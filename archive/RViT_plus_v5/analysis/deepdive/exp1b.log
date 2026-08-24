@@ -1,0 +1,19 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5/rvit_plus_v5_rl_final.pt (iter=1999) device=cpu  ring=1.0
+  ring=1.0 |Δθ|=  2.0  VALID hit=0.027 rt=12.50  | INVALID hit=0.023 rt=7.00
+  ring=1.0 |Δθ|=  4.0  VALID hit=0.083 rt=9.00  | INVALID hit=0.027 rt=9.00
+  ring=1.0 |Δθ|=  6.0  VALID hit=0.170 rt=9.00  | INVALID hit=0.127 rt=9.50
+  ring=1.0 |Δθ|=  8.0  VALID hit=0.350 rt=9.00  | INVALID hit=0.233 rt=7.00
+  ring=1.0 |Δθ|= 10.0  VALID hit=0.527 rt=7.00  | INVALID hit=0.407 rt=7.00
+  ring=1.0 |Δθ|= 12.0  VALID hit=0.750 rt=5.00  | INVALID hit=0.577 rt=6.00
+  ring=1.0 |Δθ|= 14.0  VALID hit=0.857 rt=3.00  | INVALID hit=0.747 rt=5.00
+  ring=1.0 |Δθ|= 17.0  VALID hit=0.950 rt=3.00  | INVALID hit=0.867 rt=4.00
+  ring=1.0 |Δθ|= 20.0  VALID hit=0.963 rt=2.00  | INVALID hit=0.957 rt=2.00
+  ring=1.0 |Δθ|= 25.0  VALID hit=0.993 rt=1.00  | INVALID hit=0.993 rt=1.00
+  ring=1.0 |Δθ|= 32.0  VALID hit=1.000 rt=1.00  | INVALID hit=0.997 rt=1.00
+  ring=1.0 |Δθ|= 44.0  VALID hit=1.000 rt=1.00  | INVALID hit=1.000 rt=1.00
+  ring=1.0 |Δθ|= 64.0  VALID hit=1.000 rt=1.00  | INVALID hit=1.000 rt=1.00
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/figs/exp1A_core_ring1p00.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/figs/exp1_core_compare_ring.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/tables/exp1_core_ring1p00.json
+[summary] ring=1.0: valid x50=9.62°  invalid x50=11.19°  benefit Δx50=1.57°
+[done]

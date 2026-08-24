@@ -1,0 +1,10 @@
+{
+  "matplotlib": "3.10.9",
+  "numpy": "2.4.6",
+  "pillow": "12.2.0",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.13",
+  "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+  "scipy": "1.17.1",
+  "torch": "2.12.0"
+}

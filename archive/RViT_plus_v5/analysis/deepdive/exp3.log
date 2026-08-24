@@ -1,0 +1,12 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5/rvit_plus_v5_rl_final.pt (iter=1999) device=cpu
+[collect] 2000 forced-wait trials …
+[collect] done: T=29, B=2000, change-trials=1045
+  cue_color          peak=1.000
+  cue_proportion     peak=1.000
+  cue_prop_reg       peak=1.000
+  change_location    peak=0.892
+  change_magnitude   peak=0.644
+  change_onset       peak=0.681
+  abs_time (h2_mean pooled) R²=0.972 (shuffle -0.003)
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/tables/exp3_decoding.json + /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/figs/exp3_temporal_decoding.png
+[done]

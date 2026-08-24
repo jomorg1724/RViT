@@ -1,0 +1,64 @@
+{
+  "figure_triplets": 9,
+  "pdf_records": [
+    {
+      "pages": 1,
+      "path": "figures/attention_event_query_averaged.pdf",
+      "render_height": 1640,
+      "render_width": 1536
+    },
+    {
+      "pages": 1,
+      "path": "figures/attention_metrics_and_response_strata.pdf",
+      "render_height": 1070,
+      "render_width": 1890
+    },
+    {
+      "pages": 1,
+      "path": "figures/attention_nochange_image_keys.pdf",
+      "render_height": 1460,
+      "render_width": 1508
+    },
+    {
+      "pages": 1,
+      "path": "figures/attention_nochange_memory_keys.pdf",
+      "render_height": 1460,
+      "render_width": 1508
+    },
+    {
+      "pages": 1,
+      "path": "figures/attention_query_level_forced_invalid_image_keys.pdf",
+      "render_height": 1460,
+      "render_width": 1508
+    },
+    {
+      "pages": 1,
+      "path": "figures/attention_query_level_forced_invalid_memory_keys.pdf",
+      "render_height": 1460,
+      "render_width": 1508
+    },
+    {
+      "pages": 1,
+      "path": "figures/attention_query_level_valid_image_keys.pdf",
+      "render_height": 1460,
+      "render_width": 1508
+    },
+    {
+      "pages": 1,
+      "path": "figures/attention_query_level_valid_memory_keys.pdf",
+      "render_height": 1460,
+      "render_width": 1508
+    },
+    {
+      "pages": 1,
+      "path": "figures/psychometric_valid_invalid_comparison.pdf",
+      "render_height": 1118,
+      "render_width": 1862
+    }
+  ],
+  "table_lines": {
+    "event_attention_timecourses.csv": 137,
+    "paired_attention_and_response_estimates.csv": 13,
+    "psychometric_response_rates.csv": 161
+  }
+}

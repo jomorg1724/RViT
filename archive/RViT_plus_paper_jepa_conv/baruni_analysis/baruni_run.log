@@ -1,0 +1,29 @@
+[baruni] crossattn1 iter=19999
+   t4 LS (q5/d1): acc=0.773 declare=1.00 rt=8.3
+   t4 LL (q5/d5): acc=0.769 declare=1.00 rt=8.3
+   t4 SS (q1/d1): acc=0.680 declare=1.00 rt=8.5
+   t4 SL (q1/d5): acc=0.720 declare=1.00 rt=8.5
+   t6 LS (q5/d1): acc=0.833 declare=1.00 rt=8.3
+   t6 LL (q5/d5): acc=0.849 declare=1.00 rt=8.3
+   t6 SS (q1/d1): acc=0.886 declare=0.99 rt=8.4
+   t6 SL (q1/d5): acc=0.829 declare=1.00 rt=8.5
+   t8 LS (q5/d1): acc=0.937 declare=1.00 rt=8.2
+   t8 LL (q5/d5): acc=0.933 declare=1.00 rt=8.2
+   t8 SS (q1/d1): acc=0.917 declare=1.00 rt=8.3
+   t8 SL (q1/d5): acc=0.923 declare=1.00 rt=8.3
+   attn on high-value cell: cue(t1)=0.252 stim(t3-7)=0.056 | low-value cell: cue(t1)=0.247 stim(t3-7)=0.086
+[baruni] affine_ew iter=19999
+   t4 LS (q5/d1): acc=0.750 declare=1.00 rt=8.1
+   t4 LL (q5/d5): acc=0.779 declare=1.00 rt=8.2
+   t4 SS (q1/d1): acc=0.736 declare=0.98 rt=8.2
+   t4 SL (q1/d5): acc=0.749 declare=0.98 rt=8.2
+   t6 LS (q5/d1): acc=0.840 declare=1.00 rt=8.1
+   t6 LL (q5/d5): acc=0.852 declare=0.99 rt=8.1
+   t6 SS (q1/d1): acc=0.859 declare=0.99 rt=8.2
+   t6 SL (q1/d5): acc=0.848 declare=0.99 rt=8.1
+   t8 LS (q5/d1): acc=0.917 declare=1.00 rt=8.1
+   t8 LL (q5/d5): acc=0.907 declare=1.00 rt=8.1
+   t8 SS (q1/d1): acc=0.890 declare=1.00 rt=8.1
+   t8 SL (q1/d5): acc=0.893 declare=1.00 rt=8.1
+   attn on high-value cell: cue(t1)=0.215 stim(t3-7)=0.233 | low-value cell: cue(t1)=0.278 stim(t3-7)=0.234
+[baruni] saved -> /Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_conv/baruni_analysis/figs/baruni_repro.npz

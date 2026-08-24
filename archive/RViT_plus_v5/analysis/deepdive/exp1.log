@@ -1,0 +1,35 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5/rvit_plus_v5_rl_final.pt (iter=1999) device=cpu
+
+[A] core valid/invalid psychometric
+  |Δθ|=  2.0  VALID hit=0.050 rt=10.00  | INVALID hit=0.027 rt=11.50
+  |Δθ|=  4.0  VALID hit=0.083 rt=9.00  | INVALID hit=0.033 rt=10.00
+  |Δθ|=  6.0  VALID hit=0.167 rt=8.00  | INVALID hit=0.100 rt=11.00
+  |Δθ|=  8.0  VALID hit=0.353 rt=8.00  | INVALID hit=0.253 rt=9.00
+  |Δθ|= 10.0  VALID hit=0.553 rt=6.50  | INVALID hit=0.417 rt=7.00
+  |Δθ|= 12.0  VALID hit=0.703 rt=5.00  | INVALID hit=0.557 rt=7.00
+  |Δθ|= 14.0  VALID hit=0.853 rt=4.00  | INVALID hit=0.823 rt=5.00
+  |Δθ|= 17.0  VALID hit=0.947 rt=2.00  | INVALID hit=0.880 rt=3.00
+  |Δθ|= 20.0  VALID hit=0.980 rt=2.00  | INVALID hit=0.970 rt=2.00
+  |Δθ|= 25.0  VALID hit=1.000 rt=1.00  | INVALID hit=0.987 rt=1.00
+  |Δθ|= 32.0  VALID hit=1.000 rt=1.00  | INVALID hit=0.997 rt=1.00
+  |Δθ|= 44.0  VALID hit=1.000 rt=1.00  | INVALID hit=1.000 rt=1.00
+  |Δθ|= 64.0  VALID hit=1.000 rt=1.00  | INVALID hit=1.000 rt=1.00
+
+[B] cue-side control
+
+[C] ring × validity
+  ring=1.00  valid x50=9.95 invalid x50=11.67  benefit(Δx50)=1.73
+  ring=0.75  valid x50=9.45 invalid x50=11.33  benefit(Δx50)=1.87
+  ring=0.50  valid x50=9.49 invalid x50=10.93  benefit(Δx50)=1.44
+  ring=0.25  valid x50=9.46 invalid x50=10.67  benefit(Δx50)=1.21
+
+[D] value × magnitude
+  red  (v=5) 0.06 0.15 0.31 0.48 0.69 0.87 0.94 1.00 1.00 1.00 1.00 1.00 1.00
+  green(v=3) 0.02 0.09 0.17 0.42 0.63 0.84 0.93 0.98 0.99 1.00 1.00 1.00 1.00
+  blue (v=1) 0.01 0.02 0.05 0.14 0.25 0.50 0.66 0.88 0.97 0.99 1.00 1.00 1.00
+
+[E] criterion/errors
+  no-change: correct-rejection=0.978  false-alarm(press)=0.022
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/tables/exp1_summary.json
+[saved] 5 figures to /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/figs
+[done]

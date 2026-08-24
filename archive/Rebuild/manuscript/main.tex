@@ -1,0 +1,116 @@
+% =====================================================================
+% main.tex — VDA-rebuild manuscript
+%
+% Mission: pursue the original question "when does value-directed
+% attention matter?" with a more accurate mathematical description than
+% Herman Lab 2026-04-09 ("When Does Value-Directed Attention Matter?
+% A Normative Model with Independent Attentional Benefit and Cost",
+% Critique/source/main.pdf, READ-ONLY).
+%
+% Structural convention (mission §6.3): main.tex is a thin skeleton
+% that \input{}s per-section files in sections/. Each rebuild
+% increment touches one section file. Figures live in figures/ and
+% are copied from sims/*/output/ by the increment that depends on
+% them. Bibliography in refs.bib.
+%
+% Per CLAIM_LEDGER.md, no manuscript claim may exceed the rebuilt
+% strength licensed by the live verdict ledger
+% (Critique/verdicts/). Distributional / conditional / graded voice
+% by default; categorical floors and "regardless" statements are
+% the exact failure the rebuild exists to fix (mission §3.3).
+%
+% Build: see BUILD.md. Tooling is plain pdflatex (latexmk not in
+% sandbox); run twice for refs/cross-refs.
+% =====================================================================
+
+\documentclass[11pt]{article}
+
+% --- packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=blue!50!black]{hyperref}
+% cleveref is not in TeX Live 2026basic; plain \ref{...} used in
+% section files instead (e.g. "Section~\ref{sec:model}").
+
+% --- theorem environments ---
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% --- shorthand notation aligned with Critique/source/main.pdf §2 ---
+\newcommand{\Phinorm}{\Phi}                 % standard normal CDF
+\newcommand{\HR}{\mathrm{HR}}               % hit rate
+\newcommand{\FAR}{\mathrm{FAR}}             % false alarm rate
+\newcommand{\dprime}{d'}                    % discriminability
+\newcommand{\dprimemax}{d'_{\max}}
+\newcommand{\Nloc}{N}                       % number of locations
+\newcommand{\val}{v}                        % cued value
+\newcommand{\valid}{V}                      % cued validity
+\newcommand{\alphacued}{\alpha_c}           % cued attention
+\newcommand{\alphauncued}{\alpha_u}         % uncued attention
+\newcommand{\benefit}{\beta}                % attention benefit weight
+\newcommand{\cost}{\gamma}                  % attention cost weight
+\newcommand{\Rew}{R}                        % expected reward
+\newcommand{\Rpone}{R_{\mathrm{P1}}}        % policy P1 expected reward
+\newcommand{\Rptwo}{R_{\mathrm{P2}}}
+\newcommand{\Rpthree}{R_{\mathrm{P3}}}
+\newcommand{\Rpfour}{R_{\mathrm{P4}}}
+\newcommand{\VDA}{\mathrm{VDA}}
+\newcommand{\CF}{\mathrm{CF}}               % criterion fraction
+\newcommand{\corr}{\rho}                    % cross-location correlation (A1 channel)
+\newcommand{\PnoFA}{P_{\mathrm{no\text{-}fa}}}
+\newcommand{\Rsens}{r}                      % benefit/cost ratio (A3)
+\newcommand{\rdagger}{r^{\dagger}}          % VDA-escape threshold (C2)
+\newcommand{\rstarinv}{r^{*}_{\mathrm{inv}}}% inversion threshold (C4)
+\newcommand{\CR}{\mathrm{CR}}               % conservation rule indicator
+\newcommand{\DKL}{D_{\mathrm{KL}}}           % Kullback--Leibler divergence (A3 derivation)
+
+% --- metadata ---
+\title{When does value-directed attention matter?\\[2pt]
+       \large A three-lever normative model with quantified
+       criterion, sensitivity, and decorrelation contributions
+       (rebuild draft, v0.1)}
+\author{[Authors -- TBD]\thanks{Rebuild of the Herman Lab
+        2026-04-09 manuscript with the same scientific question and
+        a more honestly-bounded mathematical description. See
+        \texttt{CLAIM\_LEDGER.md} for the disposition table that
+        binds every claim to its supporting artifact.}}
+\date{Draft compiled \today}
+
+\begin{document}
+\maketitle
+
+% =====================================================================
+% Section files. Each section file is a stub at rb-005 and gets filled
+% by a later increment (RB-009 -> results-C1, RB-010 -> results-C2,
+% RB-011 -> §5.2 redrafted design advice, RB-012 -> results-C4,
+% RB-013 -> appendix-C5, RB-004 -> model, ...). See REBUILD_BACKLOG.md.
+% =====================================================================
+
+\input{sections/abstract.tex}
+\input{sections/intro.tex}
+\input{sections/model.tex}
+\input{sections/results.tex}
+\input{sections/extensions.tex}
+\input{sections/limitations.tex}
+\input{sections/methods.tex}
+\input{sections/appendix.tex}
+
+% --- bibliography ---
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+\end{document}

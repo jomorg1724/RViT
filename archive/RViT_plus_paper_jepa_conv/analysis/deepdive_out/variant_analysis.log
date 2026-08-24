@@ -1,0 +1,17 @@
+[standard] iter=18750 correct=0.804 hit=0.705 FA=0.091 RT=5.0 | cue-orient(NC,t3-4)=-0.011 change-spike(t5)=+0.143
+[affine] iter=18399 correct=0.504 hit=0.000 FA=0.000 RT=nan | cue-orient(NC,t3-4)=+0.014 change-spike(t5)=-0.001
+[dualhead] iter=18750 correct=0.820 hit=0.708 FA=0.088 RT=5.0 | cue-orient(NC,t3-4)=+0.038 change-spike(t5)=-0.002
+[two_lstm] iter=18750 correct=0.872 hit=0.836 FA=0.094 RT=5.0 | cue-orient(NC,t3-4)=+0.008 change-spike(t5)=+0.216
+[crossattn] iter=18750 correct=0.840 hit=0.760 FA=0.080 RT=5.0 | cue-orient(NC,t3-4)=-0.179 change-spike(t5)=-0.011
+[dualmem] iter=18750 correct=0.828 hit=0.750 FA=0.079 RT=5.0 | cue-orient(NC,t3-4)=-0.174 change-spike(t5)=+0.002
+
+=== SUMMARY ===
+   variant   iter  correct    hit     FA    RT  cue-orient  chg-spike
+  standard  18750    0.804  0.705  0.091   5.0      -0.011     +0.143
+    affine  18399    0.504  0.000  0.000   nan      +0.014     -0.001
+  dualhead  18750    0.820  0.708  0.088   5.0      +0.038     -0.002
+  two_lstm  18750    0.872  0.836  0.094   5.0      +0.008     +0.216
+ crossattn  18750    0.840  0.760  0.080   5.0      -0.179     -0.011
+   dualmem  18750    0.828  0.750  0.079   5.0      -0.174     +0.002
+
+cue-orient > 0 ⇒ attends the cued location BEFORE the change (cue-driven).

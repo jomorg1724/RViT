@@ -1,0 +1,17 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5/rvit_plus_v5_rl_final.pt (iter=1999) device=cpu  gamma=0.99
+  red  (v=5): V@cue=4.07 V@change=5.04 V@max=5.07
+  green(v=3): V@cue=2.41 V@change=2.98 V@max=3.03
+  blue (v=1): V@cue=0.56 V@change=0.87 V@max=2.41
+[calibration] V vs MC return: slope=0.908 intercept=0.156 R²=0.611 (n=30506)
+[entropy] critic dist entropy pre-change=0.077  post-change=0.648
+  bias=-6: V(press)=2.99 Qadv=-0.01 qent=-1.132 Hpi=0.225 P(press)=0.822
+  bias=-4: V(press)=2.99 Qadv=-0.01 qent=-1.117 Hpi=0.225 P(press)=0.824
+  bias=-2: V(press)=2.99 Qadv=-0.01 qent=-1.128 Hpi=0.230 P(press)=0.831
+  bias=-1: V(press)=2.99 Qadv=-0.00 qent=-1.121 Hpi=0.229 P(press)=0.831
+  bias=+0: V(press)=2.98 Qadv=-0.01 qent=-1.084 Hpi=0.225 P(press)=0.823
+  bias=+1: V(press)=2.99 Qadv=0.00 qent=-1.098 Hpi=0.233 P(press)=0.832
+  bias=+2: V(press)=2.98 Qadv=-0.00 qent=-1.092 Hpi=0.236 P(press)=0.831
+  bias=+4: V(press)=2.97 Qadv=-0.00 qent=-1.045 Hpi=0.247 P(press)=0.829
+  bias=+6: V(press)=2.96 Qadv=-0.00 qent=-0.905 Hpi=0.274 P(press)=0.822
+[saved] exp5 figures + /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/tables/exp5_value.json
+[done]

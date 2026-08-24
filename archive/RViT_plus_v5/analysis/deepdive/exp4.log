@@ -1,0 +1,14 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5/rvit_plus_v5_rl_final.pt (iter=1999) device=cpu  encoder 2L×4H
+[setup] near-threshold |Δθ|=10.0 ring=0.75 change@t=15 n=256 region=patch
+[baseline] hit=0.539 rt=7.00 prem=0.000 Vadv=-1.335 qent=0.469 Hpi=0.005
+  L1H0: hit @b=-6→0.480  @b=0→0.539  @b=+6→0.613  (Δ=+0.133)
+  L1H1: hit @b=-6→0.555  @b=0→0.539  @b=+6→0.500  (Δ=-0.055)
+  L1H2: hit @b=-6→0.500  @b=0→0.539  @b=+6→0.547  (Δ=+0.047)
+  L1H3: hit @b=-6→0.539  @b=0→0.539  @b=+6→0.582  (Δ=+0.043)
+  L2H0: hit @b=-6→0.586  @b=0→0.539  @b=+6→0.555  (Δ=-0.031)
+  L2H1: hit @b=-6→0.516  @b=0→0.539  @b=+6→0.477  (Δ=-0.039)
+  L2H2: hit @b=-6→0.535  @b=0→0.539  @b=+6→0.566  (Δ=+0.031)
+  L2H3: hit @b=-6→0.547  @b=0→0.539  @b=+6→0.512  (Δ=-0.035)
+[all-heads patch-gain] hit: -6:0.527  -4:0.512  -2:0.566  -1:0.605  +0:0.500  +1:0.508  +2:0.586  +4:0.566  +6:0.586
+[saved] exp4 figures + /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/tables/exp4_causal.json
+[done]

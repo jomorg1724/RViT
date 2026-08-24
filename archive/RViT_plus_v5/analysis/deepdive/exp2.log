@@ -1,0 +1,7 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5/rvit_plus_v5_rl_final.pt (iter=1999) device=cpu
+[VALID_cueLeft_chgS1] peaks: enc_L1=0.025  enc_L2=0.005  actor_L1=0.014  actor_L2=0.363  critic_L1=0.016  critic_L2=0.251
+[INVALID_cueLeft_chgS4] peaks: enc_L1=0.023  enc_L2=0.006  actor_L1=0.015  actor_L2=0.372  critic_L1=0.015  critic_L2=0.313
+[VALID_cueRight_chgS4] peaks: enc_L1=0.020  enc_L2=0.005  actor_L1=0.014  actor_L2=0.398  critic_L1=0.015  critic_L2=0.316
+[INVALID_cueRight_chgS1] peaks: enc_L1=0.023  enc_L2=0.005  actor_L1=0.015  actor_L2=0.317  critic_L1=0.015  critic_L2=0.304
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/tables/exp2_alpha.npz  + overlays/trajectories to /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/figs
+[done]

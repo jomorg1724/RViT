@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "review_id": "deleg_59618c96",
+  "verdict": "APPROVE — narrowly scoped",
+  "approved_scope": [
+    "corrected decoder archive schema and semantics",
+    "eight checkpoint identities and iteration-19999 lineage",
+    "exact 18-file run-tree closure",
+    "live-source and frozen-snapshot hash agreement",
+    "legacy decoder path, bytes, hash, size, device, and inode preservation",
+    "Finder-specific publication recovery and external recovery attestation"
+  ],
+  "excluded_scope": [
+    "stable hard-link count for the legacy decoder; st_nlink is externally mutable",
+    "ordinary unrecovered runner audit, which intentionally requires exact historical st_nlink"
+  ],
+  "artifact": {
+    "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_corrected/data/decode.npz",
+    "bytes": 224078,
+    "sha256": "739d8b79b81a5dbab39d451556cb8fd0f7a69512e06855a9775c6f24c120e91c"
+  },
+  "manifest": {
+    "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_corrected/MANIFEST.json",
+    "sha256": "394c1528741c581c03bc9c26612fd0b6ca36f9335f59735a68fca9328f86da5f"
+  },
+  "recovery_attestation": {
+    "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_corrected.PUBLICATION_RECOVERY.json",
+    "sha256": "eb210700dde3360b584f94a021537b2dcc1bc68407d1b60cb308c312cc280eca"
+  },
+  "legacy_artifact": {
+    "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/figs/decode.npz",
+    "bytes": 10662,
+    "sha256": "1d8c7fe221d7b67d12dfc7dca05126550228a4825cfaf5d3e0ba6edd696b3a4e",
+    "device": 16777229,
+    "inode": 156947475,
+    "recorded_nlink": 4,
+    "review_time_nlink": 2
+  },
+  "run_tree": {
+    "regular_files": 18,
+    "directories": 8,
+    "tree_sha256": "f34af4cd5d702524eee7c40a6bc7496a47bd4fe2e983304b878aac7b240aa163"
+  },
+  "verification": {
+    "focused_tests": "94 passed in 2.51s",
+    "source_or_artifact_bytes_modified_by_reviewer": false,
+    "reviewer_cleanup": "removed only a test-created temporary hard-link alias outside the repository; legacy content identity remained unchanged"
+  }
+}

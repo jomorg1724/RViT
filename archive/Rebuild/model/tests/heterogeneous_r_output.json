@@ -1,0 +1,58 @@
+{
+  "checks": [
+    {
+      "failures_head": [],
+      "max_abs_diff": 0.0,
+      "n_cells": 5436,
+      "n_failed": 0,
+      "name": "d_prime_hetero == d_prime_asym (binary) on alpha>=1/N grid [5436 cells; h=['sqrt', 'linear'], p=[0.0, 0.5, 1.0], r=[0.1, 0.3, 0.398, 1.0, 3.162, 10.0]]",
+      "ok": true
+    },
+    {
+      "failures_head": [],
+      "max_abs_diff": 0.0,
+      "n_cells": 468,
+      "n_failed": 0,
+      "name": "d_prime_hetero == d_prime_asym (binary) on alpha<1/N (inversion) grid [468 cells]",
+      "ok": true
+    },
+    {
+      "max_abs_diff": 0.0,
+      "n_cells": 72,
+      "name": "scalar r_vec == uniform N-vector r_vec (binary) [72 cells]",
+      "ok": true
+    },
+    {
+      "d_c_legacy": 1.6179234605325405,
+      "d_u_legacy": 1.3687386129669001,
+      "d_vec": [
+        1.6179234605325405,
+        1.3687386129669001,
+        1.3687386129669001,
+        1.3687386129669001
+      ],
+      "max_abs_diff": 0.0,
+      "name": "CR-048 headline (r=0.398, alpha=0.5, spread=0) -> binary recovery",
+      "ok": true
+    },
+    {
+      "cued_matches": true,
+      "d_c_legacy": 1.6179234605325405,
+      "d_u_legacy": 1.3687386129669001,
+      "d_vec": [
+        1.6179234605325405,
+        1.3564809799215753,
+        1.3687386129669001,
+        1.379067207676108
+      ],
+      "middle_matches": true,
+      "monotone": true,
+      "name": "heterogeneous-r smoke: spread=0.3 -> sign(d'_u_i) as predicted",
+      "ok": true
+    }
+  ],
+  "n_passed": 5,
+  "n_total": 5,
+  "phi_backend": "scipy.special.ndtr",
+  "sha256_numeric": "0486921f8a4e253a1682ee0731e52c7de800bf6c3dbb1b5e8ff3200602454c7e"
+}

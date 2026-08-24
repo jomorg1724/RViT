@@ -1,0 +1,1002 @@
+% =====================================================================
+% appendix.tex — STUB.
+%
+% Filled in across multiple manuscript increments:
+%   RB-003 / sec:appendix-deriv-a1     — A1 ρ-channel derivation
+%   RB-026 / sec:appendix-deriv-c2     — independent r†(v) re-derivation
+%                                        (+ ρ>0 extension when ready)
+%   RB-013 / sec:appendix-c5           — symmetric-recovery at r=1 note
+%
+% The §3.3 confident-spine results (C2 non-monotonicity, C5 symmetric
+% recovery, central-tendency C1) get their full derivations here;
+% extension levers (A1 ρ, A3 conservation family, A2/A8 heterogeneity)
+% each get their own appendix subsection.
+% =====================================================================
+
+\appendix
+\section{Derivations and consistency checks}
+\label{sec:appendix}
+
+% ---------------------------------------------------------------------
+\subsection{A1 decorrelation-channel derivation}
+\label{sec:appendix-deriv-a1}
+
+[Filled by RB-003 (derivation increment). Independent re-derivation
+of the equicorrelated-Gaussian orthant integral
+$\PnoFA(\corr) = \int \phi(z)\prod_i \Phinorm\!\big((c_i +
+\sqrt{\corr}\,z)/\sqrt{1 - \corr}\big)\, dz$,
+one-factor Gauss--Hermite reduction, and the Slepian-monotonicity
+argument that bounds $\partial \CF / \partial \corr$ in the
+variant-A case. Cites~\cite{Slepian1962}.]
+
+% ---------------------------------------------------------------------
+\subsection{Closed-form VDA escape threshold $\rdagger(\val;\corr)$}
+\label{sec:appendix-deriv-c2}
+
+This subsection promotes the closed-form escape threshold introduced
+in Section~\ref{sec:results-c2} into a derivation in the rebuild's
+voice and extends it from the inherited $\corr = 0$ case to the
+$\corr \in [0, 1)$ family the A1 lever
+(Section~\ref{sec:model-rho-channel}) opens. Every numerical
+statement here traces to the companion verification script
+\texttt{Rebuild/derivations/verify\_C2\_rho/verify.py}, whose
+output digest is recorded at the end of the subsection.
+
+\paragraph{Setup at the boundary.}
+At the uniform allocation $\alpha = 1/\Nloc$ the asymmetric branch
+of the sensitivity rule of Section~\ref{sec:model} collapses to
+$\dprime_c = \dprime_u = \dprime_{\mathrm{base}} :=
+\dprimemax\,f(1/\Nloc)$ irrespective of $(\Rsens, \corr)$: the
+slope brackets vanish at $\alpha = 1/\Nloc$ before being weighted by
+$\benefit(\Rsens)$ or $\cost(\Rsens)$. The criterion optimum of
+policy P3 at $\alpha = 1/\Nloc$ is therefore the joint argmax of the
+expected reward over a fixed-$\dprime$ landscape that depends on
+$\corr$ only through the correlated no-FA term $\PnoFA(\corr)$:
+\begin{equation}
+  \bigl(c_c^\star(\corr),\,c_u^\star(\corr)\bigr)
+  \;:=\;
+  \operatorname*{arg\,max}_{(c_c, c_u)}\,
+  \Rew\bigl(\dprime_{\mathrm{base}},\,\dprime_{\mathrm{base}},\,
+           c_c,\,c_u;\,\valid,\val,\Nloc,\CR,\corr\bigr).
+  \label{eq:c2-boundary-crit}
+\end{equation}
+At the C2 headline cell
+$(\Nloc, \valid, \val) = (4, 0.5, 5)$, $\CR = 3.0$ (variant~A) the
+$\corr = 0$ optimum $(c_c^\star, c_u^\star) = (0.10, 1.75)$ shifts
+to $(0.05, 1.80)$ at $\corr = 0.2$: the cued criterion drops by
+$0.05$ (more liberal, because a cued FA is partially
+``explained away'' by correlated FAs at the other locations) and
+the uncued criterion rises by $0.05$ (more conservative, because
+an uncued FA now also hurts the cued no-FA joint event).
+
+\paragraph{The $\corr$-aware $d$-gradient integrals.}
+Differentiation of the correlated orthant probability
+$\PnoFA(\corr)$ (Equation~\eqref{eq:pnofa-rho}) under the integral
+sign --- both the integrand and its $\dprime$-derivatives are
+bounded, so dominated convergence applies --- gives the two
+$\corr$-aware 1-D Gauss--Hermite integrals
+\begin{align}
+  I_c(b_c, b_u; \corr, \Nloc)
+  &\;:=\;
+  \int_{-\infty}^{\infty}
+  \frac{1}{\sqrt{1 - \corr}}\,
+  \phi\!\left(\frac{b_c - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+  \Phinorm\!\left(\frac{b_u - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)^{\Nloc - 1}
+  \phi(z)\,dz,
+  \label{eq:c2-Ic}
+  \\[2pt]
+  I_u(b_c, b_u; \corr, \Nloc)
+  &\;:=\;
+  \int_{-\infty}^{\infty}
+  \frac{1}{\sqrt{1 - \corr}}\,
+  \Phinorm\!\left(\frac{b_c - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+  \Phinorm\!\left(\frac{b_u - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)^{\Nloc - 2}
+  \phi\!\left(\frac{b_u - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+  \phi(z)\,dz,
+  \label{eq:c2-Iu}
+\end{align}
+where $b_i := c_i + \dprime_{\mathrm{base}}/2$. Both reduce, at
+$\corr = 0$, to the independent products
+$I_c^0 = \phi(b_c)\,\Phinorm(b_u)^{\Nloc - 1}$ and
+$I_u^0 = \Phinorm(b_c)\,\Phinorm(b_u)^{\Nloc - 2}\,\phi(b_u)$ that
+appear in the $\corr = 0$ chain rule. In the rebuilt model
+implementation, \eqref{eq:c2-Ic}--\eqref{eq:c2-Iu} share the same
+64-node $(z_k, w_k)$ Gauss--Hermite nodes that
+\texttt{Rebuild/model/core.py:p\_no\_fa\_grid} uses for
+$\PnoFA(\corr)$ itself.
+
+\paragraph{Boundary first-order condition.}
+The chain-rule expansion of $\partial \Rew(\alpha)/\partial\alpha$
+at $\alpha = 1/\Nloc^{+}$ collects the asymmetric P3 booking into
+\begin{equation}
+  \frac{\partial \Rew}{\partial\alpha}\bigg|_{1/\Nloc^{+}}\!(\corr)
+  \;=\;
+  \dprimemax\,f'(1/\Nloc)\,
+  \Bigl[\,\benefit(\Rsens)\,K_c(\val; \corr)
+        \;-\; \cost(\Rsens)\,\frac{K_u(\val; \corr)}{\Nloc - 1}\,\Bigr],
+  \label{eq:c2-rho-foc}
+\end{equation}
+with $\corr$-aware coefficients
+\begin{align}
+  K_c(\val; \corr)
+  &= \tfrac{1}{4}\Big[\valid\,\val\,
+                      \phi\!\big(\tfrac{\dprime_b}{2} - c_c^\star(\corr)\big)
+                      \;+\; \CR(\val)\,
+                      I_c\bigl(b_c^\star(\corr), b_u^\star(\corr); \corr, \Nloc\bigr)\Big],
+  \label{eq:c2-Kc-rho}
+  \\[2pt]
+  K_u(\val; \corr)
+  &= \tfrac{1}{4}\Big[(1 - \valid)\,
+                      \phi\!\big(\tfrac{\dprime_b}{2} - c_u^\star(\corr)\big)
+                      \;+\; (\Nloc - 1)\,\CR(\val)\,
+                      I_u\bigl(b_c^\star(\corr), b_u^\star(\corr); \corr, \Nloc\bigr)\Big],
+  \label{eq:c2-Ku-rho}
+\end{align}
+where $b_i^\star(\corr) := c_i^\star(\corr) + \dprime_{\mathrm{base}}/2$
+and $\dprime_b = \dprime_{\mathrm{base}}$ as before. The
+change-trial density terms (the $\phi$ summands in
+\eqref{eq:c2-Kc-rho}--\eqref{eq:c2-Ku-rho}) inherit $\corr$
+dependence only through $c_i^\star(\corr)$; the no-FA terms (the
+$I_c, I_u$ summands) carry the full $\corr$ dependence of the
+correlated quadrature.
+
+\begin{proposition}[Escape threshold under equicorrelation]
+\label{prop:r-dagger-rho}
+Fix $(\Nloc, \valid, \val, \dprimemax, f_0, h, \CR, \corr)$ with
+$\corr \in [0, 1)$ and let $(c_c^\star(\corr), c_u^\star(\corr))$
+solve \eqref{eq:c2-boundary-crit}. Then
+\begin{equation}
+  \rdagger(\val; \corr)
+  \;=\;
+  \frac{K_u(\val; \corr)}{(\Nloc - 1)\,K_c(\val; \corr)},
+  \label{eq:r-dagger-rho}
+\end{equation}
+with $K_c(\val; \corr)$ and $K_u(\val; \corr)$ defined by
+\eqref{eq:c2-Kc-rho}--\eqref{eq:c2-Ku-rho}. Below $\rdagger(\val;\corr)$,
+$\alpha^\star_{\mathrm{P_1}}(\Rsens, \val; \corr) = 1/\Nloc$; above,
+$\alpha^\star_{\mathrm{P_1}}(\Rsens, \val; \corr) > 1/\Nloc$.
+\end{proposition}
+
+\begin{proof}
+Setting \eqref{eq:c2-rho-foc} to zero and dividing out the strictly
+positive prefactor
+$\dprimemax\,f'(1/\Nloc)\,\cost(\Rsens) > 0$ gives
+$\Rsens\,K_c(\val;\corr) = K_u(\val;\corr)/(\Nloc - 1)$ (using
+$\benefit(\Rsens)/\cost(\Rsens) = \Rsens$ from
+$\benefit/\cost = \Rsens$, which holds in every member of the
+conservation family of Section~\ref{sec:extensions-a3});
+solving for $\Rsens$ gives \eqref{eq:r-dagger-rho}. A one-sided
+$\alpha$ finite-difference at
+$\Rsens = \rdagger(\val;\corr) \pm 0.05$ with
+$\Delta\alpha = 10^{-3}$ confirms the sign of
+$\partial \Rew/\partial\alpha|_{1/\Nloc^{+}}$ flips at every
+$(\val, \corr) \in \{1, 2, 3\} \times \{0, 0.2\}$ probe
+(\texttt{boundary\_FD\_check}, $6/6$ flips).
+\end{proof}
+
+\paragraph{Recovery at $\corr = 0$.}
+At $\corr = 0$ the integrand of \eqref{eq:c2-Ic} loses its
+$z$-dependence ($\sqrt{\corr} = 0$, $\sqrt{1 - \corr} = 1$,
+$\int \phi(z)\,dz = 1$), so
+$I_c(b_c, b_u; 0, \Nloc) = \phi(b_c)\,\Phinorm(b_u)^{\Nloc - 1} =
+I_c^0$ and likewise
+$I_u(b_c, b_u; 0, \Nloc) = \Phinorm(b_c)\,\Phinorm(b_u)^{\Nloc - 2}\,\phi(b_u) = I_u^0$.
+The criterion optimum \eqref{eq:c2-boundary-crit} at $\corr = 0$
+recovers the asymmetric P3 optimum of Section~\ref{sec:results-c2},
+so $K_c(\val; 0) = K_c(\val)$ and $K_u(\val; 0) = K_u(\val)$ of
+Equations~\eqref{eq:K-c}--\eqref{eq:K-u}, and
+Proposition~\ref{prop:r-dagger-rho} reduces to
+Equation~\eqref{eq:r-dagger}. The recovery is \emph{structural} ---
+the integrals collapse term-by-term, not merely to numerical
+tolerance. Numerically, the verification script computes
+$|\rdagger_{\mathrm{rb\text{-}026}}(\val; 0) -
+\rdagger_{\mathrm{rb\text{-}006}}(\val)| \le 5 \times 10^{-4}$
+across $\val \in \{1, 2, 3, 5, 8, 10\}$; the residual is the
+$\Delta c = 0.05$ quantisation of $(c_c^\star, c_u^\star)$ on the
+shared criterion grid (at $\val = 2$ both implementations land on
+the same grid optimum and \eqref{eq:r-dagger-rho} matches
+Equation~\eqref{eq:r-dagger} to binary identity).
+
+\paragraph{Drift prediction at the headline cell.}
+The empirical drift table reported in Section~\ref{sec:results-c2}
+as ``$r^\star$ drifts upward with $\corr$ at low $\val$''
+(Table~\ref{tab:rho-sensitivity}) now has an analytic
+counterpart: the \emph{lower edge} of the escape band
+$\rdagger(\val;\corr)$, evaluated from
+\eqref{eq:r-dagger-rho}, drifts upward at every $\val$ in the
+family. Table~\ref{tab:r-dagger-rho-drift} reports the prediction.
+%
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{r r r r r c}
+    \toprule
+    $\val$ &
+    $\rdagger(\val;0)$ &
+    $\rdagger(\val;0.2)$ &
+    $\Delta\rdagger$ &
+    $\%\,\Delta\rdagger$ &
+    sign-match $r^\star$? \\
+    \midrule
+    $1$  & $0.343$ & $0.354$ & $+0.0103$ & $+3.0\%$  & --- (P2 ref) \\
+    $2$  & $0.168$ & $0.173$ & $+0.0051$ & $+3.0\%$  & \checkmark \\
+    $3$  & $0.099$ & $0.113$ & $+0.0132$ & $+13.2\%$ & \checkmark \\
+    $5$  & $0.050$ & $0.058$ & $+0.0077$ & $+15.2\%$ & \checkmark \\
+    $8$  & $0.022$ & $0.029$ & $+0.0066$ & $+29.7\%$ & \checkmark \\
+    $10$ & $0.016$ & $0.019$ & $+0.0030$ & $+18.7\%$ & \checkmark \\
+    \bottomrule
+  \end{tabular}
+  \caption{Closed-form drift of the escape threshold under
+  correlation at the C2 headline cell
+  $(\Nloc, \valid, \dprimemax, f_0, h) = (4,\,0.5,\,2,\,0.5,\,\sqrt{})$,
+  variant~A. $\rdagger(\val;\corr)$ from
+  Equation~\eqref{eq:r-dagger-rho}. The drift
+  $\Delta\rdagger := \rdagger(\val;0.2) - \rdagger(\val;0)$ is
+  \emph{positive} at every $\val$ tested, including $\val = 1$
+  (the value-blind P2 reference): the regime in which P1 is stuck
+  at uniform allocation \emph{widens} as $\corr$ grows. The
+  closed-form sign of $\Delta\rdagger$ matches the empirical peak
+  drift sign $\Delta r^\star$ of
+  Table~\ref{tab:rho-sensitivity} at all five $\val \ne 1$
+  rows.}
+  \label{tab:r-dagger-rho-drift}
+\end{table}
+%
+Two findings.
+%
+\begin{itemize}
+  \item \emph{Sign.} $\Delta\rdagger(\val) > 0$ at every $\val$
+  tested. The escape-band lower edge moves up under correlation
+  across the full $\val$-family; the lower edge cannot
+  exceed the peak, so the peak must also drift up
+  (Section~\ref{sec:results-c2}, ``$r^\star$ drifts up under
+  $\corr$''). The five $\val \ne 1$ rows of
+  Table~\ref{tab:r-dagger-rho-drift} match the sign of the empirical
+  peak drift $\Delta r^\star$ reported in
+  Table~\ref{tab:rho-sensitivity} ($5/5$ sign-match).
+  \item \emph{Magnitude.} The percentage drift $\%\,\Delta\rdagger$
+  is largest at $\val = 8$ ($+30\%$) and smallest at $\val = 1$
+  ($+3\%$). The absolute drift $\Delta\rdagger$ is bounded by
+  $\le 0.014$ across the family, while the empirical \emph{peak}
+  drift $\Delta r^\star$ in Table~\ref{tab:rho-sensitivity}
+  ranges up to $0.13$ at $\val = 2$. The peak drift exceeds the
+  threshold drift because the peak also responds to the
+  corresponding upward drift of $\rdagger(\val = 1; \corr)$ (which
+  widens the escape band's \emph{upper} edge) and to changes inside
+  the band as $\alpha^\star_{\mathrm{P_1}}$ climbs differently
+  across $\corr$. Equation~\eqref{eq:r-dagger-rho} pins the
+  lower-edge drift only; a closed form for the peak location
+  $r^\star(\val;\corr)$ that would additionally model the
+  $\alpha^\star$-climb above $\rdagger$ is left to a follow-up
+  derivation increment.
+\end{itemize}
+
+\paragraph{Mechanistic mirror to A1.}
+The two $\corr$-aware integrals $I_c, I_u$ of
+\eqref{eq:c2-Ic}--\eqref{eq:c2-Iu} are the gradient analogue of
+the orthant decomposition behind the A1 ``three levers, not two''
+reframe of Section~\ref{sec:model-three-levers}. The same
+one-factor Gauss--Hermite reduction that makes $\PnoFA(\corr)$
+tractable in the model code makes the boundary slope
+$\partial \Rew/\partial\alpha|_{1/\Nloc^{+}}$ tractable here.
+Section~\ref{sec:results-c2} reports the peak drift
+\emph{empirically} as a consequence of the A1 lever;
+Proposition~\ref{prop:r-dagger-rho} makes the
+\emph{lower-edge} part of that drift an analytic prediction of
+the rebuilt model. What
+Section~\ref{sec:appendix-deriv-a1}'s Slepian monotonicity argument
+does for $\CF$ as a function of $\corr$,
+Proposition~\ref{prop:r-dagger-rho} does for the
+$\rdagger$ component of the escape band: the rebuild now has a
+closed-form locus for one of the two channels of
+$\partial\VDA/\partial\corr$ (the concentration-cost relaxation
+on the lower edge), with the second channel (criterion
+devaluation, the C1-side $\CF$ effect) already pinned in
+Section~\ref{sec:appendix-deriv-a1}.
+
+\paragraph{Scope.}
+Proposition~\ref{prop:r-dagger-rho} is a \emph{local}
+statement about the lower edge of the escape band $(\rdagger(\val;\corr),
+\rdagger(1;\corr))$; the peak location $r^\star(\val;\corr)$ is
+not directly predicted. The argument assumes equicorrelated
+Gaussian decision noise (the one-factor structure of
+Section~\ref{sec:model-rho-channel}); structured non-equicorrelated
+covariances are out of scope here. The numerical realisation runs
+at the C2 headline cell under variant~A; variant~B is a mechanical
+substitution of $\CR$ in \eqref{eq:c2-Kc-rho}--\eqref{eq:c2-Ku-rho}
+and is left as a sensitivity probe
+(Section~\ref{sec:limitations}). The conservation-family extension
+to $p \ne 1$ inherits the $\corr = 0$ $\rdagger$-invariance of
+Proposition~\ref{prop:r-dagger-invariance} of
+Section~\ref{sec:extensions-a3} at the boundary
+($\dprime_c = \dprime_u = \dprime_{\mathrm{base}}$ regardless of
+$(\Rsens, p)$, so $K_c, K_u$ at $\corr = 0$ are $p$-independent);
+the joint $(p, \corr > 0)$ band is left to a future increment.
+The empirical drift in Table~\ref{tab:r-dagger-rho-drift} is
+quantified at $\corr \in \{0, 0.2\}$, the central anchor of the
+$\corr$ envelope of Section~\ref{sec:model-rho-channel}; a finer
+$\corr$-grid bracketing of $d\rdagger/d\corr$ is queued as a
+sensitivity refinement.
+
+\paragraph{Reproducibility.}
+The closed form \eqref{eq:r-dagger-rho} is implemented in
+\texttt{Rebuild/derivations/verify\_C2\_rho/verify.py}. The
+verification script (i) reconstructs $\rdagger(\val;0)$ on the
+shared criterion grid and confirms recovery against the
+$\corr = 0$ baseline of
+Section~\ref{sec:results-c2} at
+$\max|\Delta\rdagger| \le 5 \times 10^{-4}$ across
+$\val \in \{1, 2, 3, 5, 8, 10\}$ (binary at $\val = 2$);
+(ii) evaluates the drift table at $\corr = 0.2$
+(Table~\ref{tab:r-dagger-rho-drift}) and confirms
+sign-match against the empirical peak-drift signs of
+Table~\ref{tab:rho-sensitivity} at $5/5$ rows
+$\val \ne 1$; (iii) confirms the boundary-FD sign-flip
+($\partial \Rew/\partial\alpha|_{1/\Nloc^{+}}$ switches sign across
+$\Rsens = \rdagger(\val;\corr) \pm 0.05$) at $6/6$ probes
+$(\val, \corr) \in \{1, 2, 3\} \times \{0, 0.2\}$. The numerical
+payload is written to
+\texttt{Rebuild/derivations/verify\_C2\_rho/output.json}; byte-identical
+reruns produce the same SHA-256 digest
+\texttt{ddbd3988e0253fde2cfae5906ca2749cda872d1382055b3d243b4b7c6a0678dc}.
+The companion derivation file
+\texttt{Rebuild/derivations/C2-{}-non-monotonic-vda-rho.md} (rb-023,
+RB-026) is the long-form source of
+\eqref{eq:c2-Ic}--\eqref{eq:r-dagger-rho} and includes the
+additional algebraic steps elided here.
+
+% ---------------------------------------------------------------------
+\subsection{Symmetric recovery at $\Rsens = 1$}
+\label{sec:appendix-c5}
+
+The asymmetric benefit/cost family
+$\benefit(\Rsens) = 2\Rsens/(\Rsens+1)$,
+$\cost(\Rsens) = 2/(\Rsens+1)$ collapses at $\Rsens = 1$ to the
+symmetric special case $\benefit = \cost = 1$ in which a single
+shared transfer function drives both the cued and the uncued
+sensitivity. The published manuscript states this collapse as a
+numerical observation (``maximum difference: $0.0$ across all $210$
+matched parameter combinations''). Here we record the claim at the
+strength the rebuilt model actually licenses: a \emph{real-number
+identity} that holds universally and a \emph{bit-exact} guarantee that
+holds at the validation configuration. The treatment is a light-touch
+consistency result; no new sweep is needed because the
+$\corr \to 0$ recovery contract of
+Section~\ref{sec:appendix-deriv-a1} already exercises $\Rsens = 1$ as
+one of its three pinned cells (see Proposition~\ref{prop:c5-realnumber}
+and the witness below).
+
+\paragraph{The collapse as a real-number identity (universal claim).}
+At $\Rsens = 1$ the two weights $\benefit(1) = 2/(1+1) = 1$ and
+$\cost(1) = 2/(1+1) = 1$ are both \emph{exactly} representable in
+IEEE-754 binary64 (the literal float $1.0$, hex \texttt{0x1.0p+0}).
+The asymmetric sensitivity rule of Section~\ref{sec:model} writes
+$\dprime_i(\alpha) =
+ \dprime_{\mathrm{base}} +
+ s_i(\Rsens)\,(\dprime_{\max} f(\alpha) - \dprime_{\mathrm{base}})$
+where $s_i \in \{\benefit, \cost\}$ depending on whether location $i$
+is attended or not; at $\Rsens = 1$ both slopes are unit, so the
+expression collapses to $\dprime_i(\alpha) = \dprime_{\max} f(\alpha)$
+--- the symmetric rule. Because the downstream signal-detection,
+expected-reward, and criterion-optimisation stack is a deterministic
+function of the $\dprime$ arrays alone, identical arrays force
+identical optimal $(\alphacued^\star, c_c^\star, c_u^\star)$ and
+identical $\Rew^\star$.
+
+\begin{proposition}[Real-number recovery at $\Rsens = 1$]
+\label{prop:c5-realnumber}
+For every $(\valid, \val, \Nloc, \dprimemax, f_0, h)$ in the model's
+domain, and at any cross-location correlation $\corr \in [0, 1)$, the
+asymmetric model evaluated at $\Rsens = 1$ produces the same
+$\dprime$ arrays as the symmetric special case
+$\benefit = \cost = 1$. Consequently the optimal cued share, the
+optimal cued and uncued criteria, and the optimal reward all match
+the symmetric baseline as real-number identities:
+$\alphacued^\star\!\big|_{\mathrm{asym},\,\Rsens=1} =
+ \alphacued^\star\!\big|_{\mathrm{sym}}$,
+$\Rew^\star\!\big|_{\mathrm{asym},\,\Rsens=1} =
+ \Rew^\star\!\big|_{\mathrm{sym}}$, and
+$\CF\!\big|_{\Rsens=1}$ matches the symmetric criterion-fraction
+baseline pointwise. The cancellation
+$\dprime_{\mathrm{base}} - \dprime_{\mathrm{base}} = 0$ is the whole
+content of the word ``reduces.''
+\end{proposition}
+
+This is a property of the algebra, not of the numerical
+implementation, and is therefore the appropriate \emph{universal}
+form of the C5 claim.
+
+\paragraph{Bit-exact $0.0$ at the validation configuration (a
+Sterbenz-lemma band phenomenon).}
+The literal ``maximum difference: $0.0$'' of the published
+Appendix~A is sharper than Proposition~\ref{prop:c5-realnumber}: it
+asserts not merely a real-number identity but a \emph{bit-for-bit}
+identity under finite-precision arithmetic. We record it at its
+proper scope. The asymmetric code path at $\Rsens = 1$ computes
+$\mathrm{fl}\big(a + \mathrm{fl}(1.0 \cdot \mathrm{fl}(x - a))\big)$
+with $a = \dprime_{\mathrm{base}}$ and
+$x = \dprime_{\max} f(\alpha)$. Three observations compose:
+(i) $\benefit(1)$ and $\cost(1)$ are the exact float $1.0$, so the
+multiplicative slope round-trips identically;
+(ii) Sterbenz's lemma~\cite{Sterbenz1974,Goldberg1991} states that
+$a/2 \le x \le 2a$ implies $\mathrm{fl}(x - a) = x - a$ exactly;
+(iii) the validation configuration of the published manuscript
+($\Nloc = 4$, $\dprimemax = 2.0$, $f_0 = 0.5$, $h = \sqrt{\,\cdot\,}$,
+variant~A) places
+$a = \dprime_{\mathrm{base}} = \dprimemax(f_0 + (1{-}f_0) h(1/\Nloc))
+ = 2.0\,(0.5 + 0.5 \cdot 0.5) = 1.5$,
+and the swept output range $x = \dprimemax f(\alpha) \in [1.0, 2.0]$
+sits inside the Sterbenz band $[a/2, 2a] = [0.75, 3.0]$ for every
+$\alpha$ on the model's grid. The round-trip
+$a + (x - a) = x$ is therefore exact at every grid point.
+
+\begin{proposition}[Bit-exact symmetric recovery on the validation
+configuration]
+\label{prop:c5-sterbenz}
+Under variant~A at the validation configuration above, the asymmetric
+implementation evaluated at $\Rsens = 1$ returns
+$\dprime$ arrays bit-identical to the symmetric implementation; hence
+$\max\big|\Delta \alphacued^\star\big| = 0$ and
+$\max\big|\Delta \Rew^\star\big| = 0$ exactly (not merely to machine
+epsilon).
+\end{proposition}
+
+\paragraph{Scope: the literal $0.0$ is configuration-specific.}
+Proposition~\ref{prop:c5-sterbenz}'s hypothesis is sufficient but not
+necessary, and fails as soon as the smallest swept output
+$\dprimemax f_0$ drops below $\dprime_{\mathrm{base}}/2$, which gives
+the explicit threshold
+\begin{equation}
+\label{eq:c5-sterbenz-threshold}
+f_0 \;<\; \frac{h(1/\Nloc)}{1 + h(1/\Nloc)}
+\;=\; \frac{1}{3}
+\qquad (h = \sqrt{\,\cdot\,},\; \Nloc = 4).
+\end{equation}
+Off-band configurations (notably $f_0 \lesssim 1/3$) lose bit-identity
+and drift at the order of one unit in the last place ($\sim 10^{-17}$
+to $10^{-16}$). The proper universal statement of C5 is therefore
+\emph{``identical to machine precision''}; the literal ``$0.0$'' of
+the published Appendix~A is a structural guarantee of the chosen
+configuration, not a property of the model.
+
+\paragraph{$\Rsens = 1$ is the smooth centre of the family, not a
+knife-edge.}
+The collapse at $\Rsens = 1$ is the limit of a smooth, two-sided
+family rather than a removable singularity. The asymmetric slope ratio
+$\benefit(\Rsens)/\cost(\Rsens) = \Rsens$ is continuous and
+differentiable through $\Rsens = 1$, with
+$d\benefit/d\Rsens|_{\Rsens=1} = 1/2$ and
+$d\cost/d\Rsens|_{\Rsens=1} = -1/2$. The reviewer's continuity probe
+at $\Rsens = 1 \pm \epsilon$ confirms the symmetric recovery is the
+smooth interior of the family: $\max|\Delta \Rew^\star|$ against the
+symmetric model scales linearly in $|\Rsens - 1|$, with slope
+$\approx 0.084$ reward units per unit shift in $\Rsens$. Reporting
+$\Rsens = 1$ as a special case is mathematically correct but
+interpretively misleading if it suggests a knife-edge: it is the
+\emph{balanced} point of the gain-modulation versus suppression
+trade-off (see Section~\ref{sec:model}, Definition~\ref{def:three-levers}),
+the natural null away from which the asymmetric VDA effects of
+Section~\ref{sec:results} live.
+
+\paragraph{C5 is conservation-form-invariant.}
+The conservation rule on $(\benefit, \cost)$ is a model assumption,
+not a derived statement (Section~\ref{sec:extensions-a3}). The
+inherited additive constraint $\benefit + \cost = 2$ is the choice
+$p = 1$ in the power-mean family $M_p(\benefit, \cost) = 1$ with
+$\benefit/\cost = \Rsens$. At $\Rsens = 1$ the family identity
+$\benefit/\cost = 1$ forces $\benefit = \cost$, and the constraint
+$M_p(\benefit, \cost) = 1$ then forces $\benefit = \cost = 1$ for
+every $p$ (every power mean of the constant sequence equals the
+constant). Consequently the entire C5 argument
+(Proposition~\ref{prop:c5-realnumber}--Proposition~\ref{prop:c5-sterbenz})
+holds under any choice of conservation rule in the family without
+modification: the recovery at $\Rsens = 1$ is
+conservation-form-invariant by construction. The formal mechanism
+is Proposition~\ref{prop:a3d-symmetric-corner} of
+Section~\ref{sec:appendix-deriv-a3}; the C5-side corollary itself is
+Corollary~\ref{cor:a3d-c5-invariance}. The
+\emph{corollary} block of Section~\ref{sec:extensions-a3} records the
+same statement from the A3 side; this paragraph closes the
+cross-reference from the C5 side.
+
+\paragraph{Reproducibility.}
+The recovery contract is encoded in
+\texttt{Rebuild/model/tests/test\_recovery.py} and is rerun under
+\texttt{python3 -m model.tests.test\_recovery} from the
+\texttt{Rebuild/} root. At the validation configuration and
+$\corr = 0$, the policy-level test pins
+$\VDA = 0.039825$, $\CF = 0.728228$, and
+$\Rpone = 2.317239$ at $\Rsens = 1$ (variant~A, $\Nloc = 4$,
+$\dprimemax = 2.0$, $f_0 = 0.5$, $h = \sqrt{\,\cdot\,}$), all
+matched against the reviewer's logged numbers
+(\texttt{Critique/replications/A1{-}{-}correlated{-}fa/output/results.json})
+to a max absolute difference of $0.0$ on each of $\VDA$, $\CF$, and
+$\Rpone$. The probability-level test confirms that the $\corr = 0$
+quadrature shortcut returns the inherited independent product
+$\Phinorm(b_c)\,\Phinorm(b_u)^{\Nloc - 1}$ of
+Equation~\eqref{eq:pnofa-indep} to binary equality (max absolute
+difference $0.0$). All seven recovery checks pass; the test driver
+records a SHA-256 digest of
+\texttt{d3c62215cedbe2f797c484a8d76e8bef1d5ac42cdb3092ff099a34aea1b6f18f}
+on the numerical payload (output written to
+\texttt{Rebuild/model/tests/recovery\_output.json}). The
+conservation-form-invariance corollary above is independently
+exercised by \texttt{Rebuild/model/tests/test\_conservation\_family.py}
+(SHA-256 \texttt{f4f57a89e5108db47447cbeaf2f15440f56cdfffb65f3d173dc4a0550121791e}):
+the two checks \texttt{test\_symmetric\_corner\_invariant} and
+\texttt{test\_p0\_symmetric\_corner\_identity} verify
+$\texttt{policies}(\Rsens{=}1, p{=}0) = \texttt{policies}(\Rsens{=}1, p{=}1)$
+to floating-point identity across the variant grid, in agreement
+with the closed-form $\benefit(1, p) = \cost(1, p) = 1$ identity.
+
+% ---------------------------------------------------------------------
+\subsection{Power-mean conservation family derivation}
+\label{sec:appendix-deriv-a3}
+
+This subsection promotes the conservation-family treatment of
+Section~\ref{sec:extensions-a3} into a derivation in the rebuild's
+voice. It (i) records the one-parameter power-mean family that
+generalises the inherited additive A3 rule and re-derives its
+closed-form weights; (ii) states the Hardy--Littlewood--Pólya
+power-mean monotonicity inequality in exact pointwise form as a
+KL divergence; (iii) proves the symmetric-corner identity that
+backs the C5 conservation-form-invariance cross-reference of
+Section~\ref{sec:appendix-c5}; (iv) supplies the full proof of
+Proposition~\ref{prop:r-dagger-invariance} (the $\rdagger(\val)$
+$p$-invariance) for which Section~\ref{sec:extensions-a3} gives
+only a sketch; and (v) records the $d'$-channel chain rule for
+$\partial \CF/\partial p$ that motivates the empirical
+Theorem~\ref{thm:delta-cf-monotone} and isolates the one analytic
+full-strength substatement that the chain rule yields. The
+long-form source is the companion derivation file
+\texttt{Rebuild/derivations/A3{-}{-}power-mean-conservation.md}
+(rb-029, RB-033); this subsection records the equation skeleton,
+the boxed closed forms, the two formal proofs, and the open-
+conjecture status of $\Delta\CF \le 0$.
+
+\paragraph{The power-mean conservation family.}
+For $p \in \mathbb{R}$, the power (Hölder) mean of order $p$ on
+positive reals $(x, y)$ is
+\begin{equation}
+  M_p(x, y) \;=\;
+  \begin{cases}
+    \displaystyle \left( \frac{x^p + y^p}{2} \right)^{1/p}, & p \ne 0, \\[4pt]
+    \displaystyle \sqrt{x\,y}, & p = 0,
+  \end{cases}
+  \label{eq:a3d-power-mean}
+\end{equation}
+with limits $M_{-\infty}(x, y) = \min(x, y)$ and
+$M_{+\infty}(x, y) = \max(x, y)$~\cite{HLP1934}. The A3
+conservation family of Equation~\eqref{eq:conservation-family} is
+the constraint $M_p(\benefit, \cost) = 1$ together with the
+asymmetry ratio $\benefit/\cost = \Rsens$. Substituting
+$\benefit = \Rsens\,\cost$ into $M_p(\benefit, \cost) = 1$ at
+$p \ne 0$ gives
+$1 = \cost\,\bigl((\Rsens^p + 1)/2\bigr)^{1/p}$ and hence the boxed
+closed-form weights
+\begin{equation}
+  \boxed{\;
+    \cost(\Rsens; p) \;=\;
+    \left( \frac{2}{\Rsens^{\,p} + 1} \right)^{1/p},
+    \qquad
+    \benefit(\Rsens; p) \;=\;
+    \Rsens\,\cost(\Rsens; p).
+  \;}
+  \label{eq:a3d-closed-form-weights}
+\end{equation}
+The geometric-mean limit $p \to 0$ reads
+$\cost(\Rsens; 0) = 1/\sqrt{\Rsens}$,
+$\benefit(\Rsens; 0) = \sqrt{\Rsens}$ (L'Hôpital on the inner log).
+The cases $p = 1$ (additive, inherited paper) and $p = 0$
+(multiplicative, the reviewer's attack form) recover the two scalar
+rules: $\benefit(\Rsens; 1) = 2\Rsens/(\Rsens + 1)$,
+$\cost(\Rsens; 1) = 2/(\Rsens + 1)$, and the geometric-mean limit
+above. Equation~\eqref{eq:a3d-closed-form-weights} matches
+Equation~\eqref{eq:beta-gamma-of-p} of
+Section~\ref{sec:extensions-a3} and is implemented at
+\texttt{Rebuild/model/core.py} as
+\texttt{beta\_gamma(r, p)} (the $p = 1$ literal branch at line~311,
+the $|p| < 10^{-12}$ geometric-mean branch at line~314, and the
+general-$p$ branch at line~319). Three identities hold at every
+$p \in \mathbb{R}$: (I-1) $\benefit/\cost = \Rsens$ by
+construction; (I-2) $\benefit(1; p) = \cost(1; p) = 1$ (the
+symmetric-corner identity, direct from
+\eqref{eq:a3d-closed-form-weights} at $\Rsens = 1$); (I-3) the
+sign of $\benefit - \cost$ is $\operatorname{sgn}(\Rsens - 1)$,
+$p$-invariant.
+
+\paragraph{HLP monotonicity in pointwise KL-divergence form.}
+The classical Hardy--Littlewood--Pólya power-mean monotonicity
+inequality~\cite{HLP1934} states that for fixed positive reals
+$x \ne y$, the map $p \mapsto M_p(x, y)$ is strictly increasing in
+$p$ over $\mathbb{R}$ (with $p = 0$ continuous by the
+geometric-mean limit). Under the constrained form
+$M_p(\benefit, \cost) = 1$ with $\benefit/\cost = \Rsens$, the
+inequality translates into an exact pointwise identity on
+$\partial \ln \cost/\partial p$. Let
+$L(p) := \ln \cost(\Rsens; p) = (1/p)\,\ln\bigl(2/(\Rsens^p + 1)
+\bigr)$ at $p \ne 0$. Direct differentiation and the substitution
+of the Bernoulli weight
+$\theta_p := \Rsens^p/(\Rsens^p + 1)$ give
+\begin{equation}
+  \boxed{\;
+    \frac{\partial}{\partial p}\,\ln \cost(\Rsens; p)
+    \;=\;
+    -\frac{1}{p^2}\,
+    \DKL\!\bigl(\,\mathrm{Bern}(\theta_p)\,\big\|\,
+                    \mathrm{Bern}(1/2)\,\bigr),
+    \qquad
+    \theta_p \;=\; \frac{\Rsens^p}{\Rsens^p + 1}.
+  \;}
+  \label{eq:a3d-hlp-kl}
+\end{equation}
+The algebraic identity that the bracket of the direct expansion
+$\ln(2/(\Rsens^p + 1)) + p\,\theta_p \ln \Rsens$ equals
+$\theta_p \ln(2 \theta_p) + (1 - \theta_p)\,\ln(2(1 - \theta_p)) =
+\DKL\!\bigl(\mathrm{Bern}(\theta_p) \,\|\, \mathrm{Bern}(1/2)\bigr)$
+is given in the companion derivation file
+\texttt{Rebuild/derivations/A3{-}{-}power-mean-conservation.md}
+§3.2. A finite-difference cross-check of
+\eqref{eq:a3d-hlp-kl} at seven test pairs
+$(\Rsens, p) \in \{(0.3548, 0.5),\,(0.3548, 1.0),\,(10, 1.0),\,
+(10, 0.5),\,(3.162, 2.0),\,(0.5, -1.0),\,(5.0, 1.5)\}$
+(central FD, $\epsilon = 10^{-6}$) confirms LHS$-$RHS agreement
+$\le 1.5 \times 10^{-10}$ in every case; at $\Rsens = 1$ both sides
+are exactly $0$ (the Bernoulli reduces to $\mathrm{Bern}(1/2)$ and
+$\DKL = 0$). Since $\DKL \ge 0$ with equality iff
+$\theta_p = 1/2$ iff $\Rsens = 1$,
+Equation~\eqref{eq:a3d-hlp-kl} yields, for every $\Rsens > 0$,
+$\Rsens \ne 1$, every $p \in \mathbb{R} \setminus \{0\}$,
+\begin{equation}
+  \frac{\partial \cost}{\partial p}(\Rsens; p) \;<\; 0,
+  \qquad
+  \frac{\partial \benefit}{\partial p}(\Rsens; p) \;=\;
+  \Rsens \cdot \frac{\partial \cost}{\partial p} \;<\; 0
+  \quad (\Rsens > 0).
+  \label{eq:a3d-mono-sign}
+\end{equation}
+Continuity through $p = 0$ holds by series expansion: with
+$\theta_p = 1/2 + (p\,\ln \Rsens)/4 + O(p^2)$ and
+$\DKL = 2(\theta_p - 1/2)^2 + O((\theta_p - 1/2)^3)$, the bracket
+is $O(p^2)$ and the $1/p^2$ prefactor gives the finite limit
+$\lim_{p \to 0}\partial \ln \cost/\partial p = -(\ln \Rsens)^2/8$.
+The HLP envelope is therefore operative pointwise: as $p$
+decreases, both weights $(\benefit, \cost)$ strictly increase at
+every $\Rsens \ne 1$ — the conservation-form-sensitive side of A3,
+witnessed empirically by the $+13.72\%$ shift of
+$\cost(0.3548; 1) = 1.4762 \to \cost(0.3548; 0) = 1.6788$ at the
+rb-016 $\val = 10$ peak $\Rsens$.
+
+\paragraph{The symmetric corner and the C5 corollary.}
+The companion derivation file factors out two formal statements
+about the symmetric corner; we restate them here in the
+manuscript's voice.
+
+\begin{proposition}[Symmetric corner identity, $\Rsens = 1$ is
+conservation-form-invariant]
+\label{prop:a3d-symmetric-corner}
+For every $p \in \mathbb{R}$ (including $p = 0$),
+$\benefit(1; p) = \cost(1; p) = 1$.
+\end{proposition}
+
+\begin{proof}
+At $\Rsens = 1$, $\Rsens^p = 1$ for every $p$, so
+\eqref{eq:a3d-closed-form-weights} at $p \ne 0$ gives
+$\cost = (2/2)^{1/p} = 1$ and $\benefit = 1 \cdot 1 = 1$. At
+$p = 0$ the geometric-mean limit gives
+$\cost = 1/\sqrt{1} = 1$ and $\benefit = 1$. \qed
+\end{proof}
+
+Proposition~\ref{prop:a3d-symmetric-corner} is an identity of the
+conservation family alone — it does not depend on any other part
+of the rebuilt model — and is the formal mechanism behind the C5
+conservation-form-invariance cross-reference of
+Section~\ref{sec:appendix-c5}.
+
+\begin{corollary}[C5 symmetric recovery is conservation-form-invariant]
+\label{cor:a3d-c5-invariance}
+The C5 symmetric-recovery result of
+Proposition~\ref{prop:c5-realnumber} (Section~\ref{sec:appendix-c5})
+holds at every $p \in \mathbb{R}$. Specifically: at $\Rsens = 1$
+and any $p$, the asymmetric $\dprime$-map collapses pointwise to
+the symmetric baseline, $\dprime_c(\alpha; 1, p) =
+\dprime_u((1 - \alpha)/(\Nloc - 1); 1, p) = \dprimemax\,f(\alpha)$
+at every $\alpha$.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:a3d-symmetric-corner},
+$\benefit(1; p) = \cost(1; p) = 1$ at every $p$. The rebuilt
+$\dprime$-map at $\Rsens = 1$ then reads
+$\dprime_c(\alpha; 1, p) = \dprime_{\mathrm{base}} + 1 \cdot
+[\dprimemax\,f(\alpha) - \dprime_{\mathrm{base}}] = \dprimemax\,
+f(\alpha)$, with no $p$-dependence anywhere on the right; the
+uncued counterpart is identical with $(1 - \alpha)/(\Nloc - 1)$
+in place of $\alpha$. The asymmetric model's per-policy expected
+reward at $\Rsens = 1$ is therefore the symmetric baseline's,
+giving the same $(\alpha^\star, c_c^\star, c_u^\star, \Rew^\star,
+\CF)$ as real-number identities — Proposition~\ref{prop:c5-realnumber}.
+\qed
+\end{proof}
+
+The numerical witnesses are the rb-015 family tests
+\texttt{test\_symmetric\_corner\_invariant} and
+\texttt{test\_p0\_symmetric\_corner\_identity} of
+\texttt{Rebuild/model/tests/test\_conservation\_family.py} (SHA-256
+\texttt{f4f57a89e5108db47447cbeaf2f15440f56cdfffb65f3d173dc4a0550121791e},
+$14/14$ PASS), which verify
+$\benefit(1, p) = \cost(1, p) = 1$ and
+\texttt{policies(r=1, p=0) == policies(r=1, p=1)} to floating-point
+identity across the variant grid. Combined with the rb-001
+symmetric-recovery contract
+\texttt{Rebuild/model/tests/test\_recovery.py} (SHA-256
+\texttt{d3c62215cedbe2f797c484a8d76e8bef1d5ac42cdb3092ff099a34aea1b6f18f},
+which pins $\VDA = 0.039825$ and $\CF = 0.728228$ at $\Rsens = 1$
+to zero diff against the inherited $p = 1$ reference), this gives
+bit-exact recovery at $\Rsens = 1$ across the conservation family
+in the bit-exact band of Proposition~\ref{prop:c5-sterbenz}
+(Sterbenz lemma).
+
+\paragraph{Full proof of $\rdagger(\val)$ conservation-form invariance.}
+Section~\ref{sec:extensions-a3} states the $p$-invariance of the
+escape threshold $\rdagger(\val) = K_u(\val)/[(\Nloc - 1)\,
+K_c(\val)]$ as Proposition~\ref{prop:r-dagger-invariance} with a
+short proof sketch. We now record the full three-step proof, in
+which every step ties to a specific structural property of the
+$\dprime$-map at the uniform allocation.
+
+\begin{proof}[Full proof of Proposition~\ref{prop:r-dagger-invariance}]
+\textbf{(Step 1) Sensitivities at $\alpha = 1/\Nloc$ are
+$p$-independent.} At the uniform allocation $\alpha = 1/\Nloc$,
+the rebuilt $\dprime$-map reads
+\begin{equation*}
+  \dprime_c(1/\Nloc;\, \Rsens, p)
+  \;=\;
+  \dprime_{\mathrm{base}}
+  + \benefit(\Rsens; p)
+    \bigl[\,\dprimemax\,f(1/\Nloc)
+            \,-\, \dprime_{\mathrm{base}}\,\bigr]
+  \;=\;
+  \dprime_{\mathrm{base}},
+\end{equation*}
+because the bracket $\dprimemax\,f(1/\Nloc) -
+\dprime_{\mathrm{base}}$ vanishes by the definition
+$\dprime_{\mathrm{base}} := \dprimemax\,f(1/\Nloc)$ of the
+uniform-allocation baseline. The vanishing bracket annihilates
+any value of $\benefit(\Rsens; p)$, so $\dprime_c$ at
+$\alpha = 1/\Nloc$ is $\benefit$-independent — and hence
+$p$-independent. At the same $\alpha = 1/\Nloc$ the per-uncued
+allocation is $(1 - 1/\Nloc)/(\Nloc - 1) = 1/\Nloc$, so the
+uncued bracket also vanishes and
+$\dprime_u(1/\Nloc;\, \Rsens, p) = \dprime_{\mathrm{base}}$
+independent of $\cost(\Rsens; p)$ and hence of $p$. The pair
+$(\dprime_c, \dprime_u) = (\dprime_{\mathrm{base}},
+\dprime_{\mathrm{base}})$ at $\alpha = 1/\Nloc$ is therefore
+$p$-independent (and $\Rsens$-independent).
+
+\textbf{(Step 2) $\textrm{P3}$-optimal criteria are $p$-independent.}
+At the fixed uniform allocation $\alpha = 1/\Nloc$, the $\textrm{P3}$
+expected-reward functional reduces to a function of
+$(\dprime_c, \dprime_u, c_c, c_u; \valid, \val, \Nloc, \CR)$ whose
+$p$-dependence enters only through $(\dprime_c, \dprime_u)$. By
+Step 1, those are $p$-independent. The $\textrm{P3}$-optimal criteria
+\begin{equation*}
+  (c_c^\star, c_u^\star)
+  \;=\;
+  \operatorname*{arg\,max}_{(c_c, c_u)}\,
+    \Rpthree\bigl(\dprime_{\mathrm{base}},
+                       \dprime_{\mathrm{base}},
+                       c_c, c_u;\,
+                       \valid, \val, \Nloc, \CR\bigr)
+\end{equation*}
+are then the argmax of a functional whose every input is
+$p$-independent; the criteria themselves are therefore
+$p$-independent.
+
+\textbf{(Step 3) $K_c, K_u$ are $p$-independent, hence $\rdagger$
+is.} The partials
+$K_c(\val) = \partial \Rpthree/\partial \dprime_c$ and
+$K_u(\val) = \partial \Rpthree/\partial \dprime_u$ are evaluated
+at the $p$-independent
+$(\dprime_{\mathrm{base}}, \dprime_{\mathrm{base}}, c_c^\star,
+c_u^\star)$, and the functional form of $\Rpthree$ depends only on
+$(\valid, \val, \Nloc, \CR)$ — no conservation choice enters its
+expression. Hence $K_c(\val)$ and $K_u(\val)$ are $p$-independent,
+and so is their ratio
+$\rdagger(\val) = K_u/[(\Nloc - 1)\,K_c]$. \qed
+\end{proof}
+
+The structural full proof is tighter than the empirical witness
+allows: it says $\rdagger(\val)$ is an algebraic invariant of the
+family, not merely a numerical coincidence. The rb-016
+\texttt{recovery.test\_3\_r\_dagger\_p\_invariance} check
+(payload digest
+\texttt{055bf4ec862c711f2c6a3fa0831e1373b806a84c5f5c1a6b13fd1d9d7a039a33})
+records $K_c$, $K_u$, $c_c^\star$, $c_u^\star$, and
+$\rdagger(\val)$ identical to floating-point identity across
+$p \in \{0,\, 1/2,\, 1\}$ and
+$\val \in \{2,\, 3,\, 5,\, 8,\, 10\}$ (max $|\Delta| = 0.0$),
+verifying that the algebra commutes with the floating-point
+implementation across all three branches of \texttt{beta\_gamma}.
+What is \emph{not} invariant is the peak inside the band: at
+$\alpha \ne 1/\Nloc$ the bracket
+$\dprimemax\,f(\alpha) - \dprime_{\mathrm{base}}$ no longer
+vanishes, the $p$-dependence of $\benefit$ and $\cost$ does not
+cancel, and the peak coordinates
+$(\Rsens^\star, \VDA^\star)$ pick up the conservation-family band
+of Table~\ref{tab:a3-c2-peak-band} and
+Figure~\ref{fig:a3-vda-peak-band}. The C2 thread is therefore
+characterised by the cleanest possible separation: the
+\emph{left edge} of the positive-$\VDA$ band is a topological
+invariant of the model, the \emph{peak} inside the band is a
+calibration feature.
+
+\paragraph{$d'$-channel chain rule for $\partial \CF/\partial p$.}
+Theorem~\ref{thm:delta-cf-monotone} of
+Section~\ref{sec:extensions-a3}
+($\Delta\CF := \CF(p = 0) - \CF(p = 1) \le 0$ at every cell of
+the $4{,}410$-cell C1 grid, with $0$ reverse flips) admits a
+chain-rule sign analysis. With
+$\CF = (\Rpthree - \Rpone)/(\Rpfour - \Rpone)$ from
+\eqref{eq:cf-def-model} and the envelope theorem applied to each
+policy reward (the optimum's first-order conditions remove the
+inner gradient terms), the $p$-partials thread through the
+$\dprime$-map at the policy's own
+$(\alpha, c_c, c_u)$ optimum:
+\begin{equation}
+  \frac{\partial R_{\mathrm{P}_i}}{\partial p}
+  \;=\;
+  \frac{\partial R_{\mathrm{P}_i}}{\partial \dprime_c}\!\bigg|_{\!\star}
+  \cdot
+  \frac{\partial \dprime_c}{\partial p}
+  \;+\;
+  \frac{\partial R_{\mathrm{P}_i}}{\partial \dprime_u}\!\bigg|_{\!\star}
+  \cdot
+  \frac{\partial \dprime_u}{\partial p},
+  \qquad
+  i \in \{1, 3, 4\},
+  \label{eq:a3d-chain-rule}
+\end{equation}
+where from the $\dprime$-map definition,
+\begin{equation}
+  \frac{\partial \dprime_c}{\partial p}
+  \;=\;
+  \frac{\partial \benefit}{\partial p}
+  \,\bigl[\,\dprimemax\,f(\alpha) - \dprime_{\mathrm{base}}\,\bigr],
+  \qquad
+  \frac{\partial \dprime_u}{\partial p}
+  \;=\;
+  \frac{\partial \cost}{\partial p}
+  \,\bigl[\,\dprimemax\,f((1-\alpha)/(\Nloc-1))
+           - \dprime_{\mathrm{base}}\,\bigr].
+  \label{eq:a3d-dprime-of-p}
+\end{equation}
+By Equation~\eqref{eq:a3d-mono-sign}, both
+$\partial \benefit/\partial p$ and $\partial \cost/\partial p$ are
+strictly negative at every $\Rsens \ne 1$, every $p$. For
+$\alpha \ge 1/\Nloc$ (the cued-enhancement regime of the
+$\textrm{P}$ family) the first bracket of
+\eqref{eq:a3d-dprime-of-p} is non-negative and the second is
+non-positive, so $\partial \dprime_c/\partial p \le 0$ and
+$\partial \dprime_u/\partial p \ge 0$ — the cued and uncued $d'$
+channels carry opposite sign of motion in $p$. Substituting into
+\eqref{eq:a3d-chain-rule}, the two channel contributions to
+$\partial R_{\mathrm{P}_i}/\partial p$ are of opposite sign; the resolution per
+policy depends on the relative weights
+$(\partial R_{\mathrm{P}_i}/\partial \dprime_c,\, \partial R_{\mathrm{P}_i}/\partial
+\dprime_u)$ at the policy's own optimum.
+
+\begin{proposition}[$\Rpthree$ at $\alpha = 1/\Nloc$ is $p$-invariant]
+\label{prop:a3d-rp3-invariance}
+At the $\textrm{P3}$ allocation $\alpha = 1/\Nloc$,
+$\partial \Rpthree/\partial p \equiv 0$.
+\end{proposition}
+
+\begin{proof}
+$\textrm{P3}$ is the criterion-only policy fixed at $\alpha = 1/\Nloc$.
+By Step 1 of the proof of
+Proposition~\ref{prop:r-dagger-invariance} above, the brackets in
+\eqref{eq:a3d-dprime-of-p} vanish at $\alpha = 1/\Nloc$, so
+$\partial \dprime_c/\partial p = \partial \dprime_u/\partial p =
+0$, and \eqref{eq:a3d-chain-rule} gives
+$\partial \Rpthree/\partial p = 0$. \qed
+\end{proof}
+
+Proposition~\ref{prop:a3d-rp3-invariance} is the one analytic
+full-strength substatement that the chain rule yields. $\textrm{P1}$
+optimises $\alpha^\star$ away from $1/\Nloc$ and $\textrm{P4}$
+optimises both $\alpha$ and the criteria; neither enjoys the
+vanishing-bracket collapse, and both pick up the opposite-sign
+$d'$-channel competition above. The combined expression for the
+$\CF$ gradient,
+\begin{equation*}
+  \frac{\partial \CF}{\partial p}
+  \;=\;
+  \frac{(\Rpfour - \Rpone)\,(\partial_p \Rpthree
+                              - \partial_p \Rpone)
+       \;-\; (\Rpthree - \Rpone)\,(\partial_p \Rpfour
+                              - \partial_p \Rpone)}
+       {(\Rpfour - \Rpone)^2},
+\end{equation*}
+collapses by Proposition~\ref{prop:a3d-rp3-invariance} to
+\begin{equation*}
+  \frac{\partial \CF}{\partial p}
+  \;=\;
+  \frac{-(\Rpfour - \Rpone)\,\partial_p \Rpone
+       \;-\; (\Rpthree - \Rpone)\,(\partial_p \Rpfour
+                              - \partial_p \Rpone)}
+       {(\Rpfour - \Rpone)^2}.
+\end{equation*}
+Both $\Rpfour - \Rpone$ and $\Rpthree - \Rpone$ are positive
+(definition of $\CF$); the sign of $\partial \CF/\partial p$
+therefore reduces to a competition between
+$-\partial_p \Rpone$ (first term, sign $\ge 0$ since
+$\partial_p \Rpone \le 0$) and
+$-(\partial_p \Rpfour - \partial_p \Rpone)$ (second term). The
+uniform inequality
+$|\partial_p \Rpfour| \le |\partial_p \Rpone|$ (the joint policy
+falls in $p$ no faster than the sensitivity-only policy) suffices
+to make $\partial \CF/\partial p \le 0$ pointwise, which would
+integrate to $\Delta\CF \le 0$. The inequality holds at $0$
+reverse flips out of $4{,}410$ cells in the rb-016 Block B sweep,
+but a closed-form proof has so far eluded us: both
+$\partial_p \Rpone$ and $\partial_p \Rpfour$ pick up
+policy-specific $\alpha^\star(p)$ moving-target dependencies that
+the chain rule does not collapse. The rebuild therefore reports
+Theorem~\ref{thm:delta-cf-monotone} as \emph{empirical at full
+strength} (the $4{,}410$-cell statement, $0$ reverse flips), with
+the chain-rule analysis \eqref{eq:a3d-chain-rule}--%
+\eqref{eq:a3d-dprime-of-p} identifying the sign mechanism and
+Proposition~\ref{prop:a3d-rp3-invariance} contributing the one
+analytic invariant, and leaves the uniform closed-form proof as a
+queued open problem (see the \emph{Scope} paragraph below and the
+companion derivation file §8.2).
+
+\paragraph{Scope.}
+The derivation is held at $\corr = 0$ throughout: the joint
+$(p, \corr)$ sensitivity would compose the HLP gradient
+\eqref{eq:a3d-hlp-kl} with the $\corr$-channel Slepian gradient
+of Section~\ref{sec:appendix-deriv-c2}, but is not in the
+rb-016 Block B sweep that supplies the numerical witnesses
+(\texttt{Rebuild/sims/A3{-}{-}conservation-band/output} digest
+\texttt{055bf4ec862c711f2c6a3fa0831e1373b806a84c5f5c1a6b13fd1d9d7a039a33}).
+The derivation is also held at the inherited per-location
+homogeneous $\Rsens$ (A2) and homogeneous uncued allocation (A8);
+both are relaxed in Sections~\ref{sec:extensions-a2}
+and~\ref{sec:extensions-a8} respectively, and the relaxations
+compose linearly with $p$ (the conservation-family weights
+$(\benefit, \cost)$ enter the per-location $\dprime$-map
+independently of the heterogeneity structure). A closed-form
+algebraic proof of the per-cell $\Delta\CF \le 0$ monotonicity on
+the $4{,}410$-cell grid would require simultaneous control of
+$\partial_p \Rpone$ and $\partial_p \Rpfour$ along the
+$\alpha^\star(p)$ moving target, and is not yet in hand.
+
+\paragraph{Reproducibility.}
+Equation~\eqref{eq:a3d-closed-form-weights} is exercised by
+\texttt{Rebuild/model/tests/test\_conservation\_family.py}
+(SHA-256
+\texttt{f4f57a89e5108db47447cbeaf2f15440f56cdfffb65f3d173dc4a0550121791e};
+$14/14$ PASS). The
+\texttt{test\_family\_identities} check verifies $\benefit/\cost
+= \Rsens$ and $M_p(\benefit, \cost) = 1$ to relative error
+$\le 4.4 \times 10^{-16}$ across
+$p \in \{-2, -1, -1/2, 0, 1/2, 1, 2\}$ and a $21$-point
+log-$\Rsens$ grid $\Rsens \in [0.1, 10]$, backing
+\eqref{eq:a3d-closed-form-weights} pointwise.
+The
+\texttt{test\_symmetric\_corner\_invariant} and
+\texttt{test\_p0\_symmetric\_corner\_identity} checks back
+Proposition~\ref{prop:a3d-symmetric-corner} and
+Corollary~\ref{cor:a3d-c5-invariance} to floating-point identity.
+Proposition~\ref{prop:r-dagger-invariance} is exercised by the
+rb-016 \texttt{recovery.test\_3\_r\_dagger\_p\_invariance} check
+(payload digest
+\texttt{055bf4ec862c711f2c6a3fa0831e1373b806a84c5f5c1a6b13fd1d9d7a039a33};
+max $|\Delta| = 0.0$). The finite-difference cross-check of
+\eqref{eq:a3d-hlp-kl} at the seven test pairs above (LHS$-$RHS
+$\le 1.5 \times 10^{-10}$ in every case) reruns at the companion
+derivation file
+\texttt{Rebuild/derivations/A3{-}{-}power-mean-conservation.md} §3.2
+and is the long-form source of the equation labels, the boxed
+identities, and the two formal proofs in this subsection.

@@ -1,0 +1,27 @@
+{
+  "action": "removed empty Finder Icon\\r metadata and atomically promoted pre-existing manifest",
+  "artifact_sha256": "739d8b79b81a5dbab39d451556cb8fd0f7a69512e06855a9775c6f24c120e91c",
+  "created_at_utc": "2026-07-12T03:48:42.856167+00:00",
+  "legacy_link_count_drift": {
+    "current_nlink": 1,
+    "recorded_nlink": 4
+  },
+  "manifest_sha256_after_promotion": "394c1528741c581c03bc9c26612fd0b6ca36f9335f59735a68fca9328f86da5f",
+  "manifest_sha256_before_promotion": "394c1528741c581c03bc9c26612fd0b6ca36f9335f59735a68fca9328f86da5f",
+  "post_recovery_read_only_audit": "passed",
+  "recovery_script": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/scripts/recover_corrected_decoder_publication.py",
+  "recovery_script_sha256": "994bb8d728d88fa2675c8cd266f5116b3839c12288afa1f13c6aef8c97ba828a",
+  "removed_directory_xattr": "com.apple.FinderInfo",
+  "removed_files": [
+    "Icon\r",
+    "data/Icon\r",
+    "provenance/Icon\r",
+    "provenance/dependencies/Icon\r",
+    "provenance/dependencies/envs/Icon\r",
+    "provenance/dependencies/vda_sweep/Icon\r",
+    "provenance/validation/Icon\r",
+    "provenance/validation/tests/Icon\r"
+  ],
+  "run_root": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_corrected",
+  "schema_version": 1
+}

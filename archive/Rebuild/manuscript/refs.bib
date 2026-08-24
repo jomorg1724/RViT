@@ -1,0 +1,294 @@
+% refs.bib — bibliography for the VDA-rebuild manuscript.
+%
+% Seed entries: the two citations actually used by the rb-005 skeleton
+% appendix stub (Slepian 1962 — the monotonicity inequality cited in
+% sec:appendix-deriv-a1, via Critique/derivations/A1--correlated-fa-
+% upper-bound.md), plus Cohen & Maunsell 2009 — the empirical reference
+% for attention-modulated cross-location noise correlations that
+% motivates the ρ-channel of A1 (mission §3.2, A1 row).
+%
+% Later increments append entries as needed; do NOT delete entries that
+% were cited by an earlier increment without checking they're now
+% unreferenced.
+
+@article{Slepian1962,
+  author  = {Slepian, David},
+  title   = {The one-sided barrier problem for {G}aussian noise},
+  journal = {Bell System Technical Journal},
+  volume  = {41},
+  number  = {2},
+  pages   = {463--501},
+  year    = {1962},
+  doi     = {10.1002/j.1538-7305.1962.tb02419.x}
+}
+
+@article{CohenMaunsell2009,
+  author  = {Cohen, Marlene R. and Maunsell, John H. R.},
+  title   = {Attention improves performance primarily by reducing
+             interneuronal correlations},
+  journal = {Nature Neuroscience},
+  volume  = {12},
+  number  = {12},
+  pages   = {1594--1600},
+  year    = {2009},
+  doi     = {10.1038/nn.2439}
+}
+
+@article{MullerFindlay1987,
+  author  = {M{\"u}ller, Hermann J. and Findlay, John M.},
+  title   = {Sensitivity and criterion effects in the spatial cuing
+             of visual attention},
+  journal = {Perception \& Psychophysics},
+  volume  = {42},
+  number  = {4},
+  pages   = {383--399},
+  year    = {1987},
+  doi     = {10.3758/bf03203097}
+}
+
+% Added rb-009 (RB-004, §model): structured-covariance citations
+% backing Section~\ref{sec:model-rho-channel}'s scoped-limitation
+% paragraph. Both already present in research_db/papers/ as wiki
+% stubs (ruff_cohen2016_cross_area_correlations,
+% srinath2021_attention_information_flow); imported here as bib
+% entries so the .tex \cite{} commands resolve.
+@article{RuffCohen2016,
+  author  = {Ruff, Douglas A. and Cohen, Marlene R.},
+  title   = {Attention Increases Spike Count Correlations between
+             Visual Cortical Areas},
+  journal = {Journal of Neuroscience},
+  volume  = {36},
+  number  = {28},
+  pages   = {7523--7534},
+  year    = {2016},
+  doi     = {10.1523/JNEUROSCI.0610-16.2016}
+}
+
+@article{Srinath2021,
+  author  = {Srinath, Ramanujan and Ruff, Douglas A. and
+             Cohen, Marlene R.},
+  title   = {Attention improves information flow between neuronal
+             populations without changing the communication
+             subspace},
+  journal = {Current Biology},
+  volume  = {31},
+  number  = {23},
+  pages   = {5299--5313.e4},
+  year    = {2021},
+  doi     = {10.1016/j.cub.2021.09.076}
+}
+
+% Added rb-013 (RB-012, §results-C4): behavioural-literature
+% corroboration of the conditional / anti-cue restatement of C4.
+% Four entries are wired to research_db wiki stubs of the same id;
+% two (Wang--Samara--Theeuwes 2019 and Kong et al.\ 2020) are cited
+% by full bibliographic reference in the rebuild for the first time
+% --- both already listed by full bib reference in the reviewer's
+% C4 V0.2 evidence dossier (Critique/verdicts/C4--no-inversion.md
+% §Version 0.2 / Evidence). research_db stubs for those two are
+% queued (the reviewer's CR-035 / CR-037).
+@article{wang_theeuwes2018_statistical_learning_distractor_suppression,
+  author  = {Wang, Benchi and Theeuwes, Jan},
+  title   = {Statistical regularities modulate attentional capture},
+  journal = {Journal of Experimental Psychology: Human Perception
+             and Performance},
+  volume  = {44},
+  number  = {1},
+  pages   = {13--17},
+  year    = {2018},
+  doi     = {10.1037/xhp0000472}
+}
+
+@article{wang_samara_theeuwes2019,
+  author  = {Wang, Benchi and Samara, Iliana and Theeuwes, Jan},
+  title   = {Statistical regularities bias overt attention},
+  journal = {Attention, Perception, \& Psychophysics},
+  volume  = {81},
+  number  = {6},
+  pages   = {1813--1821},
+  year    = {2019},
+  doi     = {10.3758/s13414-019-01708-5}
+}
+
+@article{kong_li_wang_theeuwes2020,
+  author  = {Kong, Shaoyi and Li, Xinyi and Wang, Benchi and
+             Theeuwes, Jan},
+  title   = {Proactively location-based suppression elicited by
+             statistical learning},
+  journal = {PLoS ONE},
+  volume  = {15},
+  number  = {6},
+  pages   = {e0233544},
+  year    = {2020},
+  doi     = {10.1371/journal.pone.0233544}
+}
+
+@article{failing_theeuwes2018_selection_history,
+  author  = {Failing, Michel and Theeuwes, Jan},
+  title   = {Selection history: How reward modulates selectivity of
+             visual attention},
+  journal = {Psychonomic Bulletin \& Review},
+  volume  = {25},
+  number  = {2},
+  pages   = {514--538},
+  year    = {2018},
+  doi     = {10.3758/s13423-017-1380-y}
+}
+
+@article{hickey2010_reward_salience_acc,
+  author  = {Hickey, Clayton and Chelazzi, Leonardo and Theeuwes,
+             Jan},
+  title   = {Reward changes salience in human vision via the anterior
+             cingulate},
+  journal = {Journal of Neuroscience},
+  volume  = {30},
+  number  = {33},
+  pages   = {11096--11103},
+  year    = {2010},
+  doi     = {10.1523/JNEUROSCI.1026-10.2010}
+}
+
+@article{posner1980_orienting,
+  author  = {Posner, Michael I. and Snyder, Charles R. and
+             Davidson, Brian J.},
+  title   = {Attention and the detection of signals},
+  journal = {Journal of Experimental Psychology: General},
+  volume  = {109},
+  number  = {2},
+  pages   = {160--174},
+  year    = {1980},
+  doi     = {10.1037/0096-3445.109.2.160}
+}
+
+% Cited by Rebuild/manuscript/sections/extensions.tex (rb-017, RB-034)
+% for the power-mean conservation family (§extensions-A3). The classic
+% reference for the power-mean monotonicity that underwrites the
+% conservation-family band; no research_db/papers/ stub yet (the same
+% math-methods gap flagged by rb-008 for Slepian 1962 and Tong 1990 —
+% out of rebuilder scope per the reviewer's CR-035/CR-037 backlog).
+@book{HLP1934,
+  author    = {Hardy, G. H. and Littlewood, J. E. and P{\'o}lya, G.},
+  title     = {Inequalities},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge, UK},
+  year      = {1934},
+  note      = {2nd ed.\ 1952; reprinted 1988. Power-mean
+               monotonicity at §2.9 ($M_p(\mathbf{x})$ is non-decreasing
+               in $p$ for positive $\mathbf{x}$).}
+}
+
+% Cited by Rebuild/manuscript/sections/appendix.tex (rb-018, RB-013)
+% for the §appendix-C5 Sterbenz-lemma bit-exact recovery argument
+% (Proposition prop:c5-sterbenz). Math-methods reference; same
+% scope-gap as Slepian 1962 / Tong 1990 / Hardy-Littlewood-Polya 1934
+% (no research_db/papers/ stub, cited by full bibliographic reference;
+% out of rebuilder scope per the math-methods gap flagged by rb-008
+% and the reviewer's CR-035/CR-037 backlog).
+@book{Sterbenz1974,
+  author    = {Sterbenz, Pat H.},
+  title     = {Floating-Point Computation},
+  publisher = {Prentice-Hall},
+  address   = {Englewood Cliffs, NJ},
+  year      = {1974},
+  note      = {Theorem 4.3.1 (subtraction without round-off, the
+               ``Sterbenz lemma''): if $a/2 \le x \le 2a$ then
+               $\mathrm{fl}(x - a) = x - a$ exactly under any IEEE-754
+               round-to-nearest mode.}
+}
+
+% Cited by Rebuild/manuscript/sections/appendix.tex (rb-018, RB-013)
+% for the §appendix-C5 IEEE-754 background. The standard secondary
+% reference for the Sterbenz lemma in the CS literature; same
+% math-methods scope as Sterbenz 1974 above.
+@article{Goldberg1991,
+  author  = {Goldberg, David},
+  title   = {What Every Computer Scientist Should Know About
+             Floating-Point Arithmetic},
+  journal = {ACM Computing Surveys},
+  volume  = {23},
+  number  = {1},
+  pages   = {5--48},
+  year    = {1991},
+  doi     = {10.1145/103162.103163},
+  note    = {Theorem 11 (the Sterbenz lemma, re-stated in IEEE-754
+             notation): exact subtraction holds inside the band
+             $[a/2, 2a]$.}
+}
+
+% =====================================================================
+% Heterogeneity-of-r empirical references for §extensions-A2 (rb-022,
+% RB-035). Sourced from research_db/papers/ stubs; the live A2 verdict
+% (Critique/verdicts/A2--single-global-r.md) lists these as the
+% canonical evidence that the benefit:cost asymmetry is location-,
+% feature-, and time-heterogeneous in the real biology, motivating the
+% rebuild's between-preparation reading of A2 and the heterogeneous-r
+% extension.
+% =====================================================================
+@article{mcadams_maunsell1999_v4_tuning,
+  author  = {McAdams, Carrie J. and Maunsell, John H. R.},
+  title   = {Effects of attention on orientation-tuning functions of
+             single neurons in macaque cortical area {V}4},
+  journal = {Journal of Neuroscience},
+  volume  = {19},
+  number  = {1},
+  pages   = {431--441},
+  year    = {1999},
+  doi     = {10.1523/JNEUROSCI.19-01-00431.1999}
+}
+
+@article{reynolds_heeger2009_normalization,
+  author  = {Reynolds, John H. and Heeger, David J.},
+  title   = {The normalization model of attention},
+  journal = {Neuron},
+  volume  = {61},
+  number  = {2},
+  pages   = {168--185},
+  year    = {2009},
+  doi     = {10.1016/j.neuron.2009.01.002}
+}
+
+@article{treue_martinez_trujillo1999_feature_attention,
+  author  = {Treue, Stefan and Mart{\'\i}nez Trujillo, Julio C.},
+  title   = {Feature-based attention influences motion processing gain
+             in macaque visual cortex},
+  journal = {Nature},
+  volume  = {399},
+  pages   = {575--579},
+  year    = {1999},
+  doi     = {10.1038/21176}
+}
+
+@article{carrasco2011_visual_attention_25y,
+  author  = {Carrasco, Marisa},
+  title   = {Visual attention: the past 25 years},
+  journal = {Vision Research},
+  volume  = {51},
+  number  = {13},
+  pages   = {1484--1525},
+  year    = {2011},
+  doi     = {10.1016/j.visres.2011.04.012}
+}
+
+@article{ghose_maunsell2002_task_timing,
+  author  = {Ghose, Geoffrey M. and Maunsell, John H. R.},
+  title   = {Attentional modulation in visual cortex depends on task
+             timing},
+  journal = {Nature},
+  volume  = {419},
+  pages   = {616--620},
+  year    = {2002},
+  doi     = {10.1038/nature01057}
+}
+
+@article{sani2017_temporal_v4_gain,
+  author  = {Sani, Ilaria and Santandrea, Elisa and Morrone, Maria
+             Concetta and Chelazzi, Leonardo},
+  title   = {Temporally evolving gain mechanisms of attention in
+             macaque area {V}4},
+  journal = {Journal of Neurophysiology},
+  volume  = {118},
+  number  = {2},
+  pages   = {800--816},
+  year    = {2017},
+  doi     = {10.1152/jn.00522.2016}
+}

@@ -1,0 +1,719 @@
+Memory decay and learned
+cross-attention dynamics
+A frozen-checkpoint comparison in the four-location value-directed-
+attention task
+
+
+AttentionManuscript — standalone VDA4 analysis
+
+
+
+
+Comparison         Standard cross-attention (λ = 1.00, iteration 20,000) versus high-decay cross-
+                   attention (λ = 0.80, iteration 14,649).
+Primary question   Does the high-decay checkpoint show more frame-to-frame movement in its
+                   complete learned 4 × 8 attention distributions?
+Primary answer     The prespecified comparison gives the opposite result for this checkpoint pair.
+                   High minus standard: -0.0995, paired trial-bootstrap 95% interval [-0.1021, -
+                   0.0970].
+Run identity       20260714T040646Z_high_iter14649_vs_standard_iter20000_9e9495d1.
+VDA4 decay comparison
+
+
+                                                      Abstract
+
+           This analysis tests a precise hypothesis about recurrent visual attention: whether a stronger mem-
+       ory decay is associated with more dynamic learned attention maps. Two preserved VDA4 cross-
+       attention checkpoints were evaluated on shared trial sets under valid and deliberately forced-invalid
+       conditions. “Activity” was fixed in advance as frame-to-frame total variation over every query-to-
+       key attention distribution, because total softmax mass is constant by construction. The standard
+       checkpoint averaged 0.5245; the high-decay checkpoint averaged 0.4249. The paired high-minus-
+       standard difference was -0.0995 (95% trial-bootstrap interval [-0.1021, -0.0970]; n = 256 matched
+       trial identities, each evaluated under both event conditions). Thus the high-decay checkpoint was
+       less, not more, dynamic under the primary metric. Behavioral curves, image-versus-memory alloca-
+       tion, selectivity, spatial reorientation, response-stratified traces, and raw query-level maps provide
+       convergent description. The comparison remains associational: the high-decay checkpoint was
+       frozen 5,351 iterations earlier, and only one training seed exists per condition.
+
+
+
+1 Question, answer, and evidential scope
+
+The scientific question is narrower than whether either model “uses attention.” Both networks produce
+normalized cross-attention at every frame. The question is whether reducing the xLSTM memory-decay
+factor from 1.00 to 0.80 is associated with larger changes in the learned attention distribution from one
+frame to the next. For each query row q and consecutive frames t − 1, t, activity is
+
+                                                     ∑
+                                                     8
+                                         Dt,q = 12         |At,q,k − At−1,q,k | ,
+                                                     k=1
+
+then averaged over frames, queries, valid and forced-invalid conditions, and finally over matched tri-
+als. This total-variation distance is zero for an unchanged attention row and one for a complete shift
+between disjoint keys.
+Answer. The prespecified comparison gives the opposite result for this checkpoint pair. The
+high-decay network’s mean activity was 0.4249, compared with 0.5245 for the standard network.
+The observed difference, -0.0995, is not evidence that faster forgetting caused quieter attention
+because checkpoint maturity was not matched.
+
+Evidence boundary. The standard checkpoint completed 20,000 training iterations. The high-
+decay snapshot was frozen at iteration 14,649 while its training process was active; a later fi-
+nal checkpoint was subsequently present at iteration 19,999, but the requested frozen snapshot
+was retained. One training seed per checkpoint means the model-difference intervals quantify
+evaluation-trial sampling only, not variation across training runs.
+
+
+
+2 Frozen checkpoints and matched protocol
+
+Table 1: Frozen model identities. Both checkpoints validate as VDA4, xLSTM, crossattn1, dmem = 128, convo-
+lutional front end, and 2 × 2 geometry.
+Role               Iteration    Decay         Frozen SHA-256
+Standard           20,000       1.00          a0cf23b788b1bb74ffb598fa3978b8d601b25ec5cfa2bf67d64d2d59
+                                              bfd7d65a
+High decay         14,649       0.80          da93490bfbcbf4969f9aedb06d94da2d3c9ef088435d7f390e952ca0
+                                              aae59ab5
+
+
+                                                             1
+VDA4 decay comparison
+
+
+Each event trial has seven frames: blank, cue at frame 1, delay, stimulus array at frames 3–6, and an
+orientation change at frame 5. The cue is fixed at S1. In the valid condition the 15◦ change occurs at
+S1; in the forced-invalid condition it occurs at S4. The paired videos are identical through frame 4. The
+100%-cue invalid condition is an intervention for analysis, not a sample from the environment’s natural
+100%-valid target distribution.
+The event analysis uses 256 paired trials per condition. No-change attention uses 128 trials at each
+displayed cue proportion (25, 50, 75, and 100%). Psychometric curves use 300 shared trials at each
+combination of four displayed cue proportions, ten change magnitudes, and the valid or forced-invalid
+location. A qualifying response is the first greedy change action at frame 5 or 6. Every reported model-
+difference interval uses 10,000 deterministic paired bootstrap resamples; psychometric binomial-rate
+bands use Wilson intervals.
+
+
+3 Results
+
+3.1 Primary activity result and secondary descriptors
+
+The direction was consistent within both event conditions. High-minus-standard activity was -0.0981
+for valid changes (95% interval [-0.1014, -0.0948]) and -0.1009 for forced-invalid changes ([-0.1044, -
+0.0974]). The no-change difference was -0.1132 ([-0.1170, -0.1094]). These measures jointly contradict
+the specific prediction that the frozen high-decay checkpoint has more moving attention maps.
+Secondary descriptors show that “less motion” is not equivalent to uniformly flatter attention. High-
+decay selectivity was higher by +0.0221, while its peak-key mass was lower by -0.0374 and its image-
+key allocation was lower by -0.0420. Immediate change-location reorientation, measured as changed-
+location spatial mass at frame 5 minus frame 4, differed by only +0.0064 for valid changes and -0.0011
+for forced-invalid changes; both intervals include zero.
+
+Table 2: Paired high-decay minus standard estimates. Bootstrap intervals are over matched evaluation trials,
+not training seeds.
+
+          Measure                           Standard       High decay      Difference [95% interval]
+          Overall attention motion            0.5245          0.4249      -0.0995 [-0.1021, -0.0970]
+          Valid attention motion              0.5282          0.4301      -0.0981 [-0.1014, -0.0948]
+          Forced-invalid attention motion     0.5207          0.4198      -0.1009 [-0.1044, -0.0974]
+          Selectivity                         0.4366          0.4587    +0.0221 [+0.0193, +0.0247]
+          Peak-key mass                       0.5061          0.4687      -0.0374 [-0.0409, -0.0339]
+          Image-key mass                      0.1816          0.1397      -0.0420 [-0.0427, -0.0412]
+
+
+
+
+                                                       2
+VDA4 decay comparison                                                                                                                                        3.2 Behavior at valid and forced-invalid locations
+
+
+                                                                  VDA4 cross-attention dynamics · high decay versus standard
+                                                  Primary high−standard motion difference = -0.0995 (paired 95% bootstrap CI -0.1021, -0.0970)
+                         A Temporal attention motion (primary)            B Attention selectivity (1 − normalized entropy)      C Image-key source mass
+                   1.0                                                                                                                                                                    1.0
+                                                               standard λ=1.0 · valid                               0.9
+                                                               standard λ=1.0 · forced invalid
+                                                               high decay λ=0.8 · valid
+                                                               high decay λ=0.8 · forced invalid                    0.8
+                   0.8                                                                                                                                                                    0.8
+                                                                                                                    0.7
+
+
+
+
+ total variation                                                                                                                                                         attention mass
+                                                                                                                    0.6                                                                   0.6
+                   0.6
+
+
+                                                                                                   selectivity
+                                                                                                                    0.5
+                                                                                                                                                                                          0.4
+                   0.4
+                                                                                                                    0.4
+
+                                                                                                                    0.3                                                                   0.2
+                   0.2
+                                                                                                                    0.2
+
+                                                                                                                                                                                          0.0
+                                                                                                                    0.1
+                          1          2          3           4               5               6                              0      1      2         3         4   5   6                           0              1               2           3                  4   5   6
+                                         transition ending at frame                                                                          logical frame                                                                            logical frame
+                         D Combined attention to cued S1                                                                  E Combined attention to condition change location                     F Change-location attention by qualifying response
+                   1.0                                                                                              1.0                                                                   1.0
+
+                   0.9
+                                                                                                                    0.8                                                                   0.8
+                   0.8
+
+
+
+
+ attention mass                                                                                    attention mass                                                        attention mass
+                   0.7                                                                                              0.6                                                                   0.6
+                                                                                                                                                                                                     standard λ=1.0 · valid · response (n=171)
+                                                                                                                                                                                                     standard λ=1.0 · valid · no response (n=85)
+                                                                                                                                                                                                     standard λ=1.0 · forced invalid · response (n=107)
+                                                                                                                                                                                                     standard λ=1.0 · forced invalid · no response (n=149)
+                   0.6                                                                                                                                                                               high decay λ=0.8 · valid · response (n=176)
+                                                                                                                                                                                                     high decay λ=0.8 · valid · no response (n=80)
+                                                                                                                    0.4                                                                   0.4        high decay λ=0.8 · forced invalid · response (n=113)
+                   0.5                                                                                                                                                                               high decay λ=0.8 · forced invalid · no response (n=143)
+
+
+
+
+                   0.4
+                                                                                                                    0.2                                                                   0.2
+
+                   0.3
+
+                                                                                                                    0.0                                                                   0.0
+                   0.2
+                          0      1         2         3           4              5           6                              0      1      2         3         4   5   6                           0              1               2           3                  4   5   6
+                                               logical frame                                                                                 logical frame                                                                            logical frame
+
+
+
+
+Figure 1: Dynamic and spatial attention descriptors. Time courses compare the standard and high-decay
+checkpoints under valid and forced-invalid changes, show image-versus-memory allocation, and separate trials
+with and without a qualifying change response. Every trace derives from raw 4×8 softmax maps before summary.
+
+
+3.2 Behavior at valid and forced-invalid locations
+
+At the matched 100%-cue, 15◦ anchor, the standard checkpoint produced qualifying change re-
+sponses on 200/300 valid trials (0.667) and 112/300 forced-invalid trials (0.373). The high-decay
+checkpoint responded on 198/300 valid trials (0.660) and 133/300 forced-invalid trials (0.443). The
+full curves are more informative than this single anchor: they show how response probability changes
+with orientation magnitude at every displayed cue proportion.
+These are change-response probabilities, not sensitivity estimates. No signal-detection decomposi-
+tion separates discriminability from response criterion, so a difference in response rate cannot by itself
+establish improved detection.
+
+
+
+
+                                                                                                                                                 3
+VDA4 decay comparison                                                                                                                                                                          3.2 Behavior at valid and forced-invalid locations
+
+
+                                                                               VDA4 paired psychometrics · n=300 shared trials/point · first press at frame ≥5 qualifies
+                                                                         Bands are Wilson 95% evaluation-trial intervals; invalid at 100% displayed cue is a forced intervention.
+                                A 25% displayed cue                                               B 50% displayed cue                                  C 75% displayed cue
+                          1.0        standard λ=1.0 · valid                                                                                      1.0                                                                                                             1.0
+                                     standard λ=1.0 · forced invalid
+                                     high decay λ=0.8 · valid
+                                     high decay λ=0.8 · forced invalid
+
+                          0.8                                                                                                                    0.8                                                                                                             0.8
+
+
+
+
+ P(qualifying response)                                                                                                 P(qualifying response)                                                                                          P(qualifying response)
+                          0.6                                                                                                                    0.6                                                                                                             0.6
+
+
+
+
+                          0.4                                                                                                                    0.4                                                                                                             0.4
+
+
+
+
+                          0.2                                                                                                                    0.2                                                                                                             0.2
+
+
+
+
+                          0.0                                                                                                                    0.0                                                                                                             0.0
+                                 0           5         10       15     20      25       30                                                              0       5        10       15     20      25     30                                                              0       5        10       15     20      25     30
+                                                  orientation change (degrees)                                                                                      orientation change (degrees)                                                                                    orientation change (degrees)
+                                D 100% displayed cue                                                                                                   E High−standard response rate · valid                                                                           F High−standard response rate · forced invalid
+                          1.0
+
+                                                                                                                             100%                                                                                                            100%
+                                                                                                                                                                                                                                                                                                                             0.10
+                          0.8
+
+
+
+
+ P(qualifying response)                                                                      displayed cue proportion                                                                                        displayed cue proportion                                                                                                response-rate difference
+                                                                                                                                                                                                                                                                                                                             0.05
+                                                                                                                                         75%                                                                                                             75%
+                          0.6
+
+                                                                                                                                                                                                                                                                                                                             0.00
+
+                          0.4
+                                                                                                                                         50%                                                                                                             50%
+                                                                                                                                                                                                                                                                                                                             −0.05
+
+
+                          0.2
+                                                                                                                                                                                                                                                                                                                             −0.10
+                                                                                                                                         25%                                                                                                             25%
+
+                          0.0
+                                 0           5         10       15     20      25       30                                                             0    3       6   9   12    15    18   22    26   30                                                             0    3       6   9   12    15    18   22    26   30
+                                                  orientation change (degrees)
+                                                                                                                                                                    orientation change (degrees)                                                                                    orientation change (degrees)
+
+
+
+
+Figure 2: Behavioral comparison. Qualifying change-response probability across change magnitude for valid
+and deliberately forced-invalid locations at four displayed cue proportions. Difference panels show high decay
+minus standard. The target location is fixed by analysis in every curve; displayed validity changes the cue ap-
+pearance but does not sample target location.
+
+
+
+
+                                                                                                                                                                                    4
+VDA4 decay comparison                                                      3.3 Where the attention moves
+
+
+3.3 Where the attention moves
+
+Figure 3 keeps image and recurrent-memory keys separate while averaging over the four query rows.
+This view exposes the broad frame schedule, but it can conceal query-specific routing. Figures 4–
+7 therefore retain every query row. Bright columns identify the source location receiving attention;
+image-key and memory-key panels must be interpreted separately because each is only one four-key
+block of the normalized eight-key distribution.
+The maps show the same broad schedule in both checkpoints: image-key concentration at the cue
+frame is followed by increased recurrent-memory routing during the delay and array frames. Relative
+to standard, the high-decay checkpoint’s cue-orienting increase from frame 0 to frame 1 was larger
+by +0.1824, yet its event-average image-key mass was lower by -0.0420; because image and memory
+blocks partition each normalized row, the latter is a corresponding shift toward memory keys. At the
+frame-5 change, high-minus-standard changed-location reorientation was only +0.0064 in valid trials
+and -0.0011 in forced-invalid trials, with both intervals spanning zero. The lower total variation there-
+fore reflects a quieter routing trajectory after the strong cue transition, not an absence of cue-localized
+or source-selective structure.
+
+
+
+
+                                                    5
+VDA4 decay comparison                                                                                                                                  3.3 Where the attention moves
+
+
+                              VDA4 event-locked cross-attention · query-averaged source maps · 100% displayed cue · Δ=15°
+
+
+                                      t0 blank               t1 cue                t2 delay                t3 array            t4 maintain             t5 change            t6 response
+
+
+
+
+                standard λ=1.0
+                valid S1 change
+                     image keys
+
+
+
+
+                standard λ=1.0
+                valid S1 change
+                  memory keys
+
+
+
+
+                 standard λ=1.0
+        forced-invalid S4 change
+                      image keys
+
+
+
+
+                 standard λ=1.0                                                                                                                                                           0.8
+        forced-invalid S4 change
+                   memory keys
+
+
+
+
+                                                                                                                                                                                                attention mass
+                                                                                                                                                                                          0.6
+
+
+                                                                                                                                                                                          0.4
+
+              high decay λ=0.8
+                valid S1 change                                                                                                                                                           0.2
+                     image keys
+
+
+                                                                                                                                                                                          0.0
+
+
+
+
+              high decay λ=0.8
+                valid S1 change
+                  memory keys
+
+
+
+
+               high decay λ=0.8
+        forced-invalid S4 change
+                      image keys
+
+
+
+
+               high decay λ=0.8
+        forced-invalid S4 change
+                   memory keys
+
+
+
+
+                            Orange dot marks the cue at S1; magenta border marks the forced change. One shared scale across both models, conditions, sources, and frames.
+
+
+
+
+Figure 3: Query-averaged event maps. Standard and high-decay attention under matched valid and forced-
+invalid videos. Image keys and recurrent-memory keys are displayed separately across all seven frames. This is
+the overview; the following plates preserve the full query axis.
+
+
+
+
+                                                                                                       6
+                                                      VDA4 query-level image keys · valid · common scale
+
+
+                                                 t0   t1             t2              t3              t4    t5   t6
+
+
+
+
+                               standard λ=1.0
+                                     query S1
+
+
+
+
+                               standard λ=1.0
+                                     query S2
+
+
+
+
+                               standard λ=1.0
+                                     query S3
+
+
+
+
+                               standard λ=1.0                                                                          0.8
+                                     query S4
+
+
+
+
+                                                                                                                             attention mass
+                                                                                                                       0.6
+
+
+                                                                                                                       0.4
+
+                              high decay λ=0.8
+7                                     query S1                                                                         0.2
+
+
+                                                                                                                       0.0
+
+
+
+
+                              high decay λ=0.8
+                                      query S2
+
+
+
+
+                              high decay λ=0.8
+                                      query S3
+
+
+
+
+                              high decay λ=0.8
+                                      query S4
+
+
+
+
+    Figure 4: Valid condition, image keys. Each tile preserves the four query rows and four image-key columns. The cue and 15◦ change are both at S1;
+    paired models receive identical videos.
+                                                      VDA4 query-level memory keys · valid · common scale
+
+
+                                                 t0   t1              t2             t3              t4     t5   t6
+
+
+
+
+                               standard λ=1.0
+                                     query S1
+
+
+
+
+                               standard λ=1.0
+                                     query S2
+
+
+
+
+                               standard λ=1.0
+                                     query S3
+
+
+
+
+                               standard λ=1.0                                                                         0.8
+                                     query S4
+
+
+
+
+                                                                                                                            attention mass
+                                                                                                                      0.6
+
+
+                                                                                                                      0.4
+
+                              high decay λ=0.8
+8                                     query S1                                                                        0.2
+
+
+                                                                                                                      0.0
+
+
+
+
+                              high decay λ=0.8
+                                      query S2
+
+
+
+
+                              high decay λ=0.8
+                                      query S3
+
+
+
+
+                              high decay λ=0.8
+                                      query S4
+
+
+
+
+    Figure 5: Valid condition, recurrent-memory keys. Full query-to-memory routing for the same valid trials. Comparison with Figure 4 shows whether
+    a frame-to-frame shift is within a source block or between image and memory.
+                                                      VDA4 query-level image keys · forced invalid · common scale
+
+
+                                                 t0       t1              t2             t3              t4         t5   t6
+
+
+
+
+                               standard λ=1.0
+                                     query S1
+
+
+
+
+                               standard λ=1.0
+                                     query S2
+
+
+
+
+                               standard λ=1.0
+                                     query S3
+
+
+
+
+                               standard λ=1.0                                                                                 0.8
+                                     query S4
+
+
+
+
+                                                                                                                                    attention mass
+                                                                                                                              0.6
+
+
+                                                                                                                              0.4
+
+                              high decay λ=0.8
+9                                     query S1                                                                                0.2
+
+
+                                                                                                                              0.0
+
+
+
+
+                              high decay λ=0.8
+                                      query S2
+
+
+
+
+                              high decay λ=0.8
+                                      query S3
+
+
+
+
+                              high decay λ=0.8
+                                      query S4
+
+
+
+
+    Figure 6: Forced-invalid condition, image keys. The cue remains at S1 while the change is forced to S4. Videos are matched through frame 4, so
+    valid–invalid divergence before the event would indicate analysis or stochastic mismatch.
+                                                       VDA4 query-level memory keys · forced invalid · common scale
+
+
+                                                  t0        t1             t2              t3             t4          t5   t6
+
+
+
+
+                                standard λ=1.0
+                                      query S1
+
+
+
+
+                                standard λ=1.0
+                                      query S2
+
+
+
+
+                                standard λ=1.0
+                                      query S3
+
+
+
+
+                                standard λ=1.0                                                                                  0.8
+                                      query S4
+
+
+
+
+                                                                                                                                      attention mass
+                                                                                                                                0.6
+
+
+                                                                                                                                0.4
+
+
+10                             high decay λ=0.8
+                                       query S1                                                                                 0.2
+
+
+                                                                                                                                0.0
+
+
+
+
+                               high decay λ=0.8
+                                       query S2
+
+
+
+
+                               high decay λ=0.8
+                                       query S3
+
+
+
+
+                               high decay λ=0.8
+                                       query S4
+
+
+
+
+     Figure 7: Forced-invalid condition, recurrent-memory keys. Query-preserving memory routing after a change outside the cued location. This plate
+     is the direct spatial test requested for invalid attention.
+VDA4 decay comparison
+
+
+4 Interpretation
+
+The frozen high-decay checkpoint does not show the predicted increase in attention-map activity. Its
+attention changes less from frame to frame in valid, forced-invalid, and no-change analyses. At the
+same time, some secondary descriptors move in different directions: selectivity is slightly higher while
+peak-key and image-key mass are lower. This pattern is why the conclusion is tied to the prespecified
+total-variation metric rather than generalized into “more” or “less attention.” Attention is a normalized
+distribution; its scientific content is where mass moves, between which sources, and when.
+The result does not identify a causal memory-decay effect. Training maturity is confounded with de-
+cay, the two checkpoints were trained independently, and each represents only one training seed. A
+controlled answer requires matched training budgets, multiple seeds, checkpoint-acceptance crite-
+ria, and evaluation of both final checkpoints under this same paired-video battery. The present result
+is nevertheless decisive for the literal frozen-pair question: the available high-decay snapshot is not
+more dynamically attentive by the prespecified metric.
+
+
+5 Reproducibility record
+
+The numerical source is SUMMARY.json, derived from the validated comparison_evidence.npz cache.
+Every figure was regenerated from that admitted cache in PDF, SVG, and PNG, using TrueType PDF
+embedding and text-preserving SVG settings. The analysis source, task/environment source, model
+source, runtime versions, exact command, frozen-input manifest, and file hashes are retained in the
+analysis run. This writeup copies its numerical and lineage inputs byte-for-byte; a package manifest
+records those copies, the regenerated figures, and the compiled manuscript.
+• Analysis run: 20260714T040646Z_high_iter14649_vs_standard_iter20000_9e9495d1.
+• Standard checkpoint SHA-256: a0cf23b788b1bb74ffb598fa3978b8d601b25ec5cfa2bf67d64d2d59bfd7d65a.
+• High-decay checkpoint SHA-256: da93490bfbcbf4969f9aedb06d94da2d3c9ef088435d7f390e952ca0aae59ab5.
+• Primary metric: High decay is more active if its paired mean frame-to-frame total variation over
+  the full 4×8 attention map is larger. Total mass is not used because every query row is softmax-
+  normalized to one.
+• Interpretation boundary: This is a frozen-checkpoint comparison: standard iteration 20000 versus
+  high-decay iteration 14649. The estimates do not isolate memory decay from training maturity and
+  do not quantify training-seed uncertainty.
+
+
+
+
+                                                   11
+

@@ -1,0 +1,43 @@
+{
+  "candidate": "vda4_decay_comparison_candidate_v2",
+  "snapshot": "/Users/jonathanmorgan/AttentionManuscript/VDA4_memory_decay/comparison_analysis/review_snapshots/20260714T_decay_comparison_candidate_v2",
+  "identities": {
+    "main_tex_sha256": "ed3958dd20e5f63d40a3b2def8fcd608e44bf596a638bd6f340baee0c19cdb49",
+    "pdf_sha256": "868b420a127a0907a3092546d442c62d4dd9bcee1cc97878794898d43a1a0683",
+    "snapshot_manifest_sha256": "86590b5a0e9925ab7df25359b4df2ed2f8231f848b88ae4c831812b401e76f00"
+  },
+  "verdicts": [
+    {
+      "delegation_id": "deleg_ca923c86",
+      "scope": "reader journey and v1-blocker resolution",
+      "verdict": "PASS",
+      "must_fixes": []
+    },
+    {
+      "delegation_id": "deleg_c6ac78cc",
+      "scope": "numerical and statistical consistency",
+      "verdict": "PASS",
+      "must_fixes": []
+    },
+    {
+      "delegation_id": "deleg_c6ac78cc",
+      "scope": "visual layout and accessibility",
+      "verdict": "PASS",
+      "must_fixes": []
+    }
+  ],
+  "non_verdict_runs": [
+    {
+      "delegation_id": "deleg_ca923c86",
+      "scope": "broad statistical/provenance review",
+      "status": "timeout",
+      "disposition": "replaced by bounded numerical/statistical review"
+    },
+    {
+      "delegation_id": "deleg_ca923c86",
+      "scope": "broad layout/accessibility review",
+      "status": "timeout",
+      "disposition": "replaced by bounded visual/accessibility review"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+FZCOXY+AvenirNext-Bold               CID TrueType      Identity-H       yes yes yes      4  0
+KAESKB+AvenirNext-Regular            CID TrueType      Identity-H       yes yes yes      6  0
+AAOBEI+CMMI10                        Type 1C           Builtin          yes yes yes      8  0
+DTGYVH+CMR10                         Type 1C           Builtin          yes yes yes      9  0
+LSNTHS+CMSY10                        Type 1C           Builtin          yes yes yes     10  0
+LJJUGG+LMMono10-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     11  0
+QFAICK+CMMI8                         Type 1C           Builtin          yes yes yes     17  0
+TLTDUV+CMR8                          Type 1C           Builtin          yes yes yes     18  0
+DQURKC+CMEX10                        Type 1C           Builtin          yes yes yes     19  0
+SBEJVQ+CMSY8                         Type 1C           Builtin          yes yes yes     20  0
+FFNCPF+CMMI7                         Type 1C           Builtin          yes yes yes     24  0
+WBYMLR+LMMono9-Regular-Identity-H    CID Type 0C       Identity-H       yes yes yes     25  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no      31  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no      85  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no     142  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no     191  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no     271  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no     307  0
+EMWLRE+CMSY7                         Type 1C           Builtin          yes yes yes    653  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no     473  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no     501  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no     658  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no     685  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no     842  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no     871  0
+EVICAO+DejaVuSans-Bold               Type 3            Custom           yes yes no    1027  0
+BMQQDV+DejaVuSans                    Type 3            Custom           yes yes no    1055  0

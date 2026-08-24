@@ -1,0 +1,330 @@
+% =====================================================================
+% sdt_foundations.tex — companion derivation note for the VDA rebuild.
+%
+% Writes up the signal-detection foundations of the rebuilt model's
+% "inherited skeleton" (Rebuild/manuscript/sections/model.tex, §2.1):
+% the per-location equal-variance Gaussian decision, the derivation of
+% the hit-rate and false-alarm-rate expressions, the modelling
+% conventions that make those expressions well-posed, and the bridge
+% from a single location to the multi-location no-false-alarm term
+% P_no-fa where assumption A1 (independence) enters.
+%
+% Self-contained. Build: pdflatex sdt_foundations.tex (twice).
+% =====================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=blue!45!black]{hyperref}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% shorthand aligned with sections/model.tex
+\newcommand{\HR}{\mathrm{HR}}
+\newcommand{\FAR}{\mathrm{FAR}}
+\newcommand{\CR}{\mathrm{CR}}
+\newcommand{\dprime}{d'}
+\newcommand{\PnoFA}{P_{\mathrm{no\text{-}fa}}}
+\newcommand{\Nloc}{N}
+
+\title{Signal-detection foundations of the value-directed-attention model\\[2pt]
+       \large A derivation note for the rebuilt model section}
+\author{Jonathan Morgan \and James Herman}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This note derives, from first principles, the per-location hit-rate
+and false-alarm-rate expressions that the rebuilt model inherits from
+the Herman Lab manuscript, and states the modelling conventions that
+make them well-posed. The goal is to make every symbol in
+Equation~(\ref{eq:sdt}) traceable to an explicit probabilistic
+statement about an observer's decision, and to localise the single
+place where the per-location independence assumption (A1) enters the
+$\Nloc$-location reward, which is the seam the rebuild later cuts along
+to introduce the decorrelation channel.
+\end{abstract}
+
+% ---------------------------------------------------------------------
+\section{The task and the decision}
+\label{sec:task}
+
+An observer monitors $\Nloc \ge 2$ spatial locations (in the cued
+change-detection paradigm, $\Nloc$ oriented patches). On each trial at
+most one location changes. The observer cannot read out the world
+directly; at each location it has access only to a scalar
+\emph{decision variable} $X_i$ --- a noisy internal summary of the
+evidence that location $i$ changed. The observer issues a separate
+binary judgement at each location, ``change'' or ``no change.'' The
+quantities of interest are the two conditional response rates at each
+location: the \emph{hit rate} $\HR_i$ (the probability of reporting
+``change'' when location $i$ truly changed) and the \emph{false-alarm
+rate} $\FAR_i$ (the probability of reporting ``change'' when it did
+not).
+
+We work throughout with the \emph{normative} observer: rather than
+modelling any particular subject's idiosyncratic policy, we ask what
+an observer that has already tuned its sensitivities and criteria to
+maximise expected reward would do. The signal-detection layer below is
+the measurement model on which that optimisation is later performed.
+
+% ---------------------------------------------------------------------
+\section{The per-location signal-detection model}
+\label{sec:model}
+
+\paragraph{Distributions.}
+Adopt the equal-variance Gaussian model with unit variance
+($\sigma = 1$). At location $i$, the decision variable is drawn from
+one of two distributions according to whether a change occurred:
+\begin{equation}
+  \text{no change } (H_0):\ X_i \sim \mathcal{N}\!\left(-\tfrac{\dprime_i}{2},\, 1\right),
+  \qquad
+  \text{change } (H_1):\ X_i \sim \mathcal{N}\!\left(+\tfrac{\dprime_i}{2},\, 1\right).
+  \label{eq:dists}
+\end{equation}
+The two means are placed symmetrically about $0$, so that their
+separation is exactly $\dprime_i$. This is the definition of
+sensitivity:
+\begin{equation}
+  \dprime_i
+  \;:=\;
+  \frac{\mathbb{E}[X_i \mid H_1] - \mathbb{E}[X_i \mid H_0]}{\sigma}
+  \;=\; \tfrac{\dprime_i}{2} - \left(-\tfrac{\dprime_i}{2}\right),
+  \qquad \sigma = 1 .
+  \label{eq:dprime-def}
+\end{equation}
+Larger $\dprime_i$ pushes the two distributions apart and makes change
+more discriminable from no-change.
+
+\paragraph{Decision rule.}
+The observer reports ``change'' at location $i$ when the evidence
+exceeds a threshold, the \emph{criterion} $c_i \in \mathbb{R}$:
+\begin{equation}
+  \text{respond ``change'' at } i
+  \iff
+  X_i > c_i .
+  \label{eq:rule}
+\end{equation}
+Because $c_i$ is measured on the same centred axis as
+(\ref{eq:dists}), $c_i = 0$ is the unbiased criterion (it cuts the two
+distributions symmetrically); $c_i > 0$ is conservative (fewer
+``change'' responses), $c_i < 0$ liberal.
+
+\paragraph{Target.}
+Both $\HR_i$ and $\FAR_i$ are the \emph{same} event under
+(\ref{eq:rule}) --- ``$X_i$ exceeds $c_i$'' --- evaluated under the two
+hypotheses of (\ref{eq:dists}). They are therefore tail areas of
+Gaussians, computed with the standard-normal cumulative distribution
+function $\Phi(z) = \Pr(Z \le z)$, $Z \sim \mathcal{N}(0,1)$.
+
+% ---------------------------------------------------------------------
+\section{Deriving the hit and false-alarm rates}
+\label{sec:derivation}
+
+We use two elementary facts, stated as lemmas so the derivation has no
+hidden steps.
+
+\begin{lemma}[Standardisation]
+\label{lem:std}
+If $X \sim \mathcal{N}(\mu, \sigma^2)$ then $Z := (X-\mu)/\sigma \sim
+\mathcal{N}(0,1)$, and for any $t \in \mathbb{R}$,
+$\Pr(X > t) = \Pr\!\big(Z > (t-\mu)/\sigma\big)$.
+\end{lemma}
+
+\begin{lemma}[Tail symmetry of the standard normal]
+\label{lem:sym}
+For all $z \in \mathbb{R}$, $\;1 - \Phi(z) = \Phi(-z)$, because the
+standard-normal density is even about $0$.
+\end{lemma}
+
+\begin{proposition}[Per-location SDT rates]
+\label{prop:rates}
+Under the model (\ref{eq:dists})--(\ref{eq:rule}) with $\sigma = 1$,
+\begin{equation}
+  \HR_i = \Phi\!\left(\tfrac{\dprime_i}{2} - c_i\right),
+  \qquad
+  \FAR_i = \Phi\!\left(-\tfrac{\dprime_i}{2} - c_i\right).
+  \label{eq:sdt}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\emph{Hit rate.} Condition on $H_1$, so $X_i \sim
+\mathcal{N}(\dprime_i/2, 1)$. Apply Lemma~\ref{lem:std} with
+$\mu = \dprime_i/2$, $\sigma = 1$, $t = c_i$, and then
+Lemma~\ref{lem:sym}:
+\begin{align}
+  \HR_i
+  &= \Pr(X_i > c_i \mid H_1)
+   = \Pr\!\big(Z > c_i - \tfrac{\dprime_i}{2}\big)
+   = 1 - \Phi\!\big(c_i - \tfrac{\dprime_i}{2}\big)
+   = \Phi\!\big(\tfrac{\dprime_i}{2} - c_i\big).
+\end{align}
+\emph{False-alarm rate.} Condition on $H_0$, so $X_i \sim
+\mathcal{N}(-\dprime_i/2, 1)$. Identically,
+\begin{align}
+  \FAR_i
+  &= \Pr(X_i > c_i \mid H_0)
+   = \Pr\!\big(Z > c_i + \tfrac{\dprime_i}{2}\big)
+   = 1 - \Phi\!\big(c_i + \tfrac{\dprime_i}{2}\big)
+   = \Phi\!\big(-\tfrac{\dprime_i}{2} - c_i\big).
+\end{align}
+These are (\ref{eq:sdt}).
+\end{proof}
+
+% ---------------------------------------------------------------------
+\section{Conventions and what they buy}
+\label{sec:conventions}
+
+\begin{remark}[The centring is a choice, not a law]
+Placing the means at $\mp\dprime_i/2$ fixes the origin of the decision
+axis at the midpoint of the two distributions. Any other origin gives
+an algebraically equivalent model. For instance, putting noise at $0$
+and signal at $\dprime_i$ and measuring a criterion $c_i'$ from the
+noise mean yields $\HR_i = \Phi(\dprime_i - c_i')$,
+$\FAR_i = \Phi(-c_i')$; the substitution $c_i = c_i' - \dprime_i/2$
+recovers (\ref{eq:sdt}). The centred convention is preferred only
+because it makes $c_i = 0$ the bias-free criterion, so the sign of
+$c_i$ reads directly as conservative/liberal.
+\end{remark}
+
+\begin{remark}[Why a threshold on $X_i$ is general]
+The rule (\ref{eq:rule}) is a simple threshold on the raw decision
+variable, not on a likelihood ratio. Under the equal-variance Gaussian
+model the likelihood ratio
+$\Lambda(x) = \varphi(x - \dprime_i/2)/\varphi(x + \dprime_i/2)
+= \exp(\dprime_i x)$ is strictly increasing in $x$, so
+``$\Lambda(X_i) > \tau$'' is equivalent to ``$X_i > c_i$'' for a
+suitable $c_i$. By the Neyman--Pearson lemma the threshold rule is
+therefore the optimal test, and (\ref{eq:rule}) loses no generality.
+This equivalence relies on equal variances: with $\sigma_0 \ne
+\sigma_1$ the likelihood ratio is non-monotone, the optimal region is
+an interval rather than a half-line, and (\ref{eq:sdt}) no longer
+holds. Equal variance is thus a load-bearing modelling assumption, not
+a cosmetic one.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\section{From one location to \texorpdfstring{$\Nloc$}{N}: the no-false-alarm term}
+\label{sec:pnofa}
+
+The expected reward couples locations only through the no-change
+trials, where the observer is penalised for false-alarming
+\emph{anywhere}. Define the per-location correct-rejection probability
+\begin{equation}
+  \CR_i := 1 - \FAR_i
+  = 1 - \Phi\!\left(-\tfrac{\dprime_i}{2} - c_i\right)
+  = \Phi\!\left(\tfrac{\dprime_i}{2} + c_i\right)
+  =: \Phi(b_i),
+  \qquad
+  b_i := c_i + \tfrac{\dprime_i}{2},
+  \label{eq:cr}
+\end{equation}
+using Lemma~\ref{lem:sym} again; $b_i$ is the $z$-score the no-change
+decision variable must stay below to avoid a false alarm. The
+probability that \emph{no} location false-alarms on a no-change trial
+is then
+\begin{equation}
+  \PnoFA
+  \;=\;
+  \Pr\!\left(\bigcap_{i} \{X_i \le c_i\} \,\Big|\, H_0\ \text{at every location}\right).
+  \label{eq:pnofa-joint}
+\end{equation}
+This is the \emph{only} term in the expected reward that involves more
+than one location at once: on a change trial the change is at a single
+location, so the change-trial reward is linear in the marginal hit
+rates and contains no cross-location product.
+
+\paragraph{Where assumption A1 enters.}
+If the per-location decision variables are independent (assumption
+A1), the joint event (\ref{eq:pnofa-joint}) factorises into a product
+of marginals, and with homogeneous uncued allocation
+($\dprime_u, c_u$ shared across the $\Nloc-1$ uncued locations) it
+collapses to
+\begin{equation}
+  \PnoFA^{\text{indep}}
+  \;=\;
+  \prod_{i}\big(1 - \FAR_i\big)
+  \;=\;
+  \Phi(b_c)\,\Phi(b_u)^{\Nloc - 1}.
+  \label{eq:pnofa-indep}
+\end{equation}
+Equation~(\ref{eq:pnofa-indep}) is the sole appearance of A1 in the
+model. The rebuilt manuscript replaces it with the exact
+equicorrelated-Gaussian orthant probability: writing the no-change
+variables in one-factor form
+$X_i = \mu_i + \sqrt{\rho}\,Z + \sqrt{1-\rho}\,\varepsilon_i$ with
+$Z, \varepsilon_i \stackrel{\text{iid}}{\sim} \mathcal{N}(0,1)$ and
+$\mu_i = -\dprime_i/2$, the variables are conditionally independent
+given $Z$, so multiplying the conditional correct-rejection
+probabilities and integrating out $Z$ gives
+\begin{equation}
+  \PnoFA(\rho)
+  \;=\;
+  \int_{-\infty}^{\infty}
+  \Phi\!\left(\frac{b_c - \sqrt{\rho}\,z}{\sqrt{1-\rho}}\right)
+  \Phi\!\left(\frac{b_u - \sqrt{\rho}\,z}{\sqrt{1-\rho}}\right)^{\!\Nloc - 1}
+  \varphi(z)\,dz,
+  \qquad \rho \in [0,1).
+  \label{eq:pnofa-rho}
+\end{equation}
+At $\rho = 0$ the integrand is constant in $z$ and
+(\ref{eq:pnofa-rho}) reduces to (\ref{eq:pnofa-indep}); this is the
+recovery contract that pins the extended model to the inherited one.
+Equation~(\ref{eq:pnofa-rho}) requires no multivariate-normal CDF ---
+equicorrelation collapses the $\Nloc$-dimensional integral to a single
+dimension --- and is the formal content of the rebuild's
+``decorrelation channel.''
+
+% ---------------------------------------------------------------------
+\section{The two knobs and the question}
+\label{sec:knobs}
+
+Equations (\ref{eq:sdt}) expose the observer's two per-location
+controls. \emph{Sensitivity} $\dprime_i$ is set by attention through
+the asymmetric transfer
+$\dprime_c = \dprime_{\max} f(\alpha_c; \beta(r))$,
+$\dprime_u = \dprime_{\max} f(\alpha_u; \gamma(r))$, where the
+benefit/cost ratio $r$ governs how much sensitivity is gained at the
+cued focus versus lost at the periphery. The \emph{criterion} $c_i$
+sets the bias independently of sensitivity. Adapting to a valuable cue
+can in principle be done by sharpening $\dprime_c$ (moving attention)
+or by lowering $c_c$ (shifting the criterion), and the central
+question of the paper --- when does value-directed attention matter?
+--- is precisely which of these the reward-maximising observer relies
+on, and in what parameter regime. With (\ref{eq:pnofa-rho}) promoted to
+a model parameter, a third control appears: \emph{decorrelation} of
+the cross-location noise, which the inherited model held fixed at
+$\rho = 0$.
+
+\begin{thebibliography}{9}
+\bibitem{GreenSwets1966}
+D.~M. Green and J.~A. Swets.
+\emph{Signal Detection Theory and Psychophysics}.
+Wiley, New York, 1966.
+
+\bibitem{MacmillanCreelman2005}
+N.~A. Macmillan and C.~D. Creelman.
+\emph{Detection Theory: A User's Guide}.
+2nd ed., Lawrence Erlbaum, 2005.
+
+\bibitem{HermanVDA2026}
+Herman Lab.
+\emph{When Does Value-Directed Attention Matter? A Normative Model with
+Independent Attentional Benefit and Cost}.
+Manuscript, 2026-04-09 (target of the rebuild).
+\end{thebibliography}
+
+\end{document}

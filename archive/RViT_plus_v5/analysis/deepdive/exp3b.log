@@ -1,0 +1,11 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5/rvit_plus_v5_rl_final.pt (iter=1999) device=cpu
+[collect] 3500 forced-wait trials, full tokens at frames [3, 15, 28] …
+[collect] done. change-trials=1759
+  cue_color        (t=3): h1_mean=1.00 h1_quad=1.00 h1_flat=1.00 h2_flat=1.00 both_flat=1.00 actor_cls=1.00 critic_press_cls=1.00
+  cue_proportion   (t=3): h1_mean=0.99 h1_quad=1.00 h1_flat=1.00 h2_flat=0.99 both_flat=1.00 actor_cls=0.48 critic_press_cls=0.52
+  change_location  (t=28): h1_mean=0.34 h1_quad=0.91 h1_flat=0.86 h2_flat=0.37 both_flat=0.80 actor_cls=0.26 critic_press_cls=0.27
+  change_present   (t=15): h1_mean=0.87 h1_quad=0.83 h1_flat=0.82 h2_flat=0.86 both_flat=0.84 actor_cls=0.87 critic_press_cls=0.85
+  change_magnitude (t=28): h1_mean=0.63 h1_quad=0.57 h1_flat=0.62 h2_flat=0.61 both_flat=0.65 actor_cls=0.55 critic_press_cls=0.54
+  change_onset     (t=28): h1_mean=0.68 h1_quad=0.61 h1_flat=0.65 h2_flat=0.63 both_flat=0.65 actor_cls=0.28 critic_press_cls=0.47
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/figs/exp3b_flat_decoding.png + /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5/analysis/deepdive/tables/exp3b_flat_decoding.json
+[done]

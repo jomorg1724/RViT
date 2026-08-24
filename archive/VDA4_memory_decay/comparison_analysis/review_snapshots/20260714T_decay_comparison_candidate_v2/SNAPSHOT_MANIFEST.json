@@ -1,0 +1,110 @@
+{
+  "candidate": "vda4_decay_comparison_candidate_v2",
+  "files": [
+    {
+      "bytes": 336605,
+      "path": "VDA4_memory_decay_attention_comparison.pdf",
+      "sha256": "868b420a127a0907a3092546d442c62d4dd9bcee1cc97878794898d43a1a0683"
+    },
+    {
+      "bytes": 22944,
+      "path": "analysis/MANIFEST.json",
+      "sha256": "29ed2d28588b1b63cbd81bdc63b77d4f2f9c59a4ab4284e41987d4fb2f7a29bd"
+    },
+    {
+      "bytes": 4092,
+      "path": "analysis/REPORT.md",
+      "sha256": "0949d21d47d1133d4622c5b472bab36b2de91bdd3be5f4e8441823f7c546d8aa"
+    },
+    {
+      "bytes": 5233,
+      "path": "analysis/SUMMARY.json",
+      "sha256": "b6313ddde8f2cbf2e850a87811b0fe09fede730ba8945ea9129fbcf83ad7da34"
+    },
+    {
+      "bytes": 7241,
+      "path": "analysis/frozen_inputs.json",
+      "sha256": "cf24b5488e4ddf53696fd93c04e5d5bc5e84c77811f34ad09b0ea30898d17d85"
+    },
+    {
+      "bytes": 50759,
+      "path": "figures/attention_event_query_averaged.pdf",
+      "sha256": "49e021dfe9411ec8afbc4f9b4546d5833563c4ec975382848bd342aca344ca49"
+    },
+    {
+      "bytes": 33296,
+      "path": "figures/attention_metrics_and_response_strata.pdf",
+      "sha256": "eab664fc4222ad8535ef5468d08a79dbc739a617564d3ff41b1768e8f0f062e9"
+    },
+    {
+      "bytes": 45933,
+      "path": "figures/attention_nochange_image_keys.pdf",
+      "sha256": "293c14b24719f92567dcc5f9fa118d4a2d6815409fe5b3874184abffd39c8d9e"
+    },
+    {
+      "bytes": 47872,
+      "path": "figures/attention_nochange_memory_keys.pdf",
+      "sha256": "f7bd9f5dbe0e57ba481a034ca119c444faf6bc78174bb664d087a3d90776f57a"
+    },
+    {
+      "bytes": 47039,
+      "path": "figures/attention_query_level_forced_invalid_image_keys.pdf",
+      "sha256": "d93648b958fc94e456d79c86ed6e8279e896d98665fdf5be1024c790396dad6a"
+    },
+    {
+      "bytes": 48185,
+      "path": "figures/attention_query_level_forced_invalid_memory_keys.pdf",
+      "sha256": "c7960bd6ff3141986857ca30384299ae533e9e79073116ef6f13749754f76e3f"
+    },
+    {
+      "bytes": 46157,
+      "path": "figures/attention_query_level_valid_image_keys.pdf",
+      "sha256": "bed74d0d6e92e60d27632020d833e26389c33ce24c442b85e74ccf02d606f921"
+    },
+    {
+      "bytes": 47391,
+      "path": "figures/attention_query_level_valid_memory_keys.pdf",
+      "sha256": "4eab2e003d57ff54418b2b2fc1fb19360990583939f7ba7d3d450bc621fb1986"
+    },
+    {
+      "bytes": 41083,
+      "path": "figures/psychometric_valid_invalid_comparison.pdf",
+      "sha256": "34dff648d5f6324fec483756800b23ff7578e619db30cfecb223289acb72a9e3"
+    },
+    {
+      "bytes": 17356,
+      "path": "main.tex",
+      "sha256": "ed3958dd20e5f63d40a3b2def8fcd608e44bf596a638bd6f340baee0c19cdb49"
+    },
+    {
+      "bytes": 78180,
+      "path": "provenance/vda4_decay_comparison.py",
+      "sha256": "742e7f5f7d777cf0a8741ac1a1c54ee924e82f3c4a38060b068f5267d233bda5"
+    },
+    {
+      "bytes": 25214,
+      "path": "provenance/write_vda4_decay_latex.py",
+      "sha256": "b73230cc7445f4c395b33d84f92167e96672a6699337dff287857b0362a75ef0"
+    },
+    {
+      "bytes": 485898,
+      "path": "qa/contact_sheet_1.png",
+      "sha256": "6f9d448460b68a67dea259aec417fc2bda53522d559e3279d06189c2c91adcc4"
+    },
+    {
+      "bytes": 148937,
+      "path": "qa/contact_sheet_2.png",
+      "sha256": "2c827dd7047ccd340c98c39ecc5bda99d0f910e7c9cb586f56219908a910cbd4"
+    },
+    {
+      "bytes": 39225,
+      "path": "qa/extracted_text.txt",
+      "sha256": "a935140e4e9b61bdc6a5cd5bb1b846f080b9cda804b025a5194faf3950779ee4"
+    },
+    {
+      "bytes": 2726,
+      "path": "qa/fonts.txt",
+      "sha256": "85aeea887cecd8dda390c7dd1aa5748ce72ee0ceef602070ea909a42c1357cef"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "gh_nq": 64,
+  "phi_backend": "scipy.special.ndtr",
+  "prompt_version": "0.2",
+  "run_id": "rb-020-2026-05-25",
+  "summary": {
+    "test_1": {
+      "max_abs_diff": 2.7669910807048836e-10,
+      "n_cells": 4530,
+      "pass_": true,
+      "tol": 1e-09
+    },
+    "test_2": {
+      "max_abs_diff": 2.7841284833129976e-10,
+      "n_cells": 4530,
+      "pass_": true,
+      "tol": 1e-09
+    },
+    "test_3": {
+      "max_abs_diff": 1.1860157300702667e-10,
+      "n_cells": 302,
+      "pass_": true,
+      "tol": 1e-09
+    },
+    "test_4": {
+      "pass_": true,
+      "per_p": {
+        "0.0": {
+          "max_abs_diff": 2.0582291426762822e-10,
+          "n_cells": 151,
+          "pass_": true,
+          "tol": 1e-09
+        },
+        "0.5": {
+          "max_abs_diff": 2.11320738685572e-10,
+          "n_cells": 151,
+          "pass_": true,
+          "tol": 1e-09
+        },
+        "1.0": {
+          "max_abs_diff": 2.0440049652847847e-10,
+          "n_cells": 151,
+          "pass_": true,
+          "tol": 1e-09
+        }
+      }
+    },
+    "test_5": {
+      "observations": {
+        "alpha=0.5": {
+          "method": "grid_2d",
+          "n_groups": 2
+        },
+        "alpha=1/N": {
+          "method": "grid_2d",
+          "n_groups": 2
+        },
+        "alpha=1/N v=1 V=1/N r=1": {
+          "method": "grid_1d",
+          "n_groups": 1
+        }
+      },
+      "pass_": true
+    },
+    "test_6": {
+      "max_abs_diff": 0.0,
+      "n_cells": 186,
+      "pass_": true,
+      "tol": 1e-09
+    },
+    "test_7": {
+      "observations": {
+        "het_R": 1.8487529690394773,
+        "het_method": "coord_ascent_multi_restart",
+        "het_n_groups": 4,
+        "pooled_R": 1.844602978076662,
+        "pooled_method": "grid_2d",
+        "pooled_n_groups": 2
+      },
+      "pass_": true
+    }
+  },
+  "task": "RB-017",
+  "tol_recovery_rho0": 1e-09,
+  "tol_recovery_rho_pos": 1e-09
+}

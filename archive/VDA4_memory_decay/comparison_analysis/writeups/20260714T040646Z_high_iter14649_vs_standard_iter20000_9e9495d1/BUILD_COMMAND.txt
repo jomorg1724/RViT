@@ -1,0 +1,6 @@
+cd /Users/jonathanmorgan/AttentionManuscript/VDA4_memory_decay/comparison_analysis/writeups/20260714T040646Z_high_iter14649_vs_standard_iter20000_9e9495d1
+export SOURCE_DATE_EPOCH=1784000000
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=build main.tex
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=build main.tex
+cp build/main.pdf VDA4_memory_decay_attention_comparison.pdf
+shasum -a 256 VDA4_memory_decay_attention_comparison.pdf

@@ -1,0 +1,163 @@
+{
+  "event_condition": {
+    "attention_trials": 256,
+    "cue_location": "S1",
+    "displayed_validity": 1.0,
+    "forced_invalid_change_location": "S4",
+    "nochange_trials": 128,
+    "orientation_change_degrees": 15.0,
+    "psychometric_trials": 300,
+    "valid_change_location": "S1"
+  },
+  "hypothesis_definition": "High decay is more active if its paired mean frame-to-frame total variation over the full 4\u00d78 attention map is larger. Total mass is not used because every query row is softmax-normalized to one.",
+  "interpretation_boundary": "This is a frozen-checkpoint comparison: standard iteration 20000 versus high-decay iteration 14649. The estimates do not isolate memory decay from training maturity and do not quantify training-seed uncertainty.",
+  "primary_event_attention_motion": {
+    "bootstrap_samples": 10000,
+    "ci_high": -0.0969829900639373,
+    "ci_low": -0.1021290574722419,
+    "high_decay_mean": 0.42492045899234654,
+    "hypothesis_verdict": "opposite",
+    "mean_difference": -0.09953003626408949,
+    "n": 256,
+    "seed": 7200,
+    "standard_mean": 0.524450495256436
+  },
+  "psychometric_anchor_100pct_15deg": {
+    "high_decay": {
+      "forced_invalid": {
+        "response_count": 133,
+        "response_rate": 0.44333333333333336,
+        "trials": 300
+      },
+      "valid": {
+        "response_count": 198,
+        "response_rate": 0.66,
+        "trials": 300
+      }
+    },
+    "standard": {
+      "forced_invalid": {
+        "response_count": 112,
+        "response_rate": 0.37333333333333335,
+        "trials": 300
+      },
+      "valid": {
+        "response_count": 200,
+        "response_rate": 0.6666666666666666,
+        "trials": 300
+      }
+    }
+  },
+  "secondary_estimates": {
+    "cue_orienting_t1_minus_t0": {
+      "bootstrap_samples": 10000,
+      "ci_high": 0.18240617215633392,
+      "ci_low": 0.18240617215633392,
+      "high_decay_mean": 0.6911449879407883,
+      "mean_difference": 0.18240617215633392,
+      "n": 128,
+      "seed": 7385,
+      "standard_mean": 0.5087388157844543
+    },
+    "event_image_key_mass": {
+      "bootstrap_samples": 10000,
+      "ci_high": -0.04124166496655499,
+      "ci_low": -0.04270738208717544,
+      "high_decay_mean": 0.13968305926942792,
+      "mean_difference": -0.0419618069815999,
+      "n": 256,
+      "seed": 7311,
+      "standard_mean": 0.18164486625102785
+    },
+    "event_peak_key_mass": {
+      "bootstrap_samples": 10000,
+      "ci_high": -0.03386710873788356,
+      "ci_low": -0.04090442828580437,
+      "high_decay_mean": 0.46865402901312336,
+      "mean_difference": -0.037412256900487204,
+      "n": 256,
+      "seed": 7274,
+      "standard_mean": 0.5060662859136105
+    },
+    "event_selectivity": {
+      "bootstrap_samples": 10000,
+      "ci_high": 0.0247244149511971,
+      "ci_low": 0.01930224456851387,
+      "high_decay_mean": 0.45869226983216194,
+      "mean_difference": 0.022072183180301047,
+      "n": 256,
+      "seed": 7237,
+      "standard_mean": 0.4366200866518609
+    },
+    "forced_invalid_attention_motion": {
+      "bootstrap_samples": 10000,
+      "ci_high": -0.09737933157496931,
+      "ci_low": -0.10438770912151084,
+      "high_decay_mean": 0.41977863519180875,
+      "mean_difference": -0.10091272516729077,
+      "n": 256,
+      "seed": 7533,
+      "standard_mean": 0.5206913603590996
+    },
+    "forced_invalid_change_reorientation_t5_minus_t4": {
+      "bootstrap_samples": 10000,
+      "ci_high": 0.004900108258152612,
+      "ci_low": -0.007420107326470316,
+      "high_decay_mean": 0.0015742052346467972,
+      "mean_difference": -0.0011434464540798217,
+      "n": 256,
+      "seed": 7570,
+      "standard_mean": 0.002717651688726619
+    },
+    "forced_invalid_qualifying_response": {
+      "bootstrap_samples": 10000,
+      "ci_high": 0.078125,
+      "ci_low": -0.03125,
+      "high_decay_mean": 0.44140625,
+      "mean_difference": 0.0234375,
+      "n": 256,
+      "seed": 7607,
+      "standard_mean": 0.41796875
+    },
+    "nochange_attention_motion": {
+      "bootstrap_samples": 10000,
+      "ci_high": -0.10938015018511275,
+      "ci_low": -0.11700268392599657,
+      "high_decay_mean": 0.38424110215176677,
+      "mean_difference": -0.11323848971854507,
+      "n": 128,
+      "seed": 7348,
+      "standard_mean": 0.4974795918703118
+    },
+    "valid_attention_motion": {
+      "bootstrap_samples": 10000,
+      "ci_high": -0.09480346824163158,
+      "ci_low": -0.10143576679508137,
+      "high_decay_mean": 0.4300622827928843,
+      "mean_difference": -0.09814734736088818,
+      "n": 256,
+      "seed": 7422,
+      "standard_mean": 0.5282096301537724
+    },
+    "valid_change_reorientation_t5_minus_t4": {
+      "bootstrap_samples": 10000,
+      "ci_high": 0.015934052936790975,
+      "ci_low": -0.0032098808398586696,
+      "high_decay_mean": 0.018556196766439825,
+      "mean_difference": 0.006441272853408009,
+      "n": 256,
+      "seed": 7459,
+      "standard_mean": 0.012114923913031816
+    },
+    "valid_qualifying_response": {
+      "bootstrap_samples": 10000,
+      "ci_high": 0.06640625,
+      "ci_low": -0.03125,
+      "high_decay_mean": 0.6875,
+      "mean_difference": 0.01953125,
+      "n": 256,
+      "seed": 7496,
+      "standard_mean": 0.66796875
+    }
+  }
+}

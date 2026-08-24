@@ -1,0 +1,415 @@
+% =====================================================================
+% methods.tex — DRAFTED at rb-050 (RB-050), 2026-05-31.
+%
+% Fourth and final bookend; companion of sections/abstract.tex (rb-047),
+% sections/intro.tex (rb-049), and sections/limitations.tex (rb-048).
+% Catalogues the rebuild's simulation infrastructure (Rebuild/model/,
+% Rebuild/sims/, Rebuild/derivations/) paralleling the original paper's
+% §3 methods.  Closes the structural arc:
+%   abstract → intro → model → results → extensions → limitations →
+%   methods → appendix.
+%
+% Strength check (mission §3, CLAIM_LEDGER.md): no claim strength is
+% changed here; the section names the infrastructure that already
+% backs every claim in the body sections.  Recovery-test sha256
+% digests and per-sim output digests are cited verbatim from
+% rebuilder_state.json.
+% =====================================================================
+
+\section{Methods: the rebuilt simulation infrastructure}
+\label{sec:methods}
+
+This section catalogues the workspace under \texttt{Rebuild/} that
+backs every quantitative claim in the body sections.  It parallels
+the inherited paper's \S3 in organisation --- reference implementation,
+simulation protocol, reproducibility --- and restates each in the
+rebuild's voice: every extension to the inherited model is gated by a
+recovery test that pins the extended model to the inherited model in
+the appropriate limit to floating-point identity (or, where
+floating-point identity is structurally impossible, to a tolerance no
+coarser than $10^{-9}$); every simulation under \texttt{Rebuild/sims/}
+records a deterministic SHA-256 digest of its canonical JSON output,
+so the simulation is the operational definition of the claim it
+backs.  No quantitative claim in the manuscript exceeds the strength
+licensed by its row of \texttt{CLAIM\_LEDGER.md}, and every such row
+points at one or more of the artifacts catalogued below.
+
+% ---------------------------------------------------------------------
+\subsection{The validated reference implementation}
+\label{sec:methods-model}
+
+The rebuilt model lives in \texttt{Rebuild/model/core.py} and is
+documented in \texttt{Rebuild/model/README.md}.  Its starting point is
+not a rewrite but a copy: the validated P1--P4 optimiser from the
+skeptical-review replication \texttt{Critique/replications/\linebreak C5--symmetric-recovery/}
+was copied into \texttt{Rebuild/model/} and extended; the inherited
+model's headline numbers (Section~\ref{sec:model-inherited}) therefore
+appear in the rebuilt model at byte-exact backwards compatibility
+under the inherited parameter defaults, by construction.  The
+extensions add four orthogonal axes, each gated by a recovery test
+under \texttt{Rebuild/model/tests/}:
+
+\begin{enumerate}
+  \item \textbf{A1 --- the decorrelation channel.}  The per-location
+    independence premise of the inherited model
+    (Equation~\eqref{eq:pnofa-indep}) is replaced by the exact
+    equicorrelated-Gaussian orthant integral
+    (Equation~\eqref{eq:pnofa-rho}), evaluated by one-factor
+    Gauss--Hermite quadrature at $n_q = 64$ nodes (accurate to
+    $\sim 10^{-16}$ vs.\ $n_q = 128$ across the operating envelope).
+    The inherited independent case is recovered exactly at
+    $\corr = 0$ (Equation~\eqref{eq:rho-zero-recovery}; Definition
+    \ref{def:three-levers} promotes $\corr$ to a first-class lever).
+    Backs Sections \ref{sec:model-rho-channel} and
+    \ref{sec:model-upper-bound}; full derivation in
+    Appendix~\ref{sec:appendix-deriv-a1}.
+
+  \item \textbf{A3 --- the power-mean conservation family.}  The
+    additive conservation rule $\benefit + \cost = 2$ is generalised
+    to the power-mean family $M_p(\benefit, \cost) = 1$ with closed-
+    form weights $\cost(\Rsens; p) = (2/(\Rsens^p + 1))^{1/p}$ and
+    $\benefit = \Rsens \cost$
+    (Equations~\eqref{eq:conservation-family} and
+    \eqref{eq:beta-gamma-of-p}).  The inherited additive case is
+    $p = 1$; the multiplicative alternative
+    $\benefit \cdot \cost = 1$ is the limit $p = 0$.  The full
+    Hardy--Littlewood--P\'olya monotonicity is established in the
+    rebuild's voice in
+    Appendix~\ref{sec:appendix-deriv-a3} via the closed-form
+    KL-divergence identity~\eqref{eq:a3d-hlp-kl}.  Backs
+    Section~\ref{sec:extensions-a3}.
+
+  \item \textbf{A2 --- per-location benefit/cost ratios.}  The
+    single global scalar $\Rsens$ is promoted to a per-location vector
+    $\Rsens_i$ via the heterogeneous-$\dprime$ map
+    (Equation~\eqref{eq:d-prime-hetero}).  The inherited single-$\Rsens$
+    model is recovered byte-for-byte under uniform $\Rsens_i$ and the
+    canonical homogeneous allocation.  Backs
+    Section~\ref{sec:extensions-a2}.
+
+  \item \textbf{A8 --- the $N$-dimensional allocation simplex.}  The
+    inherited 1-D allocation space (one $\alphacued$ for the cued
+    slot, uniform $(1 - \alphacued)/(\Nloc - 1)$ on each uncued slot)
+    is generalised to the full $\Nloc$-dimensional simplex
+    $\sum_i \alpha_i = 1$, scored via the $\corr$-aware grouped-criterion
+    optimiser that composes cleanly with all three prior extensions.
+    The inherited homogeneous case is recovered to $10^{-9}$ absolute,
+    the residual being the ULP-level reconstruction error
+    $(\Nloc - 1) \cdot ((1 - \valid)/(\Nloc - 1)) - (1 - \valid)$;
+    every headline number this composition drives is reported to no
+    better than four decimal places, so $10^{-9}$ is six orders of
+    magnitude past sensitive.  Backs
+    Section~\ref{sec:extensions-a8}.
+\end{enumerate}
+
+Each axis composes with the others, and the joint composition is
+itself a recovery contract: with $\corr = 0$, $p = 1$, uniform
+$\Rsens_i$, and the canonical homogeneous allocation, the rebuilt
+optimiser reproduces every inherited number in the
+$4{,}410$-cell sweep at floating-point identity.  The notation in
+\texttt{Rebuild/model/core.py} matches the manuscript verbatim:
+\texttt{d\_prime\_asym} and \texttt{d\_prime\_hetero} are the
+sensitivity maps of Sections~\ref{sec:model-inherited} and
+\ref{sec:extensions-a2}; \texttt{beta\_gamma} is the
+$(\benefit, \cost)$ pair of Equation~\eqref{eq:beta-gamma-of-p};
+\texttt{p\_no\_fa\_indep} and \texttt{p\_no\_fa\_rho} are the
+independent and equicorrelated $\PnoFA$ of
+Equations~\eqref{eq:pnofa-indep} and \eqref{eq:pnofa-rho};
+\texttt{policies} and \texttt{er\_full\_policy} score the four nested
+policies $\Rpone, \Rpfour, \Rptwo, \Rpthree$ at the inherited 1-D and
+the A8 $\Nloc$-D allocation spaces respectively.
+
+% ---------------------------------------------------------------------
+\subsection{Recovery contracts}
+\label{sec:methods-recovery}
+
+Four recovery tests under \texttt{Rebuild/model/tests/} are run before
+any simulation on the rebuilt model is trusted.  Each test asserts
+byte-exact (or, where structurally impossible, $10^{-9}$-tolerance)
+reproduction of an inherited-model identity that the rebuild's
+extension must preserve in the appropriate limit; each test produces
+a deterministic SHA-256 digest of its JSON-serialised pass/fail
+report.  Table~\ref{tab:methods-recovery} lists the four contracts
+verbatim.
+
+\begin{table}[tb]
+  \centering
+  \small
+  \begin{tabular}{@{}lllp{6.5cm}@{}}
+    \toprule
+    Contract & Axis & Limit & SHA-256 digest (canonical JSON) \\
+    \midrule
+    \texttt{test\_recovery.py}
+      & A1 ($\corr$ channel)
+      & $\corr \to 0$
+      & \texttt{d3c62215cedbe2f797c484a8d76e8bef1d5ac42cdb3092ff099a34aea1b6f18f} \\
+    \texttt{test\_conservation\_family.py}
+      & A3 (power mean $p$)
+      & $p \to 1$
+      & \texttt{f4f57a89e5108db47447cbeaf2f15440f56cdfffb65f3d173dc4a0550121791e} \\
+    \texttt{test\_heterogeneous\_r.py}
+      & A2 (per-loc $\Rsens_i$)
+      & uniform $\Rsens_i$
+      & \texttt{0486921f8a4e253a1682ee0731e52c7de800bf6c3dbb1b5e8ff3200602454c7e} \\
+    \texttt{test\_general\_policy.py}
+      & A8 ($\Nloc$-D simplex)
+      & homogeneous uncued
+      & \texttt{883ea15af9fd069e04c05ff156d65f33a7d25278891092539c6441d2248c3d39} \\
+    \bottomrule
+  \end{tabular}
+  \caption[Recovery contracts]{The four recovery contracts gating the
+    rebuilt model's extension axes.  Each contract recovers the
+    inherited model in the named limit; the SHA-256 digest is over
+    the canonical (sort-keys, indent-$2$) JSON serialisation of the
+    test's pass/fail report.  A simulation is run only after its
+    contributing extensions are pinned by their corresponding
+    contracts.}
+  \label{tab:methods-recovery}
+\end{table}
+
+These four digests appear verbatim in
+\texttt{Rebuild/rebuilder\_state.json} as the fields
+\texttt{recovery\_test\_digest},
+\texttt{conservation\_family\_test\_digest},
+\texttt{heterogeneous\_r\_test\_digest}, and
+\texttt{general\_policy\_test\_digest}.  Any change to the model code
+that would alter a digest is a recovery violation and must either be
+reverted or accompanied by a new recovery contract; the rebuild
+contract permits no extension whose limit does not recover the
+inherited model.
+
+% ---------------------------------------------------------------------
+\subsection{Simulation protocol}
+\label{sec:methods-sims}
+
+Each simulation under \texttt{Rebuild/sims/} follows a uniform
+protocol so that any rebuilt claim can be reproduced byte-for-byte
+from the artifact catalogue alone:
+
+\begin{enumerate}
+  \item \textbf{Seeded parameter grid.}  Every stochastic component
+    of the simulation (random restarts of the policy optimiser,
+    multi-start coordinate ascent for the $\Nloc$-D simplex,
+    Gauss--Hermite node positioning) is seeded with the run id at the
+    head of the script.  The full parameter grid --- ranges of
+    $(\valid, \val, \Rsens, \corr, p)$ together with the optimiser
+    tolerances --- is recorded both in the simulation's
+    \texttt{README.md} and as the \texttt{metadata.grid} object of
+    its \texttt{output/results.json}.
+  \item \textbf{Recovery test before sweep.}  Every simulation that
+    touches an extension axis re-runs the corresponding row of
+    Table~\ref{tab:methods-recovery} before its main sweep, and
+    refuses to produce output unless the recovery test passes.
+  \item \textbf{Canonical JSON output.}  Sweep results are emitted to
+    \texttt{output/results.json} via a sort-keys, indent-$2$ JSON
+    dump.  A SHA-256 digest is computed over the JSON content
+    (excluding non-deterministic wall-clock fields) and recorded in
+    the simulation's \texttt{README.md}; for sims with auxiliary
+    payloads (e.g.\ source-payload SHAs for derived sweeps), each
+    auxiliary digest is recorded alongside.  Re-running the script
+    on the same seed and parameter grid must reproduce the digest
+    byte-for-byte.
+  \item \textbf{Captioned figures.}  Every simulation that backs a
+    manuscript claim produces a figure under \texttt{output/} that the
+    manuscript includes verbatim, with a caption stating the claim
+    the figure supports and the parameter cell the figure was
+    generated at.
+  \item \textbf{Backlog cross-reference.}  Every simulation's
+    \texttt{README.md} states which row of \texttt{CLAIM\_LEDGER.md}
+    it backs and which queued sharpening tasks under
+    \texttt{REBUILD\_BACKLOG.md} would refine its result (typically
+    a finer grid, a wider $\corr$ envelope, or a variant-B
+    re-evaluation).
+\end{enumerate}
+
+Table~\ref{tab:methods-sims-summary} lists the nine simulations wired
+into the manuscript so far.
+
+\begin{table}[tb]
+  \centering
+  \small
+  \begin{tabular}{@{}llp{2.6cm}p{6cm}@{}}
+    \toprule
+    Sim directory & Backs & Output digest (SHA-256, prefix) & Manuscript cross-reference \\
+    \midrule
+    \texttt{A1--rho-channel/}
+      & A1 (model)
+      & \texttt{b692c064\ldots}
+      & Section~\ref{sec:model-rho-channel};
+        Figures \ref{fig:vda-rho-variantA}, \ref{fig:vda-rho-variantB},
+        \ref{fig:cf-vs-rho} \\
+    \texttt{C1--cf-distribution/}
+      & C1 ($\CF$ distrib.)
+      & \texttt{91fc4692\ldots}
+      & Section~\ref{sec:results-c1};
+        Table \ref{tab:cf-distribution};
+        Figures \ref{fig:cf-histogram}, \ref{fig:cf-heatmap},
+        \ref{fig:cf-curves} \\
+    \texttt{C2--vda-vs-r-vfamily/}
+      & C2 ($\rdagger(\val)$)
+      & \texttt{09ecef3c\ldots}
+      & Section~\ref{sec:results-c2};
+        Equation~\eqref{eq:r-dagger};
+        Figures \ref{fig:vda-curves-vfamily}, \ref{fig:r-dagger-vs-v} \\
+    \texttt{C3--iso-vda-Vv/}
+      & C3 (graded band)
+      & \texttt{72820559\ldots}
+      & Section~\ref{sec:results-c3};
+        Table \ref{tab:c3-highV-probe};
+        Figures \ref{fig:iso-vda-contours}, \ref{fig:vda-at-high-V} \\
+    \texttt{C4--anti-cue-inversion/}
+      & C4 (anti-cue)
+      & \texttt{6ad651d6\ldots}
+      & Section~\ref{sec:results-c4};
+        Equation~\eqref{eq:value-weight};
+        Table \ref{tab:c4-anticue};
+        Figures \ref{fig:c4-alpha-star-map}, \ref{fig:c4-rinv-closed-form} \\
+    \texttt{A1--vda-signflip-cellwise/}
+      & A1 (cell-wise)
+      & \texttt{489c7c25\ldots}
+      & Section~\ref{sec:model-upper-bound};
+        Table \ref{tab:a1cw-summary};
+        Figures \ref{fig:a1cw-sign-heatmap-v5},
+        \ref{fig:a1cw-signflip-by-r},
+        \ref{fig:a1cw-delta-distribution} \\
+    \texttt{A2--heterogeneous-r/}
+      & A2 (band)
+      & \texttt{22b183f9\ldots}
+      & Section~\ref{sec:extensions-a2};
+        Table \ref{tab:a2-rb021-summary};
+        Figures \ref{fig:a2-vda-peak-band}, \ref{fig:a2-vda-curves-spread} \\
+    \texttt{A3--conservation-band/}
+      & A3 (band)
+      & \texttt{055bf4ec\ldots}
+      & Section~\ref{sec:extensions-a3};
+        Theorem~\ref{thm:delta-cf-monotone};
+        Tables \ref{tab:a3-c1-cf-band}, \ref{tab:a3-c2-peak-band};
+        Figures \ref{fig:a3-vda-peak-band}, \ref{fig:a3-delta-cf-distribution} \\
+    \texttt{A8--nd-uncued-sweep/}
+      & A8 ($\Nloc$-D)
+      & \texttt{beb2aa87\ldots}
+      & Section~\ref{sec:extensions-a8};
+        Table \ref{tab:a8-rb027-summary};
+        Figures \ref{fig:a8-simplex-dr}, \ref{fig:a8-anticued-suppression} \\
+    \bottomrule
+  \end{tabular}
+  \caption[Wired simulations]{The nine simulations under
+    \texttt{Rebuild/sims/} that back the manuscript's quantitative
+    claims.  Each row gives the simulation directory, the claim it
+    backs, the leading bytes of the SHA-256 digest of its canonical
+    JSON output, and the manuscript cross-references that consume its
+    figures and tables.  Full digests are recorded verbatim in each
+    simulation's \texttt{README.md} and in
+    \texttt{Rebuild/rebuilder\_state.json}.}
+  \label{tab:methods-sims-summary}
+\end{table}
+
+% ---------------------------------------------------------------------
+\subsection{Derivations}
+\label{sec:methods-derivations}
+
+Four derivations under \texttt{Rebuild/derivations/} establish in the
+rebuild's voice the closed-form results that the body sections cite.
+Each derivation is self-contained (setup, exact formulation, full
+proof, scope), independently authored from the skeptical reviewer's
+attack derivations, and verified by a finite-difference cross-check
+or by reduction to a published identity:
+
+\begin{itemize}
+  \item \textbf{\texttt{A1--rho-channel.md}} (rb-008,
+    Appendix~\ref{sec:appendix-deriv-a1}).  Promotes the
+    Booking-1 one-factor reduction of the equicorrelated-Gaussian
+    $\PnoFA$ to a derivation in the rebuild's voice; states Slepian
+    monotonicity (\cite{Slepian1962}, Tong 1990) at proposition
+    strength; gives the two-channel sign decomposition of
+    $\partial \VDA / \partial \corr$ that backs the
+    Section~\ref{sec:model-upper-bound} retraction of the inherited
+    paper's \S5.5 ``upper bound on VDA'' self-characterisation;
+    verified against the recovery digest
+    \texttt{d3c62215\ldots} of Table~\ref{tab:methods-recovery}.
+
+  \item \textbf{\texttt{C2--non-monotonic-vda-rho.md}} (rb-014,
+    Appendix~\ref{sec:appendix-deriv-c2}).  Derives the closed-form
+    escape threshold $\rdagger(\val) = K_u/[(\Nloc - 1) K_c]$
+    (Equation~\eqref{eq:r-dagger}) by left-derivative of expected
+    reward at $\alphacued = 1/\Nloc$, with $\corr > 0$ extension
+    via the $\corr$-aware gradient quadratures
+    $K_c(\valid, \val; \corr)$ and $K_u(\valid, \val; \corr)$
+    (Equations~\eqref{eq:c2-Kc-rho}, \eqref{eq:c2-Ku-rho}) giving
+    Proposition~\ref{prop:r-dagger-rho}.  Backs
+    Section~\ref{sec:results-c2}; verified numerically at the
+    headline cell to floating-point identity against the C2 sim
+    digest \texttt{09ecef3c\ldots}.
+
+  \item \textbf{\texttt{C4--anti-cue-inversion.md}} (rb-026,
+    Appendix~\ref{sec:appendix-deriv-c2}, downstream).  Derives the
+    conditional theorem $\valid \ge 1 / [(\Nloc - 1) \val + 1]$
+    (Equation~\eqref{eq:value-weight}) governing whether the cued
+    location carries weight at least equal to a uniform allocation,
+    and the closed-form inversion threshold $\rstarinv$
+    (Equation~\eqref{eq:r-inv}) at which the optimal allocation
+    flips to put \emph{less} attention at the cued location under
+    counter-predictive cues $\valid < 1/\Nloc$.  Backs
+    Section~\ref{sec:results-c4}; verified at the $\Nloc = 4$
+    anti-cue cells against the C4 sim digest \texttt{6ad651d6\ldots}.
+
+  \item \textbf{\texttt{A3--power-mean-conservation.md}} (rb-029,
+    Appendix~\ref{sec:appendix-deriv-a3}).  Establishes the
+    power-mean conservation family as the canonical generalisation of
+    A3; gives the boxed Hardy--Littlewood--P\'olya monotonicity in
+    the closed KL-divergence form
+    $\partial \ln \cost / \partial p = -(1/p^2) \DKL(\mathrm{Bern}(\theta_p) \| \mathrm{Bern}(1/2))$
+    (Equation~\eqref{eq:a3d-hlp-kl}); proves
+    Proposition~\ref{prop:r-dagger-invariance} ($p$-invariance of
+    $\rdagger(\val)$) in full and Corollary~\ref{cor:a3d-c5-invariance}
+    (C5 conservation-form-invariance).  Backs
+    Section~\ref{sec:extensions-a3} and
+    Appendix~\ref{sec:appendix-c5}; verified by finite-difference
+    cross-check of Equation~\eqref{eq:a3d-hlp-kl} at seven test
+    pairs with LHS--RHS agreement $\le 1.5 \times 10^{-10}$.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\subsection{Reproducibility and the rebuild contract}
+\label{sec:methods-reproducibility}
+
+The rebuilt manuscript reports a result only when three artifacts
+co-exist: a recovery contract that pins the relevant extension to the
+inherited model in the appropriate limit; a deterministic simulation
+whose output digest is recorded verbatim in
+\texttt{Rebuild/rebuilder\_state.json}; and, for every novel
+proposition, a derivation under \texttt{Rebuild/derivations/}.  This
+\emph{simulate-first, write-second} protocol --- the rebuild's
+operating mode, as set out in the mission file --- is what licenses
+the manuscript's distributional, graded, and conditional voice
+(Section~\ref{sec:limitations-not-claimed}): when a simulation
+\emph{weakens} a rebuilt claim, the claim moves down to its supported
+strength rather than being suppressed.  No quantitative claim in the
+body sections exceeds the strength its row of
+\texttt{CLAIM\_LEDGER.md} licenses, and that row in turn points at
+the recovery digest, simulation digest, and (where novel) derivation
+file that establish the claim's support.
+
+Software dependencies are recorded in \texttt{Rebuild/manuscript/BUILD.md}:
+NumPy, SciPy (with a hand-rolled \texttt{erf} fallback for environments
+in which SciPy is unavailable), and Matplotlib for the simulation
+side; \texttt{pdflatex}, \texttt{bibtex}, and the AMS-LaTeX packages
+\texttt{amsmath}, \texttt{amssymb}, \texttt{amsthm}, \texttt{mathtools},
+\texttt{booktabs}, and \texttt{hyperref} for the manuscript side.
+Every simulation is decomposed into a single \texttt{run.py} that
+completes within $\sim 10\text{--}20$ minutes of wall-clock on a
+laptop; larger sweeps are decomposed into multiple runs under the
+backlog rather than rolled up into a single multi-hour job.
+
+The full reproducibility ledger --- model recovery digests, per-sim
+output digests, manuscript PDF byte counts, and the disposition of
+every backlog task --- is maintained in
+\texttt{Rebuild/rebuilder\_state.json} (atomically rewritten at the
+end of every run) and chronicled in \texttt{Rebuild/BUILD\_LOG.md}
+(append-only, newest at top).  Cross-claim disposition --- one row per
+inherited claim or assumption, the rebuilt strength, and the
+backing artifacts --- is maintained in \texttt{Rebuild/CLAIM\_LEDGER.md}.
+A reader who wishes to verify any quantitative statement in this
+manuscript may locate the claim in \texttt{CLAIM\_LEDGER.md}, follow
+the pointer to its backing simulation or derivation, and re-run the
+simulation to reproduce the digest byte-for-byte.

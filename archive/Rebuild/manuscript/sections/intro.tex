@@ -1,0 +1,169 @@
+% =====================================================================
+% intro.tex — DRAFTED at rb-049 (RB-049), 2026-05-30.
+%
+% Third bookend; companion of sections/abstract.tex (rb-047, RB-047)
+% and sections/limitations.tex (rb-048, RB-048).  Mirrors the abstract's
+% voice (distributional / graded / conditional by default) and sets up
+% the §3.3 unifying-reframe contrast that the §limitations §7.6 'what
+% the rebuild does not claim' paragraph closes on.
+%
+% Strength check (mission §3, CLAIM_LEDGER.md): every quantitative
+% claim below is at the licensed band / distributional / conditional
+% strength already wired in the body sections.  Original-paper
+% categorical phrasings (CF floor [0.60, 0.96]; "negligible regardless
+% of other parameters"; uniform no-inversion; A1 upper bound on VDA)
+% appear here only as the framing being retracted, not stated.
+% =====================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+In a cued change-detection task whose cue carries both \emph{value}
+$\val \ge 1$ and \emph{validity} $\valid \in [1/\Nloc, 1]$, an
+observer adapting to the value contingency has more than one lever
+available.  They may shift decision criteria so that responses at the
+high-value location are biased toward report; they may re-allocate
+spatial attention so that the perceptual evidence at the high-value
+location is itself more reliable; and, when noise is correlated
+across locations, they may decorrelate the encoded population code so
+that the joint evidence drawn from the unattended array is less
+redundant.  The original \emph{value-directed attention} (VDA) model
+asks a sharp normative question on top of these levers: how much of
+the behavioural adaptation to value is achieved by re-allocating
+attention toward the high-value location versus by shifting decision
+criteria, and in what parameter regime does attention re-allocation
+become the dominant mechanism?  This paper preserves that question
+verbatim in spirit.  What changes is the mathematical description used
+to answer it.
+
+The inherited model couples value-driven sensitivity changes to a
+single attentional asymmetry parameter and decomposes the expected
+reward across nested policies that toggle each lever on or off.  Its
+quantitative claims, however, tend to overstate what their underlying
+simulations license: a central or peak value is repeatedly reported
+as a uniform floor, a directional inequality, or a
+``regardless of other parameters'' constant.  Re-evaluating those
+claims against the model's own definitions reveals a recurring
+mismatch.  The reported criterion-fraction interval $[0.60, 0.96]$ is
+in fact $[0.30, 1.00]$ across the same $4{,}410$-cell sweep with
+median $0.76$ and a $\sim\!13\%$ tail below $0.60$; the
+``high-validity paradigms show negligible VDA regardless of other
+parameters'' design recommendation holds at $\valid \ge 0.95$ but
+not at $\valid \approx 0.80$ once cross-location correlation is
+admitted; the ``no inversion'' result is true everywhere in the cued
+regime but not in the anti-cue regime $\valid < 1/\Nloc$; and the
+self-characterisation of independence as ``an upper bound on VDA'' is
+sign-ambiguous --- correlation \emph{suppresses} VDA in the
+cost-dominant regime and \emph{amplifies} it in the
+benefit-dominant tail.  None of these reframings overturns the
+underlying mechanism the original paper identified.  Each one
+restates a central tendency, a graded boundary, or a conditional
+theorem in place of an unconditional one.  Reporting distributions,
+quantiles, contour bands, and explicit conditions \emph{instead of}
+floors, ``never,'' and ``regardless of'' is the corrective this paper
+applies uniformly: distributional, graded, or conditional by default.
+
+Restating the model in this voice also exposes a missing lever.  The
+inherited two-channel decomposition treats criterion shifts and
+sensitivity re-allocation as the only adaptive mechanisms; the
+empirically dominant decorrelation channel
+\cite{CohenMaunsell2009,
+RuffCohen2016,
+Srinath2021} is excluded by an
+independence assumption that the model bundles into its
+no-false-alarm probability.  Section~\ref{sec:model} promotes
+cross-location correlation $\corr$ to a first-class model parameter
+through an exact one-factor Gauss--Hermite reduction of the
+equicorrelated-Gaussian orthant integral, recovering the inherited
+independent-noise model in the limit $\corr \to 0$ to floating-point
+identity (Equation~\eqref{eq:pnofa-rho},
+Equation~\eqref{eq:rho-zero-recovery}).  This yields the rebuilt
+paper's central reframe: three levers, not two
+(Definition~\ref{def:three-levers}; criterion shift,
+sensitivity re-allocation, decorrelation).  The inherited model's
+self-characterisation of independence as an upper bound on VDA is
+replaced by a more careful statement: what independence actually
+upper-bounds is the criterion fraction $\CF$ ---
+$\CF(\corr) \le \CF(0)$ pointwise in variant~A by a Slepian
+monotonicity argument (Appendix~\ref{sec:appendix-deriv-a1}) --- while
+$\partial \VDA / \partial \corr$ flips sign near $\Rsens \approx 0.5$
+at the headline cell and sweeps a cell-wise crossover up to
+$\Rsens \approx 0.79$ across the full $4{,}410$-cell sweep
+(Section~\ref{sec:model-upper-bound},
+Table~\ref{tab:a1cw-summary}).
+
+Under the corrective voice, the four headline C-row results recover
+in distributional, graded, and conditional forms.  The criterion
+fraction is concentrated in $[0.30, 1.00]$ with median $0.76$
+(Section~\ref{sec:results-c1}, Table~\ref{tab:cf-distribution});
+$\VDA$ is non-monotonic in $\Rsens$ with a closed-form lower edge
+$\rdagger(\val) = K_u(\val) / [(\Nloc - 1) K_c(\val)]$
+(Equation~\eqref{eq:r-dagger}) that extends to $\corr > 0$ through
+$\corr$-aware gradient quadratures
+(Section~\ref{sec:appendix-deriv-c2},
+Proposition~\ref{prop:r-dagger-rho}) and is invariant under the
+benefit/cost conservation order
+(Proposition~\ref{prop:r-dagger-invariance}); the ``narrow regime''
+becomes a quantitative iso-$\VDA$ contour band
+(Section~\ref{sec:results-c3}, Table~\ref{tab:c3-highV-probe}) with
+hierarchical $\valid$ thresholds ($\valid \ge 0.95$ at the grid floor
+under any $(\Rsens, \corr)$; $\valid \ge 0.80$ only at $\corr = 0$;
+$\valid \ge 0.60$ fails); and the no-inversion result becomes a
+conditional theorem with the explicit boundary
+$\valid \ge 1 / [(\Nloc - 1) \val + 1]$
+(Section~\ref{sec:results-c4}, Equation~\eqref{eq:value-weight})
+that, when crossed, generates a new falsifiable prediction --- the
+\emph{anti-cue inversion}: under counter-predictive cues
+($\valid < 1/\Nloc$) at $\Nloc = 4$, the normatively optimal
+allocation places \emph{less} attention at the high-value location
+in $36.1\%$ of probed cells (Table~\ref{tab:c4-anticue}).  Symmetric
+recovery at $\Rsens = 1$ is reaffirmed as a universal real-number
+identity (Appendix~\ref{sec:appendix-c5},
+Proposition~\ref{prop:c5-realnumber}), conservation-form-invariant by
+construction (Corollary~\ref{cor:a3d-c5-invariance}).
+
+Three further mechanisms the inherited model held fixed at
+homogeneous values return as explicit extensions.
+Within-display heterogeneity of $\Rsens$ is a bounded perturbation
+that leaves the $C_2$ peak coordinates and the contested-CF corner
+essentially invariant (Section~\ref{sec:extensions-a2},
+Table~\ref{tab:a2-rb021-summary}).  The benefit/cost conservation
+rule $\benefit + \cost = 2$ is one point in the power-mean
+conservation family
+(Equation~\eqref{eq:conservation-family},
+Equation~\eqref{eq:beta-gamma-of-p}); the rebuilt paper reports
+every headline number as a band over the family at
+$p \in \{0, 0.5, 1\}$ with the per-cell monotonicity
+$\Delta \CF(\corr = 0) \le 0$ stated as
+Theorem~\ref{thm:delta-cf-monotone}
+(Section~\ref{sec:extensions-a3}).  The $N$-dimensional uncued
+allocation policy is innocuous at the inherited additive optimum but
+exhibits a new conditional binding in a benefit-dominant
+symmetric-stress corner under multiplicative conservation, with a
+$32\%$ $\corr$-amplification at the focal cell
+(Section~\ref{sec:extensions-a8}).  Per-location decision-noise
+coupling --- a candidate fourth lever
+--- is named and held at the live status of its underlying claim
+(Section~\ref{sec:limitations-a6}) rather than wired into the model.
+
+The remainder of the manuscript follows this layout.
+Section~\ref{sec:model} states the rebuilt model with the
+three-lever decomposition and the $\corr$-channel reduction.
+Section~\ref{sec:results} reports the C-row headline results in the
+distributional / graded / conditional voice, with each subsection
+naming the inherited categorical claim it replaces.
+Section~\ref{sec:extensions} runs the three lever extensions
+(A2, A3, A8) at empirical band strength.
+Section~\ref{sec:limitations} catalogues the explicit scope of
+every claim --- in particular, what the rebuilt model does
+\emph{not} claim about neural implementation,
+empirical-$\corr$ prediction, observer-deviation, or attention
+dynamics.  The appendix collects the formal derivations
+(A1 $\corr$ channel, $C_2$ closed forms,
+$C_5$ symmetric recovery, A3 power-mean conservation).
+Every quantitative claim in the body is backed by a simulation in
+\texttt{Rebuild/sims/} with a recovered limit, a deterministic
+output hash, and a captioned figure; every novel proposition is
+derived in \texttt{Rebuild/derivations/}.  Reproducibility is
+end-to-end byte-identical, and nothing in this paper is stated more
+strongly than its row of \texttt{CLAIM\_LEDGER.md} licenses.

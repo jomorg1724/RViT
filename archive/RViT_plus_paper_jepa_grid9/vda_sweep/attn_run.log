@@ -1,0 +1,5 @@
+[attn] vda1 crossattn1 iter=19999
+[attn] vda1 affine_ew iter=19999
+[attn] vda4 crossattn1 iter=19999
+[attn] vda4 affine_ew iter=19999
+[attn] saved -> /Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/figs/attn.npz

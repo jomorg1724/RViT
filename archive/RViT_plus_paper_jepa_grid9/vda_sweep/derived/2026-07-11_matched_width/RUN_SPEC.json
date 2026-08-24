@@ -1,0 +1,1420 @@
+{
+  "artifact_class": "staged matched-width VDA checkpoint battery",
+  "blocked_cells": [
+    {
+      "available_d256_tokens": 2,
+      "canonical_d128_tokens": 4,
+      "feedbacks": [
+        "affine_ew",
+        "crossattn1"
+      ],
+      "reason": "no canonical d_mem=256 2x2 checkpoint; available d256 checkpoint has two tokens",
+      "status": "blocked",
+      "task": "vda2",
+      "widths": [
+        128,
+        256
+      ]
+    }
+  ],
+  "checkpoints": [
+    {
+      "active_locations": [
+        0
+      ],
+      "bytes": 8848341,
+      "device": 16777229,
+      "feedback": "affine_ew",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176520,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda1_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "sha256": "1869701f8ff7d18c7caaeaabb0e9440b005af8d009a4e0eb5e7950191806d0f0",
+      "task": "vda1",
+      "width": 128
+    },
+    {
+      "active_locations": [
+        0
+      ],
+      "bytes": 11268053,
+      "device": 16777229,
+      "feedback": "affine_ew",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176512,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda1_affine_ew_d256/rvit_plus_rl_latest.pt",
+      "sha256": "bc8b2792dd3c18b02010bb2fcd74c3048f4943baa6a86c435c582efa23bc017c",
+      "task": "vda1",
+      "width": 256
+    },
+    {
+      "active_locations": [
+        0
+      ],
+      "bytes": 8884593,
+      "device": 16777229,
+      "feedback": "crossattn1",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176501,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda1_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "sha256": "7e62d83a2241ec4b0aee7a05755d9b8053689910e06f35a10d0db02ad7abc492",
+      "task": "vda1",
+      "width": 128
+    },
+    {
+      "active_locations": [
+        0
+      ],
+      "bytes": 11414961,
+      "device": 16777229,
+      "feedback": "crossattn1",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176493,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda1_crossattn1_d256/rvit_plus_rl_latest.pt",
+      "sha256": "b6699c3ea52aa91b25546004a6352aa14b41a8d4631a4b7c72fb073a95c8b55f",
+      "task": "vda1",
+      "width": 256
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "bytes": 8848341,
+      "device": 16777229,
+      "feedback": "affine_ew",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176431,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "sha256": "2341026363e6e1d2115a34a8ad9a91a73e385aab4a223aace763529e4047e085",
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "bytes": 11268053,
+      "device": 16777229,
+      "feedback": "affine_ew",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176424,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d256/rvit_plus_rl_latest.pt",
+      "sha256": "a991273cffb0ea54e0546a44d065c756333e089774627adada66aeda00a3b38d",
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "bytes": 8884593,
+      "device": 16777229,
+      "feedback": "crossattn1",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176412,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "sha256": "1a2fa8ae2a57982b6c91dc75079d8293781ce843271b92fe3cfbe5fc16137155",
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "bytes": 11414961,
+      "device": 16777229,
+      "feedback": "crossattn1",
+      "grid": [
+        2,
+        2
+      ],
+      "image_size": 50,
+      "inode": 157176392,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d256/rvit_plus_rl_latest.pt",
+      "sha256": "e211fef85616e9d5e0bcc2991a9e4ca294d04c475246f44f3c693045d5b1cb17",
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bytes": 10209557,
+      "device": 16777229,
+      "feedback": "affine_ew",
+      "grid": [
+        3,
+        3
+      ],
+      "image_size": 75,
+      "inode": 157176379,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "sha256": "22f028f6232d9c3ea040019aff357645ddcaa69e4a09c2f8ceff224ea568d8d7",
+      "task": "vda9",
+      "width": 128
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bytes": 13950229,
+      "device": 16777229,
+      "feedback": "affine_ew",
+      "grid": [
+        3,
+        3
+      ],
+      "image_size": 75,
+      "inode": 157176364,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d256/rvit_plus_rl_latest.pt",
+      "sha256": "cf594ad8d65deb5a227a52b2181249a94a49ea73eb1fddf3a917fd9c8b955612",
+      "task": "vda9",
+      "width": 256
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bytes": 10248241,
+      "device": 16777229,
+      "feedback": "crossattn1",
+      "grid": [
+        3,
+        3
+      ],
+      "image_size": 75,
+      "inode": 157176346,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "sha256": "6c0587201cd2bf99b43e02278d4c65b03ab79d9b1f811406fc4962d962714946",
+      "task": "vda9",
+      "width": 128
+    },
+    {
+      "active_locations": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bytes": 14104689,
+      "device": 16777229,
+      "feedback": "crossattn1",
+      "grid": [
+        3,
+        3
+      ],
+      "image_size": 75,
+      "inode": 157176322,
+      "iteration": 19999,
+      "path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d256/rvit_plus_rl_latest.pt",
+      "sha256": "c26b2ad3202c69aedfa2ecbc4add9c81ba5b5fae73b32a41624a92f1629d751c",
+      "task": "vda9",
+      "width": 256
+    }
+  ],
+  "claim_boundary": "Width is an architectural recurrent-state intervention. Results are checkpoint-specific associations, not replicated causal width effects or human capacity estimates.",
+  "competence_flags": [
+    {
+      "best_correct": 0.5825,
+      "evidence_identity": "__metrics_inventory__",
+      "evidence_row": 41,
+      "feedback": "crossattn1",
+      "interpretation": "retain in declared scope, but interpret mechanistic estimates as possible floor-policy diagnostics rather than controlled-attention evidence",
+      "last_correct": 0.48,
+      "last_theta": 65.0,
+      "late50_mean_correct": 0.45935,
+      "status": "competence_gated",
+      "task": "vda9",
+      "width": 256
+    }
+  ],
+  "created_at_utc": "2026-07-12T05:20:26.286569+00:00",
+  "expected_shards": [
+    "vda1_affine_ew_d128.npz",
+    "vda1_affine_ew_d256.npz",
+    "vda1_crossattn1_d128.npz",
+    "vda1_crossattn1_d256.npz",
+    "vda4_affine_ew_d128.npz",
+    "vda4_affine_ew_d256.npz",
+    "vda4_crossattn1_d128.npz",
+    "vda4_crossattn1_d256.npz",
+    "vda9_affine_ew_d128.npz",
+    "vda9_affine_ew_d256.npz",
+    "vda9_crossattn1_d128.npz",
+    "vda9_crossattn1_d256.npz"
+  ],
+  "protocols": {
+    "vda1_affine_ew_d128.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": -1,
+      "invalid_defined": false,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda1"
+    },
+    "vda1_affine_ew_d256.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": -1,
+      "invalid_defined": false,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda1"
+    },
+    "vda1_crossattn1_d128.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": -1,
+      "invalid_defined": false,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda1"
+    },
+    "vda1_crossattn1_d256.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": -1,
+      "invalid_defined": false,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda1"
+    },
+    "vda4_affine_ew_d128.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 3,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda4"
+    },
+    "vda4_affine_ew_d256.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 3,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda4"
+    },
+    "vda4_crossattn1_d128.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 3,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda4"
+    },
+    "vda4_crossattn1_d256.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 3,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda4"
+    },
+    "vda9_affine_ew_d128.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 8,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda9"
+    },
+    "vda9_affine_ew_d256.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 8,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda9"
+    },
+    "vda9_crossattn1_d128.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 8,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda9"
+    },
+    "vda9_crossattn1_d256.npz": {
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "clamp_displayed_validity": 0.75,
+      "clamp_dose_parameters": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+      "clamp_from_frame": 5,
+      "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+      "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_logit_scale": 6.0,
+      "clamp_seed": 20270711,
+      "clamp_target_keys_by_routing": {
+        "affine_ew": "cued image/self key",
+        "crossattn1": "cued image key and corresponding memory key"
+      },
+      "clamp_trials": 250,
+      "common_random_numbers_across_width_and_routing": true,
+      "cue_index": 0,
+      "decoder_location_condition": "change-present trials only",
+      "decoder_n": 900,
+      "decoder_seed": 20260711,
+      "decoder_spaces": [
+        "architecture_native",
+        "foldwise_pca_128"
+      ],
+      "displayed_validities": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "invalid_change_index": 8,
+      "invalid_defined": true,
+      "press_histogram_bins": [
+        "no_response",
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+      "psychometric_seed": 20260711,
+      "psychometric_trials_per_point": 300,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "task": "vda9"
+    }
+  },
+  "runtime": {
+    "device": "cpu",
+    "numpy": "2.4.6",
+    "python": "3.12.13",
+    "scipy": "1.17.1",
+    "sklearn": "1.9.0",
+    "torch": "2.12.0"
+  },
+  "schema_version": 1,
+  "source_hashes": {
+    "__metrics_inventory__": "ee00533dee6a25a00298fab56bf388f97b9b2073341bc3723989b5bee4f6c5a5",
+    "__runner__": "6c8226bbc4ca1811c63d8da13fd52e90c9f9ef3c87e14e52a6d201831284d82a",
+    "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+    "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "tests/test_matched_width.py": "ebb6a348b2784c967b35f81b244b1843c5e878e5422cf7b28889e5d0e4120f2c",
+    "tests/test_matched_width_compute.py": "1f804bd03122e84aa5761a59d460f2121f848dd1310cd2711a3a26bc42758359",
+    "tests/test_matched_width_producer.py": "f2604f4f39fdf9f496e6553f3d45478e0d9e2217d249794f448e1774b0987080",
+    "tests/test_matched_width_runner.py": "a6920faa20677ad37540ee856b5030896336ff9b5b666d062033723bf4aec92c",
+    "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+    "vda_sweep/matched_width.py": "fe5489bccb5c3a47cc74bc6c519cffc5403e62c55cf0e6190bcfcbb61afd6b9f",
+    "vda_sweep/matched_width_compute.py": "83bcca0abc9c0a126f053312ac4f7c7b133ee6df91e005f3bc7fd9e7b42b5c5d",
+    "vda_sweep/matched_width_producer.py": "62f89036e7d5469e3b6e57060875123e9ec48c52d966ea75e1176d20ddc9eec9",
+    "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773",
+    "vda_sweep/vda_fig_decode.py": "7581d9a24b183369a35da17194b6cf7b76e973327a774748d31df689f0873277"
+  },
+  "sources": [
+    {
+      "bytes": 8410,
+      "identity": "__metrics_inventory__",
+      "role": "interpretation_evidence",
+      "sha256": "ee00533dee6a25a00298fab56bf388f97b9b2073341bc3723989b5bee4f6c5a5",
+      "snapshot_path": "provenance/evidence/battery_metrics_inventory.csv",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/reports/research_state/2026-07-11_battery_metrics_inventory.csv"
+    },
+    {
+      "bytes": 28548,
+      "identity": "__runner__",
+      "role": "execution",
+      "sha256": "6c8226bbc4ca1811c63d8da13fd52e90c9f9ef3c87e14e52a6d201831284d82a",
+      "snapshot_path": "provenance/run_matched_width.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/scripts/run_matched_width.py"
+    },
+    {
+      "bytes": 7050,
+      "identity": "conv_frontend.py",
+      "role": "execution",
+      "sha256": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+      "snapshot_path": "provenance/execution/conv_frontend.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/conv_frontend.py"
+    },
+    {
+      "bytes": 3964,
+      "identity": "envs/__init__.py",
+      "role": "execution",
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "snapshot_path": "provenance/execution/envs/__init__.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/__init__.py"
+    },
+    {
+      "bytes": 16259,
+      "identity": "envs/base.py",
+      "role": "execution",
+      "sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+      "snapshot_path": "provenance/execution/envs/base.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/base.py"
+    },
+    {
+      "bytes": 7863,
+      "identity": "envs/luo2015.py",
+      "role": "execution",
+      "sha256": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+      "snapshot_path": "provenance/execution/envs/luo2015.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/luo2015.py"
+    },
+    {
+      "bytes": 16590,
+      "identity": "envs/tasks.py",
+      "role": "execution",
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "snapshot_path": "provenance/execution/envs/tasks.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/tasks.py"
+    },
+    {
+      "bytes": 9466,
+      "identity": "model.py",
+      "role": "execution",
+      "sha256": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+      "snapshot_path": "provenance/execution/model.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/model.py"
+    },
+    {
+      "bytes": 33237,
+      "identity": "paper_encoder.py",
+      "role": "execution",
+      "sha256": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+      "snapshot_path": "provenance/execution/paper_encoder.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/paper_encoder.py"
+    },
+    {
+      "bytes": 4239,
+      "identity": "paper_heads.py",
+      "role": "execution",
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "snapshot_path": "provenance/execution/paper_heads.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/paper_heads.py"
+    },
+    {
+      "bytes": 10687,
+      "identity": "tests/test_matched_width.py",
+      "role": "validation",
+      "sha256": "ebb6a348b2784c967b35f81b244b1843c5e878e5422cf7b28889e5d0e4120f2c",
+      "snapshot_path": "provenance/validation/tests/test_matched_width.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/tests/test_matched_width.py"
+    },
+    {
+      "bytes": 2117,
+      "identity": "tests/test_matched_width_compute.py",
+      "role": "validation",
+      "sha256": "1f804bd03122e84aa5761a59d460f2121f848dd1310cd2711a3a26bc42758359",
+      "snapshot_path": "provenance/validation/tests/test_matched_width_compute.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/tests/test_matched_width_compute.py"
+    },
+    {
+      "bytes": 3983,
+      "identity": "tests/test_matched_width_producer.py",
+      "role": "validation",
+      "sha256": "f2604f4f39fdf9f496e6553f3d45478e0d9e2217d249794f448e1774b0987080",
+      "snapshot_path": "provenance/validation/tests/test_matched_width_producer.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/tests/test_matched_width_producer.py"
+    },
+    {
+      "bytes": 10962,
+      "identity": "tests/test_matched_width_runner.py",
+      "role": "validation",
+      "sha256": "a6920faa20677ad37540ee856b5030896336ff9b5b666d062033723bf4aec92c",
+      "snapshot_path": "provenance/validation/tests/test_matched_width_runner.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/tests/test_matched_width_runner.py"
+    },
+    {
+      "bytes": 5577,
+      "identity": "vae_frontend.py",
+      "role": "execution",
+      "sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+      "snapshot_path": "provenance/execution/vae_frontend.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vae_frontend.py"
+    },
+    {
+      "bytes": 21357,
+      "identity": "vda_sweep/matched_width.py",
+      "role": "execution",
+      "sha256": "fe5489bccb5c3a47cc74bc6c519cffc5403e62c55cf0e6190bcfcbb61afd6b9f",
+      "snapshot_path": "provenance/execution/vda_sweep/matched_width.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/matched_width.py"
+    },
+    {
+      "bytes": 5660,
+      "identity": "vda_sweep/matched_width_compute.py",
+      "role": "execution",
+      "sha256": "83bcca0abc9c0a126f053312ac4f7c7b133ee6df91e005f3bc7fd9e7b42b5c5d",
+      "snapshot_path": "provenance/execution/vda_sweep/matched_width_compute.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/matched_width_compute.py"
+    },
+    {
+      "bytes": 12596,
+      "identity": "vda_sweep/matched_width_producer.py",
+      "role": "execution",
+      "sha256": "62f89036e7d5469e3b6e57060875123e9ec48c52d966ea75e1176d20ddc9eec9",
+      "snapshot_path": "provenance/execution/vda_sweep/matched_width_producer.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/matched_width_producer.py"
+    },
+    {
+      "bytes": 11711,
+      "identity": "vda_sweep/vda_core.py",
+      "role": "execution",
+      "sha256": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773",
+      "snapshot_path": "provenance/execution/vda_sweep/vda_core.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/vda_core.py"
+    },
+    {
+      "bytes": 11721,
+      "identity": "vda_sweep/vda_fig_decode.py",
+      "role": "execution",
+      "sha256": "7581d9a24b183369a35da17194b6cf7b76e973327a774748d31df689f0873277",
+      "snapshot_path": "provenance/execution/vda_sweep/vda_fig_decode.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/vda_fig_decode.py"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "checks": [
+    {
+      "max_abs_diff": 0.0,
+      "name": "p_no_fa(rho=0) == product (binary)",
+      "ok": true
+    },
+    {
+      "diffs": {
+        "1e-04": 3.5556902790945255e-05,
+        "1e-05": 3.5557717201484262e-06,
+        "1e-06": 3.555779866104558e-07
+      },
+      "max_abs_diff": 3.555779866104558e-07,
+      "name": "p_no_fa(rho->0) -> product, O(rho) scaling",
+      "ok": true
+    },
+    {
+      "CF": 0.8295190133917728,
+      "CF_diff": 0.0,
+      "CF_target": 0.8295190133917728,
+      "VDA": 0.07971892561151384,
+      "VDA_diff": 0.0,
+      "VDA_target": 0.07971892561151384,
+      "name": "policy recovery @ r=0.398",
+      "ok": true
+    },
+    {
+      "CF": 0.7282279801682813,
+      "CF_diff": 0.0,
+      "CF_target": 0.7282279801682813,
+      "VDA": 0.03982512744634903,
+      "VDA_diff": 0.0,
+      "VDA_target": 0.03982512744634903,
+      "name": "policy recovery @ r=1.0",
+      "ok": true
+    },
+    {
+      "CF": 0.6409382701716876,
+      "CF_diff": 0.0,
+      "CF_target": 0.6409382701716876,
+      "VDA": 0.00808898926330448,
+      "VDA_diff": 0.0,
+      "VDA_target": 0.00808898926330448,
+      "name": "policy recovery @ r=3.162",
+      "ok": true
+    },
+    {
+      "name": "peak VDA(r) @ rho=0 ~= 0.0799 at r ~= 0.383",
+      "ok": true,
+      "peak_VDA": 0.07985731155296039,
+      "peak_r": 0.383119
+    },
+    {
+      "curve": [
+        [
+          0.0,
+          0.5935744402219404
+        ],
+        [
+          0.05,
+          0.6029605085906296
+        ],
+        [
+          0.1,
+          0.6124817311641724
+        ],
+        [
+          0.2,
+          0.6318886648522342
+        ],
+        [
+          0.3,
+          0.6517948251970722
+        ],
+        [
+          0.4,
+          0.6723050380657886
+        ],
+        [
+          0.6,
+          0.7160828093673025
+        ],
+        [
+          0.8,
+          0.7671984412340106
+        ]
+      ],
+      "indep_is_min": true,
+      "monotone": true,
+      "name": "P_no-fa(rho) monotone-up, rho=0 is min",
+      "ok": true
+    }
+  ],
+  "gh_nq": 64,
+  "n_passed": 7,
+  "n_total": 7,
+  "phi_backend": "scipy.special.ndtr",
+  "sha256_numeric": "d3c62215cedbe2f797c484a8d76e8bef1d5ac42cdb3092ff099a34aea1b6f18f"
+}

@@ -1,0 +1,12 @@
+{
+  "attention_trials": 4,
+  "device": "cpu",
+  "event_seed": 4101,
+  "nochange_seed": 1701,
+  "nochange_trials": 2,
+  "primary_activity_metric": "mean frame-to-frame total variation over the full 4x8 attention map",
+  "psychometric_seed": 2801,
+  "psychometric_trials": 3,
+  "response_rule": "first argmax change action at frame >= 5",
+  "threads": 3
+}

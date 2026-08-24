@@ -1,0 +1,204 @@
+\documentclass[11pt]{article}
+\usepackage[margin=20mm,headheight=15pt,footskip=11mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Avenir Next}
+\setsansfont{Avenir Next}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs,tabularx,array}
+\usepackage{ragged2e}
+\usepackage{pdflscape}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\definecolor{VdaBlue}{HTML}{1F6FB2}
+\definecolor{VdaPurple}{HTML}{7A3E9D}
+\definecolor{VdaGreen}{HTML}{00876C}
+\definecolor{VdaOrange}{HTML}{C44E28}
+\definecolor{VdaGray}{HTML}{4C566A}
+\definecolor{VdaLight}{HTML}{F1F5F8}
+\hypersetup{colorlinks=true,linkcolor=VdaBlue,urlcolor=VdaBlue,pdftitle={Memory decay and learned cross-attention dynamics},pdfauthor={AttentionManuscript}}
+\graphicspath{{figures/}}
+\captionsetup{font=small,labelfont=bf,justification=justified,singlelinecheck=false,hypcap=false}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist{nosep,leftmargin=1.3em}
+\emergencystretch=2em
+\raggedbottom
+\widowpenalty=10000
+\clubpenalty=10000
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcommand{\boundary}[1]{\par\smallskip\noindent\colorbox{VdaLight}{\parbox{0.96\linewidth}{\textbf{Evidence boundary.} #1}}\par\smallskip}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small VDA4 decay comparison}
+\fancyhead[R]{\small \nouppercase{\rightmark}}
+\fancyfoot[C]{\small \thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{16mm}
+{\color{VdaBlue}\rule{\textwidth}{2.2pt}}\\[10mm]
+{\fontsize{27}{32}\selectfont\bfseries Memory decay and learned\\ cross-attention dynamics\par}
+\vspace{4mm}
+{\fontsize{16}{21}\selectfont A frozen-checkpoint comparison in the four-location value-directed-attention task\par}
+\vspace{15mm}
+{\large AttentionManuscript --- standalone VDA4 analysis\par}
+\vfill
+\begin{tabularx}{\textwidth}{@{}p{3.4cm}Y@{}}
+\toprule
+\textbf{Comparison} & Standard cross-attention ($\lambda=1.00$, iteration 20,000) versus high-decay cross-attention ($\lambda=0.80$, iteration 14,649).\\
+\textbf{Primary question} & Does the high-decay checkpoint show more frame-to-frame movement in its complete learned $4\times8$ attention distributions?\\
+\textbf{Primary answer} & The prespecified comparison gives the opposite result for this checkpoint pair. High minus standard: -0.0995, paired trial-bootstrap 95\% interval [-0.1021, -0.0970].\\
+\textbf{Run identity} & \texttt{20260714T040646Z\_high\_iter14649\_vs\_standard\_iter20000\_9e9495d1}.\\
+\bottomrule
+\end{tabularx}
+\vfill
+{\color{VdaBlue}\rule{\textwidth}{2.2pt}}
+\end{titlepage}
+
+\begin{abstract}
+This analysis tests a precise hypothesis about recurrent visual attention: whether a stronger memory decay is associated with more dynamic learned attention maps. Two preserved VDA4 cross-attention checkpoints were evaluated on shared trial sets under valid and deliberately forced-invalid conditions. ``Activity'' was fixed in advance as frame-to-frame total variation over every query-to-key attention distribution, because total softmax mass is constant by construction. The standard checkpoint averaged 0.5245; the high-decay checkpoint averaged 0.4249. The paired high-minus-standard difference was -0.0995 (95\% trial-bootstrap interval [-0.1021, -0.0970]; $n=256$ matched trial identities, each evaluated under both event conditions). Thus the high-decay checkpoint was less, not more, dynamic under the primary metric. Behavioral curves, image-versus-memory allocation, selectivity, spatial reorientation, response-stratified traces, and raw query-level maps provide convergent description. The comparison remains associational: the high-decay checkpoint was frozen 5,351 iterations earlier, and only one training seed exists per condition.
+\end{abstract}
+
+\section{Question, answer, and evidential scope}
+The scientific question is narrower than whether either model ``uses attention.'' Both networks produce normalized cross-attention at every frame. The question is whether reducing the xLSTM memory-decay factor from 1.00 to 0.80 is associated with larger changes in the learned attention distribution from one frame to the next. For each query row $q$ and consecutive frames $t-1,t$, activity is
+\[
+D_{t,q}=\tfrac12\sum_{k=1}^8\left|A_{t,q,k}-A_{t-1,q,k}\right|,
+\]
+then averaged over frames, queries, valid and forced-invalid conditions, and finally over matched trials. This total-variation distance is zero for an unchanged attention row and one for a complete shift between disjoint keys.
+
+\noindent\colorbox{VdaLight}{\parbox{0.96\linewidth}{\textbf{Answer.} The prespecified comparison gives the opposite result for this checkpoint pair. The high-decay network's mean activity was 0.4249, compared with 0.5245 for the standard network. The observed difference, -0.0995, is not evidence that faster forgetting caused quieter attention because checkpoint maturity was not matched.}}
+
+\boundary{The standard checkpoint completed 20,000 training iterations. The high-decay snapshot was frozen at iteration 14,649 while its training process was active; a later final checkpoint was subsequently present at iteration 19,999, but the requested frozen snapshot was retained. One training seed per checkpoint means the model-difference intervals quantify evaluation-trial sampling only, not variation across training runs.}
+
+\section{Frozen checkpoints and matched protocol}
+\begin{center}
+\small
+\captionof{table}{Frozen model identities. Both checkpoints validate as VDA4, xLSTM, \texttt{crossattn1}, $d_{mem}=128$, convolutional front end, and $2\times2$ geometry.}
+\begin{tabularx}{\textwidth}{@{}p{2.5cm}p{1.5cm}p{1.8cm}Y@{}}
+\toprule
+Role & Iteration & Decay & Frozen SHA-256\\
+\midrule
+Standard & 20,000 & 1.00 & {\footnotesize\texttt{a0cf23b7\allowbreak{}88b1bb74\allowbreak{}ffb598fa\allowbreak{}3978b8d6\allowbreak{}01b25ec5\allowbreak{}cfa2bf67\allowbreak{}d64d2d59\allowbreak{}bfd7d65a}}\\
+High decay & 14,649 & 0.80 & {\footnotesize\texttt{da93490b\allowbreak{}fbcbf496\allowbreak{}9f9aedb0\allowbreak{}6d94da2d\allowbreak{}3c9ef088\allowbreak{}435d7f39\allowbreak{}0e952ca0\allowbreak{}aae59ab5}}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Each event trial has seven frames: blank, cue at frame 1, delay, stimulus array at frames 3--6, and an orientation change at frame 5. The cue is fixed at S1. In the valid condition the $15^\circ$ change occurs at S1; in the forced-invalid condition it occurs at S4. The paired videos are identical through frame 4. The 100\%-cue invalid condition is an intervention for analysis, not a sample from the environment's natural 100\%-valid target distribution.
+
+The event analysis uses 256 paired trials per condition. No-change attention uses 128 trials at each displayed cue proportion (25, 50, 75, and 100\%). Psychometric curves use 300 shared trials at each combination of four displayed cue proportions, ten change magnitudes, and the valid or forced-invalid location. A qualifying response is the first greedy change action at frame 5 or 6. Every reported model-difference interval uses 10,000 deterministic paired bootstrap resamples; psychometric binomial-rate bands use Wilson intervals.
+
+\section{Results}
+\subsection{Primary activity result and secondary descriptors}
+The direction was consistent within both event conditions. High-minus-standard activity was -0.0981 for valid changes (95\% interval [-0.1014, -0.0948]) and -0.1009 for forced-invalid changes ([-0.1044, -0.0974]). The no-change difference was -0.1132 ([-0.1170, -0.1094]). These measures jointly contradict the specific prediction that the frozen high-decay checkpoint has more moving attention maps.
+
+Secondary descriptors show that ``less motion'' is not equivalent to uniformly flatter attention. High-decay selectivity was higher by +0.0221, while its peak-key mass was lower by -0.0374 and its image-key allocation was lower by -0.0420. Immediate change-location reorientation, measured as changed-location spatial mass at frame 5 minus frame 4, differed by only +0.0064 for valid changes and -0.0011 for forced-invalid changes; both intervals include zero.
+
+\begin{table}[ht]
+\centering\small
+\caption{Paired high-decay minus standard estimates. Bootstrap intervals are over matched evaluation trials, not training seeds.}
+\begin{tabular}{lrrr}
+\toprule
+Measure & Standard & High decay & Difference [95\% interval]\\
+\midrule
+Overall attention motion & 0.5245 & 0.4249 & -0.0995 [-0.1021, -0.0970]\\
+Valid attention motion & 0.5282 & 0.4301 & -0.0981 [-0.1014, -0.0948]\\
+Forced-invalid attention motion & 0.5207 & 0.4198 & -0.1009 [-0.1044, -0.0974]\\
+Selectivity & 0.4366 & 0.4587 & +0.0221 [+0.0193, +0.0247]\\
+Peak-key mass & 0.5061 & 0.4687 & -0.0374 [-0.0409, -0.0339]\\
+Image-key mass & 0.1816 & 0.1397 & -0.0420 [-0.0427, -0.0412]\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+\begin{center}
+\includegraphics[width=0.98\textwidth,height=0.68\textheight,keepaspectratio]{attention_metrics_and_response_strata.pdf}
+\captionof{figure}{\textbf{Dynamic and spatial attention descriptors.} Time courses compare the standard and high-decay checkpoints under valid and forced-invalid changes, show image-versus-memory allocation, and separate trials with and without a qualifying change response. Every trace derives from raw $4\times8$ softmax maps before summary.}
+\label{fig:metrics}
+\end{center}
+
+\subsection{Behavior at valid and forced-invalid locations}
+At the matched 100\%-cue, $15^\circ$ anchor, the standard checkpoint produced qualifying change responses on 200/300 valid trials (0.667) and 112/300 forced-invalid trials (0.373). The high-decay checkpoint responded on 198/300 valid trials (0.660) and 133/300 forced-invalid trials (0.443). The full curves are more informative than this single anchor: they show how response probability changes with orientation magnitude at every displayed cue proportion.
+
+These are change-response probabilities, not sensitivity estimates. No signal-detection decomposition separates discriminability from response criterion, so a difference in response rate cannot by itself establish improved detection.
+
+\begin{center}
+\includegraphics[width=0.98\textwidth,height=0.58\textheight,keepaspectratio]{psychometric_valid_invalid_comparison.pdf}
+\captionof{figure}{\textbf{Behavioral comparison.} Qualifying change-response probability across change magnitude for valid and deliberately forced-invalid locations at four displayed cue proportions. Difference panels show high decay minus standard. The target location is fixed by analysis in every curve; displayed validity changes the cue appearance but does not sample target location.}
+\label{fig:psychometric}
+\end{center}
+
+\clearpage
+\subsection{Where the attention moves}
+Figure~\ref{fig:average-maps} keeps image and recurrent-memory keys separate while averaging over the four query rows. This view exposes the broad frame schedule, but it can conceal query-specific routing. Figures~\ref{fig:valid-image}--\ref{fig:invalid-memory} therefore retain every query row. Bright columns identify the source location receiving attention; image-key and memory-key panels must be interpreted separately because each is only one four-key block of the normalized eight-key distribution.
+
+The maps show the same broad schedule in both checkpoints: image-key concentration at the cue frame is followed by increased recurrent-memory routing during the delay and array frames. Relative to standard, the high-decay checkpoint's cue-orienting increase from frame 0 to frame 1 was larger by +0.1824, yet its event-average image-key mass was lower by -0.0420; because image and memory blocks partition each normalized row, the latter is a corresponding shift toward memory keys. At the frame-5 change, high-minus-standard changed-location reorientation was only +0.0064 in valid trials and -0.0011 in forced-invalid trials, with both intervals spanning zero. The lower total variation therefore reflects a quieter routing trajectory after the strong cue transition, not an absence of cue-localized or source-selective structure.
+
+\begin{center}
+\includegraphics[width=0.98\textwidth,height=0.68\textheight,keepaspectratio]{attention_event_query_averaged.pdf}
+\captionof{figure}{\textbf{Query-averaged event maps.} Standard and high-decay attention under matched valid and forced-invalid videos. Image keys and recurrent-memory keys are displayed separately across all seven frames. This is the overview; the following plates preserve the full query axis.}
+\label{fig:average-maps}
+\end{center}
+
+\clearpage
+\begin{landscape}
+\thispagestyle{plain}
+\begin{center}
+\includegraphics[width=0.96\linewidth,height=0.62\linewidth,keepaspectratio]{attention_query_level_valid_image_keys.pdf}
+\captionof{figure}{\textbf{Valid condition, image keys.} Each tile preserves the four query rows and four image-key columns. The cue and $15^\circ$ change are both at S1; paired models receive identical videos.}
+\label{fig:valid-image}
+\end{center}
+\end{landscape}
+
+\begin{landscape}
+\thispagestyle{plain}
+\begin{center}
+\includegraphics[width=0.96\linewidth,height=0.62\linewidth,keepaspectratio]{attention_query_level_valid_memory_keys.pdf}
+\captionof{figure}{\textbf{Valid condition, recurrent-memory keys.} Full query-to-memory routing for the same valid trials. Comparison with Figure~\ref{fig:valid-image} shows whether a frame-to-frame shift is within a source block or between image and memory.}
+\label{fig:valid-memory}
+\end{center}
+\end{landscape}
+
+\begin{landscape}
+\thispagestyle{plain}
+\begin{center}
+\includegraphics[width=0.96\linewidth,height=0.62\linewidth,keepaspectratio]{attention_query_level_forced_invalid_image_keys.pdf}
+\captionof{figure}{\textbf{Forced-invalid condition, image keys.} The cue remains at S1 while the change is forced to S4. Videos are matched through frame 4, so valid--invalid divergence before the event would indicate analysis or stochastic mismatch.}
+\label{fig:invalid-image}
+\end{center}
+\end{landscape}
+
+\begin{landscape}
+\thispagestyle{plain}
+\begin{center}
+\includegraphics[width=0.96\linewidth,height=0.62\linewidth,keepaspectratio]{attention_query_level_forced_invalid_memory_keys.pdf}
+\captionof{figure}{\textbf{Forced-invalid condition, recurrent-memory keys.} Query-preserving memory routing after a change outside the cued location. This plate is the direct spatial test requested for invalid attention.}
+\label{fig:invalid-memory}
+\end{center}
+\end{landscape}
+
+\section{Interpretation}
+The frozen high-decay checkpoint does not show the predicted increase in attention-map activity. Its attention changes less from frame to frame in valid, forced-invalid, and no-change analyses. At the same time, some secondary descriptors move in different directions: selectivity is slightly higher while peak-key and image-key mass are lower. This pattern is why the conclusion is tied to the prespecified total-variation metric rather than generalized into ``more'' or ``less attention.'' Attention is a normalized distribution; its scientific content is where mass moves, between which sources, and when.
+
+The result does not identify a causal memory-decay effect. Training maturity is confounded with decay, the two checkpoints were trained independently, and each represents only one training seed. A controlled answer requires matched training budgets, multiple seeds, checkpoint-acceptance criteria, and evaluation of both final checkpoints under this same paired-video battery. The present result is nevertheless decisive for the literal frozen-pair question: the available high-decay snapshot is not more dynamically attentive by the prespecified metric.
+
+\section{Reproducibility record}
+The numerical source is \texttt{SUMMARY.json}, derived from the validated \texttt{comparison\_evidence.npz} cache. Every figure was regenerated from that admitted cache in PDF, SVG, and PNG, using TrueType PDF embedding and text-preserving SVG settings. The analysis source, task/environment source, model source, runtime versions, exact command, frozen-input manifest, and file hashes are retained in the analysis run. This writeup copies its numerical and lineage inputs byte-for-byte; a package manifest records those copies, the regenerated figures, and the compiled manuscript.
+
+\begin{itemize}
+\item Analysis run: \path{20260714T040646Z_high_iter14649_vs_standard_iter20000_9e9495d1}.
+\item Standard checkpoint SHA-256: {\footnotesize\texttt{a0cf23b7\allowbreak{}88b1bb74\allowbreak{}ffb598fa\allowbreak{}3978b8d6\allowbreak{}01b25ec5\allowbreak{}cfa2bf67\allowbreak{}d64d2d59\allowbreak{}bfd7d65a}}.
+\item High-decay checkpoint SHA-256: {\footnotesize\texttt{da93490b\allowbreak{}fbcbf496\allowbreak{}9f9aedb0\allowbreak{}6d94da2d\allowbreak{}3c9ef088\allowbreak{}435d7f39\allowbreak{}0e952ca0\allowbreak{}aae59ab5}}.
+\item Primary metric: High decay is more active if its paired mean frame-to-frame total variation over the full 4×8 attention map is larger. Total mass is not used because every query row is softmax-normalized to one.
+\item Interpretation boundary: This is a frozen-checkpoint comparison: standard iteration 20000 versus high-decay iteration 14649. The estimates do not isolate memory decay from training maturity and do not quantify training-seed uncertainty.
+\end{itemize}
+
+\end{document}

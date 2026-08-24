@@ -1,0 +1,500 @@
+{
+  "artifact": {
+    "bytes": 224078,
+    "device": 16777229,
+    "inode": 163346721,
+    "nlink": 1,
+    "path": "data/decode.npz",
+    "sha256": "739d8b79b81a5dbab39d451556cb8fd0f7a69512e06855a9775c6f24c120e91c"
+  },
+  "artifact_class": "corrected checkpoint-recomputed VDA decoder",
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 8848341,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176520,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda1_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda1_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "1869701f8ff7d18c7caaeaabb0e9440b005af8d009a4e0eb5e7950191806d0f0",
+      "d_mem": 128,
+      "feedback": "affine_ew",
+      "loaded_iteration": 19999,
+      "model_identity": "vda1:affine_ew:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": false,
+        "minimum_n": 16,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda1"
+      },
+      "seed": 20260711,
+      "task": "vda1"
+    },
+    {
+      "checkpoint_bytes": 8884593,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176501,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda1_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda1_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "7e62d83a2241ec4b0aee7a05755d9b8053689910e06f35a10d0db02ad7abc492",
+      "d_mem": 128,
+      "feedback": "crossattn1",
+      "loaded_iteration": 19999,
+      "model_identity": "vda1:crossattn1:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": false,
+        "minimum_n": 16,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda1"
+      },
+      "seed": 20260711,
+      "task": "vda1"
+    },
+    {
+      "checkpoint_bytes": 8848341,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176120,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda2_affine_ew_d128_2x2/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda2_affine_ew_d128_2x2/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "60b508ddb4b09f19296dae2296cf43cdb8115d0e1a9c22b3b462cbdb39b5238b",
+      "d_mem": 128,
+      "feedback": "affine_ew",
+      "loaded_iteration": 19999,
+      "model_identity": "vda2:affine_ew:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0,
+          3
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": true,
+        "minimum_n": 16,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda2"
+      },
+      "seed": 20260711,
+      "task": "vda2"
+    },
+    {
+      "checkpoint_bytes": 8884593,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176112,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda2_crossattn1_d128_2x2/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda2_crossattn1_d128_2x2/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "c380f84d0f8a0aef59865d06d2cb68f5281bb48721876330522381569c759a6f",
+      "d_mem": 128,
+      "feedback": "crossattn1",
+      "loaded_iteration": 19999,
+      "model_identity": "vda2:crossattn1:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0,
+          3
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": true,
+        "minimum_n": 16,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda2"
+      },
+      "seed": 20260711,
+      "task": "vda2"
+    },
+    {
+      "checkpoint_bytes": 8848341,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176431,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "2341026363e6e1d2115a34a8ad9a91a73e385aab4a223aace763529e4047e085",
+      "d_mem": 128,
+      "feedback": "affine_ew",
+      "loaded_iteration": 19999,
+      "model_identity": "vda4:affine_ew:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": true,
+        "minimum_n": 48,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda4"
+      },
+      "seed": 20260711,
+      "task": "vda4"
+    },
+    {
+      "checkpoint_bytes": 8884593,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176412,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "1a2fa8ae2a57982b6c91dc75079d8293781ce843271b92fe3cfbe5fc16137155",
+      "d_mem": 128,
+      "feedback": "crossattn1",
+      "loaded_iteration": 19999,
+      "model_identity": "vda4:crossattn1:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": true,
+        "minimum_n": 48,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda4"
+      },
+      "seed": 20260711,
+      "task": "vda4"
+    },
+    {
+      "checkpoint_bytes": 10209557,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176379,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "22f028f6232d9c3ea040019aff357645ddcaa69e4a09c2f8ceff224ea568d8d7",
+      "d_mem": 128,
+      "feedback": "affine_ew",
+      "loaded_iteration": 19999,
+      "model_identity": "vda9:affine_ew:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": true,
+        "minimum_n": 128,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda9"
+      },
+      "seed": 20260711,
+      "task": "vda9"
+    },
+    {
+      "checkpoint_bytes": 10248241,
+      "checkpoint_device": 16777229,
+      "checkpoint_inode": 157176346,
+      "checkpoint_nlink": 1,
+      "checkpoint_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_path_relative": "../battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "6c0587201cd2bf99b43e02278d4c65b03ab79d9b1f811406fc4962d962714946",
+      "d_mem": 128,
+      "feedback": "crossattn1",
+      "loaded_iteration": 19999,
+      "model_identity": "vda9:crossattn1:d_mem=128",
+      "n": 900,
+      "replay_config": {
+        "active_locations": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "balance": "half change; changed trials half cued/half uncued when defined",
+        "change_trials": 450,
+        "cue_index": 0,
+        "cv_folds": 4,
+        "location_decode_defined": true,
+        "minimum_n": 128,
+        "n": 900,
+        "sampling_version": 1,
+        "seed": 20260711,
+        "task": "vda9"
+      },
+      "seed": 20260711,
+      "task": "vda9"
+    }
+  ],
+  "claim_boundary": "Scores are single-checkpoint descriptive cross-validated decoding estimates. They are not training-seed uncertainty, causal mechanism evidence, or capacity estimates.",
+  "command": [
+    "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/../.venv/bin/python",
+    "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/scripts/run_corrected_decoder.py",
+    "--output-root",
+    "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_corrected",
+    "--n",
+    "900",
+    "--seed",
+    "20260711"
+  ],
+  "created_at_utc": "2026-07-12T03:36:46.338961+00:00",
+  "decoder_summary": {
+    "decoded_variables": [
+      "colour",
+      "validity",
+      "change",
+      "chg_loc"
+    ],
+    "feedbacks": [
+      "crossattn1",
+      "affine_ew"
+    ],
+    "key_count": 68,
+    "location_class_counts": {
+      "vda1": {
+        "0": 450,
+        "1": 450
+      },
+      "vda2": {
+        "0": 450,
+        "1": 225,
+        "4": 225
+      },
+      "vda4": {
+        "0": 450,
+        "1": 225,
+        "2": 75,
+        "3": 75,
+        "4": 75
+      },
+      "vda9": {
+        "0": 450,
+        "1": 225,
+        "2": 29,
+        "3": 28,
+        "4": 28,
+        "5": 28,
+        "6": 28,
+        "7": 28,
+        "8": 28,
+        "9": 28
+      }
+    },
+    "n": 900,
+    "seed": 20260711,
+    "tasks": [
+      "vda1",
+      "vda2",
+      "vda4",
+      "vda9"
+    ],
+    "timesteps": 7
+  },
+  "legacy_artifact_preserved": {
+    "bytes": 10662,
+    "device": 16777229,
+    "inode": 156947475,
+    "nlink": 4,
+    "path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/figs/decode.npz",
+    "sha256": "1d8c7fe221d7b67d12dfc7dca05126550228a4825cfaf5d3e0ba6edd696b3a4e"
+  },
+  "runtime_versions": {
+    "device": "cpu",
+    "numpy": "2.4.6",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "python": "3.12.13 (main, Mar 25 2026, 03:16:06) [Clang 22.1.1 ]",
+    "scikit_learn": "1.9.0",
+    "torch": "2.12.0"
+  },
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 12295,
+      "identity": "__builder__",
+      "role": "execution",
+      "sha256": "886a42257824ef70643c6937a21091ef0f182dde1121527b45627631a265a613",
+      "snapshot_path": "provenance/build_corrected_decoder.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/scripts/build_corrected_decoder.py"
+    },
+    {
+      "bytes": 11721,
+      "identity": "__producer__",
+      "role": "execution",
+      "sha256": "7581d9a24b183369a35da17194b6cf7b76e973327a774748d31df689f0873277",
+      "snapshot_path": "provenance/vda_fig_decode.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/vda_fig_decode.py"
+    },
+    {
+      "bytes": 13381,
+      "identity": "__runner__",
+      "role": "execution",
+      "sha256": "bda5858209a9812611d35b2de7e4231ff1b5b68b4897b2587d68d2efe2c2effd",
+      "snapshot_path": "provenance/run_corrected_decoder.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/scripts/run_corrected_decoder.py"
+    },
+    {
+      "bytes": 7050,
+      "identity": "conv_frontend.py",
+      "role": "execution",
+      "sha256": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+      "snapshot_path": "provenance/dependencies/conv_frontend.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/conv_frontend.py"
+    },
+    {
+      "bytes": 3964,
+      "identity": "envs/__init__.py",
+      "role": "execution",
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "snapshot_path": "provenance/dependencies/envs/__init__.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/__init__.py"
+    },
+    {
+      "bytes": 16259,
+      "identity": "envs/base.py",
+      "role": "execution",
+      "sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+      "snapshot_path": "provenance/dependencies/envs/base.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/base.py"
+    },
+    {
+      "bytes": 7863,
+      "identity": "envs/luo2015.py",
+      "role": "execution",
+      "sha256": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+      "snapshot_path": "provenance/dependencies/envs/luo2015.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/luo2015.py"
+    },
+    {
+      "bytes": 16590,
+      "identity": "envs/tasks.py",
+      "role": "execution",
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "snapshot_path": "provenance/dependencies/envs/tasks.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/tasks.py"
+    },
+    {
+      "bytes": 9466,
+      "identity": "model.py",
+      "role": "execution",
+      "sha256": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+      "snapshot_path": "provenance/dependencies/model.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/model.py"
+    },
+    {
+      "bytes": 33237,
+      "identity": "paper_encoder.py",
+      "role": "execution",
+      "sha256": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+      "snapshot_path": "provenance/dependencies/paper_encoder.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/paper_encoder.py"
+    },
+    {
+      "bytes": 4239,
+      "identity": "paper_heads.py",
+      "role": "execution",
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "snapshot_path": "provenance/dependencies/paper_heads.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/paper_heads.py"
+    },
+    {
+      "bytes": 6522,
+      "identity": "tests/test_corrected_decoder_build.py",
+      "role": "validation",
+      "sha256": "1326b12adb9efb990b8b0830605549357b5d7b82fce802275d9a2cff21132f21",
+      "snapshot_path": "provenance/validation/tests/test_corrected_decoder_build.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/tests/test_corrected_decoder_build.py"
+    },
+    {
+      "bytes": 1066,
+      "identity": "tests/test_corrected_decoder_runner.py",
+      "role": "validation",
+      "sha256": "107d7794512c119239c56ac7a88f0dfb93c28a61877e1cbf32de74c6ea20993b",
+      "snapshot_path": "provenance/validation/tests/test_corrected_decoder_runner.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/tests/test_corrected_decoder_runner.py"
+    },
+    {
+      "bytes": 23236,
+      "identity": "tests/test_vda_correctness.py",
+      "role": "validation",
+      "sha256": "6226ddc33c9b53d537418ec0f7310abc63a7ac51f542dad5d0897300b4f3d5ce",
+      "snapshot_path": "provenance/validation/tests/test_vda_correctness.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/tests/test_vda_correctness.py"
+    },
+    {
+      "bytes": 5577,
+      "identity": "vae_frontend.py",
+      "role": "execution",
+      "sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+      "snapshot_path": "provenance/dependencies/vae_frontend.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vae_frontend.py"
+    },
+    {
+      "bytes": 11711,
+      "identity": "vda_sweep/vda_core.py",
+      "role": "execution",
+      "sha256": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773",
+      "snapshot_path": "provenance/dependencies/vda_sweep/vda_core.py",
+      "source_path_absolute": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/vda_core.py"
+    }
+  ],
+  "validation_gate": {
+    "command": "../.venv/bin/python -m pytest -q tests/test_vda_correctness.py tests/test_corrected_decoder_build.py tests/test_corrected_decoder_runner.py",
+    "result_recorded_after_build": null
+  }
+}

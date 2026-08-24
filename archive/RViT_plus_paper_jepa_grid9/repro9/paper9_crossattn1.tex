@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,bm,graphicx,booktabs,caption,subcaption}
+\usepackage[table]{xcolor}\usepackage{hyperref}\hypersetup{colorlinks=true,linkcolor=blue!50!black}
+\graphicspath{{figs/}}\captionsetup{font=small}
+\title{\textbf{A recurrent vision transformer shows signatures of primate visual attention:\\
+a full-figure reproduction on a nine-stimulus grid with a cross-attention variant}}
+\author{Reproduction of Morgan, Albanna \& Herman with the conv-frontend, $d_{\mathrm{mem}}{=}128$ \emph{cross-attention} JEPA variant on the 9-stimulus \texttt{vda9} task}
+\date{Model checkpoint iteration 2{,}999 (task: 9-stimulus $3\times3$ grid \texttt{vda9}, $75\times75$)}
+\begin{document}\maketitle
+\begin{abstract}\noindent
+We reproduce \emph{every} figure of Morgan, Albanna \& Herman on a harder, nine-stimulus version of the
+cued orientation-change task---a $3\times3$ Gabor grid with cues at opposite corners ($S_1$ top-left,
+$S_9$ bottom-right)---using a convolutional-frontend, $d_{\mathrm{mem}}{=}128$ cross-attention JEPA
+variant trained from pixels by reinforcement learning. The variant produces orderly sigmoidal
+psychometric and chronometric functions, a clear cued$>$uncued cueing benefit, interpretable recurrent
+attention dynamics over the $3\times3$ field, decodable change location/occurrence in the mnemonic
+percept, a competitive actor-logit decision axis, a distributional value jump at the change, and the
+signal-detection criterion/sensitivity signatures of attentional ``stimulation.'' Unlike the compact
+four-stimulus variants, this nine-stimulus model shows a \emph{partial} validity effect: the fitted
+threshold for cued changes is nearly flat across displayed validity, but the cued$>$uncued benefit
+\emph{grows} with validity (much larger at $100\%$ than at $0\%$). We report all figures with this
+variant's data at an early ($2{,}999$-iteration) checkpoint. \emph{This is a mid-training snapshot; the
+qualitative signatures are already present and stable, and where behaviour is still maturing we say so.}
+\end{abstract}
+
+\section{Introduction}
+The nine-stimulus grid raises set size from four to nine, distributing the same cue/change structure
+over a $3\times3$ field. We ask whether the primate-like attention signatures of the original---and of
+our four-stimulus reproductions---survive this harder task, and in particular whether the larger field
+recruits displayed cue validity more than the four-stimulus variants did (which ignored it entirely).
+
+\section{Task and model}
+Each 7-step trial (Fig.~\ref{fig:task}) presents a $75\times75$ image: blank, a corner cue at $S_1$ or
+$S_9$ ($t{=}1$), blank, then nine Gabor patches from $t{=}3$; on half of trials one patch's orientation
+steps by $\Delta$ at $t{=}5$. The variant (Fig.~\ref{fig:model}) parses each frame into nine patches,
+encodes them with a shared SE-ResNet, and feeds the tokens to a cross-attention recurrent transformer
+whose keys/values span the nine image and nine memory tokens; a spatial xLSTM holds the working memory
+read out to a distributional actor--critic and distilled by a JEPA head.
+
+\begin{figure}[h]\centering
+\includegraphics[width=\textwidth]{fig1A_task_timeline.png}\\[4pt]
+\includegraphics[width=0.6\textwidth]{fig1B_cue_configs.png}
+\caption{\textbf{Fig 1 --- Task / environment (9-stim).} Top: the 7-step timeline with change/no-change
+branch. Bottom: cue configurations (validity ring $\times$ corner) with the empirical $3\times3$
+change-location probability our environment produces.}\label{fig:task}\end{figure}
+
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig2_schematic_crossattn1.png}
+\caption{\textbf{Fig 2 --- Model schematic (9-stim cross-attention).} Nine-patch field $\to$ conv
+SE-ResNet $\to$ recurrent-ViT self-attention with memory feedback ($K,V$ over image$+$memory) $\to$
+spatial xLSTM $\to$ actor--critic (RL) and JEPA head.}\label{fig:model}\end{figure}
+
+\section{Behaviour: psychometrics and chronometrics}
+The variant produces orderly sigmoidal psychometrics and decreasing chronometrics
+(Fig.~\ref{fig:psy}). \emph{Validity.} The fitted threshold for cued changes is nearly flat across
+displayed validity ($15.9/15.9/14.8/14.8/14.6^\circ$ for $0/25/50/75/100\%$), so the model does not
+show a validity-graded threshold shift for cued changes. However---unlike the four-stimulus
+variants---the \emph{cued$>$uncued benefit grows with validity}: at a $0\%$ (uninformative) cue the
+cued and uncued curves nearly coincide, whereas at $100\%$ validity the cued curve is markedly left of
+the uncued (Fig.~\ref{fig:psy}B vs.\ C). The nine-stimulus model therefore recruits displayed validity
+\emph{partially}, in the spatial split rather than in the cued threshold.
+
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig3_crossattn1.png}
+\caption{\textbf{Fig 3 --- psychometrics and chronometrics.} A: cued response vs.\ $\Delta$ at five
+validities (incl.\ $0\%$). B: $0\%$ cued vs.\ uncued. C: $100\%$ cued vs.\ uncued (benefit larger).
+D--F: reaction time. Points $n{=}300$; lines are 4-parameter logistic fits.}\label{fig:psy}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=0.7\textwidth]{fig3_crossattn1_params.png}
+\caption{\textbf{Fitted psychometric parameters} (cued) vs.\ validity.}\label{fig:psyp}\end{figure}
+
+\section{Attention allocation dynamics}
+Averaged recurrent self-attention over the $3\times3$ field (Fig.~\ref{fig:attn}) is flat at onset
+($\approx\!1/9$ per patch), spikes onto the cued corner at the cue frame ($\alpha_1{\approx}0.89$), and
+is sustained through the following blank. Crucially---and \emph{unlike} the four-stimulus variants---the
+\emph{re-allocation} of attention onto the cued corner during the stimulus epoch is graded by displayed
+validity: at the change frame $\alpha_1$ grows monotonically from $\approx\!0.12$ at $0\%$ validity to
+$\approx\!0.31$ at $100\%$. Thus the nine-stimulus model's \emph{attention} is validity-modulated even where its cued
+psychometric threshold is not, mirroring the behavioural finding that the cued$>$uncued benefit widens
+with validity. Panel B shows $\alpha_1$($S_1$)/$\alpha_9$($S_9$) vs.\ time; panel C shows $\alpha_1$ at
+the change frame vs.\ $\Delta$ for cued and uncued changes.
+
+\begin{figure}[h]\centering
+\includegraphics[width=\textwidth]{fig4A_crossattn1.png}\\[4pt]
+\includegraphics[width=0.47\textwidth]{fig4B_crossattn1.png}\hfill
+\includegraphics[width=0.47\textwidth]{fig4C_crossattn1.png}
+\caption{\textbf{Fig 4 --- intrinsic attention dynamics (9-stim).} Top: per-timestep $3\times3$
+attention heatmaps by validity (no-change cue-$S_1$). Bottom left: $\alpha_1$/$\alpha_9$ vs.\ time.
+Bottom right: $\alpha_1$ at change vs.\ $\Delta$, uncued/cued.}\label{fig:attn}\end{figure}
+
+\section{Feedback mechanism}
+Our cross-attention variant instantiates the memory-as-tokens (concatenation) feedback with $9{+}9$
+keys/values. Fig.~\ref{fig:fb} shows the circuit alongside the four behavioural panels of the original's
+feedback figures.
+
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig567_crossattn1.png}
+\caption{\textbf{Figs 5--7 analog --- feedback circuit \& behaviour (9-stim).} Left: memory-as-tokens
+circuit. A: cued response by validity. B: enhance/suppress attention on the cued change. C: cued vs.\
+uncued at $100\%$. D: attention on $S_1$(cued) vs.\ $S_9$(change) at the change frame.}\label{fig:fb}\end{figure}
+
+\section{Causal attention manipulations on behaviour}
+Clamping attention at the change frame (Fig.~\ref{fig:manip}) reproduces the ``dual effect'' of the
+original: for an \emph{uncued} change ($S_9$ at $100\%$, $\Delta{=}18^\circ$), directing attention onto
+the change ($\alpha_9{=}1$) raises detection ($0.53\to0.67$), and \emph{suppressing} attention at the
+cued location ($\alpha_1{=}0$) \emph{also} raises it ($0.53\to0.61$). The hard clamps are therefore a
+genuine causal lever here (in contrast to the multiplicative variant), though the parametric
+$\alpha_1{\leftrightarrow}\alpha_9$ sweep leaves the fitted threshold nearly flat
+($\approx\!14.8$--$15.2^\circ$; Fig.~\ref{fig:manipp}).
+
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig5AF_crossattn1.png}
+\caption{\textbf{Attention clamps at $t_{\mathrm{change}}$ (9-stim).} Response (A--C) and RT (D--F) for
+clamps on $S_1$/$S_9$.}\label{fig:manip}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig5GK_crossattn1.png}
+\caption{\textbf{Parametric manipulation (9-stim).} Shifting attention $S_1{\leftrightarrow}S_9$ grades
+the psychometric function; fitted parameters vs.\ $\alpha_1$.}\label{fig:manipp}\end{figure}
+
+\section{Decoding the mnemonic percept}
+Decoders trained on natural states recover change \emph{location} (10-way over the $3\times3$ grid $+$
+no-change) from the full percept $H$ (Fig.~\ref{fig:dec8}) and change \emph{occurrence} from a single
+patch $h_1$ (Fig.~\ref{fig:dec9}); the actor's first activation retains occurrence
+(Fig.~\ref{fig:dec10}), and graded inhibition of $\alpha_1$ is examined in Fig.~\ref{fig:dec11}.
+
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig8_crossattn1.png}
+\caption{\textbf{Fig 8 --- decode change LOCATION (10-way) from $H$}, $t{=}5$/$6$, under
+\{no-mod, spread, $\alpha_1{=}0$, $\alpha_1{=}1$\}.}\label{fig:dec8}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=0.85\textwidth]{fig9_crossattn1.png}
+\caption{\textbf{Fig 9 --- decode change OCCURRENCE from single patch $h_1$}, $t{=}5$/$6$.}\label{fig:dec9}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig10_crossattn1.png}
+\caption{\textbf{Fig 10 --- decode from actor first activation} (location/occurrence).}\label{fig:dec10}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig11_crossattn1.png}
+\caption{\textbf{Fig 11 --- decode $S_1$-change vs.\ no-change from actor activation}, graded
+$\alpha_1$.}\label{fig:dec11}\end{figure}
+
+\section{Actor-logit geometry}
+The actor logits at the change frame form a competitive Declare/Wait axis graded by $\Delta$
+(Fig.~\ref{fig:log12}), shifted by attention modulation on $S_1$ (Fig.~\ref{fig:log13}).
+
+\begin{figure}[h]\centering\includegraphics[width=0.62\textwidth]{fig12_crossattn1.png}
+\caption{\textbf{Fig 12 --- actor logit geometry (9-stim).} A: natural. B--E: changes at $S_1$/$S_3$/
+$S_5$/$S_9$. Coloured by $\Delta$ (left) and density (right).}\label{fig:log12}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=0.62\textwidth]{fig13_crossattn1.png}
+\caption{\textbf{Fig 13 --- actor logits under $S_1$ attention modulation.}}\label{fig:log13}\end{figure}
+
+\section{Value, TD error and entropy}
+The distributional critic's value grows with $\Delta$ (Fig.~\ref{fig:td14}), and entropy/criterion vs.\
+attention are shown in Fig.~\ref{fig:ent15}.
+
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig14_crossattn1.png}
+\caption{\textbf{Fig 14 --- TD error \& value (9-stim).}}\label{fig:td14}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=0.95\textwidth]{fig15_crossattn1.png}
+\caption{\textbf{Fig 15 --- entropy \& criterion--value coupling (9-stim).}}\label{fig:ent15}\end{figure}
+
+\section{Signal detection: criterion \& sensitivity (``stimulation'' experiments)}
+Biasing attention on $S_1$ parametrically (at cue-time or change-time) modulates the signal-detection
+criterion and sensitivity (Fig.~\ref{fig:sdt16}): attention toward the change lowers criterion and
+preserves sensitivity, whereas attention directed away reduces sensitivity.
+
+\begin{figure}[h]\centering\includegraphics[width=\textwidth]{fig16_crossattn1.png}
+\caption{\textbf{Fig 16 --- SDT criterion \& sensitivity vs.\ attention bias on $S_1$ (9-stim).} Rows:
+$c$, $d'$. Columns: manipulate at cue-time / change-time. Lines: \{Cue $25/100\%$\}$\times$\{change
+$S_1$/$S_9$\}.}\label{fig:sdt16}\end{figure}
+
+\section{Supervised vs.\ RL}
+We reproduce the RL column across the four behavioural rows; the supervised columns are out-of-scope
+baselines not trained for this RL-only variant (Fig.~\ref{fig:sup17}).
+
+\begin{figure}[h]\centering\includegraphics[width=0.9\textwidth]{fig17_crossattn1.png}
+\caption{\textbf{Fig 17 analog --- supervised vs.\ RL (9-stim).}}\label{fig:sup17}\end{figure}
+
+\section{Discussion}
+On the harder nine-stimulus grid the cross-attention variant reproduces the full battery of primate-like
+signatures, and---unlike the four-stimulus variants---begins to recruit displayed cue validity: the
+cued$>$uncued benefit grows with validity even though the cued threshold stays flat. Because this is an
+early ($2{,}999$-iteration) checkpoint, we present the validity trend as a robust qualitative
+observation rather than a converged quantitative effect; continued training is expected to sharpen it.
+
+\section{Methods (variant)}
+As in the four-stimulus reproduction but with a $3\times3=9$-patch field ($75\times75$ image, corner
+cues $S_1$/$S_9$). Front-end: shared SE-ResNet to $\hat o_i\in\mathbb R^{128}$. Cross-attention with
+$9{+}9$ keys/values, $Z=X+AV$. Memory: per-patch spatial xLSTM, $d_{\mathrm{mem}}{=}128$. Training:
+distributional actor--critic on sparse reward $+$ V-JEPA. Analyses use $n{=}300$ trials/point;
+psychometrics fit a 4-parameter logistic. Decoders are 10-way (location) or 2-way (occurrence), trained
+on natural states. SDT uses hit/false-alarm rates at $\Delta{=}18^\circ$.
+
+\end{document}

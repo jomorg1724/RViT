@@ -1,0 +1,276 @@
+% =====================================================================
+% limitations.tex — DRAFTED at rb-048 (RB-048), 2026-05-30.
+%
+% Second bookend; companion of sections/abstract.tex (rb-047, RB-047).
+% Mirrors the abstract's voice (distributional / graded / conditional
+% by default).  Collects the explicit scope deferrals that every body
+% section has already flagged into a single navigable section.
+%
+% Strength check (mission §3, CLAIM_LEDGER.md): every limitation
+% below is a statement about what the live verdict ledger licenses
+% and what it does NOT license at the rebuilt strength ceiling.  No
+% claim is downgraded or upgraded by this section; the section names
+% the rebuild's scope so a reader knows the boundary of every
+% headline number.
+% =====================================================================
+
+\section{Scope and limitations}
+\label{sec:limitations}
+
+This section catalogues the scope of every claim the rebuilt
+manuscript makes.  It is organised by lever rather than by section:
+each subsection states what the live verdict ledger licenses, what
+it does not, and which queued increments would close each remaining
+gap.  Nothing here downgrades a rebuilt-strength claim; the purpose
+is to make the boundary explicit so a reader can locate the precise
+conditional under which any headline number applies.
+
+% ---------------------------------------------------------------
+\subsection{The conservation rule is a parameter, not a derivation}
+\label{sec:limitations-a3}
+
+The rebuilt model treats the benefit/cost conservation rule as a
+power-mean parameter $p$
+(Equation~\eqref{eq:conservation-family}, Equation~\eqref{eq:beta-gamma-of-p},
+Appendix~\ref{sec:appendix-deriv-a3} Equation~\eqref{eq:a3d-power-mean})
+rather than a fixed identity, and reports every headline number at
+$p = 1$ (the inherited additive form $\benefit + \cost = 2$) with a
+band over the family at $p \in \{0, 0.5, 1\}$
+(Section~\ref{sec:extensions-a3}).  Two scoped boundaries follow.
+
+First, the conservation order itself is empirically unconstrained:
+nothing in the rebuild fixes which $p$ corresponds to a biological
+resource constraint.  The additive choice is the inherited model's;
+the multiplicative choice ($p = 0$, $\benefit \cdot \cost = 1$) is
+the alternative the original paper noted in its §5.5 but did not
+run.  The rebuild does \emph{not} claim either is privileged.  What
+it claims is that the central-tendency reframe of $\CF$
+(Section~\ref{sec:results-c1}) is robust to the choice — the
+per-cell $\Delta \CF = \CF(p = 0) - \CF(p = 1) \le 0$ at every cell
+of the $4{,}410$-cell sweep with $0$ reverse flips
+(Theorem~\ref{thm:delta-cf-monotone}), so the headline median moves
+by $\le 0.001$ but the tail under $\CF < 0.5$ doubles.  Reporting
+both branches in the same band is the honest treatment.
+
+Second, the empirical monotonicity $\Delta \CF \le 0$ is licensed by
+the rb-016 sim but is \emph{not} a closed-form theorem.  The d'-channel
+chain rule of
+Appendix~\ref{sec:appendix-deriv-a3}
+(Equation~\eqref{eq:a3d-chain-rule},
+Equation~\eqref{eq:a3d-dprime-of-p}) yields the analytic statement
+$\partial \Rpthree / \partial p \equiv 0$ at $\alpha = 1/\Nloc$
+(Proposition~\ref{prop:a3d-rp3-invariance}) — the P3 contribution to
+$\CF$ is conservation-form-invariant at the symmetric attention
+point — but the joint sign of $\partial \Rpone/\partial p$ and
+$\partial \Rpfour/\partial p$ is established only by the envelope
+theorem and the empirical 4,410-cell witness, not by a uniform
+inequality.  Promoting the chain rule to a closed-form theorem of
+the form $|\partial_p R_{\mathrm{P4}}| \le |\partial_p R_{\mathrm{P1}}|$
+is an open conjecture.  The joint $(p, \corr > 0)$ band is similarly
+deferred: every $p$ sweep above runs at $\corr = 0$, and every
+$\corr$ sweep runs at $p = 1$.
+
+% ---------------------------------------------------------------
+\subsection{Heterogeneity is bounded, not abolished}
+\label{sec:limitations-a2-a8}
+
+The rebuild lifts the inherited model's single-$\Rsens$ scalar to a
+per-location vector $\boldsymbol{r}$
+(Equation~\eqref{eq:d-prime-hetero}) and the inherited
+1-dimensional uncued allocation to a full $\Nloc$-dimensional
+simplex
+(Section~\ref{sec:extensions-a8}, the policy-space lift of
+\texttt{er\_full\_policy}), and shows that both extensions leave the
+inherited model's optima essentially intact under the additive
+conservation rule.  Two boundaries remain.
+
+First, the between-preparation reading of $\Rsens$
+(Section~\ref{sec:model}) is the one in which the model statement is
+binding; the within-display reading
+(\cite{mcadams_maunsell1999_v4_tuning,reynolds_heeger2009_normalization,carrasco2011_visual_attention_25y})
+is exercised empirically by the $\Rsens_i$ sweep
+(Section~\ref{sec:extensions-a2}) but is not promoted to a closed-form
+theorem.  The empirical statement is that the $C_2$ peak coordinates
+and the contested-$\CF$ corner are invariant to within $\le 1{\times}10^{-5}$
+across linear spreads $\le 30\%$
+(Table~\ref{tab:a2-rb021-summary}), so the rebuild's headline
+numbers transport.  A closed-form perturbation expansion
+$\Delta R = O(\mathrm{Var}(\boldsymbol{r}))$ around the homogeneous
+optimum is queued as a future derivation increment.
+
+Second, the new A8 conditional — the $\Nloc$-dimensional uncued
+policy binds in a benefit-dominant symmetric-stress corner under
+multiplicative conservation
+(Section~\ref{sec:extensions-a8}, Finding F2: $\Delta R = +2.79\times
+10^{-3}$ at $\corr = 0$, amplified to $+3.68\times 10^{-3}$ at
+$\corr = 0.2$, at $\valid = 1/\Nloc$, $\val = 1$, $\Rsens = 10$,
+variant~A) — is exhibited at a single $\Rsens$, a single $(\valid,
+\val)$ cell, a single $\Nloc$, and variant~A only.  The closed-form
+A8-binding-onset locus in $(\Rsens, p, \valid)$ is not derived; a
+Slepian-style monotonicity argument on the joint no-FA integrand
+under simplex perturbation is the natural substrate but has not been
+attempted.  The variant-B replication of the F2 cell, the finer
+$\Rsens$ grid around $\Rsens \in \{5, 10, 20\}$, and the
+$\Nloc > 4$ generalisation are queued as separate sims.
+
+% ---------------------------------------------------------------
+\subsection{The decision-noise lever is deferred, not denied}
+\label{sec:limitations-a6}
+
+The rebuilt three-lever decomposition
+(Definition~\ref{def:three-levers}: criterion, sensitivity,
+decorrelation) does \emph{not} include attention-coupled decision
+noise as a fourth lever, even though the reviewer's continuing
+analysis of the homogeneous-decision-rule premise (A6 in the live
+ledger) flagged it as a candidate third channel that the criterion
+fraction would mis-book to ``attention''.  At the current live label
+(\texttt{WEAKLY-SUPPORTED}), the A6 attack-vector evidence does not
+yet shift any rebuilt headline number — fixed per-location decision
+noise is benign (absorbed into effective $\dprime$), and the
+attention-coupled-noise crack is suggestive rather than decisive.
+The rebuild therefore holds the lever inventory at three, with the
+explicit caveat that an attention-coupled-noise channel
+$\sigma_i(\alpha)$ would, if landed, enter alongside $\corr$ as a
+fourth axis of the lever decomposition and would shift the
+interpretation of $\CF$ in the cost-dominant regime.  The model and
+sim increments that would wire this lever are queued and gated on
+the A6 verdict moving past \texttt{WEAKLY-SUPPORTED}; the rebuild
+will fold the lever in by symmetry with the $\corr$ channel when
+the verdict licenses it.
+
+% ---------------------------------------------------------------
+\subsection{Assumptions retained as explicit scope}
+\label{sec:limitations-retained}
+
+Three assumptions of the inherited model are carried into the
+rebuilt model unchanged, because the live verdict ledger has not
+attacked them and they were not blocking any rebuilt-strength claim.
+Each is named here so the boundary is explicit.
+
+\emph{A4 (no learning dynamics).}  The observer is taken to have
+already discovered the optimal policy; the rebuilt manuscript is a
+normative statement about the policy itself, not about how it is
+acquired.  Learning speed and reliability — and any further bias
+they introduce toward the simpler criterion-based lever — are
+outside the rebuild's scope.  Folding a learning dynamic into the
+$(\corr, p, \boldsymbol{r}, \text{policy-space})$ extensions of the
+rebuilt model is a substantial separate program.
+
+\emph{A5 (transfer-function family).}  The four monotonic forms
+$h \in \{a, \sqrt{a}, a^{0.3}, a^{2}\}$ used by the inherited paper
+exhaust the qualitative landscape probed by the rebuilt sims; the
+rebuild's headline cell fixes $h = \sqrt{\,\cdot\,}$ for
+consistency with the inherited $C_2$ peak figure.  Other monotonic
+families (sigmoidal, threshold, contrast-response-style) are
+plausible biological extensions and are not tested.  The rebuilt
+model's mechanism statements (Definition~\ref{def:three-levers},
+Equation~\eqref{eq:r-dagger}, Proposition~\ref{prop:r-dagger-invariance})
+are stated in terms of generic $f$ and do not depend on the
+particular family; the empirical bands of
+Sections~\ref{sec:results-c1}--\ref{sec:results-c4} do.
+
+\emph{A7 (reward variants).}  The two reward conventions
+(variant~A: $\CR = \valid \cdot \val + (1 - \valid)$;
+variant~B: $\CR = 1$) bracket the natural extremes the inherited
+paper studied.  The rebuilt manuscript reports the headline numbers
+under variant~A throughout, with variant~B explicitly cited as a
+sensitivity (Table~\ref{tab:cf-distribution},
+Table~\ref{tab:cf-quadrants}, the variant-B $\CF$ tail at $0.30$,
+the variant-B equal-split criticality of
+Table~\ref{tab:a2-rb021-summary}).  Other reward structures
+(continuous-valued, asymmetric cost) are not tested.  The
+variant-axis caveats below
+(Section~\ref{sec:limitations-followups}) belong here in spirit; we
+list them with the other queued replications for compactness.
+
+% ---------------------------------------------------------------
+\subsection{Equicorrelation, $\corr$-envelope, and queued follow-ups}
+\label{sec:limitations-followups}
+
+Three further boundaries collect the remaining sims and derivations
+the rebuild has queued but not run.
+
+\emph{Equicorrelation and the $\corr$-envelope.}  The A1 channel
+(Section~\ref{sec:model-rho-channel},
+Equation~\eqref{eq:equicorr-cov},
+Equation~\eqref{eq:pnofa-rho}) assumes a single scalar $\corr$
+shared by every cross-location pair.  Structured covariances —
+distance-dependent decay, feature-similarity-dependent grouping,
+inter-areal cross-correlations
+\cite{RuffCohen2016,Srinath2021} — break the exact one-factor
+Gauss--Hermite reduction and are out of scope.  The $\corr$ grid is
+tested at $\corr \in \{0, 0.1, 0.2, 0.3, 0.4\}$ with the central
+empirical anchor $\corr = 0.2$ from
+Cohen--Maunsell~\cite{CohenMaunsell2009}; the $\corr \ge 0.5$ regime
+is plausible only under heavy attention-mediated decorrelation and
+is not exercised.  The closed-form $\rdagger(\val; \corr)$ drift
+of Appendix~\ref{sec:appendix-deriv-c2}
+(Proposition~\ref{prop:r-dagger-rho}, Table~\ref{tab:r-dagger-rho-drift})
+reports the $\corr = 0 \to 0.2$ single step; a finer $\corr$-grid
+characterisation of the drift rate $d\rdagger/d\corr$ as a function
+of $\val$ is queued.
+
+\emph{Variant-B caveats.}  The rebuild reports headline numbers
+under variant~A throughout; the variant-B replications of the
+$\corr$-channel $\CF$ flatness probe
+(Section~\ref{sec:model-upper-bound}), the $C_2$ peak under
+$\corr > 0$, the $C_3$ iso-$\VDA$ contour band, the anti-cue $C_4$
+inversion (Section~\ref{sec:results-c4}), the A2 cost-dominant
+$\Delta R$ suppression
+(Section~\ref{sec:extensions-a2}, Finding 2), and the new A8 F2
+binding (Section~\ref{sec:extensions-a8}) are queued as separate
+sims.  The rb-002 finding that variant-B $\CF$ is essentially flat
+in $\corr$ at the headline cell makes the variant axis genuinely
+informative as a sensitivity, not redundant; the rebuild flags this
+explicitly rather than treating variant~B as a footnote.
+
+\emph{Grid sharpening.}  Several quantitative thresholds are pinned
+to the grid step of their underlying sim and are queued for
+sharpening if a referee asks: the $C_3$ high-$\valid$ threshold
+$\valid^{*}$
+(Section~\ref{sec:results-c3}; pinned to $\pm 0.05$, finer grid
+queued); the $C_4$ anti-cue onset $\valid^{*}$ at $\val = 1$,
+$\Nloc = 4$ (Section~\ref{sec:results-c4}; pinned to $\pm 0.05$,
+finer grid queued); the A8 binding onset in $\Rsens$ near
+$\{5, 10, 20\}$ (Section~\ref{sec:extensions-a8}; pinned to a
+single $\Rsens = 10$ probe, finer grid queued); the closed-form
+$\CF < 0.5$ boundary in $(\valid, \Rsens)$
+(Section~\ref{sec:results-c1}; conjectured diagonal in
+$(\log \Rsens, \valid)$, derivation queued); the dormant-cell
+amplification band at $\Rsens = 0.3$, $(\valid \approx 0.7,
+\val = 10)$ (Section~\ref{sec:results-c3}, where $\VDA = 0.0007$ at
+$\corr = 0$ lifts to $0.0676$ at $\corr = 0.2$ — a $96\times$
+amplification that is the most striking single qualitative finding
+of the $C_3$ sweep, queued for a clean closeup); and the
+Slepian-style analytic locus for the cell-wise $\partial \VDA /
+\partial \corr$ sign-flip surface
+(Section~\ref{sec:model-upper-bound}, Table~\ref{tab:a1cw-summary};
+cell-wise crossover $\Rsens^{\times} \approx 0.79$ pinned
+empirically, formal proposition queued).  None of these queued
+items would change a rebuilt-strength headline; each would either
+tighten a boundary or promote an empirical observation to an
+analytic statement.
+
+% ---------------------------------------------------------------
+\subsection{What the rebuild does not claim}
+\label{sec:limitations-not-claimed}
+
+The rebuilt manuscript makes no claim about the neural
+implementation of any of the three levers — neither the criterion
+shift, nor the sensitivity re-allocation, nor the decorrelation
+channel is mapped onto a particular cortical circuit, recurrent
+dynamics, learning rule, or architectural primitive.  It makes no
+claim about the empirical $\corr$ values that human or animal
+observers exhibit under cued change detection beyond citing the
+Cohen--Maunsell~\cite{CohenMaunsell2009} $r_{SC} \approx 0.2$ V4
+anchor as the central operating point of the $\corr$ envelope.  It
+does not predict any particular biological observer's deviation
+from the normative policy.  And it does not address attention
+dynamics over time (within-trial buildup, sequential effects across
+trials, learning trajectories) — every statement above is about a
+stationary observer at a fixed parameter cell.  The rebuild's
+positive contribution is mathematical: a more honestly bounded
+description of when value-directed attention matters, with the
+boundary made explicit lever by lever, so that any downstream
+empirical or computational program inherits a clearly scoped
+substrate rather than a single uniformly-stated headline.

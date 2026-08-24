@@ -1,0 +1,86 @@
+% =====================================================================
+% abstract.tex — DRAFTED at rb-047 (RB-047), 2026-05-30.
+%
+% Filled after the body of the manuscript landed:
+%   - sec:model (rb-009, RB-004), three-lever reframe.
+%   - sec:results-c1..c4 (rb-006, rb-007, rb-011, rb-013).
+%   - sec:extensions-A3, A2, A8 (rb-017, rb-022, rb-028).
+%   - sec:appendix-c5 (rb-018), sec:appendix-deriv-c2 (rb-024),
+%     sec:appendix-deriv-a3 (rb-046).
+%
+% Strength check (mission §3, CLAIM_LEDGER.md): every quantitative
+% claim below is at the licensed band / distributional / conditional
+% strength.  Original-paper categorical phrasings (CF floor [0.60,
+% 0.96]; "negligible regardless of other parameters"; uniform
+% no-inversion; A1 upper bound on VDA) appear here only as the thing
+% being retracted, not stated.
+% =====================================================================
+
+\begin{abstract}
+\noindent
+In a cued change-detection task whose cue carries both value
+$\val \ge 1$ and validity $\valid \in [1/\Nloc, 1]$, an ideal observer
+can adapt to value by shifting decision criteria, by re-allocating
+spatial attention, or, when noise is correlated across locations, by
+\emph{decorrelating} the encoded population code.  We rebuild the
+normative model of \emph{value-directed attention} (VDA) around this
+three-lever decomposition (Section~\ref{sec:model},
+Definition~\ref{def:three-levers}), with cross-location correlation
+$\corr$ promoted to a first-class model parameter via an exact
+one-factor Gauss--Hermite reduction that recovers the inherited
+independent-noise model in the limit $\corr \to 0$ to floating-point
+identity.  The rebuilt manuscript reports every headline result at
+its defensible distributional, graded, or conditional strength
+rather than as a categorical floor.
+
+Across a $4{,}410$-cell sweep over $(\valid, \val, \Rsens)$, the
+criterion fraction $\CF$ is concentrated in $[0.30, 1.00]$ with
+median $0.76$; the published $[0.60, 0.96]$ interval is retracted on
+both ends, and adding $\corr = 0.2$ drops the strict minimum below
+$0.5$ (Section~\ref{sec:results-c1}).  $\VDA$ is non-monotonic in
+$\Rsens$ as in the inherited paper; we strengthen this result with
+the closed-form escape threshold
+$\rdagger(\val) = K_u(\val) / [(\Nloc - 1) K_c(\val)]$ that pins the
+lower edge of the VDA-active band (Section~\ref{sec:results-c2}),
+extend it to $\corr > 0$ via the natural $\corr$-aware gradient
+quadratures (Appendix~\ref{sec:appendix-deriv-c2}), and prove that
+$\rdagger(\val)$ is invariant under the conservation order of the
+benefit/cost rule (Appendix~\ref{sec:appendix-deriv-a3}).  The
+``narrow regime'' for VDA becomes a quantitative iso-$\VDA$ contour
+band (Section~\ref{sec:results-c3}): at $\valid \ge 0.95$ peak
+$\VDA$ sits at the grid floor under any $(\Rsens, \corr)$; at
+$\valid \ge 0.80$ this survives only at $\corr = 0$; at
+$\valid \ge 0.60$ it fails.  The ``no inversion'' result is restated
+as a conditional theorem with the explicit condition
+$\valid \ge 1 / [(\Nloc - 1) \val + 1]$, and the rebuild adds the
+\emph{anti-cue inversion} as a new falsifiable prediction
+(Section~\ref{sec:results-c4}, Equation~\eqref{eq:value-weight}):
+under counter-predictive cues ($\valid < 1/\Nloc$) at $\Nloc = 4$,
+the globally optimal allocation places \emph{less} attention at the
+high-value location in $36.1\%$ of probed cells.  Symmetric recovery
+at $\Rsens = 1$ is reaffirmed as a universal real-number identity
+(Appendix~\ref{sec:appendix-c5}, conservation-form-invariant by
+construction).
+
+Independence is not an upper bound on $\VDA$.  What independence
+actually upper-bounds is the criterion fraction, and only in
+variant~A: $\partial \VDA / \partial \corr$ flips sign near
+$\Rsens \approx 0.5$, with the cell-wise crossover sweeping past
+$\Rsens \approx 0.79$ across the full sweep
+(Section~\ref{sec:model-upper-bound}).  Within-display heterogeneity
+of $\Rsens$ is a bounded perturbation that leaves the $C_2$ peak
+coordinates and the contested-CF corner essentially invariant
+(Section~\ref{sec:extensions-a2}); the additive
+$\benefit + \cost = 2$ rule is one point in the power-mean
+conservation family, and the headline numbers are reported as a
+band over that family (Section~\ref{sec:extensions-a3}); the
+homogeneous-uncued result is innocuous at the inherited additive
+optimum but can fail in a benefit-dominant symmetric-stress corner
+when the conservation rule is multiplicative
+(Section~\ref{sec:extensions-a8}).  Every quantitative claim above
+is backed by a simulation under \texttt{Rebuild/sims/} with a
+recovered limit, a deterministic output hash, and a captioned
+figure; every novel proposition is derived under
+\texttt{Rebuild/derivations/}; nothing in this abstract is stated
+more strongly than its row of \texttt{CLAIM\_LEDGER.md} licenses.
+\end{abstract}

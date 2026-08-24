@@ -1,0 +1,1553 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.1)  31 MAY 2026 08:25
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count283
+\Gm@cntv=\count284
+\c@Gm@tempcnt=\count285
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks20
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks21
+\ex@=\dimen157
+))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen158
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count286
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count287
+\leftroot@=\count288
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count289
+\DOTSCASE@=\count290
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen159
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count291
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count292
+\dotsspace@=\muskip17
+\c@parentequation=\count293
+\dspbrk@lvl=\count294
+\tag@help=\toks22
+\row@=\count295
+\column@=\count296
+\maxfields@=\count297
+\andhelp@=\toks23
+\eqnshift@=\dimen160
+\alignsep@=\dimen161
+\tagshift@=\dimen162
+\tagwidth@=\dimen163
+\totwidth@=\dimen164
+\lineht@=\dimen165
+\@envbody=\toks24
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks26
+\thm@bodyfont=\toks27
+\thm@headfont=\toks28
+\thm@notefont=\toks29
+\thm@headpunct=\toks30
+\thm@preskip=\skip54
+\thm@postskip=\skip55
+\thm@headsep=\skip56
+\dth@everypar=\toks31
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count298
+\calc@Bcount=\count299
+\calc@Adimen=\dimen166
+\calc@Bdimen=\dimen167
+\calc@Askip=\skip57
+\calc@Bskip=\skip58
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count300
+\calc@Cskip=\skip59
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count301
+\l_MT_multwidth_dim=\dimen168
+\origjot=\skip60
+\l_MT_shortvdotswithinadjustabove_dim=\dimen169
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen170
+\l_MT_above_intertext_sep=\dimen171
+\l_MT_below_intertext_sep=\dimen172
+\l_MT_above_shortintertext_sep=\dimen173
+\l_MT_below_shortintertext_sep=\dimen174
+\xmathstrut@box=\box55
+\xmathstrut@dim=\dimen175
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen176
+\Gin@req@width=\dimen177
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen178
+\lightrulewidth=\dimen179
+\cmidrulewidth=\dimen180
+\belowrulesep=\dimen181
+\belowbottomsep=\dimen182
+\aboverulesep=\dimen183
+\abovetopsep=\dimen184
+\cmidrulesep=\dimen185
+\cmidrulekern=\dimen186
+\defaultaddspace=\dimen187
+\@cmidla=\count302
+\@cmidlb=\count303
+\@aboverulesep=\dimen188
+\@belowrulesep=\dimen189
+\@thisruleclass=\count304
+\@lastruleclass=\count305
+\@thisrulewidth=\dimen190
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.
+sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
+ing.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count306
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count307
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen191
+\Hy@linkcounter=\count308
+\Hy@pagecounter=\count309
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count310
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 4072.
+Package hyperref Info: Hyper figures OFF on input line 4201.
+Package hyperref Info: Link nesting OFF on input line 4206.
+Package hyperref Info: Hyper index ON on input line 4209.
+Package hyperref Info: Plain pages OFF on input line 4216.
+Package hyperref Info: Backreferencing OFF on input line 4221.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4468.
+\c@Hy@tempcnt=\count311
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4807.
+\XeTeXLinkMargin=\dimen192
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count312
+\Field@Width=\dimen193
+\Fld@charsize=\dimen194
+Package hyperref Info: Hyper figures OFF on input line 6084.
+Package hyperref Info: Link nesting OFF on input line 6089.
+Package hyperref Info: Hyper index ON on input line 6092.
+Package hyperref Info: backreferencing OFF on input line 6099.
+Package hyperref Info: Link coloring ON on input line 6102.
+Package hyperref Info: Link coloring with OCG OFF on input line 6109.
+Package hyperref Info: PDF/A mode OFF on input line 6114.
+\Hy@abspage=\count313
+\c@Item=\count314
+\c@Hfootnote=\count315
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
+\Fld@listcount=\count316
+\c@bookmark@seq@number=\count317
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/rerunfilecheck/rerunfilechec
+k.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/uniquecounter/uniquecounte
+r.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+)
+\Hy@SectionHShift=\skip61
+)
+\c@theorem=\count318
+\c@definition=\count319
+\c@assumption=\count320
+\c@remark=\count321
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 93
+.
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count322
+) (./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 452.9679pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=452.9679pt
+* \textheight=700.50687pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=59.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count323
+\scratchdimen=\dimen195
+\scratchbox=\box56
+\nofMPsegments=\count324
+\nofMParguments=\count325
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count326
+\MPscratchDim=\dimen196
+\MPnumerator=\count327
+\makeMPintoPDFobject=\count328
+\everyMPtoPDFconversion=\toks33
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package hyperref Info: Link coloring ON on input line 93.
+ (./main.out) (./main.out)
+\@outlinefile=\write3
+\openout3 = `main.out'.
+
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
+5.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
+5.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+95.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+95.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 95.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 95.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 95.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 95.
+
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 95.
+
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
+5.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 95.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 95.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
+5.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+(./sections/abstract.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 22.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 22.
+) (./sections/intro.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 22.
+ [1
+
+{/usr/local/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/us
+r/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/t
+exlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2
+026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2026ba
+sic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2026basic/t
+exmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [2]) (./sections/model.tex [3] [4{/usr
+/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+Overfull \hbox (37.92896pt too wide) in paragraph at lines 217--227
+\T1/lmr/m/n/10.95 model eval-u-ates ([][]7[][]) by 64-node Gauss--Hermite quadr
+a-ture in \T1/lmtt/m/n/10.95 Rebuild/model/core.py:p_no_fa_point
+ []
+
+[5]
+<figures/vda_curves_variantA.png, id=306, 433.62pt x 289.08pt>
+File: figures/vda_curves_variantA.png Graphic file (type png)
+<use figures/vda_curves_variantA.png>
+Package pdftex.def Info: figures/vda_curves_variantA.png  used on input line 33
+6.
+(pdftex.def)             Requested size: 389.55266pt x 259.71526pt.
+
+Underfull \hbox (badness 4416) in paragraph at lines 351--351
+\T1/lmr/m/n/10.95 duced from \T1/lmtt/m/n/10.95 Rebuild/sims/A1--rho-channel/ou
+tput/figures/vda_curves_variantA.png\T1/lmr/m/n/10.95 ,
+ []
+
+<figures/vda_curves_variantB.png, id=308, 433.62pt x 289.08pt>
+File: figures/vda_curves_variantB.png Graphic file (type png)
+<use figures/vda_curves_variantB.png>
+Package pdftex.def Info: figures/vda_curves_variantB.png  used on input line 35
+7.
+(pdftex.def)             Requested size: 389.55266pt x 259.71526pt.
+<figures/cf_vs_rho.png, id=312, 686.565pt x 289.08pt>
+File: figures/cf_vs_rho.png Graphic file (type png)
+<use figures/cf_vs_rho.png>
+Package pdftex.def Info: figures/cf_vs_rho.png  used on input line 390.
+(pdftex.def)             Requested size: 271.7835pt x 114.43456pt.
+
+Overfull \hbox (40.42096pt too wide) in paragraph at lines 417--443
+\T1/lmr/m/n/10.95 longer re-stricted to the single-cell en-ve-lope of the back-
+ing sim-u-la-tion (\T1/lmtt/m/n/10.95 Rebuild/sims/A1--rho-channel/\T1/lmr/m/n/
+10.95 ).
+ []
+
+[6]
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
+458.
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ot1lmss.fd
+File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+<figures/a1cw_vda_delta_distribution.png, id=331, 794.97pt x 303.534pt>
+File: figures/a1cw_vda_delta_distribution.png Graphic file (type png)
+<use figures/a1cw_vda_delta_distribution.png>
+Package pdftex.def Info: figures/a1cw_vda_delta_distribution.png  used on input
+ line 480.
+(pdftex.def)             Requested size: 389.55266pt x 148.74222pt.
+
+Underfull \hbox (badness 1122) in paragraph at lines 495--495
+\T1/lmr/m/n/10.95 cell variant-$\OT1/lmss/m/n/10.95 X$ \T1/lmr/m/n/10.95 slice 
+of the $\OT1/lmr/m/n/10.95 4[]410$\T1/lmr/m/n/10.95 -cell sweep (Sec-tion [][]3
+.1[][]). The variant-A panel (left)
+ []
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 495--495
+\T1/lmr/m/n/10.95 car-ries a heav-ier am-pli-fi-ca-tion tail than vari-ant B (r
+ight); $\OT1/lmr/m/n/10.95 ^^A[]$ \T1/lmr/m/n/10.95 me-di-ans are zero
+ []
+
+
+Underfull \hbox (badness 2221) in paragraph at lines 495--495
+\T1/lmr/m/n/10.95 pli-fi-ca-tion in vari-ant A ($\OT1/lmr/m/n/10.95 +4\OML/lmm/
+m/it/10.95 :\OT1/lmr/m/n/10.95 97 \OMS/lmsy/m/n/10.95 ^^B \OT1/lmr/m/n/10.95 10
+[]$\T1/lmr/m/n/10.95 ) is $\OT1/lmr/m/n/10.95 5\OML/lmm/m/it/10.95 :\OT1/lmr/m/
+n/10.95 3\OMS/lmsy/m/n/10.95 ^^B$ \T1/lmr/m/n/10.95 the rb-002 single-cell max-
+i-mum at
+ []
+
+
+Underfull \hbox (badness 1067) in paragraph at lines 495--495
+\T1/lmr/m/n/10.95 the $\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 V; v; r\OT1/lmr/
+m/n/10.95 ) = (0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 5\OML/lmm/m/it/10.95 ; 
+\OT1/lmr/m/n/10.95 5\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.
+95 :\OT1/lmr/m/n/10.95 4)$ \T1/lmr/m/n/10.95 head-line cell ($\OT1/lmr/m/n/10.9
+5 +9\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 4 \OMS/lmsy/m/n/10.95 ^^B \OT1/lmr/
+m/n/10.95 10[]$\T1/lmr/m/n/10.95 ; Fig-ure [][]1[][]). Re-pro-duced from
+ []
+
+
+Overfull \hbox (4.2237pt too wide) in paragraph at lines 495--495
+\T1/lmtt/m/n/10.95 Rebuild/sims/A1--vda-signflip-cellwise/output/figures/vda_de
+lta_distribution.png\T1/lmr/m/n/10.95 ,
+ []
+
+
+Overfull \hbox (52.9548pt too wide) in paragraph at lines 499--536
+\T1/lmr/m/it/10.95 (i) Cell-wise crossover. \T1/lmr/m/n/10.95 Strat-i-fy-ing by
+ $\OML/lmm/m/it/10.95 r$ \T1/lmr/m/n/10.95 on the $\OT1/lmr/m/n/10.95 21$\T1/lm
+r/m/n/10.95 -point log$[]$-grid of \T1/lmtt/m/n/10.95 Rebuild/sims/C1--cf-distr
+ibution/
+ []
+
+[7 <./figures/vda_curves_variantA.png>]
+<figures/a1cw_signflip_by_r.png, id=351, 794.97pt x 303.534pt>
+File: figures/a1cw_signflip_by_r.png Graphic file (type png)
+<use figures/a1cw_signflip_by_r.png>
+Package pdftex.def Info: figures/a1cw_signflip_by_r.png  used on input line 539
+.
+(pdftex.def)             Requested size: 389.55266pt x 148.74222pt.
+<figures/a1cw_vda_sign_heatmap_v5.png, id=352, 794.97pt x 325.215pt>
+File: figures/a1cw_vda_sign_heatmap_v5.png Graphic file (type png)
+<use figures/a1cw_vda_sign_heatmap_v5.png>
+Package pdftex.def Info: figures/a1cw_vda_sign_heatmap_v5.png  used on input li
+ne 559.
+(pdftex.def)             Requested size: 389.55266pt x 159.36667pt.
+) (./sections/results.tex [8 <./figures/vda_curves_variantB.png> <./figures/cf_
+vs_rho.png>] [9 <./figures/a1cw_vda_delta_distribution.png>] [10 <./figures/a1c
+w_signflip_by_r.png> <./figures/a1cw_vda_sign_heatmap_v5.png>]
+<figures/cf_histogram.png, id=392, 794.97pt x 542.025pt>
+File: figures/cf_histogram.png Graphic file (type png)
+<use figures/cf_histogram.png>
+Package pdftex.def Info: figures/cf_histogram.png  used on input line 140.
+(pdftex.def)             Requested size: 430.31812pt x 293.40868pt.
+
+Underfull \hbox (badness 1590) in paragraph at lines 203--203
+\T1/lmr/m/n/10.95 The sym-met-ric $\OML/lmm/m/it/10.95 r \OT1/lmr/m/n/10.95 = 1
+$ \T1/lmr/m/n/10.95 row is in-ter-me-di-ate and sta-ble across vari-ants. Block
+-keys
+ []
+
+[11]
+<figures/cf_heatmap.png, id=410, 794.97pt x 542.025pt>
+File: figures/cf_heatmap.png Graphic file (type png)
+<use figures/cf_heatmap.png>
+Package pdftex.def Info: figures/cf_heatmap.png  used on input line 226.
+(pdftex.def)             Requested size: 430.31812pt x 293.40868pt.
+
+Underfull \hbox (badness 1424) in paragraph at lines 236--236
+[]\T1/lmr/m/n/10.95 Figure 8: []$[]$ over the $\OT1/lmr/m/n/10.95 (\OML/lmm/m/i
+t/10.95 r; V\OT1/lmr/m/n/10.95 )$\T1/lmr/m/n/10.95 -plane at $\OML/lmm/m/it/10.
+95 v \OT1/lmr/m/n/10.95 = 5$\T1/lmr/m/n/10.95 , $\OML/lmm/m/it/10.95 N \OT1/lmr
+/m/n/10.95 = 4$\T1/lmr/m/n/10.95 , $\OML/lmm/m/it/10.95 d[] \OT1/lmr/m/n/10.95 
+= 2$\T1/lmr/m/n/10.95 , $\OML/lmm/m/it/10.95 f[] \OT1/lmr/m/n/10.95 = 0\OML/lmm
+/m/it/10.95 :\OT1/lmr/m/n/10.95 5$\T1/lmr/m/n/10.95 ,
+ []
+
+
+Underfull \hbox (badness 1472) in paragraph at lines 236--236
+\OML/lmm/m/it/10.95 h \OT1/lmr/m/n/10.95 = []$ \T1/lmr/m/n/10.95 (rows: $\OML/l
+mm/m/it/10.95 ^^Z$\T1/lmr/m/n/10.95 ; columns: vari-ant). The di-ag-o-nal bound
+-ary in $\OT1/lmr/m/n/10.95 ([] \OML/lmm/m/it/10.95 r;  V\OT1/lmr/m/n/10.95 )$ 
+\T1/lmr/m/n/10.95 be-
+ []
+
+
+Underfull \hbox (badness 1248) in paragraph at lines 236--236
+\T1/lmr/m/n/10.95 tween the CF-near-$\OT1/lmr/m/n/10.95 1$ \T1/lmr/m/n/10.95 lo
+w-$\OML/lmm/m/it/10.95 r$ \T1/lmr/m/n/10.95 re-gion (criterion-dominated) and t
+he CF-low high-$\OML/lmm/m/it/10.95 r$ \T1/lmr/m/n/10.95 low-$\OML/lmm/m/it/10.
+95 V$
+ []
+
+<figures/cf_curves.png, id=413, 794.97pt x 542.025pt>
+File: figures/cf_curves.png Graphic file (type png)
+<use figures/cf_curves.png>
+Package pdftex.def Info: figures/cf_curves.png  used on input line 242.
+(pdftex.def)             Requested size: 430.31812pt x 293.40868pt.
+
+Underfull \hbox (badness 1184) in paragraph at lines 250--250
+[]\T1/lmr/m/n/10.95 Figure 9: []$[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 r\OT
+1/lmr/m/n/10.95 )$ \T1/lmr/m/n/10.95 at $\OML/lmm/m/it/10.95 V \OMS/lmsy/m/n/10
+.95 ^^Y \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 5$ \T1/lmr/
+m/n/10.95 as a $\OML/lmm/m/it/10.95 v$\T1/lmr/m/n/10.95 -family $\OML/lmm/m/it/
+10.95 v \OMS/lmsy/m/n/10.95 2 f\OT1/lmr/m/n/10.95 1\OML/lmm/m/it/10.95 ; \OT1/l
+mr/m/n/10.95 2\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 3\OML/lmm/m/it/10.95 ; \
+OT1/lmr/m/n/10.95 4\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 5\OMS/lmsy/m/n/10.9
+5 g$ \T1/lmr/m/n/10.95 (rows: $\OML/lmm/m/it/10.95 ^^Z$\T1/lmr/m/n/10.95 ; colu
+mns:
+ []
+
+
+Underfull \hbox (badness 1762) in paragraph at lines 250--250
+\T1/lmr/m/n/10.95 vari-ant). At small $\OML/lmm/m/it/10.95 r$ \T1/lmr/m/n/10.95
+ (cost-dominant) the curves clus-ter near $[] \OT1/lmr/m/n/10.95 = 1$\T1/lmr/m/
+n/10.95 ; as $\OML/lmm/m/it/10.95 r$ \T1/lmr/m/n/10.95 in-
+ []
+
+
+Underfull \hbox (badness 1377) in paragraph at lines 250--250
+\T1/lmr/m/n/10.95 gion in which at-ten-tion re-allocation over-takes the cri-te
+-rion shift. Re-pro-duced from
+ []
+
+[12 <./figures/cf_histogram.png>] [13]
+Overfull \hbox (47.29416pt too wide) in paragraph at lines 368--392
+\T1/lmr/m/n/10.95 against the re-viewer's \T1/lmtt/m/n/10.95 Critique/replicati
+ons/C1--criterion-fraction-floor/output/results.json
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 395.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 395.
+
+
+Overfull \hbox (15.41727pt too wide) in paragraph at lines 399--413
+\T1/lmr/m/n/10.95 (\T1/lmtt/m/n/10.95 Critique/verdicts/C2--non-monotonic-vda.m
+d\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 current_label: CONFIRMED-UNDER-ATTACK\T
+1/lmr/m/n/10.95 )
+ []
+
+[14 <./figures/cf_heatmap.png>]
+Overfull \hbox (8.14557pt too wide) in paragraph at lines 415--425
+\T1/lmr/m/n/10.95 form al-lo-ca-tion $\OML/lmm/m/it/10.95  \OT1/lmr/m/n/10.95 
+= 1\OML/lmm/m/it/10.95 =N$\T1/lmr/m/n/10.95 , the first-order con-di-tion for P
+1 to leave the uni-form in-te-rior $\OML/lmm/m/it/10.95 @[]R[]\OMS/lmsy/m/n/10.
+95 j[] \OT1/lmr/m/n/10.95 =
+ []
+
+[15 <./figures/cf_curves.png>]
+<figures/r_dagger_vs_v.png, id=474, 397.485pt x 289.08pt>
+File: figures/r_dagger_vs_v.png Graphic file (type png)
+<use figures/r_dagger_vs_v.png>
+Package pdftex.def Info: figures/r_dagger_vs_v.png  used on input line 506.
+(pdftex.def)             Requested size: 317.07614pt x 230.60707pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 515--515
+\OT1/lmr/m/n/10.95 (4\OML/lmm/m/it/10.95 ;  \OT1/lmr/m/n/10.95 2\OML/lmm/m/it/1
+0.95 ;  \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 5\OML/lmm/m
+/it/10.95 ;  [];  \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 5
+)$\T1/lmr/m/n/10.95 , vari-ant A. Con-tin-u-ous trace com-puted from []--[] on 
+a
+ []
+
+
+Underfull \hbox (badness 2753) in paragraph at lines 515--515
+\T1/lmr/m/n/10.95 dense $\OML/lmm/m/it/10.95 v$\T1/lmr/m/n/10.95 -grid; fam-ily
+ points $\OML/lmm/m/it/10.95 v \OMS/lmsy/m/n/10.95 2 f\OT1/lmr/m/n/10.95 2\OML/
+lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 3\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 5
+\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 8\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10
+.95 10\OMS/lmsy/m/n/10.95 g$ \T1/lmr/m/n/10.95 marked. The hor-i-zon-tal ref-er
+-ence
+ []
+
+
+Underfull \hbox (badness 2799) in paragraph at lines 515--515
+\OML/lmm/m/it/10.95 r[]\OT1/lmr/m/n/10.95 (1) \OMS/lmsy/m/n/10.95 ^^Y \OT1/lmr/
+m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 343$ \T1/lmr/m/n/10.95 is th
+e sym-met-ric up-per an-chor of the fam-ily. Re-pro-duced from
+ []
+
+[16]
+<figures/vda_curves_vfamily.png, id=494, 794.97pt x 332.442pt>
+File: figures/vda_curves_vfamily.png Graphic file (type png)
+<use figures/vda_curves_vfamily.png>
+Package pdftex.def Info: figures/vda_curves_vfamily.png  used on input line 579
+.
+(pdftex.def)             Requested size: 430.31812pt x 179.95732pt.
+ [17 <./figures/r_dagger_vs_v.png>]
+Overfull \hbox (35.52264pt too wide) in paragraph at lines 701--718
+\T1/lmtt/m/n/10.95 09ecef3c2c5a101820951398ed7d6e67d3398aede80c5f0bddfa42b6224f
+d783 \T1/lmr/m/n/10.95 (\T1/lmtt/m/n/10.95 sha256 \T1/lmr/m/n/10.95 of the cano
+nical-
+ []
+
+
+Overfull \hbox (30.58603pt too wide) in paragraph at lines 701--718
+\T1/lmr/m/n/10.95 key-ordered nu-meric JSON, ex-clud-ing the di-gest field it-s
+elf). The Phi back-end is \T1/lmtt/m/n/10.95 scipy.special.ndtr\T1/lmr/m/n/10.9
+5 ;
+ []
+
+[18 <./figures/vda_curves_vfamily.png>]
+<figures/iso_vda_contours.png, id=543, 758.835pt x 547.70335pt>
+File: figures/iso_vda_contours.png Graphic file (type png)
+<use figures/iso_vda_contours.png>
+Package pdftex.def Info: figures/iso_vda_contours.png  used on input line 769.
+(pdftex.def)             Requested size: 443.9066pt x 320.40099pt.
+ [19] [20 <./figures/iso_vda_contours.png>] [21]
+<figures/vda_at_high_V.png, id=578, 967.90178pt x 300.43672pt>
+File: figures/vda_at_high_V.png Graphic file (type png)
+<use figures/vda_at_high_V.png>
+Package pdftex.def Info: figures/vda_at_high_V.png  used on input line 937.
+(pdftex.def)             Requested size: 430.31812pt x 133.57243pt.
+<figures/iso_vda_drho.png, id=583, 765.54579pt x 327.79607pt>
+File: figures/iso_vda_drho.png Graphic file (type png)
+<use figures/iso_vda_drho.png>
+Package pdftex.def Info: figures/iso_vda_drho.png  used on input line 972.
+(pdftex.def)             Requested size: 430.31812pt x 184.25478pt.
+
+Underfull \hbox (badness 1910) in paragraph at lines 1014--1014
+[]\T1/lmr/m/n/10.95 Table 11: []Cell-wise sign-flip of $\OML/lmm/m/it/10.95 @[]
+=@^^Z$ \T1/lmr/m/n/10.95 across the $\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 V;
+ v\OT1/lmr/m/n/10.95 )$ \T1/lmr/m/n/10.95 plane, at each $\OML/lmm/m/it/10.95 r
+$ \T1/lmr/m/n/10.95 stra-
+ []
+
+
+Underfull \hbox (badness 1939) in paragraph at lines 1014--1014
+\T1/lmr/m/n/10.95 tum. Frac-tions are over the $\OT1/lmr/m/n/10.95 589$ \T1/lmr
+/m/n/10.95 cells per panel; the resid-ual share (not shown)
+ []
+
+
+Underfull \hbox (badness 1264) in paragraph at lines 1014--1014
+\T1/lmr/m/n/10.95 is the zero-class $\OMS/lmsy/m/n/10.95 j\OT1/lmr/m/n/10.95 ^^
+A[]\OMS/lmsy/m/n/10.95 j \OML/lmm/m/it/10.95 < \OT1/lmr/m/n/10.95 10[]$\T1/lmr/
+m/n/10.95 . At $\OML/lmm/m/it/10.95 r \OT1/lmr/m/n/10.95 = 0\OML/lmm/m/it/10.95
+ :\OT1/lmr/m/n/10.95 3$ \T1/lmr/m/n/10.95 (cost-dominant; be-low the rb-002
+ []
+
+
+Underfull \hbox (badness 5403) in paragraph at lines 1014--1014
+\T1/lmr/m/n/10.95 am-pli-fi-ca-tion dom-i-nates. Block-keys \T1/lmtt/m/n/10.95 
+rho_sensitivity.r=<r>.{frac_amp,frac_supp,
+ []
+
+[22 <./figures/vda_at_high_V.png>] [23 <./figures/iso_vda_drho.png>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1095.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\ge' on input line 1095.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1095.
+
+[24]
+<figures/r_inv_closed_form.png, id=633, 831.105pt x 317.988pt>
+File: figures/r_inv_closed_form.png Graphic file (type png)
+<use figures/r_inv_closed_form.png>
+Package pdftex.def Info: figures/r_inv_closed_form.png  used on input line 1310
+.
+(pdftex.def)             Requested size: 430.31812pt x 164.64145pt.
+ [25]
+<figures/er_vs_alpha_anticue.png, id=659, 831.105pt x 317.988pt>
+File: figures/er_vs_alpha_anticue.png Graphic file (type png)
+<use figures/er_vs_alpha_anticue.png>
+Package pdftex.def Info: figures/er_vs_alpha_anticue.png  used on input line 13
+98.
+(pdftex.def)             Requested size: 430.31812pt x 164.64145pt.
+ [26]
+Overfull \hbox (6.22343pt too wide) in paragraph at lines 1446--1493
+ [][] 
+ []
+
+<figures/alpha_star_V_r_map.png, id=675, 831.105pt x 332.442pt>
+File: figures/alpha_star_V_r_map.png Graphic file (type png)
+<use figures/alpha_star_V_r_map.png>
+Package pdftex.def Info: figures/alpha_star_V_r_map.png  used on input line 151
+0.
+(pdftex.def)             Requested size: 430.31812pt x 172.12515pt.
+
+Overfull \hbox (138.75867pt too wide) in paragraph at lines 1546--1578
+\T1/lmr/m/n/10.95 model with the be-havioural pic-ture sur-veyed in the live ve
+r-dict's lit-er-a-ture at-tack (\T1/lmtt/m/n/10.95 Critique/verdicts/C4--no-inv
+ersion.md
+ []
+
+[27 <./figures/r_inv_closed_form.png>] [28 <./figures/er_vs_alpha_anticue.png>]
+) (./sections/extensions.tex
+Overfull \hbox (258.88466pt too wide) in paragraph at lines 1601--34
+ []\T1/lmr/bx/n/10.95 Reproducibility.[] \T1/lmr/m/n/10.95 The num-bers, ta-ble
+s, and fig-ures in this sec-tion are sourced from \T1/lmtt/m/n/10.95 Rebuild/si
+ms/C4--anti-cue-inversion/output/results.json
+ []
+
+
+Overfull \hbox (5.37967pt too wide) in paragraph at lines 1601--34
+\T1/lmr/m/n/10.95 with con-tent sha256 \T1/lmtt/m/n/10.95 6ad651d648e597cdfb28c
+6fd19b6261e4f9d5cb96b599557e10aad47ffd6d96
+ []
+
+[29]
+Overfull \hbox (71.96303pt too wide) in paragraph at lines 64--94
+\T1/lmr/m/n/10.95 live skeptical-reviewer ver-dict (\T1/lmtt/m/n/10.95 Critique
+/verdicts/A3--multiplicative-conservation.md\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10
+.95 current_label:
+ []
+
+[30 <./figures/alpha_star_V_r_map.png>]
+<figures/vda_curves_pfamily_v5.png, id=733, 542.025pt x 332.442pt>
+File: figures/vda_curves_pfamily_v5.png Graphic file (type png)
+<use figures/vda_curves_pfamily_v5.png>
+Package pdftex.def Info: figures/vda_curves_pfamily_v5.png  used on input line 
+199.
+(pdftex.def)             Requested size: 353.31439pt x 216.70866pt.
+ [31]
+<figures/vda_peak_band.png, id=756, 794.97pt x 317.988pt>
+File: figures/vda_peak_band.png Graphic file (type png)
+<use figures/vda_peak_band.png>
+Package pdftex.def Info: figures/vda_peak_band.png  used on input line 272.
+(pdftex.def)             Requested size: 353.31439pt x 141.3271pt.
+ [32]
+<figures/cf_histogram_pfamily.png, id=777, 794.97pt x 542.025pt>
+File: figures/cf_histogram_pfamily.png Graphic file (type png)
+<use figures/cf_histogram_pfamily.png>
+Package pdftex.def Info: figures/cf_histogram_pfamily.png  used on input line 3
+77.
+(pdftex.def)             Requested size: 416.72963pt x 284.13731pt.
+<figures/delta_cf_distribution.png, id=778, 794.97pt x 332.442pt>
+File: figures/delta_cf_distribution.png Graphic file (type png)
+<use figures/delta_cf_distribution.png>
+Package pdftex.def Info: figures/delta_cf_distribution.png  used on input line 
+389.
+(pdftex.def)             Requested size: 416.72963pt x 174.27087pt.
+ [33 <./figures/vda_curves_pfamily_v5.png>]
+Overfull \hbox (60.366pt too wide) in paragraph at lines 453--486
+ []\T1/lmr/bx/n/10.95 Reproducibility.[] \T1/lmr/m/n/10.95 The nu-mer-i-cal con
+-tent of this sub-sec-tion is the \T1/lmtt/m/n/10.95 Rebuild/sims/A3--conservat
+ion-band/
+ []
+
+
+Overfull \hbox (45.22502pt too wide) in paragraph at lines 453--486
+\T1/lmr/m/n/10.95 sim-u-la-tion (rb-016, sha256 \T1/lmtt/m/n/10.95 055bf4ec862c
+711f2c6a3fa0831e1373b806a84c5f5c1a6b13fd1d9d7a039a33\T1/lmr/m/n/10.95 ,
+ []
+
+
+Overfull \hbox (94.92703pt too wide) in paragraph at lines 453--486
+\T1/lmr/m/n/10.95 backed by the \T1/lmtt/m/n/10.95 Rebuild/model/ \T1/lmr/m/n/1
+0.95 ex-ten-sion wired at rb-015 (\T1/lmtt/m/n/10.95 Rebuild/model/tests/test_c
+onservation_family.py\T1/lmr/m/n/10.95 ,
+ []
+
+
+Overfull \hbox (16.62392pt too wide) in paragraph at lines 453--486
+\OT1/lmr/m/n/10.95 14\OML/lmm/m/it/10.95 =\OT1/lmr/m/n/10.95 14$\T1/lmr/m/n/10.
+95 , sha256 \T1/lmtt/m/n/10.95 f4f57a89e5108db47447cbeaf2f15440f56cdfffb65f3d17
+3dc4a0550121791e\T1/lmr/m/n/10.95 ). Four
+ []
+
+
+Overfull \hbox (23.1878pt too wide) in paragraph at lines 453--486
+\T1/lmr/m/n/10.95 ence cells $\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 r; []; []
+\OT1/lmr/m/n/10.95 ) \OMS/lmsy/m/n/10.95 2 f\OT1/lmr/m/n/10.95 (0\OML/lmm/m/it/
+10.95 :\OT1/lmr/m/n/10.95 398\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 0\OML/lmm
+/m/it/10.95 :\OT1/lmr/m/n/10.95 82952\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 0
+\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 07972)\OML/lmm/m/it/10.95 ; \OT1/lmr/m/
+n/10.95 (1\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 ; \OT1/l
+mr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 72823\OML/lmm/m/it/10.95 
+; \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 03983)\OML/lmm/m/
+it/10.95 ; \OT1/lmr/m/n/10.95 (3\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 162\OML
+/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 6
+4094\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n
+/10.95 00809)\OMS/lmsy/m/n/10.95 g$
+ []
+
+[34 <./figures/vda_peak_band.png>] [35 <./figures/cf_histogram_pfamily.png>]
+[36 <./figures/delta_cf_distribution.png>]
+Overfull \hbox (1.36214pt too wide) in paragraph at lines 620--649
+ [][] 
+ []
+
+[37]
+<figures/a2_vda_curves_spread.png, id=855, 786.2976pt x 319.4334pt>
+File: figures/a2_vda_curves_spread.png Graphic file (type png)
+<use figures/a2_vda_curves_spread.png>
+Package pdftex.def Info: figures/a2_vda_curves_spread.png  used on input line 7
+21.
+(pdftex.def)             Requested size: 353.31439pt x 143.5341pt.
+<figures/a2_vda_peak_band.png, id=856, 785.8158pt x 315.0972pt>
+File: figures/a2_vda_peak_band.png Graphic file (type png)
+<use figures/a2_vda_peak_band.png>
+Package pdftex.def Info: figures/a2_vda_peak_band.png  used on input line 737.
+(pdftex.def)             Requested size: 353.31439pt x 141.67223pt.
+ [38 <./figures/a2_vda_curves_spread.png>]
+<figures/a2_cf_contested_corner.png, id=869, 462.0462pt x 306.9066pt>
+File: figures/a2_cf_contested_corner.png Graphic file (type png)
+<use figures/a2_cf_contested_corner.png>
+Package pdftex.def Info: figures/a2_cf_contested_corner.png  used on input line
+ 769.
+(pdftex.def)             Requested size: 294.42636pt x 195.57191pt.
+
+Overfull \hbox (48.86853pt too wide) in paragraph at lines 823--853
+ []\T1/lmr/bx/n/10.95 Reproducibility.[] \T1/lmr/m/n/10.95 The nu-mer-i-cal con
+-tent of this sub-sec-tion is the \T1/lmtt/m/n/10.95 Rebuild/sims/A2--heterogen
+eous-r/
+ []
+
+
+Overfull \hbox (88.50778pt too wide) in paragraph at lines 823--853
+\T1/lmr/m/n/10.95 sim-u-la-tion (rb-021, pre-hash sha256 \T1/lmtt/m/n/10.95 22b
+183f942d6b1f8868848ec1143ab959afd78c72cd6d3704763eedf5713e615\T1/lmr/m/n/10.95 
+,
+ []
+
+
+Overfull \hbox (209.90076pt too wide) in paragraph at lines 823--853
+\T1/lmr/m/n/10.95 (\T1/lmtt/m/n/10.95 Rebuild/model/tests/test_heterogeneous_r.
+py\T1/lmr/m/n/10.95 , sha256 \T1/lmtt/m/n/10.95 0486921f8a4e253a1682ee0731e52c7
+de800bf6c3dbb1b5e8ff3200602454c7e\T1/lmr/m/n/10.95 ,
+ []
+
+
+Overfull \hbox (3.612pt too wide) in paragraph at lines 823--853
+\OT1/lmr/m/n/10.95 5\OML/lmm/m/it/10.95 =\OT1/lmr/m/n/10.95 5$ \T1/lmr/m/n/10.9
+5 PASS). \T1/lmr/bx/n/10.95 Re-cov-ery 2 (N-dim full pol-icy, rb-020). \T1/lmtt
+/m/n/10.95 er_full_policy \T1/lmr/m/n/10.95 re-pro-duces \T1/lmtt/m/n/10.95 opt
+imal_R
+ []
+
+
+Overfull \hbox (116.31747pt too wide) in paragraph at lines 823--853
+\T1/lmr/m/n/10.95 to $[] \OMS/lmsy/m/n/10.95 j\OT1/lmr/m/n/10.95 ^^A\OMS/lmsy/m
+/n/10.95 j ^^T \OT1/lmr/m/n/10.95 2\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 78  
+\OMS/lmsy/m/n/10.95 ^^B  \OT1/lmr/m/n/10.95 10[]$ \T1/lmr/m/n/10.95 across $\OT
+1/lmr/m/n/10.95 4[]530$ \T1/lmr/m/n/10.95 cells at both $\OML/lmm/m/it/10.95 ^^
+Z \OT1/lmr/m/n/10.95 = 0$ \T1/lmr/m/n/10.95 and $\OML/lmm/m/it/10.95 ^^Z \OT1/l
+mr/m/n/10.95 = 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 2$ \T1/lmr/m/n/10.95 (\
+T1/lmtt/m/n/10.95 Rebuild/model/tests/test_general_policy.py\T1/lmr/m/n/10.95 ,
+
+ []
+
+
+Overfull \hbox (8.48204pt too wide) in paragraph at lines 823--853
+\T1/lmr/m/n/10.95 sha256 \T1/lmtt/m/n/10.95 883ea15af9fd069e04c05ff156d65f33a7d
+25278891092539c6441d2248c3d39\T1/lmr/m/n/10.95 , $\OT1/lmr/m/n/10.95 7\OML/lmm/
+m/it/10.95 =\OT1/lmr/m/n/10.95 7$ \T1/lmr/m/n/10.95 PASS).
+ []
+
+[39 <./figures/a2_vda_peak_band.png>] [40 <./figures/a2_cf_contested_corner.png
+>] [41]
+<figures/a8_simplex_dr.png, id=901, 794.97pt x 325.215pt>
+File: figures/a8_simplex_dr.png Graphic file (type png)
+<use figures/a8_simplex_dr.png>
+Package pdftex.def Info: figures/a8_simplex_dr.png  used on input line 1076.
+(pdftex.def)             Requested size: 416.72963pt x 170.48238pt.
+ [42]
+<figures/a8_curvature.png, id=909, 650.43pt x 252.945pt>
+File: figures/a8_curvature.png Graphic file (type png)
+<use figures/a8_curvature.png>
+Package pdftex.def Info: figures/a8_curvature.png  used on input line 1116.
+(pdftex.def)             Requested size: 385.02547pt x 149.73415pt.
+ [43 <./figures/a8_simplex_dr.png>] [44 <./figures/a8_curvature.png>]
+<figures/a8_anticued_suppression.png, id=932, 650.43pt x 252.945pt>
+File: figures/a8_anticued_suppression.png Graphic file (type png)
+<use figures/a8_anticued_suppression.png>
+Package pdftex.def Info: figures/a8_anticued_suppression.png  used on input lin
+e 1222.
+(pdftex.def)             Requested size: 385.02547pt x 149.73415pt.
+ [45 <./figures/a8_anticued_suppression.png>]) (./sections/limitations.tex
+Overfull \hbox (48.86853pt too wide) in paragraph at lines 1296--16
+ []\T1/lmr/bx/n/10.95 Reproducibility.[] \T1/lmr/m/n/10.95 The nu-mer-i-cal con
+-tent of this sub-sec-tion is the \T1/lmtt/m/n/10.95 Rebuild/sims/A8--nd-uncued
+-sweep/
+ []
+
+
+Overfull \hbox (109.79945pt too wide) in paragraph at lines 1296--16
+\T1/lmr/m/n/10.95 sim-u-la-tion (rb-027, de-ter-min-is-tic sha256 \T1/lmtt/m/n/
+10.95 beb2aa879402e5c9f4c354a2c9f53a98c466d0989085dc8c78370be99dee290b\T1/lmr/m
+/n/10.95 ,
+ []
+
+
+Overfull \hbox (203.23569pt too wide) in paragraph at lines 1296--16
+\T1/lmr/bx/n/10.95 channel, rb-001). \T1/lmtt/m/n/10.95 test_recovery.py \T1/lm
+r/m/n/10.95 ($\OT1/lmr/m/n/10.95 7\OML/lmm/m/it/10.95 =\OT1/lmr/m/n/10.95 7$ \T
+1/lmr/m/n/10.95 PASS, sha256 \T1/lmtt/m/n/10.95 d3c62215cedbe2f797c484a8d76e8be
+f1d5ac42cdb3092ff099a34aea1b6f18f\T1/lmr/m/n/10.95 ).
+ []
+
+
+Overfull \hbox (13.25508pt too wide) in paragraph at lines 1296--16
+\T1/lmr/m/n/10.95 PASS, sha256 \T1/lmtt/m/n/10.95 f4f57a89e5108db47447cbeaf2f15
+440f56cdfffb65f3d173dc4a0550121791e\T1/lmr/m/n/10.95 ). \T1/lmr/bx/n/10.95 Re-
+ []
+
+
+Overfull \hbox (342.6044pt too wide) in paragraph at lines 1296--16
+\T1/lmr/bx/n/10.95 ery 4 (N-dim gen-eral pol-icy, rb-020). \T1/lmtt/m/n/10.95 t
+est_general_policy.py \T1/lmr/m/n/10.95 ($\OT1/lmr/m/n/10.95 7\OML/lmm/m/it/10.
+95 =\OT1/lmr/m/n/10.95 7$ \T1/lmr/m/n/10.95 PASS, sha256 \T1/lmtt/m/n/10.95 883
+ea15af9fd069e04c05ff156d65f33a7d25278891092539c6441d2248c3d39\T1/lmr/m/n/10.95 
+).
+ []
+
+[46] [47]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 187.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\rho' on input line 187.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 187.
+
+) (./sections/methods.tex [48]
+Overfull \hbox (28.71451pt too wide) in paragraph at lines 41--51
+\T1/lmr/m/n/10.95 The re-built model lives in \T1/lmtt/m/n/10.95 Rebuild/model/
+core.py \T1/lmr/m/n/10.95 and is doc-u-mented in \T1/lmtt/m/n/10.95 Rebuild/mod
+el/README.md\T1/lmr/m/n/10.95 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--51
+\T1/lmr/m/n/10.95 review repli-ca-tion \T1/lmtt/m/n/10.95 Critique/replications
+/
+ []
+
+
+Overfull \hbox (0.31026pt too wide) in paragraph at lines 41--51
+\T1/lmtt/m/n/10.95 C5--symmetric-recovery/ \T1/lmr/m/n/10.95 was copied into \T
+1/lmtt/m/n/10.95 Rebuild/model/ \T1/lmr/m/n/10.95 and ex-tended; the in-her-ite
+d model's
+ []
+
+[49]
+Overfull \hbox (151.05612pt too wide) in paragraph at lines 145--146
+[]\T1/lmtt/m/n/10 d3c62215cedbe2f797c484a8d76e8bef1d5ac42cdb3092ff099a34aea1b6f
+18f| 
+ []
+
+
+Overfull \hbox (151.05612pt too wide) in paragraph at lines 149--150
+[]\T1/lmtt/m/n/10 f4f57a89e5108db47447cbeaf2f15440f56cdfffb65f3d173dc4a05501217
+91e| 
+ []
+
+
+Overfull \hbox (151.05612pt too wide) in paragraph at lines 153--154
+[]\T1/lmtt/m/n/10 0486921f8a4e253a1682ee0731e52c7de800bf6c3dbb1b5e8ff3200602454
+c7e| 
+ []
+
+
+Overfull \hbox (151.05612pt too wide) in paragraph at lines 157--158
+[]\T1/lmtt/m/n/10 883ea15af9fd069e04c05ff156d65f33a7d25278891092539c6441d2248c3
+d39| 
+ []
+
+
+Overfull \hbox (86.50507pt too wide) in paragraph at lines 138--166
+ [][] 
+ []
+
+
+Overfull \hbox (80.73701pt too wide) in paragraph at lines 170--180
+[]\T1/lmr/m/n/10.95 These four di-gests ap-pear ver-ba-tim in \T1/lmtt/m/n/10.9
+5 Rebuild/rebuilder_state.json \T1/lmr/m/n/10.95 as the fields \T1/lmtt/m/n/10.
+95 recovery_test_digest\T1/lmr/m/n/10.95 ,
+ []
+
+
+Overfull \hbox (64.4788pt too wide) in paragraph at lines 170--180
+\T1/lmtt/m/n/10.95 conservation_family_test_digest\T1/lmr/m/n/10.95 , \T1/lmtt/
+m/n/10.95 heterogeneous_r_test_digest\T1/lmr/m/n/10.95 , and \T1/lmtt/m/n/10.95
+ general_policy_test_digest\T1/lmr/m/n/10.95 .
+ []
+
+
+Overfull \hbox (1.97331pt too wide) in paragraph at lines 190--199
+\T1/lmr/m/n/10.95 the sim-u-la-tion's \T1/lmtt/m/n/10.95 README.md \T1/lmr/m/n/
+10.95 and as the \T1/lmtt/m/n/10.95 metadata.grid \T1/lmr/m/n/10.95 ob-ject of 
+its \T1/lmtt/m/n/10.95 output/results.json\T1/lmr/m/n/10.95 . 
+ []
+
+[50]
+Overfull \hbox (31.43262pt too wide) in paragraph at lines 217--223
+[]\T1/lmr/bx/n/10.95 Backlog cross-reference. \T1/lmr/m/n/10.95 Ev-ery sim-u-la
+-tion's \T1/lmtt/m/n/10.95 README.md \T1/lmr/m/n/10.95 states which row of \T1/
+lmtt/m/n/10.95 CLAIM_LEDGER.md
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 233--233
+[]\T1/lmr/m/n/10 Output di-gest
+ []
+
+
+Underfull \hbox (badness 5316) in paragraph at lines 233--233
+\T1/lmr/m/n/10 (SHA-256, pre-
+ []
+
+
+Overfull \hbox (36.78093pt too wide) in paragraph at lines 231--303
+ [][] 
+ []
+
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 319.
+[51]
+Overfull \hbox (10.56235pt too wide) in paragraph at lines 356--370
+\T1/lmr/m/n/10.95 con-ser-va-tion fam-ily as the canon-i-cal gen-er-al-i-sa-tio
+n of A3; gives the boxed Hardy--Littlewood--
+ []
+
+
+Overfull \hbox (45.65422pt too wide) in paragraph at lines 356--370
+\T1/lmr/m/n/10.95 Pólya mono-tonic-ity in the closed KL-divergence form $\OML/l
+mm/m/it/10.95 @ [] ^^M=@p \OT1/lmr/m/n/10.95 = \OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/
+m/n/10.95 (1\OML/lmm/m/it/10.95 =p[]\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 D[]
+\OT1/lmr/m/n/10.95 ([](\OML/lmm/m/it/10.95 ^^R[]\OT1/lmr/m/n/10.95 )\OMS/lmsy/m
+/n/10.95 k[]\OT1/lmr/m/n/10.95 (1\OML/lmm/m/it/10.95 =\OT1/lmr/m/n/10.95 2))$
+ []
+
+) (./sections/appendix.tex
+Overfull \hbox (74.71786pt too wide) in paragraph at lines 404--15
+\T1/lmr/m/n/10.95 PDF byte counts, and the dis-po-si-tion of ev-ery back-log ta
+sk --- is main-tained in \T1/lmtt/m/n/10.95 Rebuild/rebuilder_state.json
+ []
+
+
+Overfull \hbox (3.81714pt too wide) in paragraph at lines 404--15
+\T1/lmr/m/n/10.95 (atom-i-cally rewrit-ten at the end of ev-ery run) and chron-
+i-cled in \T1/lmtt/m/n/10.95 Rebuild/BUILD_LOG.md \T1/lmr/m/n/10.95 (append-
+ []
+
+[52]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 33.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 33.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\dagger' on input line 33.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\rho' on input line 33.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 33.
+
+
+Overfull \hbox (121.04091pt too wide) in paragraph at lines 97--107
+\T1/lmr/m/n/10.95 men-ta-tion, []--[] share the same 64-node $\OT1/lmr/m/n/10.9
+5 (\OML/lmm/m/it/10.95 z[]; w[]\OT1/lmr/m/n/10.95 )$ \T1/lmr/m/n/10.95 Gauss--H
+ermite nodes that \T1/lmtt/m/n/10.95 Rebuild/model/core.py:p_no_fa_grid
+ []
+
+[53] [54]
+Overfull \hbox (22.3611pt too wide) in paragraph at lines 298--320
+ []\T1/lmr/bx/n/10.95 Scope.[] \T1/lmr/m/n/10.95 Propo-si-tion [][]3[][] is a \
+T1/lmr/m/it/10.95 lo-cal \T1/lmr/m/n/10.95 state-ment about the lower edge of t
+he es-cape band $\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 r[]\OT1/lmr/m/n/10.95 
+(\OML/lmm/m/it/10.95 v\OT1/lmr/m/n/10.95 ; \OML/lmm/m/it/10.95 ^^Z\OT1/lmr/m/n/
+10.95 )\OML/lmm/m/it/10.95 ; r[]\OT1/lmr/m/n/10.95 (1; \OML/lmm/m/it/10.95 ^^Z\
+OT1/lmr/m/n/10.95 ))$\T1/lmr/m/n/10.95 ;
+ []
+
+
+Overfull \hbox (80.5093pt too wide) in paragraph at lines 322--347
+ []\T1/lmr/bx/n/10.95 Reproducibility.[] \T1/lmr/m/n/10.95 The closed form [] i
+s im-ple-mented in \T1/lmtt/m/n/10.95 Rebuild/derivations/verify_C2_rho/verify.
+py\T1/lmr/m/n/10.95 .
+ []
+
+
+Overfull \hbox (66.11122pt too wide) in paragraph at lines 322--347
+\OMS/lmsy/m/n/10.95 f\OT1/lmr/m/n/10.95 1\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.
+95 2\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 3\OMS/lmsy/m/n/10.95 g ^^B f\OT1/l
+mr/m/n/10.95 0\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\O
+T1/lmr/m/n/10.95 2\OMS/lmsy/m/n/10.95 g$\T1/lmr/m/n/10.95 . The nu-mer-i-cal pa
+y-load is writ-ten to \T1/lmtt/m/n/10.95 Rebuild/derivations/verify_C2_rho/outp
+ut.json\T1/lmr/m/n/10.95 ;
+ []
+
+
+Overfull \hbox (177.41635pt too wide) in paragraph at lines 322--347
+\T1/lmr/m/n/10.95 byte-identical re-runs pro-duce the same SHA-256 di-gest \T1/
+lmtt/m/n/10.95 ddbd3988e0253fde2cfae5906ca2749cda872d1382055b3d243b4b7c6a0678dc
+\T1/lmr/m/n/10.95 .
+ []
+
+[55]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 349.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 349.
+
+[56]
+Overfull \hbox (20.72174pt too wide) in paragraph at lines 503--531
+ []\T1/lmr/bx/n/10.95 Reproducibility.[] \T1/lmr/m/n/10.95 The re-cov-ery con-t
+ract is en-coded in \T1/lmtt/m/n/10.95 Rebuild/model/tests/test_recovery.py
+ []
+
+
+Overfull \hbox (74.15186pt too wide) in paragraph at lines 503--531
+\T1/lmr/m/n/10.95 against the re-viewer's logged num-bers (\T1/lmtt/m/n/10.95 C
+ritique/replications/A1--correlated-fa/output/results.json\T1/lmr/m/n/10.95 )
+ []
+
+
+Overfull \hbox (191.40489pt too wide) in paragraph at lines 503--531
+\T1/lmr/m/n/10.95 ery checks pass; the test driver records a SHA-256 di-gest of
+ \T1/lmtt/m/n/10.95 d3c62215cedbe2f797c484a8d76e8bef1d5ac42cdb3092ff099a34aea1b
+6f18f
+ []
+
+
+Overfull \hbox (190.88829pt too wide) in paragraph at lines 503--531
+\T1/lmr/m/n/10.95 The conservation-form-invariance corol-lary above is in-de-pe
+n-dently ex-er-cised by \T1/lmtt/m/n/10.95 Rebuild/model/tests/test_conservatio
+n_family.py
+ []
+
+
+Overfull \hbox (10.4594pt too wide) in paragraph at lines 503--531
+\T1/lmr/m/n/10.95 (SHA-256 \T1/lmtt/m/n/10.95 f4f57a89e5108db47447cbeaf2f15440f
+56cdfffb65f3d173dc4a0550121791e\T1/lmr/m/n/10.95 ): the two
+ []
+
+
+Overfull \hbox (185.37466pt too wide) in paragraph at lines 536--556
+\T1/lmr/m/n/10.95 the chain rule yields. The long-form source is the com-pan-io
+n deriva-tion file \T1/lmtt/m/n/10.95 Rebuild/derivations/A3--power-mean-conser
+vation.md
+ []
+
+[57]
+Overfull \hbox (146.0621pt too wide) in paragraph at lines 632--650
+\T1/lmr/m/n/10.95 cross-check of [] at seven test pairs $\OT1/lmr/m/n/10.95 (\O
+ML/lmm/m/it/10.95 r; p\OT1/lmr/m/n/10.95 ) \OMS/lmsy/m/n/10.95 2 f\OT1/lmr/m/n/
+10.95 (0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 3548\OML/lmm/m/it/10.95 ; \OT1/
+lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 5)\OML/lmm/m/it/10.95 ; 
+ \OT1/lmr/m/n/10.95 (0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 3548\OML/lmm/m/it
+/10.95 ; \OT1/lmr/m/n/10.95 1\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 0)\OML/lmm
+/m/it/10.95 ;  \OT1/lmr/m/n/10.95 (10\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 1
+\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 0)\OML/lmm/m/it/10.95 ;  \OT1/lmr/m/n/1
+0.95 (10\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr
+/m/n/10.95 5)\OML/lmm/m/it/10.95 ;  \OT1/lmr/m/n/10.95 (3\OML/lmm/m/it/10.95 :\
+OT1/lmr/m/n/10.95 162\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 2\OML/lmm/m/it/10
+.95 :\OT1/lmr/m/n/10.95 0)\OML/lmm/m/it/10.95 ;  \OT1/lmr/m/n/10.95 (0\OML/lmm/
+m/it/10.95 :\OT1/lmr/m/n/10.95 5\OML/lmm/m/it/10.95 ; \OMS/lmsy/m/n/10.95 ^^@\O
+T1/lmr/m/n/10.95 1\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 0)\OML/lmm/m/it/10.95
+ ;  \OT1/lmr/m/n/10.95 (5\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 0\OML/lmm/m/it
+/10.95 ; \OT1/lmr/m/n/10.95 1\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 5)\OMS/lms
+y/m/n/10.95 g$
+ []
+
+[58]
+Overfull \hbox (7.19249pt too wide) in paragraph at lines 698--705
+[][]\T1/lmr/bx/n/10.95 Corollary 7 \T1/lmr/m/n/10.95 (C5 sym-met-ric re-cov-ery
+ is con-ser-va-tion--for-m-in-vari-ant)\T1/lmr/bx/n/10.95 . []\T1/lmr/m/it/10.9
+5 The C5 symmetric-recovery
+ []
+
+
+Overfull \hbox (41.56052pt too wide) in paragraph at lines 722--739
+\T1/lmr/m/n/10.95 and \T1/lmtt/m/n/10.95 test_p0_symmetric_corner_identity \T1/
+lmr/m/n/10.95 of \T1/lmtt/m/n/10.95 Rebuild/model/tests/test_conservation_famil
+y.py
+ []
+
+
+Overfull \hbox (218.35692pt too wide) in paragraph at lines 722--739
+\T1/lmr/m/n/10.95 con-tract \T1/lmtt/m/n/10.95 Rebuild/model/tests/test_recover
+y.py \T1/lmr/m/n/10.95 (SHA-256 \T1/lmtt/m/n/10.95 d3c62215cedbe2f797c484a8d76e
+8bef1d5ac42cdb3092ff099a34aea1b6f18f\T1/lmr/m/n/10.95 ,
+ []
+
+[59]
+Overfull \hbox (119.55307pt too wide) in paragraph at lines 809--833
+\T1/lmr/m/n/10.95 braic in-vari-ant of the fam-ily, not merely a nu-mer-i-cal c
+o-in-ci-dence. The rb-016 \T1/lmtt/m/n/10.95 recovery.test_3_r_dagger_p_invaria
+nce
+ []
+
+
+Overfull \hbox (21.77505pt too wide) in paragraph at lines 809--833
+\T1/lmr/m/n/10.95 check (pay-load di-gest \T1/lmtt/m/n/10.95 055bf4ec862c711f2c
+6a3fa0831e1373b806a84c5f5c1a6b13fd1d9d7a039a33\T1/lmr/m/n/10.95 )
+ []
+
+[60]
+Overfull \hbox (32.54015pt too wide) in paragraph at lines 956--974
+\T1/lmr/m/n/10.95 Block B sweep that sup-plies the nu-mer-i-cal wit-nesses (\T1
+/lmtt/m/n/10.95 Rebuild/sims/A3--conservation-band/output
+ []
+
+
+Overfull \hbox (11.05768pt too wide) in paragraph at lines 956--974
+\T1/lmr/m/n/10.95 di-gest \T1/lmtt/m/n/10.95 055bf4ec862c711f2c6a3fa0831e1373b8
+06a84c5f5c1a6b13fd1d9d7a039a33\T1/lmr/m/n/10.95 ). The deriva-
+ []
+
+)
+Overfull \hbox (53.78128pt too wide) in paragraph at lines 976--111
+ []\T1/lmr/bx/n/10.95 Reproducibility.[] \T1/lmr/m/n/10.95 Equa-tion [] is ex-e
+r-cised by \T1/lmtt/m/n/10.95 Rebuild/model/tests/test_conservation_family.py
+ []
+
+
+Overfull \hbox (50.09976pt too wide) in paragraph at lines 976--111
+\T1/lmr/m/n/10.95 ing [] point-wise. The \T1/lmtt/m/n/10.95 test_symmetric_corn
+er_invariant \T1/lmr/m/n/10.95 and \T1/lmtt/m/n/10.95 test_p0_symmetric_corner_
+identity
+ []
+
+
+Overfull \hbox (286.21678pt too wide) in paragraph at lines 976--111
+\T1/lmr/m/n/10.95 the rb-016 \T1/lmtt/m/n/10.95 recovery.test_3_r_dagger_p_inva
+riance \T1/lmr/m/n/10.95 check (pay-load di-gest \T1/lmtt/m/n/10.95 055bf4ec862
+c711f2c6a3fa0831e1373b806a84c5f5c1a6b13fd1d9d7a039a33\T1/lmr/m/n/10.95 ;
+ []
+
+
+Overfull \hbox (1.40237pt too wide) in paragraph at lines 976--111
+\T1/lmr/m/n/10.95 max $\OMS/lmsy/m/n/10.95 j\OT1/lmr/m/n/10.95 ^^A\OMS/lmsy/m/n
+/10.95 j \OT1/lmr/m/n/10.95 = 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 0$\T1/lm
+r/m/n/10.95 ). The finite-difference cross-check of [] at the seven test pairs 
+above (LHS$\OMS/lmsy/m/n/10.95 ^^@$\T1/lmr/m/n/10.95 RHS
+ []
+
+
+Overfull \hbox (145.97371pt too wide) in paragraph at lines 976--111
+\OMS/lmsy/m/n/10.95 ^^T \OT1/lmr/m/n/10.95 1\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/1
+0.95 5 \OMS/lmsy/m/n/10.95 ^^B \OT1/lmr/m/n/10.95 10[]$ \T1/lmr/m/n/10.95 in ev
+-ery case) re-runs at the com-pan-ion deriva-tion file \T1/lmtt/m/n/10.95 Rebui
+ld/derivations/A3--power-mean-conservation.md
+ []
+
+(./main.bbl [61] [62]) [63] (./main.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 9B02B49CA2E63833B3EDEB4780A628CC;8138.
+ ) 
+Here is how much of TeX's memory you used:
+ 12784 strings out of 469006
+ 199956 string characters out of 5454814
+ 662190 words of memory out of 5000000
+ 40933 multiletter control sequences out of 15000+600000
+ 773786 words of font info for 138 fonts, out of 8000000 for 9000
+ 319 hyphenation exceptions out of 8191
+ 75i,14n,79p,1447b,651s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></u
+sr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/lo
+cal/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbx7.pfb></usr/local/te
+xlive/2026basic/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texliv
+e/2026basic/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/20
+26basic/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2026bas
+ic/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2026basic/te
+xmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2026basic/texmf-d
+ist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2026basic/texmf-dist/fo
+nts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/ty
+pe1/public/lm/lmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/pu
+blic/lm/lmmib10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public
+/lm/lmr10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lm
+r12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr17.pf
+b></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr
+/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/
+texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive
+/2026basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2026ba
+sic/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2026basic/tex
+mf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2026basic/texmf-di
+st/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2026basic/texmf-dist/fo
+nts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/t
+ype1/public/lm/lmsy6.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/p
+ublic/lm/lmsy7.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/
+lm/lmsy8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmt
+k10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmtt10.p
+fb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></u
+sr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam1
+0.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/symb
+ols/msbm10.pfb>
+Output written on main.pdf (63 pages, 2860922 bytes).
+PDF statistics:
+ 1553 PDF objects out of 1728 (max. 8388607)
+ 1321 compressed objects within 14 object streams
+ 301 named destinations out of 1000 (max. 500000)
+ 408 words of extra memory for PDF output out of 10000 (max. 10000000)
+

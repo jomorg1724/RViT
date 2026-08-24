@@ -1,0 +1,14 @@
+---
+title: "A Recurrent Vision Transformer Learns a Posner-Style Change-Detection Task: Behaviour, Attention, Latent Codes, and Value"
+date: "2026"
+geometry: "margin=1in"
+fontsize: 11pt
+linkcolor: blue
+urlcolor: blue
+header-includes:
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \captionsetup{font=small,labelfont=bf}
+  - \setlength{\parskip}{0.4em}
+---

@@ -1,0 +1,29 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+FZCOXY+AvenirNext-Bold               CID TrueType      Identity-H       yes yes yes      4  0
+KAESKB+AvenirNext-Regular            CID TrueType      Identity-H       yes yes yes      6  0
+AAOBEI+CMMI10                        Type 1C           Builtin          yes yes yes      8  0
+DTGYVH+CMR10                         Type 1C           Builtin          yes yes yes      9  0
+LSNTHS+CMSY10                        Type 1C           Builtin          yes yes yes     10  0
+LJJUGG+LMMono10-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     11  0
+QFAICK+CMMI8                         Type 1C           Builtin          yes yes yes     17  0
+TLTDUV+CMR8                          Type 1C           Builtin          yes yes yes     18  0
+DQURKC+CMEX10                        Type 1C           Builtin          yes yes yes     19  0
+SBEJVQ+CMSY8                         Type 1C           Builtin          yes yes yes     20  0
+FFNCPF+CMMI7                         Type 1C           Builtin          yes yes yes     21  0
+WBYMLR+LMMono9-Regular-Identity-H    CID Type 0C       Identity-H       yes yes yes     22  0
+EVICAO+DejaVuSans-Bold               CID TrueType      Identity-H       yes yes yes     31  0
+BMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes     38  0
+EVICAO+DejaVuSans-Bold               CID TrueType      Identity-H       yes yes yes     62  0
+BMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes     69  0
+EVICAO+DejaVuSans-Bold               CID TrueType      Identity-H       yes yes yes    113  0
+BMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes    120  0
+EMWLRE+CMSY7                         Type 1C           Builtin          yes yes yes    383  0
+EVICAO+DejaVuSans-Bold               CID TrueType      Identity-H       yes yes yes    250  0
+BMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes    257  0
+EVICAO+DejaVuSans-Bold               CID TrueType      Identity-H       yes yes yes    388  0
+BMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes    395  0
+EVICAO+DejaVuSans-Bold               CID TrueType      Identity-H       yes yes yes    526  0
+BMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes    533  0
+EVICAO+DejaVuSans-Bold               CID TrueType      Identity-H       yes yes yes    663  0
+BMQQDV+DejaVuSans                    CID TrueType      Identity-H       yes yes yes    670  0

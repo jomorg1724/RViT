@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "created_by": "/workspace/RViT_plus_paper_jepa_grid9/analysis/change_location_intervention.py",
+  "environments": {
+    "vda4": {
+      "env": "vda4",
+      "status": "ok",
+      "feedback": "crossattn1",
+      "width": 128,
+      "grid": [
+        2,
+        2
+      ],
+      "n_locations": 4,
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/workspace/vda4_crossattn1_d128_nodecay_seed0/rvit_paper_vda4_final.pt",
+      "checkpoint_sha256": "ea671f9758551e06b39ef19c06e85e888ce3ee74dda8a534c1532251a69ee4ca",
+      "cue_index": 0,
+      "change_index": 3,
+      "control_index": 1,
+      "focal_magnitude_degrees": 18.0,
+      "displayed_validity": 1.0,
+      "trials_per_condition": 300,
+      "clamp_from_frame": 5,
+      "qualifying_response_frames": [
+        5,
+        6
+      ],
+      "doses": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "roles": {
+        "change": "target = true change location (rescue/lesion test)",
+        "cued": "target = cued (wrong) location (negative control)",
+        "control": "target = task-irrelevant location (specificity control)"
+      },
+      "role_target_location": {
+        "change": 3,
+        "cued": 0,
+        "control": 1
+      },
+      "seed_policy": "common random numbers: one invalid-change trial batch and one no-change trial batch, shared across every role/dose condition; only the attn_clamp differs",
+      "metrics": {
+        "change": {
+          "response_rate": [
+            0.26666666666666666,
+            0.29333333333333333,
+            0.4166666666666667,
+            0.5533333333333333,
+            0.5866666666666667
+          ],
+          "false_alarm_rate": [
+            0.06333333333333334,
+            0.06333333333333334,
+            0.06333333333333334,
+            0.06333333333333334,
+            0.05333333333333334
+          ],
+          "dprime": [
+            0.9044537943134996,
+            0.9837067372247672,
+            1.3169511232756625,
+            1.6614670815155754,
+            1.8323370604798626
+          ],
+          "criterion": [
+            1.0751526203668376,
+            1.0355261489112038,
+            0.8689039558857561,
+            0.6966459767657996,
+            0.6971898644123714
+          ],
+          "conditional_mean_response_frame": [
+            5.1,
+            5.181818181818182,
+            5.384,
+            5.367469879518072,
+            5.318181818181818
+          ],
+          "achieved_change_mass_t6": [
+            0.008312019483745275,
+            0.09484858540620242,
+            0.5049365766812601,
+            0.9137093733794063,
+            0.994152522595535
+          ],
+          "achieved_cued_mass_t6": [
+            0.5445357367866624,
+            0.5022398279962605,
+            0.28186069177575823,
+            0.05200025575763902,
+            0.0036376609727132112
+          ],
+          "achieved_control_mass_t6": [
+            0.23471222241637102,
+            0.21048795109110263,
+            0.10908704508446439,
+            0.017988528530077777,
+            0.0011726990700786407
+          ]
+        },
+        "cued": {
+          "response_rate": [
+            0.5133333333333333,
+            0.5033333333333333,
+            0.4166666666666667,
+            0.31333333333333335,
+            0.30333333333333334
+          ],
+          "false_alarm_rate": [
+            0.04,
+            0.03666666666666667,
+            0.06333333333333334,
+            0.06666666666666667,
+            0.07
+          ],
+          "dprime": [
+            1.7841140060824252,
+            1.7991060779742227,
+            1.3169511232756625,
+            1.0146620714154369,
+            0.9609536546795566
+          ],
+          "criterion": [
+            0.8586290682109573,
+            0.8911975141828181,
+            0.8689039558857561,
+            0.9937549103363065,
+            0.9953142008393923
+          ],
+          "conditional_mean_response_frame": [
+            5.396103896103896,
+            5.410596026490066,
+            5.384,
+            5.138297872340425,
+            5.0989010989010985
+          ],
+          "achieved_change_mass_t6": [
+            0.6916378326875201,
+            0.6753386309565758,
+            0.5049365766812601,
+            0.13075771766192473,
+            0.012820598708509767
+          ],
+          "achieved_cued_mass_t6": [
+            0.0014874874035735294,
+            0.02732108992231133,
+            0.28186069177575823,
+            0.8276266538524699,
+            0.9846015503514112
+          ],
+          "achieved_control_mass_t6": [
+            0.15923653980835903,
+            0.15398481313095544,
+            0.10908704508446439,
+            0.02123711738932343,
+            0.0013182911138056852
+          ]
+        },
+        "control": {
+          "response_rate": [
+            0.42333333333333334,
+            0.42333333333333334,
+            0.4166666666666667,
+            0.36333333333333334,
+            0.34
+          ],
+          "false_alarm_rate": [
+            0.06666666666666667,
+            0.06666666666666667,
+            0.06333333333333334,
+            0.07333333333333333,
+            0.07
+          ],
+          "dprime": [
+            1.3077127001514206,
+            1.3077127001514206,
+            1.3169511232756625,
+            1.1018436013351576,
+            1.063327898737766
+          ],
+          "criterion": [
+            0.8472295959683146,
+            0.8472295959683146,
+            0.8689039558857561,
+            0.9004848221397131,
+            0.9441270788102877
+          ],
+          "conditional_mean_response_frame": [
+            5.354330708661418,
+            5.354330708661418,
+            5.384,
+            5.192660550458716,
+            5.107843137254902
+          ],
+          "achieved_change_mass_t6": [
+            0.5486267795204973,
+            0.5462985151657085,
+            0.5049365766812601,
+            0.2634236725522775,
+            0.04226913129351336
+          ],
+          "achieved_cued_mass_t6": [
+            0.32733447507634994,
+            0.32427369863545513,
+            0.28186069177575823,
+            0.13125412671738257,
+            0.0173021301347823
+          ],
+          "achieved_control_mass_t6": [
+            0.0003527466834002742,
+            0.006973868639772339,
+            0.10908704508446439,
+            0.5688168463089581,
+            0.9370204847344819
+          ]
+        }
+      },
+      "cache_path": "/workspace/change_location_intervention_vda4/vda4/data/change_location_intervention.npz",
+      "cache_sha256": "7327850ed0467dfae1795fe2af8f1c636319ab36ed010cfd1e831a350270bc76",
+      "figure_outputs": {
+        "summary": "/workspace/change_location_intervention_vda4/vda4/figures/vda4_change_location_intervention_summary.pdf",
+        "trajectory": "/workspace/change_location_intervention_vda4/vda4/figures/vda4_change_location_attention_trajectory.pdf"
+      },
+      "runtime_versions": {
+        "python": "3.12.3",
+        "numpy": "2.1.2",
+        "torch": "2.8.0+cu128",
+        "scipy": "1.18.0",
+        "matplotlib": "3.11.1",
+        "device": "cpu"
+      },
+      "producer_path": "/workspace/RViT_plus_paper_jepa_grid9/analysis/change_location_intervention.py",
+      "producer_sha256": "982506ed49ddf28d99c6e61104b37732044277fbd9c13ed04f585d1b786d0f04"
+    }
+  }
+}

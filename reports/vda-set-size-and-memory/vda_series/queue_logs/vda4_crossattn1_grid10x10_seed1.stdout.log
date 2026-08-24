@@ -1,0 +1,14 @@
+[psychometric] validity=0.25 complete
+[psychometric] validity=0.50 complete
+[psychometric] validity=0.75 complete
+[psychometric] validity=1.00 complete
+[attention] valid complete
+[attention] invalid complete
+[intervention] regional role=change complete
+[intervention] regional role=cued complete
+[intervention] regional role=control complete
+[intervention] explicit mode=natural complete
+[intervention] explicit mode=uniform complete
+[intervention] explicit mode=shuffle complete
+[intervention] explicit mode=disable complete
+[complete] wrote C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series\spatial_scaling_evaluation_production_20260727\vda4_crossattn1_grid10x10_seed1

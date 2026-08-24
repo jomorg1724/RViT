@@ -1,0 +1,48 @@
+﻿{
+    "schema_version":  1,
+    "created_at_utc":  "2026-07-27T02:44:17.1945449Z",
+    "status":  "pulled_and_verified_waiting_for_local_gpu",
+    "pod_id":  "onrylro4hhaaly",
+    "ssh_endpoint":  "193.183.22.54:1332",
+    "remote_directory":  "/workspace/vda4_affine_ew_grid4x4_d128_nodecay_seed0_production_20260726T231002Z_d5a8b2451bee",
+    "remote_log":  "/workspace/vda4_affine_ew_grid4x4_production_20260726T231002Z.log",
+    "local_destination":  "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_affine_ew_grid4x4_d128_nodecay_seed0_pod",
+    "device":  "cuda",
+    "producer":  "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_spatial_scaling_evaluation.py",
+    "pod_lifecycle_note":  "This watcher never stops or terminates the pod; lifecycle control remains an independently verified action.",
+    "last_poll_at_utc":  "2026-07-27T05:26:14.1636619Z",
+    "last_remote_audit":  "READY|iter=19999|rows=20000|schema=3|fresh_seed0",
+    "last_remote_audit_exit_code":  0,
+    "remote_ready_at_utc":  "2026-07-27T05:26:14.1676673Z",
+    "local_checkpoint":  "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_affine_ew_grid4x4_d128_nodecay_seed0_pod\\rvit_paper_vda4_final.pt",
+    "local_checkpoint_sha256":  "aa01b752725f9d7b5b31eb24574e817a7a67acb87c3ce97561694d84b9dca399",
+    "verified_files":  [
+                           {
+                               "file":  "metrics.csv",
+                               "remote_path":  "/workspace/vda4_affine_ew_grid4x4_d128_nodecay_seed0_production_20260726T231002Z_d5a8b2451bee/metrics.csv",
+                               "sha256":  "79ace7d092ca08681474a17c2daedf3c1f5c61a2fa6c1b3840272ce533ef00eb",
+                               "bytes":  4603778
+                           },
+                           {
+                               "file":  "rvit_paper_vda4_final.pt",
+                               "remote_path":  "/workspace/vda4_affine_ew_grid4x4_d128_nodecay_seed0_production_20260726T231002Z_d5a8b2451bee/rvit_paper_vda4_final.pt",
+                               "sha256":  "aa01b752725f9d7b5b31eb24574e817a7a67acb87c3ce97561694d84b9dca399",
+                               "bytes":  60485311
+                           },
+                           {
+                               "file":  "rvit_plus_rl_latest.pt",
+                               "remote_path":  "/workspace/vda4_affine_ew_grid4x4_d128_nodecay_seed0_production_20260726T231002Z_d5a8b2451bee/rvit_plus_rl_latest.pt",
+                               "sha256":  "c6d00091fabb7f4baa01ba1b01b56802e5106d5a8a721f7c952d6ce806aff2cc",
+                               "bytes":  60484263
+                           },
+                           {
+                               "file":  "train.log",
+                               "remote_path":  "/workspace/vda4_affine_ew_grid4x4_production_20260726T231002Z.log",
+                               "sha256":  "16b6874c547f99b0d3fe4deceae252bbac4daeb277eabb35bb2fef3ad2a9311a",
+                               "bytes":  3728428
+                           }
+                       ],
+    "pulled_at_utc":  "2026-07-27T05:27:01.6408766Z",
+    "affine2_followup_status":  "waiting_for_primary_queue",
+    "last_local_gpu_poll_at_utc":  "2026-07-27T05:34:01.7626588Z"
+}

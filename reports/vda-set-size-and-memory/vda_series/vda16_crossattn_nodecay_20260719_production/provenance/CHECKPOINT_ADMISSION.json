@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "checkpoint_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\checkpoints\\rvit_paper_vda16_final.pt",
+  "checkpoint_sha256": "b40d9aa49ec28c352d7a790de84f5902e1a307f7b2abe5fe68dc9e6aabb4f84d",
+  "checkpoint_bytes": 60696261,
+  "checkpoint_schema_version": 3,
+  "checkpoint_iteration": 19999,
+  "task": "vda16",
+  "feedback": "crossattn1",
+  "width": 128,
+  "memory_decay": 1.0,
+  "grid": [
+    4,
+    4
+  ],
+  "image_size": 100,
+  "seed": 0,
+  "initialization": "fresh",
+  "launch_manifest_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_replay_excluded_seed0_20260718T205046Z_afdb54ce3f91\\launch_manifest.json",
+  "launch_manifest_sha256": "b5f51f52576f9c2b07fce79002207506da6b080492c22ba0b7e44826c1ba1134",
+  "metrics_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_replay_excluded_seed0_20260718T205046Z_afdb54ce3f91\\metrics.csv",
+  "metrics_sha256": "6782b0821f137d443eb04a4173624ff3b8246abe63cb7d6be24d6e54eed24785",
+  "training": {
+    "final_iteration": 19999,
+    "final_rolling_correct": 0.75,
+    "late50_mean_rolling_correct": 0.7742,
+    "best_rolling_correct": 0.815,
+    "initial_theta_degrees": 65.0,
+    "final_theta_degrees": 65.0,
+    "minimum_theta_degrees": 65.0,
+    "curriculum_floor_degrees": 8.0,
+    "curriculum_completed": false,
+    "status": "competence_gated",
+    "interpretation": "easiest-condition diagnostic; the curriculum never reached its declared floor"
+  },
+  "training_runtime": {
+    "python": "3.10.6",
+    "torch": "1.13.1+cu117",
+    "numpy": "1.23.1",
+    "platform": "Windows-10-10.0.22621-SP0"
+  },
+  "resume_fidelity": "replay_excluded_trainer_state",
+  "replay_buffer_persisted": false,
+  "producer_checks": [
+    {
+      "identity": "train_rl.py",
+      "checkpoint_sha256": "761f9632c8be6413b93574a3f36ab51eb8101d6c9abeb8ec214826816272255b",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\train_rl.py",
+      "status": "match",
+      "current_sha256": "761f9632c8be6413b93574a3f36ab51eb8101d6c9abeb8ec214826816272255b"
+    },
+    {
+      "identity": "ppo.py",
+      "checkpoint_sha256": "50c3463675ff4b73c755afb55b2de4f0e11eb4e1541e3131d159d7a1cfc9be76",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\ppo.py",
+      "status": "match",
+      "current_sha256": "50c3463675ff4b73c755afb55b2de4f0e11eb4e1541e3131d159d7a1cfc9be76"
+    },
+    {
+      "identity": "model.py",
+      "checkpoint_sha256": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\model.py",
+      "status": "match",
+      "current_sha256": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be"
+    },
+    {
+      "identity": "paper_encoder.py",
+      "checkpoint_sha256": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_encoder.py",
+      "status": "match",
+      "current_sha256": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe"
+    },
+    {
+      "identity": "paper_heads.py",
+      "checkpoint_sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_heads.py",
+      "status": "match",
+      "current_sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869"
+    },
+    {
+      "identity": "conv_frontend.py",
+      "checkpoint_sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\conv_frontend.py",
+      "status": "match",
+      "current_sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a"
+    },
+    {
+      "identity": "envs/base.py",
+      "checkpoint_sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\base.py",
+      "status": "match",
+      "current_sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7"
+    },
+    {
+      "identity": "envs/luo2015.py",
+      "checkpoint_sha256": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\luo2015.py",
+      "status": "match",
+      "current_sha256": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c"
+    },
+    {
+      "identity": "envs/tasks.py",
+      "checkpoint_sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\tasks.py",
+      "status": "match",
+      "current_sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e"
+    },
+    {
+      "identity": "envs/__init__.py",
+      "checkpoint_sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\__init__.py",
+      "status": "match",
+      "current_sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4"
+    },
+    {
+      "identity": "config/loader.py",
+      "checkpoint_sha256": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\config\\loader.py",
+      "status": "match",
+      "current_sha256": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9"
+    },
+    {
+      "identity": "scripts/launch_vda16_fresh.sh",
+      "checkpoint_sha256": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\scripts\\launch_vda16_fresh.sh",
+      "status": "match",
+      "current_sha256": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70"
+    },
+    {
+      "identity": "experiments/vda4_spatial_discretization/grid_10x10/launch_20k.sh",
+      "checkpoint_sha256": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda4_spatial_discretization\\grid_10x10\\launch_20k.sh",
+      "status": "match",
+      "current_sha256": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4"
+    },
+    {
+      "identity": "resolved_config",
+      "checkpoint_sha256": "812886b4d0a0b7500a5d53b4991e034aff6e7df316ef9e99be55df61e034f6d6",
+      "path": null,
+      "status": "not_reconstructable"
+    },
+    {
+      "identity": "experiment_launcher",
+      "checkpoint_sha256": "a67c6e5a78cdab0079a0b7f92a9468b4ab54559b989f5ecce0f1ef81595d0454",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\scripts\\launch_vda16_crossattn_nodecay.ps1",
+      "status": "match",
+      "current_sha256": "a67c6e5a78cdab0079a0b7f92a9468b4ab54559b989f5ecce0f1ef81595d0454"
+    }
+  ],
+  "claim_boundary": "single seed and one cross-attention/d128/no-decay checkpoint; no affine, width, decay, seed-population, or causal set-size contrast",
+  "original_checkpoint_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_replay_excluded_seed0_20260718T205046Z_afdb54ce3f91\\rvit_paper_vda16_final.pt",
+  "frozen_checkpoint_sha256": "b40d9aa49ec28c352d7a790de84f5902e1a307f7b2abe5fe68dc9e6aabb4f84d"
+}

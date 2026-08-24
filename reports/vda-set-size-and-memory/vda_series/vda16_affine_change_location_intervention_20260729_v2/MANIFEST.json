@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "artifact_class": "VDA16 affine_ew three-location causal-rescue evaluation",
+  "status": "complete_pending_independent_verification",
+  "config_path": "analysis_config.json",
+  "summary_path": "SUMMARY.json",
+  "checkpoint_sha256": "52141da629e2c7f8f902826196067efbadb924608eecde7560559fdc0f813233",
+  "checkpoint_admission_sha256": "724cf10b92ead6f34772c28ff236169e54d39b500154cbc3305fb35bc1689239",
+  "artifact_hashes": {
+    "analysis_config.json": "e368a850e6cd672cf359df93d5c313c8c94f50f36f8e45e3a2e17a8f1122f0f1",
+    "provenance/CHECKPOINT_ADMISSION.json": "724cf10b92ead6f34772c28ff236169e54d39b500154cbc3305fb35bc1689239",
+    "provenance/PROVENANCE.json": "d66339730532ccf62f97891bbf6e71d4503611a7e2332beccc1ea6d6ac6d08e9",
+    "provenance/source_snapshot/00.py": "acdac3ee69be7332b92ab3ff876de2f87bee68c384836d1b6df5c508be18ddcc",
+    "provenance/source_snapshot/01.py": "b191c26c861ee602e8186d28b7035a5c556787d5ef1289473fadfa0add10788a",
+    "provenance/source_snapshot/02.py": "b23fddbcc031e1368c6aa376374c130c6183b57cdb04e392499d7cafc0a25b7d",
+    "provenance/source_snapshot/03.py": "fe5489bccb5c3a47cc74bc6c519cffc5403e62c55cf0e6190bcfcbb61afd6b9f",
+    "provenance/source_snapshot/04.py": "b77fd7f4cd5d56fc38257b58ee5400285fba875b3c01a79ec7baf7106f66d72c",
+    "provenance/source_snapshot/05.py": "91f8a5be84aa300d4a1b42b2ec92f633bb8a704a9dae3f302f192a73915d61d1",
+    "provenance/source_snapshot/06.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "provenance/source_snapshot/07.py": "0099e258730aee7c2ae60d35215d1738771a88f9356ead1877012b89e794dd31",
+    "provenance/source_snapshot/08.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "provenance/source_snapshot/09.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "provenance/source_snapshot/10.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "SUMMARY.json": "baed95c7db7d4492bf4d0a2486409196547c273b90cb9284bc3ac1ab26e884ee",
+    "vda16/data/change_location_intervention.npz": "a3a0f0119b233ba3ec565bdf510a5b76d422129f2283e378d02418fd984a7f13",
+    "vda16/data/curves.csv": "352b5a137c58ce0375938b81df40793e8fbe72f1ff6df0a5af2a6beed26ad1a4",
+    "vda16/data/summary.json": "bfb876117391fe78e60a9f779b0eeecb203c4d5757ead762941edd77816b76f7",
+    "vda16/figures/vda16_change_location_attention_trajectory.pdf": "4df26b70cefb034138bbd3a511ec5884c4f29c3d3d9f3ebb77f6b886ef861ee2",
+    "vda16/figures/vda16_change_location_attention_trajectory.png": "daa0a837fe9fdf1effacff0c19e454bf6d041ab79e05a1a6067271cecd7babd7",
+    "vda16/figures/vda16_change_location_intervention_summary.pdf": "cd814b9d85b2161d32463be92f29e132cf8e7a3e3f6419981c1648a625cc6a38",
+    "vda16/figures/vda16_change_location_intervention_summary.png": "00a199ed2aaa84d767045a25636598d939a4f79162927d4fe302f812380c7de9"
+  }
+}

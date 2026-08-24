@@ -1,0 +1,6 @@
+{
+  "status": "failed_before_evaluation",
+  "reason": "Windows path-length failure while freezing nested provenance sources",
+  "scientific_outputs_created": false,
+  "superseded_by": "../vda16_affine_change_location_intervention_20260729_v2"
+}

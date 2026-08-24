@@ -1,0 +1,38 @@
+﻿{
+    "schema_version":  1,
+    "created_at_utc":  "2026-07-27T02:37:18.4637797Z",
+    "status":  "running",
+    "current_step":  "train:vda4_affine_ew_grid2x2_seed0",
+    "device":  "cuda",
+    "python":  "C:\\Python310\\python.exe",
+    "producer":  "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_spatial_scaling_evaluation.py",
+    "jobs":  [
+                 {
+                     "label":  "vda4_affine_ew_grid10x10_seed0",
+                     "checkpoint":  "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_affine_ew_grid10x10_d128_replay_excluded_seed0_production_20260726T165822Z_b863849f2288\\rvit_paper_vda4_final.pt",
+                     "sha256":  "0f0cfc5d0087a34de247dc02f7c343d8eae80eadb74478c564a6ea72c7244cb5"
+                 },
+                 {
+                     "label":  "vda4_crossattn1_grid10x10_seed0",
+                     "checkpoint":  "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_crossattn1_grid10x10_d128_nodecay_seed0_pod\\rvit_paper_vda4_final.pt",
+                     "sha256":  "06382037f3693c454d494df220e931717bf7f09658b5fcc3c110b6114ebf5bdc"
+                 },
+                 {
+                     "label":  "vda4_crossattn1_grid2x2_seed0",
+                     "checkpoint":  "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_crossattn1_d128_nodecay_seed0_pod\\rvit_paper_vda4_final.pt",
+                     "sha256":  "ea671f9758551e06b39ef19c06e85e888ce3ee74dda8a534c1532251a69ee4ca"
+                 },
+                 {
+                     "label":  "vda4_crossattn1_grid4x4_seed0",
+                     "checkpoint":  "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_grid4x4_crossattn1_d128_nodecay_seed0_pod\\rvit_paper_vda4_final.pt",
+                     "sha256":  "306ce94d44461ea85cd0aced5a84eb210457f718d3f2e4ebf85e46ee1922e4bf"
+                 }
+             ],
+    "completed_evaluations":  [
+                                  "vda4_affine_ew_grid10x10_seed0",
+                                  "vda4_crossattn1_grid10x10_seed0",
+                                  "vda4_crossattn1_grid2x2_seed0",
+                                  "vda4_crossattn1_grid4x4_seed0"
+                              ],
+    "final_training_launcher":  "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda4_spatial_discretization\\grid_2x2\\launch_affine_ew_local.ps1"
+}

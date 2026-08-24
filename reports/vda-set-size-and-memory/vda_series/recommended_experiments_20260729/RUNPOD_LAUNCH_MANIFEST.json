@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "status": "endpoint_heldout_evaluations_verified_next_factorial_authorized",
+  "recorded_at_utc": "2026-07-30T04:24:24.4823526Z",
+  "evidence_boundary": "Training metrics and periodic checkpoints are not attention evidence. Each run remains non-evidentiary until terminal checkpoint, contiguous finite iterations 0..19999, exact configuration and provenance, clean log, independently matched remote/local hashes, and held-out behavioral evaluation are verified.",
+  "active_gpu_hourly_cost_usd": 0.0,
+  "source_bundle": {
+    "local_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\source_archives\\rvit_vda_recommendations_20260730T041930Z.tar.gz",
+    "remote_path": "/workspace/rvit_vda_recommendations_20260730T041930Z.tar.gz",
+    "remote_source_root": "/workspace/RViT_plus_paper_jepa_grid9_recommendations_20260730T041930Z_ff3f40ee",
+    "bytes": 148702,
+    "sha256": "ff3f40eeeff04d74fc303640712c7e377359de1fc9906a48bcc731297b440cd9",
+    "remote_hash_match": true
+  },
+  "runtime": {
+    "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_memory_mib": 24576,
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "numpy": "2.1.2",
+    "gymnasium": "1.3.0"
+  },
+  "runs": [
+    {
+      "label": "vda16_crossattn1_seed1_production_replication",
+      "status": "terminal_pulled_heldout_verified_noncompetent",
+      "pod_id": "6u4vnn3q6lsfeq",
+      "pod_name": "rvit-vda16-crossattn-seed1-replication",
+      "pod_cost_usd_per_hour": 0.22,
+      "remote_pid": 489,
+      "pod_status": "EXITED",
+      "pod_runtime_absent": true,
+      "run_dir": "/workspace/vda16_crossattn1_d128_nodecay_seed1_production_replication_20260730T042400Z_4362e539c8ce",
+      "local_run_dir": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_seed1_pod",
+      "final_checkpoint_sha256": "d08d5826486f1c7f5f5e54eda916ff6dd544a3f67372c388188ab42ecc586374",
+      "pull_manifest_sha256": "14e8f3c8a1e9ac7ddb1826c8fb5c40280b5c4a4d7122c1e664596a39bb163163",
+      "log": "/workspace/vda16_crossattn1_seed1_production_replication_20260730T0425Z.log",
+      "launcher": "experiments/vda16_replication/launch_crossattn1_runpod.sh",
+      "launcher_sha256": "9941a662a2aa2ed34f2c6611538627a67ce17b56a4b4fc5921d4b91091d40ced",
+      "contract": {
+        "task": "vda16",
+        "grid": [4, 4],
+        "tokens": 16,
+        "feedback": "crossattn1",
+        "cell": "xlstm",
+        "d_mem": 128,
+        "memory_decay": 1.0,
+        "seed": 1,
+        "init_mode": "fresh",
+        "iterations": 20000,
+        "terminal_iteration": 19999,
+        "episodes_per_iteration": 8
+      },
+      "preflight": {
+        "bash_syntax": "pass",
+        "cuda": true,
+        "engineering_canary_iterations": 2,
+        "engineering_canary_status": "pass"
+      }
+    },
+    {
+      "label": "vda_fixed9_crossattn1_seed0_production_midpoint",
+      "status": "terminal_pulled_heldout_verified",
+      "pod_id": "ij94iwxzpwizyr",
+      "pod_name": "rvit-vda-fixed9-crossattn-seed0-canary",
+      "pod_cost_usd_per_hour": 0.22,
+      "remote_pid": 547,
+      "pod_status": "EXITED",
+      "pod_runtime_absent": true,
+      "run_dir": "/workspace/vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_canary_v1_20260730T042400Z_6570bf66c286",
+      "local_run_dir": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod",
+      "final_checkpoint_sha256": "b876cb6a2b5d494fa36b918d705b52a3d8c7cb3f9e8aec7e37e9e38069fce288",
+      "pull_manifest_sha256": "52cfa280ee7e2660aa11d55457d6a135c9b33c15561b114491a17df1458d8902",
+      "log": "/workspace/vda_fixed9_crossattn1_seed0_production_20260730T0425Z.log",
+      "launcher": "experiments/vda_fixed9_controlled/grid_4x4_crossattn1_seed0_canary_v1/launch_runpod_v1.sh",
+      "launcher_sha256": "3d7d8624d9faab7129bd2ef20fe5787677bbaadb796ee44d36c72349be72b1db",
+      "config": "experiments/vda_fixed9_controlled/grid_4x4_crossattn1_seed0_canary_v1/config_v1.json",
+      "config_sha256": "2d56ad6cbc4586ab9496b86278ca0a00a64e1e20710a43f3cf3a7ee975c7ca38",
+      "preflight_sha256": "64e80b652749c34501b7d384c0a071a462a454c37f7f7da384a654663a442967",
+      "contract": {
+        "task": "vda_fixed9",
+        "active_items": 9,
+        "stimulus_grid": [4, 4],
+        "patch_memory_grid": [4, 4],
+        "tokens": 16,
+        "image_size": 100,
+        "feedback": "crossattn1",
+        "cell": "xlstm",
+        "d_mem": 128,
+        "memory_decay": 1.0,
+        "memory_noise_std": 0.0,
+        "seed": 0,
+        "init_mode": "fresh",
+        "iterations": 20000,
+        "terminal_iteration": 19999,
+        "episodes_per_iteration": 8
+      },
+      "preflight": {
+        "semantic_contract": "pass",
+        "bash_syntax": "pass",
+        "cuda": true,
+        "model_tokens": 16,
+        "model_parameters": 3015636
+      }
+    }
+  ],
+  "local_parallel_analysis": {
+    "label": "vda16_affine_change_location_intervention_seed0",
+    "status": "complete_verified",
+    "pid": 25180,
+    "output": "reports/vda_series/vda16_affine_change_location_intervention_20260729_v2",
+    "checkpoint_sha256": "52141da629e2c7f8f902826196067efbadb924608eecde7560559fdc0f813233",
+    "producer_manifest_sha256": "6251380a7b74020e26a806d8b904693a9974d81e52b89b0e9324bbe567475531",
+    "validation_result_sha256": "c515b3001728d7f2169719f2053c87b3aec769af699a4ac49d425d86e0b8876d",
+    "verified_manifest_sha256": "d91c7a03e823ec7d086659c9dcbbef3382cf4fcbf284f17fa0cbc320493b06aa",
+    "artifact_hashes_verified": 22,
+    "forced_invalid_30deg_effects": {
+      "true_change_response_suppress": 0.7466666666666667,
+      "true_change_response_natural": 0.98,
+      "true_change_response_boost": 0.9933333333333333,
+      "true_change_boost_minus_suppress": 0.2466666666666666,
+      "true_change_dprime_boost_minus_suppress": 2.2254985386820376,
+      "wrong_cue_boost_minus_suppress": -0.13,
+      "neutral_control_boost_minus_suppress": -0.033333333333333326,
+      "achieved_true_change_mass_suppress": 0.4451829635310177,
+      "achieved_true_change_mass_natural": 0.8219773310048499,
+      "achieved_true_change_mass_boost": 0.9873415606680768
+    },
+    "bounded_conclusion": "Within this admitted checkpoint, routing has spatially specific causal relevance: suppressing versus boosting the true change location produces a lesion/rescue pattern not reproduced by cue or neutral targeting.",
+    "boundary": "Single seed and competence-gated mechanism-only analysis because the curriculum stopped at 47 degrees; natural behavior is near ceiling, so this is not full VDA16 competence or population-level evidence."
+  },
+  "local_evaluation_pipeline": {
+    "status": "both_endpoint_heldout_evaluations_verified",
+    "historical_vda4_evaluator_preserved_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+    "endpoint_evaluator": "analysis/vda_endpoint_evaluation.py",
+    "endpoint_evaluator_sha256": "2768e19a9cacdb46768038bd5eff8c3b9f521065b705206b29ec87395e67eaa1",
+    "terminal_validator": "analysis/vda_terminal_run_validation.py",
+    "terminal_validator_sha256": "f1149c8b4ccffa378e3f715ac4eebb2e47134b777449e14aeafd70565330a51d",
+    "wrapper": "experiments/vda_recommended_endpoints/validate_and_evaluate.ps1",
+    "wrapper_sha256": "71aeca5a182178f6941cba0388c9ed53747973c9676af1623a75130af8ed38a6",
+    "vda_core_sha256": "2d0843761bc3c5650b01bd9a17e95714ea5775aaa9ff405253f691bb3a301c18",
+    "focused_tests": "26 passed independently; agent broad focused suite 47 passed",
+    "fixed9_estimand": "Random 9-of-16 active sets conditioned on cue TL, invalid BR, and neutral control locations being active; this conditional-active protocol is recorded in evaluation config.",
+    "heldout_evaluations": {
+      "vda_fixed9_crossattn1_seed0": {
+        "status": "complete_verified",
+        "started_at_utc": "2026-07-30T15:13:28Z",
+        "wrapper_pid": 17364,
+        "evaluator_pid": 27964,
+        "device": "cuda",
+        "threads": 3,
+        "psychometric_trials": 300,
+        "attention_trials": 128,
+        "intervention_trials": 250,
+        "output_root": "reports/vda_series/recommended_experiments_20260729/heldout/vda_fixed9_crossattn1_seed0",
+        "stdout": "reports/vda_series/recommended_experiments_20260729/heldout/queue_logs/vda_fixed9_crossattn1_seed0.stdout.log",
+        "stderr": "reports/vda_series/recommended_experiments_20260729/heldout/queue_logs/vda_fixed9_crossattn1_seed0.stderr.log"
+        ,"evaluation_manifest_sha256": "c4ee23ae99592c770f39754be616812b34420c8f8ea42cda2b64889db2c17031"
+        ,"summary_sha256": "f903945585dd1dcc617bd5c4e87977d4727505b18a133e7d1ff062892a62f397"
+        ,"terminal_validation_sha256": "72623e91d6bf11a55483db219d0d472dd7ea6f8356208c16465cd556f2fa051e"
+        ,"artifact_hashes_verified": 13
+        ,"stdout_complete": true
+        ,"stderr_empty": true
+      },
+      "vda16_crossattn1_seed1": {
+        "status": "complete_verified_noncompetent",
+        "started_at_utc": "2026-07-30T15:19:29Z",
+        "wrapper_pid": 28428,
+        "evaluator_pid": 12732,
+        "device": "cuda",
+        "threads": 3,
+        "psychometric_trials": 300,
+        "attention_trials": 128,
+        "intervention_trials": 250,
+        "output_root": "reports/vda_series/recommended_experiments_20260729/heldout/vda16_crossattn1_seed1",
+        "stdout": "reports/vda_series/recommended_experiments_20260729/heldout/queue_logs/vda16_crossattn1_seed1.stdout.log",
+        "stderr": "reports/vda_series/recommended_experiments_20260729/heldout/queue_logs/vda16_crossattn1_seed1.stderr.log",
+        "evaluation_manifest_sha256": "d6eb6708d229ddb8acbbd6101416b8848cc48494ac0e359dbe470e01f673d1d1",
+        "summary_sha256": "bd55d9398a0665a746cd5a45ef4f3aed071bc8488e0c4ce88269cc41958d3c5a",
+        "terminal_validation_sha256": "b4121909b47cdd660547c455d614f02eaff82c47de04b6f5b835773f8a029ce8",
+        "artifact_hashes_verified": 13,
+        "semantic_checks_passed": 79,
+        "stdout_complete": true,
+        "stderr_empty": true,
+        "competence_gate": "failed_always_withhold",
+        "bounded_result": "Spatial routing is descriptively organized, but all held-out behavioral and intervention trials were always-withhold; this checkpoint provides no causal-performance or scaling evidence."
+      }
+    }
+  },
+  "design_only": {
+    "path": "experiments/vda_stream_factorial",
+    "status": "tested_scaffold_not_launched",
+    "factorial": "effective visual streams {4,100} x effective memory streams {4,100} on a fixed 100-slot carrier",
+    "parameter_counts": {
+      "crossattn1": 8682948,
+      "affine_ew": 8661468
+    }
+  }
+}

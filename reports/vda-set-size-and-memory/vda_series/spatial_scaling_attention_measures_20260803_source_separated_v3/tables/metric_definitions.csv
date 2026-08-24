@@ -1,0 +1,13 @@
+metric,formula,uniform_baseline,interpretation
+paired_location_patch_column_score,p_j = mean_i (A^visual_ij + A^memory_ij),1/N,secondary visual+memory paired-location total; never substituted for either source map or maximum
+source_patch_column_score,"p^s_j = mean_i A^s_ij, computed separately for visual and recurrent-memory keys",1/(2N) under globally uniform joint-key attention,"primary source-resolved mean incoming attention, retaining visual-versus-memory allocation"
+total_quadrant_mass,sum_{j in quadrant} p_j,0.25,total routing allocated to one fixed physical quadrant
+peak_patch_raw,max_{j in quadrant} p_j,1/N,user-requested maximum patch score inside a quadrant
+peak_patch_uniform_ratio,N * max_{j in quadrant} p_j,1,peak patch strength relative to a uniform native map
+peak_patch_quadrant_share,max_{j in q} p_j / sum_r max_{j in r} p_j,0.25,common-four-quadrant normalization of the peak-patch statistic
+within_quadrant_peak_ratio,(N/4) * max_{j in q} p_j / sum_{j in q} p_j,1,within-quadrant focality; identically 1 at native 2x2
+source_total_share,sum_k mean_i A_ik within one cross-attention source block,0.5 under globally uniform image+memory attention,"visual-key versus recurrent-memory-key allocation, computed per held-out trial in the source-resolved refresh"
+source_raw_total_quadrant_mass,sum_{j in quadrant} p^s_j,0.125 under globally uniform joint-key attention,raw source-specific routing to one fixed physical quadrant
+source_raw_peak_patch,max_{j in quadrant} p^s_j,1/(2N) under globally uniform joint-key attention,"source-specific maximum patch score, computed after splitting visual and memory keys"
+source_raw_peak_patch_uniform_ratio,2N * max_{j in quadrant} p^s_j,1,source-specific peak strength relative to a globally uniform cross-attention key
+source_conditional_quadrant_mass,source-specific quadrant mass / source_total_share,0.25,spatial localization conditional on attending to that source; descriptive mean only in the retained cache

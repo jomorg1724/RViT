@@ -1,0 +1,880 @@
+{
+  "schema_version": 1,
+  "artifact_class": "VDA16 single-checkpoint manuscript evidence shard",
+  "created_at_utc": "2026-07-19T16:44:51.313719+00:00",
+  "scope": {
+    "task": "vda16",
+    "feedback": "crossattn1",
+    "width": 128,
+    "memory_decay": 1.0,
+    "seed": 0,
+    "checkpoint_iteration": 19999
+  },
+  "analysis_families": [
+    "training competence",
+    "first-wave environment schematic",
+    "first-wave source-resolved attention",
+    "first-wave psychometrics",
+    "matched-bank psychometrics and response timing",
+    "five-variable native and foldwise PCA-128 recurrent decoding",
+    "graded attention-key clamp with response rates, d-prime, criterion, and timing",
+    "achieved attention mass for every clamp dose and condition",
+    "visually competence-gated descriptive historical routing-family comparison"
+  ],
+  "protocol": {
+    "task": "vda16",
+    "cue_index": 0,
+    "invalid_change_index": 15,
+    "invalid_defined": true,
+    "displayed_validities": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "change_magnitudes": [
+      2.0,
+      6.0,
+      10.0,
+      14.0,
+      18.0,
+      22.0,
+      26.0,
+      30.0,
+      34.0,
+      38.0
+    ],
+    "psychometric_trials_per_point": 300,
+    "psychometric_seed": 20260711,
+    "psychometric_invalid_at_displayed_validity_1": "forced out-of-policy stress test",
+    "press_histogram_bins": [
+      "no_response",
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "qualifying_response_frames": [
+      5,
+      6
+    ],
+    "decoder_n": 900,
+    "decoder_seed": 20260711,
+    "decoder_location_condition": "change-present trials only",
+    "decoder_spaces": [
+      "architecture_native",
+      "foldwise_pca_128"
+    ],
+    "clamp_trials": 250,
+    "clamp_seed": 20270711,
+    "clamp_dose_parameters": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "clamp_logit_scale": 6.0,
+    "clamp_key_logit_biases": [
+      -6.0,
+      -3.0,
+      0.0,
+      3.0,
+      6.0
+    ],
+    "clamp_intervention_semantics": "additive bias to the cued location's attention-key logits; not achieved attention mass",
+    "clamp_target_keys_by_routing": {
+      "affine_ew": "cued image/self key",
+      "crossattn1": "cued image key and corresponding memory key"
+    },
+    "clamp_displayed_validity": 0.75,
+    "clamp_from_frame": 5,
+    "clamp_hit_definition": "declaration at frame 5 or 6 on a reportable-change trial",
+    "clamp_false_alarm_definition": "any declaration frame 0-6 on a no-change trial",
+    "common_random_numbers_across_width_and_routing": true
+  },
+  "checkpoint_admission": {
+    "schema_version": 1,
+    "checkpoint_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\checkpoints\\rvit_paper_vda16_final.pt",
+    "checkpoint_sha256": "b40d9aa49ec28c352d7a790de84f5902e1a307f7b2abe5fe68dc9e6aabb4f84d",
+    "checkpoint_bytes": 60696261,
+    "checkpoint_schema_version": 3,
+    "checkpoint_iteration": 19999,
+    "task": "vda16",
+    "feedback": "crossattn1",
+    "width": 128,
+    "memory_decay": 1.0,
+    "grid": [
+      4,
+      4
+    ],
+    "image_size": 100,
+    "seed": 0,
+    "initialization": "fresh",
+    "launch_manifest_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_replay_excluded_seed0_20260718T205046Z_afdb54ce3f91\\launch_manifest.json",
+    "launch_manifest_sha256": "b5f51f52576f9c2b07fce79002207506da6b080492c22ba0b7e44826c1ba1134",
+    "metrics_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_replay_excluded_seed0_20260718T205046Z_afdb54ce3f91\\metrics.csv",
+    "metrics_sha256": "6782b0821f137d443eb04a4173624ff3b8246abe63cb7d6be24d6e54eed24785",
+    "training": {
+      "final_iteration": 19999,
+      "final_rolling_correct": 0.75,
+      "late50_mean_rolling_correct": 0.7742,
+      "best_rolling_correct": 0.815,
+      "initial_theta_degrees": 65.0,
+      "final_theta_degrees": 65.0,
+      "minimum_theta_degrees": 65.0,
+      "curriculum_floor_degrees": 8.0,
+      "curriculum_completed": false,
+      "status": "competence_gated",
+      "interpretation": "easiest-condition diagnostic; the curriculum never reached its declared floor"
+    },
+    "training_runtime": {
+      "python": "3.10.6",
+      "torch": "1.13.1+cu117",
+      "numpy": "1.23.1",
+      "platform": "Windows-10-10.0.22621-SP0"
+    },
+    "resume_fidelity": "replay_excluded_trainer_state",
+    "replay_buffer_persisted": false,
+    "producer_checks": [
+      {
+        "identity": "train_rl.py",
+        "checkpoint_sha256": "761f9632c8be6413b93574a3f36ab51eb8101d6c9abeb8ec214826816272255b",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\train_rl.py",
+        "status": "match",
+        "current_sha256": "761f9632c8be6413b93574a3f36ab51eb8101d6c9abeb8ec214826816272255b"
+      },
+      {
+        "identity": "ppo.py",
+        "checkpoint_sha256": "50c3463675ff4b73c755afb55b2de4f0e11eb4e1541e3131d159d7a1cfc9be76",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\ppo.py",
+        "status": "match",
+        "current_sha256": "50c3463675ff4b73c755afb55b2de4f0e11eb4e1541e3131d159d7a1cfc9be76"
+      },
+      {
+        "identity": "model.py",
+        "checkpoint_sha256": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\model.py",
+        "status": "match",
+        "current_sha256": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be"
+      },
+      {
+        "identity": "paper_encoder.py",
+        "checkpoint_sha256": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_encoder.py",
+        "status": "match",
+        "current_sha256": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe"
+      },
+      {
+        "identity": "paper_heads.py",
+        "checkpoint_sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_heads.py",
+        "status": "match",
+        "current_sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869"
+      },
+      {
+        "identity": "conv_frontend.py",
+        "checkpoint_sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\conv_frontend.py",
+        "status": "match",
+        "current_sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a"
+      },
+      {
+        "identity": "envs/base.py",
+        "checkpoint_sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\base.py",
+        "status": "match",
+        "current_sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7"
+      },
+      {
+        "identity": "envs/luo2015.py",
+        "checkpoint_sha256": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\luo2015.py",
+        "status": "match",
+        "current_sha256": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c"
+      },
+      {
+        "identity": "envs/tasks.py",
+        "checkpoint_sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\tasks.py",
+        "status": "match",
+        "current_sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e"
+      },
+      {
+        "identity": "envs/__init__.py",
+        "checkpoint_sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\__init__.py",
+        "status": "match",
+        "current_sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4"
+      },
+      {
+        "identity": "config/loader.py",
+        "checkpoint_sha256": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\config\\loader.py",
+        "status": "match",
+        "current_sha256": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9"
+      },
+      {
+        "identity": "scripts/launch_vda16_fresh.sh",
+        "checkpoint_sha256": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\scripts\\launch_vda16_fresh.sh",
+        "status": "match",
+        "current_sha256": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70"
+      },
+      {
+        "identity": "experiments/vda4_spatial_discretization/grid_10x10/launch_20k.sh",
+        "checkpoint_sha256": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda4_spatial_discretization\\grid_10x10\\launch_20k.sh",
+        "status": "match",
+        "current_sha256": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4"
+      },
+      {
+        "identity": "resolved_config",
+        "checkpoint_sha256": "812886b4d0a0b7500a5d53b4991e034aff6e7df316ef9e99be55df61e034f6d6",
+        "path": null,
+        "status": "not_reconstructable"
+      },
+      {
+        "identity": "experiment_launcher",
+        "checkpoint_sha256": "a67c6e5a78cdab0079a0b7f92a9468b4ab54559b989f5ecce0f1ef81595d0454",
+        "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\scripts\\launch_vda16_crossattn_nodecay.ps1",
+        "status": "match",
+        "current_sha256": "a67c6e5a78cdab0079a0b7f92a9468b4ab54559b989f5ecce0f1ef81595d0454"
+      }
+    ],
+    "claim_boundary": "single seed and one cross-attention/d128/no-decay checkpoint; no affine, width, decay, seed-population, or causal set-size contrast",
+    "original_checkpoint_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_replay_excluded_seed0_20260718T205046Z_afdb54ce3f91\\rvit_paper_vda16_final.pt",
+    "frozen_checkpoint_sha256": "b40d9aa49ec28c352d7a790de84f5902e1a307f7b2abe5fe68dc9e6aabb4f84d"
+  },
+  "runtime": {
+    "python": "3.10.6",
+    "python_executable": "C:\\Python310\\python.exe",
+    "platform": "Windows-10-10.0.22621-SP0",
+    "numpy": "1.23.1",
+    "matplotlib": "3.5.2",
+    "scipy": "1.8.1",
+    "sklearn": "1.1.2",
+    "torch": "1.13.1+cu117",
+    "device": "cuda",
+    "torch_cuda_runtime": "11.7",
+    "cudnn_version": "8500",
+    "cuda_available": "True",
+    "cuda_device_count": "1",
+    "deterministic_algorithms_enabled": "False",
+    "cudnn_deterministic": "False",
+    "cudnn_benchmark": "False",
+    "cuda_device_index": "0",
+    "cuda_device_name": "NVIDIA GeForce RTX 3070 Laptop GPU",
+    "cuda_compute_capability": "8.6",
+    "cuda_total_memory_bytes": "8589410304"
+  },
+  "source_hashes": {
+    "scripts/build_vda16_manuscript_shard.py": "a8a37fbc55827a3d8fe1154beb5fa85754127cddb6fbbd32282e67aa06777b65",
+    "vda_series/vda16_integration.py": "e58bbb5ab50fa7a29b9ca382102b91bb35eddb0d8f1a9e7fa3986293e0aa0dc4",
+    "vda_series/first_wave_figures.py": "b3165034fdfc3c99ac1d023b1bfb04025e72e21a553e87e0512b1c63b083c22c",
+    "vda_series/task_figures.py": "3c5182b0304213396d5d72c88ea994a080489f8454040db88175e929a49e4284",
+    "vda_sweep/vda_core.py": "b23fddbcc031e1368c6aa376374c130c6183b57cdb04e392499d7cafc0a25b7d",
+    "vda_sweep/vda_fig_decode.py": "fcb6fd449c71faa68a640d17b3fc7ef7266eb14049b372813f1e215aff718acc",
+    "vda_sweep/matched_width.py": "fe5489bccb5c3a47cc74bc6c519cffc5403e62c55cf0e6190bcfcbb61afd6b9f",
+    "vda_sweep/matched_width_compute.py": "7cbc1c94675615b73aa7bef7538e3f9198ab2868c639ac7bc6b331788ebd037b",
+    "vda_sweep/matched_width_producer.py": "62f89036e7d5469e3b6e57060875123e9ec48c52d966ea75e1176d20ddc9eec9",
+    "model.py": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be",
+    "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+    "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+    "paper_encoder.py": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "envs/luo2015.py": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c",
+    "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+    "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+    "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec"
+  },
+  "source_snapshots": [
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\scripts\\build_vda16_manuscript_shard.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\scripts\\build_vda16_manuscript_shard.py",
+      "sha256": "a8a37fbc55827a3d8fe1154beb5fa85754127cddb6fbbd32282e67aa06777b65"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_series\\vda16_integration.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_series\\vda16_integration.py",
+      "sha256": "e58bbb5ab50fa7a29b9ca382102b91bb35eddb0d8f1a9e7fa3986293e0aa0dc4"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_series\\first_wave_figures.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_series\\first_wave_figures.py",
+      "sha256": "b3165034fdfc3c99ac1d023b1bfb04025e72e21a553e87e0512b1c63b083c22c"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_series\\task_figures.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_series\\task_figures.py",
+      "sha256": "3c5182b0304213396d5d72c88ea994a080489f8454040db88175e929a49e4284"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\vda_core.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_sweep\\vda_core.py",
+      "sha256": "b23fddbcc031e1368c6aa376374c130c6183b57cdb04e392499d7cafc0a25b7d"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\vda_fig_decode.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_sweep\\vda_fig_decode.py",
+      "sha256": "fcb6fd449c71faa68a640d17b3fc7ef7266eb14049b372813f1e215aff718acc"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\matched_width.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_sweep\\matched_width.py",
+      "sha256": "fe5489bccb5c3a47cc74bc6c519cffc5403e62c55cf0e6190bcfcbb61afd6b9f"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\matched_width_compute.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_sweep\\matched_width_compute.py",
+      "sha256": "7cbc1c94675615b73aa7bef7538e3f9198ab2868c639ac7bc6b331788ebd037b"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\matched_width_producer.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_sweep\\matched_width_producer.py",
+      "sha256": "62f89036e7d5469e3b6e57060875123e9ec48c52d966ea75e1176d20ddc9eec9"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\model.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\model.py",
+      "sha256": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\conv_frontend.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\conv_frontend.py",
+      "sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vae_frontend.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vae_frontend.py",
+      "sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_encoder.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\paper_encoder.py",
+      "sha256": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_heads.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\paper_heads.py",
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\__init__.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\envs\\__init__.py",
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\base.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\envs\\base.py",
+      "sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\tasks.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\envs\\tasks.py",
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\luo2015.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\envs\\luo2015.py",
+      "sha256": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_series\\__init__.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_series\\__init__.py",
+      "sha256": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_series\\architecture_figures.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_series\\architecture_figures.py",
+      "sha256": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67"
+    },
+    {
+      "source": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_series\\behavior_figures.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\source_snapshot\\vda_series\\behavior_figures.py",
+      "sha256": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec"
+    }
+  ],
+  "historical_evidence": {
+    "manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\MANIFEST.json",
+    "manifest_sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11",
+    "snapshot": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\HISTORICAL_MATCHED_WIDTH_MANIFEST.json",
+    "frozen_shard_root": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards",
+    "selected_shards": [
+      {
+        "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda1_affine_ew_d128.npz",
+        "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda1_affine_ew_d128.npz",
+        "sha256": "10b0305ea798e85038a915a39ec98443cfa1fc6e66da46ada78fe4fc26d8cb09",
+        "bytes": 18678
+      },
+      {
+        "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda1_crossattn1_d128.npz",
+        "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda1_crossattn1_d128.npz",
+        "sha256": "efde389965952b93ac28597ee952d83910fa43fdd6f74f12ae1abf481c53977c",
+        "bytes": 18676
+      },
+      {
+        "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda4_affine_ew_d128.npz",
+        "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda4_affine_ew_d128.npz",
+        "sha256": "f9b18d36e88976f77764d4ff3b90e8ca9fae84abdcd496922f11f1eb129e131d",
+        "bytes": 21212
+      },
+      {
+        "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda4_crossattn1_d128.npz",
+        "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda4_crossattn1_d128.npz",
+        "sha256": "6bda789750a4a7d6aea08aeb23d1eb22df7a64d344f5e1800ac2072cd4cb7e89",
+        "bytes": 20827
+      },
+      {
+        "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda9_affine_ew_d128.npz",
+        "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda9_affine_ew_d128.npz",
+        "sha256": "690a17e9db18fd3153ec1a19c92a3fa9ce5fc26d17a1005f4c71476a2d3e5e62",
+        "bytes": 21777
+      },
+      {
+        "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda9_crossattn1_d128.npz",
+        "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda9_crossattn1_d128.npz",
+        "sha256": "0be3f2473db459eaeb937b077d7754310305df1a38c1740cc1246781a3b6112c",
+        "bytes": 21860
+      }
+    ],
+    "lineage_boundary": "historical shards are hash-bound aggregate evidence; this build does not recompute their checkpoints"
+  },
+  "competence_gate": {
+    "final_iteration": 19999,
+    "final_rolling_correct": 0.75,
+    "late50_mean_rolling_correct": 0.7742,
+    "best_rolling_correct": 0.815,
+    "initial_theta_degrees": 65.0,
+    "final_theta_degrees": 65.0,
+    "minimum_theta_degrees": 65.0,
+    "curriculum_floor_degrees": 8.0,
+    "curriculum_completed": false,
+    "status": "competence_gated",
+    "interpretation": "easiest-condition diagnostic; the curriculum never reached its declared floor"
+  },
+  "claim_boundary": "single seed and one cross-attention/d128/no-decay checkpoint; no affine, width, decay, seed-population, or causal set-size contrast",
+  "validation_gate": {
+    "result": "pass",
+    "path": "provenance/VALIDATION_RESULT.json",
+    "sha256": "8b25de1e1b2c61f42b1a79eb34070281330b56692045dfca25f16ddb64f5e30e"
+  },
+  "artifacts": [
+    {
+      "path": "data/attention_vda16_crossattn1.npz",
+      "bytes": 6127243,
+      "sha256": "b23febabe459e67bd4e50b88cb7ebac6553e693dfc4d99227e99a2321a4ec543"
+    },
+    {
+      "path": "data/psychometric_vda16_crossattn1.npz",
+      "bytes": 8652,
+      "sha256": "4416440472a17350faf368000740af45ae3f81a340b11e3e8a1dc94cff632c23"
+    },
+    {
+      "path": "data/vda16_clamp_achieved_attention.npz",
+      "bytes": 36801,
+      "sha256": "54b378ae5b370cc042c916cbec9f278a4a87f8028772e5a4f6269fce7aa52824"
+    },
+    {
+      "path": "data/vda16_crossattn1_d128_nodecay_seed0.npz",
+      "bytes": 22017,
+      "sha256": "4597c954a51d20f3586fe1b6a40eca3b1870ffa982f24ac8a995c5a82794167d"
+    },
+    {
+      "path": "data/vda16_summary.csv",
+      "bytes": 629,
+      "sha256": "267fe03d6e5fd90baa0f8425b74f67306e8ed1000f38cb59795e5562401c1750"
+    },
+    {
+      "path": "data/vda16_summary.json",
+      "bytes": 2335,
+      "sha256": "2a681fe0767ce158e547722b368461b6820a3bc1931d9970d06da6144cb27a9b"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1.json",
+      "bytes": 9319,
+      "sha256": "283e28f8c97f89e86db0649ca84748ba57194b78c6b7b38605920e1a1c38133e"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1.pdf",
+      "bytes": 53932,
+      "sha256": "36d835a1cedc81bc33035bd48f0db2790f0edf5adb19021c23278d8495a99b1d"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1.png",
+      "bytes": 397289,
+      "sha256": "98e0bbb51f924b8a6165d9723f26bc430ff7e900dad618f234fa1a38c4059f3c"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1.svg",
+      "bytes": 136397,
+      "sha256": "abdf35b305cc7f7a9c1b49ef0689a5a8e3d396a21f11e1a871e7d546080e7d92"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1_image_keys.pdf",
+      "bytes": 37997,
+      "sha256": "ee3a82f13ec513b184ae9065454dad89fa9bcb244c62184567858f4917d3f241"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1_image_keys.png",
+      "bytes": 283822,
+      "sha256": "6311701d21f66f2fcf7017d04fe0fca8334fdcd0e6323ae68e0d7dcc8c1c8cad"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1_image_keys.svg",
+      "bytes": 71270,
+      "sha256": "45a8603413b879bba5753402d420de8c0dc8ae37c0de5ef8d840128c83cf9667"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1_recurrent_memory_keys.pdf",
+      "bytes": 39378,
+      "sha256": "67bc8fa22b25d0e6bb8825b97f8451539709fd9752dd2a6b2b0f688f81be4519"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1_recurrent_memory_keys.png",
+      "bytes": 289905,
+      "sha256": "1465949d3c5a294670f0c34156bd1615ea0a77922f1b191c34d6f125407c2ada"
+    },
+    {
+      "path": "figures/attention/first_wave_attention_vda16_crossattn1_recurrent_memory_keys.svg",
+      "bytes": 72377,
+      "sha256": "301bd90bf1bb65cddbefeb6dd89335264c423b76ac52b5d8663ad730fd14597d"
+    },
+    {
+      "path": "figures/behavior/vda16_behavior_timing.pdf",
+      "bytes": 32820,
+      "sha256": "8cb12aeff7388cb58fdc4168342c0758f31216ba7f7fadade6d839b1dd231e17"
+    },
+    {
+      "path": "figures/behavior/vda16_behavior_timing.png",
+      "bytes": 635018,
+      "sha256": "27176463e777a939dbd4c7586c2b738eaa20d3d7658c517cb019f8f2eb04257a"
+    },
+    {
+      "path": "figures/behavior/vda16_behavior_timing.svg",
+      "bytes": 71109,
+      "sha256": "87d33c3c9af1127e864ac32462f71a02182baf96450961964893993fcbd147aa"
+    },
+    {
+      "path": "figures/clamp/vda16_attention_clamp.pdf",
+      "bytes": 28660,
+      "sha256": "d1b4ef746e8092855de3808e6f970ad35dd988be72da15298bff980dce911d1b"
+    },
+    {
+      "path": "figures/clamp/vda16_attention_clamp.png",
+      "bytes": 452146,
+      "sha256": "2c7a8a1ba32f68025d2ad68fbaf9a4f0133f8b1f2887826d6bab10b37d143115"
+    },
+    {
+      "path": "figures/clamp/vda16_attention_clamp.svg",
+      "bytes": 60409,
+      "sha256": "761ffc086b07f704eecddab85aaec9fe485c582439461290571c4dba5ce04d4d"
+    },
+    {
+      "path": "figures/clamp/vda16_clamp_achieved_attention.pdf",
+      "bytes": 25775,
+      "sha256": "fbce818c54b39a174fbb88682d821367b960d85c2e3461b8258dab7b8db4acc0"
+    },
+    {
+      "path": "figures/clamp/vda16_clamp_achieved_attention.png",
+      "bytes": 270113,
+      "sha256": "9b141f1a0fd5a4c92c50b7420632c534e2303e3e86def34dc46f97e259f5ef53"
+    },
+    {
+      "path": "figures/clamp/vda16_clamp_achieved_attention.svg",
+      "bytes": 43083,
+      "sha256": "b7838d85ef2e1eb5a596573d1d1ea211f295bba8926f25a04a24c6e540cce1fc"
+    },
+    {
+      "path": "figures/decoder/vda16_decoder.pdf",
+      "bytes": 28163,
+      "sha256": "97f4c1ff74caf013affd9827686245540ee95bc96421591eb1f40bc3314ebfbf"
+    },
+    {
+      "path": "figures/decoder/vda16_decoder.png",
+      "bytes": 376640,
+      "sha256": "5c14e9eb6948e5e907b07b84aa5d6a9e3050d03371a660236d173b0365a29988"
+    },
+    {
+      "path": "figures/decoder/vda16_decoder.svg",
+      "bytes": 37264,
+      "sha256": "bd9bc767ea500c2f7a9bc28ce0903a85308be81cd6c1903ca793be2b1d87efff"
+    },
+    {
+      "path": "figures/environment/first_wave_environment_vda16.json",
+      "bytes": 801,
+      "sha256": "77a028e1c9bb786aabd9648e5a24fb5e80b83d3fe5f852480d8905a466f8ee53"
+    },
+    {
+      "path": "figures/environment/first_wave_environment_vda16.pdf",
+      "bytes": 68985,
+      "sha256": "3e2f0a438d01bb6d15bd4254126d22974a779e74cc60ad1d9af42bb76aabecbb"
+    },
+    {
+      "path": "figures/environment/first_wave_environment_vda16.png",
+      "bytes": 197035,
+      "sha256": "dba1509e588f72c8acc13be1cc9daafa6194135958caec84bc6ef5d561928d2a"
+    },
+    {
+      "path": "figures/environment/first_wave_environment_vda16.svg",
+      "bytes": 157577,
+      "sha256": "566b7fe1e97494630d2ec5b21f8ec3250a3b6599bb370901763114a162587a1b"
+    },
+    {
+      "path": "figures/manuscript/vda16_manuscript_summary.pdf",
+      "bytes": 29975,
+      "sha256": "363056f28a2fad669589d8f27da2cb314b8002460540a692b62475f192f97a63"
+    },
+    {
+      "path": "figures/manuscript/vda16_manuscript_summary.png",
+      "bytes": 509093,
+      "sha256": "580dd907c7d766e28d397281587e57109c0f3917924f88cdcd72d45f07f506da"
+    },
+    {
+      "path": "figures/manuscript/vda16_manuscript_summary.svg",
+      "bytes": 62939,
+      "sha256": "4a5dd70cf973ac914a821d25961a7eef09c6bb9cd197eab0761afaec808be82c"
+    },
+    {
+      "path": "figures/manuscript/vda_method_comparison_with_vda16.pdf",
+      "bytes": 31294,
+      "sha256": "33bcf03f916bde86c524629697921a7981538b2c8b4a04b2a8498b4225c8a570"
+    },
+    {
+      "path": "figures/manuscript/vda_method_comparison_with_vda16.png",
+      "bytes": 594272,
+      "sha256": "d16b172e4243fb9ce6c76f2b4c5440f8ca8b1f3f6558db34f04fcd128488c702"
+    },
+    {
+      "path": "figures/manuscript/vda_method_comparison_with_vda16.svg",
+      "bytes": 47249,
+      "sha256": "518ad8798ed9cbc20b2aca55c56a8b4ab5b3839d1c03784663290d63e7fa4d8c"
+    },
+    {
+      "path": "figures/psychometrics/first_wave_psychometric_vda16_crossattn1.json",
+      "bytes": 4068,
+      "sha256": "6133caf4c36d6d0f201486004413721f609330bba274dbf6a36752b8c7d02b85"
+    },
+    {
+      "path": "figures/psychometrics/first_wave_psychometric_vda16_crossattn1.pdf",
+      "bytes": 32023,
+      "sha256": "5c048160ef3cc327b123a303da0117375bef78e8d6abda1872a426b4f8377eb9"
+    },
+    {
+      "path": "figures/psychometrics/first_wave_psychometric_vda16_crossattn1.png",
+      "bytes": 569565,
+      "sha256": "c937d9da08b9e6957b995e9b502bca7cb1a0970e003cf1ce20f4d624022ba315"
+    },
+    {
+      "path": "figures/psychometrics/first_wave_psychometric_vda16_crossattn1.svg",
+      "bytes": 65810,
+      "sha256": "5e1431f7bddbaf84065b889e9992e36539d17b825ef12d60f14e88081be8a2bc"
+    },
+    {
+      "path": "figures/training/vda16_training.pdf",
+      "bytes": 273638,
+      "sha256": "27879ee7b4d95d90946e55aeb5bb5d4e9494cd44206f26c90b0e1ff6892e92a2"
+    },
+    {
+      "path": "figures/training/vda16_training.png",
+      "bytes": 475004,
+      "sha256": "a019a1ee3b4bca4ddcf8b09a96b15ee1a15025b0dd56d77899f9102bcaefa944"
+    },
+    {
+      "path": "figures/training/vda16_training.svg",
+      "bytes": 805927,
+      "sha256": "539ae2223a81cb9efef080a0434abbdc5136168f733da15266fc6fb836617b97"
+    },
+    {
+      "path": "manuscript/vda16_results_fragment.tex",
+      "bytes": 2199,
+      "sha256": "90158d5f828bedb0f4d3a8beeaae5295f2c6dd0dfae65ebe621e4bc2a29261fd"
+    },
+    {
+      "path": "MANUSCRIPT_INTEGRATION.md",
+      "bytes": 1896,
+      "sha256": "c40d76decfe84bedf542192d93d04cf2ec39ae08ecbe12c927bcddc888fa9f96"
+    },
+    {
+      "path": "provenance/VALIDATION_RESULT.json",
+      "bytes": 928,
+      "sha256": "8b25de1e1b2c61f42b1a79eb34070281330b56692045dfca25f16ddb64f5e30e"
+    },
+    {
+      "path": "provenance/CHECKPOINT_ADMISSION.json",
+      "bytes": 8560,
+      "sha256": "9c7a76b0e69caf5434c6026898763b301a26d7ecaa983ee76b841785b75d9bfb"
+    },
+    {
+      "path": "provenance/checkpoints/rvit_paper_vda16_final.pt",
+      "bytes": 60696261,
+      "sha256": "b40d9aa49ec28c352d7a790de84f5902e1a307f7b2abe5fe68dc9e6aabb4f84d"
+    },
+    {
+      "path": "provenance/HISTORICAL_MATCHED_WIDTH_MANIFEST.json",
+      "bytes": 44515,
+      "sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11"
+    },
+    {
+      "path": "provenance/HISTORICAL_SHARD_AUDIT.json",
+      "bytes": 4576,
+      "sha256": "3bc85a3e90862f86bcbe66c79060d8e249656f0b69c838b14327a61320514641"
+    },
+    {
+      "path": "provenance/historical_shards/vda1_affine_ew_d128.npz",
+      "bytes": 18678,
+      "sha256": "10b0305ea798e85038a915a39ec98443cfa1fc6e66da46ada78fe4fc26d8cb09"
+    },
+    {
+      "path": "provenance/historical_shards/vda1_crossattn1_d128.npz",
+      "bytes": 18676,
+      "sha256": "efde389965952b93ac28597ee952d83910fa43fdd6f74f12ae1abf481c53977c"
+    },
+    {
+      "path": "provenance/historical_shards/vda4_affine_ew_d128.npz",
+      "bytes": 21212,
+      "sha256": "f9b18d36e88976f77764d4ff3b90e8ca9fae84abdcd496922f11f1eb129e131d"
+    },
+    {
+      "path": "provenance/historical_shards/vda4_crossattn1_d128.npz",
+      "bytes": 20827,
+      "sha256": "6bda789750a4a7d6aea08aeb23d1eb22df7a64d344f5e1800ac2072cd4cb7e89"
+    },
+    {
+      "path": "provenance/historical_shards/vda9_affine_ew_d128.npz",
+      "bytes": 21777,
+      "sha256": "690a17e9db18fd3153ec1a19c92a3fa9ce5fc26d17a1005f4c71476a2d3e5e62"
+    },
+    {
+      "path": "provenance/historical_shards/vda9_crossattn1_d128.npz",
+      "bytes": 21860,
+      "sha256": "0be3f2473db459eaeb937b077d7754310305df1a38c1740cc1246781a3b6112c"
+    },
+    {
+      "path": "provenance/launch_manifest.json",
+      "bytes": 2651,
+      "sha256": "b5f51f52576f9c2b07fce79002207506da6b080492c22ba0b7e44826c1ba1134"
+    },
+    {
+      "path": "provenance/metrics.csv",
+      "bytes": 4597293,
+      "sha256": "6782b0821f137d443eb04a4173624ff3b8246abe63cb7d6be24d6e54eed24785"
+    },
+    {
+      "path": "provenance/source_snapshot/conv_frontend.py",
+      "bytes": 8033,
+      "sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a"
+    },
+    {
+      "path": "provenance/source_snapshot/envs/__init__.py",
+      "bytes": 3964,
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4"
+    },
+    {
+      "path": "provenance/source_snapshot/envs/base.py",
+      "bytes": 16259,
+      "sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7"
+    },
+    {
+      "path": "provenance/source_snapshot/envs/luo2015.py",
+      "bytes": 11481,
+      "sha256": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c"
+    },
+    {
+      "path": "provenance/source_snapshot/envs/tasks.py",
+      "bytes": 16590,
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e"
+    },
+    {
+      "path": "provenance/source_snapshot/model.py",
+      "bytes": 9578,
+      "sha256": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be"
+    },
+    {
+      "path": "provenance/source_snapshot/paper_encoder.py",
+      "bytes": 34084,
+      "sha256": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe"
+    },
+    {
+      "path": "provenance/source_snapshot/paper_heads.py",
+      "bytes": 4239,
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869"
+    },
+    {
+      "path": "provenance/source_snapshot/scripts/build_vda16_manuscript_shard.py",
+      "bytes": 39565,
+      "sha256": "a8a37fbc55827a3d8fe1154beb5fa85754127cddb6fbbd32282e67aa06777b65"
+    },
+    {
+      "path": "provenance/source_snapshot/vae_frontend.py",
+      "bytes": 5577,
+      "sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_series/__init__.py",
+      "bytes": 514,
+      "sha256": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_series/architecture_figures.py",
+      "bytes": 13899,
+      "sha256": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_series/behavior_figures.py",
+      "bytes": 14011,
+      "sha256": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_series/first_wave_figures.py",
+      "bytes": 62795,
+      "sha256": "b3165034fdfc3c99ac1d023b1bfb04025e72e21a553e87e0512b1c63b083c22c"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_series/task_figures.py",
+      "bytes": 18279,
+      "sha256": "3c5182b0304213396d5d72c88ea994a080489f8454040db88175e929a49e4284"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_series/vda16_integration.py",
+      "bytes": 39850,
+      "sha256": "e58bbb5ab50fa7a29b9ca382102b91bb35eddb0d8f1a9e7fa3986293e0aa0dc4"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_sweep/matched_width.py",
+      "bytes": 21357,
+      "sha256": "fe5489bccb5c3a47cc74bc6c519cffc5403e62c55cf0e6190bcfcbb61afd6b9f"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_sweep/matched_width_compute.py",
+      "bytes": 6909,
+      "sha256": "7cbc1c94675615b73aa7bef7538e3f9198ab2868c639ac7bc6b331788ebd037b"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_sweep/matched_width_producer.py",
+      "bytes": 12596,
+      "sha256": "62f89036e7d5469e3b6e57060875123e9ec48c52d966ea75e1176d20ddc9eec9"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_sweep/vda_core.py",
+      "bytes": 15951,
+      "sha256": "b23fddbcc031e1368c6aa376374c130c6183b57cdb04e392499d7cafc0a25b7d"
+    },
+    {
+      "path": "provenance/source_snapshot/vda_sweep/vda_fig_decode.py",
+      "bytes": 11982,
+      "sha256": "fcb6fd449c71faa68a640d17b3fc7ef7266eb14049b372813f1e215aff718acc"
+    },
+    {
+      "path": "provenance/train.log",
+      "bytes": 7439968,
+      "sha256": "8b91116f399f042c7545c86153112f1e0155d8dee5ba1daf788fed31aaaff1b0"
+    }
+  ]
+}

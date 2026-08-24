@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "data_producer": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\provenance\\source_snapshot\\vda16_cued_vs_opposite_attention.py",
+  "figure_renderer": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda16_cued_vs_opposite_attention.py",
+  "artifacts": [
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\data\\vda16_cued_vs_opposite_attention.npz",
+      "sha256": "d3359287ced22900b018dc136f15177d3f370c405152368e796121b4bc126c7e",
+      "bytes": 1460741
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\data\\summary.json",
+      "sha256": "49d17170059cde005f8b3880a2ff256a59c00ecbe91df4f904f2681403059f8a",
+      "bytes": 5528
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\data\\curves.csv",
+      "sha256": "5f94ac61ae1d46e3babea6ecc139d849b46dfff74fdd40415ce14b538a157bc1",
+      "bytes": 2906
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\README.md",
+      "sha256": "9fbfce625dfe6ad92555c6649a9d1c99bf8cd60f994a83dd9ca98930393d1861",
+      "bytes": 588
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\provenance\\source_snapshot\\vda16_cued_vs_opposite_attention.py",
+      "sha256": "dd0c1cd7925939d3a72ada469064399753d6b25388183c1035e27998ae18ef76",
+      "bytes": 23276
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda16_cued_vs_opposite_attention.py",
+      "sha256": "a676740fc019bb63371238406202d4455f004097d9345d6405629c8e2a3ec8b9",
+      "bytes": 26314
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\checkpoints\\rvit_paper_vda16_final.pt",
+      "sha256": "b40d9aa49ec28c352d7a790de84f5902e1a307f7b2abe5fe68dc9e6aabb4f84d",
+      "bytes": 60696261
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\figures\\vda16_cued_vs_opposite_summary.pdf",
+      "sha256": "10648e5d10298ad60b29a23c3fbc841321649c93b0cf6632b4b67fc3d6e28c50",
+      "bytes": 32154
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\figures\\vda16_cued_vs_opposite_summary.svg",
+      "sha256": "fcbf325e1940eb75c6e0b861697dbe04e753b5e5f38b921fbcabc10f0d8a7d16",
+      "bytes": 65218
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\figures\\vda16_cued_vs_opposite_summary.png",
+      "sha256": "6c15fba4ec816bb39c253af1c381bc808e5cc93b07384a8bc7ff5d6c97ff5064",
+      "bytes": 875695
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\figures\\vda16_cued_vs_opposite_spatial_maps.pdf",
+      "sha256": "37ffdaefdb6c8d971e82b80d366b14b275ff8224363bbe0892b293d3e79db581",
+      "bytes": 25248
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\figures\\vda16_cued_vs_opposite_spatial_maps.svg",
+      "sha256": "f96071a16c464b340481ca3b98c703c647cdc1c9141a42f99af18593cc4a58e8",
+      "bytes": 22669
+    },
+    {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\figures\\vda16_cued_vs_opposite_spatial_maps.png",
+      "sha256": "e949bde02fc43e62bfdfb1aacfa094b2430726ed01c65396ec986b75ecc69ad1",
+      "bytes": 149285
+    }
+  ]
+}

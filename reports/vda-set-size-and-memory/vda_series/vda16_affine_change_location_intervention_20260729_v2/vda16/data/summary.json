@@ -1,0 +1,235 @@
+{
+  "env": "vda16",
+  "status": "ok",
+  "feedback": "affine_ew",
+  "width": 128,
+  "grid": [
+    4,
+    4
+  ],
+  "n_locations": 16,
+  "checkpoint_iteration": 19999,
+  "checkpoint_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_nodecay_20260720_production\\provenance\\checkpoints\\rvit_paper_vda16_final.pt",
+  "checkpoint_sha256": "52141da629e2c7f8f902826196067efbadb924608eecde7560559fdc0f813233",
+  "cue_index": 0,
+  "change_index": 15,
+  "control_index": 5,
+  "focal_magnitude_degrees": 30.0,
+  "displayed_validity": 1.0,
+  "trials_per_condition": 300,
+  "clamp_from_frame": 5,
+  "qualifying_response_frames": [
+    5,
+    6
+  ],
+  "doses": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "roles": {
+    "change": "target = true change location (rescue/lesion test)",
+    "cued": "target = cued (wrong) location (negative control)",
+    "control": "target = task-irrelevant location (specificity control)"
+  },
+  "role_target_location": {
+    "change": 15,
+    "cued": 0,
+    "control": 5
+  },
+  "seed_policy": "common random numbers: one invalid-change trial batch and one no-change trial batch, shared across every role/dose condition; only the attn_clamp differs",
+  "metrics": {
+    "change": {
+      "response_rate": [
+        0.7466666666666667,
+        0.96,
+        0.98,
+        0.9933333333333333,
+        0.9933333333333333
+      ],
+      "false_alarm_rate": [
+        0.043333333333333335,
+        0.043333333333333335,
+        0.043333333333333335,
+        0.04666666666666667,
+        0.016666666666666666
+      ],
+      "dprime": [
+        2.377286344722428,
+        3.463935472880242,
+        3.7669983122598953,
+        4.152810167440391,
+        4.602784883404466
+      ],
+      "criterion": [
+        0.5246062292668587,
+        -0.01871833481204821,
+        -0.17024975450187485,
+        -0.3983345654992866,
+        -0.17334720751724908
+      ],
+      "conditional_mean_response_frame": [
+        5.459821428571429,
+        5.190972222222222,
+        5.091836734693878,
+        5.073825503355705,
+        5.070469798657718
+      ],
+      "achieved_change_mass_t6": [
+        0.4451829635310177,
+        0.6082601739395382,
+        0.8219773310048499,
+        0.9376447445371399,
+        0.9873415606680768
+      ],
+      "achieved_cued_mass_t6": [
+        0.14269009859476783,
+        0.06421337448089066,
+        0.024549258245874363,
+        0.007064948666545465,
+        0.0012359960212866554
+      ],
+      "achieved_control_mass_t6": [
+        0.02885537552907559,
+        0.022988934638740702,
+        0.011335099253825615,
+        0.004057957316175705,
+        0.0008052567490308861
+      ]
+    },
+    "cued": {
+      "response_rate": [
+        0.99,
+        0.99,
+        0.98,
+        0.9733333333333334,
+        0.86
+      ],
+      "false_alarm_rate": [
+        0.013333333333333334,
+        0.016666666666666666,
+        0.043333333333333335,
+        0.05333333333333334,
+        0.04666666666666667
+      ],
+      "dprime": [
+        4.542710653265239,
+        4.454393108225824,
+        3.7669983122598953,
+        3.545570486450562,
+        2.758389859035865
+      ],
+      "criterion": [
+        -0.054992547408221126,
+        -0.09915131992792836,
+        -0.17024975450187485,
+        -0.15942684857297829,
+        0.2988755887029766
+      ],
+      "conditional_mean_response_frame": [
+        5.094276094276094,
+        5.094276094276094,
+        5.091836734693878,
+        5.157534246575342,
+        5.325581395348837
+      ],
+      "achieved_change_mass_t6": [
+        0.8336065701836904,
+        0.8329587918954331,
+        0.8219773310048499,
+        0.738219647539045,
+        0.5666156094127711
+      ],
+      "achieved_cued_mass_t6": [
+        7.472077712970773e-05,
+        0.0014808736511335006,
+        0.024549258245874363,
+        0.1777071954799936,
+        0.4161082867291862
+      ],
+      "achieved_control_mass_t6": [
+        0.012421489751918625,
+        0.012357493650893754,
+        0.011335099253825615,
+        0.005754042113488443,
+        0.001069864722520999
+      ]
+    },
+    "control": {
+      "response_rate": [
+        0.98,
+        0.98,
+        0.98,
+        0.98,
+        0.9466666666666667
+      ],
+      "false_alarm_rate": [
+        0.03666666666666667,
+        0.043333333333333335,
+        0.043333333333333335,
+        0.04666666666666667,
+        0.02666666666666667
+      ],
+      "dprime": [
+        3.844499463801752,
+        3.7669983122598953,
+        3.7669983122598953,
+        3.7318194288527318,
+        3.545570486450561
+      ],
+      "criterion": [
+        -0.13149917873094652,
+        -0.17024975450187485,
+        -0.17024975450187485,
+        -0.18783919620545675,
+        0.15942684857297773
+      ],
+      "conditional_mean_response_frame": [
+        5.091836734693878,
+        5.091836734693878,
+        5.091836734693878,
+        5.105442176870748,
+        5.144366197183099
+      ],
+      "achieved_change_mass_t6": [
+        0.8256746120008118,
+        0.8254937416977441,
+        0.8219773310048499,
+        0.7752177935482322,
+        0.5994397106791127
+      ],
+      "achieved_cued_mass_t6": [
+        0.025359500068995063,
+        0.02531840562618249,
+        0.024549258245874363,
+        0.01689064838018091,
+        0.006937855819429949
+      ],
+      "achieved_control_mass_t6": [
+        3.0225010758072773e-05,
+        0.0006047265040740631,
+        0.011335099253825615,
+        0.12004140077959206,
+        0.3729839204100675
+      ]
+    }
+  },
+  "cache_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_change_location_intervention_20260729_v2\\vda16\\data\\change_location_intervention.npz",
+  "cache_sha256": "a3a0f0119b233ba3ec565bdf510a5b76d422129f2283e378d02418fd984a7f13",
+  "figure_outputs": {
+    "summary": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_change_location_intervention_20260729_v2\\vda16\\figures\\vda16_change_location_intervention_summary.pdf",
+    "trajectory": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_change_location_intervention_20260729_v2\\vda16\\figures\\vda16_change_location_attention_trajectory.pdf"
+  },
+  "runtime_versions": {
+    "python": "3.10.6",
+    "numpy": "1.23.1",
+    "torch": "1.13.1+cu117",
+    "scipy": "1.8.1",
+    "matplotlib": "3.5.2",
+    "device": "cpu"
+  },
+  "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\change_location_intervention.py",
+  "producer_sha256": "b191c26c861ee602e8186d28b7035a5c556787d5ef1289473fadfa0add10788a"
+}

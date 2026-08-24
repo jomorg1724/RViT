@@ -1,0 +1,339 @@
+{
+  "all_metrics_path": "vda4_spatial_scaling_endpoint_replication_metrics.csv",
+  "analysis": "cached-artifact-only VDA4 cross-attention endpoint replication synthesis",
+  "descriptive_replication_summary": {
+    "causal_dependence_natural_minus_disable_pp": {
+      "direction_by_seed": {
+        "seed0": "decrease",
+        "seed1": "decrease"
+      },
+      "directional_agreement": true,
+      "evidence_class": "directional_and_dispersion_only_n_equals_2",
+      "maximum_delta": -3.600000000000003,
+      "mean_delta_descriptive_only": -7.400000000000001,
+      "minimum_delta": -11.2,
+      "n_training_seeds": 2,
+      "range_across_two_seed_deltas": 7.599999999999996,
+      "sample_standard_deviation_across_two_seed_deltas": 5.374011537017759,
+      "seedwise_deltas_10x10_minus_2x2": {
+        "seed0": -11.2,
+        "seed1": -3.600000000000003
+      },
+      "shared_direction": "decrease"
+    },
+    "invalid_br_region3_mass_frames5_6": {
+      "direction_by_seed": {
+        "seed0": "decrease",
+        "seed1": "decrease"
+      },
+      "directional_agreement": true,
+      "evidence_class": "directional_and_dispersion_only_n_equals_2",
+      "maximum_delta": -0.23860131326364353,
+      "mean_delta_descriptive_only": -0.30634909365471685,
+      "minimum_delta": -0.3740968740457902,
+      "n_training_seeds": 2,
+      "range_across_two_seed_deltas": 0.13549556078214664,
+      "sample_standard_deviation_across_two_seed_deltas": 0.09580982984972991,
+      "seedwise_deltas_10x10_minus_2x2": {
+        "seed0": -0.23860131326364353,
+        "seed1": -0.3740968740457902
+      },
+      "shared_direction": "decrease"
+    },
+    "invalid_tl_region0_mass_frames5_6": {
+      "direction_by_seed": {
+        "seed0": "decrease",
+        "seed1": "increase"
+      },
+      "directional_agreement": false,
+      "evidence_class": "directional_and_dispersion_only_n_equals_2",
+      "maximum_delta": 0.34507372019261595,
+      "mean_delta_descriptive_only": 0.1660615788069677,
+      "minimum_delta": -0.012950562578680547,
+      "n_training_seeds": 2,
+      "range_across_two_seed_deltas": 0.3580242827712965,
+      "sample_standard_deviation_across_two_seed_deltas": 0.25316139817703376,
+      "seedwise_deltas_10x10_minus_2x2": {
+        "seed0": -0.012950562578680547,
+        "seed1": 0.34507372019261595
+      },
+      "shared_direction": "discordant"
+    },
+    "normalized_response_auc_valid_minus_invalid": {
+      "direction_by_seed": {
+        "seed0": "decrease",
+        "seed1": "increase"
+      },
+      "directional_agreement": false,
+      "evidence_class": "directional_and_dispersion_only_n_equals_2",
+      "maximum_delta": 0.07555555555555551,
+      "mean_delta_descriptive_only": 0.026999999999999982,
+      "minimum_delta": -0.02155555555555555,
+      "n_training_seeds": 2,
+      "range_across_two_seed_deltas": 0.09711111111111106,
+      "sample_standard_deviation_across_two_seed_deltas": 0.06866792519522691,
+      "seedwise_deltas_10x10_minus_2x2": {
+        "seed0": -0.02155555555555555,
+        "seed1": 0.07555555555555551
+      },
+      "shared_direction": "discordant"
+    },
+    "rt30_invalid_minus_valid_frames": {
+      "direction_by_seed": {
+        "seed0": "increase",
+        "seed1": "decrease"
+      },
+      "directional_agreement": false,
+      "evidence_class": "directional_and_dispersion_only_n_equals_2",
+      "maximum_delta": 0.050228496972527736,
+      "mean_delta_descriptive_only": 0.010019488174112023,
+      "minimum_delta": -0.03018952062430369,
+      "n_training_seeds": 2,
+      "range_across_two_seed_deltas": 0.08041801759683143,
+      "sample_standard_deviation_across_two_seed_deltas": 0.056864125572298606,
+      "seedwise_deltas_10x10_minus_2x2": {
+        "seed0": 0.050228496972527736,
+        "seed1": -0.03018952062430369
+      },
+      "shared_direction": "discordant"
+    },
+    "threshold_cost_invalid_minus_valid_deg": {
+      "direction_by_seed": {
+        "seed0": "decrease",
+        "seed1": "increase"
+      },
+      "directional_agreement": false,
+      "evidence_class": "directional_and_dispersion_only_n_equals_2",
+      "maximum_delta": 2.497829382012286,
+      "mean_delta_descriptive_only": 0.7608673746219621,
+      "minimum_delta": -0.976094632768362,
+      "n_training_seeds": 2,
+      "range_across_two_seed_deltas": 3.473924014780648,
+      "sample_standard_deviation_across_two_seed_deltas": 2.4564352281781923,
+      "seedwise_deltas_10x10_minus_2x2": {
+        "seed0": -0.976094632768362,
+        "seed1": 2.497829382012286
+      },
+      "shared_direction": "discordant"
+    },
+    "valid_tl_region0_mass_frames5_6": {
+      "direction_by_seed": {
+        "seed0": "decrease",
+        "seed1": "decrease"
+      },
+      "directional_agreement": true,
+      "evidence_class": "directional_and_dispersion_only_n_equals_2",
+      "maximum_delta": -0.010009947960497811,
+      "mean_delta_descriptive_only": -0.20172563912637997,
+      "minimum_delta": -0.39344133029226214,
+      "n_training_seeds": 2,
+      "range_across_two_seed_deltas": 0.3834313823317643,
+      "sample_standard_deviation_across_two_seed_deltas": 0.2711269305665223,
+      "seedwise_deltas_10x10_minus_2x2": {
+        "seed0": -0.39344133029226214,
+        "seed1": -0.010009947960497811
+      },
+      "shared_direction": "decrease"
+    }
+  },
+  "elapsed_seconds": 3.3878350257873535,
+  "endpoint_metrics": [
+    {
+      "causal_dependence_natural_minus_disable_pp": 12.4,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.82,
+      "explicit_natural_invalid_response_rate": 0.944,
+      "explicit_shuffle_invalid_response_rate": 0.868,
+      "explicit_uniform_invalid_response_rate": 0.856,
+      "feedback": "crossattn1",
+      "grid": "2x2",
+      "invalid_br_region3_mass_frames5_6": 0.5070523979957215,
+      "invalid_reorienting_br_minus_tl_mass_frames5_6": 0.22155541094480213,
+      "invalid_threshold_deg": 19.066666666666666,
+      "invalid_tl_region0_mass_frames5_6": 0.2854969870509194,
+      "model": "Cross-attention",
+      "n_tokens": 4,
+      "normalized_response_auc_valid_minus_invalid": 0.2187777777777778,
+      "rt30_invalid_minus_valid_frames": 0.11391257242451402,
+      "seed": 0,
+      "source_manifest_sha256": "044f9a5860ac5a400a461b5d7dc5bf8a9d58559cd2fe08d925df58185b90d3f7",
+      "threshold_cost_invalid_minus_valid_deg": 7.160416666666666,
+      "valid_threshold_deg": 11.90625,
+      "valid_tl_region0_mass_frames5_6": 0.7480713168624789
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 1.200000000000001,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.964,
+      "explicit_natural_invalid_response_rate": 0.976,
+      "explicit_shuffle_invalid_response_rate": 0.936,
+      "explicit_uniform_invalid_response_rate": 0.956,
+      "feedback": "crossattn1",
+      "grid": "10x10",
+      "invalid_br_region3_mass_frames5_6": 0.268451084732078,
+      "invalid_reorienting_br_minus_tl_mass_frames5_6": -0.004095339740160853,
+      "invalid_threshold_deg": 17.625,
+      "invalid_tl_region0_mass_frames5_6": 0.27254642447223887,
+      "model": "Cross-attention",
+      "n_tokens": 100,
+      "normalized_response_auc_valid_minus_invalid": 0.19722222222222224,
+      "rt30_invalid_minus_valid_frames": 0.16414106939704176,
+      "seed": 0,
+      "source_manifest_sha256": "c3ecaa670952864230f91859cebfa5c5cbaa607e934969ca589347a237d9a6eb",
+      "threshold_cost_invalid_minus_valid_deg": 6.1843220338983045,
+      "valid_threshold_deg": 11.440677966101696,
+      "valid_tl_region0_mass_frames5_6": 0.3546299865702167
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 3.600000000000003,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.964,
+      "explicit_natural_invalid_response_rate": 1.0,
+      "explicit_shuffle_invalid_response_rate": 0.972,
+      "explicit_uniform_invalid_response_rate": 0.948,
+      "feedback": "crossattn1",
+      "grid": "2x2",
+      "invalid_br_region3_mass_frames5_6": 0.6043480687076226,
+      "invalid_reorienting_br_minus_tl_mass_frames5_6": 0.4624308977942775,
+      "invalid_threshold_deg": 14.714285714285715,
+      "invalid_tl_region0_mass_frames5_6": 0.1419171709133451,
+      "model": "Cross-attention",
+      "n_tokens": 4,
+      "normalized_response_auc_valid_minus_invalid": 0.09294444444444447,
+      "rt30_invalid_minus_valid_frames": 0.09373467112597567,
+      "seed": 1,
+      "source_manifest_sha256": "054c7bac594cfad4fd8998093e282b3d6637d47f87898d1f5f2e634776227703",
+      "threshold_cost_invalid_minus_valid_deg": 2.9729064039408897,
+      "valid_threshold_deg": 11.741379310344826,
+      "valid_tl_region0_mass_frames5_6": 0.6376794287061784
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 0.0,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 1.0,
+      "explicit_natural_invalid_response_rate": 1.0,
+      "explicit_shuffle_invalid_response_rate": 1.0,
+      "explicit_uniform_invalid_response_rate": 1.0,
+      "feedback": "crossattn1",
+      "grid": "10x10",
+      "invalid_br_region3_mass_frames5_6": 0.23025119466183241,
+      "invalid_reorienting_br_minus_tl_mass_frames5_6": -0.25673969644412864,
+      "invalid_threshold_deg": 14.41304347826087,
+      "invalid_tl_region0_mass_frames5_6": 0.48699089110596105,
+      "model": "Cross-attention",
+      "n_tokens": 100,
+      "normalized_response_auc_valid_minus_invalid": 0.16849999999999998,
+      "rt30_invalid_minus_valid_frames": 0.06354515050167198,
+      "seed": 1,
+      "source_manifest_sha256": "8d758522bddb159367960b1d3b8a80f6f660ffb529c0e8a9103d46fc5e45a387",
+      "threshold_cost_invalid_minus_valid_deg": 5.470735785953176,
+      "valid_threshold_deg": 8.942307692307693,
+      "valid_tl_region0_mass_frames5_6": 0.6276694807456806
+    }
+  ],
+  "evidence_boundary": {
+    "allowed": "seedwise direction, directional agreement, and descriptive dispersion",
+    "not_supported": [
+      "confidence intervals or p-values",
+      "population-level replication or scaling-law claims",
+      "causal isolation of token count from parameter count or spatial discretization"
+    ]
+  },
+  "feedbacks": [
+    "crossattn1"
+  ],
+  "grids": [
+    "2x2",
+    "10x10"
+  ],
+  "interpretation": {
+    "directional_findings": [
+      "For threshold_cost_invalid_minus_valid_deg, the two observed seeds have discordant endpoint directions; the endpoint effect does not directionally replicate in this two-seed sample.",
+      "For normalized_response_auc_valid_minus_invalid, the two observed seeds have discordant endpoint directions; the endpoint effect does not directionally replicate in this two-seed sample.",
+      "For rt30_invalid_minus_valid_frames, the two observed seeds have discordant endpoint directions; the endpoint effect does not directionally replicate in this two-seed sample.",
+      "For valid_tl_region0_mass_frames5_6, both observed seeds show decrease from 2x2 to 10x10; this is directional replication across two checkpoints, not a population estimate.",
+      "For invalid_br_region3_mass_frames5_6, both observed seeds show decrease from 2x2 to 10x10; this is directional replication across two checkpoints, not a population estimate.",
+      "For invalid_tl_region0_mass_frames5_6, the two observed seeds have discordant endpoint directions; the endpoint effect does not directionally replicate in this two-seed sample.",
+      "For causal_dependence_natural_minus_disable_pp, both observed seeds show decrease from 2x2 to 10x10; this is directional replication across two checkpoints, not a population estimate."
+    ],
+    "limitations": [
+      "Only two training seeds are available, so dispersion is descriptive and inferential uncertainty is not estimable.",
+      "Token count, spatial discretization, and model parameter count co-vary in this endpoint comparison.",
+      "The physical VDA4 task retains four regions; this does not establish a general biological or architectural set-size law.",
+      "Attention-mass differences are not themselves causal response-dependence evidence; the registered disable contrast is reported separately."
+    ]
+  },
+  "metric_definitions": {
+    "causal_dependence": "natural minus disable invalid response rate, percentage points",
+    "endpoint_delta": "10x10 value minus matched 2x2 value within one training seed",
+    "event_localization": "mean regional attention mass over trials and frames 5-6; valid change uses TL region 0, invalid change uses BR region 3, and invalid cue retention uses TL region 0",
+    "normalized_response_auc": "trapezoidal integral of valid minus invalid response rate over 0-30 degrees, divided by 30 degrees",
+    "rt30_cost": "invalid minus valid mean qualifying response frame at 30 degrees and 100% displayed validity",
+    "threshold": "linear crossing of 0.5 on the cumulative-maximum response-rate envelope",
+    "threshold_cost": "invalid threshold minus valid threshold at 100% displayed validity, degrees"
+  },
+  "n_training_seeds": 2,
+  "schema_version": 1,
+  "scope": "crossattn1 2x2 versus 10x10 endpoint comparison across training seeds 0 and 1",
+  "seed0_synthesis_inputs_consumed_read_only": true,
+  "seeds": [
+    0,
+    1
+  ],
+  "seedwise_endpoint_deltas": [
+    {
+      "delta_10x10_minus_2x2_causal_dependence_natural_minus_disable_pp": -11.2,
+      "delta_10x10_minus_2x2_invalid_br_region3_mass_frames5_6": -0.23860131326364353,
+      "delta_10x10_minus_2x2_invalid_tl_region0_mass_frames5_6": -0.012950562578680547,
+      "delta_10x10_minus_2x2_normalized_response_auc_valid_minus_invalid": -0.02155555555555555,
+      "delta_10x10_minus_2x2_rt30_invalid_minus_valid_frames": 0.050228496972527736,
+      "delta_10x10_minus_2x2_threshold_cost_invalid_minus_valid_deg": -0.976094632768362,
+      "delta_10x10_minus_2x2_valid_tl_region0_mass_frames5_6": -0.39344133029226214,
+      "from_grid": "2x2",
+      "from_tokens": 4,
+      "seed": 0,
+      "to_grid": "10x10",
+      "to_tokens": 100
+    },
+    {
+      "delta_10x10_minus_2x2_causal_dependence_natural_minus_disable_pp": -3.600000000000003,
+      "delta_10x10_minus_2x2_invalid_br_region3_mass_frames5_6": -0.3740968740457902,
+      "delta_10x10_minus_2x2_invalid_tl_region0_mass_frames5_6": 0.34507372019261595,
+      "delta_10x10_minus_2x2_normalized_response_auc_valid_minus_invalid": 0.07555555555555551,
+      "delta_10x10_minus_2x2_rt30_invalid_minus_valid_frames": -0.03018952062430369,
+      "delta_10x10_minus_2x2_threshold_cost_invalid_minus_valid_deg": 2.497829382012286,
+      "delta_10x10_minus_2x2_valid_tl_region0_mass_frames5_6": -0.010009947960497811,
+      "from_grid": "2x2",
+      "from_tokens": 4,
+      "seed": 1,
+      "to_grid": "10x10",
+      "to_tokens": 100
+    }
+  ],
+  "source_evaluation_count": 4,
+  "source_manifests": [
+    {
+      "bytes": 2256,
+      "label": "vda4_crossattn1_grid2x2_seed0",
+      "sha256": "044f9a5860ac5a400a461b5d7dc5bf8a9d58559cd2fe08d925df58185b90d3f7"
+    },
+    {
+      "bytes": 2272,
+      "label": "vda4_crossattn1_grid10x10_seed0",
+      "sha256": "c3ecaa670952864230f91859cebfa5c5cbaa607e934969ca589347a237d9a6eb"
+    },
+    {
+      "bytes": 2264,
+      "label": "vda4_crossattn1_grid2x2_seed1",
+      "sha256": "054c7bac594cfad4fd8998093e282b3d6637d47f87898d1f5f2e634776227703"
+    },
+    {
+      "bytes": 2272,
+      "label": "vda4_crossattn1_grid10x10_seed1",
+      "sha256": "8d758522bddb159367960b1d3b8a80f6f660ffb529c0e8a9103d46fc5e45a387"
+    }
+  ],
+  "statistical_unit": "independently trained checkpoint seed",
+  "status": "complete",
+  "training_accuracy_used_as_attention_evidence": false
+}

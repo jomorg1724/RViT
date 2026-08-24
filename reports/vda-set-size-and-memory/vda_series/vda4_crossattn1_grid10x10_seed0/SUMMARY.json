@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "model": {
+    "label": "vda4_crossattn1_grid10x10_seed0",
+    "task": "vda4",
+    "feedback": "crossattn1",
+    "grid_rows": 10,
+    "grid_cols": 10,
+    "n_tokens": 100,
+    "checkpoint_iteration": 19999,
+    "checkpoint_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_crossattn1_grid10x10_d128_nodecay_seed0_pod\\rvit_paper_vda4_final.pt",
+    "checkpoint_sha256": "06382037f3693c454d494df220e931717bf7f09658b5fcc3c110b6114ebf5bdc",
+    "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_spatial_scaling_evaluation.py",
+    "producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1"
+  },
+  "training_is_not_scientific_validation": true,
+  "anchor_100pct_30deg": {
+    "valid_response_rate": 1.0,
+    "invalid_response_rate": 0.9766666666666667,
+    "false_alarm_rate": 0.04,
+    "valid_dprime": 4.669452384267171,
+    "invalid_dprime": 3.69460760650628
+  },
+  "natural_vs_disabled_invalid": {
+    "natural_response_rate": 0.976,
+    "disabled_response_rate": 0.964,
+    "difference_disabled_minus_natural": -0.01200000000000001
+  },
+  "elapsed_seconds": 160.55802035331726
+}

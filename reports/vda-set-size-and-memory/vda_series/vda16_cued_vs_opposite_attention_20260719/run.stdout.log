@@ -1,0 +1,37 @@
+[1/10] cued_top_left magnitude=2 seed=20260711
+[1/10] forced_bottom_right magnitude=2 seed=20260711
+[2/10] cued_top_left magnitude=6 seed=20260812
+[2/10] forced_bottom_right magnitude=6 seed=20260812
+[3/10] cued_top_left magnitude=10 seed=20260913
+[3/10] forced_bottom_right magnitude=10 seed=20260913
+[4/10] cued_top_left magnitude=14 seed=20261014
+[4/10] forced_bottom_right magnitude=14 seed=20261014
+[5/10] cued_top_left magnitude=18 seed=20261115
+[5/10] forced_bottom_right magnitude=18 seed=20261115
+[6/10] cued_top_left magnitude=22 seed=20261216
+[6/10] forced_bottom_right magnitude=22 seed=20261216
+[7/10] cued_top_left magnitude=26 seed=20261317
+[7/10] forced_bottom_right magnitude=26 seed=20261317
+[8/10] cued_top_left magnitude=30 seed=20261418
+[8/10] forced_bottom_right magnitude=30 seed=20261418
+[9/10] cued_top_left magnitude=34 seed=20261519
+[9/10] forced_bottom_right magnitude=34 seed=20261519
+[10/10] cued_top_left magnitude=38 seed=20261620
+[10/10] forced_bottom_right magnitude=38 seed=20261620
+{
+  "t4": {
+    "mean": 0.08944445395221313,
+    "sem": 0.0053497214731257955,
+    "ci95_low": 0.07895899986488658,
+    "ci95_high": 0.09992990803953969,
+    "trials": 300
+  },
+  "t5": {
+    "mean": 0.04057244914273421,
+    "sem": 0.005169655334411794,
+    "ci95_low": 0.030439924687287095,
+    "ci95_high": 0.050704973598181324,
+    "trials": 300
+  }
+}
+wrote C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series\vda16_cued_vs_opposite_attention_20260719

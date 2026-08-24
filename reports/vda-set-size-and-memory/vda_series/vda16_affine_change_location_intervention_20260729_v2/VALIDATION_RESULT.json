@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "verifier_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\verify_vda16_affine_change_location_intervention.py",
+  "verifier_sha256": "c590cca0d9a9522b6ce8f1500033fe801f2a702190ffac62bb3694fcd25dde1c",
+  "producer_manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_change_location_intervention_20260729_v2\\MANIFEST.json",
+  "producer_manifest_sha256": "6251380a7b74020e26a806d8b904693a9974d81e52b89b0e9324bbe567475531",
+  "artifact_hash_count": 22,
+  "semantic_checks": {
+    "npz_exact_key_contract": true,
+    "all_press_arrays_shape_dtype_range_valid": true,
+    "all_attention_mass_arrays_finite_normalized": true,
+    "natural_common_random_number_outputs_exact_across_roles": true,
+    "all_120_recorded_metrics_recomputed": true,
+    "all_15_csv_rows_recomputed": true,
+    "all_role_target_masses_strictly_dose_monotonic": true,
+    "two_pdf_figures_parse_as_single_pages": true,
+    "two_png_figures_decode_at_expected_resolution": true
+  }
+}

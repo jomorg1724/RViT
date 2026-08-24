@@ -1,0 +1,87 @@
+{
+  "task": "vda16",
+  "feedback": "crossattn1",
+  "width": 128,
+  "memory_decay": 1.0,
+  "checkpoint_iteration": 19999,
+  "training": {
+    "final_iteration": 19999,
+    "final_rolling_correct": 0.75,
+    "late50_mean_rolling_correct": 0.7742,
+    "best_rolling_correct": 0.815,
+    "initial_theta_degrees": 65.0,
+    "final_theta_degrees": 65.0,
+    "minimum_theta_degrees": 65.0,
+    "curriculum_floor_degrees": 8.0,
+    "curriculum_completed": false,
+    "status": "competence_gated",
+    "interpretation": "easiest-condition diagnostic; the curriculum never reached its declared floor"
+  },
+  "psychometric_probe": {
+    "displayed_validity": 0.75,
+    "orientation_change_degrees": 18.0,
+    "valid_response_rate": 0.6533333333333333,
+    "forced_invalid_response_rate": 0.13333333333333333,
+    "valid_minus_invalid": 0.52
+  },
+  "decoder": {
+    "colour": {
+      "native_t6": 1.0,
+      "pca128_t6": 1.0
+    },
+    "validity": {
+      "native_t6": 0.3591204573934837,
+      "pca128_t6": 0.3980850563909774
+    },
+    "change": {
+      "native_t6": 0.6677168931731985,
+      "pca128_t6": 0.6800134323640961
+    },
+    "change_location": {
+      "native_t6": 0.11170504385964912,
+      "pca128_t6": 0.09814575501253132
+    },
+    "cued_change": {
+      "native_t6": 0.806625939849624,
+      "pca128_t6": 0.7488643483709274
+    }
+  },
+  "clamp": {
+    "key_logit_biases": [
+      -6.0,
+      -3.0,
+      0.0,
+      3.0,
+      6.0
+    ],
+    "valid_dprime": [
+      1.4830084962659569,
+      1.7819365449471298,
+      2.1434765953149775,
+      1.5326091186533282,
+      1.2378373425737639
+    ],
+    "invalid_dprime": [
+      0.7718605179540907,
+      0.7351931308924364,
+      0.6535285330609053,
+      0.5078996001140069,
+      0.18561947276777907
+    ],
+    "valid_criterion": [
+      1.1106756106360682,
+      0.9612115862954816,
+      0.5928245635452328,
+      0.04707582888674022,
+      0.012143307772616907
+    ],
+    "invalid_criterion": [
+      1.4662495997920013,
+      1.4845832933228285,
+      1.337798594672269,
+      0.5594305881564008,
+      0.5382522426756092
+    ]
+  },
+  "claim_boundary": "single seed and one cross-attention/d128/no-decay checkpoint; no affine, width, decay, seed-population, or causal set-size contrast"
+}

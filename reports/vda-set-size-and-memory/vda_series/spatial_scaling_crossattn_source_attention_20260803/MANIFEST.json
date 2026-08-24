@@ -1,0 +1,105 @@
+{
+  "admitted_labels": [
+    "vda4_crossattn1_grid10x10_seed0",
+    "vda4_crossattn1_grid10x10_seed1",
+    "vda4_crossattn1_grid2x2_seed0",
+    "vda4_crossattn1_grid2x2_seed1",
+    "vda4_crossattn1_grid4x4_seed0"
+  ],
+  "artifact": "VDA4 cross-attention source-resolved held-out refresh",
+  "device": "cuda",
+  "elapsed_seconds": 15.437851905822754,
+  "models": [
+    {
+      "comparisons": {
+        "atol": 2e-05,
+        "press_exact_match": true,
+        "raw_mean_matches_verified_raw_mean": true,
+        "raw_mean_max_abs_error": 1.2516975402832031e-06,
+        "rtol": 1e-05,
+        "source_sum_matches_verified_token_mass": true,
+        "source_sum_max_abs_error": 2.9802322387695312e-08
+      },
+      "data_sha256": "12bb249f8da1dcc19e0334eaac6b2f7e90cbc1f393acbc11fdfbf1ac45d4adea",
+      "label": "vda4_crossattn1_grid2x2_seed0",
+      "manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_crossattn_source_attention_20260803\\vda4_crossattn1_grid2x2_seed0\\MANIFEST.json",
+      "manifest_sha256": "3bfb171f506c166309ed9314306c5ec61e8cda47f99b0698a675f2d8cb9edf85"
+    },
+    {
+      "comparisons": {
+        "atol": 2e-05,
+        "press_exact_match": true,
+        "raw_mean_matches_verified_raw_mean": true,
+        "raw_mean_max_abs_error": 1.7285346984863281e-06,
+        "rtol": 1e-05,
+        "source_sum_matches_verified_token_mass": true,
+        "source_sum_max_abs_error": 2.979504643008113e-08
+      },
+      "data_sha256": "2187229c57ec1da76ed37e24440cd954ab66a9d96d59097108c9d8e3a23b66d9",
+      "label": "vda4_crossattn1_grid2x2_seed1",
+      "manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_crossattn_source_attention_20260803\\vda4_crossattn1_grid2x2_seed1\\MANIFEST.json",
+      "manifest_sha256": "a1ca7ff0643ee121c5d1b9801890d10e7bae91defed5156e2e09d68568435e1c"
+    },
+    {
+      "comparisons": {
+        "atol": 2e-05,
+        "press_exact_match": true,
+        "raw_mean_matches_verified_raw_mean": true,
+        "raw_mean_max_abs_error": 1.341104507446289e-07,
+        "rtol": 1e-05,
+        "source_sum_matches_verified_token_mass": true,
+        "source_sum_max_abs_error": 2.966226020362228e-08
+      },
+      "data_sha256": "187305d9a354511829d3d6714f799d0a1e3eb09932a317183dc0136a47094a94",
+      "label": "vda4_crossattn1_grid4x4_seed0",
+      "manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_crossattn_source_attention_20260803\\vda4_crossattn1_grid4x4_seed0\\MANIFEST.json",
+      "manifest_sha256": "a219fe105d620258fbf5c4ebecfd3c01840c2e8c8dec9c8157cf9b1029ae4305"
+    },
+    {
+      "comparisons": {
+        "atol": 2e-05,
+        "press_exact_match": true,
+        "raw_mean_matches_verified_raw_mean": true,
+        "raw_mean_max_abs_error": 1.564621925354004e-07,
+        "rtol": 1e-05,
+        "source_sum_matches_verified_token_mass": true,
+        "source_sum_max_abs_error": 7.017470132764103e-09
+      },
+      "data_sha256": "d447cdc99a733da2c3d567008b412277e553b2efdd795227f752b4b8059420b1",
+      "label": "vda4_crossattn1_grid10x10_seed0",
+      "manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_crossattn_source_attention_20260803\\vda4_crossattn1_grid10x10_seed0\\MANIFEST.json",
+      "manifest_sha256": "84f0f8fa4b46f233b729014e2455c96904c65ddf5d055e523de6bb77b117ee48"
+    },
+    {
+      "comparisons": {
+        "atol": 2e-05,
+        "press_exact_match": true,
+        "raw_mean_matches_verified_raw_mean": true,
+        "raw_mean_max_abs_error": 1.4901161193847656e-07,
+        "rtol": 1e-05,
+        "source_sum_matches_verified_token_mass": true,
+        "source_sum_max_abs_error": 2.9227230635697765e-08
+      },
+      "data_sha256": "6dc490c5203640c9f6bab670b4c47234cf1e7f26459f3319be033e6d6421c3c0",
+      "label": "vda4_crossattn1_grid10x10_seed1",
+      "manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_crossattn_source_attention_20260803\\vda4_crossattn1_grid10x10_seed1\\MANIFEST.json",
+      "manifest_sha256": "cf5dc8be90a39b8b71452c42451fc62c291b6e04ecd5b474cad14b380e497d46"
+    }
+  ],
+  "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_crossattn_source_attention_refresh.py",
+  "producer_sha256": "15c9b4614932ed8e5ee01e30d7f03fc02d1e940989494f890c6d0399cb1c6d68",
+  "runtime": {
+    "cuda_available": true,
+    "cuda_version": "11.7",
+    "gymnasium": "0.29.1",
+    "numpy": "1.23.1",
+    "platform": "Windows-10-10.0.22621-SP0",
+    "python": "3.10.6",
+    "python_executable": "C:\\Python310\\python.exe",
+    "torch": "1.13.1+cu117"
+  },
+  "schema_version": 1,
+  "source_root": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_evaluation_production_20260727",
+  "status": "complete",
+  "threads": 3
+}

@@ -1,0 +1,18 @@
+{
+  "result": "pass",
+  "validated_at_utc": "2026-07-20T17:57:08.809916+00:00",
+  "checkpoint_admission": "pass",
+  "metrics_contiguous_0_through_19999": true,
+  "matched_protocol_shard": "pass",
+  "matched_protocol_shard_sha256": "24d9c39d769b63de7a032f8e6cf3ad24ad46df55a727b1950866a8f35c83a420",
+  "first_wave_attention_cache": "pass",
+  "first_wave_attention_cache_sha256": "8afa21393d94eefbeda6fec6d126d213aab927c19b50fb6e99f2079530203de7",
+  "first_wave_psychometric_cache": "pass",
+  "first_wave_psychometric_cache_sha256": "6e80e25d774f27ab091e7aaf45307f27c9210fbf6c78f292b66ff6ee7edd5e6c",
+  "achieved_clamp_attention_cache": "pass",
+  "achieved_clamp_attention_cache_sha256": "83f7f067c866fc82d370d013a87edfc514b33972a3b80f9aa8922d68bffb0a6d",
+  "source_graph_unchanged": true,
+  "training_inputs_unchanged": true,
+  "historical_evidence_unchanged": true,
+  "competence_status": "competence_gated"
+}

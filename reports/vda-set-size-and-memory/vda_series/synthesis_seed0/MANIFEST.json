@@ -1,0 +1,405 @@
+{
+  "analysis": "cached-artifact-only VDA4 spatial-scaling synthesis",
+  "atomic_promotion": true,
+  "created_utc": "2026-07-28T01:54:09.582008+00:00",
+  "outputs": {
+    "SUMMARY.json": {
+      "bytes": 8993,
+      "sha256": "9a82e78b7f8e91bd0d2cb09c70f38ed01383cf5738b0d888371db76cd30aa310"
+    },
+    "vda4_spatial_scaling_seed0_metrics.csv": {
+      "bytes": 5870,
+      "sha256": "c9e5cb5d8f8cb34cbc7e19a05a2c36eb8da1a9fba59efac3cd2da759077d2316"
+    },
+    "vda4_spatial_scaling_seed0_summary.pdf": {
+      "bytes": 29803,
+      "sha256": "9703e2e8463a9f28e66fd3789dac8f7c939b7dd08d043dddd7d590022aa1d4c8"
+    },
+    "vda4_spatial_scaling_seed0_summary.png": {
+      "bytes": 367902,
+      "sha256": "ab8072d1b8451f9b28fac8ab83dd5e6e9b4564f6b4b41cb0a632ebf088a529d9"
+    }
+  },
+  "producer": {
+    "bytes": 33789,
+    "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_spatial_scaling_synthesis.py",
+    "sha256": "770e10847d50cca7342d0ac9fc29f873a013edb9fc9e193e108383e3746e386b"
+  },
+  "production_root": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_evaluation_production_20260727",
+  "schema_version": 1,
+  "source_evaluations": [
+    {
+      "artifacts": {
+        "SUMMARY.json": {
+          "bytes": 1250,
+          "sha256": "f855bcc15871ef76d4a5767b0c0ec74c7ef7e0a6a1696a2e98dbfad1a3b692e7"
+        },
+        "analysis_config.json": {
+          "bytes": 2639,
+          "sha256": "e66cf86f85eabce98b5d7f8638cc70ad0d7aa6665a77c720eaef0f6fb15e1abd"
+        },
+        "data/event_attention.npz": {
+          "bytes": 35623,
+          "sha256": "a1521c40f85c921e3e00a5498cc7d51741854d0ad307d425138925dde4d10e04"
+        },
+        "data/interventions.npz": {
+          "bytes": 8135,
+          "sha256": "baf169bd515013006c6db26f388d4db5ab48307ecf8ee0837f54ab2805bc6054"
+        },
+        "data/psychometrics.npz": {
+          "bytes": 7770,
+          "sha256": "c529c14796ae0680210d10f0dc403e57ec2692d44368c734e7cb0fd384a5a4ec"
+        },
+        "figures/event_attention_maps.pdf": {
+          "bytes": 27656,
+          "sha256": "cd30e121a459dd05f6c5d6c14746930298d3203fa9f6f7fb30ea64d80bf3e070"
+        },
+        "figures/event_attention_maps.png": {
+          "bytes": 72397,
+          "sha256": "0e19f9a37ba057e804be3b69bce25b62c1aa060783ddc179de6d4f9a39056c7b"
+        },
+        "figures/regional_causal_intervention.pdf": {
+          "bytes": 29307,
+          "sha256": "a5adc680cf903b21bc1bf5ef10d8aadc5f710984d9dabefa3b6ddf0535c6c9bb"
+        },
+        "figures/regional_causal_intervention.png": {
+          "bytes": 348792,
+          "sha256": "37a3ad1de72ba9222f5277cedf2c101ddd691b55fd7eb88bd27e424bdbefc48c"
+        },
+        "figures/valid_invalid_response_rt.pdf": {
+          "bytes": 33119,
+          "sha256": "639a44ef4c463d596cabd7af6c36d290ee856d9a0db670359a32a7381de80ed5"
+        },
+        "figures/valid_invalid_response_rt.png": {
+          "bytes": 373408,
+          "sha256": "bfb095de9e14a64918e617c883f078f2bc34c191aefd9d6739dbb2a1384173c4"
+        },
+        "tables/psychometrics.csv": {
+          "bytes": 10735,
+          "sha256": "7e0e8cceee89f9800ea79e08e2abd6e5b67d6529f2e340db88e2a4c1616f3f74"
+        },
+        "tables/regional_interventions.csv": {
+          "bytes": 6283,
+          "sha256": "e67264602bdcb8868cc39d508a87bb34d560fe273d3b4969a1fe0f7648f9c45b"
+        }
+      },
+      "checkpoint_sha256": "ea671f9758551e06b39ef19c06e85e888ce3ee74dda8a534c1532251a69ee4ca",
+      "label": "vda4_crossattn1_grid2x2_seed0",
+      "manifest_bytes": 2256,
+      "manifest_sha256": "044f9a5860ac5a400a461b5d7dc5bf8a9d58559cd2fe08d925df58185b90d3f7",
+      "producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+      "relative_path": "vda4_crossattn1_grid2x2_seed0"
+    },
+    {
+      "artifacts": {
+        "SUMMARY.json": {
+          "bytes": 1261,
+          "sha256": "9b9b7d2165e0a490b6b577d32eede3b5ae709d652dd1c807cd1ada486f8d6927"
+        },
+        "analysis_config.json": {
+          "bytes": 2774,
+          "sha256": "9e68a05ee2ef90833cb3b630475fb18ae2768010c1057011de6bc704ede30878"
+        },
+        "data/event_attention.npz": {
+          "bytes": 98020,
+          "sha256": "3110ba2a315aa5bee379ffd6036c9e9b20f76245e9dbdbe56b083d8c834f06a9"
+        },
+        "data/interventions.npz": {
+          "bytes": 8283,
+          "sha256": "f7a848ba8a984af1a612e729d4643b2aeb627044ac1a7c64b7df810929403fab"
+        },
+        "data/psychometrics.npz": {
+          "bytes": 7770,
+          "sha256": "74e785ae75b80d4e416045793696f0e5bedf64515c54463bc2c36d150b2ea896"
+        },
+        "figures/event_attention_maps.pdf": {
+          "bytes": 27843,
+          "sha256": "ebe644f5540f9e4b48e9a20ac6c4050c9f5707b089606413cc838028406ea8f5"
+        },
+        "figures/event_attention_maps.png": {
+          "bytes": 79430,
+          "sha256": "29be29ce754a79df589b9ed56c73b0903f92f4a84b364d99eb356b7fa57f61e1"
+        },
+        "figures/regional_causal_intervention.pdf": {
+          "bytes": 29151,
+          "sha256": "ed7218d860960be9966d6f136d5e1ba7e7b311326851eea1937273e80fcc63f9"
+        },
+        "figures/regional_causal_intervention.png": {
+          "bytes": 334891,
+          "sha256": "4c70e3e90c25b45a902b5514da9d91a7a3f89c21b3417d8a7404b684aa9d76b8"
+        },
+        "figures/valid_invalid_response_rt.pdf": {
+          "bytes": 32823,
+          "sha256": "15b000b88a27ced1de37ed2dab7f8f767411a8758f50d5711a976b485de822e0"
+        },
+        "figures/valid_invalid_response_rt.png": {
+          "bytes": 346289,
+          "sha256": "547e47ffb30d157489ef36530f127e2887765ecb0f9fa6be1b852dd358f32a3d"
+        },
+        "tables/psychometrics.csv": {
+          "bytes": 10700,
+          "sha256": "50bc3c8fb061559451bcc23c84d0130149ce10a80a9e45adccb9ce9018b01ad6"
+        },
+        "tables/regional_interventions.csv": {
+          "bytes": 6268,
+          "sha256": "ec926847e97e316d696a054ad943742ac8d495dab54a74134d6aa0d9ad4ff40c"
+        }
+      },
+      "checkpoint_sha256": "306ce94d44461ea85cd0aced5a84eb210457f718d3f2e4ebf85e46ee1922e4bf",
+      "label": "vda4_crossattn1_grid4x4_seed0",
+      "manifest_bytes": 2265,
+      "manifest_sha256": "d06bd3f6916771644bbb808e8dfb21e39016aff5a280a4b11f93782c285f62d2",
+      "producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+      "relative_path": "vda4_crossattn1_grid4x4_seed0"
+    },
+    {
+      "artifacts": {
+        "SUMMARY.json": {
+          "bytes": 1265,
+          "sha256": "b9199983eaec452268e75f3f1f5231f75036f57ed9c17e15e587394cbff69a59"
+        },
+        "analysis_config.json": {
+          "bytes": 3801,
+          "sha256": "c860a5cdbd2e8444813aea6e5ebe297ca25b1e1796851bfeaccf95236ec8d6fe"
+        },
+        "data/event_attention.npz": {
+          "bytes": 1317128,
+          "sha256": "5dd49adc21da34deb57358552ccfe04b44c92b8def20a9321ea916af3fde1de2"
+        },
+        "data/interventions.npz": {
+          "bytes": 8212,
+          "sha256": "fa59894a7c19565cbc23ef89e0d019117560262a190a6e9513c8619b8815c91f"
+        },
+        "data/psychometrics.npz": {
+          "bytes": 7708,
+          "sha256": "1de31010d3b4493c3943038d53a52e72f8732195b7b2199a78d2dcbc01669fa0"
+        },
+        "figures/event_attention_maps.pdf": {
+          "bytes": 29335,
+          "sha256": "8917a829efe5e1f60daede645585d8dc14c128a84834980cca596fe2afabe0ce"
+        },
+        "figures/event_attention_maps.png": {
+          "bytes": 79165,
+          "sha256": "b556981caf6e19b93caccf4a7b05038180a3ad63a696b220f043a9cda7c416f8"
+        },
+        "figures/regional_causal_intervention.pdf": {
+          "bytes": 29446,
+          "sha256": "8b6b71adbfad4c10c1969f9582ece7f832dd2251a27764653f9e522b76415dec"
+        },
+        "figures/regional_causal_intervention.png": {
+          "bytes": 298101,
+          "sha256": "b427267d8996ad11db85a1a488a7cbe0594266a3a5e99e360fea295821e37826"
+        },
+        "figures/valid_invalid_response_rt.pdf": {
+          "bytes": 32780,
+          "sha256": "a0bd26a0d168ab2e543fb5ac588aae6193fc6d7994cc6165e9b95bc59637673d"
+        },
+        "figures/valid_invalid_response_rt.png": {
+          "bytes": 330386,
+          "sha256": "c8f9d0d09fecafbfce8e5b3ae29ea014890cddd8f9a5cac6473776fed83a109e"
+        },
+        "tables/psychometrics.csv": {
+          "bytes": 10796,
+          "sha256": "7f51b6c9712971d7a43dfea662611cc5b74564ad07e2fc974085cda07ee356d5"
+        },
+        "tables/regional_interventions.csv": {
+          "bytes": 6222,
+          "sha256": "b11be732b374ef6356b526cb2f0a3e2f3a09fec713e67298ea8dd96773650838"
+        }
+      },
+      "checkpoint_sha256": "06382037f3693c454d494df220e931717bf7f09658b5fcc3c110b6114ebf5bdc",
+      "label": "vda4_crossattn1_grid10x10_seed0",
+      "manifest_bytes": 2272,
+      "manifest_sha256": "c3ecaa670952864230f91859cebfa5c5cbaa607e934969ca589347a237d9a6eb",
+      "producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+      "relative_path": "vda4_crossattn1_grid10x10_seed0"
+    },
+    {
+      "artifacts": {
+        "SUMMARY.json": {
+          "bytes": 1254,
+          "sha256": "e9eed2632f1ada3facf6276709062b222d0f209aed7ac296bc51b187d56e0715"
+        },
+        "analysis_config.json": {
+          "bytes": 2752,
+          "sha256": "16b2841d077f2bbef9afe76557c97e005b1d0107c347df3847663d0b374e0c0d"
+        },
+        "data/event_attention.npz": {
+          "bytes": 34830,
+          "sha256": "b70465c477649ea8c6b2da80c33d376b784a15b4eec7107809dcc3914413d4b8"
+        },
+        "data/interventions.npz": {
+          "bytes": 8078,
+          "sha256": "23f84852dd9f2baefb68d35a8e303f7add5982520080076377cdd259e36b462e"
+        },
+        "data/psychometrics.npz": {
+          "bytes": 7698,
+          "sha256": "972a3fcd34dabdd15b4dfdd5ba7bca3240cfecc39b78d7497d3785bca3a40ed3"
+        },
+        "figures/event_attention_maps.pdf": {
+          "bytes": 28283,
+          "sha256": "45a06628269e37daf87cb7bfd76528661b9f507cdbff2f24d6870db3ea199caa"
+        },
+        "figures/event_attention_maps.png": {
+          "bytes": 75376,
+          "sha256": "7d14639d22495ef51a812294b84db1be1816642bae6248a93f1cf58eb3831497"
+        },
+        "figures/regional_causal_intervention.pdf": {
+          "bytes": 30032,
+          "sha256": "5fdf6d05c469761e0379eb1d90a27da29346226d3a2b4fe901fcf180ee0ea509"
+        },
+        "figures/regional_causal_intervention.png": {
+          "bytes": 323814,
+          "sha256": "0b460bbab52a3389455742fe9c1d775627abe0cacc30c60f961d8aabc1424d0b"
+        },
+        "figures/valid_invalid_response_rt.pdf": {
+          "bytes": 33321,
+          "sha256": "ed1a22c380b9e5745888c341a7dae161c5746393b42d75172c3ee89509a6b3a3"
+        },
+        "figures/valid_invalid_response_rt.png": {
+          "bytes": 341169,
+          "sha256": "045a52f671814673cf4c7824963ec7474335c466a749b9665ef4adb14139e81b"
+        },
+        "tables/psychometrics.csv": {
+          "bytes": 10694,
+          "sha256": "ee1afc8f0833e6ccbc54db93a22a47db6d306e6c56e94367cbf6f80fea5bca51"
+        },
+        "tables/regional_interventions.csv": {
+          "bytes": 5966,
+          "sha256": "008e734898f3865dbb4396b9f89d4ab7b2b0c1a4f6d2eff21a786eda2832c3c5"
+        }
+      },
+      "checkpoint_sha256": "2db6c8a6d29b9770e74246a9095969e10c4a01441103972cf1a3768ae3314197",
+      "label": "vda4_affine_ew_grid2x2_seed0",
+      "manifest_bytes": 2273,
+      "manifest_sha256": "0235d2de5f2e816287e2d9bdba851fbee0324d62eabc93d6677cc57ecce09d1a",
+      "producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+      "relative_path": "vda4_affine_ew_grid2x2_seed0"
+    },
+    {
+      "artifacts": {
+        "SUMMARY.json": {
+          "bytes": 1257,
+          "sha256": "d9a9453967ea55ada5ab2c7b9034144b858ba8235c9632597819fd444c743a1f"
+        },
+        "analysis_config.json": {
+          "bytes": 2867,
+          "sha256": "29c200d09d3c3e81f4286d3ee3a453f43b0b12e07aea7a6e285be5a3fa7b7424"
+        },
+        "data/event_attention.npz": {
+          "bytes": 90240,
+          "sha256": "f81387cbdb6f171fee4a5552b5661f33731047323df020d2b0606e9656b6e5d5"
+        },
+        "data/interventions.npz": {
+          "bytes": 8264,
+          "sha256": "d63a7d6980bc4950a7de9ec372a0d5033afbeb813cee0ca46b909d1fde0d11ab"
+        },
+        "data/psychometrics.npz": {
+          "bytes": 7782,
+          "sha256": "dea9c38be68eb89a947d51a2f30f148f1d5f0c87ad66fc26c33f6e50d86ff353"
+        },
+        "figures/event_attention_maps.pdf": {
+          "bytes": 28074,
+          "sha256": "205696abbe90d39beb9932c82e723e009ad0421e01a17400b6b172d228734acd"
+        },
+        "figures/event_attention_maps.png": {
+          "bytes": 77285,
+          "sha256": "d80a51c7f829ac0c24c4ef3827718cb9315f2a325152d1b34da96e800a2810fa"
+        },
+        "figures/regional_causal_intervention.pdf": {
+          "bytes": 29471,
+          "sha256": "72faa9c6b12e8f698893a0d05c5271d70a3995e918a2219377e210c440102cfd"
+        },
+        "figures/regional_causal_intervention.png": {
+          "bytes": 355627,
+          "sha256": "d318b6083a7b3ca44bf141395574ba0a13b6031a347c61aaa8966c750b9da503"
+        },
+        "figures/valid_invalid_response_rt.pdf": {
+          "bytes": 33021,
+          "sha256": "a5d818820c4aa946be6dfce16815edc33bcbbeb0c53a2f0a97b3a25a5737fe59"
+        },
+        "figures/valid_invalid_response_rt.png": {
+          "bytes": 335373,
+          "sha256": "60e2a8a7345650f0a59a95af47d333ab360ead521f18ad57f58bb0487c518ff3"
+        },
+        "tables/psychometrics.csv": {
+          "bytes": 11333,
+          "sha256": "2575c21ddd34a7c810d5bf9872f776344cefd9ad7a316f822039c6fcc29929b1"
+        },
+        "tables/regional_interventions.csv": {
+          "bytes": 6088,
+          "sha256": "c164b7e296e7fae44cb6c783cf7deb721a896c24b459603d779e9abda9c4891b"
+        }
+      },
+      "checkpoint_sha256": "aa01b752725f9d7b5b31eb24574e817a7a67acb87c3ce97561694d84b9dca399",
+      "label": "vda4_affine_ew_grid4x4_seed0",
+      "manifest_bytes": 2262,
+      "manifest_sha256": "02c989ddacc67c3d406fcb2aba1f97335cc7ac65ad553b3c710251398436d9d9",
+      "producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+      "relative_path": "vda4_affine_ew_grid4x4_seed0"
+    },
+    {
+      "artifacts": {
+        "SUMMARY.json": {
+          "bytes": 1323,
+          "sha256": "572afe4d3c5ad57c292a95cfa801b8d2b0a5ec59af2c9d47db20bb6b6ce8134a"
+        },
+        "analysis_config.json": {
+          "bytes": 3843,
+          "sha256": "dff383b1417e2499b010fcec5d0c8136d0bf3c014b6243ab8ceb85517dac2553"
+        },
+        "data/event_attention.npz": {
+          "bytes": 861709,
+          "sha256": "037c5135dffabfae16b0ae1f4382c65c6fffcc41c363508641ed5fad6f93b15e"
+        },
+        "data/interventions.npz": {
+          "bytes": 8240,
+          "sha256": "248ca2312a057eb7c89da1fc92ee9cc656130316eaf56c45b3b540bb1a387568"
+        },
+        "data/psychometrics.npz": {
+          "bytes": 7823,
+          "sha256": "1bc7744069dff64799b8b88ae770618143e3275ecd4c4ba158ee59b8b724cbb2"
+        },
+        "figures/event_attention_maps.pdf": {
+          "bytes": 29482,
+          "sha256": "36fd2a8835283d6249fa5a84cca37b03db24b07483275c2e285f08a3d0adabd7"
+        },
+        "figures/event_attention_maps.png": {
+          "bytes": 80792,
+          "sha256": "323b6774accaf7d7461fe31a057168cb12352f22ff92cff81bb0e04d5137b13c"
+        },
+        "figures/regional_causal_intervention.pdf": {
+          "bytes": 29271,
+          "sha256": "3907f35c355ee798668cdbf8a2e1cfa3664871993f5ed9e7c3f22056d7de666d"
+        },
+        "figures/regional_causal_intervention.png": {
+          "bytes": 344152,
+          "sha256": "8b58aad18cf269fdd1c8fffe8c0d3478e1c55b8209f489299d0a9362dbd94aa9"
+        },
+        "figures/valid_invalid_response_rt.pdf": {
+          "bytes": 33210,
+          "sha256": "1c01571b5cd5ea397055b17f9056c3f1378f0b4cebbe0171ed4a3594d3c77a59"
+        },
+        "figures/valid_invalid_response_rt.png": {
+          "bytes": 356497,
+          "sha256": "56d6e96feb6bac3b98919e4c76c39b7d013121b78d87ac62ade34217e41b056d"
+        },
+        "tables/psychometrics.csv": {
+          "bytes": 11100,
+          "sha256": "6138e4f025ddc61bb9daaf0f48bc4f34fdfc74b7bfeacd1d1d07dd3d098b993e"
+        },
+        "tables/regional_interventions.csv": {
+          "bytes": 5979,
+          "sha256": "6541e5a107d2078ab9b4c457ac4536ed4322c7744542af219510b9dfecd8b7b9"
+        }
+      },
+      "checkpoint_sha256": "0f0cfc5d0087a34de247dc02f7c343d8eae80eadb74478c564a6ea72c7244cb5",
+      "label": "vda4_affine_ew_grid10x10_seed0",
+      "manifest_bytes": 2314,
+      "manifest_sha256": "a869859116807664e46ee6d4f0d6d5ced3be3ac9ddeddbd67f0c27839ac26ea7",
+      "producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+      "relative_path": "vda4_affine_ew_grid10x10_seed0"
+    }
+  ],
+  "status": "complete"
+}

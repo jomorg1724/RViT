@@ -1,0 +1,76 @@
+{
+  "artifact": "VDA4 source-resolved held-out event-attention refresh",
+  "attention_trial_seeds": [
+    202707360,
+    202707361
+  ],
+  "attention_trials_per_condition": 128,
+  "change_indices": [
+    0,
+    3
+  ],
+  "comparisons_to_verified_cache": {
+    "atol": 2e-05,
+    "press_exact_match": true,
+    "raw_mean_matches_verified_raw_mean": true,
+    "raw_mean_max_abs_error": 1.7285346984863281e-06,
+    "rtol": 1e-05,
+    "source_sum_matches_verified_token_mass": true,
+    "source_sum_max_abs_error": 2.979504643008113e-08
+  },
+  "conditions": [
+    "valid",
+    "invalid"
+  ],
+  "cue_index": 0,
+  "device": "cuda",
+  "focal_magnitude_degrees": 30.0,
+  "focal_validity": 1.0,
+  "model": {
+    "checkpoint_iteration": 19999,
+    "checkpoint_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_crossattn1_grid2x2_d128_nodecay_seed1_pod\\rvit_paper_vda4_final.pt",
+    "checkpoint_sha256": "31c498bd7a2f5fa6cd617364b67373c8a6d63d9f17cb1384ed36b87613066a59",
+    "feedback": "crossattn1",
+    "grid_cols": 2,
+    "grid_rows": 2,
+    "label": "vda4_crossattn1_grid2x2_seed1",
+    "n_tokens": 4,
+    "seed": 1,
+    "task": "vda4"
+  },
+  "refresh_producer": {
+    "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_crossattn_source_attention_refresh.py",
+    "sha256": "15c9b4614932ed8e5ee01e30d7f03fc02d1e940989494f890c6d0399cb1c6d68"
+  },
+  "runtime": {
+    "cuda_available": true,
+    "cuda_version": "11.7",
+    "gymnasium": "0.29.1",
+    "numpy": "1.23.1",
+    "platform": "Windows-10-10.0.22621-SP0",
+    "python": "3.10.6",
+    "python_executable": "C:\\Python310\\python.exe",
+    "torch": "1.13.1+cu117"
+  },
+  "schema_version": 1,
+  "scientific_evidence_boundary": "held-out routing measurement for one fixed checkpoint; trial intervals do not estimate training-seed or population uncertainty",
+  "source_artifacts": {
+    "evaluation_manifest": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_evaluation_production_20260727\\vda4_crossattn1_grid2x2_seed1\\MANIFEST.json",
+    "evaluation_manifest_sha256": "054c7bac594cfad4fd8998093e282b3d6637d47f87898d1f5f2e634776227703",
+    "evaluation_producer": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_spatial_scaling_evaluation.py",
+    "evaluation_producer_sha256": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+    "event_cache": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_evaluation_production_20260727\\vda4_crossattn1_grid2x2_seed1\\data\\event_attention.npz",
+    "event_cache_sha256": "640a8238d22eba12bfa7e00809b655d88c13451d1892f1924089547b136ec05c"
+  },
+  "source_axis": [
+    "visual",
+    "memory"
+  ],
+  "source_normalization": "unconditional global 2N-key softmax mass",
+  "source_quadrant_peak_formula": "max of source_token_mass over native keys in one fixed physical quadrant",
+  "source_quadrant_total_formula": "sum of source_token_mass over native keys in one fixed physical quadrant",
+  "source_token_mass_formula": "p[source,j] = mean_query A[query,source,j]",
+  "threads": 3,
+  "timesteps": 7,
+  "uniform_raw_key_baseline": "1/(2N) = 0.125"
+}

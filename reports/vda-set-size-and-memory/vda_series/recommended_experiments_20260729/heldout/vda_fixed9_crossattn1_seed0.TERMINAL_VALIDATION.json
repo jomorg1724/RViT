@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "status": "validated_terminal_training_artifacts_only",
+  "scientific_behavior_evaluated": false,
+  "spec": {
+    "task": "vda_fixed9",
+    "final_checkpoint_name": "rvit_paper_vda_fixed9_final.pt",
+    "grid_rows": 4,
+    "grid_cols": 4,
+    "image_size": 100,
+    "feedback": "crossattn1",
+    "d_mem": 128,
+    "memory_decay": 1.0
+  },
+  "seed": 0,
+  "run_dir": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod",
+  "metrics": {
+    "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod\\metrics.csv",
+    "sha256": "280f1378774f89f15d921d3ddcfcaa4d89c385f2a09975b448ae1dc20cea6d1f",
+    "rows": 20000,
+    "first_iteration": 0,
+    "last_iteration": 19999,
+    "columns": [
+      "iter",
+      "rollout/mean_return",
+      "rollout/mean_length",
+      "rollout/correct_rate",
+      "rollout/n_episodes",
+      "loss_policy",
+      "loss_value",
+      "loss_entropy",
+      "loss_contrastive",
+      "loss_jepa",
+      "loss_total",
+      "approx_kl",
+      "n_updates",
+      "n_loss_evals",
+      "n_skipped",
+      "max_grad_elem",
+      "in_burn_in",
+      "per_beta",
+      "per_buffer_size",
+      "per_n_replay_used",
+      "rolling/correct_rate",
+      "rolling/mean_return",
+      "env/theta"
+    ]
+  },
+  "log": {
+    "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod\\train.log",
+    "sha256": "f3060b01705b4350f71c297130cb9ed938866361f75cc9c9ce5491b8c1d90947",
+    "bytes": 3719669,
+    "terminal_markers_present": true,
+    "traceback_absent": true
+  },
+  "final_checkpoint": {
+    "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod\\rvit_paper_vda_fixed9_final.pt",
+    "sha256": "b876cb6a2b5d494fa36b918d705b52a3d8c7cb3f9e8aec7e37e9e38069fce288",
+    "bytes": 60700431
+  },
+  "latest_checkpoint": {
+    "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod\\rvit_plus_rl_latest.pt",
+    "sha256": "d74bce98505ff1af3855a4005e4ce41b6b2b1b302818a0e989ceab0803e90179",
+    "bytes": 60696175
+  },
+  "final_latest_semantically_equal": true,
+  "compared_numeric_leaves": 15134143,
+  "finite_numeric_leaves": 15127654,
+  "producer_checks": [
+    {
+      "identity": "config/loader.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\config\\loader.py",
+      "sha256": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9",
+      "bytes": 6197
+    },
+    {
+      "identity": "conv_frontend.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\conv_frontend.py",
+      "sha256": "0099e258730aee7c2ae60d35215d1738771a88f9356ead1877012b89e794dd31",
+      "bytes": 9041
+    },
+    {
+      "identity": "envs/__init__.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\__init__.py",
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "bytes": 3964
+    },
+    {
+      "identity": "envs/base.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\base.py",
+      "sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+      "bytes": 16259
+    },
+    {
+      "identity": "envs/luo2015.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\luo2015.py",
+      "sha256": "c9ad206324c20a703518ed9e1b241a66332458ea752900276c1f70f8d78cea2a",
+      "bytes": 13341
+    },
+    {
+      "identity": "envs/tasks.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\tasks.py",
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "bytes": 16590
+    },
+    {
+      "identity": "experiment_launcher",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_fixed9_controlled\\grid_4x4_crossattn1_seed0_canary_v1\\launch_runpod_v1.sh",
+      "sha256": "3d7d8624d9faab7129bd2ef20fe5787677bbaadb796ee44d36c72349be72b1db",
+      "bytes": 2585
+    },
+    {
+      "identity": "experiments/vda4_spatial_discretization/grid_10x10/launch_20k.sh",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda4_spatial_discretization\\grid_10x10\\launch_20k.sh",
+      "sha256": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4",
+      "bytes": 1211
+    },
+    {
+      "identity": "model.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\model.py",
+      "sha256": "b77fd7f4cd5d56fc38257b58ee5400285fba875b3c01a79ec7baf7106f66d72c",
+      "bytes": 9992
+    },
+    {
+      "identity": "paper_encoder.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_encoder.py",
+      "sha256": "91f8a5be84aa300d4a1b42b2ec92f633bb8a704a9dae3f302f192a73915d61d1",
+      "bytes": 39579
+    },
+    {
+      "identity": "paper_heads.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_heads.py",
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "bytes": 4239
+    },
+    {
+      "identity": "ppo.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\ppo.py",
+      "sha256": "b01091a4919fcc7cb31f94ac599ec86de860b2331c599e3156518f26d18c40da",
+      "bytes": 61494
+    },
+    {
+      "identity": "resolved_config",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_fixed9_controlled\\grid_4x4_crossattn1_seed0_canary_v1\\config_v1.json",
+      "sha256": "2d56ad6cbc4586ab9496b86278ca0a00a64e1e20710a43f3cf3a7ee975c7ca38",
+      "bytes": 2225
+    },
+    {
+      "identity": "scripts/launch_vda16_fresh.sh",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\scripts\\launch_vda16_fresh.sh",
+      "sha256": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70",
+      "bytes": 1096
+    },
+    {
+      "identity": "train_rl.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\train_rl.py",
+      "sha256": "9bbf01aa3680dbf0d035d0b23bbf6817c832f7ea66cbcf8edbaee84f5be7eb33",
+      "bytes": 35021
+    }
+  ],
+  "claim_boundary": "Terminal training integrity only. Held-out behavior, attention organization, and causal dependence require the separate production evaluator."
+}

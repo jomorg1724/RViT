@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "artifact": "first-wave psychometric response-rate curves",
+  "task": "vda16",
+  "feedback": "affine_ew",
+  "grid": [
+    4,
+    4
+  ],
+  "panel_count": 3,
+  "panels": [
+    "all cue proportions: valid change at S1",
+    "all cue proportions: invalid change at bottom-right",
+    "100% displayed validity: forced valid versus forced invalid change"
+  ],
+  "forced_location_intervention": true,
+  "condition_boundary": "the invalid curve at 100% displayed validity is forced and is not naturally sampled under the task policy",
+  "cue_color": "red",
+  "cue_index": 0,
+  "valid_change_index": 0,
+  "invalid_change_index": 15,
+  "displayed_validities": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "change_magnitudes_degrees": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    22.0,
+    26.0,
+    30.0
+  ],
+  "checkpoint_iteration": 19999,
+  "checkpoint_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_nodecay_20260720_production\\provenance\\checkpoints\\rvit_paper_vda16_final.pt",
+  "checkpoint_sha256": "52141da629e2c7f8f902826196067efbadb924608eecde7560559fdc0f813233",
+  "producer_sha256": "b3165034fdfc3c99ac1d023b1bfb04025e72e21a553e87e0512b1c63b083c22c",
+  "dependency_hashes": {
+    "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "envs/luo2015.py": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "model.py": "ee25a3791898320a1431678b2397e688ba93c3ca162da02157d52510f1d1a742",
+    "paper_encoder.py": "795cf35df31d5f166a6f26a4cb8d77e40a92012f23560f9a33e40f064461a500",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+    "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+    "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+    "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+    "vda_series/task_figures.py": "3c5182b0304213396d5d72c88ea994a080489f8454040db88175e929a49e4284",
+    "vda_sweep/vda_core.py": "b23fddbcc031e1368c6aa376374c130c6183b57cdb04e392499d7cafc0a25b7d"
+  },
+  "runtime_versions": {
+    "gymnasium": "0.29.1",
+    "matplotlib": "3.5.2",
+    "numpy": "1.23.1",
+    "pillow": "9.1.1",
+    "platform": "Windows-10-10.0.22621-SP0",
+    "python": "3.10.6",
+    "python_executable": "C:\\Python310\\python.exe",
+    "scipy": "1.8.1",
+    "torch": "1.13.1+cu117"
+  },
+  "device": "cuda",
+  "trials_per_point": 300,
+  "interval": "Wilson 95% binomial interval",
+  "response_definition": "first change declaration at logical frame 5 or later; all evaluation trials form the denominator",
+  "uncertainty_boundary": "evaluation-trial binomial interval for one checkpoint; not independent training-seed uncertainty",
+  "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+  "source_cache": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_nodecay_20260720_production\\data\\psychometric_vda16_affine_ew.npz",
+  "source_cache_sha256": "6e80e25d774f27ab091e7aaf45307f27c9210fbf6c78f292b66ff6ee7edd5e6c",
+  "outputs": {
+    "pdf": "first_wave_psychometric_vda16_affine_ew.pdf",
+    "svg": "first_wave_psychometric_vda16_affine_ew.svg",
+    "png": "first_wave_psychometric_vda16_affine_ew.png"
+  }
+}

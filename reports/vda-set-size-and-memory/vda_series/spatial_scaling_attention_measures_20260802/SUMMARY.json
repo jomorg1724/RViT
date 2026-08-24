@@ -1,0 +1,273 @@
+{
+  "analysis_class": "checkpoint-free derived reanalysis of verified held-out attention caches",
+  "common_grid": "fixed physical 2x2 VDA4 quadrants for every native grid",
+  "event_windows": {
+    "frame5": [
+      5
+    ],
+    "frame6": [
+      6
+    ],
+    "frames5_6_mean": [
+      5,
+      6
+    ]
+  },
+  "frame6_status": "open-loop post-change continuation; reported separately",
+  "interpretation_limits": [
+    "Total quadrant mass and peak-patch measures are distinct estimands and cannot be called a single attention score.",
+    "Frame 5, frame 6, and their mean are reported separately because event reorientation can change sign across frames.",
+    "The strongest-query max_i A_ij diagnostic is unavailable trialwise because the cache retained only the trial-mean raw matrix; it is not conflated with peak max_j mean_i A_ij.",
+    "A common 2x2 projection measures allocation to fixed physical quadrants, not within-quadrant resolution or stream count.",
+    "Cross-attention primary scores collapse paired visual and recurrent-memory keys; source-separated mean maps are supplementary and lack trial-level uncertainty in the retained cache.",
+    "Attention geometry is correlational and is not itself behavioral or causal mechanism evidence.",
+    "Seed 0 spans the six-cell factorial; seed 1 covers only cross-attention 2x2 and 10x10 endpoints.",
+    "Token count still co-varies with parameter count and native discretization."
+  ],
+  "interval": {
+    "draws": 10000,
+    "method": "percentile bootstrap",
+    "not_training_population_uncertainty": true,
+    "unit": "held-out trials"
+  },
+  "metric_definitions": [
+    {
+      "formula": "p_j = mean_i A_ij; cross-attention pairs visual and memory columns by addition",
+      "interpretation": "mean incoming attention received by one spatial patch",
+      "metric": "patch_column_score",
+      "uniform_baseline": "1/N"
+    },
+    {
+      "formula": "sum_{j in quadrant} p_j",
+      "interpretation": "total routing allocated to one fixed physical quadrant",
+      "metric": "total_quadrant_mass",
+      "uniform_baseline": "0.25"
+    },
+    {
+      "formula": "max_{j in quadrant} p_j",
+      "interpretation": "user-requested maximum patch score inside a quadrant",
+      "metric": "peak_patch_raw",
+      "uniform_baseline": "1/N"
+    },
+    {
+      "formula": "N * max_{j in quadrant} p_j",
+      "interpretation": "peak patch strength relative to a uniform native map",
+      "metric": "peak_patch_uniform_ratio",
+      "uniform_baseline": "1"
+    },
+    {
+      "formula": "max_{j in q} p_j / sum_r max_{j in r} p_j",
+      "interpretation": "common-four-quadrant normalization of the peak-patch statistic",
+      "metric": "peak_patch_quadrant_share",
+      "uniform_baseline": "0.25"
+    },
+    {
+      "formula": "(N/4) * max_{j in q} p_j / sum_{j in q} p_j",
+      "interpretation": "within-quadrant focality; identically 1 at native 2x2",
+      "metric": "within_quadrant_peak_ratio",
+      "uniform_baseline": "1"
+    },
+    {
+      "formula": "sum_k mean_i A_ik within one cross-attention source block",
+      "interpretation": "visual-key versus recurrent-memory-key allocation; descriptive mean only in the retained cache",
+      "metric": "source_total_share",
+      "uniform_baseline": "0.5 only under globally uniform image+memory attention"
+    },
+    {
+      "formula": "source-specific quadrant mass / source_total_share",
+      "interpretation": "spatial localization conditional on attending to that source; descriptive mean only in the retained cache",
+      "metric": "source_conditional_quadrant_mass",
+      "uniform_baseline": "0.25"
+    }
+  ],
+  "patch_score": "attention-map key-column mean over query patches; paired visual and memory columns summed for the primary cross-attention comparison",
+  "primary_event_window": "frame5 (change onset)",
+  "schema_version": 1,
+  "scientific_evidence": "correlational attention geometry only; causal intervention evidence remains separate",
+  "selected_seed0_results": [
+    {
+      "feedback": "crossattn1",
+      "invalid_target_minus_cue_peak_share_frames5_6": 0.22155541015760094,
+      "invalid_target_minus_cue_total_frame5": -0.30902259226422757,
+      "invalid_target_minus_cue_total_frame6": 0.7521334141538318,
+      "invalid_target_minus_cue_total_frames5_6": 0.22155541094480213,
+      "invalid_target_peak_share_frame5": 0.17026650108802655,
+      "invalid_target_total_mass_frame5": 0.1702665004413575,
+      "n_tokens": 4,
+      "primary_window": "frame5",
+      "seed": 0,
+      "valid_target_peak_share_frame5": 0.506379483285415,
+      "valid_target_peak_share_frame6": 0.9897631524872365,
+      "valid_target_peak_share_frames5_6": 0.7480713178863257,
+      "valid_target_total_mass_frame5": 0.5063794795423746,
+      "valid_target_total_mass_frame6": 0.9897631541825831,
+      "valid_target_total_mass_frames5_6": 0.7480713168624789
+    },
+    {
+      "feedback": "crossattn1",
+      "invalid_target_minus_cue_peak_share_frames5_6": -0.010200647706837733,
+      "invalid_target_minus_cue_total_frame5": -0.26016355530009605,
+      "invalid_target_minus_cue_total_frame6": 0.24915564183174865,
+      "invalid_target_minus_cue_total_frames5_6": -0.005503956734173698,
+      "invalid_target_peak_share_frame5": 0.17617854359775814,
+      "invalid_target_total_mass_frame5": 0.18488595963572152,
+      "n_tokens": 16,
+      "primary_window": "frame5",
+      "seed": 0,
+      "valid_target_peak_share_frame5": 0.48280577545122916,
+      "valid_target_peak_share_frame6": 0.9115390148995066,
+      "valid_target_peak_share_frames5_6": 0.6971723951753679,
+      "valid_target_total_mass_frame5": 0.4550413673132425,
+      "valid_target_total_mass_frame6": 0.8781179377474473,
+      "valid_target_total_mass_frames5_6": 0.6665796525303449
+    },
+    {
+      "feedback": "crossattn1",
+      "invalid_target_minus_cue_peak_share_frames5_6": 0.094932168819688,
+      "invalid_target_minus_cue_total_frame5": -0.04664860378943558,
+      "invalid_target_minus_cue_total_frame6": 0.03845792504034762,
+      "invalid_target_minus_cue_total_frames5_6": -0.0040953393745439826,
+      "invalid_target_peak_share_frame5": 0.23340432624788082,
+      "invalid_target_total_mass_frame5": 0.23602012430637842,
+      "n_tokens": 100,
+      "primary_window": "frame5",
+      "seed": 0,
+      "valid_target_peak_share_frame5": 0.3115634940883757,
+      "valid_target_peak_share_frame6": 0.7380377774460516,
+      "valid_target_peak_share_frames5_6": 0.5248006357672137,
+      "valid_target_total_mass_frame5": 0.28242880273683113,
+      "valid_target_total_mass_frame6": 0.42683117092383327,
+      "valid_target_total_mass_frames5_6": 0.3546299868303322
+    },
+    {
+      "feedback": "affine_ew",
+      "invalid_target_minus_cue_peak_share_frames5_6": 0.6429268710643508,
+      "invalid_target_minus_cue_total_frame5": 0.6723766284412704,
+      "invalid_target_minus_cue_total_frame6": 0.6134771162305697,
+      "invalid_target_minus_cue_total_frames5_6": 0.64292687233592,
+      "invalid_target_peak_share_frame5": 0.7570864752144945,
+      "invalid_target_total_mass_frame5": 0.7570864767767489,
+      "n_tokens": 4,
+      "primary_window": "frame5",
+      "seed": 0,
+      "valid_target_peak_share_frame5": 0.7776510471282125,
+      "valid_target_peak_share_frame6": 0.6955558153238974,
+      "valid_target_peak_share_frames5_6": 0.736603431226055,
+      "valid_target_total_mass_frame5": 0.7776510445401073,
+      "valid_target_total_mass_frame6": 0.6955558178015053,
+      "valid_target_total_mass_frames5_6": 0.7366034311708063
+    },
+    {
+      "feedback": "affine_ew",
+      "invalid_target_minus_cue_peak_share_frames5_6": 0.5803182538228937,
+      "invalid_target_minus_cue_total_frame5": 0.6036111663211159,
+      "invalid_target_minus_cue_total_frame6": 0.5056846647194106,
+      "invalid_target_minus_cue_total_frames5_6": 0.5546479155202633,
+      "invalid_target_peak_share_frame5": 0.7781390100559482,
+      "invalid_target_total_mass_frame5": 0.7574590482972781,
+      "n_tokens": 16,
+      "primary_window": "frame5",
+      "seed": 0,
+      "valid_target_peak_share_frame5": 0.9439305477362436,
+      "valid_target_peak_share_frame6": 0.9021649901875888,
+      "valid_target_peak_share_frames5_6": 0.9230477689619162,
+      "valid_target_total_mass_frame5": 0.9279990296545293,
+      "valid_target_total_mass_frame6": 0.8820493541138603,
+      "valid_target_total_mass_frames5_6": 0.9050241918841948
+    },
+    {
+      "feedback": "affine_ew",
+      "invalid_target_minus_cue_peak_share_frames5_6": 0.6336080004041524,
+      "invalid_target_minus_cue_total_frame5": 0.2992853474484036,
+      "invalid_target_minus_cue_total_frame6": 0.3819207050539717,
+      "invalid_target_minus_cue_total_frames5_6": 0.34060302625118766,
+      "invalid_target_peak_share_frame5": 0.767656739647955,
+      "invalid_target_total_mass_frame5": 0.5079690066504554,
+      "n_tokens": 100,
+      "primary_window": "frame5",
+      "seed": 0,
+      "valid_target_peak_share_frame5": 0.934613709038553,
+      "valid_target_peak_share_frame6": 0.7835110165869943,
+      "valid_target_peak_share_frames5_6": 0.8590623628127738,
+      "valid_target_total_mass_frame5": 0.7241093680577251,
+      "valid_target_total_mass_frame6": 0.581711195773778,
+      "valid_target_total_mass_frames5_6": 0.6529102819157515
+    }
+  ],
+  "sources": [
+    {
+      "event_attention_sha256": "037c5135dffabfae16b0ae1f4382c65c6fffcc41c363508641ed5fad6f93b15e",
+      "feedback": "affine_ew",
+      "grid": "10x10",
+      "label": "vda4_affine_ew_grid10x10_seed0",
+      "n_tokens": 100,
+      "seed": 0,
+      "source_manifest_sha256": "a869859116807664e46ee6d4f0d6d5ced3be3ac9ddeddbd67f0c27839ac26ea7"
+    },
+    {
+      "event_attention_sha256": "b70465c477649ea8c6b2da80c33d376b784a15b4eec7107809dcc3914413d4b8",
+      "feedback": "affine_ew",
+      "grid": "2x2",
+      "label": "vda4_affine_ew_grid2x2_seed0",
+      "n_tokens": 4,
+      "seed": 0,
+      "source_manifest_sha256": "0235d2de5f2e816287e2d9bdba851fbee0324d62eabc93d6677cc57ecce09d1a"
+    },
+    {
+      "event_attention_sha256": "f81387cbdb6f171fee4a5552b5661f33731047323df020d2b0606e9656b6e5d5",
+      "feedback": "affine_ew",
+      "grid": "4x4",
+      "label": "vda4_affine_ew_grid4x4_seed0",
+      "n_tokens": 16,
+      "seed": 0,
+      "source_manifest_sha256": "02c989ddacc67c3d406fcb2aba1f97335cc7ac65ad553b3c710251398436d9d9"
+    },
+    {
+      "event_attention_sha256": "5dd49adc21da34deb57358552ccfe04b44c92b8def20a9321ea916af3fde1de2",
+      "feedback": "crossattn1",
+      "grid": "10x10",
+      "label": "vda4_crossattn1_grid10x10_seed0",
+      "n_tokens": 100,
+      "seed": 0,
+      "source_manifest_sha256": "c3ecaa670952864230f91859cebfa5c5cbaa607e934969ca589347a237d9a6eb"
+    },
+    {
+      "event_attention_sha256": "d0d1ab9e0cc4b317db6181c3f8113f8a9438b4859fe9fce1028d453412c88314",
+      "feedback": "crossattn1",
+      "grid": "10x10",
+      "label": "vda4_crossattn1_grid10x10_seed1",
+      "n_tokens": 100,
+      "seed": 1,
+      "source_manifest_sha256": "8d758522bddb159367960b1d3b8a80f6f660ffb529c0e8a9103d46fc5e45a387"
+    },
+    {
+      "event_attention_sha256": "a1521c40f85c921e3e00a5498cc7d51741854d0ad307d425138925dde4d10e04",
+      "feedback": "crossattn1",
+      "grid": "2x2",
+      "label": "vda4_crossattn1_grid2x2_seed0",
+      "n_tokens": 4,
+      "seed": 0,
+      "source_manifest_sha256": "044f9a5860ac5a400a461b5d7dc5bf8a9d58559cd2fe08d925df58185b90d3f7"
+    },
+    {
+      "event_attention_sha256": "640a8238d22eba12bfa7e00809b655d88c13451d1892f1924089547b136ec05c",
+      "feedback": "crossattn1",
+      "grid": "2x2",
+      "label": "vda4_crossattn1_grid2x2_seed1",
+      "n_tokens": 4,
+      "seed": 1,
+      "source_manifest_sha256": "054c7bac594cfad4fd8998093e282b3d6637d47f87898d1f5f2e634776227703"
+    },
+    {
+      "event_attention_sha256": "3110ba2a315aa5bee379ffd6036c9e9b20f76245e9dbdbe56b083d8c834f06a9",
+      "feedback": "crossattn1",
+      "grid": "4x4",
+      "label": "vda4_crossattn1_grid4x4_seed0",
+      "n_tokens": 16,
+      "seed": 0,
+      "source_manifest_sha256": "d06bd3f6916771644bbb808e8dfb21e39016aff5a280a4b11f93782c285f62d2"
+    }
+  ],
+  "status": "complete",
+  "trials_per_condition": 128
+}

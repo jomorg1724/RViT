@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "model": {
+    "label": "vda_fixed9_crossattn1_seed0",
+    "task": "vda_fixed9",
+    "feedback": "crossattn1",
+    "grid_rows": 4,
+    "grid_cols": 4,
+    "n_tokens": 16,
+    "checkpoint_iteration": 19999,
+    "checkpoint_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod\\rvit_paper_vda_fixed9_final.pt",
+    "checkpoint_sha256": "b876cb6a2b5d494fa36b918d705b52a3d8c7cb3f9e8aec7e37e9e38069fce288",
+    "checkpoint_seed": 0,
+    "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda_endpoint_evaluation.py",
+    "producer_sha256": "2768e19a9cacdb46768038bd5eff8c3b9f521065b705206b29ec87395e67eaa1"
+  },
+  "training_is_not_scientific_validation": true,
+  "anchor_100pct_30deg": {
+    "valid_response_rate": 0.94,
+    "invalid_response_rate": 0.9033333333333333,
+    "false_alarm_rate": 0.03,
+    "valid_dprime": 3.400942250818312,
+    "invalid_dprime": 3.151318215182389
+  },
+  "natural_vs_disabled_invalid": {
+    "natural_response_rate": 0.876,
+    "disabled_response_rate": 0.0,
+    "difference_disabled_minus_natural": -0.876
+  },
+  "elapsed_seconds": 289.95509362220764
+}

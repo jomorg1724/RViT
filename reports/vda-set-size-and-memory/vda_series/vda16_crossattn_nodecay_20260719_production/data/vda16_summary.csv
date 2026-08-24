@@ -1,0 +1,15 @@
+family,metric,value
+training,status,competence_gated
+training,final_theta_degrees,65.0
+training,late50_mean_rolling_correct,0.7742
+psychometric,valid_minus_invalid_p075_nearest_d18,0.52
+decoder_native_t6,colour,1.0
+decoder_pca128_t6,colour,1.0
+decoder_native_t6,validity,0.3591204573934837
+decoder_pca128_t6,validity,0.3980850563909774
+decoder_native_t6,change,0.6677168931731985
+decoder_pca128_t6,change,0.6800134323640961
+decoder_native_t6,change_location,0.11170504385964912
+decoder_pca128_t6,change_location,0.09814575501253132
+decoder_native_t6,cued_change,0.806625939849624
+decoder_pca128_t6,cued_change,0.7488643483709274

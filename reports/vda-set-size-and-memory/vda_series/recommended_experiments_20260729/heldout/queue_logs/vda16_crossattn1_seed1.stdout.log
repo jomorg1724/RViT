@@ -1,0 +1,16 @@
+VALID|task=vda16|seed=1|iter=19999|rows=20000|checkpoint_sha256=d08d5826486f1c7f5f5e54eda916ff6dd544a3f67372c388188ab42ecc586374
+[psychometric] validity=0.25 complete
+[psychometric] validity=0.50 complete
+[psychometric] validity=0.75 complete
+[psychometric] validity=1.00 complete
+[attention] valid complete
+[attention] invalid complete
+[intervention] regional role=change complete
+[intervention] regional role=cued complete
+[intervention] regional role=control complete
+[intervention] explicit mode=natural complete
+[intervention] explicit mode=uniform complete
+[intervention] explicit mode=shuffle complete
+[intervention] explicit mode=disable complete
+[complete] wrote C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series\recommended_experiments_20260729\heldout\vda16_crossattn1_seed1
+COMPLETE|task=vda16|seed=1|terminal=C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series\recommended_experiments_20260729\heldout\vda16_crossattn1_seed1.TERMINAL_VALIDATION.json|evaluation=C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series\recommended_experiments_20260729\heldout\vda16_crossattn1_seed1

@@ -1,0 +1,875 @@
+{
+  "schema_version": 3,
+  "scope": "first-wave VDA4/VDA9 corrections",
+  "environment_geometry": {
+    "vda4": "2x2 fully occupied",
+    "vda9": "3x3 fully occupied"
+  },
+  "attention_condition": "red cue at S1; valid change at S1; rows=query patches; columns=logical timesteps",
+  "psychometric_panels": [
+    "all cue proportions with valid change at S1",
+    "all cue proportions with invalid change at bottom-right",
+    "100% displayed validity with forced valid and forced invalid changes"
+  ],
+  "requested_attention_trials": 96,
+  "requested_psychometric_trials_per_point": 300,
+  "realized_attention_trials": [
+    96
+  ],
+  "realized_psychometric_trials_per_point": [
+    300
+  ],
+  "runtime_versions": {
+    "gymnasium": "1.3.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6",
+    "pillow": "12.2.0",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "python": "3.12.13",
+    "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+    "scipy": "1.17.1",
+    "torch": "2.12.0"
+  },
+  "producer": {
+    "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_series/first_wave_figures.py",
+    "sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+    "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/first_wave_figures.py",
+    "snapshot_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33"
+  },
+  "build_script": {
+    "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/scripts/build_first_wave_figures.py",
+    "sha256": "0b90d3b6c2b378b4c335f8259d04c88bec328c5f2cd081cee3b19f683f0aa28c",
+    "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/build_first_wave_figures.py",
+    "snapshot_sha256": "0b90d3b6c2b378b4c335f8259d04c88bec328c5f2cd081cee3b19f683f0aa28c"
+  },
+  "producer_dependencies": [
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/vda_core.py",
+      "sha256": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/vda_sweep/vda_core.py",
+      "snapshot_sha256": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/model.py",
+      "sha256": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/model.py",
+      "snapshot_sha256": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/conv_frontend.py",
+      "sha256": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/conv_frontend.py",
+      "snapshot_sha256": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vae_frontend.py",
+      "sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/vae_frontend.py",
+      "snapshot_sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/paper_encoder.py",
+      "sha256": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/paper_encoder.py",
+      "snapshot_sha256": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/paper_heads.py",
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/paper_heads.py",
+      "snapshot_sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/__init__.py",
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/envs/__init__.py",
+      "snapshot_sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/base.py",
+      "sha256": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/envs/base.py",
+      "snapshot_sha256": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/tasks.py",
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/envs/tasks.py",
+      "snapshot_sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/envs/luo2015.py",
+      "sha256": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/envs/luo2015.py",
+      "snapshot_sha256": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_series/__init__.py",
+      "sha256": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/vda_series/__init__.py",
+      "snapshot_sha256": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_series/task_figures.py",
+      "sha256": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/vda_series/task_figures.py",
+      "snapshot_sha256": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_series/architecture_figures.py",
+      "sha256": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/vda_series/architecture_figures.py",
+      "snapshot_sha256": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_series/behavior_figures.py",
+      "sha256": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/provenance/dependencies/vda_series/behavior_figures.py",
+      "snapshot_sha256": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec"
+    }
+  ],
+  "validated_caches": [
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda4_affine_ew.npz",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "2341026363e6e1d2115a34a8ad9a91a73e385aab4a223aace763529e4047e085",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "cache_sha256": "326766c58dc878ce362aaf4102a7a4ceaed9393589b205fe3192a332533d2667"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda4_affine_ew.npz",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "2341026363e6e1d2115a34a8ad9a91a73e385aab4a223aace763529e4047e085",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "ef966abd2d643d83ed998ba03847f203b8c9579d70c477212951b701e355525f"
+    },
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda4_crossattn1.npz",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "1a2fa8ae2a57982b6c91dc75079d8293781ce843271b92fe3cfbe5fc16137155",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "cache_sha256": "fed7ff25f0b95e121ef439368264c2a6834496d597c2d0793f8603400058cf28"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda4_crossattn1.npz",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "1a2fa8ae2a57982b6c91dc75079d8293781ce843271b92fe3cfbe5fc16137155",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "429a095946990ab73737122b70d2a96f3fbcde91ba742e89c11adf491c5bac66"
+    },
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda9_affine_ew.npz",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "22f028f6232d9c3ea040019aff357645ddcaa69e4a09c2f8ceff224ea568d8d7",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "cache_sha256": "b72b937d076ae0fd35d25370663e955c2acc2569b0c348b90d28ba19b943cb65"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda9_affine_ew.npz",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "22f028f6232d9c3ea040019aff357645ddcaa69e4a09c2f8ceff224ea568d8d7",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "39ecd75e7ac25a54305b798aac9519d6eb46161bc323bf3855a4d7a0e1ccfb9b"
+    },
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda9_crossattn1.npz",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "6c0587201cd2bf99b43e02278d4c65b03ab79d9b1f811406fc4962d962714946",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "cache_sha256": "eef2432691167ea4be211f3f34c4d6d262c2f4b2091a68829f9eab57ba728fbd"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda9_crossattn1.npz",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "6c0587201cd2bf99b43e02278d4c65b03ab79d9b1f811406fc4962d962714946",
+      "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+      "dependency_hashes": {
+        "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "b64af40a14b85cfa00d6ae8c19f6205e03c0579574bf87947106374a796cfa04"
+    }
+  ],
+  "artifacts": [
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda4.pdf",
+      "sha256": "24d29d60438f1e01891d9d226b6eafc8893c6f1565f9c1b2c17a29be26ed2d18"
+    },
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda4.svg",
+      "sha256": "e8ef5e75453dc1a8f828d9767de46980b03baa6f136dff079760252977cbb53a"
+    },
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda4.png",
+      "sha256": "5f73ee4079a8f8ada442bafcc915247e597820abe70d53dfc808883f92a16bba"
+    },
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda4.json",
+      "sha256": "e052c27127c90116e975890419c83303dcd205d9bcc44b4950902200f518dc88"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda4_affine_ew.npz",
+      "sha256": "326766c58dc878ce362aaf4102a7a4ceaed9393589b205fe3192a332533d2667"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_affine_ew.pdf",
+      "sha256": "16c67daf98be7a699bcd65d876b8de4af5715cf2ebe123c8fdfae48ea346863f"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_affine_ew.svg",
+      "sha256": "6d5eb78c9a43660535dd649ad6d5146fce0d0f3e65cfe07f86b51dc5cbf9f0fb"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_affine_ew.png",
+      "sha256": "cc65aa063dff1d343db9538878ef529e89289a6b8ba9436c74bd4ecf5fdc064e"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_affine_ew.json",
+      "sha256": "965617802f07b5ac4e701156f69b417db4a00ea1eeaf14e575bcdfd5b7d35108"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda4_affine_ew.npz",
+      "sha256": "ef966abd2d643d83ed998ba03847f203b8c9579d70c477212951b701e355525f"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.pdf",
+      "sha256": "b7db81b5ebcb940f31f52180c626eec3d69ff80e979897e0a91c8825216d4df3"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.svg",
+      "sha256": "f8645a7960d4ca861503dc8a3870e7cd64048d33be9e1151567569b34e330271"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.png",
+      "sha256": "cb9cbc7ca450216257d875eb5addd248c218a339a53b3b942f27edf39815f107"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.json",
+      "sha256": "1ec0a076268d4fc9d7a4a20d0677812d9cf31034aa6e0710628f534edb68c416"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda4_crossattn1.npz",
+      "sha256": "fed7ff25f0b95e121ef439368264c2a6834496d597c2d0793f8603400058cf28"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_crossattn1.pdf",
+      "sha256": "0386db69a7e9435b405727ca02f857d62c405b11924fbba0fcd3401c90f3e420"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_crossattn1.svg",
+      "sha256": "838f79f6616ef9aa960bb8512a099e1031172310007e7d49434b0f061dc6db77"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_crossattn1.png",
+      "sha256": "be148a9d62053d87acd918e39a1a1b9c064b44634db714b2310de221c1c48e28"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda4_crossattn1.json",
+      "sha256": "9d04ed097a8b6f4a999f5270f619f3598dc1ef79db0f6959aba9c3f62ed7076b"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda4_crossattn1.npz",
+      "sha256": "429a095946990ab73737122b70d2a96f3fbcde91ba742e89c11adf491c5bac66"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.pdf",
+      "sha256": "349135f1c3d23220d0438ab6ed6d799a48aa7c561c6e60b1e569778b205b2c79"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.svg",
+      "sha256": "186a094269a655ff4a859912abd6406cba9e3865a173e91b73f6187208f836cf"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.png",
+      "sha256": "381e10ac16b1aabd096a9c336f7eddfa74f89193f4bb6e9fd9ac4b954d954dd6"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.json",
+      "sha256": "03c8a96e1f903ed6d8636b9ee25a421de8d0db9b48c24dbc932344d0dccff4eb"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda9.pdf",
+      "sha256": "957dded4a5ec176660a0a3c3ea7a43625824d9b3b6bf8a69e8d0aa6c9ebd32b8"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda9.svg",
+      "sha256": "d3dda3a5d6d0c83e8149f3024679cefa9eb03d545705becb2e5bf63b0cecb5b3"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda9.png",
+      "sha256": "e7e83fd471bd9282160d646357e606c28c4eed738098864fe476d1cdee325bf0"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/environment/first_wave_environment_vda9.json",
+      "sha256": "1073824105ec8086069f2e094b6bab5dfb160af8a06b297acefbc992fed4c5b3"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda9_affine_ew.npz",
+      "sha256": "b72b937d076ae0fd35d25370663e955c2acc2569b0c348b90d28ba19b943cb65"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_affine_ew.pdf",
+      "sha256": "fb204a112a4256e0c7ac0a3a272333a35ddf4afa5136921e4daa75bbace6b90c"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_affine_ew.svg",
+      "sha256": "f72124c937eabd59bdef4d0e45a02beb7f3c2977b4c7bb1842403819bbbfdccf"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_affine_ew.png",
+      "sha256": "58675f9192ab917457eb22edcb636b505c70a2ee376da5dfbb381d0528970a90"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_affine_ew.json",
+      "sha256": "d1a605c8b46bb55f524ae5f15cd1e3cdca19303b9d3a81bfc38a03cdeac25387"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda9_affine_ew.npz",
+      "sha256": "39ecd75e7ac25a54305b798aac9519d6eb46161bc323bf3855a4d7a0e1ccfb9b"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.pdf",
+      "sha256": "465968206f262cd8a2a6c172245b7cb2f6b3d31c960ba7b535c2e7bf76b7059d"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.svg",
+      "sha256": "e5fe1c7297db31ca39f2351defd4687b93da36eceb034dbdfdde2719a4879254"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.png",
+      "sha256": "a6551f4b50e538a8e996978eecc98119d7cbf2b9d85a0b1b2ac70124dc20a9c4"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.json",
+      "sha256": "5f6d81ac1e64af35d774bc3c262d85fa66d44bc896fa8fb3f6593f4e93c4d36f"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda9_crossattn1.npz",
+      "sha256": "eef2432691167ea4be211f3f34c4d6d262c2f4b2091a68829f9eab57ba728fbd"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_crossattn1.pdf",
+      "sha256": "9f88c63d6af0daedc01c25385391cfec606601f237c8d90a06373352b9096559"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_crossattn1.svg",
+      "sha256": "3bd5ae315defb4bdca1e9a40827e27676eef1c8fe713002411e97193b433c83f"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_crossattn1.png",
+      "sha256": "dfdf1219da37e1fe468100dd1abe73a8b497f461e20b0a180db2fe59af541fda"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/attention/first_wave_attention_vda9_crossattn1.json",
+      "sha256": "aae1ccc3cc3f75f8766e7201272d79d920662687795112f7023675763db4b5f9"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/psychometric_vda9_crossattn1.npz",
+      "sha256": "b64af40a14b85cfa00d6ae8c19f6205e03c0579574bf87947106374a796cfa04"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.pdf",
+      "sha256": "c47e666fcc375a4ffd5b0138e18c016d1fbdeccdc7cc914df6bf982a52ad4a58"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.svg",
+      "sha256": "4d0c2e137e3a194b5f7926f58d8e3d1f2bb5e36a5352442a8b67375206a9cdf3"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.png",
+      "sha256": "cc4e15f0c0634265def62310d87f91c66c6bed520b55d98ff09a81a31aabc129"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.json",
+      "sha256": "a490823e9edb3c7067b011348e83444cda189139a426e03e339f9ace08e0028c"
+    }
+  ]
+}

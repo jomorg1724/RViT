@@ -1,0 +1,129 @@
+{
+  "label": "vda_fixed9_crossattn1_seed0",
+  "task": "vda_fixed9",
+  "feedback": "crossattn1",
+  "grid_rows": 4,
+  "grid_cols": 4,
+  "n_tokens": 16,
+  "checkpoint_iteration": 19999,
+  "checkpoint_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod\\rvit_paper_vda_fixed9_final.pt",
+  "checkpoint_sha256": "b876cb6a2b5d494fa36b918d705b52a3d8c7cb3f9e8aec7e37e9e38069fce288",
+  "checkpoint_seed": 0,
+  "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda_endpoint_evaluation.py",
+  "producer_sha256": "2768e19a9cacdb46768038bd5eff8c3b9f521065b705206b29ec87395e67eaa1",
+  "device": "cuda",
+  "threads": 3,
+  "psychometric_trials": 300,
+  "attention_trials": 128,
+  "intervention_trials": 250,
+  "validities": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "magnitudes": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    22.0,
+    26.0,
+    30.0
+  ],
+  "focal_magnitude": 30.0,
+  "focal_validity": 1.0,
+  "qualifying_frames": [
+    5,
+    6
+  ],
+  "cue_index": 0,
+  "valid_change_index": 0,
+  "invalid_change_index": 15,
+  "control_index": 3,
+  "active_count": 9,
+  "required_active_locations": [
+    15,
+    3
+  ],
+  "active_set_sampling": "random_without_replacement_conditioned_on_cue_invalid_and_control",
+  "region_semantics": "one_carrier_token_per_location",
+  "region_tokens": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3
+    ],
+    [
+      4
+    ],
+    [
+      5
+    ],
+    [
+      6
+    ],
+    [
+      7
+    ],
+    [
+      8
+    ],
+    [
+      9
+    ],
+    [
+      10
+    ],
+    [
+      11
+    ],
+    [
+      12
+    ],
+    [
+      13
+    ],
+    [
+      14
+    ],
+    [
+      15
+    ]
+  ],
+  "regional_uniform_baseline": 0.0625,
+  "checkpoint_producer_sha256": {
+    "train_rl.py": "9bbf01aa3680dbf0d035d0b23bbf6817c832f7ea66cbcf8edbaee84f5be7eb33",
+    "ppo.py": "b01091a4919fcc7cb31f94ac599ec86de860b2331c599e3156518f26d18c40da",
+    "model.py": "b77fd7f4cd5d56fc38257b58ee5400285fba875b3c01a79ec7baf7106f66d72c",
+    "paper_encoder.py": "91f8a5be84aa300d4a1b42b2ec92f633bb8a704a9dae3f302f192a73915d61d1",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "conv_frontend.py": "0099e258730aee7c2ae60d35215d1738771a88f9356ead1877012b89e794dd31",
+    "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "envs/luo2015.py": "c9ad206324c20a703518ed9e1b241a66332458ea752900276c1f70f8d78cea2a",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "config/loader.py": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9",
+    "scripts/launch_vda16_fresh.sh": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70",
+    "experiments/vda4_spatial_discretization/grid_10x10/launch_20k.sh": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4",
+    "resolved_config": "2d56ad6cbc4586ab9496b86278ca0a00a64e1e20710a43f3cf3a7ee975c7ca38",
+    "experiment_launcher": "3d7d8624d9faab7129bd2ef20fe5787677bbaadb796ee44d36c72349be72b1db"
+  },
+  "evaluation_dependency_sha256": {
+    "analysis/vda_endpoint_evaluation.py": "2768e19a9cacdb46768038bd5eff8c3b9f521065b705206b29ec87395e67eaa1",
+    "analysis/vda4_spatial_scaling_evaluation.py": "7b824a24f4ca3350e84681ba731636bc37c61e37692e5b6a2fa229876ab827c1",
+    "vda_sweep/vda_core.py": "2d0843761bc3c5650b01bd9a17e95714ea5775aaa9ff405253f691bb3a301c18",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e"
+  }
+}

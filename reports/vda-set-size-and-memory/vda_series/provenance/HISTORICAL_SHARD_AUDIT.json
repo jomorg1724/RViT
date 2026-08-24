@@ -1,0 +1,45 @@
+{
+  "manifest_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\MANIFEST.json",
+  "manifest_sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11",
+  "snapshot": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\HISTORICAL_MATCHED_WIDTH_MANIFEST.json",
+  "frozen_shard_root": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards",
+  "selected_shards": [
+    {
+      "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda1_affine_ew_d128.npz",
+      "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda1_affine_ew_d128.npz",
+      "sha256": "10b0305ea798e85038a915a39ec98443cfa1fc6e66da46ada78fe4fc26d8cb09",
+      "bytes": 18678
+    },
+    {
+      "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda1_crossattn1_d128.npz",
+      "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda1_crossattn1_d128.npz",
+      "sha256": "efde389965952b93ac28597ee952d83910fa43fdd6f74f12ae1abf481c53977c",
+      "bytes": 18676
+    },
+    {
+      "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda4_affine_ew_d128.npz",
+      "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda4_affine_ew_d128.npz",
+      "sha256": "f9b18d36e88976f77764d4ff3b90e8ca9fae84abdcd496922f11f1eb129e131d",
+      "bytes": 21212
+    },
+    {
+      "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda4_crossattn1_d128.npz",
+      "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda4_crossattn1_d128.npz",
+      "sha256": "6bda789750a4a7d6aea08aeb23d1eb22df7a64d344f5e1800ac2072cd4cb7e89",
+      "bytes": 20827
+    },
+    {
+      "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda9_affine_ew_d128.npz",
+      "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda9_affine_ew_d128.npz",
+      "sha256": "690a17e9db18fd3153ec1a19c92a3fa9ce5fc26d17a1005f4c71476a2d3e5e62",
+      "bytes": 21777
+    },
+    {
+      "original_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\vda_sweep\\derived\\2026-07-11_matched_width\\shards\\vda9_crossattn1_d128.npz",
+      "frozen_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\historical_shards\\vda9_crossattn1_d128.npz",
+      "sha256": "0be3f2473db459eaeb937b077d7754310305df1a38c1740cc1246781a3b6112c",
+      "bytes": 21860
+    }
+  ],
+  "lineage_boundary": "historical shards are hash-bound aggregate evidence; this build does not recompute their checkpoints"
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "status": "complete_pending_independent_verification",
+  "model": {
+    "task": "vda16",
+    "feedback": "affine_ew",
+    "width": 128,
+    "seed": 0,
+    "checkpoint_iteration": 19999,
+    "checkpoint_sha256": "52141da629e2c7f8f902826196067efbadb924608eecde7560559fdc0f813233"
+  },
+  "protocol": {
+    "cue_location": 0,
+    "true_change_location": 15,
+    "neutral_control_location": 5,
+    "focal_change_degrees": 30.0,
+    "displayed_validity": 1.0,
+    "invalid_trial_interpretation": "forced out-of-policy stress test",
+    "trials_per_condition": 300,
+    "common_random_numbers": true,
+    "nochange_sdt_control": true,
+    "clamp_from_frame": 5,
+    "qualifying_frames": [
+      5,
+      6
+    ],
+    "dose_parameters": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "key_logit_scale": 6.0
+  },
+  "effects": {
+    "change": {
+      "target_location": 15,
+      "response_rate_suppress": 0.7466666666666667,
+      "response_rate_natural": 0.98,
+      "response_rate_boost": 0.9933333333333333,
+      "response_rate_boost_minus_suppress": 0.2466666666666666,
+      "dprime_boost_minus_suppress": 2.2254985386820376,
+      "false_alarm_rate_suppress": 0.043333333333333335,
+      "false_alarm_rate_boost": 0.016666666666666666,
+      "achieved_target_mass_suppress": 0.4451829635310177,
+      "achieved_target_mass_natural": 0.8219773310048499,
+      "achieved_target_mass_boost": 0.9873415606680768
+    },
+    "cued": {
+      "target_location": 0,
+      "response_rate_suppress": 0.99,
+      "response_rate_natural": 0.98,
+      "response_rate_boost": 0.86,
+      "response_rate_boost_minus_suppress": -0.13,
+      "dprime_boost_minus_suppress": -1.784320794229374,
+      "false_alarm_rate_suppress": 0.013333333333333334,
+      "false_alarm_rate_boost": 0.04666666666666667,
+      "achieved_target_mass_suppress": 7.472077712970773e-05,
+      "achieved_target_mass_natural": 0.024549258245874363,
+      "achieved_target_mass_boost": 0.4161082867291862
+    },
+    "control": {
+      "target_location": 5,
+      "response_rate_suppress": 0.98,
+      "response_rate_natural": 0.98,
+      "response_rate_boost": 0.9466666666666667,
+      "response_rate_boost_minus_suppress": -0.033333333333333326,
+      "dprime_boost_minus_suppress": -0.29892897735119117,
+      "false_alarm_rate_suppress": 0.03666666666666667,
+      "false_alarm_rate_boost": 0.02666666666666667,
+      "achieved_target_mass_suppress": 3.0225010758072773e-05,
+      "achieved_target_mass_natural": 0.011335099253825615,
+      "achieved_target_mass_boost": 0.3729839204100675
+    }
+  },
+  "elapsed_seconds": 818.8399875164032,
+  "evidence_boundary": "Single admitted seed-0 checkpoint; curriculum stopped at 47 degrees and is competence-gated. The experiment estimates within-checkpoint routing dependence at a 30-degree forced-invalid stress-test condition, not population uncertainty or full VDA16 competence."
+}

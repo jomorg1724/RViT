@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "status": "canary_block_pulled_and_independently_verified_not_scientific_evidence",
+  "updated_at_utc": "2026-07-30T16:49:50.9857724Z",
+  "design_id": "vda4_stream_factorial_crossattn1_production_v1",
+  "evidence_boundary": "These four 50-iteration runs are engineering canaries only. Training metrics, canary checkpoints, and canary outputs are not behavioral, attention, mechanism, or scaling evidence.",
+  "local_verification": {
+    "focused_tests_passed": 72,
+    "focused_tests_failed": 0,
+    "all_four_local_preflights_passed": true,
+    "checkpoint_roundtrip_smoke_passed": true
+  },
+  "source_bundle": {
+    "path": "reports/vda_series/stream_factorial_production_20260730/rvit_stream_factorial_source_20260730T161426Z.tar.gz",
+    "bytes": 170431,
+    "sha256": "d943ca758ed15cbea98d82fd8da02f3114c4bb9958845e31f2e125d0a61c17f6",
+    "remote_path": "/workspace/rvit_stream_factorial_source_20260730T161426Z.tar.gz",
+    "remote_root": "/workspace/RViT_stream_factorial_20260730T161426Z_d943ca75",
+    "remote_sha256_matched": true
+  },
+  "frozen_hashes": {
+    "train_rl.py": "713d337781f432d9419189bb66cdd5c7abd2e3986e072c8be94216700814421c",
+    "design_manifest.json": "8a82292d725eb7519c4c394a0ddfe9037aac2a60fa02476e1ce241e76b9daf76",
+    "config_crossattn1_v1.json": "f5b62e32e40e2d8c5ee97ae71e2c520737fbf431ff4b64f82b58c718b23eb6aa",
+    "preflight_contract_v1.py": "6d92391c7545c0ba558193a0b9aa28b0cc24bca8234238b0ccb78d6d7f4269be",
+    "launch_crossattn1_canary_v1.sh": "7484fa171b63559ba5210a36ee0e1375d0e89795f4f6753dc0794cff608d9dec",
+    "launch_crossattn1_production_v1.sh": "bc0b1b7c02c8ad321dcb8af510f7b40b1b394d56eff3f7e70928ba2bc07182ff",
+    "source_bundle_verify_canary_block_v1.py": "717b5181aa5169970fca03a3bf74dd14f16fd579b312b55942555a8f92b60d8a",
+    "independent_local_verify_canary_block_v1.py": "44742546dc871f5822e2d8272196de96f43c3d211bbb42adeeba05d0d1e5ebe1"
+  },
+  "linux_preflight": {
+    "bash_syntax_all_launchers_and_queues": "pass",
+    "all_four_cell_preflights": "pass",
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "numpy": "2.1.2",
+    "gymnasium": "1.3.0",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA GeForce RTX 3090"
+  },
+  "canary_matrix": {
+    "seed": 0,
+    "iterations_per_cell": 50,
+    "terminal_iteration": 49,
+    "schedule_final_iteration": 19999,
+    "cells": [
+      {"effective_visual_streams": 4, "effective_memory_streams": 4},
+      {"effective_visual_streams": 4, "effective_memory_streams": 100},
+      {"effective_visual_streams": 100, "effective_memory_streams": 4},
+      {"effective_visual_streams": 100, "effective_memory_streams": 100}
+    ]
+  },
+  "runpod": {
+    "pod_id": "lt6jjpzpnop22w",
+    "pod_name": "vda-stream-factorial-canaries-20260730",
+    "cloud": "SECURE",
+    "data_center": "EU-CZ-1",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "hourly_gpu_cost_usd": 0.5,
+    "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+    "pod_created_at_utc": "2026-07-30T16:15:16.264Z",
+    "queue_pid": 1569,
+    "queue_log": "/workspace/vda_stream_factorial_canaries_20260730T1623Z.log",
+    "queue_exit_file": "/workspace/vda_stream_factorial_canaries_20260730T1623Z.exit",
+    "queue_status": "complete_exit_0",
+    "pod_final_status": "EXITED",
+    "pod_runtime_absent": true,
+    "delete_policy": "never_delete_stop_only"
+  },
+  "verified_pull": {
+    "local_root": "C:/Users/jomor/Documents/RViT_runs/stream_factorial_canaries_20260730_seed0_verified",
+    "remote_hash_manifest_sha256": "fd459cb2352e4e8c44b81d01462e9808c14739c9be690da6dd5c3b4d21e8a894",
+    "remote_local_artifacts_matched": 22,
+    "remote_local_bytes_matched": 1402772958,
+    "verified_manifest": "reports/vda_series/stream_factorial_production_20260730/CANARY_VERIFIED_MANIFEST.json",
+    "verified_manifest_sha256": "f3f02c9decd6323b621a9d5bed230fd9407bf67e4211d6b1ee1c21b222a1caa2",
+    "verifier_status": "complete_verified_engineering_canary_block",
+    "scientific_evidence": false,
+    "common_trainable_initialization_sha256": "31bc11deab1854018d1d0105f8256fc7f82c03c8c10fcf62459e8b2669aa5def",
+    "common_environment_rng_trace_sha256": "c13c919620327f53ff1562057125f4e81a699dcc72bf5943195c325cfa218f02"
+  },
+  "provisioning_notes": [
+    "A community RTX 3090 request failed because capacity disappeared before allocation; no pod was created or billed.",
+    "A community RTX 5090 request also failed before allocation; no pod was created or billed.",
+    "A secure RTX 3090 was provisioned for the short canary gate only because inexpensive community capacity was unavailable."
+  ],
+  "promotion_gate": "Pull all four canaries through unique partial staging, verify byte hashes, and pass verify_canary_block_v1.py before launching any 20000-iteration scientific run."
+}

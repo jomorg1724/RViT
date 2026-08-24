@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "complete_verified",
+  "producer_manifest_path": "MANIFEST.json",
+  "producer_manifest_sha256": "6251380a7b74020e26a806d8b904693a9974d81e52b89b0e9324bbe567475531",
+  "validation_result_path": "VALIDATION_RESULT.json",
+  "validation_result_sha256": "c515b3001728d7f2169719f2053c87b3aec769af699a4ac49d425d86e0b8876d",
+  "checkpoint_sha256": "52141da629e2c7f8f902826196067efbadb924608eecde7560559fdc0f813233",
+  "artifact_hash_count": 22
+}

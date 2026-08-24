@@ -1,0 +1,50 @@
+{
+  "artifact_hashes": {
+    "SUMMARY.json": "0eab2d610392c7ba3bb392a86430adc3d9a1a74674c0ea185d00237e0543bd1f",
+    "figures/attention_common_2x2_maps_seed0.pdf": "83e22cbbdd08e572f55d19f7e899e1ff4fb844398ab271b3e0d08326a24c5155",
+    "figures/attention_common_2x2_maps_seed0.png": "bf8e25578d0c3749fb83f4c275575a487847b455e3ae79ea266ea82dc5479f3a",
+    "figures/attention_crossattn_source_maps_seed0.pdf": "abd5efc46832a6794a32009cf24f90408636050339f17af3aeaa70f1184ae11c",
+    "figures/attention_crossattn_source_maps_seed0.png": "f5024b22a628b67bc3aee025763fffa2806608379650c011e8e326cf2cd1b980",
+    "figures/attention_endpoint_replication_multimetric.pdf": "d198494f7225b84906f4e87342d1fa41081aaa0f029b3c7b8b093a7efcb7af28",
+    "figures/attention_endpoint_replication_multimetric.png": "a8c692c510651c8faa6577404721380b254d1f182eb61009efb8a5767ede3341",
+    "figures/attention_framewise_comparison_seed0.pdf": "64a1b75a81c04e2628d5f2bfb44cdeb146b8f6c290b64f7c8d48d3aa6c1f94d0",
+    "figures/attention_framewise_comparison_seed0.png": "b655a0d9045674d3a08c52ebdea8893e9818cb51254bf1996495dc0264f27dac",
+    "figures/attention_measure_comparison_seed0.pdf": "665e914d27bee88edbd49424196a075da19929dc907572dc76366673f7f7d994",
+    "figures/attention_measure_comparison_seed0.png": "cddf6d431767fae63a6de1d5d04ba861867b11f30b5f12a19f1b5b892539a6de",
+    "figures/attention_native_patch_maps_seed0.pdf": "1a98536ecbe7ac3dc8a600d4ac4258441da1fd7863d5dae8179ed81b1a6aaa6e",
+    "figures/attention_native_patch_maps_seed0.png": "52f9fdafbf7bcd0cc7adb8c6b5756583580dd9b56e395486454a6fbb0353b293",
+    "tables/attention_metrics_summary.csv": "b97b893f2d7314c75ae23e57c6123db0e756d72fd3454b14402160c048eb490d",
+    "tables/attention_metrics_trials.csv": "008f4f9ff03239fca934e34a7b938cb5442c9c2ced1cc2c4c603c3a7396dacfc",
+    "tables/attention_paired_grid_contrasts.csv": "83df1a1d10fbff6ee412d56a9dfb7100701a77ba816abfa57b7078f58f5a8cc8",
+    "tables/cross_attention_source_decomposition.csv": "ec00bb7ec0eb9ca9e7b0eea568071216cfccb34e0bc0c3a02f5cebb59544b854",
+    "tables/metric_definitions.csv": "034d851486f62ccae72dabca930c6434606732475ef54b6537da6e1c09d361e3"
+  },
+  "manuscript_copies": {
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_common_2x2_maps_seed0.pdf": "83e22cbbdd08e572f55d19f7e899e1ff4fb844398ab271b3e0d08326a24c5155",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_common_2x2_maps_seed0.png": "bf8e25578d0c3749fb83f4c275575a487847b455e3ae79ea266ea82dc5479f3a",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_crossattn_source_maps_seed0.pdf": "abd5efc46832a6794a32009cf24f90408636050339f17af3aeaa70f1184ae11c",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_crossattn_source_maps_seed0.png": "f5024b22a628b67bc3aee025763fffa2806608379650c011e8e326cf2cd1b980",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_endpoint_replication_multimetric.pdf": "d198494f7225b84906f4e87342d1fa41081aaa0f029b3c7b8b093a7efcb7af28",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_endpoint_replication_multimetric.png": "a8c692c510651c8faa6577404721380b254d1f182eb61009efb8a5767ede3341",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_framewise_comparison_seed0.pdf": "64a1b75a81c04e2628d5f2bfb44cdeb146b8f6c290b64f7c8d48d3aa6c1f94d0",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_framewise_comparison_seed0.png": "b655a0d9045674d3a08c52ebdea8893e9818cb51254bf1996495dc0264f27dac",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_measure_comparison_seed0.pdf": "665e914d27bee88edbd49424196a075da19929dc907572dc76366673f7f7d994",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_measure_comparison_seed0.png": "cddf6d431767fae63a6de1d5d04ba861867b11f30b5f12a19f1b5b892539a6de",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_native_patch_maps_seed0.pdf": "1a98536ecbe7ac3dc8a600d4ac4258441da1fd7863d5dae8179ed81b1a6aaa6e",
+    "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\spatial_scaling\\attention_native_patch_maps_seed0.png": "52f9fdafbf7bcd0cc7adb8c6b5756583580dd9b56e395486454a6fbb0353b293"
+  },
+  "producer": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_spatial_attention_measures.py",
+  "producer_sha256": "6408135de495a3f11f82cf1f5c866ad64c7f30cb3b39d190d784344680bfc3b9",
+  "schema_version": 1,
+  "source_artifacts": {
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_affine_ew_grid10x10_seed0/data/event_attention.npz": "037c5135dffabfae16b0ae1f4382c65c6fffcc41c363508641ed5fad6f93b15e",
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_affine_ew_grid2x2_seed0/data/event_attention.npz": "b70465c477649ea8c6b2da80c33d376b784a15b4eec7107809dcc3914413d4b8",
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_affine_ew_grid4x4_seed0/data/event_attention.npz": "f81387cbdb6f171fee4a5552b5661f33731047323df020d2b0606e9656b6e5d5",
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_crossattn1_grid10x10_seed0/data/event_attention.npz": "5dd49adc21da34deb57358552ccfe04b44c92b8def20a9321ea916af3fde1de2",
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_crossattn1_grid10x10_seed1/data/event_attention.npz": "d0d1ab9e0cc4b317db6181c3f8113f8a9438b4859fe9fce1028d453412c88314",
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_crossattn1_grid2x2_seed0/data/event_attention.npz": "a1521c40f85c921e3e00a5498cc7d51741854d0ad307d425138925dde4d10e04",
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_crossattn1_grid2x2_seed1/data/event_attention.npz": "640a8238d22eba12bfa7e00809b655d88c13451d1892f1924089547b136ec05c",
+    "reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_crossattn1_grid4x4_seed0/data/event_attention.npz": "3110ba2a315aa5bee379ffd6036c9e9b20f76245e9dbdbe56b083d8c834f06a9"
+  },
+  "status": "complete"
+}

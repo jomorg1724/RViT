@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-07-28T01:30:02.5422774Z",
+  "status": "evaluation_complete_independently_verified",
+  "pod_id": "onrylro4hhaaly",
+  "remote_directory": "/workspace/vda4_affine_ew_grid2x2_d128_nodecay_seed0_production_replacement_20260727T223830Z_fe6a0c8e6586",
+  "remote_log": "/workspace/vda4_affine_ew_grid2x2_seed0_production_replacement_20260727T223830Z.log",
+  "staging_directory": "C:/Users/jomor/Documents/RViT_runs/vda4_affine_ew_grid2x2_d128_nodecay_seed0_pod_replacement.pull-20260728T012852Z-f338b772.partial",
+  "local_destination": "C:/Users/jomor/Documents/RViT_runs/vda4_affine_ew_grid2x2_d128_nodecay_seed0_pod_replacement",
+  "promoted_at_utc": "2026-07-28T01:31:11Z",
+  "remote_contract_audit": {
+    "status": "READY",
+    "trainer_exited": true,
+    "metrics_rows": 20000,
+    "first_iteration": 0,
+    "last_iteration": 19999,
+    "metrics_contiguous": true,
+    "metrics_finite": true,
+    "checkpoint_schema_version": 3,
+    "task": "vda4",
+    "grid": [2, 2],
+    "feedback": "affine_ew",
+    "d_mem": 128,
+    "memory_decay": 1.0,
+    "initialization_mode": "fresh",
+    "seed": 0,
+    "schedule_final_iteration": 19999,
+    "episodes_per_iteration": 8,
+    "resume_fidelity": "replay_excluded_trainer_state",
+    "final_latest_model_tensors_equal": true,
+    "required_model_state_finite": true,
+    "producer_hashes_recomputed_and_equal": true,
+    "clean_log": true,
+    "terminal_save_markers_present": true
+  },
+  "local_contract_audit": {
+    "status": "LOCAL_VALID",
+    "independently_repeated_after_pull": true,
+    "metrics_rows": 20000,
+    "last_iteration": 19999,
+    "checkpoint_schema_version": 3,
+    "producer_hashes_recomputed_and_equal": true,
+    "required_model_state_finite": true,
+    "final_latest_model_tensors_equal": true,
+    "clean_log": true
+  },
+  "producer_sha256": {
+    "config/loader.py": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9",
+    "conv_frontend.py": "0099e258730aee7c2ae60d35215d1738771a88f9356ead1877012b89e794dd31",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "envs/luo2015.py": "c9ad206324c20a703518ed9e1b241a66332458ea752900276c1f70f8d78cea2a",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "experiment_launcher": "2b9377c7cd6e9c4a985034441f2e150524800a011fdd488402060a3c4bfbc79a",
+    "experiments/vda4_spatial_discretization/grid_10x10/launch_20k.sh": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4",
+    "model.py": "b77fd7f4cd5d56fc38257b58ee5400285fba875b3c01a79ec7baf7106f66d72c",
+    "paper_encoder.py": "91f8a5be84aa300d4a1b42b2ec92f633bb8a704a9dae3f302f192a73915d61d1",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "ppo.py": "b01091a4919fcc7cb31f94ac599ec86de860b2331c599e3156518f26d18c40da",
+    "resolved_config": "812886b4d0a0b7500a5d53b4991e034aff6e7df316ef9e99be55df61e034f6d6",
+    "scripts/launch_vda16_fresh.sh": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70",
+    "train_rl.py": "9bbf01aa3680dbf0d035d0b23bbf6817c832f7ea66cbcf8edbaee84f5be7eb33"
+  },
+  "verified_files": [
+    {
+      "file": "metrics.csv",
+      "bytes": 4611898,
+      "sha256": "3b6c579c3a508a038c417c943de57a2cd239f50fb1069c7aa498fbf67cb6e1a0"
+    },
+    {
+      "file": "rvit_paper_vda4_final.pt",
+      "bytes": 44245375,
+      "sha256": "2db6c8a6d29b9770e74246a9095969e10c4a01441103972cf1a3768ae3314197"
+    },
+    {
+      "file": "rvit_plus_rl_latest.pt",
+      "bytes": 44244199,
+      "sha256": "5a6df9b29942b4516b6a7830000d8302d3ef16a28704e9a0d896163ffdf3eb79"
+    },
+    {
+      "file": "train.log",
+      "bytes": 3722185,
+      "sha256": "98fa9d324060632ba0c2c5cdebdb44a7e0837b998cba3e64b132cf575317e068"
+    }
+  ],
+  "pod_lifecycle": {
+    "required_action_after_promotion": "stop",
+    "delete_forbidden": true,
+    "stop_requested": true,
+    "confirmed_api_status": "EXITED",
+    "confirmed_runtime": null,
+    "confirmed_actions": ["start", "terminate"],
+    "interpretation": "RunPod stopped state; persistent pod retained and GPU runtime absent"
+  },
+  "evaluation": {
+    "status": "complete",
+    "started_at_utc": "2026-07-28T01:32:16Z",
+    "completed_and_verified_at_utc": "2026-07-28T01:36:36.7820360Z",
+    "pid": 34788,
+    "label": "vda4_affine_ew_grid2x2_seed0",
+    "device": "cuda",
+    "psychometric_trials": 300,
+    "attention_trials": 128,
+    "intervention_trials": 250,
+    "threads": 3,
+    "output_root": "C:/Users/jomor/OneDrive/Desktop/RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001/RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_affine_ew_grid2x2_seed0",
+    "stdout": "C:/Users/jomor/OneDrive/Desktop/RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001/RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727/queue_logs/vda4_affine_ew_grid2x2_seed0.stdout.log",
+    "stderr": "C:/Users/jomor/OneDrive/Desktop/RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001/RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727/queue_logs/vda4_affine_ew_grid2x2_seed0.stderr.log",
+    "manifest_status": "complete",
+    "artifact_count": 13,
+    "all_manifest_artifact_hashes_independently_validated": true,
+    "stderr_bytes": 0,
+    "stdout_completion_marker_present": true
+  }
+}

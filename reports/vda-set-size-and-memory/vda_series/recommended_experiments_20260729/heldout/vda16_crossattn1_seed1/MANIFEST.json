@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "model": {
+    "label": "vda16_crossattn1_seed1",
+    "task": "vda16",
+    "feedback": "crossattn1",
+    "grid_rows": 4,
+    "grid_cols": 4,
+    "n_tokens": 16,
+    "checkpoint_iteration": 19999,
+    "checkpoint_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda16_crossattn1_d128_nodecay_seed1_pod\\rvit_paper_vda16_final.pt",
+    "checkpoint_sha256": "d08d5826486f1c7f5f5e54eda916ff6dd544a3f67372c388188ab42ecc586374",
+    "checkpoint_seed": 1,
+    "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda_endpoint_evaluation.py",
+    "producer_sha256": "2768e19a9cacdb46768038bd5eff8c3b9f521065b705206b29ec87395e67eaa1"
+  },
+  "config_path": "analysis_config.json",
+  "summary_path": "SUMMARY.json",
+  "artifact_hashes": {
+    "analysis_config.json": "926eae3151b5085defdb390d925809722c1480779c8cf1af7810775fbfe8df85",
+    "data/event_attention.npz": "b955ebc5345c68496be3498ae87ecee399e5c33f725bb917e2079205929cf71e",
+    "data/interventions.npz": "9b47250ff8fabc7f0866c7ce514d5c56f07f74b125048d84989c97e123c89078",
+    "data/psychometrics.npz": "fa5d2884da769a7442816a88fdfb78bf76e074ddfa88d1bff5ff0aef498ffd79",
+    "figures/event_attention_maps.pdf": "cdaa5c4bf3be017f0f4001056678ea1082ac26abc44d0575b93b50c10ed5470c",
+    "figures/event_attention_maps.png": "b4f47c750680c8f32de4c20e920ef63b4351b881f88b5ea7b21369c4cc7ae341",
+    "figures/regional_causal_intervention.pdf": "0b114d430cb5c9f55a982e29a91a9135a19b2c81ffd7c52ca2c87b1ce3ef3d62",
+    "figures/regional_causal_intervention.png": "87bb4fe9a1f909ff5afe9dccdb71a19f16c3ac5f4dc592dd3c7da7956d5a948a",
+    "figures/valid_invalid_response_rt.pdf": "29fafe6dede4e0b4f7392b5aec1f80ec188ac40c3d5febb7d3c125d50dd35856",
+    "figures/valid_invalid_response_rt.png": "17d57e9d8ffafcc601dff50b4bb488aabb0009f89f2f606a10a59a125a2ea716",
+    "SUMMARY.json": "bd55d9398a0665a746cd5a45ef4f3aed071bc8488e0c4ce88269cc41958d3c5a",
+    "tables/psychometrics.csv": "0cfc0488fa53daf0034d3777de06546beefe538b78df5e8ed4bc2042ba59117a",
+    "tables/regional_interventions.csv": "0cf931f835748a815c49bfff4809ccc9689bef82910bdaff059b18bafec5dfbf"
+  }
+}

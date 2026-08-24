@@ -1,0 +1,45 @@
+\subsection{VDA16 cross-attention checkpoint}
+\label{sec:vda16_crossattn}
+
+We evaluated one VDA16 cross-attention checkpoint ($d_\mathrm{mem}=128$,
+memory decay $=1.0$, seed 0) at terminal iteration 19,999 using the same
+deterministic psychometric, recurrent-decoder, and attention-key clamp protocols
+as the VDA analysis series (Fig.~\ref{fig:vda16_summary}). At displayed
+validity 0.75 and the sampled orientation change nearest $18^\circ$, the
+qualifying response rates were 0.653 for valid and
+0.133 for forced-invalid changes
+($\Delta=+0.520$). These are finite-trial estimates
+from one checkpoint, not training-seed estimates.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/manuscript/vda16_manuscript_summary.pdf}
+  \caption{VDA16 cross-attention analysis. (A) Matched-bank response rates.
+  (B) Foldwise train-only PCA-128 decoding from recurrent state.
+  (C--D) Sensitivity and criterion under additive cued-location attention-key
+  logit clamps. The checkpoint is competence-gated because its curriculum
+  remained at $\theta=65.0^\circ$. VDA16
+  affine, d256, decay, and replicated-seed cells are unavailable.}
+  \label{fig:vda16_summary}
+\end{figure*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/manuscript/vda_method_comparison_with_vda16.pdf}
+  \caption{Descriptive d128 routing-family matrix. The open, unconnected
+  VDA16 point is competence-gated and is not part of a fitted or implied
+  set-size trend. VDA2 is absent because no compatible modern matched-width
+  shard exists. Historical and VDA16 cells use separately frozen
+  executable/runtime lineages.}
+  \label{fig:vda16_method_context}
+\end{figure*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/clamp/vda16_clamp_achieved_attention.pdf}
+  \caption{Achieved cued-location attention mass under the VDA16 logit-clamp
+  series. Image-key and corresponding recurrent-memory-key mass are summed and
+  averaged over query tokens. Trial-level error bars describe evaluation trials
+  from one checkpoint, not training-seed uncertainty.}
+  \label{fig:vda16_achieved_attention}
+\end{figure*}

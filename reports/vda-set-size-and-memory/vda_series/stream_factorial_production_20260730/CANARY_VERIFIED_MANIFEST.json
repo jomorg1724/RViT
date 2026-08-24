@@ -1,0 +1,433 @@
+{
+  "schema_version": 1,
+  "status": "complete_verified_engineering_canary_block",
+  "evidence_class": "engineering_only_not_scientific_evidence",
+  "scientific_evidence": false,
+  "scientific_behavior_evaluated": false,
+  "design_id": "vda4_stream_factorial_crossattn1_production_v1",
+  "seed": 0,
+  "iterations": 50,
+  "terminal_iteration": 49,
+  "schedule_final_iteration": 19999,
+  "cells": {
+    "visual4_memory4": {
+      "cell_id": "visual4_memory4",
+      "effective_visual_streams": 4,
+      "effective_memory_streams": 4,
+      "seed": 0,
+      "run_dir": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory4_seed0_canary_v1_20260730T162414Z_da1c5b7d7b2f",
+      "metrics": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory4_seed0_canary_v1_20260730T162414Z_da1c5b7d7b2f\\metrics.csv",
+        "sha256": "8caf63b1a4afa62b4809229b8e541758328f8fd73ae73258fdb8a72c2d0124cd",
+        "bytes": 11320,
+        "rows": 50,
+        "first_iteration": 0,
+        "last_iteration": 49,
+        "columns": [
+          "iter",
+          "rollout/mean_return",
+          "rollout/mean_length",
+          "rollout/correct_rate",
+          "rollout/n_episodes",
+          "loss_policy",
+          "loss_value",
+          "loss_entropy",
+          "loss_contrastive",
+          "loss_jepa",
+          "loss_total",
+          "approx_kl",
+          "n_updates",
+          "n_loss_evals",
+          "n_skipped",
+          "max_grad_elem",
+          "in_burn_in",
+          "per_beta",
+          "per_buffer_size",
+          "per_n_replay_used",
+          "rolling/correct_rate",
+          "rolling/mean_return",
+          "env/theta"
+        ]
+      },
+      "log": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory4_seed0_canary_v1_20260730T162414Z_da1c5b7d7b2f\\train.log",
+        "sha256": "4795c9d94c4aca669dc01b0664d4a63ddd3143ea209e51c480484b7d5e6a7cb8",
+        "bytes": 11172,
+        "traceback_absent": true,
+        "terminal_markers_present": true
+      },
+      "launch_contract": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory4_seed0_canary_v1_20260730T162414Z_da1c5b7d7b2f\\launch_contract.json",
+        "sha256": "8a2fcccda472bc5cba9736ee7dead1ae3ff0bbda5600e5272586be2e560132c6",
+        "bytes": 5968
+      },
+      "final_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory4_seed0_canary_v1_20260730T162414Z_da1c5b7d7b2f\\rvit_paper_vda4_final.pt",
+        "sha256": "9c26d50c63b9a0fb15c8b90b2bc507d1caeea13539d69da27a70f019c589fda2",
+        "bytes": 175326859
+      },
+      "latest_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory4_seed0_canary_v1_20260730T162414Z_da1c5b7d7b2f\\rvit_plus_rl_latest.pt",
+        "sha256": "f2d50684c9d615d7b9ae171fc630ab260e67a43724d0a82e73d96ffa981781c5",
+        "bytes": 175325835
+      },
+      "final_latest_semantically_equal": true,
+      "compared_numeric_leaves": 43789749,
+      "finite_numeric_leaves": 43782850,
+      "model_factory": {
+        "kind": "stream_factorial_v1",
+        "effective_visual_streams": 4,
+        "effective_memory_streams": 4,
+        "carrier_grid": [
+          10,
+          10
+        ]
+      }
+    },
+    "visual4_memory100": {
+      "cell_id": "visual4_memory100",
+      "effective_visual_streams": 4,
+      "effective_memory_streams": 100,
+      "seed": 0,
+      "run_dir": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory100_seed0_canary_v1_20260730T162502Z_3ddcf623a108",
+      "metrics": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory100_seed0_canary_v1_20260730T162502Z_3ddcf623a108\\metrics.csv",
+        "sha256": "797b8c502aabf18795cfe4747d09c1510b466879d18710c7ca18e3736b780474",
+        "bytes": 11366,
+        "rows": 50,
+        "first_iteration": 0,
+        "last_iteration": 49,
+        "columns": [
+          "iter",
+          "rollout/mean_return",
+          "rollout/mean_length",
+          "rollout/correct_rate",
+          "rollout/n_episodes",
+          "loss_policy",
+          "loss_value",
+          "loss_entropy",
+          "loss_contrastive",
+          "loss_jepa",
+          "loss_total",
+          "approx_kl",
+          "n_updates",
+          "n_loss_evals",
+          "n_skipped",
+          "max_grad_elem",
+          "in_burn_in",
+          "per_beta",
+          "per_buffer_size",
+          "per_n_replay_used",
+          "rolling/correct_rate",
+          "rolling/mean_return",
+          "env/theta"
+        ]
+      },
+      "log": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory100_seed0_canary_v1_20260730T162502Z_3ddcf623a108\\train.log",
+        "sha256": "291871f14b5c8ba41a04312cb244f6f79f7cbb2f092f99dfaef7826170bf813b",
+        "bytes": 11180,
+        "traceback_absent": true,
+        "terminal_markers_present": true
+      },
+      "launch_contract": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory100_seed0_canary_v1_20260730T162502Z_3ddcf623a108\\launch_contract.json",
+        "sha256": "828f9c200236c6d53c86f58af131b9f98d437ff0a347f3dc315502332400a9df",
+        "bytes": 5974
+      },
+      "final_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory100_seed0_canary_v1_20260730T162502Z_3ddcf623a108\\rvit_paper_vda4_final.pt",
+        "sha256": "c8f471a1d77a2b873d038c272607e320c857df7edf7b3f17b93ba64ae0e6c10e",
+        "bytes": 175326923
+      },
+      "latest_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual4_memory100_seed0_canary_v1_20260730T162502Z_3ddcf623a108\\rvit_plus_rl_latest.pt",
+        "sha256": "60f62fe8f00296172a9f3b08ae478f8cc4a2895f26a9df4d1fed5e04d2842a5c",
+        "bytes": 175325899
+      },
+      "final_latest_semantically_equal": true,
+      "compared_numeric_leaves": 43789749,
+      "finite_numeric_leaves": 43782850,
+      "model_factory": {
+        "kind": "stream_factorial_v1",
+        "effective_visual_streams": 4,
+        "effective_memory_streams": 100,
+        "carrier_grid": [
+          10,
+          10
+        ]
+      }
+    },
+    "visual100_memory4": {
+      "cell_id": "visual100_memory4",
+      "effective_visual_streams": 100,
+      "effective_memory_streams": 4,
+      "seed": 0,
+      "run_dir": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory4_seed0_canary_v1_20260730T162552Z_adad2dacd6f9",
+      "metrics": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory4_seed0_canary_v1_20260730T162552Z_adad2dacd6f9\\metrics.csv",
+        "sha256": "a434c4ff19d16448079b456c51aafee0558a8ed6db3479d8ce1d83037c3321a2",
+        "bytes": 11349,
+        "rows": 50,
+        "first_iteration": 0,
+        "last_iteration": 49,
+        "columns": [
+          "iter",
+          "rollout/mean_return",
+          "rollout/mean_length",
+          "rollout/correct_rate",
+          "rollout/n_episodes",
+          "loss_policy",
+          "loss_value",
+          "loss_entropy",
+          "loss_contrastive",
+          "loss_jepa",
+          "loss_total",
+          "approx_kl",
+          "n_updates",
+          "n_loss_evals",
+          "n_skipped",
+          "max_grad_elem",
+          "in_burn_in",
+          "per_beta",
+          "per_buffer_size",
+          "per_n_replay_used",
+          "rolling/correct_rate",
+          "rolling/mean_return",
+          "env/theta"
+        ]
+      },
+      "log": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory4_seed0_canary_v1_20260730T162552Z_adad2dacd6f9\\train.log",
+        "sha256": "528e8ccb84aaa55959b9f3592501710c3656a658ef819d79d4cf0ce98989d90a",
+        "bytes": 11180,
+        "traceback_absent": true,
+        "terminal_markers_present": true
+      },
+      "launch_contract": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory4_seed0_canary_v1_20260730T162552Z_adad2dacd6f9\\launch_contract.json",
+        "sha256": "774747be76099665b1df71db55dba5221b39dc6f774b229aaf2605f2335129db",
+        "bytes": 5974
+      },
+      "final_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory4_seed0_canary_v1_20260730T162552Z_adad2dacd6f9\\rvit_paper_vda4_final.pt",
+        "sha256": "2ebf39ef48a16fa9848e80fdd831d5458fc1413f27c449c6281f591a3e4686c0",
+        "bytes": 175326923
+      },
+      "latest_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory4_seed0_canary_v1_20260730T162552Z_adad2dacd6f9\\rvit_plus_rl_latest.pt",
+        "sha256": "212dbf7e91968f2d2cbd1633e7bb00c9d2f1bef11a2de79f34f86423201e3710",
+        "bytes": 175325899
+      },
+      "final_latest_semantically_equal": true,
+      "compared_numeric_leaves": 43789749,
+      "finite_numeric_leaves": 43782850,
+      "model_factory": {
+        "kind": "stream_factorial_v1",
+        "effective_visual_streams": 100,
+        "effective_memory_streams": 4,
+        "carrier_grid": [
+          10,
+          10
+        ]
+      }
+    },
+    "visual100_memory100": {
+      "cell_id": "visual100_memory100",
+      "effective_visual_streams": 100,
+      "effective_memory_streams": 100,
+      "seed": 0,
+      "run_dir": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory100_seed0_canary_v1_20260730T162729Z_40e0c4e249eb",
+      "metrics": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory100_seed0_canary_v1_20260730T162729Z_40e0c4e249eb\\metrics.csv",
+        "sha256": "c2acc5713f3ec6a27bdefde5e37178151192434d096960bdcfe7373c5ebc010d",
+        "bytes": 11251,
+        "rows": 50,
+        "first_iteration": 0,
+        "last_iteration": 49,
+        "columns": [
+          "iter",
+          "rollout/mean_return",
+          "rollout/mean_length",
+          "rollout/correct_rate",
+          "rollout/n_episodes",
+          "loss_policy",
+          "loss_value",
+          "loss_entropy",
+          "loss_contrastive",
+          "loss_jepa",
+          "loss_total",
+          "approx_kl",
+          "n_updates",
+          "n_loss_evals",
+          "n_skipped",
+          "max_grad_elem",
+          "in_burn_in",
+          "per_beta",
+          "per_buffer_size",
+          "per_n_replay_used",
+          "rolling/correct_rate",
+          "rolling/mean_return",
+          "env/theta"
+        ]
+      },
+      "log": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory100_seed0_canary_v1_20260730T162729Z_40e0c4e249eb\\train.log",
+        "sha256": "7e5fc82b3f8e506a08dfec86e90d1a2d1f3221696321fe93d12e17e5237663eb",
+        "bytes": 11188,
+        "traceback_absent": true,
+        "terminal_markers_present": true
+      },
+      "launch_contract": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory100_seed0_canary_v1_20260730T162729Z_40e0c4e249eb\\launch_contract.json",
+        "sha256": "85a8b62cae78096d46c12cfe515698ca28e25eac86d7dfe620a8d7473038b5a8",
+        "bytes": 5980
+      },
+      "final_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory100_seed0_canary_v1_20260730T162729Z_40e0c4e249eb\\rvit_paper_vda4_final.pt",
+        "sha256": "b40b32ee217f76739c737d071b8490630183ec8d9f24419a9cd0a4ee36f278b8",
+        "bytes": 175326923
+      },
+      "latest_checkpoint": {
+        "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\stream_factorial_canaries_20260730_seed0_verified\\vda4_stream_factorial_crossattn1_visual100_memory100_seed0_canary_v1_20260730T162729Z_40e0c4e249eb\\rvit_plus_rl_latest.pt",
+        "sha256": "00e1b57e78ad70025ed3d8f2bc8f1df250f4b757ac6bacf9d80396ad5598bff1",
+        "bytes": 175325899
+      },
+      "final_latest_semantically_equal": true,
+      "compared_numeric_leaves": 43789749,
+      "finite_numeric_leaves": 43782850,
+      "model_factory": {
+        "kind": "stream_factorial_v1",
+        "effective_visual_streams": 100,
+        "effective_memory_streams": 100,
+        "carrier_grid": [
+          10,
+          10
+        ]
+      }
+    }
+  },
+  "common_trainable_initialization_sha256": "31bc11deab1854018d1d0105f8256fc7f82c03c8c10fcf62459e8b2669aa5def",
+  "common_environment_rng_trace_sha256": "c13c919620327f53ff1562057125f4e81a699dcc72bf5943195c325cfa218f02",
+  "producer_checks": [
+    {
+      "identity": "config/loader.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\config\\loader.py",
+      "sha256": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9",
+      "bytes": 6197
+    },
+    {
+      "identity": "conv_frontend.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\conv_frontend.py",
+      "sha256": "0099e258730aee7c2ae60d35215d1738771a88f9356ead1877012b89e794dd31",
+      "bytes": 9041
+    },
+    {
+      "identity": "envs/__init__.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\__init__.py",
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "bytes": 3964
+    },
+    {
+      "identity": "envs/base.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\base.py",
+      "sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+      "bytes": 16259
+    },
+    {
+      "identity": "envs/luo2015.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\luo2015.py",
+      "sha256": "c9ad206324c20a703518ed9e1b241a66332458ea752900276c1f70f8d78cea2a",
+      "bytes": 13341
+    },
+    {
+      "identity": "envs/tasks.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\envs\\tasks.py",
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "bytes": 16590
+    },
+    {
+      "identity": "experiment_launcher",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_stream_factorial\\launch_crossattn1_canary_v1.sh",
+      "sha256": "7484fa171b63559ba5210a36ee0e1375d0e89795f4f6753dc0794cff608d9dec",
+      "bytes": 3711
+    },
+    {
+      "identity": "experiments/vda4_spatial_discretization/grid_10x10/launch_20k.sh",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda4_spatial_discretization\\grid_10x10\\launch_20k.sh",
+      "sha256": "615862bb29eba50bc23fa17bbeee77c195ae9076a5b5fe89d2b0f552eef02fa4",
+      "bytes": 1211
+    },
+    {
+      "identity": "experiments/vda_stream_factorial/design_manifest.json",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_stream_factorial\\design_manifest.json",
+      "sha256": "8a82292d725eb7519c4c394a0ddfe9037aac2a60fa02476e1ce241e76b9daf76",
+      "bytes": 12322
+    },
+    {
+      "identity": "experiments/vda_stream_factorial/design_matrix.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_stream_factorial\\design_matrix.py",
+      "sha256": "4dc055c9f14759fd240ce10049cfb9bd08f35c776d87817dddbb7c72eee07984",
+      "bytes": 2915
+    },
+    {
+      "identity": "experiments/vda_stream_factorial/preflight_contract_v1.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_stream_factorial\\preflight_contract_v1.py",
+      "sha256": "6d92391c7545c0ba558193a0b9aa28b0cc24bca8234238b0ccb78d6d7f4269be",
+      "bytes": 23980
+    },
+    {
+      "identity": "experiments/vda_stream_factorial/stream_model.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_stream_factorial\\stream_model.py",
+      "sha256": "ea9f329ad0bafc5f37a33cf2959d070bd44795870547114afbba6186c7cece29",
+      "bytes": 10128
+    },
+    {
+      "identity": "model.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\model.py",
+      "sha256": "b77fd7f4cd5d56fc38257b58ee5400285fba875b3c01a79ec7baf7106f66d72c",
+      "bytes": 9992
+    },
+    {
+      "identity": "paper_encoder.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_encoder.py",
+      "sha256": "91f8a5be84aa300d4a1b42b2ec92f633bb8a704a9dae3f302f192a73915d61d1",
+      "bytes": 39579
+    },
+    {
+      "identity": "paper_heads.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\paper_heads.py",
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "bytes": 4239
+    },
+    {
+      "identity": "ppo.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\ppo.py",
+      "sha256": "b01091a4919fcc7cb31f94ac599ec86de860b2331c599e3156518f26d18c40da",
+      "bytes": 61494
+    },
+    {
+      "identity": "resolved_config",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_stream_factorial\\config_crossattn1_v1.json",
+      "sha256": "f5b62e32e40e2d8c5ee97ae71e2c520737fbf431ff4b64f82b58c718b23eb6aa",
+      "bytes": 2842
+    },
+    {
+      "identity": "scripts/launch_vda16_fresh.sh",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\scripts\\launch_vda16_fresh.sh",
+      "sha256": "57217b5d45c3297d583b19bdb3793a05a6d2d4153a891b5c1f855724815d9c70",
+      "bytes": 1096
+    },
+    {
+      "identity": "train_rl.py",
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\train_rl.py",
+      "sha256": "713d337781f432d9419189bb66cdd5c7abd2e3986e072c8be94216700814421c",
+      "bytes": 41624
+    }
+  ],
+  "verifier": {
+    "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\experiments\\vda_stream_factorial\\verify_canary_block_v1.py",
+    "sha256": "44742546dc871f5822e2d8272196de96f43c3d211bbb42adeeba05d0d1e5ebe1"
+  },
+  "claim_boundary": "Engineering canary integrity only. Fifty-iteration training metrics, checkpoint state, and projector checks are not behavioral, attention, mechanism, scaling, or scientific evidence."
+}

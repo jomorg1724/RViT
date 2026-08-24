@@ -1,0 +1,187 @@
+{
+  "all_metrics_path": "vda4_spatial_scaling_seed0_metrics.csv",
+  "analysis": "cached-artifact-only VDA4 spatial-scaling synthesis",
+  "elapsed_seconds": 3.722907066345215,
+  "interpretation": {
+    "finding_1": "No monotonic architecture-independent scaling law is supported: threshold cost and normalized response AUC do not change monotonically in a shared way across both routing families.",
+    "finding_2": "The increase in natural-minus-disable invalid-response dependence is affine-specific in these caches (38.4, 98.0, and 99.2 percentage points at 4, 16, and 100 tokens); cross-attention instead measures 12.4, 8.0, and 1.2 percentage points.",
+    "finding_3": "Event-localized regional attention concentration does not increase with token count in either routing family.",
+    "limitations": [
+      "All six cells use seed 0 only; there is no replication uncertainty estimate.",
+      "Token count and model parameter count co-vary, so these comparisons do not isolate a token-count causal effect.",
+      "The physical VDA4 task has four regions throughout; this is a spatial-discretization comparison, not evidence for a general set-size mechanism."
+    ]
+  },
+  "metric_definitions": {
+    "causal_dependence": "natural minus disable invalid response rate, percentage points",
+    "event_localization": "mean regional attention mass over trials and frames 5\u20136; valid uses TL region 0, invalid uses BR region 3",
+    "normalized_response_auc": "trapezoidal integral of valid minus invalid response rate over 0\u201330 degrees, divided by 30 degrees",
+    "rt30_cost": "invalid minus valid mean qualifying response frame at 30 degrees",
+    "threshold": "linear crossing of 0.5 on the cumulative-maximum response-rate envelope",
+    "threshold_cost": "invalid threshold minus valid threshold, degrees"
+  },
+  "metrics_at_100pct_validity": [
+    {
+      "causal_dependence_natural_minus_disable_pp": 12.4,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.82,
+      "explicit_natural_invalid_response_rate": 0.944,
+      "explicit_shuffle_invalid_response_rate": 0.868,
+      "explicit_uniform_invalid_response_rate": 0.856,
+      "feedback": "crossattn1",
+      "grid": "2x2",
+      "invalid_br_region3_mass_frames5_6": 0.5070523979957215,
+      "invalid_threshold_deg": 19.066666666666666,
+      "model": "Cross-attention",
+      "n_tokens": 4,
+      "normalized_response_auc_valid_minus_invalid": 0.2187777777777778,
+      "rt30_invalid_minus_valid_frames": 0.11391257242451402,
+      "seed": 0,
+      "source_manifest_sha256": "044f9a5860ac5a400a461b5d7dc5bf8a9d58559cd2fe08d925df58185b90d3f7",
+      "threshold_cost_invalid_minus_valid_deg": 7.160416666666666,
+      "valid_threshold_deg": 11.90625,
+      "valid_tl_region0_mass_frames5_6": 0.7480713168624789
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 7.9999999999999964,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.876,
+      "explicit_natural_invalid_response_rate": 0.956,
+      "explicit_shuffle_invalid_response_rate": 0.9,
+      "explicit_uniform_invalid_response_rate": 0.928,
+      "feedback": "crossattn1",
+      "grid": "4x4",
+      "invalid_br_region3_mass_frames5_6": 0.35208563099149615,
+      "invalid_threshold_deg": 19.26027397260274,
+      "model": "Cross-attention",
+      "n_tokens": 16,
+      "normalized_response_auc_valid_minus_invalid": 0.17027777777777775,
+      "rt30_invalid_minus_valid_frames": 0.24791004356528834,
+      "seed": 0,
+      "source_manifest_sha256": "d06bd3f6916771644bbb808e8dfb21e39016aff5a280a4b11f93782c285f62d2",
+      "threshold_cost_invalid_minus_valid_deg": 5.6575342465753415,
+      "valid_threshold_deg": 13.602739726027398,
+      "valid_tl_region0_mass_frames5_6": 0.6665796553716063
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 1.200000000000001,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.964,
+      "explicit_natural_invalid_response_rate": 0.976,
+      "explicit_shuffle_invalid_response_rate": 0.936,
+      "explicit_uniform_invalid_response_rate": 0.956,
+      "feedback": "crossattn1",
+      "grid": "10x10",
+      "invalid_br_region3_mass_frames5_6": 0.268451084732078,
+      "invalid_threshold_deg": 17.625,
+      "model": "Cross-attention",
+      "n_tokens": 100,
+      "normalized_response_auc_valid_minus_invalid": 0.19722222222222224,
+      "rt30_invalid_minus_valid_frames": 0.16414106939704176,
+      "seed": 0,
+      "source_manifest_sha256": "c3ecaa670952864230f91859cebfa5c5cbaa607e934969ca589347a237d9a6eb",
+      "threshold_cost_invalid_minus_valid_deg": 6.1843220338983045,
+      "valid_threshold_deg": 11.440677966101696,
+      "valid_tl_region0_mass_frames5_6": 0.3546299865702167
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 38.4,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.608,
+      "explicit_natural_invalid_response_rate": 0.992,
+      "explicit_shuffle_invalid_response_rate": 0.1,
+      "explicit_uniform_invalid_response_rate": 0.432,
+      "feedback": "affine_ew",
+      "grid": "2x2",
+      "invalid_br_region3_mass_frames5_6": 0.7226278351154178,
+      "invalid_threshold_deg": 15.0,
+      "model": "Affine EW",
+      "n_tokens": 4,
+      "normalized_response_auc_valid_minus_invalid": 0.08511111111111112,
+      "rt30_invalid_minus_valid_frames": 0.03994425863991058,
+      "seed": 0,
+      "source_manifest_sha256": "0235d2de5f2e816287e2d9bdba851fbee0324d62eabc93d6677cc57ecce09d1a",
+      "threshold_cost_invalid_minus_valid_deg": 2.625,
+      "valid_threshold_deg": 12.375,
+      "valid_tl_region0_mass_frames5_6": 0.7366034311708063
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 98.0,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.016,
+      "explicit_natural_invalid_response_rate": 0.996,
+      "explicit_shuffle_invalid_response_rate": 0.348,
+      "explicit_uniform_invalid_response_rate": 0.492,
+      "feedback": "affine_ew",
+      "grid": "4x4",
+      "invalid_br_region3_mass_frames5_6": 0.7258374873781577,
+      "invalid_threshold_deg": 15.05,
+      "model": "Affine EW",
+      "n_tokens": 16,
+      "normalized_response_auc_valid_minus_invalid": 0.07944444444444446,
+      "rt30_invalid_minus_valid_frames": 0.030313199105145294,
+      "seed": 0,
+      "source_manifest_sha256": "02c989ddacc67c3d406fcb2aba1f97335cc7ac65ad553b3c710251398436d9d9",
+      "threshold_cost_invalid_minus_valid_deg": 2.6017241379310345,
+      "valid_threshold_deg": 12.448275862068966,
+      "valid_tl_region0_mass_frames5_6": 0.9050241928780451
+    },
+    {
+      "causal_dependence_natural_minus_disable_pp": 99.2,
+      "displayed_validity": 1.0,
+      "explicit_disable_invalid_response_rate": 0.0,
+      "explicit_natural_invalid_response_rate": 0.992,
+      "explicit_shuffle_invalid_response_rate": 0.0,
+      "explicit_uniform_invalid_response_rate": 0.0,
+      "feedback": "affine_ew",
+      "grid": "10x10",
+      "invalid_br_region3_mass_frames5_6": 0.5431715662707575,
+      "invalid_threshold_deg": 17.073529411764707,
+      "model": "Affine EW",
+      "n_tokens": 100,
+      "normalized_response_auc_valid_minus_invalid": 0.12161111111111111,
+      "rt30_invalid_minus_valid_frames": 0.13560968995751566,
+      "seed": 0,
+      "source_manifest_sha256": "a869859116807664e46ee6d4f0d6d5ced3be3ac9ddeddbd67f0c27839ac26ea7",
+      "threshold_cost_invalid_minus_valid_deg": 4.240196078431373,
+      "valid_threshold_deg": 12.833333333333334,
+      "valid_tl_region0_mass_frames5_6": 0.6529102835338563
+    }
+  ],
+  "schema_version": 1,
+  "source_evaluation_count": 6,
+  "source_manifests": [
+    {
+      "bytes": 2256,
+      "label": "vda4_crossattn1_grid2x2_seed0",
+      "sha256": "044f9a5860ac5a400a461b5d7dc5bf8a9d58559cd2fe08d925df58185b90d3f7"
+    },
+    {
+      "bytes": 2265,
+      "label": "vda4_crossattn1_grid4x4_seed0",
+      "sha256": "d06bd3f6916771644bbb808e8dfb21e39016aff5a280a4b11f93782c285f62d2"
+    },
+    {
+      "bytes": 2272,
+      "label": "vda4_crossattn1_grid10x10_seed0",
+      "sha256": "c3ecaa670952864230f91859cebfa5c5cbaa607e934969ca589347a237d9a6eb"
+    },
+    {
+      "bytes": 2273,
+      "label": "vda4_affine_ew_grid2x2_seed0",
+      "sha256": "0235d2de5f2e816287e2d9bdba851fbee0324d62eabc93d6677cc57ecce09d1a"
+    },
+    {
+      "bytes": 2262,
+      "label": "vda4_affine_ew_grid4x4_seed0",
+      "sha256": "02c989ddacc67c3d406fcb2aba1f97335cc7ac65ad553b3c710251398436d9d9"
+    },
+    {
+      "bytes": 2314,
+      "label": "vda4_affine_ew_grid10x10_seed0",
+      "sha256": "a869859116807664e46ee6d4f0d6d5ced3be3ac9ddeddbd67f0c27839ac26ea7"
+    }
+  ],
+  "status": "complete",
+  "training_accuracy_used_as_attention_evidence": false
+}

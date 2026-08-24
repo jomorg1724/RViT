@@ -1,0 +1,24 @@
+{
+  "artifact_hashes": {
+    "config.json": "580e38f881d81ab6bb716acebdc94bb81a74aa42e6ee6a3a901134a350cd1371",
+    "data/source_attention.npz": "6dc490c5203640c9f6bab670b4c47234cf1e7f26459f3319be033e6d6421c3c0"
+  },
+  "checkpoint_sha256": "5e11a0691b33f1cb4373583db6beec08f22e20bd8efe9ccd16d2d035676d27d9",
+  "comparisons_to_verified_cache": {
+    "atol": 2e-05,
+    "press_exact_match": true,
+    "raw_mean_matches_verified_raw_mean": true,
+    "raw_mean_max_abs_error": 1.4901161193847656e-07,
+    "rtol": 1e-05,
+    "source_sum_matches_verified_token_mass": true,
+    "source_sum_max_abs_error": 2.9227230635697765e-08
+  },
+  "elapsed_seconds": 2.922853469848633,
+  "label": "vda4_crossattn1_grid10x10_seed1",
+  "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_crossattn_source_attention_refresh.py",
+  "producer_sha256": "15c9b4614932ed8e5ee01e30d7f03fc02d1e940989494f890c6d0399cb1c6d68",
+  "schema_version": 1,
+  "source_event_sha256": "d0d1ab9e0cc4b317db6181c3f8113f8a9438b4859fe9fce1028d453412c88314",
+  "source_manifest_sha256": "8d758522bddb159367960b1d3b8a80f6f660ffb529c0e8a9103d46fc5e45a387",
+  "status": "complete"
+}

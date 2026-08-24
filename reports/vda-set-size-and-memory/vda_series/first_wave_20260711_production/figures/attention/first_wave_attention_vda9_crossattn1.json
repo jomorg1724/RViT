@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "artifact": "first-wave spatial attention map",
+  "task": "vda9",
+  "feedback": "crossattn1",
+  "grid": [
+    3,
+    3
+  ],
+  "token_count": 9,
+  "figure_rows": 9,
+  "figure_columns": 7,
+  "row_semantics": "query patch",
+  "column_semantics": "logical timestep",
+  "cue_index": 0,
+  "change_index": 0,
+  "displayed_validity": 1.0,
+  "cue_color": "red",
+  "change_frame": 5,
+  "change_magnitude_degrees": 56.0,
+  "checkpoint_iteration": 19999,
+  "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+  "checkpoint_sha256": "6c0587201cd2bf99b43e02278d4c65b03ab79d9b1f811406fc4962d962714946",
+  "producer_sha256": "0bb4ee909f6b14abaace8aa97bf88749050b4cd073e1ed829f73a4cfa6c47f33",
+  "dependency_hashes": {
+    "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/base.py": "de0e4182d1ffb30ebc72127bc0d32a542f337c8c2ef6f77ab6e6e463b44fb8c7",
+    "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+    "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+    "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+    "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+    "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+    "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+    "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+  },
+  "runtime_versions": {
+    "gymnasium": "1.3.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6",
+    "pillow": "12.2.0",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "python": "3.12.13",
+    "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+    "scipy": "1.17.1",
+    "torch": "2.12.0"
+  },
+  "device": "cpu",
+  "evaluation_trials": 96,
+  "observed_max_attention_mass": 0.9876768589019775,
+  "color_scale": [
+    0.0,
+    1.0
+  ],
+  "uniform_attention_baseline": 0.1111111111111111,
+  "mean_attention_to_s1_by_timestep": [
+    0.11117624077532026,
+    0.3945454731583595,
+    0.6427915096282959,
+    0.14790601034959158,
+    0.21384510232342613,
+    0.26247939467430115,
+    0.9866413672765096
+  ],
+  "descriptive_s1_delta_cue_minus_blank": 0.28336923238303924,
+  "descriptive_s1_delta_change_minus_maintenance": 0.04863429235087502,
+  "trial_level_attention_saved": true,
+  "source_cache": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/reports/vda_series/first_wave_20260711_production/data/attention_vda9_crossattn1.npz",
+  "source_cache_sha256": "eef2432691167ea4be211f3f34c4d6d262c2f4b2091a68829f9eab57ba728fbd",
+  "spatial_collapse": "Cross-attention image and memory keys are paired and summed by spatial location.",
+  "inference_boundary": "descriptive checkpoint attention; temporal changes do not by themselves establish causal cue modulation",
+  "outputs": {
+    "pdf": "first_wave_attention_vda9_crossattn1.pdf",
+    "svg": "first_wave_attention_vda9_crossattn1.svg",
+    "png": "first_wave_attention_vda9_crossattn1.png"
+  }
+}

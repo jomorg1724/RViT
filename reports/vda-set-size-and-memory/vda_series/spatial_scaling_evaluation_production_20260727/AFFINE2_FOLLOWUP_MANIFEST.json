@@ -1,0 +1,10 @@
+﻿{
+    "schema_version":  1,
+    "created_at_utc":  "2026-07-27T02:40:27.9377155Z",
+    "status":  "waiting_for_primary_queue",
+    "queue_manifest":  "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\spatial_scaling_evaluation_production_20260727\\QUEUE_MANIFEST.json",
+    "device":  "cuda",
+    "producer":  "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\vda4_spatial_scaling_evaluation.py",
+    "primary_queue_step":  "train:vda4_affine_ew_grid2x2_seed0",
+    "last_poll_at_utc":  "2026-07-27T05:34:32.1703075Z"
+}

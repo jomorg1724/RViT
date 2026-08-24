@@ -1,0 +1,107 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\HyPL@Entry{1<</S/D>>}
+\citation{mah2025}
+\@writefile{toc}{\contentsline {section}{How to read this notebook}{2}{Doc-Start}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Evidence levels are cumulative. Training metrics, curriculum values, periodic checkpoints, and GPU/process health remain engineering evidence only.}}{2}{table.caption.1}\protected@file@percent }
+\citation{mah2025}
+\@writefile{toc}{\contentsline {section}{Part I --- The decisive result sequence}{3}{part*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}The question Herman--Morgan leaves open}{3}{section.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces The rewrite retains Herman--Morgan's readable evidentiary escalation while tightening measurement and inference.}}{3}{table.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Entry LN-00: Frozen hypothesis and failure conditions}{3}{section.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Three competition axes and the claim boundary attached to each.}}{4}{table.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Entry LN-01: Task, architecture, and interpretable routing}{4}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Historical VDA4 (left) and controlled fixed-grid VDA4 (right). The visible task is similar, but the grid and cue-validity semantics differ. These are deterministic specifications, not behavioral evidence.}}{5}{figure.caption.5}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:ln-task}{{1}{5}{Historical VDA4 (left) and controlled fixed-grid VDA4 (right). The visible task is similar, but the grid and cue-validity semantics differ. These are deterministic specifications, not behavioral evidence}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Shared recurrent pipeline (top), affine feedback (bottom left), and cross-attention feedback (bottom right). In the affine model, $H_{t-1}$ modulates the current-image tokens before an $N\times N$ self-attention operation; there is no separate hidden-state-key map. In the cross-attention model, $N$ current-image queries attend jointly to $N$ keys projected from $X_t$ and $N$ keys projected from $H_{t-1}$ under one softmax.}}{5}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:ln-architecture}{{2}{5}{Shared recurrent pipeline (top), affine feedback (bottom left), and cross-attention feedback (bottom right). In the affine model, $H_{t-1}$ modulates the current-image tokens before an $N\times N$ self-attention operation; there is no separate hidden-state-key map. In the cross-attention model, $N$ current-image queries attend jointly to $N$ keys projected from $X_t$ and $N$ keys projected from $H_{t-1}$ under one softmax}{figure.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Architecture-grounded attention vocabulary. Routing family, key source, query reduction, spatial aggregation, and event frame are separate labels and must all be stated.}}{6}{table.caption.7}\protected@file@percent }
+\newlabel{tab:ln-attention-terms}{{4}{6}{Architecture-grounded attention vocabulary. Routing family, key source, query reduction, spatial aggregation, and event frame are separate labels and must all be stated}{table.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Entry LN-02: Cued behavior and sensitivity}{6}{section.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Cueing-effect magnitude versus active-item set size. The cross-attention sequence is motivating evidence; the affine sequence prevents a universal capacity-law claim.}}{7}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:ln-setsize-summary}{{3}{7}{Cueing-effect magnitude versus active-item set size. The cross-attention sequence is motivating evidence; the affine sequence prevents a universal capacity-law claim}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Unmanipulated VDA16 sensitivity and criterion. Solid lines are valid trials; dashed lines are forced-invalid. This is the appropriate behavioral bridge to an attention mechanism claim.}}{7}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:ln-baseline-sdt}{{4}{7}{Unmanipulated VDA16 sensitivity and criterion. Solid lines are valid trials; dashed lines are forced-invalid. This is the appropriate behavioral bridge to an attention mechanism claim}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Entry LN-03: Current-image-key and previous-hidden-state-key routing over time}{8}{section.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces VDA4 cross-attention no-change routing. Left: query-averaged incoming mass $p^X$ to keys projected from current-image tokens $X_t$. Right: query-averaged incoming mass $p^H$ to keys projected from the previous recurrent hidden output $H_{t-1}$. The embedded legacy headings ``image keys'' and ``recurrent-memory keys'' refer to these two blocks. Neither block is renormalized within source; both preserve their absolute share under the same joint $2N$-key softmax and use one common raw scale. No affine checkpoint appears. These maps describe allocation, not representation quality or causal use.}}{8}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:ln-vda4-sources}{{5}{8}{VDA4 cross-attention no-change routing. Left: query-averaged incoming mass $p^X$ to keys projected from current-image tokens $X_t$. Right: query-averaged incoming mass $p^H$ to keys projected from the previous recurrent hidden output $H_{t-1}$. The embedded legacy headings ``image keys'' and ``recurrent-memory keys'' refer to these two blocks. Neither block is renormalized within source; both preserve their absolute share under the same joint $2N$-key softmax and use one common raw scale. No affine checkpoint appears. These maps describe allocation, not representation quality or causal use}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces VDA16 cross-attention no-change routing. Left is $p^X$ to current-image keys; right is $p^H$ to previous-hidden-state keys. The two blocks preserve absolute mass under one joint $2N$-key softmax and use one common raw scale; they are never added. The embedded panel headings are legacy aliases. No affine checkpoint appears.}}{9}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:ln-vda16-sources}{{6}{9}{VDA16 cross-attention no-change routing. Left is $p^X$ to current-image keys; right is $p^H$ to previous-hidden-state keys. The two blocks preserve absolute mass under one joint $2N$-key softmax and use one common raw scale; they are never added. The embedded panel headings are legacy aliases. No affine checkpoint appears}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces VDA16 \texttt  {crossattn1} held-out paired behavior only. The cue is fixed at S1; the physical change occurs either at valid S1 or forced-invalid S16 over 300 matched trials per magnitude. Panel A reports qualifying response probability. Panel B reports the model's discrete response frame conditional on responding; it is not human reaction time. Bands are finite evaluation-trial intervals from one checkpoint, not training-seed uncertainty or paired-difference intervals. No attention sources are summed or displayed, and this change-present bank cannot by itself estimate $d'$ or criterion.}}{9}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:ln-vda16-paired-behavior}{{7}{9}{VDA16 \texttt {crossattn1} held-out paired behavior only. The cue is fixed at S1; the physical change occurs either at valid S1 or forced-invalid S16 over 300 matched trials per magnitude. Panel A reports qualifying response probability. Panel B reports the model's discrete response frame conditional on responding; it is not human reaction time. Bands are finite evaluation-trial intervals from one checkpoint, not training-seed uncertainty or paired-difference intervals. No attention sources are summed or displayed, and this change-present bank cannot by itself estimate $d'$ or criterion}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Entry LN-04: Spatially specific causal rescue}{10}{section.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The central VDA result: only a bias targeted at the true change location produces the predicted bidirectional rescue. Panels jointly report response, $d'$, criterion, and achieved attention.}}{10}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:ln-central-causal}{{8}{10}{The central VDA result: only a bias targeted at the true change location produces the predicted bidirectional rescue. Panels jointly report response, $d'$, criterion, and achieved attention}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Achieved attention at the true change location across the trial. Direct true-location targeting raises its mass; forcing either control location lowers it competitively.}}{11}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:ln-central-trajectory}{{9}{11}{Achieved attention at the true change location across the trial. Direct true-location targeting raises its mass; forcing either control location lowers it competitively}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces VDA4 scale-down. True-location targeting remains the largest and most orderly effect, but control behavior differs from VDA16.}}{11}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:ln-vda4-causal}{{10}{11}{VDA4 scale-down. True-location targeting remains the largest and most orderly effect, but control behavior differs from VDA16}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Entry LN-05: The fixed-set-size discretization test}{12}{section.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Fixed-four-item native-grid battery. The behavioral, temporally averaged attention, and routing-disable panels reveal routing-family heterogeneity rather than one monotonic token-count law.}}{12}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:ln-grid-summary}{{11}{12}{Fixed-four-item native-grid battery. The behavioral, temporally averaged attention, and routing-disable panels reveal routing-family heterogeneity rather than one monotonic token-count law}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Current-image-key and previous-hidden-state-key sources remain separate. Source share, equal-area target total, raw maximum, uniform-normalized maximum, conditional target total, and peak-quadrant share are distinct estimands.}}{13}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:ln-source-metrics}{{12}{13}{Current-image-key and previous-hidden-state-key sources remain separate. Source share, equal-area target total, raw maximum, uniform-normalized maximum, conditional target total, and peak-quadrant share are distinct estimands}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Source-specific common-physical-grid totals and maxima. Rows identify native grid and key source; columns separate valid/invalid and total/maximum. Current-image-key and previous-hidden-state-key maps share scales and are never collapsed before the maximum.}}{14}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:ln-source-common}{{13}{14}{Source-specific common-physical-grid totals and maxima. Rows identify native grid and key source; columns separate valid/invalid and total/maximum. Current-image-key and previous-hidden-state-key maps share scales and are never collapsed before the maximum}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{Part II --- Detailed laboratory entries and unresolved tests}{15}{part*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Experiment index and evidence labels}{15}{section.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Laboratory entries that preserve negative, omitted, interrupted, and proposed work.}}{16}{table.caption.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Entry LN-06: Representation, width, and memory decay}{16}{section.9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Final-timestep held-out decoder balanced accuracy. Decodability establishes information availability, not attention-created coherence or policy use.}}{16}{table.caption.21}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Matched-width negative comparison. The absence of a common signed direction is informative and belongs in the notebook, not as a headline positive result.}}{17}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:ln-width}{{14}{17}{Matched-width negative comparison. The absence of a common signed direction is informative and belongs in the notebook, not as a headline positive result}{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Entry LN-07: Omitted, newly located, and bounded evidence}{17}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Fixed-carrier K=9 cross-attention seed 0}{17}{subsection.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}VDA16 cross-attention seed 1 competence failure}{18}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Independently verified VDA16 affine rescue}{18}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Entry LN-08: Fixed-100-carrier visual-by-memory stream factorial}{18}{section.11}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Stream-factorial production status. Completion of training is deliberately separated from completion of the scientific experiment.}}{19}{table.caption.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12}Entry LN-09: Proposed decisive coherence-chain experiment}{20}{section.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}Entry LN-10: Proposed clean distractor-cardinality experiment}{20}{section.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14}Entry LN-11: Proposed fixed-carrier active-item series}{21}{section.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15}Entry LN-12: Replication, calibration, and inference policy}{21}{section.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {16}Entry LN-13: Registered VDA4 mnemonic-interference pilot}{23}{section.16}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces The complete held-out $2\times 2$ factorial separates acute corruption from training-time adaptation. The matched total contrast is train0/eval0 versus train0.5/eval0.5; the adaptation contrast holds evaluation noise at 0.5.}}{23}{table.caption.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Part III --- Measurement dictionary, diagnostic plates, and provenance}{24}{part*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {17}Exact attention-map reduction and comparison rules}{24}{section.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {17.1}Split the sources before any reduction}{24}{subsection.17.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {17.2}Map every native grid to the same physical four regions}{25}{subsection.17.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {17.3}Report raw and normalized quantities together}{25}{subsection.17.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Attention measures are named by the question they answer. The manuscript must never call all of them an undifferentiated ``attention score.''}}{25}{table.caption.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {18}Behavioral and statistical estimands}{26}{section.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {19}Selected diagnostic plates}{26}{section.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.1}VDA16 psychometric overlays}{26}{subsection.19.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Cross-attention separates valid and forced-invalid curves across displayed cue proportions; affine separates mainly in the 100\%-displayed out-of-policy stress test. The routing-family contrast is descriptive because checkpoint competence and training history differ.}}{26}{figure.caption.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.2}Frame-specific attention diagnostics}{27}{subsection.19.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Frame 5 and frame 6 are separate estimands. Cross-attention panels shown here are secondary paired-location totals; source-separated maps follow.}}{27}{figure.caption.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.3}Two-seed endpoint directions}{27}{subsection.19.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Cross-attention endpoints at seeds 0 and 1. Behavioral directions disagree and the seed-1 100-token intervention is saturated. Two seeds support directional description, not population inference.}}{27}{figure.caption.29}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces The endpoint conclusion changes with the named frame-5 estimator. Trial-bootstrap intervals remain within-checkpoint intervals.}}{28}{figure.caption.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.4}Native source-separated time courses}{28}{subsection.19.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces $2\times 2$ cross-attention source time course.}}{28}{figure.caption.31}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces $4\times 4$ cross-attention source time course, with the same physical quadrant boundaries.}}{29}{figure.caption.32}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces $10\times 10$ cross-attention source time course at native resolution. The grid is not upsampled and the sources are not collapsed.}}{29}{figure.caption.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {20}Production freeze and interruption record}{29}{section.20}\protected@file@percent }
+\gdef \LT@i {\LT@entry 
+    {1}{85.3252pt}\LT@entry 
+    {1}{190.47792pt}\LT@entry 
+    {1}{184.47792pt}}
+\gdef \LT@ii {\LT@entry 
+    {1}{124.9878pt}\LT@entry 
+    {1}{249.96803pt}\LT@entry 
+    {1}{105.15271pt}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Frozen production inputs. Hash integrity establishes provenance, not a scientific result.}}{30}{table.caption.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {21}Artifact register}{30}{section.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {22}Final scientific synthesis}{31}{section.22}\protected@file@percent }
+\bibcite{mah2025}{1}
+\bibcite{carrasco2011}{2}
+\bibcite{luo2018}{3}
+\bibcite{moore2003}{4}
+\bibcite{cavanaugh2004}{5}
+\bibcite{luck1997}{6}
+\bibcite{awh2001}{7}
+\bibcite{panichello2021}{8}
+\gdef \@abspage@last{33}

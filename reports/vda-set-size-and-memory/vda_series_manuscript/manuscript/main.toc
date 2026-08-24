@@ -1,0 +1,35 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Task and model}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}The value-directed-attention task family}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Trial structure and response scoring}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Recurrent architecture}{8}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Behavioral signatures: psychometric and chronometric functions, cueing effects}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Historical set-size series: a broad but loosely controlled landscape}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Checkpoint-verified psychometrics: VDA4 and VDA9}{15}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Does recurrent width change the cueing benefit?}{20}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}VDA16: the payoff of a larger, fully controlled set size}{22}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Logistic psychometric functions and chronometric functions across set size}{26}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Attention dynamics over time}{30}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Event-aligned attention maps: VDA4 and VDA9}{30}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}What a held-out probe can read from the recurrent state}{37}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}VDA16: source-resolved attention maps and readout}{37}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Attention tracks the change location over the full timeline, more weakly when uncued}{41}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Memory decay shapes attention stability, independent of set size}{43}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Attention manipulation}{44}{section.5}%
+\contentsline {subsection}{\numberline {5.1}An existing lever: biasing the cued location changes sensitivity}{44}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}The rescue test: paired intervention at the true change location}{45}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Discussion}{48}{section.6}%
+\contentsline {subsection}{\numberline {6.1}What is established}{48}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}What remains unestablished}{49}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Evidence required to revise the current conclusions}{49}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Methods and reproducibility}{50}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Evidence classes and permitted conclusions}{50}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Source and figure workflow}{52}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Quality control}{52}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Conclusion}{52}{section.8}%
+\contentsline {section}{\numberline {A}Fourteen-environment task atlas}{54}{appendix.A}%
+\contentsline {section}{\numberline {B}Full historical aggregate plates}{55}{appendix.B}%
+\contentsline {section}{\numberline {C}Coverage counts by source object}{63}{appendix.C}%
+\contentsline {section}{\numberline {D}Exact panel--environment disposition matrix}{65}{appendix.D}%
+\contentsline {section}{\numberline {E}Matched-width constituent values}{71}{appendix.E}%
+\contentsline {section}{\numberline {F}Artifact locations and provenance classes}{72}{appendix.F}%

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "artifact_class": "completed matched-width manuscript summary",
+  "created_at_utc": "2026-07-12T08:49:54.986840+00:00",
+  "input_root": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_matched_width",
+  "upstream_manifest_sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11",
+  "source_sha256": "60868f441b880863479893aa191bae188070d2d1bc31411905ab9ee7970a3207",
+  "validation_gate": {
+    "result": "pass",
+    "record": "provenance/VALIDATION_RESULT.json"
+  },
+  "artifacts": [
+    {
+      "path": "Icon\r",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "figures/Icon\r",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "figures/matched_width_summary.json",
+      "bytes": 21964,
+      "sha256": "15dadb9e2e290918e3dc2bb0af92d1170871eb8fedaea04796615f3bfda4fa5c"
+    },
+    {
+      "path": "figures/matched_width_summary.pdf",
+      "bytes": 29316,
+      "sha256": "2bf164ed9a02891face995d82a6bf032a0f31a07d8255afb9a820f3f909bad54"
+    },
+    {
+      "path": "figures/matched_width_summary.png",
+      "bytes": 648426,
+      "sha256": "0c08f84fb57f9af677feb29b7975994bee1ed8fca1b663791269cd5bc9877b79"
+    },
+    {
+      "path": "figures/matched_width_summary.svg",
+      "bytes": 168056,
+      "sha256": "9e47c1228cd9858580df931dd6258bd1b1aaa379ddec050ab7b9fb6384347422"
+    },
+    {
+      "path": "provenance/Icon\r",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "provenance/UPSTREAM_MANIFEST.json",
+      "bytes": 44515,
+      "sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11"
+    },
+    {
+      "path": "provenance/VALIDATION_RESULT.json",
+      "bytes": 742,
+      "sha256": "e6ca78e0325b7aba77179aeb24aa0decd9e4a4b6f118379b8875a98e95487949"
+    },
+    {
+      "path": "provenance/build_matched_width_summary.py",
+      "bytes": 31230,
+      "sha256": "60868f441b880863479893aa191bae188070d2d1bc31411905ab9ee7970a3207"
+    }
+  ]
+}

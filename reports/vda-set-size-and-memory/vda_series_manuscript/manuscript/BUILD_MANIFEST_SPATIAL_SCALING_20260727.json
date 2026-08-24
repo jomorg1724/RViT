@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "created_utc": "2026-07-28T02:04:06Z",
+  "document": {
+    "title": "VDA Set Size",
+    "source": {
+      "path": "reports/vda_series/manuscript/main.tex",
+      "bytes": 72338,
+      "sha256": "569d5311ebdca45230921ee60e395e584d8e14639bc595f041c254088c1120d4"
+    },
+    "public_pdf": {
+      "path": "reports/vda_series/manuscript/VDA_Set_Size.pdf",
+      "bytes": 3345034,
+      "sha256": "0df7624fb59ce7f503633df4b475110c2c1cfca30da3b8f1478d0ba1acf7459e",
+      "pages": 28,
+      "pdf_title": "VDA Set Size"
+    },
+    "build_pdf": {
+      "path": "reports/vda_series/manuscript/main.pdf",
+      "bytes": 3345034,
+      "sha256": "0df7624fb59ce7f503633df4b475110c2c1cfca30da3b8f1478d0ba1acf7459e",
+      "byte_identical_to_public_pdf": true
+    },
+    "build_log": {
+      "path": "reports/vda_series/manuscript/main.log",
+      "bytes": 47748,
+      "sha256": "39c1e8f30b0e41fdd62a552bdef19cd396fc35160516f86f1f2c20a0da15786e",
+      "blocking_error_hits": 0,
+      "overfull_box_hits": 0,
+      "undefined_reference_hits": 0
+    }
+  },
+  "build": {
+    "engine": "tectonic 0.16.9",
+    "command": "tectonic.exe -X compile main.tex --keep-logs --keep-intermediates",
+    "result": "success",
+    "fontconfig_notice": "Tectonic reported a missing default fontconfig file and used the declared Windows Times New Roman font files; this did not prevent compilation."
+  },
+  "spatial_scaling_synthesis": {
+    "production_root": "RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727",
+    "bundle": "RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727/synthesis_seed0_v3",
+    "bundle_manifest": {
+      "bytes": 17509,
+      "sha256": "16d6a964d476930044a3476d9ecbcfdfb6daa26d8d0b0d29049206e82df37f3b"
+    },
+    "producer": {
+      "path": "RViT_plus_paper_jepa_grid9/analysis/vda4_spatial_scaling_synthesis.py",
+      "bytes": 33934,
+      "sha256": "d6527b65aca93d46b0eaa80923881f1a1bcf1504b11dde98f8dde511fc3e47f6"
+    },
+    "figure_pdf": {
+      "path": "reports/vda_series/figures/spatial_scaling/vda4_spatial_scaling_seed0_summary.pdf",
+      "bytes": 30305,
+      "sha256": "ae1a156ca765211e0aa16ba05223154ab2119cc4c4ec9107dede30f0a2bf2e72"
+    },
+    "figure_png": {
+      "path": "reports/vda_series/figures/spatial_scaling/vda4_spatial_scaling_seed0_summary.png",
+      "bytes": 356734,
+      "sha256": "7275d8975e1af56db6382ccd44707ad1eb3672748db97bfdecd327cd48cbcf0e"
+    },
+    "affine_2x2_evidence_manifest": {
+      "path": "RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727/AFFINE2_RUNPOD_REPLACEMENT_MANIFEST.json",
+      "bytes": 5530,
+      "sha256": "af71abb58de76206900b3dc7cca1d34bb1830b9259ffc8edd99561269c860565"
+    }
+  },
+  "visual_qa": {
+    "status": "pass",
+    "render_engine": "Poppler pdftoppm",
+    "render_dpi": 120,
+    "pages_inspected": "1-28",
+    "final_figure_page_inspected_at_dpi": 180,
+    "contact_sheets": [
+      {"path": "reports/vda_series/manuscript/qa/spatial_scaling_20260727_contact-01-04.png", "bytes": 952515, "sha256": "2ea80267c2b317c07ff31dec1ab3cc8ca3d538d707f1f4a23ea0aeabe9bb7363"},
+      {"path": "reports/vda_series/manuscript/qa/spatial_scaling_20260727_contact-05-08.png", "bytes": 709679, "sha256": "1f7d3b788636be840548a898401001edd2209dd8295ef2c8946e8509496da762"},
+      {"path": "reports/vda_series/manuscript/qa/spatial_scaling_20260727_contact-09-12.png", "bytes": 360919, "sha256": "4619a491d9669ee6ba8cfefbf9242f3594a265a0330cbb4856dbfb8d2e4ab490"},
+      {"path": "reports/vda_series/manuscript/qa/spatial_scaling_20260727_contact-13-16.png", "bytes": 969890, "sha256": "2b542a98f169d579801c06cad20ccfcfd84e891151cb3ef6c6e29bd3eb1d6262"},
+      {"path": "reports/vda_series/manuscript/qa/spatial_scaling_20260727_contact-17-20.png", "bytes": 669581, "sha256": "b239a6b3f6abca58f833547f01dd4e6d3c54e21fcae7811eb558d7a5f2899171"},
+      {"path": "reports/vda_series/manuscript/qa/spatial_scaling_20260727_contact-21-24.png", "bytes": 530954, "sha256": "18919d32377bd66079d296b8b1c45caa5e771cc347abf86f16b413cfb0c71013"},
+      {"path": "reports/vda_series/manuscript/qa/spatial_scaling_20260727_contact-25-28.png", "bytes": 476652, "sha256": "dba25565106b4f0f13ff5df9fab9af4191307fcdd72a36e61456006e63f3e726"}
+    ],
+    "checks": {
+      "missing_or_clipped_content": false,
+      "figure_legend_overlap": false,
+      "unreadable_inserted_figure_labels": false,
+      "unexpected_blank_pages": false,
+      "page_numbering_complete": true
+    }
+  },
+  "evidence_boundary": "Six seed-0 cells support a tokenization-by-routing interaction. They do not establish a routing-independent monotonic processing-stream law, a training-population effect, or a biological scaling law; token and parameter counts co-vary and endpoint seed replication is pending."
+}

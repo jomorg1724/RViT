@@ -1,0 +1,37 @@
+\contentsline {section}{\numberline {1}Methods}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Model Overview}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Pre-Processing, Content Selection, and Construction for Visual Working Memory}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Spatially Oriented Visual Working Memory}{4}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}A Disjoint Memory}{5}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Self-Attention and Spatially Aware activated memory}{6}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Recurrent Feedback From Memory}{7}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Mnemonic Guidance}{8}{subsection.1.7}%
+\contentsline {subsubsection}{\numberline {1.7.1}Visual working memory as tokens}{8}{subsubsection.1.7.1}%
+\contentsline {subsubsection}{\numberline {1.7.2}Additive Feedback from Visual Working Memory}{9}{subsubsection.1.7.2}%
+\contentsline {subsubsection}{\numberline {1.7.3}Multiplicative Feedback from Visual Working Memory}{10}{subsubsection.1.7.3}%
+\contentsline {section}{\numberline {2}Model Architecture}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}VAE Pre-Processing}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}ViT}{13}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Spatial LSTM}{13}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Actor-Critic Network}{14}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Reinforcement Learning}{15}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Task Difficulty}{15}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Logistic Function and Fitting Procedure}{16}{section.3}%
+\contentsline {section}{\numberline {4}Decoding Analysis}{16}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Decoder Architecture}{16}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Decoding Analysis of patch-based LSTM Components}{17}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Decoding from the Complete mnemonic percept}{17}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Decoding from a Single Mnemonic Percept Patch}{19}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Decoding from the Actor Network's First Activation Layer}{19}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Analysis of Actor Network Logits}{21}{subsubsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.3}Self-Attention Amplifies Change Signals}{25}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Influence of Induced Bias on Value Estimates and Temporal Difference Errors}{25}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Effects of Bias Manipulation on Temporal Difference Errors}{25}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Effects of Bias Manipulation on Value Estimates}{26}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Manipulating Bias Influences Criterion and Sensitivity}{27}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Criterion and Sensitivity in Signal Detection Theory}{27}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Random Variable Interpretation of the Hit-Rate and False-Alarm Rate}{27}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}z-Score as a Random Variable Transformation}{28}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Criterion and Sensitivity are Normally Distributed in the Large Sample Limit}{29}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Bias effects on criterion and sensitivity}{29}{subsection.6.5}%
+\contentsline {section}{\numberline {7}Comparison of supervised and RL training signals}{32}{section.7}%

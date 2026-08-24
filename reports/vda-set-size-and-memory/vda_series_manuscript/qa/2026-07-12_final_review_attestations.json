@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "candidate": {
+    "snapshot": "final_candidate_20260712_v8",
+    "snapshot_manifest_sha256": "f9a2b05e6ae2cf2c3508cde71a8f0a3cb231247750f4635af9778818baa0c3c7",
+    "source_sha256": "19f8cbbd85d736b77263f273dccb15a2ac962f8d9f996e44cd829f6ce30a8f5d",
+    "pdf_sha256": "d1f87f402019f05158dbe3b3db451a3cab77494edb5c56c7b00e3c19cf6d30f7",
+    "build_manifest_sha256": "78deeca7e3cb73dabc4fcf5d5b5560da3d1e8cc63a9d97910a583ea0d5984ea2",
+    "ordered_render_set_sha256": "da6126545be97834fcadbab4fc87d68a606ae74bc32b450577249d0734852a81",
+    "page_count": 54
+  },
+  "records": [
+    {
+      "role": "feynman",
+      "path": "reports/vda_series/qa/2026-07-12_final_review_feynman.json",
+      "sha256": "7984c70af114e55b642fdabd6dddb2895a9648ba3ac2c13b912f45eadd2f0c8b"
+    },
+    {
+      "role": "hawking",
+      "path": "reports/vda_series/qa/2026-07-12_final_review_hawking.json",
+      "sha256": "e73ccb602d44c636df03193a812096f214a0efba5be6473acdeead55bb6b9f25"
+    },
+    {
+      "role": "tyson",
+      "path": "reports/vda_series/qa/2026-07-12_final_review_tyson.json",
+      "sha256": "29c3690889d68ed449fafc5d1fb8dda5c1e84ca3923c30fff12ffa2bcdea5115"
+    },
+    {
+      "role": "thorne",
+      "path": "reports/vda_series/qa/2026-07-12_final_review_thorne.json",
+      "sha256": "d76164180b830e0bde3d1f197dfa7b8f78fd924b6d005def322a59f3ec5c79f6"
+    },
+    {
+      "role": "prose",
+      "path": "reports/vda_series/qa/2026-07-12_final_review_prose.json",
+      "sha256": "ff4800cf3827edd74e1dc854e967c4ef38bb4a34761201b9730f8fab271f1c78"
+    },
+    {
+      "role": "artifact",
+      "path": "reports/vda_series/qa/2026-07-12_final_review_artifact.json",
+      "sha256": "b9349c1ffe4b130a24d24570e0af270c775794557a30d5dca72c8593338be991"
+    }
+  ]
+}

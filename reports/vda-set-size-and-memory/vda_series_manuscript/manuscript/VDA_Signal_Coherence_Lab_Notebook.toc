@@ -1,0 +1,36 @@
+\contentsline {section}{How to read this notebook}{2}{Doc-Start}%
+\contentsline {section}{Part I --- The decisive result sequence}{3}{part*.2}%
+\contentsline {section}{\numberline {1}The question Herman--Morgan leaves open}{3}{section.1}%
+\contentsline {section}{\numberline {2}Entry LN-00: Frozen hypothesis and failure conditions}{3}{section.2}%
+\contentsline {section}{\numberline {3}Entry LN-01: Task, architecture, and interpretable routing}{4}{section.3}%
+\contentsline {section}{\numberline {4}Entry LN-02: Cued behavior and sensitivity}{6}{section.4}%
+\contentsline {section}{\numberline {5}Entry LN-03: Current-image-key and previous-hidden-state-key routing over time}{8}{section.5}%
+\contentsline {section}{\numberline {6}Entry LN-04: Spatially specific causal rescue}{10}{section.6}%
+\contentsline {section}{\numberline {7}Entry LN-05: The fixed-set-size discretization test}{12}{section.7}%
+\contentsline {section}{Part II --- Detailed laboratory entries and unresolved tests}{15}{part*.19}%
+\contentsline {section}{\numberline {8}Experiment index and evidence labels}{15}{section.8}%
+\contentsline {section}{\numberline {9}Entry LN-06: Representation, width, and memory decay}{16}{section.9}%
+\contentsline {section}{\numberline {10}Entry LN-07: Omitted, newly located, and bounded evidence}{17}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Fixed-carrier K=9 cross-attention seed 0}{17}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}VDA16 cross-attention seed 1 competence failure}{18}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Independently verified VDA16 affine rescue}{18}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Entry LN-08: Fixed-100-carrier visual-by-memory stream factorial}{18}{section.11}%
+\contentsline {section}{\numberline {12}Entry LN-09: Proposed decisive coherence-chain experiment}{20}{section.12}%
+\contentsline {section}{\numberline {13}Entry LN-10: Proposed clean distractor-cardinality experiment}{20}{section.13}%
+\contentsline {section}{\numberline {14}Entry LN-11: Proposed fixed-carrier active-item series}{21}{section.14}%
+\contentsline {section}{\numberline {15}Entry LN-12: Replication, calibration, and inference policy}{21}{section.15}%
+\contentsline {section}{\numberline {16}Entry LN-13: Registered VDA4 mnemonic-interference pilot}{23}{section.16}%
+\contentsline {section}{Part III --- Measurement dictionary, diagnostic plates, and provenance}{24}{part*.25}%
+\contentsline {section}{\numberline {17}Exact attention-map reduction and comparison rules}{24}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Split the sources before any reduction}{24}{subsection.17.1}%
+\contentsline {subsection}{\numberline {17.2}Map every native grid to the same physical four regions}{25}{subsection.17.2}%
+\contentsline {subsection}{\numberline {17.3}Report raw and normalized quantities together}{25}{subsection.17.3}%
+\contentsline {section}{\numberline {18}Behavioral and statistical estimands}{26}{section.18}%
+\contentsline {section}{\numberline {19}Selected diagnostic plates}{26}{section.19}%
+\contentsline {subsection}{\numberline {19.1}VDA16 psychometric overlays}{26}{subsection.19.1}%
+\contentsline {subsection}{\numberline {19.2}Frame-specific attention diagnostics}{27}{subsection.19.2}%
+\contentsline {subsection}{\numberline {19.3}Two-seed endpoint directions}{27}{subsection.19.3}%
+\contentsline {subsection}{\numberline {19.4}Native source-separated time courses}{28}{subsection.19.4}%
+\contentsline {section}{\numberline {20}Production freeze and interruption record}{29}{section.20}%
+\contentsline {section}{\numberline {21}Artifact register}{30}{section.21}%
+\contentsline {section}{\numberline {22}Final scientific synthesis}{31}{section.22}%

@@ -1,0 +1,34 @@
+APPROVE
+
+Reviewer identity: independent_subagent / deleg_8266648e / task 1 / artifact
+Candidate: final_candidate_20260712_v8
+
+- v15 exact inventory: MANIFEST.json is strict schema-v1 JSON with unique keys, finite values, typed byte counts, safe relative paths, and 10 artifact records. Including the manifest, the tree contains exactly 11 regular single-link files. Every declared size and SHA-256 matches; no undeclared files, symlinks, special files, duplicate inode identities, or hard-link aliases were identified.
+- v15 manifest SHA-256: 3ded3023a0cd81a344487807e11d8a06fa46b7c29cf7f5f499ef5ac659ff5e24
+- v15 provenance:
+  - Upstream manifest: f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11
+  - Summary builder: 43e6f6ddc822283432c0b076fedef546b3e69ea529d5a0cebd00844a9bde19e9
+  - Post-build validation: 72b730572d45a77a1430d091f6fa36e4029a7ebf148698e8d8beab3f38711214
+- v15 panel and metadata identities:
+  - PDF: dafba8a4e721a02c56ef0e9703c1f555909aefbdc2fab238309b2018bc1a2628
+  - SVG: f7622adae3a63edfe39efeeca9dd061a4cc831eda7371c8532bea7425437feb3
+  - PNG: 74d1c203452553e1af0b2c628075ba3750ee6f737ac06bc260db190b87944b7b
+  - Summary JSON: 15dadb9e2e290918e3dc2bb0af92d1170871eb8fedaea04796615f3bfda4fa5c
+- M1/M2 provenance: all 14 M1 task-metadata records and their PDF panels are accounted for; the single M2 sidecar binds the four inspected implementation-source hashes and the M2A–M2D panel map. The frozen builder requires exactly 14 M1 metadata files and one M2 sidecar and hashes the associated producers, source anchors, metadata, and panel PDFs.
+- Candidate constituent identities:
+  - Panel-coverage table: 977c67b081791a79c5be2fc41f88a582f3cfa546a4cd408ffff903a654f6cdbe
+  - Constituent JSON: 0402a39623f319cf996d133512fdeef9744fd8371345b66deec66fb98aaa7498
+  - Absolute-behavior table: fe5bcdad68d732f656b6587075224a0756622eaf6ae12c5ac80b5501f2f596ff
+  - Clamp-constituent table: 955e2f012eb8353dcf54885eecfd2a82e4e2409aa762a050c3dafbafbafb010b
+- Candidate v8 binding: the mandated verifier was run exactly once and returned PASS, with 21 files excluding the manifest, 22 including it, 54 contiguous rendered pages, unique file identities, single-link regular files, and read-only immutable snapshot entries.
+  - Snapshot manifest: f9a2b05e6ae2cf2c3508cde71a8f0a3cb231247750f4635af9778818baa0c3c7
+  - Source: 19f8cbbd85d736b77263f273dccb15a2ac962f8d9f996e44cd829f6ce30a8f5d
+  - PDF: d1f87f402019f05158dbe3b3db451a3cab77494edb5c56c7b00e3c19cf6d30f7
+  - Frozen manifest builder: 78deeca7e3cb73dabc4fcf5d5b5560da3d1e8cc63a9d97910a583ea0d5984ea2
+  - Ordered render set: da6126545be97834fcadbab4fc87d68a606ae74bc32b450577249d0734852a81
+- Final structured review attestations and the integrated build manifest are intentionally downstream review-closure files.
+- Files created or modified by reviewer: none.
+
+consequential_findings: []
+limitations: []
+files_modified: []

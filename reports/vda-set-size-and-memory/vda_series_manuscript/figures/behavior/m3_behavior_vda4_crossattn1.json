@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "source_object": "M3",
+  "task": "vda4",
+  "feedback": "crossattn1",
+  "checkpoint_iteration_reported_in_cache": 19999,
+  "evidence_class": "regenerated from archived NPZ",
+  "recomputed_from_checkpoint": false,
+  "source_npz": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/figs/psych.npz",
+  "source_npz_sha256": "e63f0b343254ce6fa8632305c831d33c03ee5b5d75116423f20393f6dadc25fd",
+  "panel_status_axis": "publication_coverage",
+  "panel_status": {
+    "M3A": "complete",
+    "M3B": "complete",
+    "M3C": "complete",
+    "M3D": "complete",
+    "M3E": "complete",
+    "M3F": "complete"
+  },
+  "epistemic_status_axis": "claim_support",
+  "epistemic_status": {
+    "M3A": "cache-attributed-aggregate",
+    "M3B": "cache-attributed-aggregate",
+    "M3C": "cache-attributed-aggregate",
+    "M3D": "cache-attributed-aggregate",
+    "M3E": "cache-attributed-aggregate",
+    "M3F": "cache-attributed-aggregate"
+  },
+  "panel_map": {
+    "M3A": "response rate by displayed validity for cued-location changes",
+    "M3B": "response rate: cued versus archived uncued change at 25% displayed validity",
+    "M3C": "response rate: cued versus archived uncued change at 100% displayed validity",
+    "M3D": "conditional response frame by displayed validity for cued-location changes",
+    "M3E": "conditional response frame: cued versus archived uncued change at 25% displayed validity",
+    "M3F": "conditional response frame: cued versus archived uncued change at 100% displayed validity"
+  },
+  "change_magnitudes_degrees": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    22.0,
+    26.0,
+    30.0
+  ],
+  "displayed_validities": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "producer_source_reported_trials_per_point": 300,
+  "producer_source_current_sha256": "f205c6cdb478c597223889cb1df5d355695b0538ffe9bfcece05d4a41ccf7b9c",
+  "producer_source_hash_boundary": "The NPZ does not embed its producer hash; this is the current script hash, not proof of the historical execution source.",
+  "producer_semantics_boundary": "The inspected current producer evaluates change-conditioned trials at forced cued or uncued locations. The NPZ does not prove that this exact producer generated the historical cache.",
+  "uncued_location_boundary": "The NPZ labels these arrays 'uncued' but does not embed the evaluated spatial index. The figures therefore do not rename them as geometrically opposing locations.",
+  "outputs": {
+    "pdf": "m3_behavior_vda4_crossattn1.pdf",
+    "svg": "m3_behavior_vda4_crossattn1.svg",
+    "png": "m3_behavior_vda4_crossattn1.png"
+  },
+  "claim_boundary": "Publication coverage marked complete means the admitted cache-derived product, sidecar, manuscript placement, and QA are complete. Epistemically, the values remain cache-attributed aggregate point estimates and do not establish historical producer identity, sampling uncertainty, seed reliability, convergence, or mechanism."
+}

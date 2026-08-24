@@ -1,0 +1,57 @@
+{
+  "active_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "cue_configurations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "cue_index": 0,
+  "displayed_validity": 0.25,
+  "displayed_validity_curve": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "evidence_class": "task-derived schematic",
+  "figure_id": "M1",
+  "outputs": {
+    "pdf": "m1_task_validity4.pdf",
+    "png": "m1_task_validity4.png"
+  },
+  "realized_cue_probability_curve": [
+    0.4375,
+    0.625,
+    0.8125,
+    1.0
+  ],
+  "realized_target_distribution": [
+    0.4375,
+    0.1875,
+    0.1875,
+    0.1875
+  ],
+  "schema_version": 2,
+  "seed": 0,
+  "task": {
+    "active_count": 4,
+    "grid": [
+      2,
+      2
+    ],
+    "image_size": 50,
+    "lineage": "historical-comparator",
+    "name": "validity4",
+    "probe_location": null,
+    "token_count": 4,
+    "validity_mode": "archived_including_cue",
+    "value_cues": false
+  },
+  "timeline_frames": 7
+}

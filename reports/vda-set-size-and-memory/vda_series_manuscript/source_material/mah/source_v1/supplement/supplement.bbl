@@ -1,0 +1,168 @@
+\begin{thebibliography}{10}
+
+\bibitem{anderson2016attention}
+Brian~A Anderson.
+\newblock The attention habit: How reward learning shapes attentional
+  selection.
+\newblock {\em Annals of the new York Academy of Sciences}, 1369(1):24--39,
+  2016.
+
+\bibitem{anderson2016role}
+Brian~A Anderson, Hiroto Kuwabara, Dean~F Wong, Emily~G Gean, Arman Rahmim,
+  James~R Bra{\v{s}}i{\'c}, Noble George, Boris Frolov, Susan~M Courtney, and
+  Steven Yantis.
+\newblock The role of dopamine in value-based attentional orienting.
+\newblock {\em Current Biology}, 26(4):550--555, 2016.
+
+\bibitem{beck2024xlstm}
+Maximilian Beck, Korbinian Pppel, Markus Spanring, Andreas Auer, Oleksandra
+  Prudnikova, Michael Kopp, Gnter Klambauer, Johannes Brandstetter, and Sepp
+  Hochreiter.
+\newblock xlstm: Extended long short-term memory.
+\newblock {\em arXiv preprint arXiv:2405.04517}, 2024.
+
+\bibitem{cavanaugh2006enhanced}
+James Cavanaugh, Bryan~D Alvarez, and Robert~H Wurtz.
+\newblock Enhanced performance with brain stimulation: attentional shift or
+  visual cue?
+\newblock {\em Journal of Neuroscience}, 26(44):11347--11358, 2006.
+
+\bibitem{dayan2008decision}
+Peter Dayan and Nathaniel~D Daw.
+\newblock Decision theory, reinforcement learning, and the brain.
+\newblock {\em Cognitive, Affective, \& Behavioral Neuroscience},
+  8(4):429--453, 2008.
+
+\bibitem{desimone1995neural}
+Robert Desimone, John Duncan, et~al.
+\newblock Neural mechanisms of selective visual attention.
+\newblock {\em Annual review of neuroscience}, 18(1):193--222, 1995.
+
+\bibitem{failing2018selection}
+Michel Failing and Jan Theeuwes.
+\newblock Selection history: How reward modulates selectivity of visual
+  attention.
+\newblock {\em Psychonomic bulletin \& review}, 25(2):514--538, 2018.
+
+\bibitem{glimcher2011understanding}
+Paul~W Glimcher.
+\newblock Understanding dopamine and reinforcement learning: the dopamine
+  reward prediction error hypothesis.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  108(supplement\_3):15647--15654, 2011.
+
+\bibitem{gupta2024presaccadic}
+Priyanka Gupta and Devarajan Sridharan.
+\newblock Presaccadic attention does not facilitate the detection of changes in
+  the visual field.
+\newblock {\em PLoS Biology}, 22(1):e3002485, 2024.
+
+\bibitem{hikosaka2006basal}
+Okihide Hikosaka, Kae Nakamura, and Hiroyuki Nakahara.
+\newblock Basal ganglia orient eyes to reward.
+\newblock {\em Journal of neurophysiology}, 95(2):567--584, 2006.
+
+\bibitem{hochreiter1997long}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9(8):1735--1780, 1997.
+
+\bibitem{holroyd2002neural}
+Clay~B Holroyd and Michael~GH Coles.
+\newblock The neural basis of human error processing: reinforcement learning,
+  dopamine, and the error-related negativity.
+\newblock {\em Psychological review}, 109(4):679, 2002.
+
+\bibitem{knudsen2007fundamental}
+Eric~I Knudsen.
+\newblock Fundamental components of attention.
+\newblock {\em Annu. Rev. Neurosci.}, 30(1):57--78, 2007.
+
+\bibitem{koch1984selecting}
+Christof Koch and Shimon Ullman.
+\newblock Selecting one among the many: A simple network implementing shifts in
+  selective visual attention.
+\newblock 1984.
+
+\bibitem{leong2017dynamic}
+Yuan~Chang Leong, Angela Radulescu, Reka Daniel, Vivian DeWoskin, and Yael Niv.
+\newblock Dynamic interaction between reinforcement learning and attention in
+  multidimensional environments.
+\newblock {\em Neuron}, 93(2):451--463, 2017.
+
+\bibitem{lim2011decision}
+Seung-Lark Lim, John~P O'Doherty, and Antonio Rangel.
+\newblock The decision value computations in the vmpfc and striatum use a
+  relative value code that is guided by visual attention.
+\newblock {\em Journal of Neuroscience}, 31(37):13214--13223, 2011.
+
+\bibitem{luo2018attentional}
+Thomas~Zhihao Luo and John~HR Maunsell.
+\newblock Attentional changes in either criterion or sensitivity are associated
+  with robust modulations in lateral prefrontal cortex.
+\newblock {\em Neuron}, 97(6):1382--1393, 2018.
+
+\bibitem{maunsell2004neuronal}
+John~HR Maunsell.
+\newblock Neuronal representations of cognitive state: reward or attention?
+\newblock {\em Trends in cognitive sciences}, 8(6):261--265, 2004.
+
+\bibitem{maunsell2015neuronal}
+John~HR Maunsell.
+\newblock Neuronal mechanisms of visual attention.
+\newblock {\em Annual review of vision science}, 1(1):373--391, 2015.
+
+\bibitem{moore2003selective}
+Tirin Moore and Katherine~M Armstrong.
+\newblock Selective gating of visual signals by microstimulation of frontal
+  cortex.
+\newblock {\em Nature}, 421(6921):370--373, 2003.
+
+\bibitem{niv2009reinforcement}
+Yael Niv.
+\newblock Reinforcement learning in the brain.
+\newblock {\em Journal of Mathematical Psychology}, 53(3):139--154, 2009.
+
+\bibitem{pertzov2014privileged}
+Yoni Pertzov and Masud Husain.
+\newblock The privileged role of location in visual working memory.
+\newblock {\em Attention, Perception, \& Psychophysics}, 76:1914--1924, 2014.
+
+\bibitem{schneegans2017neural}
+Sebastian Schneegans and Paul~M Bays.
+\newblock Neural architecture for feature binding in visual working memory.
+\newblock {\em Journal of Neuroscience}, 37(14):3913--3925, 2017.
+
+\bibitem{schultz2000neuronal}
+Wolfram Schultz and Anthony Dickinson.
+\newblock Neuronal coding of prediction errors.
+\newblock {\em Annual review of neuroscience}, 23(1):473--500, 2000.
+
+\bibitem{sutton2018reinforcement}
+Richard~S Sutton.
+\newblock Reinforcement learning: An introduction.
+\newblock {\em A Bradford Book}, 2018.
+
+\bibitem{tsotsos1988complexity}
+John~K Tsotsos.
+\newblock A ‘complexity level’analysis of immediate vision.
+\newblock {\em International journal of computer vision}, 1(4):303--320, 1988.
+
+\bibitem{van2019human}
+Freek van Ede, Sammi~R Chekroud, and Anna~C Nobre.
+\newblock Human gaze tracks the focusing of attention within the internal space
+  of visual working memory.
+\newblock {\em Journal of Vision}, 19(10):133b--133b, 2019.
+
+\bibitem{wang2022neuronal}
+Lupeng Wang, James~P Herman, and Richard~J Krauzlis.
+\newblock Neuronal modulation in the mouse superior colliculus during covert
+  visual selective attention.
+\newblock {\em Scientific Reports}, 12(1):2482, 2022.
+
+\bibitem{wheeler2002binding}
+Mary~E Wheeler and Anne~M Treisman.
+\newblock Binding in short-term visual memory.
+\newblock {\em Journal of experimental psychology: General}, 131(1):48, 2002.
+
+\end{thebibliography}

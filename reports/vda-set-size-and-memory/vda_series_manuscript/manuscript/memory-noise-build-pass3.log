@@ -1,0 +1,223 @@
+﻿This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.5) (preloaded format=xelatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(VDA_Signal_Coherence_Lab_Notebook.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-06-18>
+
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/base\art
+icle.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/base\siz
+e11.clo))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/fontspec
+\fontspec.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/l3packag
+es/xparse\xparse.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/l3kernel
+\expl3.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/l3backen
+d\l3backend-xetex.def)))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/fontspec
+\fontspec-xetex.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/base\fon
+tenc.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/fontspec
+\fontspec.cfg)))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/geometry
+\geometry.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+\keyval.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/iftex\
+ifvtex.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/iftex\
+iftex.sty))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/geometry
+\geometry.cfg))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/microtyp
+e\microtype.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/etoolbox
+\etoolbox.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/microtyp
+e\microtype-xetex.def)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/microtyp
+e\microtype.cfg))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+\graphicx.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+\graphics.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+\trig.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+-cfg\graphics.cfg)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+-def\xetex.def)))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/booktabs
+\booktabs.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/tools\ar
+ray.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/tools\ta
+bularx.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/tools\lo
+ngtable.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/ragged2e
+\ragged2e.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/xcolor\x
+color.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+-cfg\color.cfg)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/graphics
+\mathcolor.ltx))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/hyperref
+\hyperref.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/kvsetkey
+s\kvsetkeys.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/kvdefi
+nekeys\kvdefinekeys.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/pdfesc
+ape\pdfescape.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/ltxcmd
+s\ltxcmds.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/pdftex
+cmds\pdftexcmds.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/infwar
+err\infwarerr.sty)))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/hycolor\
+hycolor.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/hyperref
+\nameref.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/refcount
+\refcount.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/gettit
+lestring\gettitlestring.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/kvoption
+s\kvoptions.sty)))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/string
+enc\stringenc.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/hyperref
+\pd1enc.def)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/intcal
+c\intcalc.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/hyperref
+\puenc.def)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/url\url.
+sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/bitset
+\bitset.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/bigint
+calc\bigintcalc.sty)))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/hyperref
+\hxetex.def
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/rerunfil
+echeck\rerunfilecheck.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/generic/unique
+counter\uniquecounter.sty)))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/caption\
+caption.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/caption\
+caption3.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/caption\
+ltcaption.sty))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/enumitem
+\enumitem.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/amsmath\
+amsmath.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/amsmath\
+amstext.sty
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/amsmath\
+amsgen.sty))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/amsmath\
+amsbsy.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/amsmath\
+amsopn.sty))
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/titlesec
+\titlesec.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/placeins
+\placeins.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/fancyhdr
+\fancyhdr.sty)
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/float\fl
+oat.sty) (VDA_Signal_Coherence_Lab_Notebook.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(VDA_Signal_Coherence_Lab_Notebook.out) (VDA_Signal_Coherence_Lab_Notebook.out)
+
+(C:\Users\jomor\AppData\Local\Temp\codex-miktex\install-root\tex/latex/microtyp
+e\mt-cmr.cfg) [1] (VDA_Signal_Coherence_Lab_Notebook.toc) [1] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
+
+
+Underfull \hbox (badness 1005) in paragraph at lines 219--219
+[]|\TU/TimesNewRoman(0)/m/n/10 More candidate ob- 
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
+
+[4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
+
+[6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 334--335
+
+[9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
+
+[11] [12] [13] [14]
+Underfull \hbox (badness 1859) in paragraph at lines 429--430
+[]\TU/TimesNewRoman(0)/b/n/10.95 C — held-out descriptive evidence: \TU/TimesNe
+wRoman(0)/m/n/10.95 valid fixed-checkpoint measurement, but correlational, sing
+le-
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 455--456
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
+
+
+Overfull \hbox (5.13335pt too wide) in paragraph at lines 495--496
+\TU/TimesNewRoman(0)/m/n/10.95 A complete producer manifest exists at $[][][][]
+ [] [][][][] [] [][][][][] [] [][][][] [] [][][][][] [] [][][][][][][] [] [][][
+] [] [][][][][][] [] [][][][][][][][][][][] []
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 508--509
+
+[18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 545--546
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 567--568
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 593--594
+
+[21] [22]
+Underfull \hbox (badness 10000) in paragraph at lines 609--610
+
+[23]
+Underfull \hbox (badness 1173) in paragraph at lines 642--644
+[][]\TU/Arial(0)/b/n/9 ENGINEERING STATUS ON 3 AUGUST 2026.[] \TU/TimesNewRoman
+(0)/m/n/10.95 The frozen package is at $[][][][] [] [][][][] [] [][][][][] [] [
+][][][] [] [][][][][] []
+
+Overfull \hbox (299.56972pt too wide) in paragraph at lines 642--644
+[][][][][][][][][][][] [] [][][][] [] [][][][][][] [] [][][][][] [] [][][][][][
+][] [] [][][][][][][][][][] [] [][][][][] [] [][][]$\TU/TimesNewRoman(0)/m/n/10
+.95 . Design SHA-256 is \TU/lmtt/m/n/10.95 1ae15e32b35687501554463a714074b6774e
+70aed524780ff14a733d832ec97b\TU/TimesNewRoman(0)/m/n/10.95 ;
+[24] [25] [26] [27] [28]
+Underfull \hbox (badness 4913) in paragraph at lines 772--773
+\TU/TimesNewRoman(0)/m/n/10.95 The frozen stream-factorial source bundle is $[]
+[][][][][][] [] [][][] [] [][][][][][] [] [][][][][][] [] [][][][][][][][][] []
+ [][][][][][][][][][] []
+[29] [30] [31] [32] (VDA_Signal_Coherence_Lab_Notebook.aux) )
+(see the transcript file for additional information)
+Output written on VDA_Signal_Coherence_Lab_Notebook.pdf (33 pages).
+Transcript written on VDA_Signal_Coherence_Lab_Notebook.log.

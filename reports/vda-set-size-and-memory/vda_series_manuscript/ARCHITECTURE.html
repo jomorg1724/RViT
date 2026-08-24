@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The VDA Model — Architecture and Training</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#ffffff; --ink:#1c1b19; --ink-soft:#4a4741; --ink-faint:#7d786f;
+    --rule:#e5e0d8; --rule-soft:#efebe4;
+    --accent:#8a5a2b; --accent-soft:#f4ece2;
+    --blue:#2a5d8f; --blue-soft:#eaf1f8;
+    --green:#3f6b4a; --green-soft:#eaf3ec;
+    --code-bg:#f5f2ec;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16151a; --panel:#1d1c22; --ink:#eceae6; --ink-soft:#bdb8b0; --ink-faint:#8b857c;
+      --rule:#33313a; --rule-soft:#28262e;
+      --accent:#d8a76a; --accent-soft:#2a2119;
+      --blue:#7fb0dd; --blue-soft:#1a2430;
+      --code-bg:#22212a;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--serif); font-size:17px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{display:grid; grid-template-columns:250px minmax(0,1fr); gap:0; max-width:1180px; margin:0 auto;}
+  /* ---- table of contents ---- */
+  nav{
+    position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+    padding:38px 22px 40px 24px; border-right:1px solid var(--rule);
+    font-family:var(--sans); font-size:12.5px; line-height:1.5;
+  }
+  nav .navtitle{
+    font-family:var(--sans); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:14px; font-weight:600;
+  }
+  nav a{display:block; color:var(--ink-soft); text-decoration:none; padding:4px 0 4px 10px;
+        border-left:2px solid var(--rule-soft); transition:.15s;}
+  nav a:hover{color:var(--accent); border-left-color:var(--accent);}
+  nav a.sub{padding-left:22px; font-size:11.8px; color:var(--ink-faint);}
+  /* ---- content ---- */
+  main{padding:56px 52px 120px 52px; min-width:0;}
+  header.doc{border-bottom:2px solid var(--ink); padding-bottom:26px; margin-bottom:40px;}
+  .eyebrow{font-family:var(--sans); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+           color:var(--accent); font-weight:700; margin-bottom:14px;}
+  h1{font-size:41px; line-height:1.12; margin:0 0 16px; font-weight:600; letter-spacing:-.015em;}
+  .standfirst{font-size:19px; color:var(--ink-soft); line-height:1.55; margin:0; max-width:62ch;}
+  .meta{font-family:var(--sans); font-size:12px; color:var(--ink-faint); margin-top:22px;}
+  .meta code{font-size:11.5px}
+  h2{font-size:26px; margin:58px 0 6px; font-weight:600; letter-spacing:-.01em; scroll-margin-top:24px;}
+  h2 .num{color:var(--accent); font-family:var(--sans); font-size:14px; font-weight:700;
+          display:block; letter-spacing:.1em; margin-bottom:4px;}
+  h3{font-size:19px; margin:34px 0 8px; font-weight:600; scroll-margin-top:24px;}
+  h4{font-size:15px; margin:24px 0 6px; font-weight:600; font-family:var(--sans);
+     letter-spacing:.02em; color:var(--ink-soft);}
+  p{margin:0 0 15px; max-width:70ch;}
+  ul,ol{max-width:68ch; padding-left:22px; margin:0 0 16px;}
+  li{margin-bottom:7px;}
+  a{color:var(--accent);}
+  code{font-family:var(--mono); font-size:.85em; background:var(--code-bg); padding:1px 5px;
+       border-radius:3px; color:var(--ink);}
+  strong{font-weight:600;}
+  em.term{font-style:normal; font-weight:600; color:var(--accent);}
+  hr.sec{border:0; border-top:1px solid var(--rule); margin:46px 0 0;}
+  /* ---- boxes ---- */
+  .eq{
+    background:var(--code-bg); border-left:3px solid var(--accent); border-radius:0 6px 6px 0;
+    padding:16px 20px; margin:18px 0 20px; font-family:var(--mono); font-size:13.5px;
+    line-height:1.85; overflow-x:auto; max-width:100%; white-space:pre;
+  }
+  .eq .cmt{color:var(--ink-faint);}
+  .note{
+    background:var(--panel); border:1px solid var(--rule); border-radius:8px;
+    padding:16px 20px; margin:22px 0; font-size:15.5px; max-width:70ch;
+  }
+  .note .lbl{font-family:var(--sans); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+             color:var(--accent); font-weight:700; display:block; margin-bottom:6px;}
+  .note.blue{border-left:3px solid var(--blue);} .note.blue .lbl{color:var(--blue);}
+  .note p:last-child{margin-bottom:0}
+  /* ---- tables ---- */
+  .tablewrap{overflow-x:auto; margin:20px 0 26px; border:1px solid var(--rule); border-radius:8px; background:var(--panel);}
+  table{border-collapse:collapse; width:100%; font-family:var(--sans); font-size:13px;}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--rule-soft); vertical-align:top;}
+  th{font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-faint);
+     font-weight:700; background:var(--code-bg); white-space:nowrap;}
+  tbody tr:last-child td{border-bottom:0;}
+  td code{font-size:12px; background:transparent; padding:0;}
+  .num-col{font-variant-numeric:tabular-nums; white-space:nowrap;}
+  caption{caption-side:bottom; text-align:left; padding:10px 14px; font-family:var(--sans);
+          font-size:12px; color:var(--ink-faint); line-height:1.5;}
+  /* ---- figure ---- */
+  figure{margin:28px 0 30px; padding:0;}
+  figure svg{width:100%; height:auto; display:block; background:var(--panel);
+             border:1px solid var(--rule); border-radius:8px;}
+  figcaption{font-family:var(--sans); font-size:12.5px; color:var(--ink-faint);
+             margin-top:10px; line-height:1.55; max-width:70ch;}
+  .shapes{font-family:var(--sans); font-size:12.5px; color:var(--ink-faint);}
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr;}
+    nav{position:static; height:auto; border-right:0; border-bottom:1px solid var(--rule);
+        display:flex; flex-wrap:wrap; gap:4px 14px; padding:20px 24px;}
+    nav .navtitle{width:100%; margin-bottom:4px;}
+    nav a{border-left:0; padding:2px 0;} nav a.sub{display:none;}
+    main{padding:32px 24px 80px;}
+    h1{font-size:31px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <div class="navtitle">Contents</div>
+  <a href="#overview">1 · What the system is</a>
+  <a href="#task">2 · The task</a>
+  <a href="#task" class="sub">Timeline, cue, scoring</a>
+  <a href="#task" class="sub">The environment family</a>
+  <a href="#pipeline">3 · The model, end to end</a>
+  <a href="#frontend">4 · Seeing: patch encoder</a>
+  <a href="#routing">5 · Routing: attention</a>
+  <a href="#routing" class="sub">Cross-attention</a>
+  <a href="#routing" class="sub">Affine modulation</a>
+  <a href="#routing" class="sub">Other variants</a>
+  <a href="#memory">6 · Remembering: xLSTM</a>
+  <a href="#heads">7 · Deciding: actor &amp; critic</a>
+  <a href="#jepa">8 · The prediction loss</a>
+  <a href="#training">9 · How it is trained</a>
+  <a href="#sizes">10 · Sizes and counts</a>
+  <a href="#intervention">11 · The causal lever</a>
+  <a href="#repro">12 · Reproducing a run</a>
+  <a href="#choices">13 · Why each choice</a>
+  <a href="#files">14 · File map</a>
+</nav>
+
+<main>
+
+<header class="doc">
+  <div class="eyebrow">Value-Directed Attention · Model Documentation</div>
+  <h1>The architecture behind every VDA experiment</h1>
+  <p class="standfirst">One network, one training harness, one task generator — reused unchanged across
+  every set size, every grid, and every routing family we have run. This document describes all of it
+  in plain language, with every number and equation needed to rebuild it from scratch.</p>
+  <div class="meta">
+    Source of record: <code>RViT_plus_paper_jepa_grid9/</code> · written 2026-08-04 · describes the code as it
+    stands, not an idealized version of it.
+  </div>
+</header>
+
+<!-- ══════════════════════════════════ 1 ══════════════════════════════════ -->
+<h2 id="overview"><span class="num">Section 1</span>What the system is</h2>
+
+<p>The object of study is a small artificial agent that watches a short movie and presses a button when
+it notices something change. It has one non-obvious property: <strong>what it remembers determines what
+it looks at next</strong>. Memory is not a passive record downstream of perception — it reaches back and
+reshapes how the next frame is read. That loop is the entire point of the model, and every experiment in
+this series is an attempt to measure it, break it, or steer it.</p>
+
+<p>Four parts, arranged in a loop that runs once per movie frame:</p>
+
+<ol>
+  <li><strong>An eye.</strong> The frame is cut into a grid of square tiles; a small shared convolutional
+  network turns each tile into a vector of 128 numbers. Position and time-of-frame are stapled on.</li>
+  <li><strong>A router.</strong> The tiles are mixed together by an attention operation. Crucially, the
+  memory from the <em>previous</em> frame participates in this mixing — it decides which tiles get
+  amplified and which get ignored. This is the model's attention, and it is the thing we measure and
+  manipulate.</li>
+  <li><strong>A memory.</strong> One recurrent cell per grid location, updated each frame from the routed
+  tiles. It is what carries "there was a stimulus here, oriented like this" across the blank frames.</li>
+  <li><strong>A decision.</strong> The whole memory is flattened into one long vector and read by two
+  small networks: one chooses <em>wait</em> or <em>declare a change</em>, the other estimates how much
+  reward that choice is worth.</li>
+</ol>
+
+<p>The agent is never told where the change is. It is never told what a cue means. It is trained only by
+reward — press correctly, get points — plus one self-supervised auxiliary loss that asks it to predict
+its own future memory state. Everything the experiments report (cueing benefits, attention maps, the
+rescue effect) is behaviour that emerges from that training, not behaviour that was designed in.</p>
+
+<div class="note">
+  <span class="lbl">The single most important design decision</span>
+  <p>The image is divided into exactly as many tokens as there are places worth attending to, and token
+  <em>i</em> corresponds to grid cell <em>i</em> — a fixed, known, row-major correspondence. That makes
+  the attention map a small, directly readable array over <em>locations</em>, and it makes the attention
+  map directly <strong>writable</strong>: we can add a bias to the attention score of one specific
+  location, mid-trial, and watch what the agent does. A conventional vision transformer with 100
+  anonymous patches would give us neither.</p>
+</div>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 2 ══════════════════════════════════ -->
+<h2 id="task"><span class="num">Section 2</span>The task the agent is solving</h2>
+
+<h3>Trial timeline</h3>
+
+<p>Every trial is <strong>seven logical frames</strong> of a 50×50, 75×75, or 100×100 RGB image
+(the size depends on the grid). Nothing about this timeline changes between experiments:</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Frame</th><th>What is on screen</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td class="num-col">t = 0</td><td>Black</td><td>Baseline</td></tr>
+<tr><td class="num-col">t = 1</td><td>The cue: a filled disc plus a partial ring, drawn in one grid cell, in colour</td><td>Tells the agent where to expect the change, how reliable that expectation is, and how much the trial is worth</td></tr>
+<tr><td class="num-col">t = 2</td><td>Black</td><td>Delay — the cue must be <em>held in memory</em> from here on</td></tr>
+<tr><td class="num-col">t = 3, 4</td><td>Gabor patches, one per active cell, each jittered by fresh orientation noise every frame</td><td>Stimulus array; the agent must not press yet</td></tr>
+<tr><td class="num-col">t = 5</td><td>Same array, but on half of trials <strong>one patch steps its orientation by Δ</strong></td><td>The event</td></tr>
+<tr><td class="num-col">t = 6</td><td>Array continues (with the change persisting)</td><td>Last chance to respond</td></tr>
+</tbody>
+</table>
+<caption>The change time is fixed at t = 5 in every experiment reported here (<code>--min-change-time 5 --max-change-time 5</code>). The trainer supports a random-onset variant with a longer horizon; it is not what these runs used.</caption>
+</div>
+
+<p>At every frame the agent picks one of two actions: <strong>wait (0)</strong> or <strong>declare a change
+(1)</strong>. Declaring ends the trial immediately. The scoring is deliberately blunt:</p>
+
+<ul>
+  <li><strong>Hit</strong> — declares at t ≥ 5 on a trial that actually contained a change. Pays the trial's reward value.</li>
+  <li><strong>False alarm</strong> — declares before t = 5, or on a no-change trial. Pays zero.</li>
+  <li><strong>Miss</strong> — never declares on a change trial. Pays zero.</li>
+  <li><strong>Correct rejection</strong> — waits out a no-change trial to the end. Pays the trial's reward value.</li>
+</ul>
+
+<p>Note the consequence: because responses are frame-indexed and there are only two qualifying frames
+(5 and 6), "reaction time" in this model has a resolution of exactly two steps. We report it at that
+resolution and never dress it up in continuous-time language.</p>
+
+<h3>What the cue actually encodes</h3>
+
+<p>The cue is one glyph carrying three separate pieces of information, all in a single cell of the grid:</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Channel</th><th>Physical form</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><strong>Location</strong></td><td>Which cell the glyph is drawn in</td><td>Where the change is likely to occur</td></tr>
+<tr><td><strong>Validity</strong></td><td>How complete the surrounding ring is — a full ring is 100%, a quarter arc is 25%</td><td>The probability <em>p</em> that the change will occur at the cued cell. Drawn per trial from {0.25, 0.5, 0.75, 1.0}, with 0.0 added for the larger grids</td></tr>
+<tr><td><strong>Value</strong></td><td>The colour of the glyph: red, green, or blue</td><td>The reward for being correct: 5, 3, or 1 points. Says nothing about <em>where</em></td></tr>
+</tbody>
+</table>
+<caption>Validity and value are crossed independently every trial, which is what makes the task "value-directed" rather than merely "cued".</caption>
+</div>
+
+<h3>Two validity conventions — and why they are never pooled</h3>
+
+<p>There is a subtle but consequential difference between the older and newer task variants, and the
+experiments treat them as separate evidence lineages:</p>
+
+<ul>
+  <li><strong>Historical tasks</strong> (<code>vda4</code>, <code>vda9</code>): on the invalid branch,
+  the change location is drawn uniformly from <em>all N</em> cells — which can re-select the cued cell.
+  The <em>realized</em> validity is therefore <code>p + (1−p)/N</code>, not <code>p</code>.</li>
+  <li><strong>Controlled tasks</strong> (<code>vda_fixed*</code>): the invalid branch samples only from
+  the <em>N−1 non-cued</em> cells, so displayed and realized validity are exactly equal.</li>
+</ul>
+
+<p>Both live in the codebase (<code>_draw_change_index</code> versus <code>_draw_validity_target</code>).
+Mixing results across the two would silently confound the very quantity under study.</p>
+
+<h3>The curriculum</h3>
+
+<p>Detection difficulty is not fixed — it is <em>earned down</em>. The maximum orientation change θ starts
+at 65°, and each trial's actual change is drawn Δ ~ U(−θ, +θ). Every 1,000 trials the environment checks
+the agent's accuracy over that window; if it is at or above 85%, θ drops by 3°. The floor is 8°. Nothing
+ever raises θ back up.</p>
+
+<div class="note blue">
+  <span class="lbl">Why the final θ matters when reading results</span>
+  <p>θ at the end of training is a competence measure, not a hyperparameter. A checkpoint that finished at
+  θ = 65° never once cleared the 85% gate — it is still on the easiest setting the curriculum offers. A
+  checkpoint at θ = 47° cleared it six times. Several results in the manuscript are explicitly labelled
+  <em>competence-gated</em> for exactly this reason, and comparisons across checkpoints with different
+  terminal θ are not like-for-like.</p>
+</div>
+
+<h3>The environment family</h3>
+
+<p>Fourteen registered environments share one base class; each subclass overrides only the reward rule,
+the target-sampling rule, or which cells are active. The ones that carry the VDA results:</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Name</th><th>Grid / image</th><th>Active items</th><th>What it manipulates</th></tr></thead>
+<tbody>
+<tr><td><code>vda4</code></td><td>2×2 / 50 px</td><td class="num-col">4</td><td>The canonical value-directed task</td></tr>
+<tr><td><code>vda9</code></td><td>3×3 / 75 px</td><td class="num-col">9</td><td>More items — but also a different display geometry</td></tr>
+<tr><td><code>vda16</code></td><td>4×4 / 100 px</td><td class="num-col">16</td><td>Set size 16, historical validity convention</td></tr>
+<tr><td><code>vda_fixed{1,2,4,9,16}</code></td><td>4×4 / 100 px</td><td class="num-col">1–16</td><td>Set size varied <em>with geometry held constant</em> — inactive cells are simply blank</td></tr>
+<tr><td><code>vda1</code>, <code>vda2</code></td><td>2×2 / 50 px</td><td class="num-col">1–2</td><td>Reduced set size on the small grid</td></tr>
+<tr><td><code>vda_excl</code></td><td>1×2 / 50 px</td><td class="num-col">1–2</td><td>Distractor present or absent, interleaved — isolates noise-exclusion accounts</td></tr>
+<tr><td><code>validity4</code></td><td>2×2 / 50 px</td><td class="num-col">4</td><td>Same task, uniform reward — the no-value comparator</td></tr>
+<tr><td><code>krauzlis</code></td><td>2×2 / 50 px</td><td class="num-col">4</td><td>Only cued-location changes are reportable; others must be ignored</td></tr>
+<tr><td><code>luo_maunsell_*</code></td><td>2×2 / 50 px</td><td class="num-col">4</td><td>Reward <em>structure</em>: value concentrated at one place vs. hit/correct-reject ratio</td></tr>
+<tr><td><code>vda_probe_cued/uncued</code></td><td>2×2 / 50 px</td><td class="num-col">4</td><td>A passive probe flashed during the blank delay — read zero-shot from a trained model</td></tr>
+</tbody>
+</table>
+<caption>The distinction between <code>vda16</code> and <code>vda_fixed16</code> is not cosmetic: they differ in validity semantics and are separate lineages. All VDA16 results in the manuscript come from the controlled family.</caption>
+</div>
+
+<h3>The discretization dimension</h3>
+
+<p>One further axis, and it is the one most easily misread. The <strong>stimulus grid</strong> (how many
+Gabors are on screen) and the <strong>token grid</strong> (how finely the image is cut up for the model)
+are set independently, via <code>--patch-grid-rows/--patch-grid-cols</code>. A <code>vda4</code> trial —
+four Gabors, unchanged pixels — can be handed to a model that sees it as 4 tokens, 16 tokens, or 100
+tokens. Below 1:1, several tokens tile a single stimulus and the one-token-per-item correspondence is
+deliberately broken. That is the experiment: <em>does finer spatial competition make attention matter
+more, even when the number of things to remember is fixed?</em></p>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 3 ══════════════════════════════════ -->
+<h2 id="pipeline"><span class="num">Section 3</span>The model, end to end</h2>
+
+<figure>
+<svg viewBox="0 0 940 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data flow diagram of the recurrent model">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="currentColor"/>
+    </marker>
+    <marker id="arf" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#8a5a2b"/>
+    </marker>
+  </defs>
+  <style>
+    .bx{fill:none;stroke:currentColor;stroke-width:1.3;rx:7}
+    .lbl{font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:12.5px;font-weight:600;fill:currentColor}
+    .sub{font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:10.5px;fill:currentColor;opacity:.62}
+    .fl{stroke:currentColor;stroke-width:1.3;fill:none}
+    .fb{stroke:#8a5a2b;stroke-width:1.6;fill:none;stroke-dasharray:5 3}
+    .fbl{font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:11px;font-weight:700;fill:#8a5a2b}
+    .tag{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;fill:currentColor;opacity:.55}
+  </style>
+
+  <!-- frame -->
+  <rect x="26" y="120" width="96" height="76" class="bx"/>
+  <text x="74" y="150" class="lbl" text-anchor="middle">Frame t</text>
+  <text x="74" y="167" class="sub" text-anchor="middle">RGB image</text>
+  <text x="74" y="212" class="tag" text-anchor="middle">(B,3,S,S)</text>
+
+  <!-- frontend -->
+  <rect x="158" y="112" width="130" height="92" class="bx"/>
+  <text x="223" y="142" class="lbl" text-anchor="middle">Patch encoder</text>
+  <text x="223" y="159" class="sub" text-anchor="middle">shared SE-ResNet</text>
+  <text x="223" y="174" class="sub" text-anchor="middle">+ position + time</text>
+  <text x="223" y="220" class="tag" text-anchor="middle">X: (B,N,d)</text>
+
+  <!-- attention -->
+  <rect x="324" y="104" width="150" height="108" class="bx"/>
+  <text x="399" y="134" class="lbl" text-anchor="middle">Attention router</text>
+  <text x="399" y="151" class="sub" text-anchor="middle">crossattn1 or affine_ew</text>
+  <text x="399" y="167" class="sub" text-anchor="middle">memory decides</text>
+  <text x="399" y="182" class="sub" text-anchor="middle">what is amplified</text>
+  <text x="399" y="228" class="tag" text-anchor="middle">Z: (B,N,d)</text>
+
+  <!-- lever -->
+  <rect x="324" y="30" width="150" height="44" class="bx" stroke="#8a5a2b" stroke-dasharray="4 3"/>
+  <text x="399" y="49" class="fbl" text-anchor="middle">causal lever</text>
+  <text x="399" y="65" class="sub" text-anchor="middle">+b on one key, pre-softmax</text>
+  <path d="M399,74 L399,102" class="fb" marker-end="url(#arf)"/>
+
+  <!-- memory -->
+  <rect x="510" y="112" width="136" height="92" class="bx"/>
+  <text x="578" y="142" class="lbl" text-anchor="middle">Spatial xLSTM</text>
+  <text x="578" y="159" class="sub" text-anchor="middle">one cell per location,</text>
+  <text x="578" y="174" class="sub" text-anchor="middle">weights shared</text>
+  <text x="578" y="220" class="tag" text-anchor="middle">H: (B,N,d_mem)</text>
+
+  <!-- readout -->
+  <rect x="682" y="120" width="96" height="76" class="bx"/>
+  <text x="730" y="150" class="lbl" text-anchor="middle">Flatten</text>
+  <text x="730" y="167" class="sub" text-anchor="middle">N · d_mem</text>
+
+  <!-- heads -->
+  <rect x="814" y="86" width="100" height="52" class="bx"/>
+  <text x="864" y="108" class="lbl" text-anchor="middle">Actor</text>
+  <text x="864" y="124" class="sub" text-anchor="middle">wait / declare</text>
+  <rect x="814" y="178" width="100" height="52" class="bx"/>
+  <text x="864" y="200" class="lbl" text-anchor="middle">Critic</text>
+  <text x="864" y="216" class="sub" text-anchor="middle">5 quantiles × 2</text>
+
+  <!-- jepa -->
+  <rect x="510" y="292" width="136" height="50" class="bx" stroke-dasharray="4 3"/>
+  <text x="578" y="313" class="lbl" text-anchor="middle">JEPA head</text>
+  <text x="578" y="329" class="sub" text-anchor="middle">predict own next state</text>
+  <path d="M578,204 L578,290" class="fl" marker-end="url(#ar)"/>
+
+  <!-- arrows -->
+  <path d="M122,158 L156,158" class="fl" marker-end="url(#ar)"/>
+  <path d="M288,158 L322,158" class="fl" marker-end="url(#ar)"/>
+  <path d="M474,158 L508,158" class="fl" marker-end="url(#ar)"/>
+  <path d="M646,158 L680,158" class="fl" marker-end="url(#ar)"/>
+  <path d="M778,150 L796,150 L796,112 L812,112" class="fl" marker-end="url(#ar)"/>
+  <path d="M778,166 L796,166 L796,204 L812,204" class="fl" marker-end="url(#ar)"/>
+
+  <!-- feedback loop -->
+  <path d="M646,190 L666,190 L666,262 L300,262 L300,180 L322,180" class="fb" marker-end="url(#arf)"/>
+  <text x="483" y="279" class="fbl" text-anchor="middle">memory from frame t−1 conditions the routing at frame t</text>
+</svg>
+<figcaption><strong>The recurrent loop.</strong> Solid lines are the feedforward path within one frame.
+The brown dashed line is the recurrence, and it is the object of study: memory does not merely accumulate,
+it modulates. The lever at top is the intervention hook of Section 11 — an additive bias on one attention
+key, injected before the softmax, at a location and a time of our choosing.</figcaption>
+</figure>
+
+<p>In code this is one call, <code>model.rl_step(frame, state)</code>, which returns the action logits,
+the value distribution, the attention map, and the new state. The same computation batched over a whole
+trial is <code>forward_rl_sequence</code>. The recurrent state is carried as an opaque tuple — the
+training harness never inspects it.</p>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 4 ══════════════════════════════════ -->
+<h2 id="frontend"><span class="num">Section 4</span>Seeing — the patch encoder</h2>
+
+<p>The frame arrives as a 3-channel RGB image. Colour is not decorative: the cue's <em>value</em> is
+carried entirely by hue, so a grayscale front-end would destroy the manipulation.</p>
+
+<p>The image is cut row-major into <em>R × C</em> equal tiles. Each tile goes through the <strong>same</strong>
+small convolutional network — one set of weights, applied everywhere, so nothing about a location is
+learned in the encoder itself. The network is a compact SE-ResNet:</p>
+
+<div class="eq">stem      Conv 3×3 (3 → 32), GroupNorm, SiLU
+stage 1   SE-residual block, 32 → 64,  stride 2      <span class="cmt">25px → 13px</span>
+stage 2   SE-residual block, 64 → 128, stride 1      <span class="cmt">13px → 7px</span>
+stage 3   SE-residual block, 128 → 128, stride 1     <span class="cmt">depth, no downsample</span>
+pool      global average → 128 numbers
+norm      RMSNorm (scale only, mean preserved)</div>
+
+<p>Each SE-residual block is: <code>Conv3×3 → GroupNorm → SiLU → Conv3×3 → GroupNorm → squeeze-excite →
+add the input back → SiLU</code>. The squeeze-excite step pools each channel to a single number, passes it
+through a tiny bottleneck, and uses the result to rescale that channel — cheap channel-level attention
+inside the encoder.</p>
+
+<p>Each tile's 128-number embedding is then concatenated with two one-hot vectors:</p>
+
+<div class="eq">token_i = [ embedding (128)  ‖  which cell (N)  ‖  which frame (8) ]
+
+token width d = 128 + N + 8      <span class="cmt">140 at N=4 · 152 at N=16 · 236 at N=100</span>
+X             = (B, N, d)</div>
+
+<p>The frame index is clamped into 8 slots, which comfortably covers the 7-frame trial. Position is a
+plain one-hot rather than a learned embedding, so the spatial index stays literally readable — necessary
+for the intervention machinery downstream.</p>
+
+<div class="note">
+  <span class="lbl">Two deliberate deviations from standard practice</span>
+  <p><strong>GroupNorm, not BatchNorm.</strong> During online rollout the model runs with a batch of one,
+  frame by frame. BatchNorm's running statistics are fragile in that regime and make training and
+  evaluation behave differently. GroupNorm is batch-independent and identical in both modes.</p>
+  <p><strong>RMSNorm, not LayerNorm, on the pooled embedding.</strong> LayerNorm subtracts the mean, which
+  would attenuate a uniform colour offset — exactly the signal the value cue uses. RMSNorm rescales
+  without recentring, so the DC component survives.</p>
+</div>
+
+<p>The front-end is trained end to end from reward. There is no pretraining, no reconstruction loss, no
+frozen encoder. (An earlier VAE-based front-end fixed to a 2×2 / 50 px layout still exists in the
+repository and is refused for any other geometry, but no VDA experiment reported here uses it.)</p>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 5 ══════════════════════════════════ -->
+<h2 id="routing"><span class="num">Section 5</span>Routing — where memory meets vision</h2>
+
+<p>This is the mechanism the whole project is about. The tokens <code>X</code> from the current frame and
+the memory <code>H</code> from the previous frame are combined into <code>Z</code>, the representation that
+will be written to memory. <em>How</em> memory participates in that combination defines a
+<strong>routing family</strong>, and the family is a first-class experimental variable — several results
+hold for one family and not the other, which is itself a finding.</p>
+
+<p>Two families carry the VDA experiments.</p>
+
+<h3>Cross-attention — <code>crossattn1</code></h3>
+
+<p>The current image asks the questions; both the image and memory offer answers.</p>
+
+<div class="eq">Q = W_q(X)                                <span class="cmt">N queries, from vision only</span>
+K = [ W_kx(X) ‖ W_kh(H) ]                 <span class="cmt">2N keys: N visual, then N memory</span>
+V = [ W_vx(X) ‖ W_vh(H) ]                 <span class="cmt">2N values, same layout</span>
+
+A = softmax( Q Kᵀ / √d )                  <span class="cmt">(B, N, 2N)</span>
+Z = X + A · V                             <span class="cmt">residual on X</span></div>
+
+<p>The attention map is <em>N × 2N</em>. Key <em>j</em> for j &lt; N is "the image at location j"; key
+<em>N + j</em> is "what I remember about location j". Because the two streams are separate columns of one
+softmax, the map states not just <em>where</em> the model is attending but <strong>whether it is currently
+looking or currently remembering</strong> — a distinction the analysis code uses directly (it reports
+visual-source and memory-source mass before they are summed).</p>
+
+<h3>Affine modulation — <code>affine_ew</code></h3>
+
+<p>Memory does not compete for attention. Instead it rewrites the visual features first, and then a plain
+self-attention runs over the rewritten features.</p>
+
+<div class="eq">b  = tanh( bottleneck(H) )                <span class="cmt">H → 64 dims</span>
+γ  = scale(b)          ∈ ℝ^d              <span class="cmt">element-wise gain,  init 1</span>
+β  = shift(b)          ∈ ℝ^d              <span class="cmt">element-wise offset, init 0</span>
+X' = γ ⊙ X + β                            <span class="cmt">no "1 +" identity term</span>
+
+Q,K,V = W_XQ(X'), W_XK(X'), W_XV(X')
+A     = softmax( Q Kᵀ / √d )              <span class="cmt">(B, N, N)</span>
+Z     = X + A · V                         <span class="cmt">residual on the UNmodulated X</span></div>
+
+<p>Only N keys here — half as many spatial keys as cross-attention for the same token count. Note the
+initialization: γ starts at 1 and β at 0, so the block begins life as ordinary self-attention over the
+raw image and the memory's influence grows as training proceeds. Zero-initializing the gain instead would
+collapse <code>X'</code> to zero and kill attention before it started; this is a real failure mode the
+code comments call out by name.</p>
+
+<div class="note blue">
+  <span class="lbl">Why the comparison is fair</span>
+  <p>Both routers see the same tokens, write to the same memory, use the same readout, and are trained
+  by the same harness with the same hyperparameters. They differ in <em>one</em> thing: whether memory
+  competes for attention as an explicit set of keys, or silently reshapes the features that attention
+  then operates on. When a result appears under one and not the other, that is the difference doing
+  the work.</p>
+</div>
+
+<h3>The other routers in the file</h3>
+
+<p>Implemented, tested, and available; not used by the VDA results reported here, but worth knowing about
+because they define the space the two chosen families sit in.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Flag</th><th>Mechanism</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td><code>multiplicative</code></td><td>Q, K, V are each the product of a visual projection and a memory projection</td><td>The original published form. With H = 0 at the first frame the gate is 0, so Z = X</td></tr>
+<tr><td><code>film</code></td><td>Same, but the memory term is <code>(1 + W·H)</code> with W zero-initialized</td><td>Starts as plain self-attention; stable where the pure product is not</td></tr>
+<tr><td><code>affine</code></td><td>Memory generates a full <em>d × d</em> scale matrix plus a shift</td><td>Matrix-valued FiLM. Costs ~1.2 M extra parameters at d = 140</td></tr>
+<tr><td><code>dualhead</code></td><td>Two parallel heads, one purely sensory, one memory-driven</td><td>Prevents memory from monopolizing routing</td></tr>
+<tr><td><code>dualmem</code>, <code>affine_cascade</code></td><td>Two memories with distinct roles; cascade splits the readout (actor reads one, critic the other)</td><td>Both force a second recurrent cell</td></tr>
+<tr><td><code>hyper</code>, <code>hyper_codebook</code></td><td>Memory generates the attention weight matrices themselves; values come from a learned codebook</td><td>Fast-weight variants</td></tr>
+</tbody>
+</table>
+</div>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 6 ══════════════════════════════════ -->
+<h2 id="memory"><span class="num">Section 6</span>Remembering — the spatial xLSTM</h2>
+
+<p>The routed tokens <code>Z</code> are written into memory by an <strong>xLSTM</strong> cell: an LSTM
+whose input and forget gates are exponential rather than sigmoidal, with a running normalizer that keeps
+the result bounded. It updates each of the N locations independently, using one shared set of weights —
+so the memory has spatial structure without the cell knowing anything about geometry.</p>
+
+<div class="eq">Ĩ = Z·W_i + H·R_i        F̃ = Z·W_f + H·R_f
+Õ = Z·W_o + H·R_o        Ũ = Z·W_u + H·R_z
+
+M = max( F̃ + M_prev , Ĩ )              <span class="cmt">stabilizer — keeps exp() finite</span>
+I = exp( Ĩ − M )                       <span class="cmt">input gate</span>
+F = exp( F̃ + M_prev − M )              <span class="cmt">forget gate</span>
+O = σ(Õ)        U = tanh(Ũ)
+
+N_t = F ⊙ N_prev + I                   <span class="cmt">normalizer</span>
+C_t = λ · (C_prev ⊙ F) + U ⊙ I         <span class="cmt">cell content</span>
+H_t = O ⊙ ( C_t / N_t )                <span class="cmt">the readable memory</span></div>
+
+<p>Four states are carried per location: <code>H</code> (output), <code>C</code> (content),
+<code>N</code> (normalizer), <code>M</code> (log-space stabilizer). All start at zero, which makes the
+first frame's output well defined as <code>O ⊙ U</code>. Input weights carry a bias; recurrent weights
+do not.</p>
+
+<h4>Two experimental knobs live inside this cell</h4>
+
+<ul>
+  <li><strong><code>--memory-decay λ</code></strong> (default 1.0 = off). λ multiplies only the content
+  <em>carried over</em> from the previous frame; what is written this frame is untouched. It implements a
+  clean forgetting rate that is independent of what the gates decide to do. Setting λ = 1 recovers the
+  original xLSTM equation exactly.</li>
+  <li><strong><code>--memory-noise-std</code></strong> (default 0 = off). Gaussian noise added to the cell
+  content, scaled by the same normalizer that divides <code>C</code> — so the noise level is expressed in
+  the units the readout actually sees and cannot blow up when the normalizer is near zero. The perturbed
+  content <em>is</em> carried forward, so the corruption compounds across frames, as a memory noise model
+  should.</li>
+</ul>
+
+<p>Two alternative cells exist for ablations: <code>layernorm_lstm</code> (carries only H and C, normalizes
+the content) and <code>softmax_head</code> (a categorical state that is both the memory and the readout).
+Every VDA result reported uses <code>xlstm</code>.</p>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 7 ══════════════════════════════════ -->
+<h2 id="heads"><span class="num">Section 7</span>Deciding — actor and critic</h2>
+
+<p>The spatial structure is deliberately dropped at the decision stage. The memory <code>(B, N, d_mem)</code>
+is flattened to a single vector of length <code>N · d_mem</code>, and two independent networks read it.
+Neither has any notion of location; if the agent's decisions are spatially sensitive, that sensitivity
+had to be built upstream.</p>
+
+<p>Both heads are the same trunk — three fully connected layers of 256 units with ELU activations — and
+differ only in what they emit:</p>
+
+<ul>
+  <li><strong>Actor</strong> → 2 logits, softmaxed into P(wait) and P(declare). The output bias is
+  initialized to <code>[0.0, −1.5]</code>, which makes the untrained agent strongly prefer waiting. Without
+  this the agent presses constantly at the start, every trial ends at frame 0, and it never sees a stimulus
+  to learn from.</li>
+  <li><strong>Critic</strong> → 2 actions × 5 quantiles. Rather than a single expected value, it predicts
+  five points of the return <em>distribution</em>, at quantile levels 0.1, 0.3, 0.5, 0.7, 0.9. The state
+  value is the policy-weighted mixture: <code>V_dist = Σ_a π(a) · Q_dist(a)</code>, and its mean is the
+  scalar value.</li>
+</ul>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 8 ══════════════════════════════════ -->
+<h2 id="jepa"><span class="num">Section 8</span>The prediction loss</h2>
+
+<p>Reward alone is a thin training signal in this task: one scalar, once per trial, on a problem that
+requires holding a cue across a blank frame. A self-supervised auxiliary loss supplies dense, per-frame
+gradient by asking the model to <strong>predict its own future memory state</strong>.</p>
+
+<p>The scheme is DINO-style self-distillation applied along time (a V-JEPA arrangement):</p>
+
+<ol>
+  <li>A <strong>teacher</strong> copy of the network is maintained as an exponential moving average of the
+  student, with its own decay (0.996) kept separate from the reinforcement-learning target network.</li>
+  <li>Both run the same trial. A small head maps each location's memory state to
+  <strong>4 groups of 256 logits</strong>, each group softmaxed independently — so each location emits four
+  separate categorical codes rather than one flat distribution.</li>
+  <li>The teacher's distribution at frame <em>t+1</em> is centred (by a running mean) and sharpened
+  (temperature 0.04 → 0.07 over 300 iterations). The student's distribution at frame <em>t</em> is softened
+  (temperature 0.1). The loss is the cross-entropy between them.</li>
+  <li>The running centre is updated as an EMA (momentum 0.9) — the standard guard against the collapse
+  where every state maps to the same code.</li>
+</ol>
+
+<p>Weight: <code>--jepa-coef 0.5</code> in every VDA run. A same-time ablation (predict the present rather
+than the future) is available via <code>--jepa-same-time</code>.</p>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 9 ══════════════════════════════════ -->
+<h2 id="training"><span class="num">Section 9</span>How it is trained</h2>
+
+<p>Reinforcement learning, but not PPO despite the file name. The actor is updated by a
+<strong>PAC/MPO</strong> rule and the critic by <strong>quantile regression</strong>, both against a
+time-lagged target copy of the network, with prioritized replay of whole episodes.</p>
+
+<h3>One iteration</h3>
+
+<ol>
+  <li><strong>Collect.</strong> Run 8 complete trials, one at a time, carrying the recurrent state within
+  each. Actions are <em>sampled</em> from the policy, not taken greedily.</li>
+  <li><strong>Replay.</strong> Draw 4 past episodes from a 1,000-episode prioritized buffer and append
+  them to the batch. Priority is the episode's mean critic loss; sampling exponent α = 0.6; the importance
+  weight exponent β anneals 0.4 → 1.0 across the run.</li>
+  <li><strong>Update.</strong> Four gradient passes over the combined batch of 12 episodes.</li>
+  <li><strong>Track.</strong> Update the target network, the JEPA teacher, and the replay priorities.</li>
+</ol>
+
+<h3>The losses</h3>
+
+<div class="eq">L = L_actor  +  0.5 · L_critic  −  0.01 · entropy  +  0.5 · L_jepa</div>
+
+<p><strong>Critic.</strong> A one-step distributional TD target,
+<code>r_t + γ · V_dist(s_{t+1}) · (1 − done)</code>, bootstrapped from the <em>target</em> network so the
+goalposts do not move within an update. The loss is quantile Huber (κ = 1.0) over all 25 quantile pairs.</p>
+
+<p><strong>Actor.</strong> The MPO expectation step has a closed form over two discrete actions:</p>
+
+<div class="eq">q(a|s) ∝ exp[ log π_target(a|s)  +  Q̄(s,a) / η ]        <span class="cmt">η = 0.1</span>
+
+L_actor = (1 − α) · ( −Σ_a q(a|s) log π(a|s) )   <span class="cmt">fit the improved policy</span>
+        +      α  · ( −log π(a_t|s) )            <span class="cmt">α = 0.1, behaviour cloning</span></div>
+
+<p>The reference policy is the lagged target, not the current policy — that is the stabilizer. The
+behaviour-cloning term anchors the update to actions actually taken.</p>
+
+<h3>Stabilizers that matter in practice</h3>
+
+<ul>
+  <li><strong>Burn-in.</strong> For the first 20 iterations the agent is <em>forced</em> to wait every
+  frame. Every trial runs to full length, and only the critic and representation train. This warms up the
+  value function on complete trajectories before the policy is allowed to truncate them.</li>
+  <li><strong>Two-stage gradient clipping.</strong> A per-element clip first (guarding against a single
+  huge gradient producing an infinite norm), then a global L2 clip at 0.5. If the norm is still
+  non-finite the step is dropped and counted, never silently applied.</li>
+  <li><strong>EMA target.</strong> θ′ ← 0.995·θ′ + 0.005·θ every iteration, replacing periodic hard copies.</li>
+  <li><strong>Masked padding.</strong> Trials that end early are padded to 7 frames by repeating the last
+  real frame — not with black — so the recurrent encoder settles rather than drifting. A validity mask
+  zeroes those steps in every loss.</li>
+</ul>
+
+<h3>Every hyperparameter</h3>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Group</th><th>Setting</th><th class="num-col">Value</th></tr></thead>
+<tbody>
+<tr><td rowspan="5">Optimization</td><td>Learning rate (Adam)</td><td class="num-col">3 × 10⁻⁴</td></tr>
+<tr><td>Gradient passes per batch</td><td class="num-col">4</td></tr>
+<tr><td>Gradient norm clip</td><td class="num-col">0.5</td></tr>
+<tr><td>Episodes per iteration</td><td class="num-col">8 fresh + 4 replayed</td></tr>
+<tr><td>Iterations</td><td class="num-col">20,000</td></tr>
+<tr><td rowspan="4">Reinforcement learning</td><td>Discount γ</td><td class="num-col">0.95</td></tr>
+<tr><td>Critic quantiles / Huber κ</td><td class="num-col">5 / 1.0</td></tr>
+<tr><td>MPO temperature η / BC blend α</td><td class="num-col">0.1 / 0.1</td></tr>
+<tr><td>Target EMA decay</td><td class="num-col">0.995</td></tr>
+<tr><td rowspan="4">Replay</td><td>Buffer capacity (episodes)</td><td class="num-col">1,000</td></tr>
+<tr><td>Priority exponent α</td><td class="num-col">0.6</td></tr>
+<tr><td>Importance exponent β</td><td class="num-col">0.4 → 1.0</td></tr>
+<tr><td>Priority clip</td><td class="num-col">50.0</td></tr>
+<tr><td rowspan="5">JEPA</td><td>Loss weight</td><td class="num-col">0.5</td></tr>
+<tr><td>Heads × prototypes</td><td class="num-col">4 × 256</td></tr>
+<tr><td>Teacher EMA / centre momentum</td><td class="num-col">0.996 / 0.9</td></tr>
+<tr><td>Student temperature</td><td class="num-col">0.1</td></tr>
+<tr><td>Teacher temperature</td><td class="num-col">0.04 → 0.07 over 300 iters</td></tr>
+<tr><td rowspan="4">Task</td><td>Frames per trial</td><td class="num-col">7</td></tr>
+<tr><td>Change frame</td><td class="num-col">5 (fixed)</td></tr>
+<tr><td>Orientation noise σ</td><td class="num-col">5°</td></tr>
+<tr><td>Curriculum θ: start / step / floor</td><td class="num-col">65° / −3° per cleared window / 8°</td></tr>
+<tr><td rowspan="3">Other</td><td>Entropy bonus</td><td class="num-col">0.01</td></tr>
+<tr><td>Burn-in (forced wait)</td><td class="num-col">20 iterations</td></tr>
+<tr><td>Recurrent width d_mem</td><td class="num-col">128</td></tr>
+</tbody>
+</table>
+<caption>Defaults live in <code>config/default.json</code>; every one is overridable from the command line, and the exact argument vector used for a run is written to <code>launch_manifest.json</code> beside its checkpoints.</caption>
+</div>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 10 ══════════════════════════════════ -->
+<h2 id="sizes"><span class="num">Section 10</span>Sizes, shapes, and parameter counts</h2>
+
+<p>Computed directly from the constructor, for the configurations actually used:</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr>
+  <th>Configuration</th><th class="num-col">Tokens</th><th class="num-col">Token width</th>
+  <th class="num-col">Readout</th><th class="num-col">Encoder</th><th class="num-col">Router + memory</th>
+  <th class="num-col">Heads</th><th class="num-col">JEPA</th><th class="num-col">Total</th>
+</tr></thead>
+<tbody>
+<tr><td>vda4 · crossattn1 · 2×2</td><td class="num-col">4</td><td class="num-col">140</td><td class="num-col">512</td><td class="num-col">593,928</td><td class="num-col">232,368</td><td class="num-col">528,908</td><td class="num-col">854,272</td><td class="num-col"><strong>2,209,476</strong></td></tr>
+<tr><td>vda16 · crossattn1 · 4×4</td><td class="num-col">16</td><td class="num-col">152</td><td class="num-col">2,048</td><td class="num-col">593,928</td><td class="num-col">252,096</td><td class="num-col">1,315,340</td><td class="num-col">854,272</td><td class="num-col"><strong>3,015,636</strong></td></tr>
+<tr><td>vda16 · affine_ew · 4×4</td><td class="num-col">16</td><td class="num-col">152</td><td class="num-col">2,048</td><td class="num-col">593,928</td><td class="num-col">241,200</td><td class="num-col">1,315,340</td><td class="num-col">854,272</td><td class="num-col"><strong>3,004,740</strong></td></tr>
+<tr><td>vda4 · crossattn1 · 10×10 tokens</td><td class="num-col">100</td><td class="num-col">236</td><td class="num-col">12,800</td><td class="num-col">593,928</td><td class="num-col">414,384</td><td class="num-col">6,820,364</td><td class="num-col">854,272</td><td class="num-col"><strong>8,682,948</strong></td></tr>
+<tr><td>vda4 · affine (matrix) · 2×2</td><td class="num-col">4</td><td class="num-col">140</td><td class="num-col">512</td><td class="num-col">593,928</td><td class="num-col">1,487,884</td><td class="num-col">528,908</td><td class="num-col">854,272</td><td class="num-col"><strong>3,464,992</strong></td></tr>
+</tbody>
+</table>
+<caption>All at d_mem = 128 with the convolutional front-end and JEPA enabled. The encoder count is identical everywhere — it is one shared network applied per tile, so it does not grow with the grid.</caption>
+</div>
+
+<p>Two things are worth reading off this table. First, the routing families are within 0.4% of each other
+in size at matched settings — the comparison between them is not a comparison of capacity. Second, the
+cost of finer discretization falls almost entirely on the <em>heads</em>: going from 4 to 100 tokens
+multiplies the flattened readout by 25, and the two 256-unit trunks grow with it. The perceptual and
+recurrent machinery barely changes.</p>
+
+<h4>Tensor shapes through one frame</h4>
+
+<div class="eq">frame        (B, 3, S, S)              S = 50, 75, or 100
+tokens X     (B, N, 128 + N + 8)
+attention    (B, N, 2N)   cross-attention   |   (B, N, N)   affine
+routed Z     (B, N, d)
+memory H     (B, N, 128)
+readout      (B, N · 128)
+actor        (B, 2)         critic  (B, 2, 5)</div>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 11 ══════════════════════════════════ -->
+<h2 id="intervention"><span class="num">Section 11</span>The causal lever</h2>
+
+<p>Everything above is observational. The reason the architecture is shaped the way it is — one token per
+location, a fixed row-major index, a raw one-hot position code — is so that attention can be
+<strong>intervened on</strong> rather than merely watched.</p>
+
+<p>The hook is deliberately minimal. Inside every routing module, immediately before the softmax, one
+line adds a constant to the attention score of a chosen key:</p>
+
+<div class="eq">scores[..., j] += b        <span class="cmt">then softmax as usual</span></div>
+
+<p>Nothing else changes: no weights are edited, no trial is altered, no gradients are involved. The bias
+is parameterized by a dose α ∈ [0, 1]:</p>
+
+<div class="eq">b = 6.0 · (2α − 1)
+
+α = 0.0  →  b = −6   <span class="cmt">suppress this location</span>
+α = 0.5  →  b =  0   <span class="cmt">no manipulation (the natural condition)</span>
+α = 1.0  →  b = +6   <span class="cmt">boost this location</span></div>
+
+<p>Under cross-attention, a "location" is two keys — the visual key <em>j</em> and the memory key
+<em>N + j</em> — and both receive the bias, so the manipulation targets the place rather than the stream.
+Under affine routing there is one key per location. The clamp is switched on at frame 5 (the change
+frame) and held through the end of the trial.</p>
+
+<h3>The rescue experiment, as an illustration</h3>
+
+<p>The design that this hook makes possible: take <strong>invalid</strong> trials — where the cue pointed
+one way and the change happened somewhere else, the condition the agent is worst at — and apply the bias
+at three different places, holding everything else fixed.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Target of the bias</th><th>Role</th><th>Prediction if attention is causal</th></tr></thead>
+<tbody>
+<tr><td>The true change location</td><td>The test</td><td>Suppressing it should destroy detection; boosting it should restore it</td></tr>
+<tr><td>The cued (wrong) location</td><td>Negative control</td><td>Should not rescue — the change is not there</td></tr>
+<tr><td>A third, irrelevant location</td><td>Specificity control</td><td>Should not rescue — it is spatially unrelated</td></tr>
+</tbody>
+</table>
+<caption>300 trials per condition; a response counts only at frame 5 or 6; sensitivity and criterion are decomposed separately so a change in hit rate is never mistaken for a change in evidence.</caption>
+</div>
+
+<p>The measured result on the VDA16 cross-attention checkpoint: detection on invalid trials falls from
+51% to 7% under suppression and rises to 95% under boost, closing 92% of the gap to the valid-cue
+ceiling — while neither control location reproduces it. That double dissociation, spatially specific
+in both directions, is the headline causal result of the manuscript.</p>
+
+<div class="note">
+  <span class="lbl">Discipline around this tool</span>
+  <p>The intervention script introduces no model code. It composes primitives that already existed and
+  were already tested: the graded key bias, forced-location trial generation, and the signal-detection
+  reduction. It also refuses to run against a checkpoint whose SHA-256 does not match its registered
+  value — a missing or altered checkpoint is recorded in the manifest as <em>blocked</em>, never quietly
+  skipped. Two arms of the original design (VDA9, and parts of the fixed-grid family) are recorded as
+  blocked for exactly this reason.</p>
+</div>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 12 ══════════════════════════════════ -->
+<h2 id="repro"><span class="num">Section 12</span>Reproducing a run</h2>
+
+<p>Training a checkpoint is a single command. The canonical VDA16 cross-attention run:</p>
+
+<div class="eq">python train_rl.py \
+  --task vda16 --T 7 --min-change-time 5 --max-change-time 5 \
+  --cell xlstm --feedback crossattn1 --memory-decay 1.0 \
+  --conv-frontend --patch-grid-rows 4 --patch-grid-cols 4 \
+  --jepa-coef 0.5 --d-mem 128 --curriculum \
+  --init-mode fresh --iters 20000 --schedule-final-iteration 19999 \
+  --episodes-per-iter 8 --save-every 50 --log-every 1 \
+  --seed 0 --device cuda --checkpoint-dir &lt;OUT&gt;</div>
+
+<p>Its affine counterpart is the same line with <code>--feedback affine_ew</code>. The discretization
+experiment keeps <code>--task vda4</code> — identical pixels — and changes only
+<code>--patch-grid-rows/-cols</code> to 2, 4, or 10.</p>
+
+<h4>What a run writes</h4>
+
+<ul>
+  <li><code>launch_manifest.json</code> — the full argument vector, interpreter path, launcher script, and
+  a timestamped run identifier, written <em>before</em> training starts.</li>
+  <li><code>metrics.csv</code> — one row per iteration, flushed immediately: every loss term, gradient
+  norm, skipped-step count, replay buffer state, rolling accuracy, and current curriculum θ.</li>
+  <li><code>rvit_plus_rl_latest.pt</code> / <code>..._final.pt</code> — model, optimizer, target network,
+  JEPA teacher, RNG state for every backend, and the environment's curriculum state.</li>
+  <li><code>train.log</code> — the console transcript.</li>
+</ul>
+
+<p>Resumption is contract-checked, not best-effort. <code>load_training_state_dict</code> refuses a
+checkpoint whose environment configuration differs from the live environment in any field, whose
+curriculum settings differ, or whose θ falls outside the configured bounds. The metrics schema must match
+before a resumed run is allowed to append. A run that cannot be resumed exactly fails loudly instead of
+continuing on slightly different terms.</p>
+
+<h4>What counts as a completed checkpoint</h4>
+
+<p>For a run to be admitted as evidence: the trainer must have exited cleanly; <code>metrics.csv</code>
+must contain exactly contiguous finite rows for iterations 0 through 19,999; final and latest checkpoints
+must exist and be semantically equal; schema, config, and provenance validation must pass; and local and
+remote SHA-256 values must match. Only then does the checkpoint run the held-out evaluator — 300
+psychometric trials, 128 attention trials, and 250 intervention trials per condition, on trials the
+training run never saw.</p>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 13 ══════════════════════════════════ -->
+<h2 id="choices"><span class="num">Section 13</span>Why each choice was made</h2>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Choice</th><th>Alternative</th><th>Reason</th></tr></thead>
+<tbody>
+<tr><td>One token per attendable location</td><td>Fine anonymous ViT patches</td><td>Makes the attention map readable <em>and</em> writable at a named place — the precondition for every causal experiment here</td></tr>
+<tr><td>One-hot position codes</td><td>Learned positional embeddings</td><td>The spatial index stays literal, so a key index means a place with no decoding step</td></tr>
+<tr><td>Convolutional front-end trained end to end</td><td>The original from-scratch VAE encoder</td><td>The VAE was the perception bottleneck: the agent learned to press but never learned <em>when</em>, and collapsed to premature responding</td></tr>
+<tr><td>GroupNorm</td><td>BatchNorm</td><td>Rollout runs at batch size 1; batch statistics are unreliable there and differ between train and eval</td></tr>
+<tr><td>RMSNorm on the pooled embedding</td><td>LayerNorm</td><td>Mean subtraction would attenuate a uniform colour offset — the value cue's entire carrier</td></tr>
+<tr><td>Identity initialization of the routers</td><td>Zero initialization of the gain</td><td>A zero gain makes the modulated features vanish and attention dies at step one</td></tr>
+<tr><td>Distributional (quantile) critic</td><td>Scalar value head</td><td>Returns here are genuinely multi-modal — {0, 1, 3, 5} depending on cue colour and outcome — and a mean is a poor summary of that</td></tr>
+<tr><td>Lagged target as the MPO reference</td><td>The current policy</td><td>Stops the improved policy from chasing its own tail; the main stabilizer for a bootstrapped recurrent actor-critic</td></tr>
+<tr><td>Forced-wait burn-in</td><td>Training the actor from iteration 0</td><td>Otherwise the agent terminates every trial at frame 0 and never observes a stimulus</td></tr>
+<tr><td>Action bias <code>[0, −1.5]</code></td><td>Zero bias</td><td>Same failure mode, addressed at initialization</td></tr>
+<tr><td>Self-supervised prediction loss</td><td>Reward only</td><td>One scalar per trial is too thin to shape a recurrent memory across a blank delay frame</td></tr>
+<tr><td>Padding with the last real frame</td><td>Padding with black</td><td>Black padding drives the recurrent state somewhere meaningless before the loss mask can help</td></tr>
+<tr><td>Decay applied only to carried content</td><td>Decaying the whole cell</td><td>Keeps "forgetting rate" separable from "how much was just written"</td></tr>
+<tr><td>Memory noise scaled by the normalizer</td><td>Raw additive noise</td><td>Makes the noise level meaningful in readout units and prevents blow-up when the normalizer is small</td></tr>
+</tbody>
+</table>
+</div>
+
+<hr class="sec">
+
+<!-- ══════════════════════════════════ 14 ══════════════════════════════════ -->
+<h2 id="files"><span class="num">Section 14</span>Where everything lives</h2>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Path</th><th>Contents</th></tr></thead>
+<tbody>
+<tr><td><code>model.py</code></td><td><code>RViTPaperModel</code> — assembles front-end, encoder, heads; defines <code>rl_step</code> and <code>forward_rl_sequence</code></td></tr>
+<tr><td><code>conv_frontend.py</code></td><td>The SE-ResNet tile encoder and token assembly</td></tr>
+<tr><td><code>paper_encoder.py</code></td><td>Every routing family, the xLSTM and alternative cells, and <code>RecurrentViTxLSTM</code> which wires them together</td></tr>
+<tr><td><code>paper_heads.py</code></td><td>Actor, quantile critic, JEPA prediction head</td></tr>
+<tr><td><code>ppo.py</code></td><td>Episode collection, prioritized replay, the PAC/MPO + quantile update, the training loop, and the checkpoint contract</td></tr>
+<tr><td><code>train_rl.py</code></td><td>Command-line entry point; resolves task, grids, and configuration</td></tr>
+<tr><td><code>envs/base.py</code></td><td>Trial timeline, cue and Gabor rendering, reward scoring, curriculum</td></tr>
+<tr><td><code>envs/tasks.py</code>, <code>envs/__init__.py</code></td><td>The fourteen environment subclasses and their registry</td></tr>
+<tr><td><code>config/default.json</code></td><td>Default hyperparameters</td></tr>
+<tr><td><code>vda_sweep/vda_core.py</code></td><td>Evaluation primitives: forced-location trial generation, the graded clamp, rollout helpers</td></tr>
+<tr><td><code>analysis/change_location_intervention.py</code></td><td>The rescue experiment of Section 11</td></tr>
+<tr><td><code>scripts/launch_*.ps1</code>, <code>experiments/*/</code></td><td>Exact launchers, one per run, each writing its own manifest</td></tr>
+<tr><td><code>reports/vda_series/manuscript/main.tex</code></td><td>The manuscript these experiments feed</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note blue" style="margin-top:34px">
+  <span class="lbl">One sentence, if you only keep one</span>
+  <p>A shared tile encoder turns each frame into one token per place; the previous frame's memory decides
+  how those tokens are routed; an xLSTM keeps one memory per place; a flat readout decides whether to
+  press — and because the routing is indexed by place, we can reach in mid-trial, bias attention at any
+  location we choose, and measure what breaks.</p>
+</div>
+
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "active_indices": [
+    0,
+    3
+  ],
+  "cue_configurations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "cue_index": 0,
+  "displayed_validity": 0.25,
+  "displayed_validity_curve": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "evidence_class": "task-derived schematic",
+  "figure_id": "M1",
+  "outputs": {
+    "pdf": "m1_task_vda2.pdf",
+    "png": "m1_task_vda2.png"
+  },
+  "realized_cue_probability_curve": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "realized_target_distribution": [
+    0.25,
+    0.0,
+    0.0,
+    0.75
+  ],
+  "schema_version": 2,
+  "seed": 0,
+  "task": {
+    "active_count": 2,
+    "grid": [
+      2,
+      2
+    ],
+    "image_size": 50,
+    "lineage": "historical",
+    "name": "vda2",
+    "probe_location": null,
+    "token_count": 4,
+    "validity_mode": "exact_excluding_cue",
+    "value_cues": true
+  },
+  "timeline_frames": 7
+}

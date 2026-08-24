@@ -1,0 +1,52 @@
+{
+  "artifacts": [
+    {
+      "bytes": 29468,
+      "path": "matched_width_summary.pdf",
+      "role": "publication figure PDF",
+      "sha256": "dafba8a4e721a02c56ef0e9703c1f555909aefbdc2fab238309b2018bc1a2628",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15/figures/matched_width_summary.pdf"
+    },
+    {
+      "bytes": 173192,
+      "path": "matched_width_summary.svg",
+      "role": "publication figure SVG",
+      "sha256": "f7622adae3a63edfe39efeeca9dd061a4cc831eda7371c8532bea7425437feb3",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15/figures/matched_width_summary.svg"
+    },
+    {
+      "bytes": 667935,
+      "path": "matched_width_summary.png",
+      "role": "publication figure PNG",
+      "sha256": "74d1c203452553e1af0b2c628075ba3750ee6f737ac06bc260db190b87944b7b",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15/figures/matched_width_summary.png"
+    },
+    {
+      "bytes": 21964,
+      "path": "matched_width_summary.json",
+      "role": "machine-readable summary",
+      "sha256": "15dadb9e2e290918e3dc2bb0af92d1170871eb8fedaea04796615f3bfda4fa5c",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15/figures/matched_width_summary.json"
+    },
+    {
+      "bytes": 2210,
+      "path": "MATCHED_WIDTH_PRODUCTION_MANIFEST.json",
+      "role": "v15 production manifest snapshot",
+      "sha256": "3ded3023a0cd81a344487807e11d8a06fa46b7c29cf7f5f499ef5ac659ff5e24",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15/MANIFEST.json"
+    },
+    {
+      "bytes": 0,
+      "path": "Icon\r",
+      "role": "manifested zero-byte Finder housekeeping sidecar",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": null
+    }
+  ],
+  "classification": "non-self-contained publication projection of matched_width_20260712_production_v15",
+  "dependency_boundary": "Reconstruction and durable read-only re-audit require the immutable upstream battery, source graph, checkpoints, and runtime named by production v15.",
+  "inventory_contract": "Exact inventory is these six artifacts plus PUBLICATION_MANIFEST.json; all must be regular single-link files with no symlinks or special files.",
+  "production_manifest_sha256": "3ded3023a0cd81a344487807e11d8a06fa46b7c29cf7f5f499ef5ac659ff5e24",
+  "production_root": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15",
+  "schema_version": 1
+}

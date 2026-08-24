@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "artifact": "first-wave historical environment schematic",
+  "task": "vda4",
+  "lineage": "historical task specification",
+  "grid": [
+    2,
+    2
+  ],
+  "model_tokens": 4,
+  "active_items": 4,
+  "cue_index": 0,
+  "valid_change_index": 0,
+  "invalid_change_index": 3,
+  "cue_color": "red",
+  "change_magnitude_degrees": 56.0,
+  "panels": [
+    "red cue at S1",
+    "fully occupied array",
+    "valid change at S1",
+    "invalid change at bottom-right"
+  ],
+  "seed": 1701,
+  "overlay_disclosure": "S-labels and colored borders are explanatory overlays, not observation pixels",
+  "outputs": {
+    "pdf": "first_wave_environment_vda4.pdf",
+    "svg": "first_wave_environment_vda4.svg",
+    "png": "first_wave_environment_vda4.png"
+  }
+}

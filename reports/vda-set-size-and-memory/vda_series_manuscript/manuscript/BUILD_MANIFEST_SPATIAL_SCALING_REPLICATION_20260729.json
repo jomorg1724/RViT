@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "created_at_utc": "2026-07-29T05:21:20.5742724Z",
+  "document": "VDA Set Size",
+  "update_scope": "verified cross-attention 4-token versus 100-token endpoint replication across training seeds 0 and 1",
+  "evidence_boundary": {
+    "admitted": "terminal independently validated checkpoints and held-out evaluation artifacts only",
+    "training_accuracy_used_as_attention_evidence": false,
+    "scientific_conclusion": "Across two cross-attention seeds, finer spatial discretization reproduces lower quadrant-level target/change concentration and a collapsed invalid reorientation contrast. Behavioral scaling directions disagree, and the smaller response-rate disable contrast is ceiling-limited and does not replicate under sensitivity correction.",
+    "not_supported": [
+      "a population-level scaling law",
+      "an architecture-independent monotonic processing-stream law",
+      "causal isolation of token count from spatial resolution and parameter count",
+      "a biological equivalence claim"
+    ]
+  },
+  "source_evidence": {
+    "seed1_grid2x2_evaluation_manifest": {
+      "path": "RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727/vda4_crossattn1_grid2x2_seed1/MANIFEST.json",
+      "bytes": 2264,
+      "sha256": "054c7bac594cfad4fd8998093e282b3d6637d47f87898d1f5f2e634776227703",
+      "artifact_hashes_verified": 13,
+      "stdout_complete_marker": true,
+      "stderr_bytes": 0
+    },
+    "endpoint_replication_bundle": {
+      "path": "RViT_plus_paper_jepa_grid9/reports/vda_series/spatial_scaling_evaluation_production_20260727/endpoint_replication_s01/MANIFEST.json",
+      "bytes": 13038,
+      "sha256": "3c0acd3b024378984fc4dfc3ebaba0f6f3818d38fe866489721c6d92eb668ddb",
+      "source_evaluations": 4,
+      "source_artifacts": 52,
+      "hashes_verified": 66,
+      "semantic_and_integrity_checks": 2246,
+      "decoded_figures": 26,
+      "verifier_failures": 0
+    },
+    "replication_figure": {
+      "path": "reports/vda_series/figures/spatial_scaling/vda4_spatial_scaling_endpoint_replication_summary.pdf",
+      "bytes": 29322,
+      "sha256": "8e65d1f0833f82b1dc818fb0fb0c0eaa217e7b7397996801153c8d63175d5a61",
+      "byte_identical_to_verified_bundle_figure": true
+    }
+  },
+  "manuscript_source": {
+    "path": "reports/vda_series/manuscript/main.tex",
+    "bytes": 78007,
+    "sha256": "92de3e50a2322dd5d013b7cfaaa349ef934a46248d551d891f42a9123a5791b2"
+  },
+  "build": {
+    "isolated_output_directory": "reports/vda_series/manuscript/tmp/pdfs/vda_set_size_endpoint_replication_20260729",
+    "engine": "MiKTeX-XeTeX 4.18 (MiKTeX 26.5)",
+    "command": "xelatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory=<isolated_output_directory> main.tex",
+    "passes": 3,
+    "pass3_stdout": {
+      "bytes": 49784,
+      "sha256": "b6f7d58f788c779a755ec6bf32c78bf294cb22922d82511edfb85c0a42be35a4"
+    },
+    "fatal_errors": 0,
+    "undefined_references": 0,
+    "overfull_boxes": 0,
+    "underfull_boxes": 111,
+    "underfull_box_disposition": "non-blocking line-break diagnostics; visual inspection found no clipped or overlapping content",
+    "temporary_environment_repair": {
+      "reason": "the disposable MiKTeX cache had been partially cleaned between builds",
+      "verification": "miktex packages verify",
+      "action": "restored 83 verifier-identified packages, updated the binary set consistently, rebuilt the xelatex format, and re-ran package verification",
+      "final_package_verification": "All packages are correctly installed."
+    }
+  },
+  "pdf_qa": {
+    "poppler_version": "26.05.0",
+    "page_count": 30,
+    "page_size_points": "612 x 792",
+    "render_dpi": 110,
+    "rendered_pages": 30,
+    "contact_sheets_inspected": 8,
+    "all_pages_visually_inspected": true,
+    "new_replication_figure_page": 11,
+    "new_replication_figure_legible": true,
+    "clipping_or_overlap_found": false,
+    "stale_in_progress_language_found": false
+  },
+  "canonical_outputs": {
+    "main.pdf": {
+      "path": "reports/vda_series/manuscript/main.pdf",
+      "bytes": 3503421,
+      "sha256": "d5dfa2b8e9ee69b1a18e361ccd63369a339f42e5cfdd5d8d9f6a8b7e29b6bf34"
+    },
+    "VDA_Set_Size.pdf": {
+      "path": "reports/vda_series/manuscript/VDA_Set_Size.pdf",
+      "bytes": 3503421,
+      "sha256": "d5dfa2b8e9ee69b1a18e361ccd63369a339f42e5cfdd5d8d9f6a8b7e29b6bf34"
+    },
+    "canonical_outputs_byte_identical": true,
+    "atomic_promotion_after_qa": true
+  }
+}

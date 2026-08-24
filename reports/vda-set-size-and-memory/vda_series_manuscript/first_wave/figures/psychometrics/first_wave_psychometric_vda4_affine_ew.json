@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "artifact": "first-wave psychometric response-rate curves",
+  "task": "vda4",
+  "feedback": "affine_ew",
+  "grid": [
+    2,
+    2
+  ],
+  "panel_count": 3,
+  "panels": [
+    "all cue proportions: valid change at S1",
+    "all cue proportions: invalid change at bottom-right",
+    "100% displayed validity: valid versus invalid change"
+  ],
+  "cue_color": "red",
+  "cue_index": 0,
+  "valid_change_index": 0,
+  "invalid_change_index": 3,
+  "displayed_validities": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "change_magnitudes_degrees": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    22.0,
+    26.0,
+    30.0
+  ],
+  "checkpoint_iteration": 19999,
+  "trials_per_point": 300,
+  "interval": "Wilson 95% binomial interval",
+  "source_cache": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/first_wave/data/psychometric_vda4_affine_ew.npz",
+  "source_cache_sha256": "04ef61215fca4e0de63b72d2e69a551646c2977d802b173403658bce494dacec",
+  "outputs": {
+    "pdf": "first_wave_psychometric_vda4_affine_ew.pdf",
+    "svg": "first_wave_psychometric_vda4_affine_ew.svg",
+    "png": "first_wave_psychometric_vda4_affine_ew.png"
+  }
+}

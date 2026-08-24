@@ -1,0 +1,273 @@
+{
+  "schema_version": 2,
+  "artifact": "first-wave cue-proportion attention maps on no-change trials",
+  "task": "vda4",
+  "feedback": "affine_ew",
+  "grid": [
+    2,
+    2
+  ],
+  "token_count": 4,
+  "figure_rows": 4,
+  "figure_columns": 7,
+  "attention_arrays": [
+    "spatial keys"
+  ],
+  "row_semantics": "displayed cue proportion",
+  "column_semantics": "logical timestep",
+  "displayed_validities": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "trial_filter": "no-change trials only",
+  "query_reduction": "arithmetic mean over all query patches",
+  "cue_index": 0,
+  "change_index": -1,
+  "cue_color": "red",
+  "change_frame": 5,
+  "change_present": false,
+  "change_magnitude_degrees": 0.0,
+  "checkpoint_iteration": 19999,
+  "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+  "checkpoint_sha256": "2341026363e6e1d2115a34a8ad9a91a73e385aab4a223aace763529e4047e085",
+  "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+  "dependency_hashes": {
+    "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+    "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+    "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+    "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+    "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+    "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+    "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+  },
+  "runtime_versions": {
+    "gymnasium": "1.3.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6",
+    "pillow": "12.2.0",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.13",
+    "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+    "scipy": "1.17.1",
+    "torch": "2.12.0"
+  },
+  "device": "cpu",
+  "evaluation_trials": 96,
+  "observed_max_attention_mass": 0.4850260615348816,
+  "color_scale": [
+    0.0,
+    0.4850260615348816
+  ],
+  "uniform_attention_baseline_per_key": 0.25,
+  "mean_attention_to_cue_by_proportion_timestep_and_source": [
+    [
+      [
+        0.24259549379348755
+      ],
+      [
+        0.4530688524246216
+      ],
+      [
+        0.36770525574684143
+      ],
+      [
+        0.28131741285324097
+      ],
+      [
+        0.2796986699104309
+      ],
+      [
+        0.28095850348472595
+      ],
+      [
+        0.3101549744606018
+      ]
+    ],
+    [
+      [
+        0.24259549379348755
+      ],
+      [
+        0.46645382046699524
+      ],
+      [
+        0.37321364879608154
+      ],
+      [
+        0.2819959819316864
+      ],
+      [
+        0.2840023636817932
+      ],
+      [
+        0.2875407338142395
+      ],
+      [
+        0.3216874599456787
+      ]
+    ],
+    [
+      [
+        0.24259549379348755
+      ],
+      [
+        0.48365816473960876
+      ],
+      [
+        0.37167906761169434
+      ],
+      [
+        0.28233981132507324
+      ],
+      [
+        0.2854568362236023
+      ],
+      [
+        0.29041874408721924
+      ],
+      [
+        0.3259006440639496
+      ]
+    ],
+    [
+      [
+        0.24259549379348755
+      ],
+      [
+        0.4850260615348816
+      ],
+      [
+        0.3734667897224426
+      ],
+      [
+        0.282421737909317
+      ],
+      [
+        0.28573572635650635
+      ],
+      [
+        0.2909833490848541
+      ],
+      [
+        0.32714369893074036
+      ]
+    ]
+  ],
+  "cue_attention_100_minus_25_percent_at_change_opportunity_by_source": [
+    0.010024845600128174
+  ],
+  "source_mass_by_proportion_timestep_and_source": [
+    [
+      [
+        0.9999999552965164
+      ],
+      [
+        0.9999997317790985
+      ],
+      [
+        1.0000002831220627
+      ],
+      [
+        0.9999998956918716
+      ],
+      [
+        1.0000000298023224
+      ],
+      [
+        1.0000000298023224
+      ],
+      [
+        0.9999999403953552
+      ]
+    ],
+    [
+      [
+        0.9999999552965164
+      ],
+      [
+        1.000000074505806
+      ],
+      [
+        1.0000001639127731
+      ],
+      [
+        1.0000000149011612
+      ],
+      [
+        0.9999999552965164
+      ],
+      [
+        0.9999999701976776
+      ],
+      [
+        0.9999999701976776
+      ]
+    ],
+    [
+      [
+        0.9999999552965164
+      ],
+      [
+        0.9999994784593582
+      ],
+      [
+        0.9999999701976776
+      ],
+      [
+        1.0
+      ],
+      [
+        1.0000000447034836
+      ],
+      [
+        0.9999998807907104
+      ],
+      [
+        1.0
+      ]
+    ],
+    [
+      [
+        0.9999999552965164
+      ],
+      [
+        1.0000001192092896
+      ],
+      [
+        0.9999999701976776
+      ],
+      [
+        1.0000000298023224
+      ],
+      [
+        0.9999999701976776
+      ],
+      [
+        0.9999999850988388
+      ],
+      [
+        0.9999999850988388
+      ]
+    ]
+  ],
+  "trial_level_attention_saved": true,
+  "source_cache": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda4_affine_ew.npz",
+  "source_cache_sha256": "564de2f9d306cce9fed9f99ac5f95dfa521aa3d326e77a83d2a43cd38525279a",
+  "attention_reduction": "Affine maps retain the single spatial-key array.",
+  "inference_boundary": "descriptive one-checkpoint cue-proportion contrast on matched no-change trials; attention weights are routing summaries, not biological attention measures",
+  "outputs": {
+    "pdf": "first_wave_attention_vda4_affine_ew.pdf",
+    "svg": "first_wave_attention_vda4_affine_ew.svg",
+    "png": "first_wave_attention_vda4_affine_ew.png"
+  },
+  "source_panel_outputs": {}
+}

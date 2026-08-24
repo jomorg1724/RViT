@@ -1,0 +1,102 @@
+{
+  "files": [
+    {
+      "bytes": 71571,
+      "path": "manuscript/main.tex",
+      "sha256": "c13429561f521a622b10bd6bc8d9cbce31f41ff5c79cb3e0305660617e28b221",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/main.tex"
+    },
+    {
+      "bytes": 2916923,
+      "path": "manuscript/main.pdf",
+      "sha256": "158c18e7b14a045e0ddd5c19cfd12eb9500247408b68b111fce3e0574aa54e2f",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/main.pdf"
+    },
+    {
+      "bytes": 10080,
+      "path": "manuscript/build_constituent_tables.py",
+      "sha256": "af989c56aec7e571bcd66d9efc69ffed6cb8f1347d5aecd6ad77ddc3105535d9",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/build_constituent_tables.py"
+    },
+    {
+      "bytes": 5829,
+      "path": "manuscript/build_tables.py",
+      "sha256": "7754be4d72ddd19f51d1b9b4265296267448256c92effaf53de68b77a17f689f",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/build_tables.py"
+    },
+    {
+      "bytes": 8221,
+      "path": "manuscript/build_manifest.py",
+      "sha256": "b983c82e0a317d85680e84c64f44e62019b41061b2eecb206215b7afde340ac3",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/build_manifest.py"
+    },
+    {
+      "bytes": 9062,
+      "path": "qa/prose_trigger_lint.txt",
+      "sha256": "25d876e1bcf2372b0a375dda8aa4ca149952ed46ceed41bce2ab06f37fd39946",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/qa/2026-07-12_integrated_prose_trigger_lint.txt"
+    },
+    {
+      "bytes": 3782,
+      "path": "qa/prose_trigger_disposition.md",
+      "sha256": "b4ea6b185eb180487d8ef16191c6c3b2204376fc3712e7207ddcc8362055e9ea",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/qa/2026-07-12_integrated_prose_trigger_disposition.md"
+    },
+    {
+      "bytes": 3036,
+      "path": "qa/visual_audit.md",
+      "sha256": "498a1f606834e44aaf3aa2b79805f8d2777911a217c31372bc36b942d7670930",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/qa/2026-07-12_matched_width_integrated_manuscript_visual_audit.md"
+    },
+    {
+      "bytes": 260,
+      "path": "qa/test_gate.txt",
+      "sha256": "0a69fff89304a003875efee7b3750370c76c699e6ac3c991a86e4ea149c2e254",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/qa/2026-07-12_final_161_test_gate.txt"
+    },
+    {
+      "bytes": 0,
+      "path": "manuscript/generated/Icon\r",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/generated/Icon\r"
+    },
+    {
+      "bytes": 1760,
+      "path": "manuscript/generated/matched_width_absolute_behavior.tex",
+      "sha256": "fe5bcdad68d732f656b6587075224a0756622eaf6ae12c5ac80b5501f2f596ff",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/generated/matched_width_absolute_behavior.tex"
+    },
+    {
+      "bytes": 2009,
+      "path": "manuscript/generated/matched_width_clamp_constituents.tex",
+      "sha256": "955e2f012eb8353dcf54885eecfd2a82e4e2409aa762a050c3dafbafbafb010b",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/generated/matched_width_clamp_constituents.tex"
+    },
+    {
+      "bytes": 9528,
+      "path": "manuscript/generated/matched_width_constituents.json",
+      "sha256": "0402a39623f319cf996d133512fdeef9744fd8371345b66deec66fb98aaa7498",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/generated/matched_width_constituents.json"
+    },
+    {
+      "bytes": 1406,
+      "path": "manuscript/generated/object_status_counts.tex",
+      "sha256": "ca1b1be1721de18b90b4fd51be5e408e04dd64f7a7c9dc5c2eb4cd2d8b50fabc",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/generated/object_status_counts.tex"
+    },
+    {
+      "bytes": 11839,
+      "path": "manuscript/generated/panel_coverage_table.tex",
+      "sha256": "977c67b081791a79c5be2fc41f88a582f3cfa546a4cd408ffff903a654f6cdbe",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/generated/panel_coverage_table.tex"
+    },
+    {
+      "bytes": 318,
+      "path": "manuscript/generated/status_summary.tex",
+      "sha256": "483b8322ccf3f5289fd5c9d9062fec55575d808bcdb71f0e7bfabd91b62a07e4",
+      "source": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/manuscript/generated/status_summary.tex"
+    }
+  ],
+  "immutable_after_creation": true,
+  "snapshot": "final_candidate_20260712_v1"
+}

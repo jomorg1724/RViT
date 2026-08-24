@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "role": "artifact",
+  "verdict": "APPROVE",
+  "reviewer_identity": {
+    "kind": "independent_subagent",
+    "delegation_id": "deleg_8266648e",
+    "task_index": 1,
+    "lens": "artifact"
+  },
+  "candidate": {
+    "snapshot": "final_candidate_20260712_v8",
+    "snapshot_manifest_sha256": "f9a2b05e6ae2cf2c3508cde71a8f0a3cb231247750f4635af9778818baa0c3c7",
+    "source_sha256": "19f8cbbd85d736b77263f273dccb15a2ac962f8d9f996e44cd829f6ce30a8f5d",
+    "pdf_sha256": "d1f87f402019f05158dbe3b3db451a3cab77494edb5c56c7b00e3c19cf6d30f7",
+    "build_manifest_sha256": "78deeca7e3cb73dabc4fcf5d5b5560da3d1e8cc63a9d97910a583ea0d5984ea2",
+    "ordered_render_set_sha256": "da6126545be97834fcadbab4fc87d68a606ae74bc32b450577249d0734852a81",
+    "page_count": 54
+  },
+  "artifact_manifest_sha256": "3ded3023a0cd81a344487807e11d8a06fa46b7c29cf7f5f499ef5ac659ff5e24",
+  "verification": {
+    "snapshot_verifier_verdict": "PASS"
+  },
+  "consequential_findings": [],
+  "limitations": [],
+  "files_modified": [],
+  "summary": "Fresh independent artifact audit approved the exact v15 inventory, strict manifest semantics, all hashes and sizes, lstat safety, M1/M2 provenance, panel and constituent identities, and binding to immutable candidate v8."
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "candidate": {
+    "snapshot": "final_candidate_20260712_v12_attention_fix",
+    "snapshot_manifest_sha256": "899ebd8bbc72f3fb0aea9c86d225740ebc1c2559918b7deaec6b36b250c676d7",
+    "source_sha256": "28ae6ecb4057ea32a7ac491f8f528100362e74e514a0953a1e68fc4b459bd5eb",
+    "pdf_sha256": "28fb82d7dcffcc1f34eb4a280d88a326de99ed7d456a42f0a1a23481bdd88e55",
+    "build_manifest_sha256": "83136a22dbd0cbbc99a3454c379c14f6596baf6fa585e62de699bcecaaacf61d",
+    "ordered_render_set_sha256": "3f5e2a10955f2598212b0bdad017bb1b4588031fc883feb70bf27c49a78b18c0",
+    "page_count": 56
+  },
+  "records": [
+    {
+      "role": "artifact",
+      "path": "reports/vda_series/qa/2026-07-12_attention_fix_v12_final_review_artifact.json",
+      "sha256": "dc4c3931fd14fd68a3e0049c696f90f080a64f7439991301887afe2a7c69d8b9"
+    },
+    {
+      "role": "feynman",
+      "path": "reports/vda_series/qa/2026-07-12_attention_fix_v12_final_review_feynman.json",
+      "sha256": "b03c3d9e22d06894961b5c33623792665d8fc8e33de1bc7528d87c59383c736c"
+    },
+    {
+      "role": "hawking",
+      "path": "reports/vda_series/qa/2026-07-12_attention_fix_v12_final_review_hawking.json",
+      "sha256": "09e5d3b73c0b8d73f2f952178ee67317c4e573e259147e2523e4b482880f7cca"
+    },
+    {
+      "role": "prose",
+      "path": "reports/vda_series/qa/2026-07-12_attention_fix_v12_final_review_prose.json",
+      "sha256": "8a615de9572cc6f194cb019f9ab29cda5ce53784cfa6279cd9064893287fc5fc"
+    },
+    {
+      "role": "thorne",
+      "path": "reports/vda_series/qa/2026-07-12_attention_fix_v12_final_review_thorne.json",
+      "sha256": "2788c4be673609559971ac3d7f5bff38e15781992c7a967d256f7e354486887c"
+    },
+    {
+      "role": "tyson",
+      "path": "reports/vda_series/qa/2026-07-12_attention_fix_v12_final_review_tyson.json",
+      "sha256": "926c50f1aec58020e0f9da08fe4dd5d9e42d2533e0ad2a3f0412925aeda4f0fc"
+    }
+  ]
+}

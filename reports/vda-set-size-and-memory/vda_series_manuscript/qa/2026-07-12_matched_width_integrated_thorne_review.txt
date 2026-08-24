@@ -1,0 +1,198 @@
+# Verdict: **REVISE**
+
+The manuscript is unusually disciplined about evidence classes and most newly integrated matched-width claims are numerically accurate and appropriately bounded. It is not ready to pass, however, because the integrated manuscript’s provenance closure is stale, and two method details materially affect interpretation of the decoder and clamp comparisons.
+
+## Strongest passage
+
+**“Matched-width behavioral, representational, and intervention battery,” `main.tex:317–337`, especially lines 319–324 and the boundary at 337.**
+
+This passage does the best Thorne-style work in the manuscript:
+
+- identifies the 12 checkpoint-bound shards and iteration-19999 checkpoints;
+- separates blocked, competence-gated, and admitted comparisons;
+- calls widths associations between separately trained checkpoints;
+- scopes the native-decoder warnings without contaminating clean PCA-128 results;
+- identifies t0 as structurally uninformative;
+- distinguishes key-logit bias from achieved attention;
+- limits causal interpretation to the evaluated checkpoint;
+- states that aggregate counts do not support paired intervals.
+
+The evidence boundary at line 337 is particularly strong: it keeps behavior, decodability, intervention causality, causal width effects, human capacity, and biological homology on separate inferential levels.
+
+## Three most consequential failures
+
+### 1. Critical — The claimed integrated build provenance is stale
+
+**Main-text locations**
+
+- **Methods and reproducibility:** `main.tex:385–393`, especially lines **387** and **393**
+- **Artifact locations:** `main.tex:419–434`, especially line **430**
+
+**Problem**
+
+Line 387 says the matched-width snapshots are admitted after exact-inventory and delayed independent audit. Line 393 says the build manifest records the source and artifact hashes and that the integrated revision passed a **154-test** scientific gate.
+
+The inspected `manuscript/BUILD_MANIFEST.json` does not close that integration:
+
+- `BUILD_MANIFEST.json:5` is dated **11 July**, before the stated 12 July matched-width freeze.
+- `BUILD_MANIFEST.json:30` records **“148 passed”**, not 154.
+- `BUILD_MANIFEST.json:33–109` contains no matched-width figure, sidecar, v8 production manifest, upstream manifest, builder, or independent-review record.
+- Its PDF record is for a 47-page earlier build (`BUILD_MANIFEST.json:6–12`).
+
+The matched-width `PRODUCTION_MANIFEST.json` authenticates the standalone summary tree, but it does not authenticate the current `main.tex`, integrated PDF, or manuscript QA. Its inventory also contains no persisted independent-review verdict. The supplied artifact verdict was **APPROVE_WITH_LIMITS**, but the manuscript never names that verdict or distinguishes it from the delayed exact-inventory pass.
+
+**Consequence**
+
+The scientific claims may be correct, but the manuscript’s assertion of final integrated provenance closure is not currently auditable. This is a direct contradiction in a provenance-first paper.
+
+**Minimum repair**
+
+After all semantic edits:
+
+1. rebuild the manuscript;
+2. rerun the stated 154-test gate;
+3. regenerate `BUILD_MANIFEST.json`;
+4. bind current `main.tex`, PDF, rendered-page QA, matched-width PDF/JSON, v8 `PRODUCTION_MANIFEST.json`, upstream manifest, summary builder, and review record;
+5. report separately:
+   - artifact verdict: **APPROVE_WITH_LIMITS**;
+   - delayed exact-inventory audit: **PASS**;
+   - the limits that remain active.
+
+---
+
+### 2. Important — Decoder sample size and label semantics are incompletely disclosed
+
+**Main-text locations**
+
+- **Design, admission, and estimands:** `main.tex:321`
+- **Heterogeneous width-associated differences:** `main.tex:328`
+- **Figure caption:** `main.tex:334`
+- **Discussion:** `main.tex:368,371`
+
+**Problem**
+
+The manuscript repeatedly states “900 samples per shard,” but that is the stored decoder-array size, not the effective sample size for every reported decoder:
+
+- change occurrence uses all **900** trials;
+- change location and `cued_change` are fitted only on the **450 change-present trials**;
+- `change_location` is the realized active-location class among change trials;
+- `cued_change` is cued-versus-uncued location among change trials, not a general “cued change versus everything else” label;
+- VDA1 location-conditioned labels are undefined.
+
+The producer snapshot makes this explicit: location labels are masked to change-present rows and folds are stratified on that subset. The upstream manifest likewise records `decoder_location_condition = "change-present trials only"`.
+
+Calling all panels “900 samples per shard” without the effective conditional support risks making the location probes appear twice as well-supported as they are. “Cued change” is also semantically ambiguous and partly redundant with a binary collapse of change location.
+
+**Consequence**
+
+Readers cannot reconstruct what information the probes decode or distinguish an event detector from a conditional spatial decoder. This is central to the manuscript’s representation-versus-mechanism boundary.
+
+**Minimum repair**
+
+Add an explicit decoder estimand paragraph and revise the caption:
+
+> Each shard contains 900 trials, balanced as 450 change-present and 450 no-change trials. Change-occurrence decoding uses all 900. Change-location and cued-versus-uncued decoding are conditional on the 450 change-present trials; individual uncued locations receive balanced support. These conditional labels are undefined for VDA1.
+
+Also rename the displayed category from **“cued change”** to something unambiguous such as **“cued versus uncued change location.”**
+
+---
+
+### 3. Important — The clamp is not intervention-equivalent across routing families
+
+**Main-text locations**
+
+- **Design, admission, and estimands:** `main.tex:323`
+- **Clamp-result comparison:** `main.tex:330`
+- **Figure caption:** `main.tex:334`
+- **Neuroscience correspondence:** `main.tex:356,360`
+- **Discussion/conclusion:** `main.tex:368,396`
+
+**Problem**
+
+The manuscript correctly says the clamp biases cued routing-key logits rather than achieved attention, but omits a consequential routing-specific difference:
+
+- affine routing biases the cued image/self key;
+- cross-attention biases both the cued image key **and** its corresponding memory key.
+
+Thus, the same numerical bias is not the same-dimensional intervention across routing families. Line 330 directly compares affine and cross-attention values at bias −6 and +6 without stating that target multiplicity and key semantics differ.
+
+Within-checkpoint causality remains valid: changing those specified logits causes the measured endpoint change in that checkpoint. Width contrasts within a routing family remain associative. But equal-bias magnitudes are not calibrated cross-routing doses and cannot support a mechanistic affine-versus-cross-attention comparison.
+
+**Consequence**
+
+The figure and prose can be read as if routing families underwent a common intervention. They did not.
+
+**Minimum repair**
+
+State the routing-specific targets in lines 323 and 334 and add:
+
+> Bias values are comparable across widths within a routing family, but not as equal achieved-allocation doses across routing families, because affine and cross-attention clamps target different key sets.
+
+In the figure, replace **“width difference-in-differences”** with **“d256–d128 checkpoint contrast in within-checkpoint clamp effect.”**
+
+## Structural edits
+
+1. **Insert a matched-width admission/estimand table after `main.tex:319`.**  
+   Columns should include task, routing, d128/d256 checkpoint status, pair status, decoder effective \(n\), warning disposition, clamp target, uncertainty available, and permitted inference. This would also expose that **both VDA2 routing-specific width pairs** are blocked; line 319 currently calls them singularly “the VDA2 pair.”
+
+2. **Separate scientific admissibility from publication closure in Methods.**  
+   Split line 387 into:
+   - checkpoint/run provenance;
+   - estimand and exclusion rules;
+   - artifact verdict and limits;
+   - exact-inventory and manuscript-build closure.
+
+3. **Make Figure 1 standalone-safe.**  
+   The caption is careful, but the graphic itself uses d256-minus-d128 and “width difference-in-differences” without visible separate-checkpoint or no-interval warnings. Add a short in-figure footer:
+   > Separately trained checkpoints; point estimates; no seed replication or paired intervals.
+
+4. **Define decoder labels before presenting decoder values.**  
+   The current sequence moves from PCA mechanics directly to numerical contrasts. Put the class definitions and effective sample support first.
+
+## Claims needing qualification
+
+- **`main.tex:326` and `396` — monotonic/universal width language.**  
+  Replace “do not follow one monotonic width rule” and “argue against a universal width ordering” with:
+  > The observed point estimates from five admitted checkpoint pairs do not provide evidence for a common width ordering.
+
+  Mixed signs in unreplicated, separately trained checkpoints do not positively identify heterogeneity beyond those selected checkpoints.
+
+- **`main.tex:319` — VDA2 inventory.**  
+  Change “The VDA2 pair is blocked” to:
+  > Both VDA2 routing-specific width pairs are blocked because the available d256 checkpoints have two tokens whereas the canonical d128 checkpoints have four.
+
+- **`main.tex:356,360` — criterion versus plotted evidence.**  
+  Clarify that the upstream battery computes both \(d'\) and criterion, while Figure 1 summarizes only \(d'\). The figure does not itself evidence the criterion trajectory.
+
+- **`main.tex:360` — Panichello and Buschman.**  
+  “Established with matched tasks and cross-validated geometry” is stronger than needed. Prefer:
+  > reported shared PFC population geometry across controlled attention and working-memory selection tasks.
+
+  This preserves the cited study’s regime and avoids turning one primate experiment into a domain-general biological law.
+
+- **`main.tex:358` — requirements for biological correspondence.**  
+  Change “would require” to “would require at least.” Event-aligned hit/miss trajectories and latency alignment would strengthen correspondence but would not alone establish anatomical or circuit homology.
+
+- **`main.tex:387,430` — audit status.**  
+  Name **APPROVE_WITH_LIMITS** and the separate delayed exact-inventory pass rather than using unqualified “audited.”
+
+## Confirmed correct
+
+- All rounded numerical claims in `main.tex:326–330` match `matched_width_summary.json`.
+- The summary direction is consistently d256 minus d128.
+- Psychometric \(N=300\) per point and clamp \(N=250\) per cell are correctly reported.
+- The 12-shard inventory and one iteration-19999 checkpoint per cell are correctly described.
+- VDA9 cross-attention is correctly omitted because d256 is competence-gated.
+- The two warning-affected native `cued_change` trajectories are correctly excluded, while clean PCA-128 results remain admitted.
+- t0 is correctly treated as structural zero-variance chance, not representational evidence.
+- VDA1 location and invalid-change estimands are correctly marked undefined.
+- Clamp causality is generally bounded to the evaluated checkpoint, and width contrasts are correctly called associative.
+- Neuroscience language is mostly exemplary: no tensor is identified as FEF, SC, LPFC, or biological working memory.
+- The publication PDF/SVG/PNG/JSON and copied production manifest are byte-identical to the v8 summary tree.
+
+## Review record
+
+- Reviewed the complete `main.tex`, matched-width sidecar, publication manifest, upstream manifest, frozen producer semantics, decoder shards, figure, and current manuscript build manifest.
+- No files were created or modified.
+- Live web search was unavailable; literature-boundary checks used the manuscript’s cited records and local full-depth source notes.
+- One additional read-only shell verification was denied; no further attempt was made.

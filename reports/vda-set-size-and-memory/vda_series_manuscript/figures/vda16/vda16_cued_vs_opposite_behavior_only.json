@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "artifact": "VDA16 paired held-out behavior only",
+  "cache_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_cued_vs_opposite_attention_20260719\\data\\vda16_cued_vs_opposite_attention.npz",
+  "cache_sha256": "d3359287ced22900b018dc136f15177d3f370c405152368e796121b4bc126c7e",
+  "renderer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\render_vda16_paired_behavior_only.py",
+  "renderer_sha256": "02c73e3322627b0b5ecd8fe30c9d17b5701d40da491201c4b7d1722a7d4741b0",
+  "conditions": [
+    "cued_top_left",
+    "forced_bottom_right"
+  ],
+  "change_magnitudes_degrees": [
+    2.0,
+    6.0,
+    10.0,
+    14.0,
+    18.0,
+    22.0,
+    26.0,
+    30.0,
+    34.0,
+    38.0
+  ],
+  "trials_per_point": 300,
+  "qualifying_response_frames": [
+    5,
+    6
+  ],
+  "attention_data_used": false,
+  "exclusion_reason": "legacy cache retained only a fused current-image-key plus previous-hidden-state-key location total; source-separated branch maps require checkpoint reevaluation",
+  "outputs": {
+    "pdf": {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\vda16\\vda16_cued_vs_opposite_behavior_only.pdf",
+      "sha256": "1f57957baf90345a94c1f604b0695511a21fff1125ee4eefa0339705714add98"
+    },
+    "png": {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\vda16\\vda16_cued_vs_opposite_behavior_only.png",
+      "sha256": "cc49ff4d609750ea64448a365944581f05004f1ea64eee953aa87755b5fa98d0"
+    }
+  },
+  "runtime_versions": {
+    "numpy": "1.23.1",
+    "matplotlib": "3.5.2"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "artifact_class": "completed matched-width manuscript summary",
+  "created_at_utc": "2026-07-12T07:39:45.992176+00:00",
+  "input_root": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_matched_width",
+  "upstream_manifest_sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11",
+  "source_sha256": "426fe9eae1bfc6d002b33edff1538400cc8a4c84b60feee9e527d4a67f3ca56f",
+  "artifacts": [
+    {
+      "path": "figures/matched_width_summary.json",
+      "bytes": 8211,
+      "sha256": "8ae52527573afb81401442c65c65612ebd941158b1d089587559bc0378bb75d0"
+    },
+    {
+      "path": "figures/matched_width_summary.pdf",
+      "bytes": 27526,
+      "sha256": "0946708e03fd649669a8a3bb676b83cee1e1b6ca7071290bb4cd7ac2cea3aaa6"
+    },
+    {
+      "path": "figures/matched_width_summary.png",
+      "bytes": 550123,
+      "sha256": "ce4890b3f6bead7deabca2f51a8a9379bb43512040d3200649325a6249a0a50d"
+    },
+    {
+      "path": "figures/matched_width_summary.svg",
+      "bytes": 127659,
+      "sha256": "e9f29444e9c51363ee31e807acf611839cb5267eee77cc9a4e0debd5aa23ae0c"
+    },
+    {
+      "path": "provenance/UPSTREAM_MANIFEST.json",
+      "bytes": 44515,
+      "sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11"
+    },
+    {
+      "path": "provenance/build_matched_width_summary.py",
+      "bytes": 20679,
+      "sha256": "426fe9eae1bfc6d002b33edff1538400cc8a4c84b60feee9e527d4a67f3ca56f"
+    }
+  ]
+}

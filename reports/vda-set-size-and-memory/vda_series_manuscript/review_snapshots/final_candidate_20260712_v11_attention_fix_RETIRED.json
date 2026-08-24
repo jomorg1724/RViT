@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "snapshot": "final_candidate_20260712_v11_attention_fix",
+  "snapshot_manifest_sha256": "2c703f78f7445752cf40c86024ac9aef38f896539f53281cefbc4a5e99e2ca97",
+  "status": "RETIRED",
+  "reason": "Independent Feynman- and Thorne-lens reviews found that main.tex still stated a 265-test current regression gate while the v11 bound QA record documented 266 passing tests.",
+  "superseded_by": "final_candidate_20260712_v12_attention_fix",
+  "verdict_effect": "All v11 review verdicts are stale for subsequent candidates, including substantively approving verdicts.",
+  "retired_at": "2026-07-12T12:16:00-07:00"
+}

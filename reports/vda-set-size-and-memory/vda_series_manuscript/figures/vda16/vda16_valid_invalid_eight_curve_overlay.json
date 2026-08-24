@@ -1,0 +1,48 @@
+{
+  "figure": "VDA16 valid-versus-invalid eight-curve overlay",
+  "panels": [
+    "affine response probability",
+    "cross-attention response probability",
+    "affine conditional mean response frame",
+    "cross-attention conditional mean response frame"
+  ],
+  "displayed_validities": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "change_magnitudes_degrees": [
+    2.0,
+    6.0,
+    10.0,
+    14.0,
+    18.0,
+    22.0,
+    26.0,
+    30.0,
+    34.0,
+    38.0
+  ],
+  "condition_encoding": {
+    "valid": "solid line with filled circle",
+    "forced_invalid": "dashed line with open square"
+  },
+  "condition_boundary": "At displayed validity 1.0, invalid changes are forced out-of-policy stress tests rather than naturally sampled trials.",
+  "timing_definition": "Conditional mean response frame over qualifying response frames 5 and 6.",
+  "sources": {
+    "Affine element-wise": {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_affine_nodecay_20260720_production\\data\\vda16_affine_ew_d128_nodecay_seed0.npz",
+      "sha256": "24d9c39d769b63de7a032f8e6cf3ad24ad46df55a727b1950866a8f35c83a420"
+    },
+    "Cross-attention": {
+      "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\data\\vda16_crossattn1_d128_nodecay_seed0.npz",
+      "sha256": "4597c954a51d20f3586fe1b6a40eca3b1870ffa982f24ac8a995c5a82794167d"
+    }
+  },
+  "outputs": {
+    "pdf": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\vda16\\vda16_valid_invalid_eight_curve_overlay.pdf",
+    "svg": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\vda16\\vda16_valid_invalid_eight_curve_overlay.svg",
+    "png": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\reports\\vda_series\\figures\\vda16\\vda16_valid_invalid_eight_curve_overlay.png"
+  }
+}

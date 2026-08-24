@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "artifact_class": "descriptive matched-width summary",
+  "evidence_class": "checkpoint-recomputed, single checkpoint per task \u00d7 routing \u00d7 width cell",
+  "upstream_manifest_sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11",
+  "contrast_direction": "d256 minus d128",
+  "psychometric_reference_condition": {
+    "location": "valid",
+    "displayed_validity": 0.75,
+    "trials_per_point": 300
+  },
+  "decoder": {
+    "space": "foldwise train-only PCA-128",
+    "timestep": 6,
+    "metric": "balanced accuracy"
+  },
+  "clamp": {
+    "intervention": "additive bias on cued routing-key logits at change time",
+    "baseline_key_logit_bias": 0.0,
+    "trials_per_cell": 512
+  },
+  "claim_boundary": "Width is an architectural recurrent-state intervention. Results are checkpoint-specific associations, not replicated causal width effects or human capacity estimates.",
+  "limits": [
+    "Width pairs are separately trained checkpoints, not within-checkpoint causal interventions or independent-seed populations.",
+    "Finite-trial aggregate counts do not retain trial pairing, so the plotted contrasts have no paired confidence intervals.",
+    "Native-space decoder values are not plotted; panel B uses only foldwise train-only PCA-128 scores.",
+    "Timestep t0 is omitted from the decoder summary because pre-stimulus recurrent states are zero-variance and chance-level.",
+    "The intervention manipulates key logits, not an observed or clamped achieved allocation value."
+  ],
+  "records": [
+    {
+      "task": "vda1",
+      "feedback": "affine_ew",
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "psychometric_valid_p075_d256_minus_d128": [
+        -0.009999999999999995,
+        -0.01999999999999999,
+        0.026666666666666672,
+        -0.043333333333333335,
+        0.0033333333333332993,
+        -0.00666666666666671,
+        -0.006666666666666599,
+        -0.0033333333333332993,
+        -0.00666666666666671,
+        0.01666666666666672
+      ],
+      "decoder_matched128_t6_d256_minus_d128": {
+        "change": [
+          0.008918694690265627
+        ],
+        "change_location": null,
+        "cued_change": null
+      },
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_valid_dprime_width_effect_did": [
+        1.6642121272179429,
+        1.107029615896562,
+        0.0,
+        0.45726757399113116,
+        0.5526133938865976
+      ],
+      "clamp_invalid_dprime_width_effect_did": null
+    },
+    {
+      "task": "vda1",
+      "feedback": "crossattn1",
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "psychometric_valid_p075_d256_minus_d128": [
+        0.11666666666666667,
+        0.16333333333333333,
+        0.16666666666666663,
+        0.20999999999999996,
+        0.09333333333333338,
+        0.06666666666666665,
+        0.033333333333333326,
+        0.033333333333333326,
+        0.033333333333333326,
+        0.039999999999999925
+      ],
+      "decoder_matched128_t6_d256_minus_d128": {
+        "change": [
+          -0.008839680783817916
+        ],
+        "change_location": null,
+        "cued_change": null
+      },
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_valid_dprime_width_effect_did": [
+        0.5565940218841732,
+        -0.026391503646418624,
+        0.0,
+        -0.08978792334696939,
+        -0.2393848984812772
+      ],
+      "clamp_invalid_dprime_width_effect_did": null
+    },
+    {
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "psychometric_valid_p075_d256_minus_d128": [
+        0.026666666666666658,
+        0.16,
+        0.15000000000000002,
+        0.11333333333333329,
+        0.09999999999999998,
+        0.033333333333333326,
+        0.016666666666666607,
+        0.0,
+        -0.0033333333333332993,
+        0.0
+      ],
+      "decoder_matched128_t6_d256_minus_d128": {
+        "change": [
+          0.04875158027812898
+        ],
+        "change_location": [
+          0.28472874895572264
+        ],
+        "cued_change": [
+          0.11313439849624063
+        ]
+      },
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_valid_dprime_width_effect_did": [
+        0.8930670772503564,
+        0.4455677461179641,
+        0.0,
+        -0.201507826618474,
+        -0.24810589320581133
+      ],
+      "clamp_invalid_dprime_width_effect_did": [
+        -0.09004121253430086,
+        -0.20581735256952816,
+        0.0,
+        0.4077483322497686,
+        0.697134200696393
+      ]
+    },
+    {
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "psychometric_valid_p075_d256_minus_d128": [
+        -0.026666666666666672,
+        -0.026666666666666686,
+        -0.10666666666666663,
+        -0.13,
+        -0.1133333333333334,
+        -0.043333333333333335,
+        -0.026666666666666616,
+        -0.00666666666666671,
+        0.0,
+        0.0
+      ],
+      "decoder_matched128_t6_d256_minus_d128": {
+        "change": [
+          0.015615123261694008
+        ],
+        "change_location": [
+          -0.04986424394319133
+        ],
+        "cued_change": [
+          -0.029017857142857206
+        ]
+      },
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_valid_dprime_width_effect_did": [
+        -0.1920485490853432,
+        -0.15092885505868514,
+        0.0,
+        0.2888049200590812,
+        0.408830797123938
+      ],
+      "clamp_invalid_dprime_width_effect_did": [
+        -0.0550996389501901,
+        -0.038666249600365354,
+        0.0,
+        0.17563595018629452,
+        0.17634930266465265
+      ]
+    },
+    {
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "change_magnitudes": [
+        2.0,
+        6.0,
+        10.0,
+        14.0,
+        18.0,
+        22.0,
+        26.0,
+        30.0,
+        34.0,
+        38.0
+      ],
+      "psychometric_valid_p075_d256_minus_d128": [
+        0.013333333333333336,
+        -0.03,
+        -0.013333333333333308,
+        -0.043333333333333335,
+        -0.04999999999999993,
+        -0.006666666666666599,
+        -0.00666666666666671,
+        -0.0033333333333332993,
+        0.0,
+        0.0
+      ],
+      "decoder_matched128_t6_d256_minus_d128": {
+        "change": [
+          0.03100308154235154
+        ],
+        "change_location": [
+          -0.15477060707323875
+        ],
+        "cued_change": [
+          -0.05760494987468667
+        ]
+      },
+      "clamp_key_logit_biases": [
+        -6.0,
+        -3.0,
+        0.0,
+        3.0,
+        6.0
+      ],
+      "clamp_valid_dprime_width_effect_did": [
+        0.9323465239255755,
+        0.3406615101264001,
+        0.0,
+        0.18261002930246173,
+        0.29617693181881455
+      ],
+      "clamp_invalid_dprime_width_effect_did": [
+        -0.26997770405596677,
+        -0.31516508223899753,
+        0.0,
+        0.026380341156884146,
+        0.08371825490132179
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "reason": "d256 checkpoint is competence_gated; no width contrast is estimated"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "artifact": "first-wave spatial attention map",
+  "task": "vda4",
+  "feedback": "affine_ew",
+  "grid": [
+    2,
+    2
+  ],
+  "token_count": 4,
+  "figure_rows": 4,
+  "figure_columns": 7,
+  "row_semantics": "query patch",
+  "column_semantics": "logical timestep",
+  "cue_index": 0,
+  "change_index": 0,
+  "displayed_validity": 1.0,
+  "cue_color": "red",
+  "change_frame": 5,
+  "change_magnitude_degrees": 56.0,
+  "checkpoint_iteration": 19999,
+  "evaluation_trials": 96,
+  "observed_max_attention_mass": 0.9750959277153015,
+  "color_scale": [
+    0.0,
+    1.0
+  ],
+  "uniform_attention_baseline": 0.25,
+  "mean_attention_to_s1_by_timestep": [
+    0.24259549751877785,
+    0.4850260615348816,
+    0.37346678227186203,
+    0.2844780534505844,
+    0.2814032733440399,
+    0.7987775653600693,
+    0.861881822347641
+  ],
+  "descriptive_s1_delta_cue_minus_blank": 0.24243056401610374,
+  "descriptive_s1_delta_change_minus_maintenance": 0.5173742920160294,
+  "trial_level_attention_saved": true,
+  "source_cache": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/first_wave/data/attention_vda4_affine_ew.npz",
+  "source_cache_sha256": "48293737868994366a7009b7d7e13a7dd6143d1ade60698b87e439645f0e717e",
+  "spatial_collapse": "image and memory keys are summed by location for cross-attention; affine attention is unchanged",
+  "inference_boundary": "descriptive checkpoint attention; temporal changes do not by themselves establish causal cue modulation",
+  "outputs": {
+    "pdf": "first_wave_attention_vda4_affine_ew.pdf",
+    "svg": "first_wave_attention_vda4_affine_ew.svg",
+    "png": "first_wave_attention_vda4_affine_ew.png"
+  }
+}

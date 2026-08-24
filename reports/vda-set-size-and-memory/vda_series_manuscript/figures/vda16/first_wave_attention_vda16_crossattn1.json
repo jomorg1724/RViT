@@ -1,0 +1,342 @@
+{
+  "schema_version": 2,
+  "artifact": "first-wave cue-proportion attention maps on no-change trials",
+  "task": "vda16",
+  "feedback": "crossattn1",
+  "grid": [
+    4,
+    4
+  ],
+  "token_count": 16,
+  "figure_rows": 4,
+  "figure_columns": 7,
+  "attention_arrays": [
+    "image keys",
+    "recurrent-memory keys"
+  ],
+  "row_semantics": "displayed cue proportion",
+  "column_semantics": "logical timestep",
+  "displayed_validities": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "trial_filter": "no-change trials only",
+  "query_reduction": "arithmetic mean over all query patches",
+  "cue_index": 0,
+  "change_index": -1,
+  "cue_color": "red",
+  "change_frame": 5,
+  "change_present": false,
+  "change_magnitude_degrees": 0.0,
+  "checkpoint_iteration": 19999,
+  "checkpoint_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\provenance\\checkpoints\\rvit_paper_vda16_final.pt",
+  "checkpoint_sha256": "b40d9aa49ec28c352d7a790de84f5902e1a307f7b2abe5fe68dc9e6aabb4f84d",
+  "producer_sha256": "b3165034fdfc3c99ac1d023b1bfb04025e72e21a553e87e0512b1c63b083c22c",
+  "dependency_hashes": {
+    "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+    "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+    "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+    "envs/luo2015.py": "9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c",
+    "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+    "model.py": "16601567095f4f765c013a2b8b0cf69b63d8978ab49ca278ddff3649cd4637be",
+    "paper_encoder.py": "ef58bd645a6a565198aaa8a70b7407854ec2e46f9f9c2a4e8dd8d3f6f5b109fe",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+    "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+    "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+    "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+    "vda_series/task_figures.py": "3c5182b0304213396d5d72c88ea994a080489f8454040db88175e929a49e4284",
+    "vda_sweep/vda_core.py": "b23fddbcc031e1368c6aa376374c130c6183b57cdb04e392499d7cafc0a25b7d"
+  },
+  "runtime_versions": {
+    "gymnasium": "0.29.1",
+    "matplotlib": "3.5.2",
+    "numpy": "1.23.1",
+    "pillow": "9.1.1",
+    "platform": "Windows-10-10.0.22621-SP0",
+    "python": "3.10.6",
+    "python_executable": "C:\\Python310\\python.exe",
+    "scipy": "1.8.1",
+    "torch": "1.13.1+cu117"
+  },
+  "device": "cuda",
+  "evaluation_trials": 96,
+  "observed_max_attention_mass": 0.9067037105560303,
+  "color_scale": [
+    0.0,
+    0.9067037105560303
+  ],
+  "uniform_attention_baseline_per_key": 0.03125,
+  "mean_attention_to_cue_by_proportion_timestep_and_source": [
+    [
+      [
+        2.159830546588637e-05,
+        0.06248003989458084
+      ],
+      [
+        0.010539092123508453,
+        0.0568050779402256
+      ],
+      [
+        3.826855754596181e-05,
+        0.8712945580482483
+      ],
+      [
+        0.0066895815543830395,
+        0.07342518866062164
+      ],
+      [
+        0.0026857899501919746,
+        0.08340899646282196
+      ],
+      [
+        0.0014270780375227332,
+        0.06663437187671661
+      ],
+      [
+        0.0002819242363329977,
+        0.05696507915854454
+      ]
+    ],
+    [
+      [
+        2.159830546588637e-05,
+        0.06248003989458084
+      ],
+      [
+        0.25807762145996094,
+        0.0415753573179245
+      ],
+      [
+        3.908227154170163e-05,
+        0.8808412551879883
+      ],
+      [
+        0.0076973047107458115,
+        0.12306654453277588
+      ],
+      [
+        0.002351450501009822,
+        0.1252024620771408
+      ],
+      [
+        0.0012377753155305982,
+        0.08354343473911285
+      ],
+      [
+        0.00021820690017193556,
+        0.08865154534578323
+      ]
+    ],
+    [
+      [
+        2.159830546588637e-05,
+        0.06248003989458084
+      ],
+      [
+        0.33369046449661255,
+        0.03676849603652954
+      ],
+      [
+        3.5042481613345444e-05,
+        0.9026172161102295
+      ],
+      [
+        0.007658783346414566,
+        0.13026998937129974
+      ],
+      [
+        0.0023256561253219843,
+        0.12933216989040375
+      ],
+      [
+        0.0012200375786051154,
+        0.08587616682052612
+      ],
+      [
+        0.00021465129975695163,
+        0.09014759957790375
+      ]
+    ],
+    [
+      [
+        2.159830546588637e-05,
+        0.06248003989458084
+      ],
+      [
+        0.38952964544296265,
+        0.03325507417321205
+      ],
+      [
+        3.42711791745387e-05,
+        0.9067037105560303
+      ],
+      [
+        0.007697016000747681,
+        0.13554710149765015
+      ],
+      [
+        0.00230784947052598,
+        0.13244813680648804
+      ],
+      [
+        0.0012137126177549362,
+        0.08771928399801254
+      ],
+      [
+        0.00021403012215159833,
+        0.09149853140115738
+      ]
+    ]
+  ],
+  "cue_attention_100_minus_25_percent_at_change_opportunity_by_source": [
+    -0.000213365419767797,
+    0.02108491212129593
+  ],
+  "source_mass_by_proportion_timestep_and_source": [
+    [
+      [
+        0.00031945000955602154,
+        0.9996806383132935
+      ],
+      [
+        0.020345910044852644,
+        0.9796540774405003
+      ],
+      [
+        0.0005610891239484772,
+        0.9994388241320848
+      ],
+      [
+        0.1170301204547286,
+        0.8829698748886585
+      ],
+      [
+        0.052272031316533685,
+        0.9477279745042324
+      ],
+      [
+        0.026713933213613927,
+        0.9732860550284386
+      ],
+      [
+        0.005732928111683577,
+        0.9942670799791813
+      ]
+    ],
+    [
+      [
+        0.00031945000955602154,
+        0.9996806383132935
+      ],
+      [
+        0.2823466685367748,
+        0.7176533415913582
+      ],
+      [
+        0.0005730239081458421,
+        0.9994270126335323
+      ],
+      [
+        0.1346283950842917,
+        0.8653716035187244
+      ],
+      [
+        0.04657493904232979,
+        0.9534250423312187
+      ],
+      [
+        0.023719461634755135,
+        0.9762805514037609
+      ],
+      [
+        0.004764111858094111,
+        0.995235875248909
+      ]
+    ],
+    [
+      [
+        0.00031945000955602154,
+        0.9996806383132935
+      ],
+      [
+        0.36518165364395827,
+        0.634818397462368
+      ],
+      [
+        0.0005137937150720973,
+        0.9994861749000847
+      ],
+      [
+        0.13395730033516884,
+        0.8660427033901215
+      ],
+      [
+        0.04608488921076059,
+        0.9539151154458523
+      ],
+      [
+        0.023394108400680125,
+        0.9766059033572674
+      ],
+      [
+        0.0046986111119622365,
+        0.9953013807535172
+      ]
+    ],
+    [
+      [
+        0.00031945000955602154,
+        0.9996806383132935
+      ],
+      [
+        0.4257626314647496,
+        0.5742374695837498
+      ],
+      [
+        0.0005024850797781255,
+        0.9994976185262203
+      ],
+      [
+        0.13462468422949314,
+        0.8653753027319908
+      ],
+      [
+        0.045749187702313066,
+        0.9542508199810982
+      ],
+      [
+        0.023282011621631682,
+        0.9767180010676384
+      ],
+      [
+        0.004691809634095989,
+        0.9953082017600536
+      ]
+    ]
+  ],
+  "trial_level_attention_saved": true,
+  "source_cache": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda16_crossattn_nodecay_20260719_production\\data\\attention_vda16_crossattn1.npz",
+  "source_cache_sha256": "b23febabe459e67bd4e50b88cb7ebac6553e693dfc4d99227e99a2321a4ec543",
+  "attention_reduction": "Cross-attention image and recurrent-memory key arrays are shown separately.",
+  "inference_boundary": "descriptive one-checkpoint cue-proportion contrast on matched no-change trials; attention weights are routing summaries, not biological attention measures",
+  "outputs": {
+    "pdf": "first_wave_attention_vda16_crossattn1.pdf",
+    "svg": "first_wave_attention_vda16_crossattn1.svg",
+    "png": "first_wave_attention_vda16_crossattn1.png"
+  },
+  "source_panel_outputs": {
+    "image_keys": {
+      "pdf": "first_wave_attention_vda16_crossattn1_image_keys.pdf",
+      "svg": "first_wave_attention_vda16_crossattn1_image_keys.svg",
+      "png": "first_wave_attention_vda16_crossattn1_image_keys.png"
+    },
+    "recurrent_memory_keys": {
+      "pdf": "first_wave_attention_vda16_crossattn1_recurrent_memory_keys.pdf",
+      "svg": "first_wave_attention_vda16_crossattn1_recurrent_memory_keys.svg",
+      "png": "first_wave_attention_vda16_crossattn1_recurrent_memory_keys.png"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact": "first-wave spatial attention map",
+  "task": "vda4",
+  "feedback": "crossattn1",
+  "grid": [
+    2,
+    2
+  ],
+  "token_count": 4,
+  "figure_rows": 4,
+  "figure_columns": 7,
+  "row_semantics": "query patch",
+  "column_semantics": "logical timestep",
+  "cue_index": 0,
+  "change_index": 0,
+  "displayed_validity": 1.0,
+  "cue_color": "red",
+  "change_frame": 5,
+  "change_magnitude_degrees": 56.0,
+  "checkpoint_iteration": 19999,
+  "evaluation_trials": 96,
+  "source_cache": "/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/first_wave/data/attention_vda4_crossattn1.npz",
+  "source_cache_sha256": "f18e3350c05dfe03b1b8670bfca795a6eeb65de21e7bc8f3fe4b5e33088ec073",
+  "spatial_collapse": "image and memory keys are summed by location for cross-attention; affine attention is unchanged",
+  "outputs": {
+    "pdf": "first_wave_attention_vda4_crossattn1.pdf",
+    "svg": "first_wave_attention_vda4_crossattn1.svg",
+    "png": "first_wave_attention_vda4_crossattn1.png"
+  }
+}

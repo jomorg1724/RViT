@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "snapshot": "final_candidate_20260712_v2",
+  "status": "active review candidate",
+  "source_sha256": "1ffb36dabc7e9cdfc4877baa3926a7e1f8f3103d8de76f725c4570b83dd65502",
+  "pdf_sha256": "598c332ea0404e0a7d4c39efc6edd7906477235c52021e280cf63c7a4506461d",
+  "file_count_excluding_manifest": 19,
+  "files": [
+    {
+      "path": "manuscript/build_constituent_tables.py",
+      "bytes": 10080,
+      "sha256": "af989c56aec7e571bcd66d9efc69ffed6cb8f1347d5aecd6ad77ddc3105535d9"
+    },
+    {
+      "path": "manuscript/build_manifest.py",
+      "bytes": 8335,
+      "sha256": "7a3ff72d8da7265fb6f66cb42c46523e3061e4a763d6f54ffc9dfd864b6f950f"
+    },
+    {
+      "path": "manuscript/build_tables.py",
+      "bytes": 5829,
+      "sha256": "7754be4d72ddd19f51d1b9b4265296267448256c92effaf53de68b77a17f689f"
+    },
+    {
+      "path": "manuscript/generated/matched_width_absolute_behavior.tex",
+      "bytes": 1760,
+      "sha256": "fe5bcdad68d732f656b6587075224a0756622eaf6ae12c5ac80b5501f2f596ff"
+    },
+    {
+      "path": "manuscript/generated/matched_width_clamp_constituents.tex",
+      "bytes": 2009,
+      "sha256": "955e2f012eb8353dcf54885eecfd2a82e4e2409aa762a050c3dafbafbafb010b"
+    },
+    {
+      "path": "manuscript/generated/matched_width_constituents.json",
+      "bytes": 9528,
+      "sha256": "0402a39623f319cf996d133512fdeef9744fd8371345b66deec66fb98aaa7498"
+    },
+    {
+      "path": "manuscript/generated/object_status_counts.tex",
+      "bytes": 1406,
+      "sha256": "ca1b1be1721de18b90b4fd51be5e408e04dd64f7a7c9dc5c2eb4cd2d8b50fabc"
+    },
+    {
+      "path": "manuscript/generated/panel_coverage_table.tex",
+      "bytes": 11839,
+      "sha256": "977c67b081791a79c5be2fc41f88a582f3cfa546a4cd408ffff903a654f6cdbe"
+    },
+    {
+      "path": "manuscript/generated/status_summary.tex",
+      "bytes": 318,
+      "sha256": "483b8322ccf3f5289fd5c9d9062fec55575d808bcdb71f0e7bfabd91b62a07e4"
+    },
+    {
+      "path": "manuscript/main.pdf",
+      "bytes": 2916290,
+      "sha256": "598c332ea0404e0a7d4c39efc6edd7906477235c52021e280cf63c7a4506461d"
+    },
+    {
+      "path": "manuscript/main.tex",
+      "bytes": 70904,
+      "sha256": "1ffb36dabc7e9cdfc4877baa3926a7e1f8f3103d8de76f725c4570b83dd65502"
+    },
+    {
+      "path": "qa/checkpoint_execution_audit.md",
+      "bytes": 8410,
+      "sha256": "87a9b8f789189d72873dc4ca615c946feadaf3ef3c2a61eebffe82aeb5ec45aa"
+    },
+    {
+      "path": "qa/prose_trigger_disposition.md",
+      "bytes": 3831,
+      "sha256": "4f115f78d2ce5e08bd77c9a885bcf7f4cf4154a0090bc6828d87e23885869e67"
+    },
+    {
+      "path": "qa/prose_trigger_lint.txt",
+      "bytes": 9227,
+      "sha256": "d3f39ce8718e5225c84268590779247cedc79442e775e0387c938c83b69ea669"
+    },
+    {
+      "path": "qa/read_only_audits.txt",
+      "bytes": 596,
+      "sha256": "0db9a61fa6626fa550209f81a77cc944c1024c0c0ceac70d6e1e6162738312a5"
+    },
+    {
+      "path": "qa/test_gate.txt",
+      "bytes": 260,
+      "sha256": "addb2356d2502381e36edcc3e527860977e6d0c211547502f25c5c029ee1b6a8"
+    },
+    {
+      "path": "qa/upstream_independent_review.txt",
+      "bytes": 4133,
+      "sha256": "bba2e361d21e2190327b4f7ef166427cab85b26980b875a7ee4ad6ea31eeda4d"
+    },
+    {
+      "path": "qa/v15_exact_inventory_audit.md",
+      "bytes": 3142,
+      "sha256": "59f32651cc9f9428cdd3e8434213b6e4c583855758cdd799cdd5e039a063dc82"
+    },
+    {
+      "path": "qa/visual_audit.md",
+      "bytes": 3408,
+      "sha256": "e034687fed845787e86f6b9a793fa0e0ec2d75946b3cd571fc93089f747329e7"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "role": "tyson",
+  "verdict": "PASS",
+  "reviewer_identity": {
+    "kind": "independent_subagent",
+    "delegation_id": "deleg_812b54a4",
+    "task_index": 1,
+    "lens": "tyson"
+  },
+  "candidate": {
+    "snapshot": "final_candidate_20260712_v12_attention_fix",
+    "snapshot_manifest_sha256": "899ebd8bbc72f3fb0aea9c86d225740ebc1c2559918b7deaec6b36b250c676d7",
+    "source_sha256": "28ae6ecb4057ea32a7ac491f8f528100362e74e514a0953a1e68fc4b459bd5eb",
+    "pdf_sha256": "28fb82d7dcffcc1f34eb4a280d88a326de99ed7d456a42f0a1a23481bdd88e55",
+    "build_manifest_sha256": "83136a22dbd0cbbc99a3454c379c14f6596baf6fa585e62de699bcecaaacf61d",
+    "ordered_render_set_sha256": "3f5e2a10955f2598212b0bdad017bb1b4588031fc883feb70bf27c49a78b18c0",
+    "page_count": 56
+  },
+  "artifact_manifest_sha256": null,
+  "verification": {
+    "snapshot_verifier_verdict": "PASS"
+  },
+  "consequential_findings": [],
+  "limitations": [],
+  "files_modified": [],
+  "summary": "Communication, accessibility, caption clarity, jargon control, fixed-location semantics, and inferential restraint passed on the bound pages; no biological-attention inflation or layout defect remains."
+}

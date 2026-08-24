@@ -1,0 +1,57 @@
+{
+  "checkpoint_identities": {
+    "architecture_state_shape_sha256": "31d4b0c86df099697afdccf611c089c36f65668d8d52d58246f310fd54bb26bf",
+    "historical_clean": {
+      "contract": {
+        "cell": "xlstm",
+        "d_mem": 128,
+        "feedback": "crossattn1",
+        "memory_decay": 1.0,
+        "memory_noise_std": 0.0,
+        "n_tokens": 4,
+        "seq_len": 7,
+        "two_lstm": false
+      },
+      "evaluation_memory_noise_std": 0.0,
+      "iteration": 19999,
+      "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_crossattn1_d128_nodecay_seed0_pod\\rvit_paper_vda4_final.pt",
+      "sha256": "ea671f9758551e06b39ef19c06e85e888ce3ee74dda8a534c1532251a69ee4ca",
+      "training_memory_noise_std": 0.0
+    },
+    "interrupted_noisy": {
+      "contract": {
+        "cell": "xlstm",
+        "d_mem": 128,
+        "feedback": "crossattn1",
+        "memory_decay": 1.0,
+        "memory_noise_std": 0.5,
+        "n_tokens": 4,
+        "seq_len": 7,
+        "two_lstm": false
+      },
+      "evaluation_memory_noise_std": 0.5,
+      "iteration": 15999,
+      "path": "C:\\Users\\jomor\\Documents\\RViT_runs\\vda4_memory_noise_noise0p5_interrupted_snapshot_20260804T055300Z\\run\\rvit_plus_rl_latest.pt",
+      "sha256": "be5e67f907e6603229c48ee54cc41e7075d62a4514f61f0f9da0d2e56d1de967",
+      "training_memory_noise_std": 0.5
+    }
+  },
+  "device": "cuda",
+  "evidence_boundary": "Exploratory OOD invalid probe: historical terminal clean reference versus interrupted noise-trained checkpoint; training duration, provenance, and acute evaluation noise are not matched.",
+  "frozen_seeds": {
+    "mnemonic_standard_normal": 2608044103,
+    "nochange_mnemonic_standard_normal": 2608044203,
+    "nochange_policy_uniform": 2608044202,
+    "nochange_sensory": 2608044201,
+    "policy_uniform": 2608044102,
+    "sensory": 2608044101
+  },
+  "gpu_name": "NVIDIA GeForce RTX 3070 Laptop GPU",
+  "producer_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda4_memory_noise_psychometric_s1_to_s4_20260804\\generate_psychometric.py",
+  "producer_sha256": "5a4b87051a5da987d2695408cdc9ddd391873091ffab8d0255addf3571a1386c",
+  "protocol_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\vda_series\\vda4_memory_noise_psychometric_s1_to_s4_20260804\\PROTOCOL_AMENDMENT.md",
+  "protocol_sha256": "3e6bd6da0d14df020dd658ba5b4216d6a5c5742d9c985ca9d9f6dfa32824afb2",
+  "registered_terminal_pair": false,
+  "schema_version": 1,
+  "validity_scope": "ood_forced_invalid_probe"
+}

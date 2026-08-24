@@ -1,0 +1,95 @@
+{
+  "answers": {
+    "cue_exists": false,
+    "cue_note": "The Luo task has no explicit cue; both sample Gabors are simultaneously task-relevant at t0-t1.",
+    "first_test_location_is_selected": false,
+    "initial_samples_receive_more_attention_than_blank_quadrants": false,
+    "same_location_is_reselected_at_second_test": false
+  },
+  "checkpoint": {
+    "iteration": 12899,
+    "sha256": "2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f",
+    "snapshot_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\luo2015_attention_smoke_20260802_retry\\checkpoint_snapshot.pt",
+    "source_path": "C:\\Users\\jomor\\Documents\\RViT_runs\\luo2015_grid20x20_dmem32_memnoise064_uniformchange_nodecay_matched_eval_neutral_seed000_local\\rvit_plus_rl_latest.pt"
+  },
+  "contract": {
+    "base_orientations": {
+      "0": 98.78643070691845,
+      "3": 128.7340859470355
+    },
+    "evaluation_seed": 20260802,
+    "memory_noise_enabled": true,
+    "model_patch_grid": [
+      20,
+      20
+    ],
+    "sample_actions": true,
+    "sensory_orientation_noise_std_degrees": 5.0,
+    "task": "luo2015_criterion",
+    "task_logical_grid": [
+      2,
+      2
+    ],
+    "theta_uniform_bound_degrees": 35.0,
+    "total_trials": 8,
+    "trials_per_change_status_per_location": 2
+  },
+  "estimates": {
+    "first_test_query_same_minus_other_memory": {
+      "ci95_high": 0.05515817274572328,
+      "ci95_low": 0.04630375010310672,
+      "direction": "positive",
+      "mean": 0.05084406421519816,
+      "n": 8
+    },
+    "first_test_target_minus_other_combined": {
+      "ci95_high": -0.046411369686360615,
+      "ci95_low": -0.04934105828067135,
+      "direction": "negative",
+      "mean": -0.04775624818450375,
+      "n": 8
+    },
+    "sample_loc0_minus_loc3_combined": {
+      "ci95_high": 0.02386148586926229,
+      "ci95_low": -0.018331264376450718,
+      "direction": "uncertain",
+      "mean": 0.0030174325630758503,
+      "n": 8
+    },
+    "sample_stimulus_minus_blank_combined": {
+      "ci95_high": -0.029210575671755157,
+      "ci95_low": -0.03158538812420009,
+      "direction": "negative",
+      "mean": -0.03036135630974135,
+      "n": 8
+    },
+    "second_test_query_same_minus_other_memory": {
+      "ci95_high": 0.19038224018368055,
+      "ci95_low": -0.11843577260151505,
+      "direction": "uncertain",
+      "mean": 0.03597323379108275,
+      "n": 4
+    },
+    "second_test_return_from_gap_combined": {
+      "ci95_high": -0.017268568681969576,
+      "ci95_low": -0.06783488705815532,
+      "direction": "negative",
+      "mean": -0.044023948826832804,
+      "n": 4
+    },
+    "second_test_target_minus_other_combined": {
+      "ci95_high": -0.010937002336778079,
+      "ci95_low": -0.09153425493428102,
+      "direction": "negative",
+      "mean": -0.05123562863552955,
+      "n": 4
+    }
+  },
+  "interpretation_boundary": "Weights are descriptive routing evidence for one mid-training checkpoint. They do not by themselves establish causal use; attention clamping/ablation is required.",
+  "outcomes": {
+    "correct_rejection": 4,
+    "hit": 3,
+    "miss": 1
+  },
+  "schema_version": 1
+}

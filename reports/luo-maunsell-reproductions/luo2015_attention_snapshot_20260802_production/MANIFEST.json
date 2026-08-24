@@ -1,0 +1,16 @@
+{
+  "artifact_hashes": {
+    "checkpoint_snapshot.pt": "2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f",
+    "data/attention_trials.npz": "9fcbcea7c65a74dff42bc66b8990b668a929586a9db93656592052bf6058bd6c",
+    "data/contrast_trials.csv": "48b5c705b2d7749412c59cf14e2f9724e2681d1a8b2a8e56172c2811d1db0042",
+    "data/summary.json": "c96438c083818d95873d4bea9887f7cc82fc25cee3412ffb95f149b325872533",
+    "figures/attention_phase_maps.pdf": "f3f15402d81d6f0b4e04e7ae37daf118481160c2632fcc340bcfc58fef91c964",
+    "figures/attention_phase_maps.png": "9847335309b5ef7b477421cd1ebe723f03fafd591848f10d31cda218b5c824b6",
+    "figures/attention_timecourses.pdf": "cbe74b6f249496ff2a941be11e68abd56b78cdbb8272681d9cc9afab8cb1dc87",
+    "figures/attention_timecourses.png": "001791b09a655ca3e603a144cbdca8e8975ad6e6a9b9b062ff26ef02e35c5020"
+  },
+  "checkpoint_sha256": "2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f",
+  "producer": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\analysis\\run_luo2015_attention_snapshot.py",
+  "producer_sha256": "49137c4a74aae145d78bbe5aa5aab27aacc29a01f5718db4fe2f157d0843b69f",
+  "status": "complete"
+}

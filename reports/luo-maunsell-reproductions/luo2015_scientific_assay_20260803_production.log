@@ -1,0 +1,84 @@
+[maps] changed, test L0, +18°, samples low/low: Counter({'hit': 63, 'miss': 1})
+[maps] changed, test L3, +18°, samples low/low: Counter({'hit': 64})
+[maps] unchanged, test L0, +18°, samples low/low: Counter({'correct_rejection': 60, 'false_alarm': 4})
+[maps] unchanged, test L3, +18°, samples low/low: Counter({'correct_rejection': 59, 'false_alarm': 5})
+[nochange] natural complete
+[nochange] tested_sample complete
+[nochange] other_sample complete
+[nochange] blank_control complete
+[curves] magnitude 0 complete
+[curves] magnitude 3 complete
+[curves] magnitude 6 complete
+[curves] magnitude 9 complete
+[curves] magnitude 12 complete
+[curves] magnitude 18 complete
+[curves] magnitude 24 complete
+[curves] magnitude 30 complete
+[curves] magnitude 35 complete
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+{
+  "intervention_overall": {
+    "natural": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "total_trials": 704,
+      "target_region_sample_mass": 0.2341664789710194,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      }
+    },
+    "tested_sample": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "total_trials": 704,
+      "target_region_sample_mass": 0.0011291391765553271,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      }
+    },
+    "other_sample": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "total_trials": 704,
+      "target_region_sample_mass": 0.001244203564056079,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      }
+    },
+    "blank_control": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "total_trials": 704,
+      "target_region_sample_mass": 0.0009150458745352807,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      }
+    }
+  },
+  "paired_effects": {
+    "tested_sample": {
+      "n": 704,
+      "mean_inhibited_minus_natural": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0
+    },
+    "other_sample": {
+      "n": 704,
+      "mean_inhibited_minus_natural": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0
+    },
+    "blank_control": {
+      "n": 704,
+      "mean_inhibited_minus_natural": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0
+    }
+  }
+}
+[complete] C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\luo2015_scientific_assay_20260803_production

@@ -1,0 +1,12 @@
+{
+  "batch_size": 2,
+  "bias": -6.0,
+  "checkpoint": "reports\\luo2015_attention_snapshot_20260802_production\\checkpoint_snapshot.pt",
+  "curve_trials": 4,
+  "expected_sha256": "2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f",
+  "map_repeats": 2,
+  "nochange_trials": 8,
+  "output_root": "reports\\luo2015_scientific_assay_smoke_20260803",
+  "seed": 20260803,
+  "threads": 4
+}

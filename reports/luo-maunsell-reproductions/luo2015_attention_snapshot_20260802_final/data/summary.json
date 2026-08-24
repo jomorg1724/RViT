@@ -1,0 +1,162 @@
+{
+  "answers": {
+    "cue_exists": false,
+    "cue_note": "The Luo task has no explicit cue; both sample Gabors are simultaneously task-relevant at t0-t1.",
+    "first_test_onset_t3_query_selects_same_location_memory": false,
+    "first_test_repeat_t4_query_selects_same_location_memory": true,
+    "guaranteed_second_test_t6_query_reselects_same_location": false,
+    "sample_queries_route_more_mass_to_sample_than_blank_regions": true,
+    "sample_regions_receive_more_global_incoming_mass_than_blank_regions": false,
+    "timing_note": "t3 is first-test onset; t4 repeats that test. On no-change trials, t6 is a later guaranteed changed test at the same location."
+  },
+  "checkpoint": {
+    "iteration": 12899,
+    "sha256": "2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f",
+    "snapshot_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\luo2015_attention_snapshot_20260802_final\\checkpoint_snapshot.pt",
+    "source_path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\luo2015_attention_snapshot_20260802_production\\checkpoint_snapshot.pt"
+  },
+  "contract": {
+    "base_orientations": {
+      "0": 98.78643070691845,
+      "3": 128.7340859470355
+    },
+    "evaluation_seed": 20260802,
+    "memory_noise_enabled": true,
+    "model_patch_grid": [
+      20,
+      20
+    ],
+    "sample_actions": true,
+    "sensory_orientation_noise_std_degrees": 5.0,
+    "task": "luo2015_criterion",
+    "task_logical_grid": [
+      2,
+      2
+    ],
+    "theta_uniform_bound_degrees": 35.0,
+    "total_trials": 128,
+    "trials_per_change_status_per_location": 32
+  },
+  "estimates": {
+    "first_test_query_same_minus_other_memory": {
+      "ci95_high": 0.05249138804392715,
+      "ci95_low": 0.04900446224164625,
+      "direction": "positive",
+      "mean": 0.05075026737176813,
+      "n": 128
+    },
+    "first_test_t3_query_same_minus_other_combined": {
+      "ci95_high": -0.04810424128954764,
+      "ci95_low": -0.048200152261415496,
+      "direction": "negative",
+      "mean": -0.04815165395848453,
+      "n": 128
+    },
+    "first_test_t3_query_same_minus_other_memory": {
+      "ci95_high": 2.1941268641967316e-05,
+      "ci95_low": -1.3645552098751067e-05,
+      "direction": "uncertain",
+      "mean": 3.8995640352368355e-06,
+      "n": 128
+    },
+    "first_test_t3_query_same_minus_other_visual": {
+      "ci95_high": -0.04811399684404023,
+      "ci95_low": -0.048197474560583944,
+      "direction": "negative",
+      "mean": -0.04815555352251977,
+      "n": 128
+    },
+    "first_test_t4_query_same_minus_other_combined": {
+      "ci95_high": 0.056990765873342744,
+      "ci95_low": 0.04998369883323903,
+      "direction": "positive",
+      "mean": 0.05347042781068012,
+      "n": 128
+    },
+    "first_test_t4_query_same_minus_other_memory": {
+      "ci95_high": 0.10506668464004179,
+      "ci95_low": 0.09795172382509917,
+      "direction": "positive",
+      "mean": 0.10149663517950103,
+      "n": 128
+    },
+    "first_test_t4_query_same_minus_other_visual": {
+      "ci95_high": -0.04798636795894708,
+      "ci95_low": -0.048067078681197015,
+      "direction": "negative",
+      "mean": -0.048026207368820906,
+      "n": 128
+    },
+    "first_test_target_minus_other_combined": {
+      "ci95_high": -0.04725284970899339,
+      "ci95_low": -0.048261175599140956,
+      "direction": "negative",
+      "mean": -0.04776204736537937,
+      "n": 128
+    },
+    "sample_loc0_minus_loc3_combined": {
+      "ci95_high": -0.004234894946727464,
+      "ci95_low": -0.012068672218858014,
+      "direction": "negative",
+      "mean": -0.00819375193873878,
+      "n": 128
+    },
+    "sample_query_stimulus_minus_blank_combined": {
+      "ci95_high": 0.011607383963087158,
+      "ci95_low": 0.008989623975207906,
+      "direction": "positive",
+      "mean": 0.01032133087528564,
+      "n": 128
+    },
+    "sample_stimulus_minus_blank_combined": {
+      "ci95_high": -0.031082520680867077,
+      "ci95_low": -0.031767722436466424,
+      "direction": "negative",
+      "mean": -0.03141584032326741,
+      "n": 128
+    },
+    "second_test_query_same_minus_other_combined": {
+      "ci95_high": 0.004173837217529861,
+      "ci95_low": -0.0981073512635092,
+      "direction": "uncertain",
+      "mean": -0.04683856639628381,
+      "n": 64
+    },
+    "second_test_query_same_minus_other_memory": {
+      "ci95_high": 0.05107513781435657,
+      "ci95_low": -0.04793201380801299,
+      "direction": "uncertain",
+      "mean": 0.0015215529446575005,
+      "n": 64
+    },
+    "second_test_query_same_minus_other_visual": {
+      "ci95_high": -0.048323243885533884,
+      "ci95_low": -0.048396373726427556,
+      "direction": "negative",
+      "mean": -0.04836011934094131,
+      "n": 64
+    },
+    "second_test_return_from_gap_combined": {
+      "ci95_high": -0.035888245557201444,
+      "ci95_low": -0.04996481358880306,
+      "direction": "negative",
+      "mean": -0.04310695661887821,
+      "n": 64
+    },
+    "second_test_target_minus_other_combined": {
+      "ci95_high": -0.04762645988058941,
+      "ci95_low": -0.07533822845624914,
+      "direction": "negative",
+      "mean": -0.06142595481626834,
+      "n": 64
+    }
+  },
+  "interpretation_boundary": "Weights are descriptive routing evidence for one mid-training checkpoint. They do not by themselves establish causal use; attention clamping/ablation is required.",
+  "outcomes": {
+    "correct_rejection": 60,
+    "false_alarm": 4,
+    "hit": 44,
+    "miss": 20
+  },
+  "schema_version": 1
+}

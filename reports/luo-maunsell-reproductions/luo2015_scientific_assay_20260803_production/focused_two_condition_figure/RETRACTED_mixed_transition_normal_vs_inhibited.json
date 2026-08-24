@@ -1,0 +1,47 @@
+{
+  "reference_style": "Morgan, Albanna & Herman, Figure 5",
+  "conditions": [
+    "Normal",
+    "Sample-location attention inhibited"
+  ],
+  "series_count": 2,
+  "trials_per_magnitude_per_condition": 64,
+  "magnitudes_degrees": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    18.0,
+    24.0,
+    30.0,
+    35.0
+  ],
+  "normal_response_rate": [
+    0.109375,
+    0.25,
+    0.40625,
+    0.71875,
+    0.875,
+    0.984375,
+    0.96875,
+    0.71875,
+    0.546875
+  ],
+  "inhibited_response_rate": [
+    0.109375,
+    0.25,
+    0.40625,
+    0.71875,
+    0.875,
+    0.984375,
+    0.96875,
+    0.71875,
+    0.546875
+  ],
+  "maximum_absolute_curve_difference": 0.0,
+  "uncertainty": "95% Wilson intervals; shared because paired outcomes are identical",
+  "fit": "none; raw point estimates connected because the observed function is non-monotonic",
+  "png": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\luo2015_scientific_assay_20260803_production\\focused_two_condition_figure\\normal_vs_attention_inhibited_response_rate.png",
+  "pdf": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\luo2015_scientific_assay_20260803_production\\focused_two_condition_figure\\normal_vs_attention_inhibited_response_rate.pdf"
+}

@@ -1,0 +1,46 @@
+{
+  "evidence_boundary": "Exploratory OOD invalid probe: historical terminal clean reference versus interrupted noise-trained checkpoint; training duration, provenance, and acute evaluation noise are not matched.",
+  "files": [
+    {
+      "bytes": 2705,
+      "path": "COMPARISON_IDENTITY.json",
+      "sha256": "49df0dd428890dccd65f6c225ae46f7a6ab58e780399b0bd132fabfe5ee24d26"
+    },
+    {
+      "bytes": 4395,
+      "path": "data/psychometric.csv",
+      "sha256": "e33aaca96433914b89f81b5e924c14daa893c74fb8f630e0115ff45969611b1e"
+    },
+    {
+      "bytes": 73350,
+      "path": "data/psychometric_trials.npz",
+      "sha256": "61fab93d7f945773ff5889ac84185471c5608e3fb652ad2f231a44d795f12db0"
+    },
+    {
+      "bytes": 5397,
+      "path": "DISPLAY_DATA.json",
+      "sha256": "719dcb20a283654d75ec47211b45ad9072cdc1a4f1a88847924e65b77358cf42"
+    },
+    {
+      "bytes": 21217,
+      "path": "figures/psychometric.pdf",
+      "sha256": "45921012644646509ddd54fb6e3f51b68ad64d994f7a7b2ac8e63cba4e886f40"
+    },
+    {
+      "bytes": 151967,
+      "path": "figures/psychometric.png",
+      "sha256": "02d6bdc613bbba7a034ffeeaab846e62a29c064bd03414a4bbc73d989d778bc4"
+    },
+    {
+      "bytes": 7991,
+      "path": "RUNTIME_NOISE_REGISTRY.json",
+      "sha256": "e88d7aa7933b92e3164a06b8bc2facee3f1d01d0534f71828754c24b9f072c0c"
+    },
+    {
+      "bytes": 8137,
+      "path": "TRIAL_BANK_REGISTRY.json",
+      "sha256": "a79581d1332ba5c5c41099270336bc59be55492ee00d09e2cac3fd83094e11d0"
+    }
+  ],
+  "schema_version": 1
+}

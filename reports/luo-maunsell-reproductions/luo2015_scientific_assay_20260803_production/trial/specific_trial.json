@@ -1,0 +1,120 @@
+{
+  "latent_condition": {
+    "sample_orientations": {
+      "0": 98.78643070691845,
+      "3": 128.7340859470355
+    },
+    "test_location": 0,
+    "first_test_changed": false,
+    "guaranteed_second_test_change_degrees": 18.0
+  },
+  "sensory_frames": [
+    {
+      "frame": 0,
+      "phase": "sample 1",
+      "stimuli": [
+        {
+          "location": 0,
+          "intended_degrees": 98.78643070691845,
+          "realized_degrees": 97.62479328031955
+        },
+        {
+          "location": 3,
+          "intended_degrees": 128.7340859470355,
+          "realized_degrees": 131.7581977892474
+        }
+      ]
+    },
+    {
+      "frame": 1,
+      "phase": "sample 2",
+      "stimuli": [
+        {
+          "location": 0,
+          "intended_degrees": 98.78643070691845,
+          "realized_degrees": 100.39670778730837
+        },
+        {
+          "location": 3,
+          "intended_degrees": 128.7340859470355,
+          "realized_degrees": 128.0193672761645
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "phase": "delay",
+      "stimuli": []
+    },
+    {
+      "frame": 3,
+      "phase": "test 1 onset",
+      "stimuli": [
+        {
+          "location": 0,
+          "intended_degrees": 98.78643070691845,
+          "realized_degrees": 93.9736877248026
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "phase": "test 1 repeat",
+      "stimuli": [
+        {
+          "location": 0,
+          "intended_degrees": 98.78643070691845,
+          "realized_degrees": 98.22345383572686
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "phase": "gap",
+      "stimuli": []
+    },
+    {
+      "frame": 6,
+      "phase": "test 2",
+      "stimuli": [
+        {
+          "location": 0,
+          "intended_degrees": 116.78643070691845,
+          "realized_degrees": 114.28814927608035
+        }
+      ]
+    }
+  ],
+  "declare_probabilities": [
+    8.853973804123783e-11,
+    2.8734633206168465e-32,
+    2.5817636029046298e-08,
+    2.2873113181276494e-08,
+    4.203672787639334e-08,
+    1.4094163169886542e-08,
+    1.0
+  ],
+  "sampled_actions": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "first_press": 6,
+  "outcome": "correct_rejection",
+  "selection_rule": "canonical fixed replicate 0, preselected independently of behavior",
+  "candidate_offset": 0,
+  "gif": "reports\\luo2015_scientific_assay_20260803_production\\trial\\specific_trial_all_frames.gif",
+  "individual_frames": [
+    "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t0.png",
+    "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t1.png",
+    "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t2.png",
+    "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t3.png",
+    "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t4.png",
+    "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t5.png",
+    "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t6.png"
+  ]
+}

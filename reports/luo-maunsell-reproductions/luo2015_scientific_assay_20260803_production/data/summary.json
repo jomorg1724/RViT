@@ -1,0 +1,545 @@
+{
+  "checkpoint": {
+    "iteration": 12899,
+    "path": "C:\\Users\\jomor\\OneDrive\\Desktop\\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\\RViT_plus_paper_jepa_grid9\\reports\\luo2015_attention_snapshot_20260802_production\\checkpoint_snapshot.pt",
+    "sha256": "2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f"
+  },
+  "contract": {
+    "base_orientations_degrees": {
+      "0": 98.78643070691845,
+      "3": 128.7340859470355
+    },
+    "common_nochange_trials": 128,
+    "curve_changed_trials_per_magnitude": 64,
+    "fixed_psychometric_magnitudes_degrees": [
+      0.0,
+      3.0,
+      6.0,
+      9.0,
+      12.0,
+      18.0,
+      24.0,
+      30.0,
+      35.0
+    ],
+    "map_repeats_per_exact_latent_cell": 64,
+    "memory_noise_enabled": true,
+    "mnemonic_noise_std": 0.64,
+    "model_grid": [
+      20,
+      20
+    ],
+    "sample_inhibition_frames": [
+      0,
+      1
+    ],
+    "sample_inhibition_key_sources": [
+      "visual",
+      "recurrent_memory"
+    ],
+    "sample_inhibition_logit_bias": -6.0,
+    "sampled_actions": true,
+    "sensory_noise_std_degrees": 5.0,
+    "task": "luo2015_criterion",
+    "theta_uniform_training_bound_degrees": 35.0
+  },
+  "curves": {
+    "blank_control": {
+      "criterion": [
+        1.3237807459002897,
+        1.0558085285300867,
+        0.8413335239256362,
+        0.43999852012465923,
+        0.16320974565135693,
+        -0.2724009081974439,
+        -0.15982162451252546,
+        0.43999852012465923,
+        0.6666159824779553
+      ],
+      "dprime": [
+        0.25080208718673047,
+        0.7867465219271363,
+        1.2156965311360375,
+        2.0183665387379914,
+        2.571944087684596,
+        3.4431653953821977,
+        3.218006828012361,
+        2.0183665387379914,
+        1.5651316140313993
+      ],
+      "early_hit_fraction": [
+        0.5714285714285714,
+        0.25,
+        0.07692307692307693,
+        0.391304347826087,
+        0.5357142857142857,
+        0.746031746031746,
+        0.7903225806451613,
+        0.8043478260869565,
+        0.9428571428571428
+      ],
+      "false_alarm_rate": [
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125
+      ],
+      "hit_rate": [
+        0.109375,
+        0.25,
+        0.40625,
+        0.71875,
+        0.875,
+        0.984375,
+        0.96875,
+        0.71875,
+        0.546875
+      ],
+      "mean_hit_frame": [
+        3.4285714285714284,
+        3.75,
+        3.923076923076923,
+        3.608695652173913,
+        3.4642857142857144,
+        3.253968253968254,
+        3.2096774193548385,
+        3.1956521739130435,
+        3.057142857142857
+      ]
+    },
+    "natural": {
+      "criterion": [
+        1.3237807459002897,
+        1.0558085285300867,
+        0.8413335239256362,
+        0.43999852012465923,
+        0.16320974565135693,
+        -0.2724009081974439,
+        -0.15982162451252546,
+        0.43999852012465923,
+        0.6666159824779553
+      ],
+      "dprime": [
+        0.25080208718673047,
+        0.7867465219271363,
+        1.2156965311360375,
+        2.0183665387379914,
+        2.571944087684596,
+        3.4431653953821977,
+        3.218006828012361,
+        2.0183665387379914,
+        1.5651316140313993
+      ],
+      "early_hit_fraction": [
+        0.5714285714285714,
+        0.25,
+        0.07692307692307693,
+        0.391304347826087,
+        0.5357142857142857,
+        0.746031746031746,
+        0.7903225806451613,
+        0.8043478260869565,
+        0.9428571428571428
+      ],
+      "false_alarm_rate": [
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125
+      ],
+      "hit_rate": [
+        0.109375,
+        0.25,
+        0.40625,
+        0.71875,
+        0.875,
+        0.984375,
+        0.96875,
+        0.71875,
+        0.546875
+      ],
+      "mean_hit_frame": [
+        3.4285714285714284,
+        3.75,
+        3.923076923076923,
+        3.608695652173913,
+        3.4642857142857144,
+        3.253968253968254,
+        3.2096774193548385,
+        3.1956521739130435,
+        3.057142857142857
+      ]
+    },
+    "other_sample": {
+      "criterion": [
+        1.3237807459002897,
+        1.0558085285300867,
+        0.8413335239256362,
+        0.43999852012465923,
+        0.16320974565135693,
+        -0.2724009081974439,
+        -0.15982162451252546,
+        0.43999852012465923,
+        0.6666159824779553
+      ],
+      "dprime": [
+        0.25080208718673047,
+        0.7867465219271363,
+        1.2156965311360375,
+        2.0183665387379914,
+        2.571944087684596,
+        3.4431653953821977,
+        3.218006828012361,
+        2.0183665387379914,
+        1.5651316140313993
+      ],
+      "early_hit_fraction": [
+        0.5714285714285714,
+        0.25,
+        0.07692307692307693,
+        0.391304347826087,
+        0.5357142857142857,
+        0.746031746031746,
+        0.7903225806451613,
+        0.8043478260869565,
+        0.9428571428571428
+      ],
+      "false_alarm_rate": [
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125
+      ],
+      "hit_rate": [
+        0.109375,
+        0.25,
+        0.40625,
+        0.71875,
+        0.875,
+        0.984375,
+        0.96875,
+        0.71875,
+        0.546875
+      ],
+      "mean_hit_frame": [
+        3.4285714285714284,
+        3.75,
+        3.923076923076923,
+        3.608695652173913,
+        3.4642857142857144,
+        3.253968253968254,
+        3.2096774193548385,
+        3.1956521739130435,
+        3.057142857142857
+      ]
+    },
+    "tested_sample": {
+      "criterion": [
+        1.3237807459002897,
+        1.0558085285300867,
+        0.8413335239256362,
+        0.43999852012465923,
+        0.16320974565135693,
+        -0.2724009081974439,
+        -0.15982162451252546,
+        0.43999852012465923,
+        0.6666159824779553
+      ],
+      "dprime": [
+        0.25080208718673047,
+        0.7867465219271363,
+        1.2156965311360375,
+        2.0183665387379914,
+        2.571944087684596,
+        3.4431653953821977,
+        3.218006828012361,
+        2.0183665387379914,
+        1.5651316140313993
+      ],
+      "early_hit_fraction": [
+        0.5714285714285714,
+        0.25,
+        0.07692307692307693,
+        0.391304347826087,
+        0.5535714285714286,
+        0.746031746031746,
+        0.7903225806451613,
+        0.8043478260869565,
+        0.9428571428571428
+      ],
+      "false_alarm_rate": [
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125,
+        0.0703125
+      ],
+      "hit_rate": [
+        0.109375,
+        0.25,
+        0.40625,
+        0.71875,
+        0.875,
+        0.984375,
+        0.96875,
+        0.71875,
+        0.546875
+      ],
+      "mean_hit_frame": [
+        3.4285714285714284,
+        3.75,
+        3.923076923076923,
+        3.608695652173913,
+        3.4464285714285716,
+        3.253968253968254,
+        3.2096774193548385,
+        3.1956521739130435,
+        3.057142857142857
+      ]
+    }
+  },
+  "elapsed_seconds": 773.294830083847,
+  "interpretation_boundaries": [
+    "Attention maps are descriptive routing weights, not content decoding.",
+    "The tested-sample lesion is oracle-targeted to the future first-test location, which is not cued to the model.",
+    "Fixed-magnitude curves are controlled measurement slices within the training support; the trained changed-trial sampler is uniform.",
+    "Intervals quantify evaluation-trial sampling for one frozen checkpoint, not training-seed uncertainty."
+  ],
+  "intervention_overall": {
+    "blank_control": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      },
+      "target_region_sample_mass": 0.0009150458745352807,
+      "total_trials": 704
+    },
+    "natural": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      },
+      "target_region_sample_mass": 0.2341664789710194,
+      "total_trials": 704
+    },
+    "other_sample": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      },
+      "target_region_sample_mass": 0.001244203564056079,
+      "total_trials": 704
+    },
+    "tested_sample": {
+      "all_trial_accuracy": 0.6761363636363636,
+      "correct_count": 476,
+      "nochange_outcomes": {
+        "correct_rejection": 119,
+        "false_alarm": 9
+      },
+      "target_region_sample_mass": 0.0011291391765553271,
+      "total_trials": 704
+    }
+  },
+  "map_conditions": {
+    "changed, test L0, +18\u00b0, samples low/low": {
+      "accuracy": 0.984375,
+      "outcomes": {
+        "hit": 63,
+        "miss": 1
+      }
+    },
+    "changed, test L3, +18\u00b0, samples low/low": {
+      "accuracy": 1.0,
+      "outcomes": {
+        "hit": 64
+      }
+    },
+    "unchanged, test L0, +18\u00b0, samples low/low": {
+      "accuracy": 0.9375,
+      "outcomes": {
+        "correct_rejection": 60,
+        "false_alarm": 4
+      }
+    },
+    "unchanged, test L3, +18\u00b0, samples low/low": {
+      "accuracy": 0.921875,
+      "outcomes": {
+        "correct_rejection": 59,
+        "false_alarm": 5
+      }
+    }
+  },
+  "paired_accuracy_effects": {
+    "blank_control": {
+      "ci95_high": 0.0,
+      "ci95_low": 0.0,
+      "mean_inhibited_minus_natural": 0.0,
+      "n": 704,
+      "discordant_pairs": 0,
+      "no_discordance_abs_bound_95": 0.005226181334430091
+    },
+    "other_sample": {
+      "ci95_high": 0.0,
+      "ci95_low": 0.0,
+      "mean_inhibited_minus_natural": 0.0,
+      "n": 704,
+      "discordant_pairs": 0,
+      "no_discordance_abs_bound_95": 0.005226181334430091
+    },
+    "tested_sample": {
+      "ci95_high": 0.0,
+      "ci95_low": 0.0,
+      "mean_inhibited_minus_natural": 0.0,
+      "n": 704,
+      "discordant_pairs": 0,
+      "no_discordance_abs_bound_95": 0.005226181334430091
+    }
+  },
+  "schema_version": 1,
+  "specific_trial": {
+    "latent_condition": {
+      "sample_orientations": {
+        "0": 98.78643070691845,
+        "3": 128.7340859470355
+      },
+      "test_location": 0,
+      "first_test_changed": false,
+      "guaranteed_second_test_change_degrees": 18.0
+    },
+    "sensory_frames": [
+      {
+        "frame": 0,
+        "phase": "sample 1",
+        "stimuli": [
+          {
+            "location": 0,
+            "intended_degrees": 98.78643070691845,
+            "realized_degrees": 97.62479328031955
+          },
+          {
+            "location": 3,
+            "intended_degrees": 128.7340859470355,
+            "realized_degrees": 131.7581977892474
+          }
+        ]
+      },
+      {
+        "frame": 1,
+        "phase": "sample 2",
+        "stimuli": [
+          {
+            "location": 0,
+            "intended_degrees": 98.78643070691845,
+            "realized_degrees": 100.39670778730837
+          },
+          {
+            "location": 3,
+            "intended_degrees": 128.7340859470355,
+            "realized_degrees": 128.0193672761645
+          }
+        ]
+      },
+      {
+        "frame": 2,
+        "phase": "delay",
+        "stimuli": []
+      },
+      {
+        "frame": 3,
+        "phase": "test 1 onset",
+        "stimuli": [
+          {
+            "location": 0,
+            "intended_degrees": 98.78643070691845,
+            "realized_degrees": 93.9736877248026
+          }
+        ]
+      },
+      {
+        "frame": 4,
+        "phase": "test 1 repeat",
+        "stimuli": [
+          {
+            "location": 0,
+            "intended_degrees": 98.78643070691845,
+            "realized_degrees": 98.22345383572686
+          }
+        ]
+      },
+      {
+        "frame": 5,
+        "phase": "gap",
+        "stimuli": []
+      },
+      {
+        "frame": 6,
+        "phase": "test 2",
+        "stimuli": [
+          {
+            "location": 0,
+            "intended_degrees": 116.78643070691845,
+            "realized_degrees": 114.28814927608035
+          }
+        ]
+      }
+    ],
+    "declare_probabilities": [
+      8.853973804123783e-11,
+      2.8734633206168465e-32,
+      2.5817636029046298e-08,
+      2.2873113181276494e-08,
+      4.203672787639334e-08,
+      1.4094163169886542e-08,
+      1.0
+    ],
+    "sampled_actions": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "first_press": 6,
+    "outcome": "correct_rejection",
+    "selection_rule": "canonical fixed replicate 0, preselected independently of behavior",
+    "candidate_offset": 0,
+    "gif": "reports\\luo2015_scientific_assay_20260803_production\\trial\\specific_trial_all_frames.gif",
+    "individual_frames": [
+      "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t0.png",
+      "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t1.png",
+      "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t2.png",
+      "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t3.png",
+      "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t4.png",
+      "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t5.png",
+      "reports\\luo2015_scientific_assay_20260803_production\\trial\\trial_frame_t6.png"
+    ]
+  }
+}

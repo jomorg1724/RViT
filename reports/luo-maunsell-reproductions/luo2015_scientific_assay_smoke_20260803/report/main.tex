@@ -1,0 +1,106 @@
+\documentclass[10pt]{article}
+\usepackage[margin=18mm,headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Heros}
+\setsansfont{TeX Gyre Heros}
+\usepackage{microtype,graphicx,booktabs,tabularx,array,caption,xcolor,hyperref,fancyhdr,amsmath,pdflscape}
+\definecolor{Blue}{HTML}{1F6FB2}
+\definecolor{Orange}{HTML}{D55E00}
+\definecolor{Light}{HTML}{F1F5F8}
+\hypersetup{colorlinks=true,linkcolor=Blue,urlcolor=Blue,pdftitle={Luo sample-phase attention assay}}
+\graphicspath{{../figures/}{../trial/}}
+\captionsetup{font=small,labelfont=bf,justification=justified,singlelinecheck=false}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.45em}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Luo noisy-memory attention assay}\fancyhead[R]{\small frozen checkpoint}\fancyfoot[C]{\small \thepage}
+\newcommand{\boundary}[1]{\par\smallskip\colorbox{Light}{\parbox{0.96\linewidth}{\textbf{Evidence boundary.} #1}}\par\smallskip}
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}\vspace*{10mm}{\color{Blue}\rule{\textwidth}{2.2pt}}\\[8mm]
+{\fontsize{25}{30}\selectfont\bfseries Sample-phase spatial attention\\in the noisy-memory Luo task\par}
+\vspace{4mm}{\fontsize{14}{19}\selectfont Noise-averaged maps, an oracle spatial lesion, psychometrics, chronometrics, and a complete rendered trial\par}
+\vfill
+\begin{tabularx}{\textwidth}{@{}p{4.0cm}X@{}}\toprule
+\textbf{Frozen checkpoint} & iteration 12899; SHA-256 \texttt{2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f}.\\
+\textbf{Primary intervention} & Additive key-logit bias -6.0 at all 100 visual and 100 recurrent-memory keys in the future-tested quadrant, only at sample frames $t0$--$t1$.\\
+\textbf{Primary result} & Suppressing the future-tested sample region changed pooled task accuracy by +0.000 (paired trial-bootstrap 95\% interval [+0.000, +0.000]; n=44 paired trials).\\
+\textbf{Run} & \texttt{luo2015\_scientific\_assay\_smoke\_20260803}.\\\bottomrule
+\end{tabularx}
+\vfill{\color{Blue}\rule{\textwidth}{2.2pt}}
+\end{titlepage}
+
+\begin{abstract}
+We evaluated one frozen recurrent vision-transformer policy in a seven-frame Luo--Maunsell-inspired change-detection task. Attention maps average 2 repeats of each exactly fixed latent condition while sensory, mnemonic, and policy-sampling noise vary. A causal routing assay suppressed the future-tested sample quadrant only during sample presentation, with equal-area suppression of the other active sample and a blank quadrant as spatial controls. Suppressing the future-tested sample region changed pooled task accuracy by +0.000 (paired trial-bootstrap 95\% interval [+0.000, +0.000]; n=44 paired trials). The clamp changed mean sample-frame mass from 0.0048 to 0.0000. Fixed-magnitude psychometric and chronometric curves characterize the behavioral regime. Results concern one mid-training checkpoint and do not estimate training-seed uncertainty.
+\end{abstract}
+
+\section{Question and evidential scope}
+The task has no symbolic or spatial cue: samples are shown simultaneously at locations 0 and 3. The primary causal question is whether routing to the sample at the \emph{future tested location} is necessary for later performance. The tested-location intervention is therefore oracle targeted; the model itself is not told which location will be tested.
+
+\boundary{Raw attention maps show routing, not mnemonic content. The causal clamp establishes the effect of changing that routing operator, but orientation decoding would still be required to identify what information occupies the selected recurrent tokens.}
+
+\section{Frozen model and controlled protocol}
+The checkpoint uses a $20\times20$ token grid (400 visual queries; 400 visual plus 400 recurrent-memory keys), xLSTM recurrence, sensory orientation noise SD 5.0$^\circ$, and mnemonic noise SD 0.64. The training generator samples $\Delta\sim\mathrm{Uniform}(-35^\circ,+35^\circ)$. Policy actions are sampled.
+
+Map cells fix test location, change status, signed $18^\circ$ change, and both sample members exactly. Each cell is repeated 2 times; only sensory rendering noise, recurrent-memory noise, and policy sampling vary. Maps are query-averaged incoming key mass or query-quadrant-to-key-quadrant routing. Frames after an action or automatic termination are excluded.
+
+Psychometrics use fixed $|\Delta|\in\{0, 3, 6, 9, 12, 18, 24, 30, 35\}^\circ$, with 4 changed trials per point and 8 common no-change trials. These are controlled measurement slices within the training support, not a claim that training used fixed magnitudes. Chronometrics report logical response frame, not biological milliseconds.
+
+\section{Behavioral effect of sample-phase inhibition}
+\begin{center}\small
+\begin{tabular}{lrrrrrr}\toprule
+Condition & Correct & Accuracy & Sample mass & $\Delta$ accuracy [95\% CI] & HR at $18^\circ$ & $d'$ at $18^\circ$\\\midrule
+Natural & 28/44 & 0.636 & 0.0048 & reference & 1.000 & 2.875 \\
+Inhibit future-tested sample & 28/44 & 0.636 & 0.0000 & +0.000 [+0.000, +0.000] & 1.000 & 2.875 \\
+Inhibit other active sample & 28/44 & 0.636 & 0.0000 & +0.000 [+0.000, +0.000] & 1.000 & 2.875 \\
+Inhibit blank control & 28/44 & 0.636 & 0.0000 & +0.000 [+0.000, +0.000] & 1.000 & 2.875 \\
+\bottomrule\end{tabular}
+\end{center}
+
+Suppressing the future-tested sample region changed pooled task accuracy by +0.000 (paired trial-bootstrap 95\% interval [+0.000, +0.000]; n=44 paired trials). The other-active-sample and blank-quadrant interventions are equal-area controls under the same logit bias and common trial/noise schedule. Confidence intervals are paired over evaluation trials.
+
+\begin{center}\includegraphics[width=0.98\textwidth]{sample_attention_inhibition_summary.pdf}
+\captionof{figure}{\textbf{Sample-phase lesion and manipulation check.} Accuracy is pooled over all fixed-magnitude changed trials and the common no-change bank. Attention mass is measured in the region that each condition targets during $t0$--$t1$.}
+\end{center}
+
+\section{Psychometric and chronometric functions}
+\begin{center}\includegraphics[width=0.98\textwidth]{psychometric_chronometric_curves.pdf}
+\captionof{figure}{\textbf{Controlled behavioral curves.} Hit rate and $d'$ are plotted against fixed absolute orientation change. Response timing is a computational frame index: changed trials can declare at first-test onset $t3$ or repeat $t4$.}
+\end{center}
+
+\section{Attention maps across exactly repeated latent conditions}
+\begin{landscape}\begin{center}\includegraphics[width=0.98\linewidth,height=0.78\textheight,keepaspectratio]{attention_maps_combined_keys.pdf}
+\captionof{figure}{\textbf{Combined visual-plus-memory incoming attention.} Rows are four exact latent conditions (changed/unchanged crossed with test location 0/3); columns are all seven logical frames. Color is $\log_2$ attention relative to uniform spatial mass. Gray cells were not experienced after termination.}
+\end{center}\end{landscape}
+
+\begin{landscape}\begin{center}\includegraphics[width=0.98\linewidth,height=0.78\textheight,keepaspectratio]{attention_maps_recurrent_memory_keys.pdf}
+\captionof{figure}{\textbf{Recurrent-memory source maps.} Same aggregation and survivor rule, restricted to recurrent-memory keys under the joint visual-plus-memory softmax.}
+\end{center}\end{landscape}
+
+\begin{landscape}\begin{center}\includegraphics[width=0.98\linewidth,height=0.78\textheight,keepaspectratio]{attention_maps_visual_keys.pdf}
+\captionof{figure}{\textbf{Current-visual source maps.} Visual and memory source maps are not independently renormalized; each retains its share of the joint softmax.}
+\end{center}\end{landscape}
+
+\begin{landscape}\begin{center}\includegraphics[width=0.98\linewidth,height=0.78\textheight,keepaspectratio]{attention_query_to_key_routing.pdf}
+\captionof{figure}{\textbf{Query-conditioned spatial routing.} Each $4\times4$ tile preserves task-quadrant query origin (rows) and key destination (columns), summing visual and recurrent-memory sources.}
+\end{center}\end{landscape}
+
+\section{One complete trial}
+The rendered example had an unchanged first test at location 0 followed by a guaranteed $+18^\circ$ second test. The sampled policy first declared at $t6$, yielding a \texttt{correct\_rejection}. Its declare probabilities were \texttt{[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]}; sampled actions were \texttt{[0, 0, 0, 0, 0, 0, 1]} ($0=$ wait, $1=$ declare).
+
+\begin{center}\includegraphics[width=0.98\textwidth]{specific_trial_montage.pdf}
+\captionof{figure}{\textbf{Every physical image in the specific trial.} The animated companion GIF pairs each input with its incoming attention map and action probability.}
+\end{center}
+
+\section{Interpretation and limitations}
+\begin{enumerate}
+\item This is a single frozen checkpoint at iteration 12899; evaluation-trial intervals do not quantify training-seed variability.
+\item The intervention suppresses both visual and recurrent-memory keys in one quadrant under a joint softmax. It therefore changes competitive routing globally and is not equivalent to deleting pixels or cell state.
+\item Oracle targeting answers a mechanistic counterfactual but is not a model-endogenous cue manipulation.
+\item Fixed-magnitude psychometrics deliberately condition the uniform training sampler. Same-distribution competence and transfer must remain separately labeled.
+\item The biological comparison target is Luo and Maunsell (2015) V4. This distributed recurrent model is a computational abstraction; raw attention is not a V4 firing-rate measurement.
+\end{enumerate}
+
+\section{Reproducibility}
+The run retains reduced source-resolved attention arrays, query-quadrant routing, behavioral curves, CSV tables, the exact trial record, every trial frame, the GIF, producer hash, checkpoint hash, and an artifact manifest. Source checkpoint SHA-256: \texttt{2c4a6d2d21bd9698387f7a4b27cbc242c7f3bb097868518deb7790ae1c8b339f}. The mutable live-training checkpoint was never opened.
+
+\paragraph{Reference.} Luo, T. Z. and Maunsell, J. H. R. (2015). Neuronal modulations in visual cortex are associated with only one of multiple components of attention. \emph{Neuron} 86, 1182--1188. \href{https://doi.org/10.1016/j.neuron.2015.05.007}{doi:10.1016/j.neuron.2015.05.007}.
+\end{document}

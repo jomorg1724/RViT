@@ -1,0 +1,4 @@
+C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series\vda4_memory_noise_attention_comparison_20260804\generate_attention_comparison.py:315: UserWarning: constrained_layout not applied because axes sizes collapsed to zero.  Try making figure larger or axes decorations smaller.
+  fig.savefig(figure_dir / f"{stem}.png", dpi=200, bbox_inches="tight")
+C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series\vda4_memory_noise_attention_comparison_20260804\generate_attention_comparison.py:316: UserWarning: constrained_layout not applied because axes sizes collapsed to zero.  Try making figure larger or axes decorations smaller.
+  fig.savefig(figure_dir / f"{stem}.pdf", bbox_inches="tight")

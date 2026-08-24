@@ -1,0 +1,106 @@
+{
+  "historical_clean": {
+    "assay_a_nochange_v0.25": {
+      "memory_noise_draw_calls": 0,
+      "memory_noise_schedule_sha256": "disabled",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.0,
+        "inject_memory_noise": false,
+        "lstm_memory_noise_std": 0.0
+      }
+    },
+    "assay_a_nochange_v0.5": {
+      "memory_noise_draw_calls": 0,
+      "memory_noise_schedule_sha256": "disabled",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.0,
+        "inject_memory_noise": false,
+        "lstm_memory_noise_std": 0.0
+      }
+    },
+    "assay_a_nochange_v0.75": {
+      "memory_noise_draw_calls": 0,
+      "memory_noise_schedule_sha256": "disabled",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.0,
+        "inject_memory_noise": false,
+        "lstm_memory_noise_std": 0.0
+      }
+    },
+    "assay_a_nochange_v1": {
+      "memory_noise_draw_calls": 0,
+      "memory_noise_schedule_sha256": "disabled",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.0,
+        "inject_memory_noise": false,
+        "lstm_memory_noise_std": 0.0
+      }
+    },
+    "assay_b_invalid_cue0_target3_v0.75_mag18": {
+      "memory_noise_draw_calls": 0,
+      "memory_noise_schedule_sha256": "disabled",
+      "memory_noise_seed": 8830956565345402291,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.0,
+        "inject_memory_noise": false,
+        "lstm_memory_noise_std": 0.0
+      }
+    }
+  },
+  "interrupted_noisy": {
+    "assay_a_nochange_v0.25": {
+      "memory_noise_draw_calls": 7,
+      "memory_noise_schedule_sha256": "6372712bef973fc725337b34664f706cc135399ecc10b8ded5f40c28a0f422ec",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.5,
+        "inject_memory_noise": true,
+        "lstm_memory_noise_std": 0.5
+      }
+    },
+    "assay_a_nochange_v0.5": {
+      "memory_noise_draw_calls": 7,
+      "memory_noise_schedule_sha256": "6372712bef973fc725337b34664f706cc135399ecc10b8ded5f40c28a0f422ec",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.5,
+        "inject_memory_noise": true,
+        "lstm_memory_noise_std": 0.5
+      }
+    },
+    "assay_a_nochange_v0.75": {
+      "memory_noise_draw_calls": 7,
+      "memory_noise_schedule_sha256": "6372712bef973fc725337b34664f706cc135399ecc10b8ded5f40c28a0f422ec",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.5,
+        "inject_memory_noise": true,
+        "lstm_memory_noise_std": 0.5
+      }
+    },
+    "assay_a_nochange_v1": {
+      "memory_noise_draw_calls": 7,
+      "memory_noise_schedule_sha256": "6372712bef973fc725337b34664f706cc135399ecc10b8ded5f40c28a0f422ec",
+      "memory_noise_seed": 7495128873241552703,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.5,
+        "inject_memory_noise": true,
+        "lstm_memory_noise_std": 0.5
+      }
+    },
+    "assay_b_invalid_cue0_target3_v0.75_mag18": {
+      "memory_noise_draw_calls": 7,
+      "memory_noise_schedule_sha256": "222fbf8ffeea128737fa11c3010bf7ad3060e69b6162e1a9a6b497bdbceff0f8",
+      "memory_noise_seed": 8830956565345402291,
+      "runtime_noise_contract": {
+        "encoder_memory_noise_std": 0.5,
+        "inject_memory_noise": true,
+        "lstm_memory_noise_std": 0.5
+      }
+    }
+  }
+}

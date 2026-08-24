@@ -1,0 +1,76 @@
+{
+  "evidence_boundary": "Exploratory held-out routing comparison: historical terminal clean reference versus interrupted noise-trained checkpoint. Training duration, provenance, and initialization pairing are not matched.",
+  "files": [
+    {
+      "bytes": 3111,
+      "path": "COMPARISON_IDENTITY.json",
+      "sha256": "857953b3db6467b64f1f83991839259b2fa324191db72ddbc1d8189481874b1c"
+    },
+    {
+      "bytes": 707709,
+      "path": "data/attention_diagnostic_trials.npz",
+      "sha256": "e55041f9ffceb237629aec6f9d34088c5aa64b070abf792b140923ebf85d4b2e"
+    },
+    {
+      "bytes": 178296,
+      "path": "data/attention_metrics.csv",
+      "sha256": "f884ed92e34f4e894077a179fe0979c55cea2385c277452f247856a7b3f45eeb"
+    },
+    {
+      "bytes": 24811,
+      "path": "DISPLAY_DATA.json",
+      "sha256": "28231d23d0dbd1b8946797ce0639a5059ecffadbce881f7a92f117c9426983ca"
+    },
+    {
+      "bytes": 44453,
+      "path": "figures/cue_diff.pdf",
+      "sha256": "de7ed84845d306d1d9e156b3bd8fa7a37f17c8271ba9b80b3a880ed18811d773"
+    },
+    {
+      "bytes": 113162,
+      "path": "figures/cue_diff.png",
+      "sha256": "864c9d841650cf22aca7a5a64167921d785ffc8851c93b710177377ff96ee6e9"
+    },
+    {
+      "bytes": 71294,
+      "path": "figures/cue_maps.pdf",
+      "sha256": "ba69d4a6d4d2e7de07bb1c92e0efc058e74b0e651432ff7c0c5476e15bd84a3d"
+    },
+    {
+      "bytes": 187029,
+      "path": "figures/cue_maps.png",
+      "sha256": "8e7c0f59349f2ad316965c3fa91da92c2f9d77c17f5834f2d270574196e2a375"
+    },
+    {
+      "bytes": 25667,
+      "path": "figures/invalid_diff.pdf",
+      "sha256": "733d9f61455abf40a9a29133703871215c35fe8a52d26f33955935e4a7e69aaf"
+    },
+    {
+      "bytes": 95096,
+      "path": "figures/invalid_diff.png",
+      "sha256": "f77c95c77a16ae0cde5a7770af94b9c36f0555730afb2c799752045cae7a3c5a"
+    },
+    {
+      "bytes": 34479,
+      "path": "figures/invalid_maps.pdf",
+      "sha256": "e27f2c4caf1504dd9a240fb1a1ed2e3030d76983e2d4d2dd779bd7794a3ccc98"
+    },
+    {
+      "bytes": 143265,
+      "path": "figures/invalid_maps.png",
+      "sha256": "81efdcedbcbd9924d559aee5cf3cdd681b222bf5e9e3b661d4b9e242e2ae9143"
+    },
+    {
+      "bytes": 3779,
+      "path": "RUNTIME_NOISE_REGISTRY.json",
+      "sha256": "46a3b75b5aa11e5c7a36de750c9141b9e85fb385a5fae503519311cb3736ae19"
+    },
+    {
+      "bytes": 3651,
+      "path": "TRIAL_BANK_REGISTRY.json",
+      "sha256": "4166f43b4cb76aea12297e99de0378bea0d133b40101e977f910ba745ed395d9"
+    }
+  ],
+  "schema_version": 1
+}

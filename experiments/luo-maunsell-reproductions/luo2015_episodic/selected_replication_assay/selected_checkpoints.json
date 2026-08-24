@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "design": "selected_fixed_policy_luo2015_behavioral_replication_assay",
+  "claim_scope": "behavioral_dissociation_only_not_V4_mechanistic_replication",
+  "models": [
+    {
+      "id": "criterion_loc3_gamma100",
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_gamma_ladder_20260804\\criterion_loc3_dmd9nechl0nrcr\\gamma100\\rvit_paper_luo2015_criterion_final.pt",
+      "checkpoint_sha256": "db72e3a48acb3dabe58c48e5731667888003e56f7d21409d45b4dc1c47f1d9f9",
+      "checkpoint_bytes": 36664315,
+      "session": "criterion",
+      "task": "luo2015_criterion",
+      "condition_loc": 3,
+      "gamma": 1.0,
+      "expected_primary_contrast": "condition_minus_control_criterion_negative"
+    },
+    {
+      "id": "sensitivity_loc3_gamma100",
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_gamma_ladder_20260804\\sensitivity_loc3_5nl4baxc1d0u9e\\gamma100\\rvit_paper_luo2015_sensitivity_final.pt",
+      "checkpoint_sha256": "4a64fb7caee70e3f7eb84d1650f42b10d7c986f91c5d4b60a10e9dbc42e97459",
+      "checkpoint_bytes": 36665635,
+      "session": "sensitivity",
+      "task": "luo2015_sensitivity",
+      "condition_loc": 3,
+      "gamma": 1.0,
+      "expected_primary_contrast": "condition_minus_control_dprime_positive"
+    },
+    {
+      "id": "criterion_loc3_gamma090",
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_gamma_ladder_20260804\\criterion_loc3_dmd9nechl0nrcr\\gamma090\\rvit_paper_luo2015_criterion_final.pt",
+      "checkpoint_sha256": "1cf5746adfb1615087a537a1d1e6df31f94e9ae9039593ce21b27499e222c5ed",
+      "checkpoint_bytes": 36664315,
+      "session": "criterion",
+      "task": "luo2015_criterion",
+      "condition_loc": 3,
+      "gamma": 0.9,
+      "expected_primary_contrast": "condition_minus_control_criterion_negative"
+    },
+    {
+      "id": "sensitivity_loc0_gamma090",
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_gamma_ladder_20260804\\sensitivity_loc0_3hx2459sfg3tki\\gamma090\\rvit_paper_luo2015_sensitivity_final.pt",
+      "checkpoint_sha256": "33a8f6dc49503ec7256fa02462acbadf02a15ca6e403be4d9a168cdf7a17fe10",
+      "checkpoint_bytes": 36665635,
+      "session": "sensitivity",
+      "task": "luo2015_sensitivity",
+      "condition_loc": 0,
+      "gamma": 0.9,
+      "expected_primary_contrast": "condition_minus_control_dprime_positive"
+    }
+  ],
+  "evaluation_contract": {
+    "theta": 65.0,
+    "change_distribution": "signed_delta_uniform(-65,+65)",
+    "initial_orientations": "iid_uniform_axial_0_180",
+    "sensory_orientation_noise_sd": 5.0,
+    "mnemonic_noise_sd": 0.32,
+    "mnemonic_noise_enabled": true,
+    "sample_actions": true,
+    "curriculum": false,
+    "timeline_frames": 7,
+    "balanced_change_status_and_locations": true,
+    "trials_per_status_per_location": 2000,
+    "evaluation_seed": 20260804
+  },
+  "paper_targets": {
+    "source": "Luo and Maunsell, Neuron 2015, Figure S3C medians",
+    "criterion": {
+      "monkey_F_delta_c": -1.34,
+      "monkey_L_delta_c": -0.9,
+      "delta_dprime_near_zero": [
+        -0.001,
+        0.03
+      ]
+    },
+    "sensitivity": {
+      "monkey_F_delta_dprime": 1.72,
+      "monkey_L_delta_dprime": 1.6,
+      "delta_c_near_zero": [
+        0.02,
+        0.02
+      ]
+    }
+  }
+}

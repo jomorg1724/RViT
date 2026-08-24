@@ -1,0 +1,67 @@
+cat1 move log started 2026-08-20 21:26:22
+21:26:23  OK  runs\vda4_crossattn1_d128_nodecay_seed0_pod
+21:26:24  OK  runs\vda4_crossattn1_grid10x10_d128_nodecay_seed0_pod
+21:26:26  OK  runs\vda4_crossattn1_grid10x10_d128_nodecay_seed1_pod
+21:26:27  OK  runs\vda4_crossattn1_grid2x2_d128_nodecay_seed1_pod
+21:26:27  OK  runs\vda4_affine_ew_grid10x10_d128_replay_excluded_seed0_canary2_20260726T165645Z_1fea99f309ef
+21:26:28  OK  runs\vda4_affine_ew_grid10x10_d128_replay_excluded_seed0_canary3_20260726T165715Z_4684824535f4
+21:26:29  OK  runs\vda4_affine_ew_grid10x10_d128_replay_excluded_seed0_canary_20260726T165618Z_e55ae413f7fb
+21:26:30  OK  runs\vda4_affine_ew_grid10x10_d128_replay_excluded_seed0_production_20260726T165822Z_b863849f2288
+21:26:31  OK  runs\vda4_affine_ew_grid2x2_d128_nodecay_seed0_canary_20260727T023426Z_f1974435b306
+21:26:32  OK  runs\vda4_affine_ew_grid2x2_d128_nodecay_seed0_matched_production_20260727T024649Z_9f3a6fd97053
+21:26:33  OK  runs\vda4_affine_ew_grid2x2_d128_nodecay_seed0_pod_replacement
+21:26:33  OK  runs\vda4_affine_ew_grid4x4_d128_nodecay_seed0_pod
+21:26:34  OK  runs\vda4_affine_grid4x4_batched_canary_seed0_20260720_143513
+21:26:35  OK  runs\vda4_affine_grid4x4_batched_seed0
+21:26:35  OK  runs\vda4_affine_grid4x4_seed0
+21:26:36  OK  runs\vda4_grid4x4_crossattn1_d128_nodecay_seed0_pod
+21:26:37  OK  runs\vda16_affine_ew_d128_nodecay_replay_excluded_seed0_20260719T185019Z_e25459313c43
+21:26:39  OK  runs\vda16_crossattn1_d128_nodecay_replay_excluded_seed0_20260718T205046Z_afdb54ce3f91
+21:26:40  OK  runs\vda16_crossattn1_d128_nodecay_seed1_pod
+21:26:41  OK  runs\vda_fixed9_crossattn1_grid4x4_d128_nodecay_seed0_pod
+21:26:42  ERR runs\: Could not find a part of the path.
+21:26:42  OK  runs\source_archives\rvit_vda_recommendations_20260730T041930Z.tar.gz
+21:26:42  OK  experiments\vda16_replication
+21:26:42  OK  experiments\vda_fixed9_controlled
+21:26:43  OK  experiments\vda_recommended_endpoints
+21:26:46  OK  experiments\vda_stream_factorial
+21:26:46  OK  reports\vda_series\baseline_sdt_decomposition_20260726
+21:26:47  OK  reports\vda_series\change_location_intervention_20260719
+21:26:48  OK  reports\vda_series\change_location_intervention_vda4_20260725
+21:26:54  OK  reports\vda_series\first_wave_20260711_production
+21:26:54  OK  reports\vda_series\manuscript
+21:26:57  OK  reports\vda_series\recommended_experiments_20260729
+21:26:58  OK  reports\vda_series\spatial_scaling_attention_measures_20260802
+21:27:01  OK  reports\vda_series\spatial_scaling_attention_measures_20260803_source_separated
+21:27:03  OK  reports\vda_series\spatial_scaling_attention_measures_20260803_source_separated_v2
+21:27:05  OK  reports\vda_series\spatial_scaling_attention_measures_20260803_source_separated_v3
+21:27:06  OK  reports\vda_series\spatial_scaling_attention_measures_20260803_source_separated_v4
+21:27:08  OK  reports\vda_series\spatial_scaling_attention_measures_20260803_source_separated_v5
+21:27:10  OK  reports\vda_series\spatial_scaling_attention_measures_20260803_source_separated_v6
+21:27:11  OK  reports\vda_series\spatial_scaling_crossattn_source_attention_20260803
+21:27:12  ERR reports\vda_series\: Could not find a part of the path.
+21:27:12  OK  reports\vda_series\spatial_scaling_eval_canary_affine10_20260726
+21:27:12  OK  reports\vda_series\spatial_scaling_eval_canary_affine10_v2_20260726
+21:27:13  OK  reports\vda_series\spatial_scaling_eval_canary_cross10_20260726
+21:27:13  OK  reports\vda_series\stream_factorial_production_20260730
+21:27:13  OK  reports\vda_series\vda16_affine_change_location_intervention_20260729_v1
+21:27:15  OK  reports\vda_series\vda16_affine_change_location_intervention_20260729_v2
+21:27:19  OK  reports\vda_series\vda16_affine_nodecay_20260720_production
+21:27:23  OK  reports\vda_series\vda16_crossattn_nodecay_20260719_production
+21:27:24  ERR reports\vda_series\: Could not find a part of the path.
+21:27:26  OK  reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_decoder_nonconvergence
+21:27:28  ERR reports\vda_series\: Could not find a part of the path.
+21:27:30  OK  reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_t0_pca_zero_variance
+21:27:32  OK  reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_visual_qa
+21:27:33  OK  reports\vda_series\vda16_cued_vs_opposite_attention_20260719
+21:27:33  OK  reports\vda_series\first_wave_20260711_production_QA.md
+21:27:33  OK  reports\vda_series\spatial_scaling_attention_measures_v3.stderr.log
+21:27:33  OK  reports\vda_series\spatial_scaling_attention_measures_v3.stdout.log
+21:27:33  OK  reports\vda_series\spatial_scaling_attention_measures_v4.stderr.log
+21:27:34  OK  reports\vda_series\spatial_scaling_attention_measures_v4.stdout.log
+21:27:34  OK  reports\vda_series\spatial_scaling_attention_measures_v5.stderr.log
+21:27:34  OK  reports\vda_series\spatial_scaling_attention_measures_v5.stdout.log
+21:27:34  OK  reports\vda_series\spatial_scaling_attention_measures_v6.stderr.log
+21:27:34  OK  reports\vda_series\spatial_scaling_attention_measures_v6.stdout.log
+21:28:05  OK  reports\vda_series_manuscript (workspace-root tree)
+21:28:05  cat1 move script finished

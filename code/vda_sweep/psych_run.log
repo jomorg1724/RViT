@@ -1,0 +1,21 @@
+[psych] vda1 crossattn1 iter=19999
+   p0.25 cued thr=13.1° fa=0.03
+   p0.5 cued thr=12.8° fa=0.04
+   p0.75 cued thr=12.7° fa=0.03
+   p1.0 cued thr=12.4° fa=0.03
+[psych] vda1 affine_ew iter=19999
+   p0.25 cued thr=9.7° fa=0.10
+   p0.5 cued thr=9.9° fa=0.10
+   p0.75 cued thr=10.2° fa=0.09
+   p1.0 cued thr=10.0° fa=0.10
+[psych] vda4 crossattn1 iter=19999
+   p0.25 cued thr=12.7° fa=0.05
+   p0.5 cued thr=12.3° fa=0.04
+   p0.75 cued thr=12.1° fa=0.05
+   p1.0 cued thr=13.0° fa=0.04
+[psych] vda4 affine_ew iter=19999
+   p0.25 cued thr=12.5° fa=0.09
+   p0.5 cued thr=12.3° fa=0.09
+   p0.75 cued thr=11.5° fa=0.07
+   p1.0 cued thr=12.4° fa=0.08
+[psych] saved -> /Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/figs/psych.npz

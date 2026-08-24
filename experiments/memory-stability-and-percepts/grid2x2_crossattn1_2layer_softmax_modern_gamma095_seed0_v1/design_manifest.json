@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vda4_grid2x2_crossattn1_transformer_memory_2layer_softmax_modern_gamma095_seed0_v1",
+  "status": "registered_local_seed0_experiment",
+  "claim_scope": "single-seed online same-distribution VDA4 competence test; not transfer or held-out evidence",
+  "task_contract": {
+    "task": "vda4",
+    "active_items": 4,
+    "timeline_frames": 7,
+    "change_time": 5,
+    "sensory_noise_std": 5.0,
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "action_semantics": "0=wait, 1=declare; sampled policy"
+  },
+  "architecture": {
+    "cell": "transformer_memory_2layer_softmax_modern",
+    "visual_feedback": "crossattn1: RMSNorm sources; Q=X; K/V=[X,H1_prev] under one inspectable softmax; per-head QK normalization",
+    "memory1": "RMSNorm sources; Q=H1_prev; K/V=[H1_prev,Z]; four-head QK-normalized attention; K3-style output gate; raw H1 then tokenwise feature softmax",
+    "memory2": "RMSNorm sources; Q=H2_prev; K/V=[H2_prev,H1]; four-head QK-normalized attention; K3-style output gate; raw H2 then tokenwise feature softmax",
+    "student_memory_output": "tokenwise_feature_softmax",
+    "initial_memory": "learned slot-distinct H1_0/H2_0 logits, tokenwise softmaxed before first use",
+    "softmax_axis": "each token independently over its 128 memory features",
+    "downstream_h1": ["memory transformer 2", "next-step visual feedback", "H1 JEPA head"],
+    "downstream_h2": ["actor", "critic", "next-step memory-2 recurrence", "H2 JEPA head"],
+    "patch_grid": [2, 2],
+    "tokens_per_layer": 4,
+    "d_mem": 128,
+    "memory_heads_per_layer": 4,
+    "head_dimension": 32,
+    "attention_output_gate": "bias-free full-rank sigmoid gate per query/head/channel after attention-times-value and before output projection",
+    "all_parameters_trainable": true
+  },
+  "jepa": {
+    "coefficient_on_total": 0.5,
+    "cross_entropy": "temporal student@t predicts detached EMA-teacher@t+1 independently for H1/H2",
+    "student_output": "structured prototype probabilities via feature-wise logits and student-temperature softmax in the JEPA objective",
+    "heads_per_memory_layer": 4,
+    "prototype_dimension": 256,
+    "student_temperature": 0.1,
+    "teacher_temperature_start": 0.04,
+    "teacher_temperature_end": 0.07,
+    "teacher_temperature_warmup_iterations": 300,
+    "center_momentum": 0.9,
+    "center_update": "EMA over valid timesteps only; padded tails excluded",
+    "teacher_ema_decay": 0.996,
+    "teacher_ema_schedule": "none; fixed decay throughout",
+    "collapse_prevention": {
+      "sinkhorn_knopp": "3 iterations; balanced independently per memory-layer/token/head over valid batch-time samples",
+      "projected_feature_variance_floor": {"coefficient": 1.0, "target_std": 1.0},
+      "projected_feature_covariance_decorrelation": {"coefficient": 0.01},
+      "total": "CE + 1.0*variance + 0.01*covariance"
+    }
+  },
+  "training": {
+    "iterations": 20000,
+    "episodes_per_iteration": 8,
+    "seed": 0,
+    "device": "local_cuda",
+    "optimizer_learning_rate": 0.0003,
+    "gamma": 0.95,
+    "discounting": "one-step TD targets use gamma 0.95",
+    "entropy_coefficient": 0.01,
+    "initial_action_bias": [0.0, -1.5],
+    "pac_target_ema_decay": 0.995,
+    "initialization": "fresh",
+    "checkpoint_every_iterations": 50
+  },
+  "curriculum": {
+    "enabled": true,
+    "theta_start_deg": 65.0,
+    "window_trials": 1000,
+    "correctness_threshold": 0.85,
+    "theta_step_deg": 3.0,
+    "theta_floor_deg": 8.0,
+    "window_semantics": "non-overlapping valid completed trials",
+    "update": "theta=max(theta_floor, theta-3deg) only when window correctness>=0.85"
+  },
+  "monitoring": {
+    "required_metrics": ["rollout/mean_return", "rollout/correct_rate", "rolling/mean_return", "rolling/correct_rate", "loss_jepa_h1", "loss_jepa_h2", "loss_jepa_ce", "loss_jepa_var", "loss_jepa_cov", "loss_jepa", "n_skipped", "env/theta"],
+    "post_checkpoint_routing": ["visual attention source mass", "memory attention by layer and head", "memory output gates", "post-gate source contribution norms"]
+  }
+}

@@ -1,0 +1,991 @@
+"""
+Generate metadata-only stubs for seed papers in the research database.
+
+Each entry produces a markdown file at papers/{id}.md containing YAML
+frontmatter (per SCHEMA.md) and a header. Existing files are not overwritten
+— full-depth exemplars stay intact.
+
+Run from anywhere:
+    python3 research_db/tools/generate_stubs.py
+
+The bibliographic data is held in this file (the script is the canonical
+source of truth for seed metadata). To add a paper, append to the appropriate
+list below and re-run.
+"""
+
+from __future__ import annotations
+import os
+from pathlib import Path
+from textwrap import dedent
+
+# -----------------------------------------------------------------------------
+# Resolve paths relative to this script's location so the script works from
+# any working directory.
+# -----------------------------------------------------------------------------
+SCRIPT_DIR = Path(__file__).resolve().parent
+DB_ROOT = SCRIPT_DIR.parent
+PAPERS_DIR = DB_ROOT / "papers"
+TODAY = "2026-05-13"
+
+# -----------------------------------------------------------------------------
+# Seed data
+# -----------------------------------------------------------------------------
+# Each tuple is:
+#   (id, title, authors_list, year, venue, tags, concepts, relevance, seed,
+#    arxiv, doi, related)
+#
+# - tags / concepts must be in TAXONOMY.md
+# - relevance is a list with elements from {recurrent_vit, prism_v1, prism_v2}
+# - seed is a list of seed_source strings
+# - related can be [] when unknown
+# -----------------------------------------------------------------------------
+
+# Section A — references from 2502.10955 (Recurrent ViT)
+VIT_REFS = [
+    # (id, title, authors, year, venue, tags, concepts, relevance, seed, arxiv, doi, related)
+    ("carrasco2011_visual_attention_25y", "Visual attention: the past 25 years",
+     ["Carrasco, Marisa"], 2011, "Vision Research",
+     ["visual-attention", "review", "psychophysics"],
+     ["validity-effect", "gain-modulation", "attentional-spotlight"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_1"], "", "", []),
+    ("clark2015_prefrontal_attention", "Visual attention: linking prefrontal sources to neuronal and behavioral correlates",
+     ["Clark, Kelsey", "Squire, Ryan Fox", "Merrikhi, Yaser", "Noudoost, Behrad"], 2015,
+     "Progress in Neurobiology",
+     ["visual-attention", "prefrontal-cortex", "review"],
+     ["top-down-feedback", "gain-modulation"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_2"], "", "", []),
+    ("hoffman2016_attention_eye_movements", "Visual attention and eye movements",
+     ["Hoffman, James E."], 2016, "Attention (Routledge book chapter)",
+     ["visual-attention", "review"], ["attentional-spotlight"],
+     ["recurrent_vit"], ["vit_paper_ref_3"], "", "", []),
+    ("bhatnagar2022_attention_choice_metaanalysis", "A meta-analysis of the effect of visual attention on choice",
+     ["Bhatnagar, Roopali", "Orquin, Jacob L."], 2022, "JEP: General",
+     ["visual-attention", "decision-making", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_4"], "", "", []),
+    ("rust_cohen2022_priority_coding", "Priority coding in the visual system",
+     ["Rust, Nicole C.", "Cohen, Marlene R."], 2022, "Nature Reviews Neuroscience",
+     ["visual-attention", "primate-neurophysiology", "review"],
+     ["priority-map", "gain-modulation"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_5"], "", "", []),
+    ("mcadams_maunsell1999_reliability", "Effects of attention on the reliability of individual neurons in monkey visual cortex",
+     ["McAdams, Carrie J.", "Maunsell, John H. R."], 1999, "Neuron",
+     ["primate-neurophysiology", "visual-attention", "early-visual-cortex"],
+     ["gain-modulation"],
+     ["recurrent_vit"], ["vit_paper_ref_6"], "", "", []),
+    ("mcadams_maunsell1999_v4_tuning", "Effects of attention on orientation-tuning functions of single neurons in macaque V4",
+     ["McAdams, Carrie J.", "Maunsell, John H. R."], 1999, "Journal of Neuroscience",
+     ["primate-neurophysiology", "visual-attention", "early-visual-cortex"],
+     ["gain-modulation"],
+     ["recurrent_vit"], ["vit_paper_ref_7"], "", "", []),
+    ("thiele_bellgrove2018_neuromodulation", "Neuromodulation of attention",
+     ["Thiele, Alexander", "Bellgrove, Mark A."], 2018, "Neuron",
+     ["visual-attention", "review", "primate-neurophysiology"],
+     ["gain-modulation"],
+     ["recurrent_vit"], ["vit_paper_ref_8"], "", "", []),
+    ("cohen_maunsell2009_correlations", "Attention improves performance primarily by reducing interneuronal correlations",
+     ["Cohen, Marlene R.", "Maunsell, John H. R."], 2009, "Nature Neuroscience",
+     ["primate-neurophysiology", "visual-attention"],
+     ["gain-modulation"],
+     ["recurrent_vit"], ["vit_paper_ref_9"], "", "", []),
+    ("ruff_cohen2016_cross_area_correlations", "Attention increases spike count correlations between visual cortical areas",
+     ["Ruff, Douglas A.", "Cohen, Marlene R."], 2016, "Journal of Neuroscience",
+     ["primate-neurophysiology", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_10"], "", "", []),
+    ("awh2006_attention_wm", "Interactions between attention and working memory",
+     ["Awh, Edward", "Vogel, Edward K.", "Oh, S-H."], 2006, "Neuroscience",
+     ["visual-attention", "working-memory", "review"],
+     ["attentional-template"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_12"], "", "", []),
+    ("gazzaley_nobre2012_topdown", "Top-down modulation: bridging selective attention and working memory",
+     ["Gazzaley, Adam", "Nobre, Anna C."], 2012, "Trends in Cognitive Sciences",
+     ["visual-attention", "working-memory", "review"],
+     ["top-down-feedback", "attentional-template"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_13"], "", "", []),
+    ("kiyonaga_egner2013_wm_internal_attention", "Working memory as internal attention",
+     ["Kiyonaga, Anastasia", "Egner, Tobias"], 2013, "Psychonomic Bulletin & Review",
+     ["working-memory", "visual-attention", "review"],
+     ["attentional-template"],
+     ["recurrent_vit"], ["vit_paper_ref_14"], "", "", []),
+    ("panichello_buschman2021_shared_mechanisms", "Shared mechanisms underlie the control of working memory and attention",
+     ["Panichello, Matthew F.", "Buschman, Timothy J."], 2021, "Nature",
+     ["working-memory", "visual-attention", "prefrontal-cortex"],
+     ["attentional-template", "working-memory-persistent-activity"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_15"], "", "", []),
+    ("oberauer2002_access_wm", "Access to information in working memory: exploring the focus of attention",
+     ["Oberauer, Klaus"], 2002, "JEP: LMC",
+     ["working-memory"], [],
+     ["recurrent_vit"], ["vit_paper_ref_16"], "", "", []),
+    ("mcnab_klingberg2008_pfc_bg_wm", "Prefrontal cortex and basal ganglia control access to working memory",
+     ["McNab, Fiona", "Klingberg, Torkel"], 2008, "Nature Neuroscience",
+     ["working-memory", "prefrontal-cortex", "subcortical"], [],
+     ["recurrent_vit"], ["vit_paper_ref_17"], "", "", []),
+    ("carlisle2011_attentional_templates", "Attentional templates in visual working memory",
+     ["Carlisle, Nancy B.", "Arita, Jason T.", "Pardo, Deborah", "Woodman, Geoffrey F."],
+     2011, "Journal of Neuroscience",
+     ["working-memory", "visual-attention"], ["attentional-template"],
+     ["recurrent_vit"], ["vit_paper_ref_18"], "", "", []),
+    ("vanmoorselaar2014_template_competition", "In competition for the attentional template: multiple items in WM",
+     ["van Moorselaar, Dirk", "Theeuwes, Jan", "Olivers, Christian N. L."], 2014, "JEP: HPP",
+     ["working-memory", "visual-attention"], ["attentional-template"],
+     ["recurrent_vit"], ["vit_paper_ref_19"], "", "", []),
+    ("berggren_eimer2018_wm_load", "Visual working memory load disrupts template-guided attentional selection",
+     ["Berggren, Nick", "Eimer, Martin"], 2018, "Journal of Cognitive Neuroscience",
+     ["working-memory", "visual-attention"], ["attentional-template"],
+     ["recurrent_vit"], ["vit_paper_ref_20"], "", "", []),
+    ("carlisle_kristjansson2018_wm_priming", "How visual working memory contents influence priming of visual attention",
+     ["Carlisle, Nancy B.", "Kristjánsson, Árni"], 2018, "Psychological Research",
+     ["working-memory", "visual-attention"], ["attentional-template"],
+     ["recurrent_vit"], ["vit_paper_ref_21"], "", "", []),
+    ("vanede2019_gaze_internal_wm", "Human gaze tracks the focusing of attention within the internal space of VWM",
+     ["van Ede, Freek", "Chekroud, Sammi R.", "Nobre, Anna C."], 2019, "Journal of Vision",
+     ["working-memory", "visual-attention", "human-neuroimaging"], [],
+     ["recurrent_vit"], ["vit_paper_ref_22"], "", "", []),
+    ("khan2022_transformers_vision_survey", "Transformers in vision: a survey",
+     ["Khan, Salman", "Naseer, Muzammal", "Hayat, Munawar", "et al."], 2022, "ACM CSUR",
+     ["transformers", "vision-transformers", "review"],
+     ["self-attention-over-tokens", "multi-head-attention"],
+     ["recurrent_vit"], ["vit_paper_ref_25"], "", "", []),
+    ("lemeur2006_coherent_attention", "A coherent computational approach to model bottom-up visual attention",
+     ["Le Meur, Olivier", "Le Callet, Patrick", "Barba, Dominique", "Thoreau, Dominique"],
+     2006, "IEEE TPAMI",
+     ["saliency-models", "visual-attention"], [],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_27"], "", "", []),
+    ("kruger2017_tva_salience", "Measuring and modeling salience with the theory of visual attention",
+     ["Krüger, Alexander", "Tünnermann, Jan", "Scharlau, Ingrid"], 2017,
+     "Attention, Perception, & Psychophysics",
+     ["saliency-models", "visual-attention", "psychophysics"], [],
+     ["recurrent_vit"], ["vit_paper_ref_28"], "", "", []),
+    ("zou2023_reading_attention", "Human attention during goal-directed reading comprehension relies on task optimization",
+     ["Zou, Jiajie", "Zhang, Yuran", "Li, Jialu", "Tian, Xing", "Ding, Nai"], 2023, "eLife",
+     ["visual-attention", "human-neuroimaging"], [],
+     ["recurrent_vit"], ["vit_paper_ref_29"], "", "", []),
+    ("mehrani_tsotsos2023_attention_grouping", "Self-attention in vision transformers performs perceptual grouping, not attention",
+     ["Mehrani, Paria", "Tsotsos, John K."], 2023, "arXiv:2303.01542",
+     ["vision-transformers", "visual-attention", "theoretical-essay"],
+     ["self-attention-over-tokens"],
+     ["recurrent_vit"], ["vit_paper_ref_30"], "2303.01542", "", []),
+    ("yamamoto2024_human_like_vit_attention", "Emergence of human-like attention in self-supervised vision transformers",
+     ["Yamamoto, Takuto", "Akahoshi, Hirosato", "Kitazawa, Shigeru"], 2024, "arXiv:2410.22768",
+     ["vision-transformers", "self-supervised-learning", "visual-attention"],
+     ["self-attention-over-tokens"],
+     ["recurrent_vit"], ["vit_paper_ref_31"], "2410.22768", "", []),
+    ("luck_vogel1997_wm_capacity", "The capacity of visual working memory for features and conjunctions",
+     ["Luck, Steven J.", "Vogel, Edward K."], 1997, "Nature",
+     ["working-memory", "psychophysics"], [],
+     ["recurrent_vit"], ["vit_paper_ref_33"], "", "", []),
+    ("luck_vogel2013_wm_capacity_review", "Visual working memory capacity: from psychophysics and neurobiology to individual differences",
+     ["Luck, Steven J.", "Vogel, Edward K."], 2013, "Trends in Cognitive Sciences",
+     ["working-memory", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_34"], "", "", []),
+    ("brady_tenenbaum2013_probabilistic_wm", "A probabilistic model of visual working memory: incorporating higher order regularities",
+     ["Brady, Timothy F.", "Tenenbaum, Joshua B."], 2013, "Psychological Review",
+     ["working-memory", "theoretical-essay"], [],
+     ["recurrent_vit"], ["vit_paper_ref_35"], "", "", []),
+    ("emrich2017_attention_wm_resources", "Attention mediates the flexible allocation of VWM resources",
+     ["Emrich, Stephen M.", "Lockhart, Holly A.", "Al-Aidroos, Naseem"], 2017, "JEP: HPP",
+     ["working-memory", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_36"], "", "", []),
+    ("olivers2011_wm_states_attention", "Different states in visual working memory: when it guides attention and when it does not",
+     ["Olivers, Christian N. L.", "Peters, Judith", "Houtkamp, Roos", "Roelfsema, Pieter R."],
+     2011, "Trends in Cognitive Sciences",
+     ["working-memory", "visual-attention", "review"], ["attentional-template"],
+     ["recurrent_vit"], ["vit_paper_ref_37"], "", "", []),
+    ("teng_kravitz2019_wm_alters_perception", "Visual working memory directly alters perception",
+     ["Teng, Chunyue", "Kravitz, Dwight J."], 2019, "Nature Human Behaviour",
+     ["working-memory", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_38"], "", "", []),
+    ("bays2024_wm_representation", "Representation and computation in visual working memory",
+     ["Bays, Paul M.", "Schneegans, Sebastian", "Ma, Wei Ji", "Brady, Timothy F."],
+     2024, "Nature Human Behaviour",
+     ["working-memory", "review", "theoretical-essay"], [],
+     ["recurrent_vit"], ["vit_paper_ref_39"], "", "", []),
+    ("beck2024_xlstm", "xLSTM: Extended long short-term memory",
+     ["Beck, Maximilian", "Pöppel, Korbinian", "Spanring, Markus", "et al."], 2024,
+     "arXiv:2405.04517",
+     ["recurrent-networks", "deep-learning"], ["lstm-cell", "xlstm"],
+     ["recurrent_vit"], ["vit_paper_ref_41"], "2405.04517", "", []),
+    ("srinath2021_attention_information_flow", "Attention improves information flow between neuronal populations without changing the communication subspace",
+     ["Srinath, Ramanujan", "Ruff, Douglas A.", "Cohen, Marlene R."], 2021,
+     "Current Biology",
+     ["primate-neurophysiology", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_42"], "", "", []),
+    ("cavanaugh_wurtz2004_sc_change_blindness", "Subcortical modulation of attention counters change blindness",
+     ["Cavanaugh, James", "Wurtz, Robert H."], 2004, "Journal of Neuroscience",
+     ["primate-neurophysiology", "subcortical", "lesion-microstimulation"],
+     ["microstimulation"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_44", "thesis_md"], "", "", []),
+    ("cavanaugh2006_brain_stim_attention", "Enhanced performance with brain stimulation: attentional shift or visual cue?",
+     ["Cavanaugh, James", "Alvarez, Bryan D.", "Wurtz, Robert H."], 2006, "Journal of Neuroscience",
+     ["primate-neurophysiology", "subcortical", "lesion-microstimulation"],
+     ["microstimulation"],
+     ["recurrent_vit"], ["vit_paper_ref_45"], "", "", []),
+    ("egly1994_object_attention", "Shifting visual attention between objects and locations: evidence from normal and parietal lesion subjects",
+     ["Egly, Robert", "Driver, Jon", "Rafal, Robert D."], 1994, "JEP: General",
+     ["visual-attention", "psychophysics"], [],
+     ["recurrent_vit"], ["vit_paper_ref_46"], "", "", []),
+    ("thomsen2005_conflicting_cues_fmri", "Processing of conflicting cues in an attention-shift paradigm studied with fMRI",
+     ["Thomsen, Tormod", "Specht, Karsten", "Ersland, Lars", "Hugdahl, Kenneth"], 2005,
+     "Neuroscience Letters",
+     ["visual-attention", "human-neuroimaging"], [],
+     ["recurrent_vit"], ["vit_paper_ref_47"], "", "", []),
+    ("brisson_jolicoeur2008_express_reengagement", "Express attentional re-engagement but delayed entry into consciousness following invalid spatial cues",
+     ["Brisson, Benoit", "Jolicoeur, Pierre"], 2008, "PLoS ONE",
+     ["visual-attention", "psychophysics"], ["validity-effect"],
+     ["recurrent_vit"], ["vit_paper_ref_48"], "", "", []),
+    ("lu_dosher1998_external_noise", "External noise distinguishes attention mechanisms",
+     ["Lu, Zhong-Lin", "Dosher, Barbara"], 1998, "Vision Research",
+     ["visual-attention", "psychophysics"], ["signal-detection-theory"],
+     ["recurrent_vit"], ["vit_paper_ref_49"], "", "", []),
+    ("solomon2004_cues_sensitivity", "The effect of spatial cues on visual sensitivity",
+     ["Solomon, Joshua A."], 2004, "Vision Research",
+     ["visual-attention", "psychophysics"], ["cueing-effect"],
+     ["recurrent_vit"], ["vit_paper_ref_50"], "", "", []),
+    ("cameron2002_covert_attention_contrast", "Covert attention affects the psychometric function of contrast sensitivity",
+     ["Cameron, E. Leslie", "Tai, Joanna C.", "Carrasco, Marisa"], 2002, "Vision Research",
+     ["visual-attention", "psychophysics"], ["psychometric-function"],
+     ["recurrent_vit"], ["vit_paper_ref_51"], "", "", []),
+    ("muller_findlay1987_sensitivity_criterion", "Sensitivity and criterion effects in the spatial cuing of visual attention",
+     ["Müller, Hermann J.", "Findlay, John M."], 1987, "Perception & Psychophysics",
+     ["visual-attention", "psychophysics"], ["signal-detection-theory", "cueing-effect"],
+     ["recurrent_vit"], ["vit_paper_ref_52"], "", "", []),
+    ("hawkins1990_attention_detectability", "Visual attention modulates signal detectability",
+     ["Hawkins, Harold L.", "Hillyard, Steven A.", "Luck, Steven J.", "et al."], 1990, "JEP: HPP",
+     ["visual-attention", "psychophysics"], ["signal-detection-theory"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_53"], "", "", []),
+    ("saltzman_garner1948_rt_span", "Reaction time as a measure of span of attention",
+     ["Saltzman, I. J.", "Garner, W. R."], 1948, "Journal of Psychology",
+     ["visual-attention", "reaction-time"], [],
+     ["recurrent_vit"], ["vit_paper_ref_54"], "", "", []),
+    ("carlson1983_rt_intelligence", "Reaction time, intelligence, and attention",
+     ["Carlson, Jerry S.", "Jensen, C. Mark", "Widaman, Keith F."], 1983, "Intelligence",
+     ["reaction-time", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_55"], "", "", []),
+    ("prinzmetal2005_rt_vs_accuracy", "Attention: reaction time and accuracy reveal different mechanisms",
+     ["Prinzmetal, William", "McCool, Christin", "Park, Samuel"], 2005, "JEP: General",
+     ["visual-attention", "psychophysics", "reaction-time"], [],
+     ["recurrent_vit"], ["vit_paper_ref_56"], "", "", []),
+    ("jehu2015_postural_attention", "Prioritizing attention on a reaction time task improves postural control and reaction time",
+     ["Jehu, Deborah A.", "Desponts, Alyssa", "Paquet, Nicole", "Lajoie, Yves"], 2015,
+     "International Journal of Neuroscience",
+     ["reaction-time", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_57"], "", "", []),
+    ("herman_krauzlis2017_sc_change_detection", "Color-change detection activity in the primate superior colliculus",
+     ["Herman, James P.", "Krauzlis, Richard J."], 2017, "eNeuro",
+     ["primate-neurophysiology", "subcortical", "change-detection"], [],
+     ["recurrent_vit"], ["vit_paper_ref_58"], "", "", []),
+    ("ghose_maunsell2002_task_timing", "Attentional modulation in visual cortex depends on task timing",
+     ["Ghose, Geoffrey M.", "Maunsell, John H. R."], 2002, "Nature",
+     ["primate-neurophysiology", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_59"], "", "", []),
+    ("sani2017_temporal_v4_gain", "Temporally evolving gain mechanisms of attention in macaque area V4",
+     ["Sani, Ilaria", "Santandrea, Elisa", "Morrone, Maria Concetta", "Chelazzi, Leonardo"],
+     2017, "Journal of Neurophysiology",
+     ["primate-neurophysiology", "visual-attention", "early-visual-cortex"],
+     ["gain-modulation"],
+     ["recurrent_vit"], ["vit_paper_ref_60"], "", "", []),
+    ("wang2015_v1_exogenous_attention", "Modulation of neuronal responses by exogenous attention in macaque primary visual cortex",
+     ["Wang, Feng", "Chen, Minggui", "Yan, Yin", "et al."], 2015, "Journal of Neuroscience",
+     ["primate-neurophysiology", "early-visual-cortex", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_61"], "", "", []),
+    ("thompson1996_fef_stages", "Perceptual and motor processing stages identified in the activity of macaque frontal eye field neurons during visual search",
+     ["Thompson, K. G.", "Hanes, D. P.", "Bichot, N. P.", "Schall, J. D."], 1996,
+     "Journal of Neurophysiology",
+     ["primate-neurophysiology", "prefrontal-cortex"], [],
+     ["recurrent_vit"], ["vit_paper_ref_62"], "", "", []),
+    ("sharma2015_attention_temporal_v1", "Spatial attention and temporal expectation under timed uncertainty predictably modulate neuronal responses in monkey V1",
+     ["Sharma, Jitendra", "Sugihara, Hiroki", "Katz, Yarden", "et al."], 2015,
+     "Cerebral Cortex",
+     ["primate-neurophysiology", "early-visual-cortex", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_63"], "", "", []),
+    ("jaramillo_zador2011_auditory_temporal", "The auditory cortex mediates the perceptual effects of acoustic temporal expectation",
+     ["Jaramillo, Santiago", "Zador, Anthony M."], 2011, "Nature Neuroscience",
+     ["primate-neurophysiology"], [],
+     ["recurrent_vit"], ["vit_paper_ref_64"], "", "", []),
+    ("nobre_vanede2018_anticipated_moments", "Anticipated moments: temporal structure in attention",
+     ["Nobre, Anna C.", "van Ede, Freek"], 2018, "Nature Reviews Neuroscience",
+     ["visual-attention", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_65"], "", "", []),
+    ("mirpour2010_ppc_microstim", "Microstimulation of posterior parietal cortex biases the selection of eye movement goals during search",
+     ["Mirpour, Koorosh", "Ong, Wei Song", "Bisley, James W."], 2010,
+     "Journal of Neurophysiology",
+     ["primate-neurophysiology", "parietal-cortex", "lesion-microstimulation"],
+     ["microstimulation", "priority-map"],
+     ["recurrent_vit"], ["vit_paper_ref_66"], "", "", []),
+    ("bollimunta2018_fef_sc_covert", "Comparing frontal eye field and superior colliculus contributions to covert spatial attention",
+     ["Bollimunta, Anil", "Bogadhi, Amarender R.", "Krauzlis, Richard J."], 2018,
+     "Nature Communications",
+     ["primate-neurophysiology", "prefrontal-cortex", "subcortical"], [],
+     ["recurrent_vit", "prism_v2"], ["vit_paper_ref_67"], "", "", []),
+    ("monosov2011_pfc_inactivation_it", "The effects of PFC inactivation on object responses of single neurons in IT cortex during visual search",
+     ["Monosov, Ilya E.", "Sheinberg, David L.", "Thompson, Kirk G."], 2011,
+     "Journal of Neuroscience",
+     ["primate-neurophysiology", "prefrontal-cortex"], [],
+     ["recurrent_vit"], ["vit_paper_ref_68"], "", "", []),
+    ("zenon_krauzlis2012_attention_deficits", "Attention deficits without cortical neuronal deficits",
+     ["Zénon, Alexandre", "Krauzlis, Richard J."], 2012, "Nature",
+     ["primate-neurophysiology", "subcortical"], [],
+     ["recurrent_vit"], ["vit_paper_ref_69"], "", "", []),
+    ("herman2018_midbrain_decisions", "Midbrain activity can explain perceptual decisions during an attention task",
+     ["Herman, James P.", "Katz, Leor N.", "Krauzlis, Richard J."], 2018, "Nature Neuroscience",
+     ["primate-neurophysiology", "subcortical", "decision-making"], [],
+     ["recurrent_vit"], ["vit_paper_ref_70"], "", "", []),
+    ("sridharan2017_sc_sensitivity_bias", "Does the superior colliculus control perceptual sensitivity or choice bias during attention?",
+     ["Sridharan, Devarajan", "Steinmetz, Nicholas A.", "Moore, Tirin", "Knudsen, Eric I."],
+     2017, "Journal of Neuroscience",
+     ["primate-neurophysiology", "subcortical"], ["signal-detection-theory"],
+     ["recurrent_vit"], ["vit_paper_ref_71"], "", "", []),
+    ("luo_maunsell2018_criterion_sensitivity", "Attentional changes in either criterion or sensitivity are associated with robust modulations in lateral PFC",
+     ["Luo, Thomas Zhihao", "Maunsell, John H. R."], 2018, "Neuron",
+     ["primate-neurophysiology", "prefrontal-cortex"], ["signal-detection-theory"],
+     ["recurrent_vit"], ["vit_paper_ref_72"], "", "", []),
+    ("baluch_itti2011_topdown_mechanisms", "Mechanisms of top-down attention",
+     ["Baluch, Farhan", "Itti, Laurent"], 2011, "Trends in Neurosciences",
+     ["visual-attention", "review"], ["top-down-feedback"],
+     ["recurrent_vit"], ["vit_paper_ref_73"], "", "", []),
+    ("knudsen2007_fundamental_components", "Fundamental components of attention",
+     ["Knudsen, Eric I."], 2007, "Annual Review of Neuroscience",
+     ["visual-attention", "review", "theoretical-essay"], ["priority-map"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_75"], "", "", []),
+    ("lamy2006_grouping_no_attention", "Grouping does not require attention",
+     ["Lamy, Dominique", "Segal, Hannah", "Ruderman, Lital"], 2006,
+     "Perception & Psychophysics",
+     ["visual-attention", "psychophysics"], [],
+     ["recurrent_vit"], ["vit_paper_ref_76"], "", "", []),
+    ("bahle2018_wm_attention_architecture", "The architecture of interaction between visual WM and visual attention",
+     ["Bahle, Brett", "Beck, Valerie M.", "Hollingworth, Andrew"], 2018, "JEP: HPP",
+     ["working-memory", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_77"], "", "", []),
+    ("wheeler_treisman2002_binding", "Binding in short-term visual memory",
+     ["Wheeler, Mary E.", "Treisman, Anne M."], 2002, "JEP: General",
+     ["working-memory", "visual-attention"], ["feature-binding"],
+     ["recurrent_vit"], ["vit_paper_ref_78"], "", "", []),
+    ("botta_lupianez2014_attentional_bias_vwm", "Spatial distribution of attentional bias in visuo-spatial WM following multiple cues",
+     ["Botta, Fabiano", "Lupiáñez, Juan"], 2014, "Acta Psychologica",
+     ["working-memory", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_79"], "", "", []),
+    ("krauzlis2013_sc_attention", "Superior colliculus and visual spatial attention",
+     ["Krauzlis, Richard J.", "Lovejoy, Lee P.", "Zénon, Alexandre"], 2013,
+     "Annual Review of Neuroscience",
+     ["primate-neurophysiology", "subcortical", "review"], ["priority-map"],
+     ["recurrent_vit"], ["vit_paper_ref_81"], "", "", []),
+    ("silver2005_topographic_parietal", "Topographic maps of visual spatial attention in human parietal cortex",
+     ["Silver, Michael A.", "Ress, David", "Heeger, David J."], 2005, "Journal of Neurophysiology",
+     ["human-neuroimaging", "parietal-cortex"], ["priority-map", "retinotopy"],
+     ["recurrent_vit"], ["vit_paper_ref_82"], "", "", []),
+    ("huda2020_pfc_topdown_circuits", "Distinct prefrontal top-down circuits differentially modulate sensorimotor behavior",
+     ["Huda, Rafiq", "Sipe, Grayson O.", "Breton-Provencher, Vincent", "et al."], 2020,
+     "Nature Communications",
+     ["primate-neurophysiology", "prefrontal-cortex"], ["top-down-feedback"],
+     ["recurrent_vit"], ["vit_paper_ref_83"], "", "", []),
+    ("bolton2015_dopamine_sc", "A diencephalic dopamine source provides input to the superior colliculus",
+     ["Bolton, Andrew D.", "Murata, Yasunobu", "Kirchner, Rory", "et al."], 2015,
+     "Cell Reports",
+     ["subcortical", "dopamine"], [],
+     ["recurrent_vit"], ["vit_paper_ref_84"], "", "", []),
+    ("pradel2021_sc_rmtg", "Superior colliculus controls the activity of the rostromedial tegmental nuclei",
+     ["Pradel, Kamil", "Drwiega, Gniewosz", "Basiak, Tomasz"], 2021, "Journal of Neuroscience",
+     ["subcortical"], [],
+     ["recurrent_vit"], ["vit_paper_ref_85"], "", "", []),
+    ("essig_felsen2016_dopamine_sc", "Warning! Dopaminergic modulation of the superior colliculus",
+     ["Essig, Jaclyn", "Felsen, Gidon"], 2016, "Trends in Neurosciences",
+     ["subcortical", "dopamine", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_86"], "", "", []),
+    ("perezfernandez2017_snc_tectum", "Direct dopaminergic projections from the SNc modulate visuomotor transformation in the lamprey tectum",
+     ["Pérez-Fernández, Juan", "Kardamakis, Andreas A.", "Suzuki, Daichi G.", "et al."],
+     2017, "Neuron",
+     ["subcortical", "dopamine"], [],
+     ["recurrent_vit"], ["vit_paper_ref_87"], "", "", []),
+    ("hikosaka2006_bg_reward_eyes", "Basal ganglia orient eyes to reward",
+     ["Hikosaka, Okihide", "Nakamura, Kae", "Nakahara, Hiroyuki"], 2006,
+     "Journal of Neurophysiology",
+     ["subcortical", "dopamine", "review"], ["reward-modulated-attention"],
+     ["recurrent_vit"], ["vit_paper_ref_88"], "", "", []),
+    ("hickey2010_reward_salience_acc", "Reward changes salience in human vision via the anterior cingulate",
+     ["Hickey, Clayton", "Chelazzi, Leonardo", "Theeuwes, Jan"], 2010,
+     "Journal of Neuroscience",
+     ["visual-attention", "human-neuroimaging"], ["reward-modulated-attention"],
+     ["recurrent_vit"], ["vit_paper_ref_89"], "", "", []),
+    ("failing_theeuwes2018_selection_history", "Selection history: how reward modulates selectivity of visual attention",
+     ["Failing, Michel", "Theeuwes, Jan"], 2018, "Psychonomic Bulletin & Review",
+     ["visual-attention", "review"], ["reward-modulated-attention"],
+     ["recurrent_vit"], ["vit_paper_ref_90"], "", "", []),
+    ("friston2006_free_energy_brain", "A free energy principle for the brain",
+     ["Friston, Karl", "Kilner, James", "Harrison, Lee"], 2006, "Journal of Physiology - Paris",
+     ["free-energy-principle", "predictive-coding", "theoretical-essay"],
+     ["variational-free-energy"],
+     ["prism_v1", "prism_v2"], ["vit_paper_ref_91"], "", "", []),
+    ("feldman_friston2010_attention_free_energy", "Attention, uncertainty, and free-energy",
+     ["Feldman, Harriet", "Friston, Karl J."], 2010, "Frontiers in Human Neuroscience",
+     ["free-energy-principle", "visual-attention", "theoretical-essay"],
+     ["precision-weighting", "attention-as-prediction-error"],
+     ["prism_v1", "prism_v2"], ["vit_paper_ref_92"], "", "",
+     ["friston2010_fep_unified_theory", "rao_ballard1999_predictive_coding"]),
+    ("friston2012_dopamine_active_inference", "Dopamine, affordance and active inference",
+     ["Friston, Karl J.", "Shiner, Tamara", "FitzGerald, Thomas", "et al."], 2012,
+     "PLoS Computational Biology",
+     ["free-energy-principle", "dopamine", "theoretical-essay"], ["active-inference"],
+     ["prism_v1"], ["vit_paper_ref_93"], "", "", []),
+    ("khezri2022_fep_chapter", "Free energy principle (FEP) — chapter",
+     ["Khezri, Bijan"], 2022, "Springer (book chapter)",
+     ["free-energy-principle", "review"], [],
+     ["prism_v1"], ["vit_paper_ref_94"], "", "", []),
+    ("mazzaglia2022_fep_deep_learning", "The free energy principle for perception and action: a deep learning perspective",
+     ["Mazzaglia, Pietro", "Verbelen, Tim", "Çatal, Ozan", "Dhoedt, Bart"], 2022, "Entropy",
+     ["free-energy-principle", "deep-learning", "review"],
+     ["variational-free-energy", "active-inference"],
+     ["prism_v1", "prism_v2"], ["vit_paper_ref_95"], "", "", []),
+    ("hassanin2024_attention_dl_survey", "Visual attention methods in deep learning: an in-depth survey",
+     ["Hassanin, Mohammed", "Anwar, Saeed", "Radwan, Ibrahim", "Khan, Fahad Shahbaz", "Mian, Ajmal"],
+     2024, "Information Fusion",
+     ["visual-attention", "deep-learning", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_96"], "", "", []),
+    ("reynolds1999_competitive_v2_v4", "Competitive mechanisms subserve attention in macaque areas V2 and V4",
+     ["Reynolds, John H.", "Chelazzi, Leonardo", "Desimone, Robert"], 1999,
+     "Journal of Neuroscience",
+     ["primate-neurophysiology", "visual-attention", "early-visual-cortex"],
+     ["biased-competition"],
+     ["recurrent_vit"], ["vit_paper_ref_97"], "", "", []),
+    ("bisley_mirpour2019_priority_map", "The neural instantiation of a priority map",
+     ["Bisley, James W.", "Mirpour, Koorosh"], 2019, "Current Opinion in Psychology",
+     ["primate-neurophysiology", "parietal-cortex", "review"], ["priority-map"],
+     ["recurrent_vit"], ["vit_paper_ref_98"], "", "", []),
+    ("wolfe2021_guided_search_6", "Guided search 6.0: an updated model of visual search",
+     ["Wolfe, Jeremy M."], 2021, "Psychonomic Bulletin & Review",
+     ["visual-attention", "review", "theoretical-essay"], ["priority-map"],
+     ["recurrent_vit"], ["vit_paper_ref_99"], "", "", []),
+    ("desimone1996_visual_memory_attention", "Neural mechanisms for visual memory and their role in attention",
+     ["Desimone, Robert"], 1996, "Proceedings of the National Academy of Sciences",
+     ["primate-neurophysiology", "visual-attention", "working-memory"],
+     ["attentional-template"],
+     ["recurrent_vit"], ["vit_paper_ref_100"], "", "", []),
+    ("vanderstigchel2009_topdown_limits", "The limits of top-down control of visual attention",
+     ["Van der Stigchel, Stefan", "Belopolsky, Artem V.", "Peters, Judith C.", "et al."],
+     2009, "Acta Psychologica",
+     ["visual-attention", "review"], ["top-down-feedback"],
+     ["recurrent_vit"], ["vit_paper_ref_101"], "", "", []),
+    ("lee_greening_mather2015_emotional_arousal", "Encoding of goal-relevant stimuli is strengthened by emotional arousal in memory",
+     ["Lee, Tae-Ho", "Greening, Steven G.", "Mather, Mara"], 2015, "Frontiers in Psychology",
+     ["working-memory"], [],
+     ["recurrent_vit"], ["vit_paper_ref_102"], "", "", []),
+    ("herman_arcizet2020_caudate_sc", "Attention-related modulation of caudate neurons depends on SC activity",
+     ["Herman, James P.", "Arcizet, Fabrice", "Krauzlis, Richard J."], 2020, "eLife",
+     ["primate-neurophysiology", "subcortical"], [],
+     ["recurrent_vit"], ["vit_paper_ref_103"], "", "", []),
+    ("bettencourt_somers2009_mot", "Effects of target enhancement and distractor suppression on multiple object tracking capacity",
+     ["Bettencourt, Katherine C.", "Somers, David C."], 2009, "Journal of Vision",
+     ["visual-attention", "psychophysics"], [],
+     ["recurrent_vit"], ["vit_paper_ref_104"], "", "", []),
+    ("meyerhoff2017_mot_review", "Studying visual attention using the multiple object tracking paradigm",
+     ["Meyerhoff, Hauke S.", "Papenmeier, Frank", "Huff, Markus"], 2017,
+     "Attention, Perception, & Psychophysics",
+     ["visual-attention", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_105"], "", "", []),
+    ("wolfe2011_scene_search", "Visual search in scenes involves selective and nonselective pathways",
+     ["Wolfe, Jeremy M.", "Võ, Melissa L.-H.", "Evans, Karla K.", "Greene, Michelle R."],
+     2011, "Trends in Cognitive Sciences",
+     ["visual-attention", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_106"], "", "", []),
+    ("tas2016_attention_wm_covert_overt", "The relationship between visual attention and visual WM encoding: a dissociation between covert and overt orienting",
+     ["Tas, A. Caglar", "Luck, Steven J.", "Hollingworth, Andrew"], 2016, "JEP: HPP",
+     ["visual-attention", "working-memory"], [],
+     ["recurrent_vit"], ["vit_paper_ref_107"], "", "", []),
+    ("gresch2024_perception_wm_shifts", "Shifting attention between perception and working memory",
+     ["Gresch, Daniela", "Boettcher, Sage E. P.", "van Ede, Freek", "Nobre, Anna C."], 2024,
+     "Cognition",
+     ["visual-attention", "working-memory"], [],
+     ["recurrent_vit"], ["vit_paper_ref_108"], "", "", []),
+    ("gupta_sridharan2024_presaccadic_change", "Pre-saccadic attention does not facilitate the detection of changes in the visual field",
+     ["Gupta, Priyanka", "Sridharan, Devarajan"], 2024, "PLoS Biology",
+     ["visual-attention", "psychophysics", "change-detection"], [],
+     ["recurrent_vit"], ["vit_paper_ref_109"], "", "", []),
+    ("kietzmann2019_recurrence_required", "Recurrence is required to capture the representational dynamics of the human visual system",
+     ["Kietzmann, Tim C.", "Spoerer, Courtney J.", "Sörensen, Lynn K. A.", "et al."], 2019,
+     "PNAS",
+     ["deep-learning", "neuro-ai-bridging", "human-neuroimaging"],
+     ["recurrence-for-temporal-dynamics"],
+     ["recurrent_vit", "prism_v1", "prism_v2"], ["vit_paper_ref_111"], "", "", []),
+    ("zhuang2021_unsupervised_ventral", "Unsupervised neural network models of the ventral visual stream",
+     ["Zhuang, Chengxu", "Yan, Siming", "Nayebi, Aran", "et al."], 2021, "PNAS",
+     ["self-supervised-learning", "neuro-ai-bridging"], ["unsupervised-ventral-stream-model"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_112"], "", "", []),
+    ("botvinick2020_deep_rl_neuro", "Deep reinforcement learning and its neuroscientific implications",
+     ["Botvinick, Matthew", "Wang, Jane X.", "Dabney, Will", "Miller, Kevin J.", "Kurth-Nelson, Zeb"],
+     2020, "Neuron",
+     ["reinforcement-learning", "neuro-ai-bridging", "review"], [],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_113"], "", "", []),
+    ("babayan_uchida_gershman2018_belief_states_dopamine", "Belief state representation in the dopamine system",
+     ["Babayan, Benedicte M.", "Uchida, Naoshige", "Gershman, Samuel J."], 2018,
+     "Nature Communications",
+     ["dopamine", "reinforcement-learning"], [],
+     ["recurrent_vit"], ["vit_paper_ref_114"], "", "", []),
+    ("monosov2020_outcome_uncertainty", "How outcome uncertainty mediates attention, learning, and decision-making",
+     ["Monosov, Ilya E."], 2020, "Trends in Neurosciences",
+     ["primate-neurophysiology", "review", "decision-making"], [],
+     ["recurrent_vit"], ["vit_paper_ref_115"], "", "", []),
+    ("mante2013_context_dependent_pfc", "Context-dependent computation by recurrent dynamics in prefrontal cortex",
+     ["Mante, Valerio", "Sussillo, David", "Shenoy, Krishna V.", "Newsome, William T."], 2013,
+     "Nature",
+     ["primate-neurophysiology", "prefrontal-cortex", "neuro-ai-bridging"],
+     ["recurrence-for-temporal-dynamics"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_116"], "", "", []),
+    ("gattass_desimone2014_sc_microstim", "Effect of microstimulation of the superior colliculus on visual space attention",
+     ["Gattass, Ricardo", "Desimone, Robert"], 2014, "Journal of Cognitive Neuroscience",
+     ["primate-neurophysiology", "subcortical", "lesion-microstimulation"],
+     ["microstimulation"],
+     ["recurrent_vit"], ["vit_paper_ref_117"], "", "", []),
+    ("miconi_vanrullen2016_feedback_attention", "A feedback model of attention explains the diverse effects of attention on neural firing rates and RFs",
+     ["Miconi, Thomas", "VanRullen, Rufin"], 2016, "PLoS Computational Biology",
+     ["theoretical-essay", "visual-attention"], ["top-down-feedback"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_118"], "", "", []),
+    ("liu2024_human_attention_explainable_ai", "Human attention guided explainable AI for computer vision models",
+     ["Liu, Guoyang", "Zhang, Jindi", "Chan, Antoni B.", "Hsiao, Janet H."], 2024,
+     "Neural Networks",
+     ["deep-learning", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_119"], "", "", []),
+    ("cartella2024_human_attention_modeling", "Trends, applications, and challenges in human attention modelling",
+     ["Cartella, Giuseppe", "Cornia, Marcella", "Cuculo, Vittorio", "et al."], 2024,
+     "arXiv:2402.18673",
+     ["visual-attention", "deep-learning", "review"], [],
+     ["recurrent_vit"], ["vit_paper_ref_120"], "2402.18673", "", []),
+    ("pertzov_husain2014_location_wm", "The privileged role of location in visual working memory",
+     ["Pertzov, Yoni", "Husain, Masud"], 2014, "Attention, Perception, & Psychophysics",
+     ["working-memory", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_121"], "", "", []),
+    ("schneegans_bays2017_feature_binding_wm", "Neural architecture for feature binding in visual working memory",
+     ["Schneegans, Sebastian", "Bays, Paul M."], 2017, "Journal of Neuroscience",
+     ["working-memory", "primate-neurophysiology"], ["feature-binding"],
+     ["recurrent_vit"], ["vit_paper_ref_122"], "", "", []),
+    ("tsotsos1988_complexity_vision", "A 'complexity level' analysis of immediate vision",
+     ["Tsotsos, John K."], 1988, "International Journal of Computer Vision",
+     ["theoretical-essay", "visual-attention"], [],
+     ["recurrent_vit"], ["vit_paper_ref_123"], "", "", []),
+    ("sutton_barto2018_rl_intro", "Reinforcement Learning: An Introduction (2nd ed.)",
+     ["Sutton, Richard S.", "Barto, Andrew G."], 2018, "MIT Press",
+     ["reinforcement-learning", "review"], ["actor-critic", "ppo"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_125"], "", "", []),
+    ("springenberg2024_offline_actor_critic", "Offline actor-critic reinforcement learning scales to large models",
+     ["Springenberg, Jost Tobias", "Abdolmaleki, Abbas", "Zhang, Jingwei", "et al."], 2024,
+     "arXiv:2402.05546",
+     ["reinforcement-learning", "deep-learning"], ["actor-critic"],
+     ["recurrent_vit"], ["vit_paper_ref_126"], "2402.05546", "", []),
+]
+
+# Full-depth exemplars (do NOT regenerate)
+EXEMPLARS = {
+    "posner1980_orienting",
+    "vaswani2017_attention",
+    "rao_ballard1999_predictive_coding",
+    "reynolds_heeger2009_normalization",
+    "friston2010_fep_unified_theory",
+    "dosovitskiy2020_vit",
+    "bardes2023_vjepa",
+    "moore_armstrong2003_fef_microstim",
+}
+
+# Stubs that the VIT_REFS list above intentionally omits because they have
+# full-depth entries (saves us from special-casing each).
+# These ids are added back in EXEMPLARS_IN_VIT below for completeness checks.
+EXEMPLARS_IN_VIT = {
+    "posner1980_orienting",        # ref [11]
+    "vaswani2017_attention",       # ref [23]
+    "dosovitskiy2020_vit",         # ref [24]
+    "itti_koch2001_saliency_review",  # ref [26], will appear in THESIS_REFS
+    "bardes2023_vjepa",            # ref [32]
+    "moore_armstrong2003_fef_microstim",  # ref [43]
+    "bisley_goldberg2010_parietal_priority",  # ref [74]
+    "desimone_duncan1995_biased_competition",  # ref [80]
+    "felleman_vanessen1991_hierarchical_cortex",  # ref [110]
+    "koch_ullman1984_winner_takes_all",  # ref [124]
+    "hochreiter_schmidhuber1997_lstm",  # ref [40]
+}
+
+# Section B — references from PRISM/docs/THESIS.md unique to PRISM
+THESIS_REFS = [
+    ("ba2015_multiple_object_recognition", "Multiple object recognition with visual attention",
+     ["Ba, Jimmy", "Mnih, Volodymyr", "Kavukcuoglu, Koray"], 2015, "ICLR",
+     ["deep-learning", "visual-attention", "reinforcement-learning"],
+     ["recurrent-attention"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("ballas2016_convgru", "Delving deeper into convolutional networks for learning video representations",
+     ["Ballas, Nicolas", "Yao, Li", "Pal, Chris", "Courville, Aaron"], 2016, "ICLR",
+     ["recurrent-networks", "deep-learning"], ["convgru-cell"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "", []),
+    ("bastos2012_canonical_microcircuits", "Canonical microcircuits for predictive coding",
+     ["Bastos, Andre M.", "Usrey, W. Martin", "Adams, Rick A.", "et al."], 2012, "Neuron",
+     ["predictive-coding", "cortical-anatomy", "review", "theoretical-essay"],
+     ["hierarchical-predictive-coding", "rao-ballard-coding", "cortical-microcircuit-model"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "",
+     ["rao_ballard1999_predictive_coding", "friston2010_fep_unified_theory"]),
+    ("brefczynski_deyoe1999_spotlight_fmri", "A physiological correlate of the spotlight of visual attention",
+     ["Brefczynski, J. A.", "DeYoe, E. A."], 1999, "Nature Neuroscience",
+     ["human-neuroimaging", "visual-attention"], ["attentional-spotlight"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("buckley2017_fep_mathematical", "The free-energy principle for action and perception: a mathematical review",
+     ["Buckley, Christopher L.", "Kim, Chang Sub", "McGregor, Simon", "Seth, Anil K."], 2017,
+     "Journal of Mathematical Psychology",
+     ["free-energy-principle", "review", "theoretical-essay"],
+     ["variational-free-energy", "active-inference"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "", ["friston2010_fep_unified_theory"]),
+    ("constantinidis2018_persistent_activity", "Persistent spiking activity underlies working memory",
+     ["Constantinidis, Christos", "Funahashi, Shintaro", "Lee, Daeyeol", "et al."], 2018,
+     "Journal of Neuroscience",
+     ["primate-neurophysiology", "prefrontal-cortex", "working-memory", "review"],
+     ["working-memory-persistent-activity"],
+     ["prism_v1", "prism_v2"], ["thesis_md", "prism_v2_proposal"], "", "", []),
+    ("cutrell_marrocco2002_ppc_microstim", "Electrical microstimulation of primate posterior parietal cortex initiates orienting and alerting",
+     ["Cutrell, Edward B.", "Marrocco, Richard T."], 2002, "Experimental Brain Research",
+     ["primate-neurophysiology", "parietal-cortex", "lesion-microstimulation"],
+     ["microstimulation"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("devalois1988_spatial_vision", "Spatial Vision (book)",
+     ["De Valois, Russell L.", "De Valois, Karen K."], 1988, "Oxford University Press",
+     ["early-visual-cortex", "review"], ["gabor-receptive-fields", "orientation-selectivity"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("funahashi1989_mnemonic_dlpfc", "Mnemonic coding of visual space in the monkey's dorsolateral prefrontal cortex",
+     ["Funahashi, Shintaro", "Bruce, Charles J.", "Goldman-Rakic, Patricia S."], 1989,
+     "Journal of Neurophysiology",
+     ["primate-neurophysiology", "prefrontal-cortex", "working-memory"],
+     ["working-memory-persistent-activity"],
+     ["prism_v1", "prism_v2"], ["thesis_md", "prism_v2_proposal"], "", "", []),
+    ("gold_shadlen2007_decision_making", "The neural basis of decision making",
+     ["Gold, Joshua I.", "Shadlen, Michael N."], 2007, "Annual Review of Neuroscience",
+     ["primate-neurophysiology", "decision-making", "review"],
+     ["drift-diffusion-model"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("goldman_rakic1995_cellular_wm", "Cellular basis of working memory",
+     ["Goldman-Rakic, Patricia S."], 1995, "Neuron",
+     ["primate-neurophysiology", "prefrontal-cortex", "working-memory", "review"],
+     ["working-memory-persistent-activity"],
+     ["prism_v1", "prism_v2"], ["thesis_md", "prism_v2_proposal"], "", "", []),
+    ("hanks_summerfield2017_perceptual_decisions", "Perceptual decision making in rodents, monkeys, and humans",
+     ["Hanks, Timothy D.", "Summerfield, Christopher"], 2017, "Neuron",
+     ["decision-making", "review"], ["drift-diffusion-model"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("heilman2003_neglect", "Neglect and related disorders (chapter)",
+     ["Heilman, Kenneth M.", "Watson, Robert T.", "Valenstein, Edward"], 2003,
+     "Clinical Neuropsychology (Oxford UP)",
+     ["visual-attention", "review"], [],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("hollingworth2008_vstm_function", "Understanding the function of visual short-term memory: transsaccadic memory, object correspondence, and gaze correction",
+     ["Hollingworth, Andrew", "Richard, Ashleigh M.", "Luck, Steven J."], 2008,
+     "JEP: General",
+     ["working-memory", "visual-attention"], [],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("itti_koch2001_saliency_review", "Computational modelling of visual attention",
+     ["Itti, Laurent", "Koch, Christof"], 2001, "Nature Reviews Neuroscience",
+     ["saliency-models", "visual-attention", "review"],
+     ["prediction-error-map", "priority-map"],
+     ["prism_v1", "recurrent_vit"], ["thesis_md", "vit_paper_ref_26"], "", "",
+     ["koch_ullman1984_winner_takes_all"]),
+    ("hubel_wiesel1962_receptive_fields", "Receptive fields, binocular interaction and functional architecture in the cat's visual cortex",
+     ["Hubel, David H.", "Wiesel, Torsten N."], 1962, "Journal of Physiology",
+     ["early-visual-cortex", "primate-neurophysiology"],
+     ["gabor-receptive-fields", "orientation-selectivity"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "", []),
+    ("jozefowicz2015_rnn_exploration", "An empirical exploration of recurrent network architectures",
+     ["Jozefowicz, Rafal", "Zaremba, Wojciech", "Sutskever, Ilya"], 2015, "ICML",
+     ["recurrent-networks", "deep-learning"], ["lstm-cell", "gru-cell"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("kingma_ba2015_adam", "Adam: a method for stochastic optimization",
+     ["Kingma, Diederik P.", "Ba, Jimmy"], 2015, "ICLR",
+     ["deep-learning"], [],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("kriegeskorte2008_rsa", "Representational similarity analysis: connecting the branches of systems neuroscience",
+     ["Kriegeskorte, Nikolaus", "Mur, Marieke", "Bandettini, Peter A."], 2008,
+     "Frontiers in Systems Neuroscience",
+     ["methodology", "review", "neuro-ai-bridging"],
+     ["representational-dissimilarity-matrix", "representational-geometry"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "", []),
+    ("lisman_grace2005_hippocampal_vta", "The hippocampal-VTA loop: controlling the entry of information into long-term memory",
+     ["Lisman, John E.", "Grace, Anthony A."], 2005, "Neuron",
+     ["dopamine", "subcortical", "theoretical-essay"], [],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("locatello2020_slot_attention", "Object-centric learning with slot attention",
+     ["Locatello, Francesco", "Weissenborn, Dirk", "Unterthiner, Thomas", "et al."], 2020,
+     "NeurIPS",
+     ["deep-learning", "vision-transformers"], ["slot-attention"],
+     ["prism_v1", "recurrent_vit"], ["thesis_md"], "", "", []),
+    ("maunsell2015_attention_mechanisms", "Neuronal mechanisms of visual attention",
+     ["Maunsell, John H. R."], 2015, "Annual Review of Vision Science",
+     ["primate-neurophysiology", "visual-attention", "review"],
+     ["gain-modulation", "top-down-feedback"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("mnih2014_recurrent_attention", "Recurrent models of visual attention (RAM)",
+     ["Mnih, Volodymyr", "Heess, Nicolas", "Graves, Alex", "Kavukcuoglu, Koray"], 2014,
+     "NeurIPS",
+     ["deep-learning", "reinforcement-learning", "visual-attention"],
+     ["recurrent-attention", "reinforce"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("muller2005_sc_microstim_covert", "Microstimulation of the superior colliculus focuses attention without moving the eyes",
+     ["Müller, J. R.", "Philiastides, M. G.", "Newsome, William T."], 2005, "PNAS",
+     ["primate-neurophysiology", "subcortical", "lesion-microstimulation"],
+     ["microstimulation"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("perez2018_film", "FiLM: Visual reasoning with a general conditioning layer",
+     ["Perez, Ethan", "Strub, Florian", "De Vries, Harm", "Dumoulin, Vincent", "Bengio, Aaron"],
+     2018, "AAAI",
+     ["deep-learning"], ["feature-wise-linear-modulation", "multiplicative-feedback"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "",
+     ["reynolds_heeger2009_normalization"]),
+    ("pleines2022_recurrent_ppo", "Generalization, mayhems and limits in recurrent proximal policy optimization",
+     ["Pleines, Marco", "Pallasch, Matthias", "Zimmer, Frank", "Preuss, Mike"], 2022,
+     "arXiv:2205.11104",
+     ["reinforcement-learning", "deep-learning"], ["ppo", "actor-critic"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "2205.11104", "", []),
+    ("ratcliff1978_drift_diffusion", "A theory of memory retrieval (drift-diffusion model)",
+     ["Ratcliff, Roger"], 1978, "Psychological Review",
+     ["decision-making", "theoretical-essay"], ["drift-diffusion-model"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("reynolds_chelazzi2004_attentional_modulation", "Attentional modulation of visual processing",
+     ["Reynolds, John H.", "Chelazzi, Leonardo"], 2004, "Annual Review of Neuroscience",
+     ["primate-neurophysiology", "visual-attention", "review"],
+     ["gain-modulation", "biased-competition"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("riley_constantinidis2016_pfc_persistent", "Role of prefrontal persistent activity in working memory",
+     ["Riley, Mitchell R.", "Constantinidis, Christos"], 2016,
+     "Frontiers in Systems Neuroscience",
+     ["primate-neurophysiology", "prefrontal-cortex", "working-memory", "review"],
+     ["working-memory-persistent-activity"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("roitman_shadlen2002_lip_rt", "Response of neurons in the lateral intraparietal area during a combined visual-discrimination reaction-time task",
+     ["Roitman, Jamie D.", "Shadlen, Michael N."], 2002, "Journal of Neuroscience",
+     ["primate-neurophysiology", "parietal-cortex", "decision-making", "reaction-time"],
+     ["drift-diffusion-model"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("schulman2016_gae", "High-dimensional continuous control using generalized advantage estimation",
+     ["Schulman, John", "Moritz, Philipp", "Levine, Sergey", "Jordan, Michael", "Abbeel, Pieter"],
+     2016, "ICLR",
+     ["reinforcement-learning"], ["gae", "actor-critic"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "", []),
+    ("schulman2017_ppo", "Proximal policy optimization algorithms",
+     ["Schulman, John", "Wolski, Filip", "Dhariwal, Prafulla", "Radford, Alec", "Klimov, Oleg"],
+     2017, "arXiv:1707.06347",
+     ["reinforcement-learning", "deep-learning"], ["ppo", "actor-critic"],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "1707.06347", "", []),
+    ("spratling2008_pc_biased_competition", "Predictive coding as a model of biased competition in visual attention",
+     ["Spratling, M. W."], 2008, "Vision Research",
+     ["predictive-coding", "visual-attention", "theoretical-essay"],
+     ["biased-competition", "rao-ballard-coding", "attention-as-prediction-error"],
+     ["prism_v1"], ["thesis_md"], "", "",
+     ["rao_ballard1999_predictive_coding", "desimone_duncan1995_biased_competition"]),
+    ("sutton2019_bitter_lesson", "The Bitter Lesson",
+     ["Sutton, Richard S."], 2019, "Online essay",
+     ["theoretical-essay", "review"], [],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "", []),
+    ("treisman_gelade1980_feature_integration", "A feature-integration theory of attention",
+     ["Treisman, Anne M.", "Gelade, Garry"], 1980, "Cognitive Psychology",
+     ["visual-attention", "psychophysics", "theoretical-essay"], ["feature-binding"],
+     ["prism_v1"], ["thesis_md"], "", "", []),
+    ("wu_he2018_groupnorm", "Group normalization",
+     ["Wu, Yuxin", "He, Kaiming"], 2018, "ECCV",
+     ["deep-learning"], [],
+     ["prism_v1", "prism_v2"], ["thesis_md"], "", "", []),
+    # The handful of "full" exemplars that came from THESIS rather than ViT — they
+    # have full-depth files already, so we'd just skip them in generation.
+    ("bisley_goldberg2010_parietal_priority", "Attention, intention, and priority in the parietal lobe",
+     ["Bisley, James W.", "Goldberg, Michael E."], 2010, "Annual Review of Neuroscience",
+     ["primate-neurophysiology", "parietal-cortex", "review"], ["priority-map"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_74", "thesis_md"], "", "", []),
+    ("desimone_duncan1995_biased_competition", "Neural mechanisms of selective visual attention",
+     ["Desimone, Robert", "Duncan, John"], 1995, "Annual Review of Neuroscience",
+     ["visual-attention", "review", "primate-neurophysiology"],
+     ["biased-competition", "attentional-template"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_80"], "", "", []),
+    ("felleman_vanessen1991_hierarchical_cortex", "Distributed hierarchical processing in the primate cerebral cortex",
+     ["Felleman, Daniel J.", "Van Essen, David C."], 1991, "Cerebral Cortex",
+     ["cortical-anatomy", "review", "primate-neurophysiology"],
+     ["ventral-stream-hierarchy", "top-down-feedback"],
+     ["prism_v1", "prism_v2", "recurrent_vit"], ["vit_paper_ref_110", "thesis_md"], "", "", []),
+    ("koch_ullman1984_winner_takes_all", "Selecting one among the many: a simple network implementing shifts in visual attention",
+     ["Koch, Christof", "Ullman, Shimon"], 1984, "MIT AI Memo",
+     ["saliency-models", "theoretical-essay"], ["attentional-spotlight"],
+     ["recurrent_vit"], ["vit_paper_ref_124"], "", "", []),
+    ("hochreiter_schmidhuber1997_lstm", "Long short-term memory",
+     ["Hochreiter, Sepp", "Schmidhuber, Jürgen"], 1997, "Neural Computation",
+     ["recurrent-networks", "deep-learning"], ["lstm-cell"],
+     ["recurrent_vit", "prism_v1"], ["vit_paper_ref_40"], "", "", []),
+]
+
+# Section C — references unique to PRISM_V2_PROPOSAL.md
+V2_REFS = [
+    ("mujika2017_fast_slow_rnn", "Fast-slow recurrent neural networks",
+     ["Mujika, Asier", "Meier, Florian", "Steger, Angelika"], 2017, "NeurIPS",
+     ["recurrent-networks", "deep-learning"], ["slow-fast-recurrence"],
+     ["prism_v2"], ["prism_v2_proposal"], "", "", []),
+    ("tallec_ollivier2018_chrono_init", "Can recurrent networks warp time? (chrono-initialization)",
+     ["Tallec, Corentin", "Ollivier, Yann"], 2018, "ICLR",
+     ["recurrent-networks", "deep-learning", "theoretical-essay"],
+     ["chrono-initialization", "lstm-cell"],
+     ["prism_v2"], ["prism_v2_proposal"], "", "", []),
+    ("wen2018_deep_pc_networks", "Deep predictive coding networks for object recognition",
+     ["Wen, Haiguang", "Han, Kuan", "Liu, Junxing", "et al."], 2018, "arXiv",
+     ["predictive-coding", "deep-learning"],
+     ["hierarchical-predictive-coding", "generative-decoder"],
+     ["prism_v2"], ["prism_v2_proposal"], "", "",
+     ["rao_ballard1999_predictive_coding"]),
+    ("pinchetti2024_benchmark_pc_networks", "Benchmarking predictive-coding networks for visual learning",
+     ["Pinchetti, Luca", "et al."], 2024, "arXiv",
+     ["predictive-coding", "deep-learning", "review"],
+     ["hierarchical-predictive-coding"],
+     ["prism_v2"], ["prism_v2_proposal"], "", "", []),
+    ("voita2019_head_specialization", "Analyzing multi-head self-attention: specialized heads do the heavy lifting",
+     ["Voita, Elena", "Talbot, David", "Moiseev, Fedor", "et al."], 2019, "ACL",
+     ["transformers", "deep-learning"], ["multi-head-attention"],
+     ["prism_v2", "recurrent_vit"], ["prism_v2_proposal"], "", "",
+     ["vaswani2017_attention"]),
+    ("dicarlo2012_object_recognition", "How does the brain solve visual object recognition?",
+     ["DiCarlo, James J.", "Zoccolan, Davide", "Rust, Nicole C."], 2012, "Neuron",
+     ["primate-neurophysiology", "review", "early-visual-cortex"],
+     ["ventral-stream-hierarchy"],
+     ["prism_v2"], ["prism_v2_proposal"], "", "", []),
+    ("buzsaki_wang2012_gamma", "Mechanisms of gamma oscillations",
+     ["Buzsáki, György", "Wang, Xiao-Jing"], 2012, "Annual Review of Neuroscience",
+     ["primate-neurophysiology", "review", "early-visual-cortex"], [],
+     ["prism_v2"], ["prism_v2_proposal"], "", "", []),
+    ("banino2021_pondernet", "PonderNet: learning to ponder (adaptive computation)",
+     ["Banino, Andrea", "Balaguer, Jan", "Barreca, Charles", "et al."], 2021,
+     "ICML Workshop",
+     ["deep-learning", "recurrent-networks"], ["inner-inference-loop"],
+     ["prism_v2"], ["prism_v2_proposal"], "", "", []),
+    ("graves2016_act", "Adaptive computation time for recurrent neural networks",
+     ["Graves, Alex"], 2016, "arXiv:1603.08983",
+     ["recurrent-networks", "deep-learning"], ["inner-inference-loop"],
+     ["prism_v2"], ["prism_v2_proposal"], "1603.08983", "", []),
+]
+
+ALL_SEED = VIT_REFS + THESIS_REFS + V2_REFS
+
+# -----------------------------------------------------------------------------
+# Stub template
+# -----------------------------------------------------------------------------
+
+TEMPLATE = dedent("""\
+    ---
+    id: {id}
+    title: "{title}"
+    authors:
+    {authors_block}
+    year: {year}
+    venue: "{venue}"
+    doi: "{doi}"
+    arxiv: "{arxiv}"
+    url: "{url}"
+    tags:
+    {tags_block}
+    concepts:
+    {concepts_block}
+    related:
+    {related_block}
+    relevance_to:
+    {relevance_block}
+    seed_source:
+    {seed_block}
+    status: stub
+    depth: metadata
+    last_updated: "{today}"
+    ---
+
+    # {title}
+
+    > **Stub.** Metadata only — abstract, claims, and structured summary pending. Deepen in a future session per `SCHEMA.md`.
+
+    ## 1. Abstract
+
+    *Pending.*
+
+    ## 2. Why this matters for us
+
+    *Pending — but the entry is in the seed because it appears in `{seed_human}`.*
+    """)
+
+
+def _yaml_list_block(items: list[str], indent: int = 2) -> str:
+    """Render a list of strings as a YAML block list."""
+    if not items:
+        return " " * indent + "[]"
+    pad = " " * indent
+    return "\n".join(f"{pad}- {item}" if not item.startswith("\"") else f"{pad}- {item}"
+                     for item in items)
+
+
+def _quoted_yaml_list_block(items: list[str], indent: int = 2) -> str:
+    """Same as above but quotes each value (used for authors / strings with commas)."""
+    if not items:
+        return " " * indent + "[]"
+    pad = " " * indent
+    return "\n".join(f'{pad}- "{item}"' for item in items)
+
+
+def render(entry) -> tuple[str, str]:
+    (eid, title, authors, year, venue, tags, concepts, relevance, seed,
+     arxiv, doi, related) = entry
+
+    url = f"https://arxiv.org/abs/{arxiv}" if arxiv else ""
+    if not concepts:
+        concepts = []
+    if not related:
+        related = []
+
+    seed_human = ", ".join(seed)
+
+    body = TEMPLATE.format(
+        id=eid,
+        title=title.replace('"', "'"),
+        authors_block=_quoted_yaml_list_block(authors),
+        year=year,
+        venue=venue,
+        doi=doi,
+        arxiv=arxiv,
+        url=url,
+        tags_block=_yaml_list_block(tags),
+        concepts_block=_yaml_list_block(concepts),
+        related_block=_yaml_list_block(related),
+        relevance_block=_yaml_list_block(relevance),
+        seed_block=_yaml_list_block(seed),
+        seed_human=seed_human,
+        today=TODAY,
+    )
+    return eid, body
+
+
+def main():
+    PAPERS_DIR.mkdir(parents=True, exist_ok=True)
+    n_created = 0
+    n_skipped_exemplar = 0
+    n_skipped_existing = 0
+    seen_ids: set[str] = set()
+    duplicates: list[str] = []
+
+    for entry in ALL_SEED:
+        eid, body = render(entry)
+
+        # dedupe within seed (a paper cited by both ViT paper and THESIS shouldn't
+        # produce two files — the first one wins, but log)
+        if eid in seen_ids:
+            duplicates.append(eid)
+            continue
+        seen_ids.add(eid)
+
+        out_path = PAPERS_DIR / f"{eid}.md"
+        if eid in EXEMPLARS:
+            n_skipped_exemplar += 1
+            continue
+        if out_path.exists():
+            n_skipped_existing += 1
+            continue
+
+        out_path.write_text(body, encoding="utf-8")
+        n_created += 1
+
+    print(f"Created:                {n_created} stub files")
+    print(f"Skipped (exemplar):     {n_skipped_exemplar}")
+    print(f"Skipped (already on disk): {n_skipped_existing}")
+    if duplicates:
+        print(f"Duplicate entries in seed (kept first): {len(duplicates)}")
+        for d in duplicates:
+            print(f"  - {d}")
+    print(f"Total seed entries: {len(seen_ids)}")
+
+
+if __name__ == "__main__":
+    main()

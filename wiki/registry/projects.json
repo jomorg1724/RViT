@@ -1,0 +1,15 @@
+{
+  "projects": [
+    {
+      "description": "Convolutional-front-end and memory-noise battery runs.",
+      "producer_path": "RViT_plus_paper_jepa_conv",
+      "project_id": "rvit-plus-paper-jepa-conv"
+    },
+    {
+      "description": "Value-directed attention and behavioral battery runs.",
+      "producer_path": "RViT_plus_paper_jepa_grid9",
+      "project_id": "rvit-plus-paper-jepa-grid9"
+    }
+  ],
+  "schema_version": 1
+}

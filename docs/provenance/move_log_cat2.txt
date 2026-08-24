@@ -1,0 +1,41 @@
+cat2 move log started 2026-08-20 21:26:22
+21:26:25  OK  runs\luo2015_grid20x20_dmem32_memnoise001_nodecay_cpu_canary_20260728
+21:26:27  OK  runs\luo2015_grid20x20_dmem32_memnoise004_nodecay_gpu_canary
+21:26:28  OK  runs\luo2015_grid20x20_dmem32_memnoise004_nodecay_seeds012_local
+21:26:29  OK  runs\luo2015_grid20x20_dmem32_memnoise008_nodecay_matched_eval_gpu_canary
+21:26:30  OK  runs\luo2015_grid20x20_dmem32_memnoise008_nodecay_matched_eval_neutral_seed000_local
+21:26:30  OK  runs\luo2015_grid20x20_dmem32_memnoise008_nodecay_matched_eval_seeds012_local
+21:26:32  OK  runs\luo2015_grid20x20_dmem32_memnoise016_nodecay_matched_eval_gpu_canary
+21:26:33  OK  runs\luo2015_grid20x20_dmem32_memnoise016_nodecay_matched_eval_neutral_seed000_local
+21:26:34  OK  runs\luo2015_grid20x20_dmem32_memnoise032_nodecay_matched_eval_gpu_canary
+21:26:35  OK  runs\luo2015_grid20x20_dmem32_memnoise032_nodecay_matched_eval_neutral_seed000_local
+21:26:36  OK  runs\luo2015_grid20x20_dmem32_memnoise064_nodecay_matched_eval_gpu_canary
+21:26:38  OK  runs\luo2015_grid20x20_dmem32_memnoise064_nodecay_matched_eval_neutral_seed000_local
+21:26:39  OK  runs\luo2015_grid20x20_dmem32_memnoise064_uniformchange_nodecay_matched_eval_gpu_canary
+21:26:42  OK  runs\luo2015_grid20x20_dmem32_memnoise064_uniformchange_nodecay_matched_eval_neutral_seed000_local
+21:26:45  OK  runs\luo2015_grid20x20_dmem32_memnoise128_nodecay_matched_eval_gpu_canary
+21:26:46  OK  runs\luo2015_grid20x20_dmem32_memnoise128_nodecay_matched_eval_neutral_seed000_local
+21:26:46  OK  runs\luo2015_grid4_sigma010_cpu_canary_20260720_161322
+21:27:06  ERR runs\runpod_exports: Could not find a part of the path.
+21:27:10  ERR runs\deployments: Could not find a part of the path 'fresh_dualstream_dmem128_grid2_memnoise0075_gamma100_bc000_curriculum_sensitivity_runpod'.
+21:27:10  OK  runs\canaries
+21:27:11  OK  runs\analyses
+21:27:11  OK  runs\source_archives\rvit_luo_corrected_grid20_grid2_20260803.tar.gz
+21:27:11  OK  runs\source_archives\rvit_luo_corrected_grid2_memnoise032_20260804.tar.gz
+21:27:14  OK  experiments\luo2015_episodic
+21:27:15  OK  reports\luo2015_attention_paper_20260804
+21:27:16  OK  reports\luo2015_attention_smoke_20260802
+21:27:17  OK  reports\luo2015_attention_smoke_20260802_retry
+21:27:18  OK  reports\luo2015_attention_snapshot_20260802_final
+21:27:19  OK  reports\luo2015_attention_snapshot_20260802_production
+21:27:19  OK  reports\luo2015_dmem128_partial_20260818
+21:27:21  OK  reports\luo2015_scientific_assay_20260803_production
+21:27:23  OK  reports\luo2015_scientific_assay_smoke_20260803
+21:27:23  OK  analysis\luo2015_analysis
+21:27:31  OK  rescues\eval_tree
+21:27:36  OK  rescues\loc0
+21:27:41  OK  rescues\loc3
+21:27:43  OK  rescues\report
+21:27:43  OK  rescues\rescue_loc0.tar.gz
+21:27:44  OK  rescues\rescue_loc3.tar.gz
+21:27:44  cat2 move script finished

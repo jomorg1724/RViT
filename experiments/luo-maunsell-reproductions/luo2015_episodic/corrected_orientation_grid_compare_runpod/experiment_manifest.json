@@ -1,0 +1,50 @@
+{
+  "experiment_family": "luo2015_corrected_orientation_grid_compare",
+  "scientific_state": "neutral_parent_calibration",
+  "initialization": "fresh",
+  "automatic_children": false,
+  "seed": 0,
+  "iterations": 20000,
+  "task_contract": {
+    "task": "luo2015_criterion",
+    "orientation_sampling": "independent_uniform_axial_0_180",
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "curriculum_changes_only": "theta",
+    "theta_start": 65.0,
+    "theta_floor": 18.0,
+    "theta_step": 3.0,
+    "timeline_frames": 7,
+    "scene_pixels": [50, 50],
+    "sensory_orientation_noise_sd": 5.0,
+    "change_probability": 0.5,
+    "neutral_rewards": {"hit": 1.0, "correct_reject": 1.0}
+  },
+  "model_contract": {
+    "cell": "xlstm",
+    "feedback": "crossattn1",
+    "convolutional_frontend": true,
+    "memory_dimension": 32,
+    "memory_noise_sd": 0.64,
+    "memory_noise_granularity": "independent_per_batch_token_memory_scalar_update",
+    "memory_retention_coefficient": 1.0,
+    "jepa_coefficient": 0.5
+  },
+  "training_contract": {
+    "episodes_per_iteration": 8,
+    "gamma": 1.0,
+    "save_every": 50,
+    "log_every": 1,
+    "policy_action_semantics": "sampled",
+    "device": "cuda"
+  },
+  "comparison": {
+    "changed_variable": "model_patch_grid",
+    "held_fixed": "all task, model, optimization, seed, and iteration settings other than patch-grid rows/columns",
+    "conditions": [
+      {"name": "dense_grid20", "patch_grid": [20, 20], "visual_tokens": 400},
+      {"name": "coarse_grid2", "patch_grid": [2, 2], "visual_tokens": 4}
+    ],
+    "capacity_warning": "Changing token count also changes positional width, recurrent-state count, flattened readout width, and total parameter count; this is a tokenization comparison, not a capacity-matched causal ablation."
+  },
+  "promotion_policy": "Train neutral parents only. Calibrate matched fresh-episode competence and non-ceiling headroom before any criterion or sensitivity children."
+}

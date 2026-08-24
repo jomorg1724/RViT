@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vda4_modern_gamma095_critic1_actor01_jepa0001_teacher003005_nobc_seed0_v1",
+  "status": "registered_local_seed0_experiment",
+  "claim_scope": "single-seed online same-distribution VDA4 competence test; not transfer or held-out evidence",
+  "hypothesis": "A critic-dominant objective will stabilize value grounding while a middle-weight actor learns behavior and a low-weight JEPA objective regularizes rather than dominates the recurrent representation.",
+  "rationale": "The preceding actor-0.01/critic-0.5/JEPA-0.6 run was numerically stable but behaviorally unstable: actual last-window contributions were roughly actor 0.0027, critic 0.043, JEPA 3.5, with 15-16% correctness and late H2 weakening. Coefficients are calibrated against those raw loss scales so actual window-averaged contributions should be critic > actor > JEPA.",
+  "controlled_delta": {
+    "critic_coefficient": {"from": 0.5, "to": 1.0},
+    "actor_coefficient": {"from": 0.01, "to": 0.1},
+    "jepa_coefficient": {"from": 0.6, "to": 0.001}
+  },
+  "objective_weights": {
+    "critic": 1.0,
+    "actor": 0.1,
+    "jepa": 0.001,
+    "ordering": "critic > actor > JEPA",
+    "behavior_cloning_alpha": 0.0
+  },
+  "behavior_cloning": "disabled; alpha-zero pure-MPO path does not construct a BC loss",
+  "falsification": "Actual rolling weighted contributions fail to remain critic > actor > JEPA, long-window correctness remains near or below chance, best rolling correctness fails to exceed the prior modern-run 57.75% peak and older 64-67% range, or theta never decreases.",
+  "task_contract": {
+    "task": "vda4",
+    "active_items": 4,
+    "timeline_frames": 7,
+    "change_time": 5,
+    "sensory_noise_std": 5.0,
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "action_semantics": "0=wait, 1=declare; sampled policy"
+  },
+  "architecture": {
+    "cell": "transformer_memory_2layer_softmax_modern",
+    "visual_feedback": "source-RMSNorm and QK-normalized crossattn1: Q=X; K/V=[X,H1_prev] under one inspectable softmax",
+    "memory1": "source-RMSNorm; four-head QK-normalized attention; gated output; raw H1 then tokenwise feature softmax",
+    "memory2": "source-RMSNorm; four-head QK-normalized attention; gated output; raw H2 then tokenwise feature softmax",
+    "student_memory_output": "tokenwise_feature_softmax",
+    "initial_memory": "learned slot-distinct H1_0/H2_0 logits, tokenwise softmaxed before first use",
+    "downstream_h1": ["memory transformer 2", "next-step visual feedback", "H1 JEPA head"],
+    "downstream_h2": ["actor", "critic", "next-step memory-2 recurrence", "H2 JEPA head"],
+    "patch_grid": [2, 2],
+    "d_mem": 128,
+    "memory_heads_per_layer": 4,
+    "head_dimension": 32,
+    "all_parameters_trainable": true
+  },
+  "jepa": {
+    "coefficient_on_total": 0.001,
+    "cross_entropy": "temporal student@t predicts detached EMA-teacher@t+1 independently for H1/H2",
+    "heads_per_memory_layer": 4,
+    "prototype_dimension": 256,
+    "student_temperature": 0.1,
+    "teacher_temperature_start": 0.03,
+    "teacher_temperature_end": 0.05,
+    "teacher_temperature_warmup_iterations": 300,
+    "center_momentum": 0.9,
+    "center_update": "EMA over valid timesteps only; padded tails excluded",
+    "teacher_ema_decay": 0.996,
+    "teacher_ema_schedule": "none; fixed decay throughout",
+    "collapse_prevention": {
+      "sinkhorn_knopp": "3 iterations over valid samples",
+      "projected_feature_variance_floor": {"coefficient": 1.0, "target_std": 1.0},
+      "projected_feature_covariance_decorrelation": {"coefficient": 0.01},
+      "total": "CE + 1.0*variance + 0.01*covariance"
+    }
+  },
+  "training": {
+    "iterations": 20000,
+    "episodes_per_iteration": 8,
+    "seed": 0,
+    "device": "local_cuda",
+    "optimizer_learning_rate": 0.0003,
+    "gamma": 0.95,
+    "entropy_coefficient": 0.01,
+    "initial_action_bias": [0.0, -1.5],
+    "pac_target_ema_decay": 0.995,
+    "initialization": "fresh",
+    "checkpoint_every_iterations": 50
+  },
+  "curriculum": {
+    "enabled": true,
+    "theta_start_deg": 65.0,
+    "window_trials": 1000,
+    "correctness_threshold": 0.85,
+    "theta_step_deg": 3.0,
+    "theta_floor_deg": 8.0,
+    "window_semantics": "non-overlapping valid completed trials",
+    "update": "theta=max(theta_floor, theta-3deg) only when window correctness>=0.85"
+  },
+  "monitoring": {
+    "required_metrics": ["rolling/correct_rate", "rolling/mean_return", "loss_policy_weighted", "loss_value_weighted", "loss_jepa_weighted", "loss_jepa_h1", "loss_jepa_h2", "loss_entropy", "approx_kl", "n_skipped", "env/theta"],
+    "decision_rule": "Behavior and curriculum advancement dominate auxiliary loss values; weighted contribution ordering is checked on rolling windows, not every noisy minibatch."
+  }
+}

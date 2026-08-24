@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "design": "fresh_counterphased_reward_objectives",
+  "claim_scope": "independent_fixed_condition_policy_optima_not_warm_start_adaptation_or_alternating_block_learning",
+  "initialization": "fresh_identical_seed_per_cell",
+  "seed": 0,
+  "iterations_per_cell": 20000,
+  "discount_factor": 0.7,
+  "patch_grid": [2, 2],
+  "memory_dimension": 32,
+  "memory_noise_sd": 0.32,
+  "memory_retention_coefficient": 1.0,
+  "sensory_orientation_noise_sd": 5.0,
+  "theta": 65.0,
+  "curriculum": false,
+  "feedback": "crossattn1",
+  "cell_type": "xlstm",
+  "jepa_coefficient": 0.5,
+  "episodes_per_iteration": 8,
+  "task_contract": {
+    "orientation_sampling": "independent_uniform_axial_0_180",
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "orientation_period_degrees": 180.0,
+    "timeline_frames": 7,
+    "visible_reward_cue": false,
+    "action_semantics": "0=wait, 1=declare; sampled policy"
+  },
+  "discount_hypothesis": {
+    "statement": "Temporal discounting may expose reward modulation that is weak under magnitude-invariant undiscounted returns.",
+    "known_consequence": "Correct-rejection rewards occur later than hit rewards, so gamma=0.7 changes effective first-test hit:CR ratios.",
+    "planned_ladder_if_unsuccessful": [0.9, 1.0]
+  },
+  "cells": {
+    "sensitivity_loc0": {"task": "luo2015_sensitivity", "condition_loc": 0, "reward_scale": 0.3333333333333333},
+    "sensitivity_loc3": {"task": "luo2015_sensitivity", "condition_loc": 3, "reward_scale": 0.3333333333333333},
+    "criterion_loc0": {"task": "luo2015_criterion", "condition_loc": 0, "reward_scale": 1.0526315789473684},
+    "criterion_loc3": {"task": "luo2015_criterion", "condition_loc": 3, "reward_scale": 1.0526315789473684}
+  },
+  "primary_estimands": {
+    "sensitivity": "counterphased location difference-in-differences in d-prime",
+    "criterion": "counterphased location difference-in-differences in criterion c"
+  }
+}

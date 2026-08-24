@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vda4_grid2x2_crossattn1_transformer_memory_seed0_v1",
+  "status": "local_seed0_experiment_registered",
+  "claim_scope": "single-seed online same-distribution VDA4 competence experiment",
+  "question": "Can an H-only transformer memory solve VDA4 when it may jointly attend to previous memory and current visual-transformer tokens?",
+  "task_contract": {
+    "task": "vda4",
+    "active_items": 4,
+    "timeline_frames": 7,
+    "change_time": 5,
+    "sensory_noise_std": 5.0,
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "action_semantics": "0=wait, 1=declare; sampled policy"
+  },
+  "architecture": {
+    "visual_feedback": "crossattn1: Q=X; K/V=[X,H_prev]; residual=X",
+    "memory": "single transformer: Q=H_prev; K/V=[H_prev,Z]; residual=H_prev; H-only state",
+    "initial_memory": "learned slot-distinct H0 tokens",
+    "memory_key_order": ["H_prev", "Z"],
+    "patch_grid": [2, 2],
+    "tokens": 4,
+    "d_mem": 128,
+    "memory_heads": 4,
+    "actor_and_value_source": "H",
+    "visual_feedback_source": "H",
+    "jepa_teacher": "EMA teacher over H with temporal t-to-t+1 distillation"
+  },
+  "training": {
+    "iterations": 20000,
+    "terminal_iteration": 19999,
+    "episodes_per_iteration": 8,
+    "seed": 0,
+    "device": "local_cuda",
+    "initialization": "fresh",
+    "curriculum": {
+      "theta_start": 65.0,
+      "window": 1000,
+      "threshold": 0.85,
+      "step": 3.0,
+      "floor": 8.0
+    },
+    "optimizer": {
+      "lr": 0.0003,
+      "gamma": 0.95,
+      "entropy_coefficient": 0.01,
+      "target_ema_decay": 0.995
+    },
+    "jepa": {
+      "coefficient": 0.5,
+      "heads": 4,
+      "prototype_dimension": 256,
+      "teacher_ema_decay": 0.996,
+      "temporal": true
+    }
+  },
+  "success_gate": "Operational competence requires a healthy complete run and sustained same-distribution correctness above chance; mechanistic claims require a separate frozen attention/intervention assay.",
+  "falsifier": "The registered architecture fails to improve beyond chance or is numerically/operationally unstable over the full local run."
+}

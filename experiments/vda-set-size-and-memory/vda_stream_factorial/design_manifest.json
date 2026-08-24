@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "design_id": "vda4_stream_factorial_crossattn1_production_v1",
+  "status": "production_contract_prepared_not_launched",
+  "scientific_question": "Do visual-stream rank, recurrent-memory-stream rank, and their interaction change cueing behavior, spatial representation, and causal routing dependence when carrier shape, parameter count, active-item count, and training budget are fixed?",
+  "hypothesis": {
+    "simple_stream_count": "More differentiable streams increase attention-related effects.",
+    "coherent_actionable_percept": "Additional memory streams help most when they remain correctly bound to distinct visual streams, producing a positive visual-by-memory interaction and a reversible cost of rank-preserving visual-memory misbinding."
+  },
+  "source_contract": {
+    "stream_model_path": "experiments/vda_stream_factorial/stream_model.py",
+    "stream_model_sha256": "ea9f329ad0bafc5f37a33cf2959d070bd44795870547114afbba6186c7cece29",
+    "design_matrix_path": "experiments/vda_stream_factorial/design_matrix.py",
+    "design_matrix_sha256": "4dc055c9f14759fd240ce10049cfb9bd08f35c776d87817dddbb7c72eee07984",
+    "train_rl_required_cli": [
+      "--effective-visual-streams",
+      "--effective-memory-streams"
+    ],
+    "model_factory_kind": "stream_factorial_v1"
+  },
+  "fixed_scientific_contract": {
+    "task": "vda4",
+    "display": "unchanged 50x50 four-item VDA4 scene",
+    "active_items": 4,
+    "stimulus_grid": [2, 2],
+    "carrier_grid": [10, 10],
+    "carrier_tokens": 100,
+    "image_size": 50,
+    "token_width": 236,
+    "readout_dim": 12800,
+    "feedback": "crossattn1",
+    "cell": "xlstm",
+    "d_mem": 128,
+    "memory_decay": 1.0,
+    "memory_noise_std": 0.0,
+    "conv_frontend": true,
+    "jepa_coef": 0.5,
+    "episodes_per_iteration": 8,
+    "schedule_final_iteration": 19999,
+    "initialization": "fresh",
+    "no_early_stopping": true,
+    "trainable_parameters": 8682948,
+    "paired_initialization": "Within a routing family and seed, reset all training RNGs before construction and require an identical hash over every named trainable tensor in all four cells.",
+    "paired_environment_rng": "Within a seed, all four cells use the same environment RNG seed and must reproduce the registered trial-metadata trace hash."
+  },
+  "factor_levels": {
+    "effective_visual_streams": [4, 100],
+    "effective_memory_streams": [4, 100],
+    "training_seeds": [0, 1, 2]
+  },
+  "cells": [
+    {
+      "cell_id": "visual4_memory4",
+      "effective_visual_streams": 4,
+      "effective_memory_streams": 4
+    },
+    {
+      "cell_id": "visual4_memory100",
+      "effective_visual_streams": 4,
+      "effective_memory_streams": 100
+    },
+    {
+      "cell_id": "visual100_memory4",
+      "effective_visual_streams": 100,
+      "effective_memory_streams": 4
+    },
+    {
+      "cell_id": "visual100_memory100",
+      "effective_visual_streams": 100,
+      "effective_memory_streams": 100
+    }
+  ],
+  "engineering_canaries": {
+    "evidence_class": "engineering_only_not_scientific_evidence",
+    "seed": 0,
+    "iterations": 50,
+    "terminal_iteration": 49,
+    "schedule_final_iteration": 19999,
+    "cells": [
+      "visual4_memory4",
+      "visual4_memory100",
+      "visual100_memory4",
+      "visual100_memory100"
+    ],
+    "required_checks": [
+      "all four cells start from the same named-trainable-tensor SHA-256",
+      "visual and memory projector ranks equal the requested levels",
+      "projector buffers are fixed, finite, idempotent, and gradient-transparent",
+      "carrier shape is 100 tokens and actor/critic readout is 12800 in every cell",
+      "trainable parameter count is exactly 8682948 in every cell",
+      "environment RNG trace matches the registered seed-0 trace",
+      "checkpoint schema binds model_factory, effective stream levels, config, design, source, and launcher hashes",
+      "metrics are finite and contiguous for iterations 0 through 49",
+      "log has no traceback and the trainer writes the final canary checkpoint"
+    ]
+  },
+  "production": {
+    "evidence_class": "scientific_only_after_terminal_and_heldout_validation",
+    "iterations": 20000,
+    "terminal_iteration": 19999,
+    "seeds": [0, 1, 2],
+    "run_count": 12,
+    "no_result_dependent_stopping": true,
+    "required_completion": [
+      "trainer exits successfully",
+      "exactly 20000 contiguous finite metric rows for iterations 0 through 19999",
+      "schema-3 terminal final and latest checkpoints with finite equal required state",
+      "exact task, carrier, feedback, cell, d_mem, decay, fresh seed, and effective-stream contract",
+      "exact producer, config, design, preflight, and launcher SHA-256 provenance",
+      "clean final-save log and no traceback",
+      "remote and local bytes and SHA-256 match before atomic promotion",
+      "held-out behavior and mechanism evaluation passes artifact and semantic validation"
+    ]
+  },
+  "environment_rng_trace": {
+    "algorithm": "SHA-256 over canonical JSON for 32 sequential VDA4 reset trial-metadata records after numpy.random.seed(seed)",
+    "fields": [
+      "cue_index",
+      "change_true",
+      "change_index",
+      "change_time",
+      "proportion",
+      "cue_color",
+      "orientation_change",
+      "orientations"
+    ],
+    "trial_count": 32,
+    "expected_sha256_by_seed": {
+      "0": "c13c919620327f53ff1562057125f4e81a699dcc72bf5943195c325cfa218f02",
+      "1": "006086c85b4f091e2d684e9ea403d672bf847eda78d28fa729b659e6c39d9f15",
+      "2": "e15b65309e7cffd77b2531007595e6d18510702db78ae780bf5cebabfe83e022"
+    }
+  },
+  "heldout_banks": {
+    "common_random_numbers": true,
+    "shared_across_all_cells_and_training_seeds": true,
+    "calibration": {
+      "seed": 2026073001,
+      "trials_per_magnitude": 128,
+      "displayed_validity": 1.0,
+      "condition": "forced_invalid",
+      "magnitudes_degrees": [3, 6, 9, 12, 15, 18, 22, 26, 30],
+      "selection_rule": "Choose the smallest magnitude with natural invalid response rate in [0.50, 0.70]. If none exists, mark the primary causal estimand non-informative for that checkpoint.",
+      "disjoint_from_all_test_banks": true
+    },
+    "psychometric": {
+      "seed": 2026073002,
+      "trials_per_point": 300,
+      "displayed_validities": [0.25, 0.5, 0.75, 1.0],
+      "magnitudes_degrees": [0, 3, 6, 9, 12, 15, 18, 22, 26, 30],
+      "conditions": ["valid", "forced_invalid", "no_change"],
+      "qualifying_response_frames": [5, 6]
+    },
+    "attention": {
+      "seed": 2026073003,
+      "trials_per_condition": 128,
+      "conditions": ["valid_top_left_change", "forced_invalid_bottom_right_change", "no_change"],
+      "primary_frames": [2, 3, 4, 5, 6]
+    },
+    "intervention": {
+      "seed": 2026073004,
+      "trials_per_role_dose_condition": 250,
+      "displayed_validity": 1.0,
+      "magnitude": "checkpoint-specific value frozen by the disjoint calibration bank",
+      "target_roles": ["true_change", "cued_wrong", "neutral_control"],
+      "doses": [0.0, 0.25, 0.5, 0.75, 1.0],
+      "conditions": ["valid", "forced_invalid", "no_change"],
+      "report": ["response_rate", "response_time", "dprime", "criterion", "achieved_target_mass"]
+    },
+    "binding": {
+      "seed": 2026073005,
+      "trials_per_condition": 250,
+      "mapping_conditions": ["aligned", "cyclic_shift_delay", "cyclic_shift_change", "cyclic_shift_all", "restored"],
+      "constraint": "The intervention preserves stream count, tensor rank, state values, parameters, and trial bank; only visual-memory spatial correspondence changes."
+    }
+  },
+  "admission_gates": {
+    "terminal_gate": "Every production completion requirement must pass before scientific evaluation.",
+    "behavioral_competence": {
+      "max_magnitude_valid_response_rate_minimum": 0.5,
+      "no_change_false_alarm_rate_maximum": 0.2,
+      "failure_disposition": "Retain and report the terminal checkpoint, but mark attention-behavior estimands non-informative; never substitute training accuracy."
+    },
+    "primary_causal_probe": {
+      "calibration_natural_invalid_response_rate_interval": [0.5, 0.7],
+      "independent_test_natural_invalid_response_rate_interval": [0.35, 0.85],
+      "failure_disposition": "Report saturation or floor failure and do not interpret a null intervention contrast."
+    },
+    "attention_integrity": {
+      "finite": true,
+      "per_query_probability_sum_tolerance": 0.00001,
+      "failure_disposition": "Reject attention localization and intervention artifacts."
+    }
+  },
+  "primary_estimands": {
+    "behavior": [
+      "invalid-minus-valid psychometric threshold in degrees",
+      "normalized valid-minus-invalid response AUC",
+      "invalid-minus-valid qualifying response-frame cost",
+      "valid-minus-invalid dprime with criterion reported separately"
+    ],
+    "representation": [
+      "cue-region routing mass during frames 2 through 4",
+      "true-change-region routing mass during frames 5 through 6",
+      "true-change-minus-cue-region reorienting contrast on forced-invalid trials",
+      "held-out balanced change-location decoding"
+    ],
+    "causal_use": [
+      "natural-minus-disable invalid dprime and response rate",
+      "true-change suppress-to-boost dprime and response-rate rescue",
+      "spatial specificity versus cued-wrong and neutral-control targets",
+      "aligned-minus-cyclic and restored-minus-cyclic binding contrasts"
+    ]
+  },
+  "factorial_contrasts": {
+    "notation": "Y_V_M is one admitted held-out estimand for the cell with effective visual rank V and memory rank M.",
+    "visual_main_effect": "0.5 * ((Y_100_4 - Y_4_4) + (Y_100_100 - Y_4_100))",
+    "memory_main_effect": "0.5 * ((Y_4_100 - Y_4_4) + (Y_100_100 - Y_100_4))",
+    "visual_by_memory_interaction": "Y_100_100 - Y_100_4 - Y_4_100 + Y_4_4",
+    "unit": "independently trained seed, paired across all four cells",
+    "aggregation": "Report all seedwise contrasts, directional agreement, median, range, and sample standard deviation. With three seeds, do not report a population scaling law."
+  },
+  "interpretation_rules": {
+    "simple_stream_count_support": "A positive registered stream contrast must agree directionally across all three seeds and across at least one behavioral, one representational, and one causal-use estimand without competence or saturation failures.",
+    "visual_bottleneck": "Visual main effect is directionally consistent while memory main effect and interaction are not.",
+    "memory_bottleneck": "Memory main effect is directionally consistent while visual main effect and interaction are not.",
+    "independent_capacity": "Visual and memory main effects are directionally consistent while the interaction and binding intervention are negligible.",
+    "coherent_actionable_percept_support": "The visual-by-memory interaction is directionally consistent and rank-preserving cyclic misbinding selectively impairs localization, decoding, and causal rescue, with restoration recovering them.",
+    "not_supported": "Discordant seed directions, effects confined to training metrics, effects removed by dprime/criterion decomposition, or cells failing competence/non-saturation gates do not support the corresponding hypothesis."
+  },
+  "evidence_boundaries": [
+    "Engineering canaries, training accuracy, curriculum theta, and periodic checkpoints are never attention evidence.",
+    "Three training seeds support directional and descriptive-dispersion statements only, not population inference.",
+    "A crossattn1 result is routing-family-specific until the full affine_ew factorial is independently replicated.",
+    "Attention-mass differences are correlational unless accompanied by the registered causal intervention.",
+    "The fixed-rank projection operationalizes differentiable streams; it is not identical to adding biological neurons or independent cognitive modules.",
+    "No result licenses biological equivalence or a human/primate capacity claim."
+  ],
+  "next_stage_gate": {
+    "affine_replication": "After all 12 crossattn1 cells are terminal and evaluated, repeat the same matrix for affine_ew before any routing-family-independent statement.",
+    "population_extension": "Add seeds 3 and 4 only under a separately frozen extension manifest; five seeds are the minimum target for an inferential claim."
+  }
+}

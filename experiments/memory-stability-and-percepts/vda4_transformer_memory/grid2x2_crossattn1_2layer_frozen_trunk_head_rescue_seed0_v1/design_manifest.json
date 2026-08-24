@@ -1,0 +1,53 @@
+{
+  "experiment_id": "vda4_grid2x2_crossattn1_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1",
+  "status": "registered_local_frozen_trunk_probe",
+  "question": "Does the trained transformer-memory trunk contain VDA4 information that fresh actor and critic heads can exploit without any further trunk learning?",
+  "parent": {
+    "checkpoint_path": "C:/Users/jomor/Documents/RViT_runs/vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1/trunk_parent_iter16949.pt",
+    "checkpoint_iteration": 16949,
+    "sha256": "d9539ef2c4cb0b337da4c87023f10b6507581d189392c2c99c93a624ada10898",
+    "task": "vda4",
+    "cell": "transformer_memory_2layer",
+    "feedback": "crossattn1"
+  },
+  "parameter_scope": {
+    "loaded_and_frozen": ["front.", "encoder."],
+    "fresh_and_trainable": ["actor_head.", "critic_head."],
+    "excluded_from_parent": ["actor_head", "critic_head", "jepa_heads_and_centers"]
+  },
+  "architecture": {
+    "visual_feedback": "crossattn1: Q=X; K/V=[X,H1_prev]",
+    "memory1": "Q=H1_prev; K/V=[H1_prev,Z] -> H1",
+    "memory2": "Q=H2_prev; K/V=[H2_prev,H1] -> H2",
+    "actor_and_critic_input": "frozen H2",
+    "patch_grid": [2, 2],
+    "d_mem": 128
+  },
+  "task_contract": {
+    "task": "vda4",
+    "timeline": 7,
+    "change_time": 5,
+    "theta_start": 65.0,
+    "sensory_noise": 5.0,
+    "curriculum": true,
+    "fresh_same_distribution_rollouts": true
+  },
+  "training": {
+    "iterations": 5000,
+    "episodes_per_iteration": 8,
+    "seed": 0,
+    "device": "local_cuda",
+    "jepa_coef": 0.0,
+    "init_action_bias": [0.0, 0.0],
+    "entropy_coef": 0.1,
+    "learning_rate": 0.0003,
+    "ema_decay": 0.995,
+    "buffer_capacity": 1000,
+    "probe_note": "Neutral actor bias and stronger entropy deliberately prevent the always-wait collapse; success tests representation accessibility, not exact replication of the failed behavior policy."
+  },
+  "success_interpretation": {
+    "above_chance": "Frozen H2 contains task-relevant information accessible to fresh nonlinear heads.",
+    "chance_with_noncollapsed_actor": "The trained trunk does not expose sufficient VDA4 information to the heads.",
+    "actor_collapse": "Probe is inconclusive and requires an explicit behavior-policy exploration floor."
+  }
+}

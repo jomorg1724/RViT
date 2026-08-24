@@ -1,0 +1,79 @@
+{
+  "claim_scope": "matched_frozen_policy_behavioral_measurement_plus_explicit_noise_and_exact_magnitude_manipulations_not_V4_mechanistic_replication",
+  "design": "latest_noise0106667_gamma080_full_luo2015_behavioral_battery",
+  "evaluation_contract": {
+    "balanced_change_status_and_locations": true,
+    "bootstrap_draws": 5000,
+    "change_distribution": "primary_signed_delta_uniform(-65,+65)",
+    "curriculum": false,
+    "evaluation_seed": 20260809,
+    "initial_orientations": "iid_uniform_axial_0_180",
+    "mnemonic_noise_enabled_primary": true,
+    "mnemonic_noise_sd": 0.10666666666666666,
+    "primary_trials_per_status_per_location": 2000,
+    "psychometric_design": "exact_abs_delta_balanced_sign_and_location",
+    "psychometric_magnitudes": [
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      35.0,
+      50.0,
+      65.0
+    ],
+    "psychometric_second_test_magnitude": 65.0,
+    "psychometric_trials_per_sign_per_location": 250,
+    "sample_actions": true,
+    "sensory_orientation_noise_sd": 5.0,
+    "theta": 65.0,
+    "timeline_frames": 7
+  },
+  "models": [
+    {
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_memnoise0106667_gamma080_20260808\\89vem3jhqzx2ck_luo-mem0106667-g080-criterion-loc0\\criterion_loc0\\rvit_paper_luo2015_criterion_final.pt",
+      "checkpoint_bytes": 36664379,
+      "checkpoint_sha256": "12513e3700a5e15b313509e4538d36c091cfd5bfd83f26395ad487ffda98319c",
+      "condition_loc": 0,
+      "gamma": 0.8,
+      "id": "criterion_loc0_noise0106667_gamma080",
+      "session": "criterion",
+      "task": "luo2015_criterion"
+    },
+    {
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_memnoise0106667_gamma080_20260808\\1ij2o7pntjil76_luo-mem0106667-g080-criterion-loc3\\criterion_loc3\\rvit_paper_luo2015_criterion_final.pt",
+      "checkpoint_bytes": 36664379,
+      "checkpoint_sha256": "c5012aeb11ddb42a5dfed99b71b39b93ff4525007a8ab8a3d043eb790d49081f",
+      "condition_loc": 3,
+      "gamma": 0.8,
+      "id": "criterion_loc3_noise0106667_gamma080",
+      "session": "criterion",
+      "task": "luo2015_criterion"
+    },
+    {
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_memnoise0106667_gamma080_20260808\\1y4rl34vv2ajkc_luo-mem0106667-g080-sensitivity-loc0\\sensitivity_loc0\\rvit_paper_luo2015_sensitivity_final.pt",
+      "checkpoint_bytes": 36665763,
+      "checkpoint_sha256": "e8295cefe19199cc695c0eb14a46deccbddb1b94062a14d2080c3470c1f7cb1b",
+      "condition_loc": 0,
+      "gamma": 0.8,
+      "id": "sensitivity_loc0_noise0106667_gamma080",
+      "session": "sensitivity",
+      "task": "luo2015_sensitivity"
+    },
+    {
+      "checkpoint": "C:\\Users\\jomor\\Documents\\RViT_runs\\runpod_exports\\luo_memnoise0106667_gamma080_20260808\\6d5astkkxlsh9t_luo-mem0106667-g080-sensitivity-loc3\\sensitivity_loc3\\rvit_paper_luo2015_sensitivity_final.pt",
+      "checkpoint_bytes": 36665763,
+      "checkpoint_sha256": "7dcfcb7abe92404c05bf1bd2457c6ea3979cb4d553f64fb9f1c51c5037033089",
+      "condition_loc": 3,
+      "gamma": 0.8,
+      "id": "sensitivity_loc3_noise0106667_gamma080",
+      "session": "sensitivity",
+      "task": "luo2015_sensitivity"
+    }
+  ],
+  "paper_targets": {
+    "criterion": "negative counterphased criterion difference-in-differences with dprime cross-effect inside equivalence bound",
+    "equivalence_bound_abs": 0.2,
+    "sensitivity": "positive counterphased dprime difference-in-differences with criterion cross-effect inside equivalence bound"
+  },
+  "schema_version": 1
+}

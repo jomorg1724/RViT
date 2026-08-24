@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "design": "fresh_dual_actor_critic_sensitivity_counterphase",
+  "claim_scope": "independent_fixed_condition_sensitivity_policy_optima",
+  "task_family": "luo2015_sensitivity",
+  "changed_variables": [
+    "dual_actor_critic_streams",
+    "bc_alpha"
+  ],
+  "dual_actor_critic_streams": true,
+  "actor_critic_parameter_sharing": "none",
+  "actor_stream": "independent_conv_frontend_to_crossattn1_transformer_to_xlstm_to_actor",
+  "critic_stream": "independent_conv_frontend_to_crossattn1_transformer_to_xlstm_to_distributional_critic",
+  "independent_recurrent_states": true,
+  "independent_jepa_branches": ["actor", "critic"],
+  "jepa_coef_per_branch": 0.5,
+  "jepa_teacher_ema": 0.996,
+  "bc_alpha": 0.0,
+  "primary_hypothesis": "Separating actor and critic perceptual-recurrent representations prevents immediate high-reward action learning from overwriting the critic memory needed to propagate delayed correct-rejection value.",
+  "falsifier": "Both counterphased sensitivity agents again converge to near-deterministic always-change behavior at the high-reward location under a contract-matched frozen sampled-policy assay.",
+  "gamma": 1.0,
+  "grid": [2, 2],
+  "memory_dim_per_branch": 32,
+  "memory_decay": 1.0,
+  "memory_noise_sd": 0.075,
+  "sensory_orientation_noise_sd": 5.0,
+  "theta": 65.0,
+  "curriculum": false,
+  "seed": 0,
+  "iterations": 20000,
+  "terminal_iteration": 19999,
+  "initialization": "fresh_seed_0",
+  "warm_start": false,
+  "resume": false,
+  "orientation_sampling": "independent_uniform_axial_0_180",
+  "orientation_period_degrees": 180.0,
+  "reward_timing": "unchanged_from_memnoise0075_gamma100_parent",
+  "reward_table": "unchanged_from_memnoise0075_gamma100_parent",
+  "action_semantics": "unchanged_from_memnoise0075_gamma100_parent",
+  "cells": {
+    "sensitivity_loc0": {
+      "task": "luo2015_sensitivity",
+      "condition_location": 0,
+      "reward_scale": 0.3333333333333333
+    },
+    "sensitivity_loc3": {
+      "task": "luo2015_sensitivity",
+      "condition_location": 3,
+      "reward_scale": 0.3333333333333333
+    }
+  }
+}

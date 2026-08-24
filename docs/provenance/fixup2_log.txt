@@ -1,0 +1,25 @@
+fixup2 started 2026-08-20 21:34:40
+21:34:40  OK  deleted source (dest complete, rc=2): stream_factorial_canaries_20260730_seed0_verified
+21:34:40  KEEP source (rc=3 missing=1 mismatch=0 failed=0): vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_canary_20260816
+21:34:40  KEEP source (rc=3 missing=1 mismatch=0 failed=0): vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260816
+21:34:40  KEEP source (rc=3 missing=1 mismatch=0 failed=0): vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260817
+21:34:40  KEEP source (rc=3 missing=1 mismatch=0 failed=0): vda4_modern_gamma095_jepa06_teacher003005_actor01_critic05_nobc_seed0_v1_canary_20260816
+21:34:40  KEEP source (rc=3 missing=1 mismatch=0 failed=0): vda4_transformer_memory_2layer_softmax_modern_gamma095_seed0_v1_production_20260816
+21:34:40  KEEP source (rc=3 missing=1 mismatch=0 failed=0): vda4_transformer_memory_2layer_softmax_modern_gamma1_seed0_v1_canary_20260816
+21:34:40  OK  deleted source (dest complete, rc=2): vda4_transformer_memory_2layer_softmax_modern_gamma1_seed0_v1_production_20260816
+21:34:41  OK  deleted source (dest complete, rc=2): runpod_exports
+21:34:43  OK  deleted source (dest complete, rc=2): deployments
+21:34:43  OK  deleted source (dest complete, rc=2): vda4_transformer_memory
+21:34:43  OK  deleted source (dest complete, rc=2): spatial_scaling_evaluation_production_20260727
+21:34:43  KEEP source (rc=3 missing=1 mismatch=0 failed=0): vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted
+21:34:43  OK  deleted source (dest complete, rc=2): vda16_crossattn_nodecay_20260719_rejected_source_snapshot_gap
+21:34:43  OK  loose -> cat3\runs\vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1_canary20_20260809\vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1_canary20_20260809.log (rc=1)
+21:34:43  OK  loose -> cat3\runs\vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1_canary40_20260809\vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1_canary40_20260809.log (rc=1)
+21:34:44  OK  loose -> cat3\runs\vda4_transformer_memory_2layer_maskedcenter_seed0_local_v1_production_20260809\vda4_transformer_memory_2layer_maskedcenter_seed0_local_v1_production_20260809.parent.log (rc=1)
+21:34:44  OK  loose -> cat3\runs\vda4_transformer_memory_2layer_seed0_local_v1_maskedcenter_canary10_20260809b\vda4_transformer_memory_2layer_seed0_local_v1_maskedcenter_canary10_20260809b.parent.log (rc=1)
+21:34:44  OK  loose -> cat3\runs\vda4_transformer_memory_2layer_softmax_anticollapse_seed0_v1_canary10_20260809\vda4_transformer_memory_2layer_softmax_anticollapse_seed0_v1_canary10_20260809.log (rc=1)
+21:34:44  OK  loose -> cat3\runs\vda4_transformer_memory_2layer_softmax_anticollapse_seed0_v1_canary40_20260809\vda4_transformer_memory_2layer_softmax_anticollapse_seed0_v1_canary40_20260809.log (rc=1)
+21:34:44  OK  loose -> cat3\runs\vda4_transformer_memory_2layer_target_tau_1over100_seed0_v1_canary10_20260809\vda4_transformer_memory_2layer_target_tau_1over100_seed0_v1_canary10_20260809.log (rc=1)
+21:34:44  WARN dir not empty (3): C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series
+21:34:44  WARN dir not empty (1): C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\experiments
+21:34:44  fixup2 finished

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "design": "fresh_counterphased_gamma080_memory_noise_two_thirds_followup",
+  "claim_scope": "independent_fixed_condition_policy_optima",
+  "gamma": 0.8,
+  "memory_noise_sd": 0.10666666666666666,
+  "parent_memory_noise_sd": 0.16,
+  "noise_multiplier_relative_to_parent": 0.6666666666666666,
+  "changed_variable": "memory_noise_sd",
+  "initialization": "fresh_seed_0",
+  "iterations": 20000,
+  "seed": 0,
+  "patch_grid": [2, 2],
+  "memory_dimension": 32,
+  "memory_retention_coefficient": 1.0,
+  "sensory_orientation_noise_sd": 5.0,
+  "theta": 65.0,
+  "curriculum": false,
+  "feedback": "crossattn1",
+  "cell_type": "xlstm",
+  "jepa_coefficient": 0.5,
+  "episodes_per_iteration": 8,
+  "parent_artifacts": "C:/Users/jomor/Documents/RViT_runs/runpod_exports/luo_memnoise016_gamma080_rerun2_20260808",
+  "parent_terminal_last1000_iteration_correct": {
+    "sensitivity_loc0": 0.63925,
+    "sensitivity_loc3": 0.623125,
+    "criterion_loc0": 0.675125,
+    "criterion_loc3": 0.50425
+  },
+  "held_fixed": [
+    "task generator and corrected orientation contract",
+    "gamma", "reward tables and counterphased locations", "seed and fresh initialization",
+    "model architecture", "optimizer", "sensory noise", "theta and curriculum",
+    "iteration budget", "policy action semantics"
+  ],
+  "task_contract": {
+    "orientation_sampling": "independent_uniform_axial_0_180",
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "timeline_frames": 7,
+    "visible_reward_cue": false,
+    "action_semantics": "0=wait,1=declare; sampled policy"
+  },
+  "cells": {
+    "sensitivity_loc0": {"task": "luo2015_sensitivity", "condition_loc": 0, "reward_scale": 0.3333333333333333},
+    "sensitivity_loc3": {"task": "luo2015_sensitivity", "condition_loc": 3, "reward_scale": 0.3333333333333333},
+    "criterion_loc0": {"task": "luo2015_criterion", "condition_loc": 0, "reward_scale": 1.0526315789473684},
+    "criterion_loc3": {"task": "luo2015_criterion", "condition_loc": 3, "reward_scale": 1.0526315789473684}
+  },
+  "hypothesis": "reducing mnemonic noise to two-thirds of 0.16 may improve competence while preserving reward-location effects",
+  "falsifier": "counterphased cells remain at chance or lose reward-location selectivity under matched terminal evaluation"
+}

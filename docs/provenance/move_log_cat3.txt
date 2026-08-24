@@ -1,0 +1,46 @@
+cat3 move log started 2026-08-20 21:26:22
+21:26:24  OK  runs\vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1
+21:26:24  OK  runs\vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1_canary20_20260809
+21:26:25  OK  runs\vda4_transformer_memory_2layer_frozen_trunk_head_rescue_seed0_v1_canary40_20260809
+21:26:26  OK  runs\vda4_transformer_memory_2layer_maskedcenter_seed0_local_v1_production_20260809
+21:26:27  OK  runs\vda4_transformer_memory_2layer_seed0_local_v1_canary10_20260809a
+21:26:28  OK  runs\vda4_transformer_memory_2layer_seed0_local_v1_maskedcenter_canary10_20260809b
+21:26:29  OK  runs\vda4_transformer_memory_2layer_seed0_local_v1_production_20260809
+21:26:30  OK  runs\vda4_transformer_memory_2layer_softmax_anticollapse_seed0_v1_canary10_20260809
+21:26:31  OK  runs\vda4_transformer_memory_2layer_softmax_anticollapse_seed0_v1_canary40_20260809
+21:26:32  OK  runs\vda4_transformer_memory_2layer_softmax_anticollapse_seed0_v1_production_20260809
+21:26:33  ERR runs\: Could not find a part of the path.
+21:26:35  ERR runs\: Could not find a part of the path.
+21:26:36  ERR runs\: Could not find a part of the path.
+21:26:37  OK  runs\vda4_transformer_memory_2layer_target_tau_1over100_seed0_v1_canary10_20260809
+21:26:38  OK  runs\vda4_transformer_memory_2layer_target_tau_1over100_seed0_v1_production_20260809
+21:26:39  OK  runs\vda4_transformer_memory_seed0_local_v1_canary10_20260808c
+21:26:40  OK  runs\vda4_transformer_memory_seed0_local_v1_canary_20260808a
+21:26:40  OK  runs\vda4_transformer_memory_seed0_local_v1_canary_20260808b
+21:26:41  OK  runs\vda4_transformer_memory_seed0_local_v1_production_20260808
+21:26:42  OK  runs\vda4_transformer_memory_seed0_local_v1_slotinit_canary10_20260808d
+21:26:43  OK  runs\vda4_transformer_memory_slotinit_seed0_local_v1_production_20260808
+21:26:46  OK  runs\vda4_memory_noise_noise0p5_interrupted_snapshot_20260804T055300Z
+21:26:48  OK  runs\vda4_modern_c1_a01_j0001_t003005_nobc_s0_v1_canary_20260817
+21:26:49  OK  runs\vda4_modern_c1_a01_j0001_t003005_nobc_s0_v1_prod_20260817
+21:26:50  ERR runs\: Could not find a part of the path.
+21:26:51  ERR runs\: Could not find a part of the path.
+21:26:53  ERR runs\: Could not find a part of the path.
+21:26:54  ERR runs\: Could not find a part of the path.
+21:26:56  OK  runs\vda4_teacherac_ste_c1_a01_j0001_s0_v1_canary_20260817
+21:26:57  OK  runs\vda4_teacherac_ste_c1_a01_j0001_s0_v1_prod_20260817
+21:26:59  OK  runs\vda4_fsq2_c1_a01_j0001_lr2e4_s0_v1_canary_20260817
+21:27:01  OK  runs\vda4_fsq2_c1_a01_j0001_lr2e4_s0_v1_prod_20260817
+21:27:02  OK  experiments\vda4_memory_noise
+21:27:03  OK  experiments\vda4_spatial_discretization
+21:27:03  ERR experiments\vda4_transformer_memory: Could not find a part of the path.
+21:27:04  OK  reports\vda_series\memory_noise_comparison_20260804
+21:27:05  OK  reports\vda_series\vda4_memory_noise_psychometric_s1_to_s4_20260804
+21:27:07  OK  reports\vda_series\vda4_memory_noise_attention_comparison_20260804
+21:27:08  OK  reports\vda_series\synthesis_signal_coherence_20260818
+21:27:08  OK  reports\lab_notebook\VDA_Signal_Coherence_Lab_Notebook.aux
+21:27:08  OK  reports\lab_notebook\VDA_Signal_Coherence_Lab_Notebook.log
+21:27:08  OK  reports\lab_notebook\VDA_Signal_Coherence_Lab_Notebook.out
+21:27:08  OK  reports\lab_notebook\VDA_Signal_Coherence_Lab_Notebook.pdf
+21:27:08  OK  reports\lab_notebook\VDA_Signal_Coherence_Lab_Notebook.toc
+21:27:11  cat3 move script finished

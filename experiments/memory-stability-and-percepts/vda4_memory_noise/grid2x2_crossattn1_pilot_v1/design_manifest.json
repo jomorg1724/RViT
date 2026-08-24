@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "design_id": "vda4_grid2x2_crossattn1_memory_noise_seed0_paired_pilot_v1",
+  "status": "paired_pilot_contract_prepared_not_launched",
+  "scientific_question": "Does independently drawn destructive interference in recurrent memory increase cueing, source-separated attention allocation, and causal reliance on routing in a native 2x2 VDA4 model?",
+  "hypothesis": {
+    "primary": "Relative to memory_noise_std=0.0, training and testing with memory_noise_std=0.5 will increase the valid-versus-invalid behavioral cueing effect, sharpen cue- and target-aligned routing, and increase the behavioral consequence of spatially specific routing interventions.",
+    "signal_coherence_interpretation": "If attention helps preserve and propagate task-relevant signals against independently corrupted memory traces, destructive interference should increase the value of selective routing. Support requires aligned behavioral, representational, and causal-use evidence rather than a training-accuracy difference alone.",
+    "null_or_disconfirming_patterns": [
+      "the noise condition loses behavioral competence or produces a floor/ceiling that makes cueing uninterpretable",
+      "cueing changes only through criterion while sensitivity does not improve",
+      "attention becomes more extreme without better target localization or stronger spatially specific causal effects",
+      "effects disappear when the noise-trained checkpoint is evaluated with memory noise disabled",
+      "the seed-0 direction fails to replicate in a separately registered multi-seed extension"
+    ]
+  },
+  "manipulation": {
+    "factor": "memory_noise_std",
+    "levels": [0.0, 0.5],
+    "unit": "normalized xLSTM C/N_state units, where N_state is the xLSTM normalizer state and is unrelated to the native four-token count",
+    "implementation": "After each xLSTM cell update, when inject_memory_noise is true, C is replaced by C + memory_noise_std * (N_state + 1e-8) * randn_like(C). The code variable is named N; here it is written N_state to distinguish the recurrent normalizer from N_tokens=4. The perturbed C is carried to the next recurrent step.",
+    "independence": "torch.randn_like(C) draws one pseudorandom standard-normal value for every batch, native memory-slot, and memory-coordinate element at every injected update.",
+    "scope": "Noise is applied to the sole student/online xlstm used by crossattn1 during rollout collection and student replay optimization. The target actor/critic and JEPA EMA-teacher sequence passes remain noise-off even though those copied model objects carry the same sigma. Evaluation must explicitly report whether online noise injection is enabled.",
+    "trainer_asymmetry": "Registered and intentional for this pilot: ppo.collect_episodes injects noise into online rl_step; the optimized student sequence injects noise; target_model.forward_rl_sequence and jepa_teacher.forward_rl_sequence omit inject_memory_noise and therefore use deterministic recurrent updates. This experiment tests the current noisy-student/noise-off-teacher training algorithm, not an all-networks-noisy algorithm.",
+    "not_manipulated": [
+      "visual input noise",
+      "memory decay",
+      "number of visual patches",
+      "number or width of memory slots",
+      "routing family",
+      "parameter count",
+      "training seed",
+      "initial training RNG seed (subsequent on-policy trajectories may diverge)",
+      "training budget"
+    ]
+  },
+  "source_contract": {
+    "required_sha256": {
+      "train_rl.py": "713d337781f432d9419189bb66cdd5c7abd2e3986e072c8be94216700814421c",
+      "ppo.py": "b01091a4919fcc7cb31f94ac599ec86de860b2331c599e3156518f26d18c40da",
+      "model.py": "b77fd7f4cd5d56fc38257b58ee5400285fba875b3c01a79ec7baf7106f66d72c",
+      "paper_encoder.py": "91f8a5be84aa300d4a1b42b2ec92f633bb8a704a9dae3f302f192a73915d61d1",
+      "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "conv_frontend.py": "0099e258730aee7c2ae60d35215d1738771a88f9356ead1877012b89e794dd31",
+      "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+      "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "config/loader.py": "fd7296e433c83c9106d6bf03f0cb7e9c80640df874698a605f945f0fa5469fc9"
+    },
+    "noise_implementation_path": "paper_encoder.py",
+    "trainer_injection_paths": [
+      "ppo.collect_episodes calls model.rl_step(..., inject_memory_noise=True)",
+      "ppo.update calls model.forward_rl_sequence(..., inject_memory_noise=True)"
+    ],
+    "trainer_noise_off_reference_paths": [
+      "ppo.update calls target_model.forward_rl_sequence(batch.observations) without inject_memory_noise",
+      "ppo.update calls jepa_teacher.forward_rl_sequence(batch.observations, return_cell=True) without inject_memory_noise"
+    ]
+  },
+  "fixed_scientific_contract": {
+    "task": "vda4",
+    "active_items": 4,
+    "stimulus_grid": [2, 2],
+    "patch_memory_grid": [2, 2],
+    "tokens": 4,
+    "image_size": 50,
+    "T": 7,
+    "frame_repeat": 1,
+    "change_time": 5,
+    "pixel_noise_multiplier": 5.0,
+    "cell": "xlstm",
+    "feedback": "crossattn1",
+    "d_mem": 128,
+    "memory_decay": 1.0,
+    "conv_frontend": true,
+    "trainable_parameters": 2209476,
+    "readout_dim": 512,
+    "jepa_coef": 0.5,
+    "episodes_per_iteration": 8,
+    "training_seed": 0,
+    "initialization": "fresh",
+    "start_iteration": 0,
+    "iterations": 20000,
+    "terminal_iteration": 19999,
+    "schedule_final_iteration": 19999,
+    "no_early_stopping": true
+  },
+  "registered_runs": [
+    {
+      "condition_id": "noise0p0",
+      "memory_noise_std": 0.0,
+      "seed": 0,
+      "required": true
+    },
+    {
+      "condition_id": "noise0p5",
+      "memory_noise_std": 0.5,
+      "seed": 0,
+      "required": true
+    }
+  ],
+  "pairing_contract": {
+    "run_count": 2,
+    "queue_order": [0.0, 0.5],
+    "same_named_trainable_initialization_sha256": true,
+    "same_initial_environment_seed": true,
+    "same_training_environment_trace": false,
+    "training_trace_limitation": "The manipulation can change sampled actions and episode lengths. Because environment rendering and resets also consume RNG, the two on-policy training trajectories are not asserted to be common-random-number or bitwise identical after initialization. The held-out trial banks, not training, provide the true CRN comparison.",
+    "same_runtime_fingerprint": true,
+    "same_physical_gpu_uuid": true,
+    "no_result_dependent_stopping": true,
+    "failure_rule": "The queue may stop only on an engineering or terminal-contract failure. It must never inspect cueing, attention, training accuracy, theta, or effect direction between conditions.",
+    "paired_failure_disposition": "If either member is interrupted or fails after the other member completes, preserve both unique directories but rerun the entire seed-0 pair fresh on one verified runtime for the registered comparison. Never splice a replacement condition together with the prior mate unless the original pair identity and exact runtime/GPU fingerprint contract are independently proven valid.",
+    "inference_unit": "one paired seed-0 pilot; directional and descriptive only"
+  },
+  "initial_environment_reset_diagnostic": {
+    "evidence_class": "engineering_only_not_a_training_trajectory_claim",
+    "algorithm": "SHA-256 over canonical JSON for 32 consecutive VDA4 resets immediately after numpy.random.seed(0), with no intervening actions or rendered episode steps",
+    "trial_count": 32,
+    "expected_sha256": "c13c919620327f53ff1562057125f4e81a699dcc72bf5943195c325cfa218f02",
+    "claim_boundary": "This verifies the initial task RNG configuration only. It does not imply identical trial sequences during on-policy training."
+  },
+  "engineering_canaries": {
+    "evidence_class": "engineering_only_not_scientific_evidence",
+    "iterations_per_condition": 50,
+    "terminal_iteration": 49,
+    "required_conditions": [0.0, 0.5],
+    "required_checks": [
+      "both levels construct the same 2209476 trainable parameters and identical named trainable initialization",
+      "the native grid is exactly 2x2 with four visual tokens and four recurrent memory slots",
+      "noise=0.0 is a functional no-op when injection is requested",
+      "noise=0.5 changes the carried C state, is reproducible under a reset torch RNG, and changes under a different RNG seed",
+      "all tensors and all 50 metric rows are finite",
+      "checkpoint and launch records bind the requested noise level, config, design, preflight, launcher, initial reset diagnostic, and source hashes"
+    ]
+  },
+  "terminal_completion_contract": {
+    "required_for_each_condition": [
+      "trainer exits successfully",
+      "exactly 20000 finite contiguous metrics rows with iter 0 through 19999",
+      "schema-3 rvit_paper_vda4_final.pt and rvit_plus_rl_latest.pt at iter 19999",
+      "finite semantic equality of final and latest checkpoint payloads",
+      "task vda4, native grid2x2, crossattn1, xlstm, d_mem128, memory_decay1, exact requested memory_noise_std, fresh seed0",
+      "exact resolved-config and experiment-launcher producer hashes",
+      "launch contract carries exact design, config, preflight, launcher, trainable-initialization, initial reset diagnostic, and source hashes",
+      "clean final-save log with no traceback",
+      "same pair id and runtime/GPU fingerprint across the two registered conditions"
+    ],
+    "partial_or_interrupted_disposition": "Preserve every unique directory. A nonterminal member cannot enter paired evaluation and must never be overwritten or silently resumed. If either member fails or is interrupted, preserve both attempts and rerun the full seed-0 pair fresh under one new pair identity and one verified runtime; do not splice a replacement with an earlier mate unless the original pair/runtime identity remains independently valid."
+  },
+  "heldout_evaluation": {
+    "prerequisite": "Both registered runs pass terminal validation before any paired held-out result is inspected.",
+    "common_random_numbers": true,
+    "factorial_cells": "Evaluate both trained checkpoints at evaluation-time memory_noise_std=0.0 and 0.5, yielding the complete 2x2 train-noise by evaluation-noise factorial. The matched trained-condition contrast is train0/eval0 versus train0.5/eval0.5; noise-off and crossover cells distinguish learned compensation from acute corruption.",
+    "mnemonic_draw_policy": "Use exactly one independently drawn mnemonic-noise realization for each unique held-out sensory trial. Do not repeat the same sensory realization across multiple mnemonic draws. Share the exact trial identities, policy uniforms, and standard-normal mnemonic schedules across comparable factorial cells, and record their deterministic namespace-derived seeds and SHA-256 identities.",
+    "adaptive_nonsaturation_calibration": {
+      "rng_namespace": "calibration_v1",
+      "aggregate_trials_per_magnitude_condition": 120,
+      "magnitudes_degrees": [3, 6, 9, 12, 15, 18, 22, 26, 30],
+      "conditions": ["valid", "forced_invalid", "no_change"],
+      "spatial_counterbalancing": "At each magnitude, balance valid and no-change trials over all four cue locations and forced-invalid trials over all 12 ordered cue-to-distinct-change pairs.",
+      "selection_rule": "Select one common focal magnitude once across all four train-noise by evaluation-noise cells using natural forced-invalid response rates. A magnitude is admitted only when every cell lies in [0.20,0.80]. Among admitted magnitudes choose the one minimizing mean squared distance from target response rate 0.60. If none is admitted, retain diagnostics at the angle with minimum maximum out-of-bounds distance and then minimum squared target distance, but mark the mechanistic interpretation gate failed. Freeze the selected common angle for every subsequent natural and intervention assay; never select per checkpoint or by the hypothesized effect direction."
+    },
+    "psychometric_bank": {
+      "rng_namespace": "frozen_evaluation_v1",
+      "aggregate_trials_per_validity_magnitude_condition": 300,
+      "validities": [0.25, 0.5, 0.75, 1.0],
+      "primary_in_distribution_validities": [0.25, 0.5, 0.75],
+      "validity_one_status": "Forced-invalid trials at displayed validity 1.0 are an out-of-distribution expectancy-violation probe and are excluded from the primary in-distribution cue-validity slope/interaction.",
+      "magnitudes_degrees": [0, 3, 6, 9, 12, 15, 18, 22, 26, 30],
+      "conditions": ["valid", "forced_invalid", "no_change"],
+      "spatial_counterbalancing": "Balance cue locations over all four patches and forced-invalid targets over all 12 ordered distinct-location pairs within each validity/magnitude cell."
+    },
+    "attention_bank": {
+      "rng_namespace": "frozen_evaluation_v1",
+      "aggregate_trials_per_condition": 240,
+      "displayed_validity": 0.75,
+      "conditions": ["valid", "forced_invalid", "no_change"],
+      "frames": [0, 1, 2, 3, 4, 5, 6],
+      "spatial_counterbalancing": "Balance cue locations over all four native patches. For forced-invalid trials, balance all 12 ordered cue-to-distinct-change location pairs. Preserve pair identities across checkpoints with common random numbers.",
+      "registered_timing_contrasts": "Measure cue-aligned allocation over frames 1-4 and true-change allocation over frames 5-6. On forced-invalid trials, report target-minus-cued-wrong allocation and postchange-minus-prechange reorientation separately for visual and recurrent-memory sources.",
+      "display": "Always show visual-key and memory-key maps separately. A fused V+M display is secondary and must be labeled fused."
+    },
+    "intervention_bank": {
+      "rng_namespace": "frozen_evaluation_v1",
+      "aggregate_trials_per_role_source_dose_condition": 240,
+      "natural_baseline": true,
+      "target_roles": ["true_change", "cued_wrong", "neutral_control"],
+      "sources": ["visual", "memory", "both"],
+      "doses": [0.0, 0.25, 0.5, 0.75, 1.0],
+      "intervention_formula": "Beginning at frame 5, add key-logit bias b=6*(2*alpha-1) to the selected role and source keys. Thus alpha=0 is the registered -6 suppress endpoint, alpha=0.5 is zero-bias, and alpha=1 is the +6 boost endpoint. This additive hook does not implement routing-disabled and no result may be labeled as such.",
+      "conditions": ["valid", "forced_invalid", "no_change"],
+      "cued_wrong_control_definition": "On forced-invalid trials the cued-wrong role is the cue location. On valid and no-change trials, where the cue and target-index fields coincide, cued-wrong is a deterministic non-target control location.",
+      "spatial_counterbalancing": "Apply every role, source, and dose across all four cue locations and all 12 ordered forced-invalid cue-to-change pairs. A fixed top-left cue to bottom-right change may be shown only as a labeled illustrative panel, never as the primary spatial estimate."
+    },
+    "online_noise_modes": {
+      "matched_trained_condition": "Compare the noise0p0 checkpoint at evaluation noise 0.0 with the noise0p5 checkpoint at evaluation noise 0.5 using paired sensory trials, policy uniforms, and the single-draw-per-trial mnemonic schedule.",
+      "diagnostic_noise_off": "Evaluate both trained checkpoints with injection disabled to test learned compensation and routing organization without acute stochastic corruption.",
+      "diagnostic_cross_over": "Evaluate both checkpoints at both evaluation-noise levels. The train-noise by evaluation-noise interaction separates learned adaptation from acute stochastic corruption; it complements rather than replaces the matched trained-condition contrast."
+    }
+  },
+  "primary_estimands": {
+    "behavior": [
+      "primary in-distribution cue-validity slope and train-noise by evaluation-noise interaction over displayed validities 0.25, 0.50, and 0.75",
+      "invalid-minus-valid psychometric threshold in degrees",
+      "normalized valid-minus-invalid response AUC",
+      "valid-minus-invalid d-prime, with criterion reported separately",
+      "invalid-minus-valid qualifying response-frame cost",
+      "validity-1.0 forced-invalid expectancy-violation result reported separately as out-of-distribution"
+    ],
+    "attention_allocation": [
+      "visual-key and memory-key source shares by frame",
+      "source-conditional mass at cue, true-change, cued-wrong, and neutral locations",
+      "cue-aligned allocation at frames 1-4 and true-change allocation at frames 5-6",
+      "forced-invalid target-minus-cued-wrong and postchange-minus-prechange reorientation, separately for visual and memory sources",
+      "entropy, effective number of attended keys, top-one mass, and target-to-distractor ratio within each source"
+    ],
+    "causal_use": [
+      "natural-baseline versus additive key-logit-bias response rate and d-prime",
+      "role-by-source dose response across alpha 0, 0.25, 0.5, 0.75, and 1.0",
+      "true-change alpha-1 boost minus alpha-0 suppress response rate and d-prime",
+      "spatial specificity relative to cued-wrong and neutral-control roles"
+    ],
+    "paired_contrast": "For every estimand Y, report the matched trained-condition contrast Y_train0p5_eval0p5 - Y_train0_eval0 and the complete train-noise by evaluation-noise factorial contrasts on common-random-number trials. Use deterministic trial-stratified paired bootstrap confidence intervals. These intervals quantify held-out trial uncertainty conditional on seed 0; they are not across-seed population intervals."
+  },
+  "attention_measurement_contract": {
+    "native_shape": "For N=4 crossattn1, A has N query rows and 2N key columns: four visual keys followed by four recurrent-memory keys.",
+    "column_average": "pV_j=(1/N)*sum_i A[i,j] and pM_j=(1/N)*sum_i A[i,N+j].",
+    "physical_regions": "Use the same physical 2x2 quadrants for all displays. In this native 2x2 pilot each region contains one patch.",
+    "regional_total": "T_s(r)=sum_{j in region r} p_s(j).",
+    "regional_max": "P_s(r)=max_{j in region r} p_s(j). In a native 2x2 grid, total and max are algebraically identical and must not be presented as independent converging measures.",
+    "normalization": "Report raw mass, source-conditional mass, and uniform-normalized values. For crossattn1 with N=4, the raw-key uniform baseline is 1/(2N)=1/8.",
+    "aggregation": "Preserve trial-level values and summarize paired trials; do not take a maximum over trials, heads, frames, or conditions unless that reduction is separately named."
+  },
+  "spatial_inference_contract": {
+    "primary": "Location-counterbalanced average over the full native 2x2 grid.",
+    "cue_locations": [0, 1, 2, 3],
+    "forced_invalid_pairs": "all 12 ordered pairs (cue, change) with cue != change",
+    "pairing": "The same trial identity, cue/change locations, sensory realization, and evaluation-noise draw identifiers are used for both checkpoints.",
+    "fixed_example_limit": "Top-left cue to bottom-right change is permitted only for intuitive visualization and must be labeled non-generalizing."
+  },
+  "admission_gates": {
+    "behavioral_competence": "For every train-noise by evaluation-noise cell, require no-change false-alarm rate below 0.20, both policy actions observed, a positive forced-invalid response-rate slope from 3 to 30 degrees, and positive 30-degree forced-invalid d-prime. Failure is retained and reported as a competence failure.",
+    "nonsaturation": "The one common focal magnitude must place natural forced-invalid response rate in [0.20,0.80] in every factorial cell. Otherwise maps and interventions are retained as gated diagnostics and cannot support a mechanistic interpretation.",
+    "attention_integrity": "All attention values must be finite and each query distribution must sum to one within 1e-5.",
+    "paired_admission": "No paired scientific comparison is allowed unless both conditions pass terminal artifact validation. Scientific gates may label an estimand non-informative but never delete or replace a condition."
+  },
+  "interpretation_rules": {
+    "pilot_support": "The hypothesis receives seed-0 pilot support only if noise0p5 increases at least one sensitivity-corrected cueing estimand, increases target-selective source-separated routing at the registered frames, and increases a spatially specific causal-use contrast without competence or saturation failure.",
+    "attention_only": "More concentrated or extreme attention without behavioral and causal alignment is descriptive reallocation, not support for signal coherence.",
+    "behavior_only": "A cueing difference without source/time-specific routing and causal mediation does not establish attention as the mechanism.",
+    "criterion_only": "A response-rate difference explained by criterion rather than d-prime does not support increased signal coherence.",
+    "replication_requirement": "Any supportive seed-0 result must be followed by a separately frozen multi-seed replication before a general claim."
+  },
+  "evidence_boundaries": [
+    "Engineering canaries, training accuracy, curriculum theta, periodic checkpoints, GPU utilization, and process health are not attention, behavior, mechanism, or scaling evidence.",
+    "The two training runs are one paired seed and cannot establish a population effect.",
+    "Attention allocation is correlational unless accompanied by the registered spatially controlled intervention.",
+    "This pilot tests the native 2x2 VDA4 crossattn1 implementation only; it does not establish routing-family, discretization, set-size, biological, human, or primate generality.",
+    "A technically complete checkpoint that fails held-out competence remains a valid artifact but not usable evidence for the hypothesis."
+  ]
+}

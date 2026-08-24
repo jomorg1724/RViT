@@ -1,0 +1,15 @@
+---
+title: "A Cascade of Affine-Modulated Transformers for Cued Change Detection"
+subtitle: "Two affine self-attention stages with a split actor/critic readout — a mechanistic deep dive on the affine\\_cascade model"
+author: "RViT architecture program — Morgan, Albanna \\& Herman"
+date: "2026"
+geometry: "margin=1in"
+fontsize: 11pt
+linkcolor: blue
+header-includes:
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \captionsetup{font=small,labelfont=bf}
+  - \setlength{\parskip}{0.4em}
+---

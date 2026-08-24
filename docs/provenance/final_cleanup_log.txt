@@ -1,0 +1,20 @@
+final cleanup started 2026-08-20 21:38:40
+KEEP: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_canary_20260816 remaining problems=3
+   MISSING provenance\source_snapshot\tests\test_loss_weight_hierarchy.py
+   MISSING provenance\source_snapshot\tests\test_modern_jepa_sharpening_experiment_contract.py
+   MISSING provenance\source_snapshot\tests\test_modern_transformer_memory.py
+KEEP: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260816 remaining problems=3
+   MISSING provenance\source_snapshot\tests\test_loss_weight_hierarchy.py
+   MISSING provenance\source_snapshot\tests\test_modern_jepa_sharpening_experiment_contract.py
+   MISSING provenance\source_snapshot\tests\test_modern_transformer_memory.py
+KEEP: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260817 remaining problems=3
+   MISSING provenance\source_snapshot\tests\test_loss_weight_hierarchy.py
+   MISSING provenance\source_snapshot\tests\test_modern_jepa_sharpening_experiment_contract.py
+   MISSING provenance\source_snapshot\tests\test_modern_transformer_memory.py
+OK removed: vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted
+KEEP: grid2x2_crossattn1_2layer_softmax_modern_gamma095_critic1_actor01_jepa0001_teacher003005_nobc_seed0_v1 remaining problems=2
+   MISSING design_manifest.json
+   MISSING launch_local_v1.sh
+WARN dir still has 4 entries: C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\experiments
+WARN dir still has 12 entries: C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\reports\vda_series
+final cleanup finished

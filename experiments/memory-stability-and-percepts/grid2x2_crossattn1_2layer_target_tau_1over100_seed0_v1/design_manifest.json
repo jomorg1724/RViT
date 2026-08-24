@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vda4_grid2x2_crossattn1_transformer_memory_2layer_target_tau_1over100_seed0_v1",
+  "status": "registered_local_seed0_experiment",
+  "claim_scope": "single-seed online same-distribution VDA4 competence test; one-factor actor/critic target-EMA tau intervention",
+  "intervention": {
+    "parameter": "PAC actor-and-critic target-network Polyak tau",
+    "definition": "target <- (1-tau)*target + tau*online",
+    "previous_tau": 0.005,
+    "new_tau": 0.00005,
+    "ratio_new_to_previous": 0.01,
+    "cli_equivalent": "--ema-decay 0.99995",
+    "not_changed": [
+      "MPO temperature",
+      "JEPA student temperature",
+      "JEPA teacher temperature",
+      "JEPA teacher EMA decay"
+    ]
+  },
+  "task_contract": {
+    "task": "vda4",
+    "active_items": 4,
+    "timeline_frames": 7,
+    "change_time": 5,
+    "sensory_noise_std": 5.0,
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "action_semantics": "0=wait, 1=declare; sampled policy"
+  },
+  "architecture": {
+    "visual_feedback": "crossattn1: Q=X; K/V=[X,H1_prev]; residual=X",
+    "memory1": "Q=H1_prev; K/V=[H1_prev,Z]; residual=H1_prev -> H1",
+    "memory2": "Q=H2_prev; K/V=[H2_prev,H1]; residual=H2_prev -> H2",
+    "initial_memory": "independent learned slot-distinct H1_0 and H2_0 tokens",
+    "patch_grid": [2, 2],
+    "d_mem": 128,
+    "memory_heads_per_layer": 4,
+    "actor_and_value_source": "H2",
+    "all_trunk_and_head_parameters_trainable": true
+  },
+  "jepa": {
+    "coefficient_on_layer_mean": 0.5,
+    "heads_per_memory_layer": 4,
+    "prototype_dimension": 256,
+    "student_temperature": 0.1,
+    "teacher_temperature_start": 0.04,
+    "teacher_temperature_end": 0.07,
+    "teacher_temperature_warmup_iterations": 300,
+    "center_momentum": 0.9,
+    "center_update": "EMA over valid timesteps only; padded tails excluded",
+    "teacher_ema_decay": 0.996
+  },
+  "training": {
+    "iterations": 20000,
+    "episodes_per_iteration": 8,
+    "seed": 0,
+    "device": "local_cuda",
+    "optimizer_learning_rate": 0.0003,
+    "gamma": 0.95,
+    "entropy_coefficient": 0.01,
+    "initial_action_bias": [0.0, -1.5],
+    "target_ema_decay": 0.99995,
+    "target_polyak_tau": 0.00005,
+    "initialization": "fresh",
+    "checkpoint_every_iterations": 50
+  },
+  "curriculum": {
+    "enabled": true,
+    "theta_start_deg": 65.0,
+    "window_trials": 1000,
+    "correctness_threshold": 0.85,
+    "theta_step_deg": 3.0,
+    "theta_floor_deg": 8.0
+  }
+}

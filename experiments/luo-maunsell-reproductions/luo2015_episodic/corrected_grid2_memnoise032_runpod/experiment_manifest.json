@@ -1,0 +1,42 @@
+{
+  "experiment_family": "luo2015_corrected_grid2_memory_noise_followup",
+  "condition_name": "grid2_memnoise032_seed0",
+  "initialization": "fresh",
+  "automatic_children": false,
+  "seed": 0,
+  "iterations": 20000,
+  "patch_grid": [2, 2],
+  "memory_noise_sd": 0.32,
+  "changed_variable": "memory_noise_sd",
+  "parent_run": {
+    "condition_name": "grid2_memnoise064_seed0",
+    "memory_noise_sd": 0.64,
+    "terminal_iteration": 19999,
+    "terminal_last1000_correct": 0.49525,
+    "terminal_rolling_correct": 0.475,
+    "terminal_theta": 65.0
+  },
+  "task_contract": {
+    "task": "luo2015_criterion",
+    "orientation_sampling": "independent_uniform_axial_0_180",
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "curriculum_changes_only": "theta",
+    "theta_start": 65.0,
+    "theta_floor": 18.0,
+    "timeline_frames": 7,
+    "sensory_orientation_noise_sd": 5.0,
+    "neutral_rewards": {"hit": 1.0, "correct_reject": 1.0}
+  },
+  "held_fixed": {
+    "cell": "xlstm",
+    "feedback": "crossattn1",
+    "memory_dimension": 32,
+    "memory_retention_coefficient": 1.0,
+    "jepa_coefficient": 0.5,
+    "episodes_per_iteration": 8,
+    "gamma": 1.0,
+    "policy_action_semantics": "sampled"
+  },
+  "hypothesis": "The four-token representation can learn the corrected Luo task when independent recurrent-memory noise is reduced from 0.64 to 0.32.",
+  "falsifier": "No sustained above-chance performance or curriculum progress by the end of the fresh 20,000-iteration run."
+}

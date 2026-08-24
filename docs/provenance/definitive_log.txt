@@ -1,0 +1,11 @@
+definitive cleanup started 2026-08-20 21:42:26
+OK removed: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_canary_20260816 (src still exists: False)
+OK removed: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260816 (src still exists: False)
+OK removed: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260817 (src still exists: False)
+OK removed design leftover (still exists: True)
+OK removed source_snapshot_gap (still exists: False)
+OK removed spatial_scaling leftover (still exists: False)
+WARN still has 3 entries: C:\Users\jomor\OneDrive\Desktop\RViT_plus_paper_jepa_grid9-20260718T193411Z-1-001\RViT_plus_paper_jepa_grid9\experiments
+OK removed empty dir: vda_series
+OK removed empty dir: reports
+definitive cleanup finished

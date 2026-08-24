@@ -1,0 +1,78 @@
+# ============================================================================
+# RViT — .gitignore
+# Policy: code, docs, wiki, experiment designs, and reports are tracked.
+# Datasets, model weights/checkpoints, run outputs, and environments are NOT.
+# ============================================================================
+
+# --- Model weights & checkpoints ---
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.h5
+*.pkl
+*.pickle
+checkpoints/
+**/checkpoints/
+
+# --- Datasets & large binary data ---
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+*.gz
+*.wad
+*.tfrecord
+*.lmndb
+data/raw/
+datasets/
+
+# --- Run outputs (logs/configs live locally, but stay out of git) ---
+runs/
+**/runs/
+rescues/
+**/rescues/
+battery_sweep_results/
+
+# --- Media captures ---
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# --- Python / environments ---
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+ipython_checkpoints/
+.ipynb_checkpoints/
+
+# --- Tooling / OS clutter ---
+.claude/
+.hermes/
+.vscode/
+.idea/
+desktop.ini
+Desktop.ini
+_vizdoom.ini
+.DS_Store
+Thumbs.db
+texput.log
+tmp/
+**/tmp/
+
+# --- Secrets ---
+.env
+*.local
+
+# Large archived analysis outputs (regenerable saliency maps)
+archive/Prism/analysis/avg_saliency_changeS1.npz
+archive/Prism/analysis/avg_saliency_cueS1_S4.npz

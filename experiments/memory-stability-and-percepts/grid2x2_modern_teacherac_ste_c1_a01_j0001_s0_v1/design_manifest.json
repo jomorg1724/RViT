@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vda4_modern_teacherac_ste_c1_a01_j0001_s0_v1",
+  "status": "registered_local_seed0_experiment",
+  "hypothesis": "An EMA-teacher H2 forward representation can stabilize actor/critic decisions while a straight-through estimator routes those task gradients into online student H2 without updating the teacher.",
+  "controlled_delta": "Relative to the killed critic-dominant run, only actor/critic representation routing changes; architecture, objective coefficients, JEPA targets, temperatures, EMA decays, task, seed, gamma, and curriculum remain fixed.",
+  "representation_routing": {
+    "actor_critic_forward": "detached JEPA EMA-teacher H2",
+    "actor_critic_backward_representation": "online student H2 via straight-through estimator",
+    "teacher_gradient": "blocked",
+    "online_actor_critic_heads": "trainable",
+    "rollout_representation": "JEPA EMA-teacher H2 decoded by online actor/critic heads"
+  },
+  "ste_equation": "H_route = H_student + stopgrad(H_teacher - H_student); forward(H_route)=H_teacher, dH_route/dH_student=I, dH_route/dH_teacher=0",
+  "objective_weights": {
+    "critic": 1.0,
+    "actor": 0.1,
+    "jepa": 0.001,
+    "behavior_cloning_alpha": 0.0
+  },
+  "architecture": {
+    "cell": "transformer_memory_2layer_softmax_modern",
+    "routing": "X queries [X,H1_prev]; H1_prev queries [H1_prev,Z]; H2_prev queries [H2_prev,H1]",
+    "memory_tokens_per_level": 4,
+    "memory_attention_heads": 4,
+    "d_mem": 128,
+    "student_memory_output": "tokenwise_feature_softmax",
+    "actor_critic_memory_level": "H2"
+  },
+  "jepa": {
+    "temporal_targets": "student@t predicts EMA-teacher@t+1",
+    "memory_levels": ["H1", "H2"],
+    "tokens_per_level": 4,
+    "structured_heads_per_token": 4,
+    "prototype_dimension": 256,
+    "teacher_ema_decay": 0.996,
+    "teacher_temperature": [0.03, 0.05],
+    "student_temperature": 0.1,
+    "sinkhorn_iterations": 3,
+    "variance_weight": 1.0,
+    "covariance_weight": 0.01
+  },
+  "training": {
+    "iterations": 20000,
+    "episodes_per_iteration": 8,
+    "seed": 0,
+    "device": "local_cuda",
+    "gamma": 0.95,
+    "pac_target_ema": 0.995,
+    "initialization": "fresh"
+  },
+  "curriculum": {
+    "theta_start_deg": 65.0,
+    "window_trials": 1000,
+    "threshold": 0.85,
+    "step_deg": 3.0,
+    "floor_deg": 8.0,
+    "window_semantics": "non-overlapping completed trials"
+  },
+  "required_canary_evidence": [
+    "actor/critic forward outputs equal direct teacher-H2 decoding",
+    "student encoder receives nonzero gradient",
+    "online actor and critic heads receive nonzero gradients",
+    "JEPA teacher gradient maximum is exactly zero",
+    "finite tensors and zero skipped updates",
+    "teacher/student H2 MSE and cosine telemetry are present"
+  ],
+  "falsification": "Reject if gradient routing violates the contract, teacher/student drift becomes uncontrolled, behavior remains a deterministic fixed-time policy, correctness fails to exceed the older 64-67% range, or theta never advances."
+}

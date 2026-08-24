@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run_manifest.schema.json",
+  "title": "AttentionManuscript metrics-backed run manifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "run_id",
+    "experiment_id",
+    "task",
+    "producer_path",
+    "source_tree_sha256",
+    "command",
+    "config",
+    "feedback",
+    "d_mem",
+    "reward_scale",
+    "seed",
+    "device",
+    "start_time",
+    "end_time",
+    "planned_iterations",
+    "max_logged_iteration",
+    "completion_reason",
+    "status",
+    "metrics_path",
+    "checkpoint_paths",
+    "checkpoint_sha256",
+    "analysis_paths",
+    "parent_run_id",
+    "caveats"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "task": {"type": "string", "minLength": 1},
+    "producer_path": {"type": ["string", "null"]},
+    "source_tree_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "command": {"type": ["string", "null"]},
+    "config": {"type": "object"},
+    "feedback": {"type": ["string", "null"]},
+    "d_mem": {"type": ["integer", "null"], "minimum": 1},
+    "reward_scale": {"type": ["number", "null"]},
+    "seed": {"type": ["integer", "null"], "minimum": 0},
+    "device": {"type": ["string", "null"]},
+    "start_time": {"type": ["string", "null"], "format": "date-time"},
+    "end_time": {"type": ["string", "null"], "format": "date-time"},
+    "planned_iterations": {"type": ["integer", "null"], "minimum": 0},
+    "max_logged_iteration": {"type": ["integer", "null"], "minimum": 0},
+    "completion_reason": {
+      "type": "string",
+      "enum": [
+        "budget_complete",
+        "early_success",
+        "interrupted_infrastructure",
+        "interrupted_manual",
+        "numerical_failure",
+        "policy_collapse",
+        "unknown"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "partial", "logged_phase_complete"]
+    },
+    "metrics_path": {"type": "string", "minLength": 1},
+    "checkpoint_paths": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "checkpoint_sha256": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["string", "null"],
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "analysis_paths": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "parent_run_id": {"type": ["string", "null"]},
+    "caveats": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

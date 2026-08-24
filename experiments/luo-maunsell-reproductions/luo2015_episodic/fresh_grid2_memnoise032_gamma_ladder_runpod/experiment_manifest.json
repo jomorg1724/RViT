@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "design": "fresh_counterphased_discount_ladder",
+  "claim_scope": "independent_fixed_condition_policy_optima_at_each_discount_factor",
+  "gammas": [0.8, 0.9, 1.0],
+  "stage_transition": "automatic_per_cell_after_verified_completion",
+  "initialization_each_stage": "fresh_seed_0",
+  "weights_carried_between_gammas": false,
+  "iterations_per_gamma": 20000,
+  "seed": 0,
+  "patch_grid": [2, 2],
+  "memory_dimension": 32,
+  "memory_noise_sd": 0.32,
+  "memory_retention_coefficient": 1.0,
+  "sensory_orientation_noise_sd": 5.0,
+  "theta": 65.0,
+  "curriculum": false,
+  "feedback": "crossattn1",
+  "cell_type": "xlstm",
+  "jepa_coefficient": 0.5,
+  "episodes_per_iteration": 8,
+  "task_contract": {
+    "orientation_sampling": "independent_uniform_axial_0_180",
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "timeline_frames": 7,
+    "visible_reward_cue": false,
+    "action_semantics": "0=wait,1=declare; sampled policy"
+  },
+  "cells": {
+    "sensitivity_loc0": {"task": "luo2015_sensitivity", "condition_loc": 0, "reward_scale": 0.3333333333333333},
+    "sensitivity_loc3": {"task": "luo2015_sensitivity", "condition_loc": 3, "reward_scale": 0.3333333333333333},
+    "criterion_loc0": {"task": "luo2015_criterion", "condition_loc": 0, "reward_scale": 1.0526315789473684},
+    "criterion_loc3": {"task": "luo2015_criterion", "condition_loc": 3, "reward_scale": 1.0526315789473684}
+  },
+  "stage_acceptance": {
+    "checkpoint_iteration": 19999,
+    "initialization_mode": "fresh",
+    "gamma_must_match_stage": true,
+    "task_and_condition_must_match_cell": true
+  },
+  "aborted_predecessor": "gamma=0.7 stopped after near-chance behavior; not part of this ladder"
+}

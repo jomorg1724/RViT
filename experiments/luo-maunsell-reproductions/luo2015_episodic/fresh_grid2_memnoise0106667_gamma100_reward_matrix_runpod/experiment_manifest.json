@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "design": "fresh_counterphased_gamma100_memory_noise0106667",
+  "claim_scope": "independent_fixed_condition_policy_optima",
+  "gamma": 1.0,
+  "parent_gamma": 0.8,
+  "memory_noise_sd": 0.10666666666666666,
+  "changed_variable": "gamma",
+  "initialization": "fresh_seed_0",
+  "iterations": 20000,
+  "seed": 0,
+  "patch_grid": [2, 2],
+  "memory_dimension": 32,
+  "memory_retention_coefficient": 1.0,
+  "sensory_orientation_noise_sd": 5.0,
+  "theta": 65.0,
+  "curriculum": false,
+  "feedback": "crossattn1",
+  "cell_type": "xlstm",
+  "jepa_coefficient": 0.5,
+  "episodes_per_iteration": 8,
+  "parent_artifacts": "C:/Users/jomor/Documents/RViT_runs/runpod_exports/luo_memnoise0106667_gamma080_20260808",
+  "held_fixed": [
+    "task generator and corrected orientation contract",
+    "mnemonic and sensory noise",
+    "reward tables, scales, and counterphased locations",
+    "seed and fresh initialization",
+    "model architecture and optimizer",
+    "theta and curriculum",
+    "iteration budget and policy action semantics"
+  ],
+  "task_contract": {
+    "orientation_sampling": "independent_uniform_axial_0_180",
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "timeline_frames": 7,
+    "visible_reward_cue": false,
+    "action_semantics": "0=wait,1=declare; sampled policy"
+  },
+  "cells": {
+    "sensitivity_loc0": {"task": "luo2015_sensitivity", "condition_loc": 0, "reward_scale": 0.3333333333333333},
+    "sensitivity_loc3": {"task": "luo2015_sensitivity", "condition_loc": 3, "reward_scale": 0.3333333333333333},
+    "criterion_loc0": {"task": "luo2015_criterion", "condition_loc": 0, "reward_scale": 1.0526315789473684},
+    "criterion_loc3": {"task": "luo2015_criterion", "condition_loc": 3, "reward_scale": 1.0526315789473684}
+  },
+  "primary_hypothesis": "gamma=1 removes the temporal discount between first-test hits and second-test correct rejections and prevents the sensitivity always-declare collapse",
+  "secondary_hypothesis": "reward_magnitude_invariance at gamma=1 predicts little or no counterphased sensitivity d-prime difference despite competent discrimination",
+  "primary_falsifier": "sensitivity manipulated locations remain HR=1, FA=1, dprime=0 in matched frozen-policy evaluation",
+  "secondary_falsifier": "counterphased sensitivity policies show a reliable manipulated-location d-prime difference under gamma=1"
+}

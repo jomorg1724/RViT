@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "vda4_modern_gamma095_jepa06_teacher003005_seed0_v1",
+  "status": "registered_local_seed0_experiment",
+  "claim_scope": "single-seed online same-distribution VDA4 competence test; not transfer or held-out evidence",
+  "hypothesis": "Increasing the total JEPA coefficient slightly while sharpening teacher prototype targets will strengthen task-relevant H1/H2 temporal structure enough to improve policy learning.",
+  "rationale": "The failed modern gamma-0.95 run remained behaviorally near chance while H1/H2 prototype CE stayed only modestly below uniform and H2 weakened late. Lower teacher tau makes assignments closer to one-hot; a 20% JEPA-weight increase gives those sharper temporal targets slightly more optimization influence.",
+  "controlled_delta": {
+    "jepa_coefficient": {"from": 0.5, "to": 0.6},
+    "teacher_temperature": {"from": [0.04, 0.07], "to": [0.03, 0.05]}
+  },
+  "bundle_note": "These two linked JEPA changes are intentionally bundled by user direction. A positive result would require a later ablation to attribute causality between weight and temperature.",
+  "developmental_learning_principle": "Representation learning first, value learning second, motor/policy learning last.",
+  "objective_weights": {
+    "actor": 0.01,
+    "critic": 0.5,
+    "jepa": 0.6,
+    "ordering": "actor < critic < JEPA",
+    "behavior_cloning_alpha": 0.0
+  },
+  "behavior_cloning": "disabled; the alpha-zero pure-MPO path does not construct a BC loss",
+  "falsification": "Long-window correctness remains near 50%, best rolling correctness fails to exceed the prior 57.75% modern-run peak and 64-67% older baseline range, theta never decreases, or sharper targets cause prototype/representation collapse.",
+  "task_contract": {
+    "task": "vda4",
+    "active_items": 4,
+    "timeline_frames": 7,
+    "change_time": 5,
+    "sensory_noise_std": 5.0,
+    "signed_change_sampling": "uniform(-theta,+theta)",
+    "action_semantics": "0=wait, 1=declare; sampled policy"
+  },
+  "architecture": {
+    "cell": "transformer_memory_2layer_softmax_modern",
+    "visual_feedback": "source-RMSNorm and QK-normalized crossattn1: Q=X; K/V=[X,H1_prev] under one inspectable softmax",
+    "memory1": "source-RMSNorm; four-head QK-normalized attention; gated output; raw H1 then tokenwise feature softmax",
+    "memory2": "source-RMSNorm; four-head QK-normalized attention; gated output; raw H2 then tokenwise feature softmax",
+    "student_memory_output": "tokenwise_feature_softmax",
+    "initial_memory": "learned slot-distinct H1_0/H2_0 logits, tokenwise softmaxed before first use",
+    "downstream_h1": ["memory transformer 2", "next-step visual feedback", "H1 JEPA head"],
+    "downstream_h2": ["actor", "critic", "next-step memory-2 recurrence", "H2 JEPA head"],
+    "patch_grid": [2, 2],
+    "d_mem": 128,
+    "memory_heads_per_layer": 4,
+    "head_dimension": 32,
+    "all_parameters_trainable": true
+  },
+  "jepa": {
+    "coefficient_on_total": 0.6,
+    "cross_entropy": "temporal student@t predicts detached EMA-teacher@t+1 independently for H1/H2",
+    "heads_per_memory_layer": 4,
+    "prototype_dimension": 256,
+    "student_temperature": 0.1,
+    "teacher_temperature_start": 0.03,
+    "teacher_temperature_end": 0.05,
+    "teacher_temperature_warmup_iterations": 300,
+    "teacher_target_intent": "lower entropy and closer to one-hot than the previous 0.04-to-0.07 schedule",
+    "center_momentum": 0.9,
+    "center_update": "EMA over valid timesteps only; padded tails excluded",
+    "teacher_ema_decay": 0.996,
+    "teacher_ema_schedule": "none; fixed decay throughout",
+    "collapse_prevention": {
+      "sinkhorn_knopp": "3 iterations; balanced independently per memory-layer/token/head over valid batch-time samples",
+      "projected_feature_variance_floor": {"coefficient": 1.0, "target_std": 1.0},
+      "projected_feature_covariance_decorrelation": {"coefficient": 0.01},
+      "total": "CE + 1.0*variance + 0.01*covariance"
+    }
+  },
+  "training": {
+    "iterations": 20000,
+    "episodes_per_iteration": 8,
+    "seed": 0,
+    "device": "local_cuda",
+    "optimizer_learning_rate": 0.0003,
+    "gamma": 0.95,
+    "entropy_coefficient": 0.01,
+    "initial_action_bias": [0.0, -1.5],
+    "pac_target_ema_decay": 0.995,
+    "initialization": "fresh",
+    "checkpoint_every_iterations": 50
+  },
+  "curriculum": {
+    "enabled": true,
+    "theta_start_deg": 65.0,
+    "window_trials": 1000,
+    "correctness_threshold": 0.85,
+    "theta_step_deg": 3.0,
+    "theta_floor_deg": 8.0,
+    "window_semantics": "non-overlapping valid completed trials",
+    "update": "theta=max(theta_floor, theta-3deg) only when window correctness>=0.85"
+  },
+  "monitoring": {
+    "required_metrics": ["rolling/correct_rate", "rolling/mean_return", "loss_jepa_h1", "loss_jepa_h2", "loss_jepa_ce", "loss_jepa_var", "loss_jepa_cov", "loss_jepa", "loss_entropy", "approx_kl", "n_skipped", "env/theta"],
+    "decision_rule": "Behavior and curriculum advancement dominate JEPA CE; lower CE alone is not success."
+  }
+}

@@ -1,0 +1,39 @@
+final verify started 2026-08-20 21:37:33
+KEEP: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_canary_20260816 problems=2
+   SIZE provenance\source_snapshot\tests\test_loss_weight_hierarchy.py src=1705 dst=1700
+   SIZE provenance\source_snapshot\tests\test_modern_jepa_sharpening_experiment_contract.py src=2135 dst=2133
+KEEP: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260816 problems=2
+   SIZE provenance\source_snapshot\tests\test_loss_weight_hierarchy.py src=1705 dst=1700
+   SIZE provenance\source_snapshot\tests\test_modern_jepa_sharpening_experiment_contract.py src=2135 dst=2133
+KEEP: vda4_modern_gamma095_jepa06_teacher003005_actor001_critic05_nobc_seed0_v1_production_20260817 problems=2
+   SIZE provenance\source_snapshot\tests\test_loss_weight_hierarchy.py src=1705 dst=1700
+   SIZE provenance\source_snapshot\tests\test_modern_jepa_sharpening_experiment_contract.py src=2135 dst=2133
+OK removed: vda4_modern_gamma095_jepa06_teacher003005_actor01_critic05_nobc_seed0_v1_canary_20260816
+OK removed: vda4_transformer_memory_2layer_softmax_modern_gamma095_seed0_v1_production_20260816
+OK removed: vda4_transformer_memory_2layer_softmax_modern_gamma1_seed0_v1_canary_20260816
+KEEP: vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted problems=3
+   SIZE provenance\source_snapshot\scripts\build_vda16_manuscript_shard.py src=24728 dst=38418
+   SIZE provenance\source_snapshot\vda_series\vda16_integration.py src=35672 dst=39485
+   SIZE provenance\source_snapshot\vda_sweep\matched_width_compute.py src=6329 dst=6909
+repo experiments leftover entries: 4
+   exp-left: \experiments\vda4_transformer_memory
+   exp-left: \experiments\vda4_transformer_memory\grid2x2_crossattn1_2layer_softmax_modern_gamma095_critic1_actor01_jepa0001_teacher003005_nobc_seed0_v1
+   exp-left: \experiments\vda4_transformer_memory\grid2x2_crossattn1_2layer_softmax_modern_gamma095_critic1_actor01_jepa0001_teacher003005_nobc_seed0_v1\design_manifest.json
+   exp-left: \experiments\vda4_transformer_memory\grid2x2_crossattn1_2layer_softmax_modern_gamma095_critic1_actor01_jepa0001_teacher003005_nobc_seed0_v1\launch_local_v1.sh
+repo reports vda_series leftover entries: 27
+   rep-left: \reports\vda_series\spatial_scaling_evaluation_production_20260727
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_source_snapshot_gap
+   rep-left: \reports\vda_series\spatial_scaling_evaluation_production_20260727\failed_synthesis_attempt_missing_matplotlib_20260727T1858
+   rep-left: \reports\vda_series\spatial_scaling_evaluation_production_20260727\failed_synthesis_attempt_missing_matplotlib_20260727T1858\vda4_spatial_scaling_seed0_metrics.csv
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\scripts
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\vda_series
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\vda_sweep
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\scripts\build_vda16_manuscript_shard.py
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\vda_series\first_wave_figures.py
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\vda_series\task_figures.py
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\vda_series\vda16_integration.py
+   rep-left: \reports\vda_series\vda16_crossattn_nodecay_20260719_rejected_comparison_gate_omitted\provenance\source_snapshot\vda_sweep\matched_width.py
+final verify finished

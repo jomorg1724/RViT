@@ -1,0 +1,112 @@
+########################################################################
+# FIRST LOOK  ·  RViT_plus_v3
+# checkpoint : /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/checkpoints/rvit_plus_rl_final.pt
+# device     : cpu   n_trials: 200   out: /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look
+########################################################################
+
+>>> [1/2] psychometric / chronometric
+[loaded] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/checkpoints/rvit_plus_rl_final.pt (iter=1999)  device=cpu
+
+[EXP 1] signal-strength psychometric / chronometric (valid vs invalid)
+  |Δθ|=  2.0  VALID hit=0.005 rt=2.00 | INVALID hit=0.020 rt=7.00
+  |Δθ|=  5.0  VALID hit=0.005 rt=1.00 | INVALID hit=0.015 rt=9.00
+  |Δθ|=  9.0  VALID hit=0.025 rt=6.00 | INVALID hit=0.030 rt=3.00
+  |Δθ|= 14.0  VALID hit=0.125 rt=1.00 | INVALID hit=0.055 rt=1.00
+  |Δθ|= 20.0  VALID hit=0.360 rt=0.00 | INVALID hit=0.160 rt=0.00
+  |Δθ|= 30.0  VALID hit=0.785 rt=0.00 | INVALID hit=0.555 rt=0.00
+  |Δθ|= 44.0  VALID hit=0.955 rt=0.00 | INVALID hit=0.835 rt=0.00
+  |Δθ|= 64.0  VALID hit=0.900 rt=0.00 | INVALID hit=0.815 rt=0.00
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/psychometric_chronometric_signal.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/psychometric_signal.csv
+
+[EXP 2] validity scaling (cued)
+  validity=0.25  hit=0.140  rt=1.00
+  validity=0.50  hit=0.155  rt=1.00
+  validity=0.75  hit=0.145  rt=2.00
+  validity=1.00  hit=0.195  rt=2.00
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/psychometric_chronometric_validity.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/psychometric_validity.csv
+
+[EXP 3] value scaling (cued)
+  value=1 (blue )  hit=0.140  rt=1.50
+  value=3 (green)  hit=0.145  rt=1.00
+  value=5 (red  )  hit=0.145  rt=0.00
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/psychometric_chronometric_value.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/psychometric_value.csv
+
+[done]
+
+>>> [2/2] averaged attention maps
+[loaded] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/checkpoints/rvit_plus_rl_final.pt (iter=1999)  device=cpu
+[fixed change] quadrant=S1 top-left  t=15  |Δθ|=64.0
+  [cue left · ring 1.0 (VALID)] done  (layer ranges: L1=[1.19,1.92], L2=[0.63,2.91], L3=[1.16,3.26])
+  [cue right · ring 1.0 (INVALID)] done  (layer ranges: L1=[1.21,1.92], L2=[0.60,2.91], L3=[1.16,3.26])
+  [cue left · ring 0.25 (VALID)] done  (layer ranges: L1=[1.19,1.92], L2=[0.60,2.90], L3=[1.15,3.26])
+  [cue right · ring 0.25 (INVALID)] done  (layer ranges: L1=[1.21,1.92], L2=[0.61,2.92], L3=[1.16,3.26])
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L1_cueleft_ring1.0VALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L1_cueright_ring1.0INVALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L1_cueleft_ring0.25VALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L1_cueright_ring0.25INVALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_alpha_L1_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L2_cueleft_ring1.0VALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L2_cueright_ring1.0INVALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L2_cueleft_ring0.25VALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L2_cueright_ring0.25INVALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_alpha_L2_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L3_cueleft_ring1.0VALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L3_cueright_ring1.0INVALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L3_cueleft_ring0.25VALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_L3_cueright_ring0.25INVALID_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_alpha_L3_chg0_t15.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look/avg_attn_chg0_t15.npz
+[done]
+
+========================================================================
+FIRST-LOOK DIGEST
+========================================================================
+
+[Psychometric] P(hit) vs |Δθ|   (valid = change at cued loc.)
+   |Δθ|   valid  invalid   gap
+      2   0.005   0.020   -0.015
+      5   0.005   0.015   -0.010
+      9   0.025   0.030   -0.005
+     14   0.125   0.055   +0.070
+     20   0.360   0.160   +0.200
+     30   0.785   0.555   +0.230
+     44   0.955   0.835   +0.120
+     64   0.900   0.815   +0.085
+   → 50% threshold: valid ≈ 23.3°, invalid ≈ 28.6°  (benefit +5.3°);  max P(hit) gap +0.230 @ |Δθ|=30°
+   → spatial cueing/validity effect: PRESENT
+
+[Validity scaling] cued P(hit) & RT vs displayed ring validity
+   validity=0.25  hit=0.140  rt=1.00
+   validity=0.50  hit=0.155  rt=1.00
+   validity=0.75  hit=0.145  rt=2.00
+   validity=1.00  hit=0.195  rt=2.00
+   → accuracy trend (1.0 − 0.25): +0.055 (scales with validity)
+
+[Value scaling] cued P(hit) & RT vs cue value
+   blue  (v=1)  hit=0.140  rt=1.50
+   green (v=3)  hit=0.145  rt=1.00
+   red   (v=5)  hit=0.145  rt=0.00
+   → accuracy spread across value: 0.005 (flat/null)
+
+[Attention] channel/head-summed heatmaps written:
+   avg_attn_L1_cueleft_ring0.25VALID_chg0_t15.png
+   avg_attn_L1_cueleft_ring1.0VALID_chg0_t15.png
+   avg_attn_L1_cueright_ring0.25INVALID_chg0_t15.png
+   avg_attn_L1_cueright_ring1.0INVALID_chg0_t15.png
+   avg_attn_L2_cueleft_ring0.25VALID_chg0_t15.png
+   avg_attn_L2_cueleft_ring1.0VALID_chg0_t15.png
+   avg_attn_L2_cueright_ring0.25INVALID_chg0_t15.png
+   avg_attn_L2_cueright_ring1.0INVALID_chg0_t15.png
+   avg_attn_L3_cueleft_ring0.25VALID_chg0_t15.png
+   avg_attn_L3_cueleft_ring1.0VALID_chg0_t15.png
+   avg_attn_L3_cueright_ring0.25INVALID_chg0_t15.png
+   avg_attn_L3_cueright_ring1.0INVALID_chg0_t15.png
+   avg_attn_alpha_L1_chg0_t15.png
+   avg_attn_alpha_L2_chg0_t15.png
+   avg_attn_alpha_L3_chg0_t15.png
+========================================================================
+All figures + CSVs: /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v3/analysis/figures/first_look
+========================================================================

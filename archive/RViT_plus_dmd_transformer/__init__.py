@@ -1,0 +1,1 @@
+"""DMD-feature transformer variant."""

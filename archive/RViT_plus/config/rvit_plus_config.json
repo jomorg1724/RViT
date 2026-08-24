@@ -1,0 +1,116 @@
+{
+    "_comment": "RViT+ project configuration. Matches the JSON convention used by Prism/, HRA/, and PrismV2/ (sections, `_note_*` inline docs). Both train.py (autoencoder) and train_rl.py (PPO + distributional critic + recon aux) load this file. Priority for any setting: CLI arg > this config > script-hardcoded default.",
+
+    "run": {
+        "_note_init_mode": "How training initializes the model. Three modes: 'fresh' = random init, checkpoint_path is ignored. 'warm_start' = load tensors from checkpoint_path whose name AND shape match the current model; any tensor missing or shape-mismatched stays at its random init (silently skipped). Use this when loading an AE checkpoint into an RL model — the RL heads stay random, the encoder warm-starts. 'resume' = load EVERY tensor from checkpoint_path; fail loudly if any tensor is missing, extra, or shape-mismatched. Use only when continuing the same architecture (e.g. an RL checkpoint into the same RL model config).",
+        "init_mode": "resume",
+        "checkpoint_path": "RViT_plus/checkpoints/rvit_plus_rl_latest.pt",
+        "seed": 0,
+        "device": "",
+        "checkpoint_dir": "RViT_plus/checkpoints",
+        "log_every": 5,
+        "save_every": 200
+    },
+
+    "environment": {
+        "_comment": "ChangeDetectionEnv parameters. Currently only consumed by train_rl.py. Match the Prism/HRA defaults so cross-project comparisons are apples-to-apples.",
+        "min_change_time": 11,
+        "max_change_time": 25
+    },
+
+    "model": {
+        "_comment": "Shared architecture (encoder + decoder + RL heads). Used by both AE and RL training.",
+        "in_channels": 3,
+        "image_h": 50,
+        "image_w": 50,
+        "stem_out_channels": 64,
+        "state_channels": [64, 96, 128],
+        "n_FR": 4,
+        "n_heads": 4,
+        "enable_skips": true,
+        "skip_scale": 0.3,
+
+        "_note_decoder": "Decoder: feedforward upsample-and-concat + CNN. The upsample pyramids bring each Cᵢ to image resolution (50×50) and concatenate channels before a moderate CNN decodes T frames.",
+        "upsample_out_channels": 32,
+        "cnn_hidden": 64,
+
+        "_note_rl_heads": "Actor + distributional critic. Each head reads its own (C₁, C₂, C₃_X) when split_c3=true. init_action_bias = [wait_bias, press_bias] — biases the actor's initial logits per action. For ChangeDetectionEnv, [-1.5] on press gives initial P(press)≈0.18 (vs ≈0.5 for [0,0]).",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "rl_per_state_channels": 32,
+            "rl_cnn_hidden": 64,
+            "init_action_bias": [0.0, -1.5],
+            "split_c3": true,
+
+            "_note_contrastive": "SimCLR-style projection-head output dimensionality used by the actor and critic contrastive auxiliary losses. Each head projects an encoder state triplet (C₁, C₂, C₃_X) to a vector of this size, L2-normalised, before pairwise cosine similarity is computed in the PPO update.",
+            "contrastive_projection_dim": 128
+        }
+    },
+
+    "ae": {
+        "_comment": "Autoencoder training (train.py). MovingMNIST video compression by default.",
+        "iters": 10000,
+        "batch_size": 8,
+        "seq_len": 10,
+        "lr": 3e-4,
+        "grad_clip": 0.5,
+
+        "recon_kind": "mse",
+        "content_weight": 100.0,
+
+        "_note_kl": "KL coefficient + free-bits for the VAE bottleneck. The spatial VAE is currently DEFERRED (run-13+), so these are effectively unused unless the VAE path is re-enabled.",
+        "kl_coef": 0.001,
+        "free_bits": 2.0,
+
+        "_note_curriculum": "Progressive T ramp from T=1 → T=seq_len over warmup_iters. Was used pre-run-13 when the decoder was recurrent. With the feedforward decoder it serves no purpose; default 0.",
+        "warmup_iters": 0
+    },
+
+    "ppo": {
+        "_comment": "PPO + distributional QR-DQN critic + reconstruction auxiliary (train_rl.py).",
+        "iters": 2000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 3e-4,
+        "n_epochs": 4,
+        "clip_range": 0.2,
+        "grad_clip": 0.5,
+        "grad_value_clip": 1.0e3,
+
+        "_note_loss_coefs": "Three core gradient sources: policy gradient (PPO surrogate), distributional value (quantile-Huber on the executed action's Q-dist), reconstruction (content-weighted MSE on the decoder output). All flow back through the shared encoder.",
+        "value_coef": 0.5,
+        "entropy_coef": 0.2,
+        "recon_coef": 0.5,
+        "content_weight": 100.0,
+        "recon_kind": "mse",
+
+        "gamma": 0.95,
+        "gae_lambda": 0.95,
+        "qr_kappa": 1.0,
+
+        "_note_pretrain": "Force action=0 (wait) during rollouts so episodes always run the full 30 steps, update ONLY the reconstruction loss. Lets the encoder learn the env's visual statistics before RL signal starts. Set 0 to disable.",
+        "recon_pretrain_iters": 20,
+
+        "_note_contrastive": "Auxiliary contrastive losses on the encoder's per-step state triplets. Two SimCLR-style projection heads (one for the actor branch reading (C₁,C₂,C₃_actor), one for the critic reading (C₁,C₂,C₃_critic)) produce L2-normalised embeddings; pairwise cosine similarities are then shaped. ACTOR (binary): pairs with same action AND same reward are pulled together; everything else is pushed apart below `contrastive_margin`. CRITIC (continuous): repulsive weight is |per-step QH error_i − error_j| (detached), attractive weight is cosine(Q_i, Q_j) (detached, clamped ≥ 0); gradient flows only through the encoder + projection heads.",
+        "contrastive_actor_coef": 0.005,
+        "contrastive_critic_coef": 0.005,
+        "contrastive_margin": 0.3,
+
+        "_note_pc": "Predictive-coding auxiliary. Per branch X ∈ {actor, critic}, a small predictor head P_X maps the deep specialist state at t-1 to a tensor matching the shared middle state's shape. Loss = mean_{b, t ≥ 1}[ 1 − cos(P_X(C_{3,X,t-1}), C_{2,t}.detach()) ]. Target detached so gradient flows only into P_X and cell3_X (not into the shared C_2). This is a temporal-consistency constraint that operates on encoder dynamics — independent of (action, reward) labels — so it remains active when the actor collapses. Used to complement / replace the contrastive auxiliaries when they are observed to function as a competing pressure rather than as a permanent representational shaping.",
+        "pc_actor_coef": 0.1,
+        "pc_critic_coef": 0.1,
+
+        "_note_pac_actor": "PAC actor loss (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. For discrete actions the MPO E-step is closed-form:  q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]  where Q̄(s,a) is the scalar mean over quantiles. M-step + BC blend gives  L_actor = (1−α)·[ −Σ_a q(a|s)·log π_θ(a|s) ]  +  α·[ −log π_θ(a_t|s) ]. Q drives the actor DIRECTLY through the MPO weights (no GAE, no PPO ratio). α=0 is pure MPO, α=1 is pure BC. η controls how aggressively the E-step concentrates on high-Q actions.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+
+        "_note_per": "Prioritized episode replay buffer (Schaul et al. 2016, episode-level). Fresh `episodes_per_iter` on-policy episodes are augmented with `per_n_replay` replay episodes sampled from `EpisodeReplayBuffer`; the combined batch goes through one PPO update. Each entry's priority is the MEAN per-step quantile-Huber error over the episode's valid timesteps, refreshed every time the entry is sampled. Sampling: p_i ∝ priority_i^per_alpha (clipped at per_priority_clip × median). IS weights: w_i = (1/(N·p_i))^β / max_w, with β linearly annealed from per_beta_start to per_beta_end over the full training run. Fresh episodes always have w=1. Set per_n_replay=0 to disable replay entirely.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

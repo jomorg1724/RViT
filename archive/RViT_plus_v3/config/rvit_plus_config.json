@@ -1,0 +1,120 @@
+{
+    "_comment": "RViT+ V3 project configuration (revision V3b). Sibling of RViT_plus_v2/. Attention (attention.py): channels split into n_heads=32 groups; per head and per spatial position, the per-head channel vectors of Q and K are inner-producted (collapsing the channel axis) into ONE spatial score A_i in (B,H,W); A_i is SOFTMAX-normalized over the H.W grid (temperature 1/sqrt(Ch)); that distribution multiplies the head's V (broadcast over channels); the 32 heads are concatenated and added to the residual. This replaces the earlier V3a sigmoid gate, which saturated (no cross-position competition -> bright borders / all-on); softmax forces each head to spend one unit of attention across space. GroupNorm group count is decoupled from n_heads (uses 8). Memory (memory.py): Stage-3 attractor-settling compute -- K=2 leaky recurrent relaxation micro-steps toward a learned attractor with GroupNorm after each step (combines gated evidence write + attractor settling + normalization). Contrastive auxiliaries remain removed; PC + PER + PAC actor loss retained. Priority for any setting: CLI arg > this config > script-hardcoded default.",
+
+    "run": {
+        "_note_init_mode": "How training initializes the model. Three modes: 'fresh' = random init, checkpoint_path is ignored. 'warm_start' = load tensors from checkpoint_path whose name AND shape match the current model; any tensor missing or shape-mismatched stays at its random init (silently skipped). Use this when loading an AE checkpoint into an RL model — the RL heads stay random, the encoder warm-starts. 'resume' = load EVERY tensor from checkpoint_path; fail loudly if any tensor is missing, extra, or shape-mismatched. Use only when continuing the same architecture (e.g. an RL checkpoint into the same RL model config).",
+        "_note_init_mode_migration": "Set to 'warm_start' for the FIRST discrete_jepa run (ppo.pc_kind): the encoder/actor/critic/decoder warm-start from the cosine-PC checkpoint while the reshaped PC predictor heads + new tokenizers initialize fresh. Strict 'resume' would fail on those shape-mismatched PC tensors. Once a discrete_jepa checkpoint has been saved, switch back to 'resume' to continue it strictly.",
+        "init_mode": "resume",
+        "_note_checkpoint_location": "checkpoint_path/checkpoint_dir point at ~/rvit_plus_checkpoints (ABSOLUTE, OUTSIDE the repo) on purpose: the AttentionManuscript repo is itself a Google Drive sync root (.tmp.driveupload/.tmp.drivedownload live at its top level), and Drive was observed rewriting rvit_plus_rl_latest.pt mid-session. Loading or saving a checkpoint while Drive concurrently replaces it can corrupt a run. Keeping checkpoints in a non-synced home dir removes that hazard. Trade-off: these checkpoints are no longer Drive-backed — copy a final checkpoint back into the repo manually if you want it backed up (but NOT during a live run). The in-repo RViT_plus_v3/checkpoints/ still holds the old (Drive-synced) checkpoints, which analysis/*.py scripts default to via their --checkpoint arg.",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/rvit_plus_rl_latest.pt",
+        "seed": 0,
+        "device": "",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints",
+        "log_every": 5,
+        "save_every": 200
+    },
+
+    "environment": {
+        "_comment": "ChangeDetectionEnv parameters. Currently only consumed by train_rl.py. Match the Prism/HRA defaults so cross-project comparisons are apples-to-apples.",
+        "min_change_time": 11,
+        "max_change_time": 25
+    },
+
+    "model": {
+        "_comment": "Shared architecture (encoder + decoder + RL heads). Used by both AE and RL training.",
+        "in_channels": 3,
+        "image_h": 50,
+        "image_w": 50,
+        "stem_out_channels": 64,
+        "state_channels": [64, 96, 128],
+        "n_FR": 4,
+        "n_heads": 32,
+        "enable_skips": true,
+        "skip_scale": 0.3,
+
+        "_note_decoder": "Decoder: feedforward upsample-and-concat + CNN. The upsample pyramids bring each Cᵢ to image resolution (50×50) and concatenate channels before a moderate CNN decodes T frames.",
+        "upsample_out_channels": 32,
+        "cnn_hidden": 64,
+
+        "_note_rl_heads": "Actor + distributional critic. Each head reads its own (C₁, C₂, C₃_X) when split_c3=true. init_action_bias = [wait_bias, press_bias] — biases the actor's initial logits per action. For ChangeDetectionEnv, [-1.5] on press gives initial P(press)≈0.18 (vs ≈0.5 for [0,0]).",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "rl_per_state_channels": 32,
+            "rl_cnn_hidden": 64,
+            "init_action_bias": [0.0, -1.5],
+            "split_c3": true
+        }
+    },
+
+    "ae": {
+        "_comment": "Autoencoder training (train.py). MovingMNIST video compression by default.",
+        "iters": 10000,
+        "batch_size": 8,
+        "seq_len": 10,
+        "lr": 3e-4,
+        "grad_clip": 0.5,
+
+        "recon_kind": "mse",
+        "content_weight": 100.0,
+
+        "_note_kl": "KL coefficient + free-bits for the VAE bottleneck. The spatial VAE is currently DEFERRED (run-13+), so these are effectively unused unless the VAE path is re-enabled.",
+        "kl_coef": 0.001,
+        "free_bits": 2.0,
+
+        "_note_curriculum": "Progressive T ramp from T=1 → T=seq_len over warmup_iters. Was used pre-run-13 when the decoder was recurrent. With the feedforward decoder it serves no purpose; default 0.",
+        "warmup_iters": 20
+    },
+
+    "ppo": {
+        "_comment": "PPO + distributional QR-DQN critic + reconstruction auxiliary (train_rl.py).",
+        "iters": 2000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 3e-4,
+        "n_epochs": 4,
+        "clip_range": 0.2,
+        "grad_clip": 0.5,
+        "grad_value_clip": 1.0e3,
+
+        "_note_loss_coefs": "Three core gradient sources: policy gradient (PPO surrogate), distributional value (quantile-Huber on the executed action's Q-dist), reconstruction (content-weighted MSE on the decoder output). All flow back through the shared encoder.",
+        "value_coef": 0.5,
+        "entropy_coef": 0.1,
+        "recon_coef": 0.5,
+        "content_weight": 100.0,
+        "recon_kind": "mse",
+
+        "gamma": 0.95,
+        "gae_lambda": 0.95,
+        "qr_kappa": 1.0,
+
+        "_note_pretrain": "Force action=0 (wait) during rollouts so episodes always run the full 30 steps, update ONLY the reconstruction loss. Lets the encoder learn the env's visual statistics before RL signal starts. Set 0 to disable.",
+        "recon_pretrain_iters": 20,
+
+        "_note_pc": "Predictive-coding auxiliary. Per branch X ∈ {actor, critic}, a predictor head P_X maps the deep specialist state at t-1 to a prediction of the next-step shared middle state C_2. pc_actor_coef / pc_critic_coef are the outer weights on each branch's PC loss; the target is always stop-gradded so the predictive gradient reaches only P_X and cell3_X (not the shared C_2). The OBJECTIVE is selected by pc_kind. This is a temporal-consistency constraint on encoder dynamics — independent of (action, reward) labels — so it remains active when the actor collapses.",
+        "pc_actor_coef": 0.1,
+        "pc_critic_coef": 0.1,
+
+        "_note_pc_kind": "PC objective family. 'cosine' (legacy) = predict C_2ₜ as a continuous tensor, loss = 1 − cos(P_X(C_{3,X,t-1}), C_{2,t}.detach()) — directional only, no magnitude, no collapse guard. 'discrete_jepa' (run-19) = discrete categorical code as a PREDICTION TARGET ONLY: a tokenizer quantizes C_2ₜ into K×V codes per position, P_X predicts them via KL-balanced cross-entropy + InfoMax anchor; the agent still reads continuous C_2. 'discrete_latent' (run-19b, CURRENT) = the full DreamerV3 move: ONE shared tokenizer + codebook turn C_2ₜ into a HARD one-hot latent z (argmax + straight-through) that the actor & critic READ in place of C_2 (model._route_states_to_heads injects embed(z) into the C_2 slot — same shape, so the heads warm-start unchanged). Policy + value gradients flow through z (STE) into the tokenizer/encoder, so the latent is anchored by reward (the anchoring our target-only version lacked). The per-branch predictors P_X(C_{3,X,t-1}) become the DYNAMICS model that predicts the next z — that KL-balanced loss (pc_kl_dyn / pc_kl_rep / pc_anchor_coef, shared with discrete_jepa) is now the world-model dynamics/JEPA term, and it unlocks latent rollout/planning later. argmax (not sampling) keeps z deterministic given the observation so PAC's old_log_probs stay consistent on re-encode. No pixel target. NOTE: requires init_mode='warm_start' for the first run (new tokenizer + codebook + reshaped predictors init fresh; encoder/actor/critic — including the C_2 downsample pyramid — warm-start). pc_detach_c2 is ignored in this mode.",
+        "pc_kind": "discrete_latent",
+        "pc_groups": 8,
+        "pc_classes": 16,
+        "pc_kl_dyn": 0.5,
+        "pc_kl_rep": 0.1,
+        "pc_anchor_coef": 0.1,
+        "pc_free_bits": 0.0,
+        "pc_detach_c2": true,
+
+        "_note_pac_actor": "PAC actor loss (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. For discrete actions the MPO E-step is closed-form:  q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]  where Q̄(s,a) is the scalar mean over quantiles. M-step + BC blend gives  L_actor = (1−α)·[ −Σ_a q(a|s)·log π_θ(a|s) ]  +  α·[ −log π_θ(a_t|s) ]. Q drives the actor DIRECTLY through the MPO weights (no GAE, no PPO ratio). α=0 is pure MPO, α=1 is pure BC. η controls how aggressively the E-step concentrates on high-Q actions.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+
+        "_note_per": "Prioritized episode replay buffer (Schaul et al. 2016, episode-level). Fresh `episodes_per_iter` on-policy episodes are augmented with `per_n_replay` replay episodes sampled from `EpisodeReplayBuffer`; the combined batch goes through one PPO update. Each entry's priority is the MEAN per-step quantile-Huber error over the episode's valid timesteps, refreshed every time the entry is sampled. Sampling: p_i ∝ priority_i^per_alpha (clipped at per_priority_clip × median). IS weights: w_i = (1/(N·p_i))^β / max_w, with β linearly annealed from per_beta_start to per_beta_end over the full training run. Fresh episodes always have w=1. Set per_n_replay=0 to disable replay entirely.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

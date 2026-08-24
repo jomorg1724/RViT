@@ -1,0 +1,97 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5_part2/v5p2_analysis_snapshot.pt (iter=4999) device=cpu  encoder cross-attn 1block×8H, 2 mem-LSTMs, N=100 (keys = 3N = patch++H1++H2)
+[setup] near-threshold |Δθ|=10.0 ring=0.75 change@t=15 n=256 biases=[-6, -4, -2, -1, 0, 1, 2, 4, 6]
+[note] v5_part2 decoders are 1D-conv heads (no attention) — every lever below perturbs the ENCODER cross-attention only.
+[baseline cued] hit=0.523 rt=6.00 prem=0.000 Vadv=-0.745 qent=0.552 qstd=0.839 Hpi=0.000
+
+=== ALL-HEADS region sweeps (change_index_mode='cued') ===
+
+[patch] patch keys (image gain), all heads
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.566   5.0  0.000  -0.727  +0.526  0.824  0.001
+   -4.0  0.551   6.0  0.000  -0.745  +0.560  0.841  0.000
+   -2.0  0.465   6.0  0.000  -0.757  +0.546  0.840  0.000
+   -1.0  0.578   6.0  0.000  -0.734  +0.551  0.832  0.000
+   +0.0  0.535   5.0  0.000  -0.738  +0.555  0.836  0.000
+   +1.0  0.566   6.0  0.000  -0.745  +0.538  0.842  0.000
+   +2.0  0.551   6.0  0.000  -0.738  +0.553  0.835  0.000
+   +4.0  0.574   6.0  0.000  -0.746  +0.582  0.840  0.000
+   +6.0  0.637   7.0  0.000  -0.700  +0.557  0.820  0.000
+  Δ(full sweep): hit=+0.070 prem=+0.000 Vadv=+0.027 qent=+0.031 Hpi=-0.001
+
+[memory] memory keys H1+H2 (recurrent readout), all heads
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.617   6.0  0.000  -0.703  +0.555  0.822  0.000
+   -4.0  0.605   6.0  0.000  -0.749  +0.576  0.842  0.000
+   -2.0  0.570   7.0  0.000  -0.728  +0.552  0.835  0.003
+   -1.0  0.520   6.0  0.000  -0.743  +0.543  0.837  0.000
+   +0.0  0.559   7.0  0.000  -0.732  +0.545  0.832  0.000
+   +1.0  0.570   6.0  0.000  -0.729  +0.534  0.827  0.000
+   +2.0  0.539   6.0  0.000  -0.735  +0.543  0.834  0.000
+   +4.0  0.527   6.0  0.000  -0.741  +0.550  0.839  0.000
+   +6.0  0.527   6.0  0.000  -0.747  +0.546  0.843  0.000
+  Δ(full sweep): hit=-0.090 prem=+0.000 Vadv=-0.044 qent=-0.009 Hpi=-0.000
+
+[quad_S1] patch keys of S1 (top-left)
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.551   7.0  0.000  -0.743  +0.538  0.835  0.000
+   -4.0  0.582   6.0  0.000  -0.742  +0.543  0.831  0.000
+   -2.0  0.547   6.0  0.000  -0.747  +0.554  0.847  0.002
+   -1.0  0.613   6.0  0.000  -0.727  +0.521  0.830  0.004
+   +0.0  0.555   6.0  0.000  -0.746  +0.549  0.840  0.000
+   +1.0  0.543   6.0  0.000  -0.738  +0.543  0.834  0.000
+   +2.0  0.551   6.0  0.000  -0.732  +0.543  0.829  0.000
+   +4.0  0.633   6.0  0.000  -0.735  +0.545  0.830  0.002
+   +6.0  0.602   5.0  0.000  -0.727  +0.553  0.826  0.000
+  Δ(full sweep): hit=+0.051 prem=+0.000 Vadv=+0.016 qent=+0.015 Hpi=+0.000
+
+[quad_S4] patch keys of S4 (bottom-right)
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.574   5.0  0.000  -0.735  +0.554  0.836  0.000
+   -4.0  0.543   6.0  0.000  -0.748  +0.555  0.843  0.000
+   -2.0  0.547   6.0  0.000  -0.748  +0.544  0.843  0.000
+   -1.0  0.535   6.0  0.000  -0.732  +0.535  0.829  0.000
+   +0.0  0.551   5.0  0.000  -0.744  +0.536  0.839  0.002
+   +1.0  0.547   6.0  0.000  -0.729  +0.546  0.830  0.000
+   +2.0  0.578   7.0  0.000  -0.754  +0.552  0.843  0.000
+   +4.0  0.574   7.0  0.000  -0.752  +0.569  0.847  0.000
+   +6.0  0.609   6.0  0.000  -0.711  +0.553  0.817  0.000
+  Δ(full sweep): hit=+0.035 prem=+0.000 Vadv=+0.024 qent=-0.002 Hpi=-0.000
+
+[memquad_S1] memory keys of S1 quadrant
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.219   8.0  0.000  -0.542  +0.305  0.597  0.000
+   -4.0  0.352   8.0  0.000  -0.742  +0.530  0.823  0.000
+   -2.0  0.465   7.0  0.000  -0.737  +0.553  0.837  0.000
+   -1.0  0.469   7.0  0.000  -0.729  +0.544  0.831  0.000
+   +0.0  0.566   6.0  0.000  -0.747  +0.552  0.839  0.001
+   +1.0  0.625   6.0  0.000  -0.727  +0.539  0.838  0.002
+   +2.0  0.629   6.0  0.000  -0.736  +0.547  0.836  0.000
+   +4.0  0.590   6.0  0.000  -0.748  +0.553  0.838  0.000
+   +6.0  0.582   6.0  0.000  -0.772  +0.568  0.858  0.001
+  Δ(full sweep): hit=+0.363 prem=+0.000 Vadv=-0.230 qent=+0.263 Hpi=+0.001
+
+=== Invalid-alignment control: change ALWAYS at S1, cue FIXED right (S4) ===
+[baseline changeS1/cueS4] hit=0.473 prem=0.000 Vadv=-0.765 qent=0.496
+[S1_patch_invalid] Δ hit=+0.094 prem=+0.000 Vadv=+0.003 qent=+0.035
+[S4_patch_invalid] Δ hit=+0.113 prem=+0.000 Vadv=+0.021 qent=+0.048
+[patch_invalid] Δ hit=+0.082 prem=-0.004 Vadv=+0.028 qent=+0.083
+[memory_invalid] Δ hit=-0.152 prem=+0.000 Vadv=-0.043 qent=-0.057
+[memquad_S1_invalid] Δ hit=+0.496 prem=+0.000 Vadv=-0.014 qent=-0.115
+
+=== DECISION-vs-UNCERTAINTY summary ===
+region	|Δhit|	|Δprem|	|ΔVadv|	|Δqent|	decision	uncertainty	verdict
+patch	0.070	0.000	0.027	0.031	0.070	0.031	DECISION-moving
+memory	0.090	0.000	0.044	0.009	0.090	0.044	DECISION-moving
+quad_S1	0.051	0.000	0.016	0.015	0.051	0.016	DECISION-moving
+quad_S4	0.035	0.000	0.024	0.002	0.035	0.024	inert
+memquad_S1	0.363	0.000	0.230	0.263	0.363	0.263	DECISION-moving
+S1_patch_invalid	0.094	0.000	0.003	0.035	0.094	0.035	DECISION-moving
+S4_patch_invalid	0.113	0.000	0.021	0.048	0.113	0.048	DECISION-moving
+patch_invalid	0.082	0.004	0.028	0.083	0.082	0.083	uncertainty/value-moving
+memory_invalid	0.152	0.000	0.043	0.057	0.152	0.057	DECISION-moving
+memquad_S1_invalid	0.496	0.000	0.014	0.115	0.496	0.115	DECISION-moving
+
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/tables/exp4_causal.json
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/tables/exp4_summary.tsv
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/figs/exp4_region_behaviour.png, exp4_patch_vs_memory_value.png
+[done]

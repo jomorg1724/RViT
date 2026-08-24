@@ -1,0 +1,89 @@
+% =====================================================================
+% main.tex — "When does value-directed attention matter?"
+% A normative account of criterion, sensitivity, and decorrelation.
+%
+% Thin skeleton: \input{}s the section files in sections/. Notation is
+% defined once in the \newcommand block below.
+%
+% Build: see BUILD.md. pdflatex twice + bibtex for refs/cross-refs.
+% =====================================================================
+
+\documentclass[11pt]{article}
+
+% --- packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=blue!50!black]{hyperref}
+% cleveref is not in TeX Live 2026basic; plain \ref{...} used in
+% section files instead (e.g. "Section~\ref{sec:model}").
+
+% --- theorem environments ---
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% --- notation ---
+\newcommand{\Phinorm}{\Phi}                 % standard normal CDF
+\newcommand{\HR}{\mathrm{HR}}               % hit rate
+\newcommand{\FAR}{\mathrm{FAR}}             % false alarm rate
+\newcommand{\dprime}{d'}                    % discriminability
+\newcommand{\dprimemax}{d'_{\max}}
+\newcommand{\Nloc}{N}                       % number of locations
+\newcommand{\val}{v}                        % cued value
+\newcommand{\valid}{V}                      % cued validity
+\newcommand{\alphacued}{\alpha_c}           % cued attention
+\newcommand{\alphauncued}{\alpha_u}         % uncued attention
+\newcommand{\benefit}{\beta}                % attention benefit weight
+\newcommand{\cost}{\gamma}                  % attention cost weight
+\newcommand{\Rew}{R}                        % expected reward
+\newcommand{\Rpone}{R_{\mathrm{P1}}}        % policy P1 expected reward
+\newcommand{\Rptwo}{R_{\mathrm{P2}}}
+\newcommand{\Rpthree}{R_{\mathrm{P3}}}
+\newcommand{\Rpfour}{R_{\mathrm{P4}}}
+\newcommand{\VDA}{\mathrm{VDA}}
+\newcommand{\CF}{\mathrm{CF}}               % criterion fraction
+\newcommand{\corr}{\rho}                    % cross-location noise correlation
+\newcommand{\PnoFA}{P_{\mathrm{no\text{-}fa}}}
+\newcommand{\Rsens}{r}                      % benefit/cost asymmetry ratio
+\newcommand{\rdagger}{r^{\dagger}}          % VDA-escape threshold
+\newcommand{\rstarinv}{r^{*}_{\mathrm{inv}}}% inversion threshold
+\newcommand{\CR}{\mathrm{CR}}               % conservation-rule indicator
+\newcommand{\DKL}{D_{\mathrm{KL}}}           % Kullback--Leibler divergence
+
+% --- metadata ---
+\title{When does value-directed attention matter?\\
+       A normative account of criterion, sensitivity, and decorrelation}
+\author{[Author names]\\[2pt]\normalsize [Affiliations]}
+\date{}
+
+\begin{document}
+\maketitle
+
+% --- section files (Methods and supplementary material at the end) ---
+
+\input{sections/abstract.tex}
+\input{sections/intro.tex}
+\input{sections/model.tex}
+\input{sections/results.tex}
+\input{sections/discussion.tex}
+\input{sections/methods.tex}
+\input{sections/appendix.tex}
+
+% --- bibliography ---
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+\end{document}

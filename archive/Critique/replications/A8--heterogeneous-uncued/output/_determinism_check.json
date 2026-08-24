@@ -1,0 +1,5 @@
+{
+  "_note": "Determinism check for run.py (CR-036, run-012). run.py uses no RNG; two consecutive runs produced byte-identical output/results.json (sha256 53e2d5f9eb5d43a2...). The earlier '_run1.json' artifact in this directory is a leftover copy from that check (the sandbox blocks file deletion, mission rule #8); it is byte-identical to results.json and can be ignored or removed by the owner.",
+  "deterministic": true,
+  "results_sha256_prefix": "53e2d5f9eb5d43a2"
+}

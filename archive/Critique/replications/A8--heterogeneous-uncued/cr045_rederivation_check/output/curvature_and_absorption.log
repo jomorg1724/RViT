@@ -1,0 +1,51 @@
+======================================================================
+CR-045 numerical corroboration of the A8 re-derivation
+======================================================================
+
+[V1/V2] equal-split critical point + R''(0) sign vs regime
+  value-blind (v=1), cued held at the HOMOGENEOUS optimum α* per cell
+  (α* found by scanning the 1-D homogeneous policy, Δα=0.005)
+  r=0.100  α*=0.250  ā=(1-α*)/(N-1)=0.250  R'(0)=-7.36e-05  R''[112]=-209.5763  λ(112)=-34.9294  λ(1,-1)=-52.3522
+  r=0.398  α*=0.320  ā=(1-α*)/(N-1)=0.227  R'(0)=-8.76e-07  R''[112]=-0.7714  λ(112)=-0.1286  λ(1,-1)=-0.1286
+  r=1.000  α*=0.750  ā=(1-α*)/(N-1)=0.083  R'(0)=-5.75e-06  R''[112]=-1.9023  λ(112)=-0.3170  λ(1,-1)=-0.3170
+  r=2.000  α*=0.915  ā=(1-α*)/(N-1)=0.028  R'(0)=-5.11e-05  R''[112]=-5.7731  λ(112)=-0.9622  λ(1,-1)=-0.9614
+  r=5.000  α*=0.975  ā=(1-α*)/(N-1)=0.008  R'(0)=-6.02e-04  R''[112]=-19.6961  λ(112)=-3.2827  λ(1,-1)=-3.2524
+
+[V3] FORCED uncued budget α=1/N (ā=1/N, uncued sit AT the β/γ kink):
+  benefit-dominant r>1 should give R''(0)>0 (concentration);
+  cost-dominant r<1 should give R''(0)<0 (spreading).
+  h=sqrt     r=0.5: R''=-85.645   r=1.0: R''=-0.460   r=2.0: R''=+84.711
+  h=linear   r=0.5: R''=-69.679   r=1.0: R''=-0.050   r=2.0: R''=+70.765
+  h=p0_3     r=0.5: R''=-70.596   r=1.0: R''=-0.496   r=2.0: R''=+69.593
+  h=p2       r=0.5: R''=-27.725   r=1.0: R''=+0.243   r=2.0: R''=+28.208
+
+[V3b] reproduce CR-036's headline: value-blind, FORCED α=1/N, r=2:
+  h=linear   R''(0)[112] at r=2 = +70.7651  -> CONCENTRATE (>0)
+  h=sqrt     R''(0)[112] at r=2 = +84.7108  -> CONCENTRATE (>0)
+  h=p0_3     R''(0)[112] at r=2 = +69.5930  -> CONCENTRATE (>0)
+  h=p2       R''(0)[112] at r=2 = +28.2085  -> CONCENTRATE (>0)
+  and cost-dominant r=0.1 value-blind (expect ≈ -2.26 per CR-036):
+  h=sqrt r=0.1 forced: R''(0)[112] = -209.5763
+
+[V4] CUED-ABSORPTION: joint optimum over (α, ONE uncued winner share).
+  Parameterise uncued split by w∈[0,1]: winner gets w·(1-α), the other
+  N-2 share (1-w)(1-α) equally. w=1/(N-1) is the HOMOGENEOUS split.
+  Report α*, winner share, and whether the optimum breaks homogeneity.
+  C2-ref benefit cell (v=5)          r= 0.40  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+  C2-ref benefit cell (v=5)          r= 2.00  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+  C2-ref benefit cell (v=5)          r=10.00  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+
+  C1-contested corner (V=1/N,v=4,B)  r= 0.40  α*=0.290  B=1-α*=0.710  winner*=0.35 (homog=0.333) -> HOMOG
+  C1-contested corner (V=1/N,v=4,B)  r= 2.00  α*=0.850  B=1-α*=0.150  winner*=0.35 (homog=0.333) -> HOMOG
+  C1-contested corner (V=1/N,v=4,B)  r=10.00  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+
+  repeat                             r= 0.40  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+  repeat                             r= 2.00  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+  repeat                             r=10.00  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+
+  high-V v=5                         r= 0.40  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+  high-V v=5                         r= 2.00  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+  high-V v=5                         r=10.00  α*=0.990  B=1-α*=0.010  winner*=0.35 (homog=0.333) -> HOMOG
+
+======================================================================
+done

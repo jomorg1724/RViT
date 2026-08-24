@@ -1,0 +1,337 @@
+% =====================================================================
+% model.tex
+% Content: the signal-detection-theoretic model of the cued change-
+% detection task. Task structure, attention allocation, attention-to-
+% perception mapping with asymmetric benefit/cost, reward structure and
+% the decorrelation channel (the correlated-noise orthant integral), and
+% the four-policy decomposition that defines the three levers
+% (criterion, sensitivity, decorrelation).
+% =====================================================================
+
+\section{Model}
+\label{sec:model}
+
+The model is a signal-detection-theoretic account of a cued
+change-detection task with four nested decision policies. It admits
+three mechanisms by which an observer can adapt to a value cue:
+criterion adjustment, sensitivity re-allocation, and decorrelation of
+cross-location noise (correlation $\corr$). When $\corr = 0$ the
+decorrelation lever is inactive and the value response reduces to the
+familiar criterion-versus-sensitivity description
+(Section~\ref{sec:model-policies}). We first state the task and the
+attention-to-perception machinery (Sections~\ref{sec:model-task}--%
+\ref{sec:model-mapping}), then introduce the reward structure and the
+single place the independence assumption enters it
+(Section~\ref{sec:model-reward}), and finally the policy decomposition
+that isolates each lever's contribution
+(Section~\ref{sec:model-policies}).
+
+% ---------------------------------------------------------------------
+\subsection{Task structure}
+\label{sec:model-task}
+
+Consider a spatial change-detection task with $\Nloc \ge 2$ locations,
+one of which is cued. Index the locations so that $i = c$ is the cued
+location and $i = 1, \dots, \Nloc - 1$ enumerate the $\Nloc - 1$ uncued
+locations. The cue conveys two pieces of information:
+\begin{itemize}
+\item \textbf{Value} ($\val \ge 1$): the reward for detecting a change
+  at the cued location. Changes at uncued locations are worth a reward
+  of $1$.
+\item \textbf{Validity} ($\valid \in [1/\Nloc, 1]$): the probability
+  that, given a change trial, the change occurs at the cued location.
+  Each uncued location receives probability $(1 - \valid)/(\Nloc - 1)$.
+\end{itemize}
+On each trial a change occurs with probability $0.5$ (a ``change
+trial'') or does not (a ``no-change trial''). Each location carries an
+equal-variance Gaussian decision variable, and the observer makes a
+detection decision at each location using signal detection theory. The
+per-location hit rate and false-alarm rate are
+\begin{equation}
+  \HR_i \;=\; \Phinorm(\dprime_i/2 - c_i),
+  \qquad
+  \FAR_i \;=\; \Phinorm(-\dprime_i/2 - c_i),
+  \label{eq:sdt-marginal}
+\end{equation}
+where $\dprime_i$ is perceptual sensitivity at $i$, $c_i$ is the
+decision criterion at $i$, and $\Phinorm$ is the standard-normal
+cumulative distribution function \cite{MullerFindlay1987,
+posner1980_orienting}.
+
+% ---------------------------------------------------------------------
+\subsection{Attention allocation}
+\label{sec:model-allocation}
+
+The observer allocates a continuous share of attention
+$\alphacued \in [0, 1]$ to the cued location. The remaining attention is
+distributed equally among the uncued locations, so each receives
+$\alphauncued = (1 - \alphacued)/(\Nloc - 1)$ and the shares satisfy
+$\alphacued + (\Nloc - 1)\,\alphauncued = 1$. At uniform attention
+$\alphacued = 1/\Nloc$ and all locations are treated identically.
+
+% ---------------------------------------------------------------------
+\subsection{Attention-to-perception mapping}
+\label{sec:model-mapping}
+
+Attention determines perceptual sensitivity at each location through a
+baseline transfer function
+\begin{equation}
+  f(a) \;=\; f_0 + (1 - f_0)\,h(a),
+  \label{eq:transfer}
+\end{equation}
+where $a$ is the attention allocated to a location, $f_0 \in (0, 1)$ is
+the baseline sensitivity fraction at minimal attention, and $h$ is a
+monotonically increasing function with $h(0) = 0$ and $h(1) = 1$. We
+consider four functional forms,
+\begin{equation}
+  h(a) \;\in\; \{\, a,\ \sqrt{a},\ a^{0.3},\ a^{2} \,\},
+  \label{eq:h-forms}
+\end{equation}
+spanning regimes from strongly diminishing returns ($a^{0.3}$) to
+accelerating returns ($a^{2}$). At uniform attention every location
+achieves a baseline sensitivity $\dprime_{\mathrm{base}} = \dprimemax
+\cdot f(1/\Nloc)$.
+
+\paragraph{Independent benefit and cost.}
+Attentional re-allocation need not help and hurt equally. We
+parameterise the asymmetry between attentional benefit and cost with a
+ratio $\Rsens > 0$. When a location gains attention relative to uniform,
+its $\dprime$ departure from baseline is scaled by a benefit weight
+$\benefit(\Rsens)$; when a location loses attention, the departure is
+scaled by a cost weight $\cost(\Rsens)$. Under an additive
+conservation rule,
+\begin{equation}
+  \benefit(\Rsens) = \frac{2\Rsens}{\Rsens + 1}
+  \quad\text{(benefit)},
+  \qquad
+  \cost(\Rsens) = \frac{2}{\Rsens + 1}
+  \quad\text{(cost)},
+  \label{eq:beta-gamma}
+\end{equation}
+which satisfy $\benefit + \cost = 2$ (conserving total magnitude) and
+$\benefit/\cost = \Rsens$. The ratio $\Rsens$ reflects the relative
+efficacy of attentional enhancement versus suppression: a
+benefit-dominant regime ($\Rsens > 1$) corresponds to circuits in which
+top-down feedback boosts attended representations more effectively than
+lateral inhibition suppresses unattended ones, and a cost-dominant
+regime ($\Rsens < 1$) to strong surround suppression at unattended
+locations \cite{reynolds_heeger2009_normalization,
+treue_martinez_trujillo1999_feature_attention,
+mcadams_maunsell1999_v4_tuning}. The resulting per-location sensitivities
+are
+\begin{align}
+  \dprime_c
+    &= \dprime_{\mathrm{base}}
+       + \benefit(\Rsens) \cdot
+       \big[\, \dprimemax\, f(\alphacued) - \dprime_{\mathrm{base}} \,\big],
+  \label{eq:dprime-cued}\\
+  \dprime_u
+    &= \dprime_{\mathrm{base}}
+       + \cost(\Rsens) \cdot
+       \big[\, \dprimemax\, f(\alphauncued) - \dprime_{\mathrm{base}} \,\big],
+  \label{eq:dprime-uncued}
+\end{align}
+with the convention that if $\alphacued < 1/\Nloc$ the roles reverse
+(the cued departure is scaled by $\cost$ and each uncued by $\benefit$)
+and all $\dprime$ values are clamped at $\ge 0$. At $\Rsens = 1$,
+$\benefit = \cost = 1$ and the model reduces to a symmetric special case
+in which a single shared transfer function governs both benefit and
+cost; this symmetric corner is the smooth centre of the asymmetry
+family, and its exact consistency properties are recorded in the
+Supplementary material (Section~\ref{sec:appendix}).
+
+\textcolor{red}{[GAP G-001: needs the attention-to-$\dprime$ mapping
+figure.]}
+
+% ---------------------------------------------------------------------
+\subsection{Reward structure and the decorrelation channel}
+\label{sec:model-reward}
+
+We evaluate two reward variants to separate task-design effects from
+fundamental incentive structure. \emph{Variant~A} (value-coupled
+correct rejection) couples the correct-rejection reward to value and
+validity, $\CR = \valid\,\val + (1 - \valid)$, calibrated so that the
+expected value of responding and withholding are balanced at uniform
+attention. \emph{Variant~B} (fixed correct rejection) sets $\CR = 1$
+independent of $\val$ and $\valid$, which creates a stronger marginal
+benefit for detection at high-value locations because the hit--$\CR$
+difference at the cued position scales with $\val$. The expected reward
+on a single trial is
+\begin{equation}
+  \mathbb{E}[\Rew]
+  \;=\;
+  \tfrac{1}{2}\big[\,\valid\,\HR_c\,\val
+                  \,+\,(1-\valid)\,\HR_u\,\big]
+  \;+\;
+  \tfrac{1}{2}\,\PnoFA\,\CR,
+  \label{eq:expected-reward}
+\end{equation}
+where $\PnoFA$ is the probability of no false alarm at any location on a
+no-change trial.
+
+\paragraph{The locus of the independence assumption.}
+Equation~(\ref{eq:expected-reward}) is linear in the marginal hit rates
+$\HR_c, \HR_u$: on a change trial the change occurs at a single location,
+so no product of probabilities across locations appears in the
+change-trial bracket. The \emph{only} cross-location term in
+(\ref{eq:expected-reward}) is $\PnoFA$. Under independent per-location
+decision variables,
+\begin{equation}
+  \PnoFA^{\text{indep}}
+  \;=\;
+  \prod_{i} (1 - \FAR_i)
+  \;=\;
+  \Phinorm(b_c)\,\Phinorm(b_u)^{\Nloc - 1},
+  \qquad
+  b_i := c_i + \dprime_i/2,
+  \label{eq:pnofa-indep}
+\end{equation}
+where $b_i$ is the $z$-score the no-change decision variable must stay
+below. Equation~(\ref{eq:pnofa-indep}) is the sole place the
+independence assumption enters the reward structure, so relaxing that
+assumption amounts to replacing this product by the correlated joint
+orthant probability.
+
+\paragraph{The decorrelation channel.}
+We promote the independence assumption to a tunable equicorrelation
+parameter $\corr \in [0, 1)$. Let the no-change decision variables be
+jointly Gaussian with standardised marginals and equicorrelation,
+\begin{equation}
+  \mathbf{X} \;\sim\; \mathcal{N}(\boldsymbol\mu, \Sigma),
+  \qquad
+  \mu_i = -\dprime_i/2,
+  \qquad
+  \Sigma_{ii} = 1,
+  \qquad
+  \Sigma_{ij} = \corr \ (i \neq j).
+  \label{eq:equicorr-cov}
+\end{equation}
+The one-factor representation
+$X_i = \mu_i + \sqrt{\corr}\,Z + \sqrt{1 - \corr}\,\varepsilon_i$, with
+$Z, \varepsilon_1, \dots, \varepsilon_\Nloc$ i.i.d.\ $\mathcal{N}(0, 1)$,
+reproduces (\ref{eq:equicorr-cov}) and makes the $X_i$ conditionally
+independent given $Z$. Multiplying the conditional event probabilities
+and integrating out $Z$ against the standard-normal density $\varphi$
+yields the exact one-dimensional integral
+\begin{equation}
+  \boxed{\;
+    \PnoFA(\corr)
+    \;=\;
+    \int_{-\infty}^{\infty}
+    \Phinorm\!\left(\frac{b_c - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+    \Phinorm\!\left(\frac{b_u - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)^{\!\Nloc - 1}
+    \varphi(z)\,dz.
+  \;}
+  \label{eq:pnofa-rho}
+\end{equation}
+Equation~(\ref{eq:pnofa-rho}) is exact for any $\Nloc$ and any
+$\corr \in [0, 1)$; equicorrelation collapses the $\Nloc$-dimensional
+orthant integral to a one-dimensional one, with no multivariate-normal
+CDF required. We evaluate it by $64$-node Gauss--Hermite quadrature,
+with quadrature error $\le 10^{-15}$ against a $128$-node reference
+across the operating band $\corr \in \{0, 0.05, 0.1, 0.2, 0.3, 0.4\}$.
+
+\paragraph{Recovery contract.}
+At $\corr = 0$ the integrand of (\ref{eq:pnofa-rho}) is constant in $z$
+and the integral reduces to (\ref{eq:pnofa-indep}):
+\begin{equation}
+  \PnoFA(0) \;=\;
+  \Phinorm(b_c)\,\Phinorm(b_u)^{\Nloc - 1}.
+  \label{eq:rho-zero-recovery}
+\end{equation}
+Equation~(\ref{eq:rho-zero-recovery}) is the \emph{recovery contract}:
+with $\corr$ clamped to zero, the model's reward, VDA, and
+criterion-fraction values coincide to floating-point identity with the
+independent-noise model, so every result reported below contains the
+independent-noise case as its $\corr = 0$ limit. The empirical envelope
+we explore is $\corr \in [0, 0.4]$, which brackets the $\corr \approx 0.2$
+spike-count correlation reported in macaque V4 during peripheral-cue
+change detection \cite{CohenMaunsell2009}; higher $\corr$ values are
+admissible in the model but anchor no headline claim. Equicorrelation is
+a deliberate one-parameter simplification; structured covariances
+\cite{RuffCohen2016, Srinath2021} break the exact one-dimensional
+reduction (\ref{eq:pnofa-rho}) and are noted as a scoped limitation in
+the Discussion (Section~\ref{sec:discussion}). By the Slepian
+inequality, $\PnoFA(\corr)$ is non-decreasing in $\corr$ at fixed
+$(b_c, b_u)$ \cite{Slepian1962}; the full derivation of
+(\ref{eq:pnofa-rho}) and this monotonicity is in the Supplementary
+material (Section~\ref{sec:appendix}).
+
+% ---------------------------------------------------------------------
+\subsection{Policy decomposition}
+\label{sec:model-policies}
+
+To isolate the contribution of each mechanism, we define four nested
+policies that optimise (\ref{eq:expected-reward}) over progressively
+shrinking parameter sets:
+\begin{enumerate}
+\item \textbf{Joint optimum (P1)}: $\alphacued, c_c, c_u$ jointly
+  optimised at each $\val$. This is the best any observer can achieve.
+\item \textbf{Value-blind attention (P2)}: $\alphacued$ fixed at its
+  $\val = 1$ optimum --- the optimal allocation when all locations have
+  equal value --- with the criteria re-optimised at each $\val$. This
+  observer uses attention for validity but not for value.
+\item \textbf{Uniform attention (P3)}: $\alphacued = 1/\Nloc$, criteria
+  optimised. This observer uses only the criterion to encode value.
+\item \textbf{Floor (P4)}: $\alphacued = 1/\Nloc$, $c = 0$. An unbiased
+  baseline that uses neither mechanism.
+\end{enumerate}
+The reward gain decomposes into three additive pieces,
+\begin{align}
+  \text{criterion gain} &= \Rpthree - \Rpfour,
+  \label{eq:gain-criterion}\\
+  \text{validity-attention gain} &= \Rptwo - \Rpthree,
+  \label{eq:gain-validity}\\
+  \VDA &= \Rpone - \Rptwo,
+  \label{eq:vda-def}
+\end{align}
+where the value-directed-attention benefit $\VDA$ --- the reward gained
+by making attention track cue \emph{value} on top of an already
+optimal, validity-driven allocation and criterion --- is our central
+metric. The criterion fraction,
+\begin{equation}
+  \CF \;=\;
+  \frac{\Rpthree - \Rpfour}{\Rpone - \Rpfour},
+  \label{eq:cf-def}
+\end{equation}
+measures the share of the total reward gain captured by the criterion
+lever alone. We report the range and distribution of $\CF$ across the
+full parameter space in Section~\ref{sec:results}.
+
+\paragraph{Three levers.}
+At fixed correlation the value response decomposes into two levers:
+criterion shift (P3~$\to$~P4) and sensitivity re-allocation
+(P1~$\to$~P2). With $\corr$ a free model parameter, the same
+expected-reward expression (\ref{eq:expected-reward}) admits a third.
+
+\begin{definition}[The three levers]
+\label{def:three-levers}
+At fixed $(\Nloc, \valid, \val, \dprimemax, f_0, h, \CR, \Rsens)$, the
+model exposes three independent mechanisms by which an observer can
+adapt to a non-trivial cue:
+\begin{enumerate}
+\item \textbf{Criterion shift} --- moving $(c_c, c_u)$ off the
+  $\val = 1$ floor. Its standalone reward contribution is
+  $\Rpthree - \Rpfour$, and its share of the value-related gain is
+  $\CF$ (\ref{eq:cf-def}).
+\item \textbf{Sensitivity re-allocation} --- moving $\alphacued$ off the
+  $\val = 1$ optimum. Its standalone contribution at adapted criteria is
+  $\Rpone - \Rptwo = \VDA$ (\ref{eq:vda-def}).
+\item \textbf{Decorrelation} --- moving $\corr$ off the
+  $\corr = 0$ corner. By Slepian monotonicity $\PnoFA(\corr)$ is
+  non-decreasing in $\corr$ at fixed $(b_c, b_u)$ \cite{Slepian1962},
+  which lifts every per-policy supremum reward
+  $\Rew_{\mathrm{P}_k}(\corr)$ above its $\corr = 0$ value.
+\end{enumerate}
+\end{definition}
+
+The decorrelation lever is grounded in physiology: attention is known to
+reduce interneuronal correlations in visual cortex
+\cite{CohenMaunsell2009, RuffCohen2016, Srinath2021}. Treating $\corr$
+as a model parameter rather than fixing it at zero lets us report what
+the expected-reward expression does as cross-location noise is varied.
+Whether independent-noise analyses bound the VDA benefit, and what
+quantity they bound, is an empirical question about the sign of
+$\partial\VDA/\partial\corr$ that we take up with the corresponding
+sweep in the Results (Section~\ref{sec:results}) and Discussion
+(Section~\ref{sec:discussion}).

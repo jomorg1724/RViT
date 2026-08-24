@@ -1,0 +1,40 @@
+========================================================================
+(A) SMOOTH BRANCH  ā<1/N : analytic λ vs fixed-criterion finite diff
+========================================================================
+  config: V=0.5 v=1 variant=A  α=0.7 ⇒ ā=0.1000 (<1/N) ; w_u=0.1667 CR=1.0
+  h=sqrt    r=0.398: λ_analytic=-0.34299  λ_fd(fixed-c)=-0.34299  [HR=-0.1261 noFA=-0.2169]
+  h=sqrt    r=0.500: λ_analytic=-0.31562  λ_fd(fixed-c)=-0.31562  [HR=-0.1199 noFA=-0.1957]
+  h=sqrt    r=1.000: λ_analytic=-0.24203  λ_fd(fixed-c)=-0.24203  [HR=-0.1000 noFA=-0.1421]
+  h=sqrt    r=2.000: λ_analytic=-0.16293  λ_fd(fixed-c)=-0.16293  [HR=-0.0727 noFA=-0.0902]
+
+  h=linear  r=0.398: λ_analytic=-0.01113  λ_fd(fixed-c)=-0.01113  [HR=+0.0103 noFA=-0.0214]
+  h=linear  r=0.500: λ_analytic=-0.00955  λ_fd(fixed-c)=-0.00955  [HR=+0.0090 noFA=-0.0185]
+  h=linear  r=1.000: λ_analytic=-0.00585  λ_fd(fixed-c)=-0.00585  [HR=+0.0050 noFA=-0.0109]
+  h=linear  r=2.000: λ_analytic=-0.00290  λ_fd(fixed-c)=-0.00290  [HR=+0.0022 noFA=-0.0051]
+
+  h=p0_3    r=0.398: λ_analytic=-0.49929  λ_fd(fixed-c)=-0.49929  [HR=-0.2127 noFA=-0.2866]
+  h=p0_3    r=0.500: λ_analytic=-0.48477  λ_fd(fixed-c)=-0.48477  [HR=-0.2057 noFA=-0.2791]
+  h=p0_3    r=1.000: λ_analytic=-0.36926  λ_fd(fixed-c)=-0.36926  [HR=-0.1619 noFA=-0.2074]
+  h=p0_3    r=2.000: λ_analytic=-0.23625  λ_fd(fixed-c)=-0.23625  [HR=-0.1102 noFA=-0.1261]
+
+  h=p2      r=0.398: λ_analytic=+0.04833  λ_fd(fixed-c)=+0.04833  [HR=+0.0248 noFA=+0.0235]
+  h=p2      r=0.500: λ_analytic=+0.04512  λ_fd(fixed-c)=+0.04512  [HR=+0.0231 noFA=+0.0220]
+  h=p2      r=1.000: λ_analytic=+0.03662  λ_fd(fixed-c)=+0.03662  [HR=+0.0185 noFA=+0.0182]
+  h=p2      r=2.000: λ_analytic=+0.02441  λ_fd(fixed-c)=+0.02441  [HR=+0.0124 noFA=+0.0120]
+
+========================================================================
+(B) KINK ā=1/N : cusp first-order law, sign = sign(r-1); 1/ε blow-up
+========================================================================
+  r=0.5: β-γ=-0.667 (sign=-)
+      eps= 0.0100: (R(ε)-R0)/ε=-0.0221  2nd-diff=     -4.42  (ε·2nd-diff=-0.0442 ~ const ⇒ 1/ε blow-up)
+      eps= 0.0050: (R(ε)-R0)/ε=-0.0217  2nd-diff=     -8.67  (ε·2nd-diff=-0.0434 ~ const ⇒ 1/ε blow-up)
+      eps= 0.0010: (R(ε)-R0)/ε=-0.0214  2nd-diff=    -42.74  (ε·2nd-diff=-0.0427 ~ const ⇒ 1/ε blow-up)
+  r=1.0: β-γ=+0.000 (sign=0)
+      eps= 0.0100: (R(ε)-R0)/ε=-0.0008  2nd-diff=     -0.15  (ε·2nd-diff=-0.0015 ~ const ⇒ 1/ε blow-up)
+      eps= 0.0050: (R(ε)-R0)/ε=-0.0004  2nd-diff=     -0.15  (ε·2nd-diff=-0.0008 ~ const ⇒ 1/ε blow-up)
+      eps= 0.0010: (R(ε)-R0)/ε=-0.0001  2nd-diff=     -0.15  (ε·2nd-diff=-0.0002 ~ const ⇒ 1/ε blow-up)
+  r=2.0: β-γ=+0.667 (sign=+)
+      eps= 0.0100: (R(ε)-R0)/ε=+0.0205  2nd-diff=     +4.10  (ε·2nd-diff=+0.0410 ~ const ⇒ 1/ε blow-up)
+      eps= 0.0050: (R(ε)-R0)/ε=+0.0209  2nd-diff=     +8.36  (ε·2nd-diff=+0.0418 ~ const ⇒ 1/ε blow-up)
+      eps= 0.0010: (R(ε)-R0)/ε=+0.0212  2nd-diff=    +42.43  (ε·2nd-diff=+0.0424 ~ const ⇒ 1/ε blow-up)
+========================================================================

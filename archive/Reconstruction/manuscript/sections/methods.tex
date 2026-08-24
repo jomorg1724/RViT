@@ -1,0 +1,192 @@
+% =====================================================================
+% methods.tex
+% Content: parameter space, criterion/attention grid optimisation, the
+% correlated-noise quadrature, the four parameter sweeps, validation
+% (rho->0 recovery, quadrature convergence), and reproducibility.
+% Placed at the end of the arc; equations are referenced from the Model.
+% =====================================================================
+
+\section{Methods}
+\label{sec:methods}
+
+% ---------------------------------------------------------------------
+\subsection{Task and decision model}
+\label{sec:methods-model}
+
+All results derive from the signal-detection model of
+Section~\ref{sec:model}. On each trial a change is present with
+probability $0.5$ and, when present, occurs at the cued location with
+probability $\valid$ and at each of the $\Nloc - 1$ uncued locations
+with probability $(1 - \valid)/(\Nloc - 1)$. Each location carries an
+equal-variance Gaussian decision variable, and the observer applies an
+independent detection criterion $c_i$ at every location, yielding the
+per-location hit and false-alarm rates of
+Equation~(\ref{eq:sdt-marginal}). Detecting a change at the cued
+location earns reward $\val \ge 1$; detecting a change at any uncued
+location earns reward $1$; a correct rejection earns $\CR$. Expected
+reward on a trial is Equation~(\ref{eq:expected-reward}). Unless stated
+otherwise, all reported sweeps fix the perceptual cell at $\Nloc = 4$,
+maximal sensitivity $\dprimemax = 2$, baseline fraction $f_0 = 0.5$, and
+the square-root transfer function $h(a) = \sqrt{a}$ in
+Equation~(\ref{eq:transfer}); the remaining four functional forms of
+Equation~(\ref{eq:h-forms}) are used for the transfer-function
+robustness checks.
+
+% ---------------------------------------------------------------------
+\subsection{Benefit, cost, and reward variants}
+\label{sec:methods-asymmetry}
+
+The asymmetry between attentional enhancement and suppression is set by
+the ratio $\Rsens = \benefit/\cost$, with the benefit and cost weights
+fixed by the additive conservation rule of
+Equation~(\ref{eq:beta-gamma}), $\benefit + \cost = 2$. Sensitivity to
+the form of this conservation constraint is examined as a one-parameter
+power-mean family that contains the additive rule as a special case;
+the family and the resulting band on the criterion fraction $\CF$ are
+given in the Supplementary material (Section~\ref{sec:appendix}). Two
+reward variants are evaluated throughout to separate task-design effects
+from incentive structure: \emph{variant~A}, in which the
+correct-rejection reward is value-coupled, $\CR = \valid\,\val +
+(1-\valid)$; and \emph{variant~B}, in which it is fixed at $\CR = 1$.
+Variant~A is the primary cell for the figures; variant~B is reported
+alongside it wherever the two diverge.
+
+% ---------------------------------------------------------------------
+\subsection{Correlated-noise channel}
+\label{sec:methods-quadrature}
+
+Cross-location noise is admitted through the equicorrelation parameter
+$\corr \in [0, 1)$ of Equation~(\ref{eq:equicorr-cov}). The only
+cross-location term in the expected reward is the no-false-alarm
+probability $\PnoFA$, and equicorrelation collapses its
+$\Nloc$-dimensional orthant integral to the one-dimensional integral of
+Equation~(\ref{eq:pnofa-rho}). We evaluate that integral by $64$-node
+Gauss--Hermite quadrature. The quadrature is converged: across the
+operating band $\corr \in \{0, 0.05, 0.1, 0.2, 0.3, 0.4\}$ the $64$-node
+estimate agrees with a $128$-node reference to within $10^{-15}$,
+several orders of magnitude below the precision of any reported
+quantity. All headline results use $\corr \in \{0, 0.2\}$, bracketing
+the independent-noise limit and the $\corr \approx 0.2$ spike-count
+correlation reported in macaque V4 during peripheral-cue change
+detection \cite{CohenMaunsell2009}.
+
+% ---------------------------------------------------------------------
+\subsection{Policy optimisation}
+\label{sec:methods-optimisation}
+
+The three-lever decomposition (Definition~\ref{def:three-levers}) is
+computed from the four nested policies $\Rpone$ through $\Rpfour$
+defined in Section~\ref{sec:model-policies}. Each policy is evaluated by
+exhaustive grid optimisation, which is robust to the non-convexity of
+the expected-reward surface in the attention share:
+
+\begin{itemize}
+\item \textbf{Criteria.} At any sensitivity pair $(\dprime_c,
+  \dprime_u)$, the per-location criteria are optimised over a grid of
+  $121$ values, $c_i \in [-3, 3]$ in steps of $\Delta c = 0.05$, and the
+  pair $(c_c, c_u)$ maximising Equation~(\ref{eq:expected-reward}) is
+  selected. The floor policy $\Rpfour$ instead fixes $c = 0$.
+\item \textbf{Attention.} The cued share $\alphacued$ is optimised over
+  a grid spanning the admissible range, with the uncued share following
+  from $\alphacued + (\Nloc - 1)\alphauncued = 1$. For the joint optimum
+  $\Rpone$ and the value-blind allocation $\Rptwo$, $\alphacued$ ranges
+  over $[1/\Nloc, 1]$; the distributional and anti-cue sweeps extend the
+  grid to $[0.02, 1]$ so that allocations below uniform
+  ($\alphacued < 1/\Nloc$) are admissible and inversion can be detected
+  when it occurs. The uniform-attention policies $\Rpthree, \Rpfour$ fix
+  $\alphacued = 1/\Nloc$.
+\end{itemize}
+
+The value-directed-attention benefit is $\VDA = \Rpone - \Rptwo$
+(Equation~(\ref{eq:vda-def})) and the criterion fraction is $\CF$
+(Equation~(\ref{eq:cf-def})). The value-blind allocation that defines
+$\Rptwo$ depends only on $(\Rsens, \valid, \Nloc, \dprimemax, f_0, h,
+\text{variant}, \corr)$ and is therefore computed once per such
+configuration and reused across the value grid.
+
+% ---------------------------------------------------------------------
+\subsection{Parameter sweeps}
+\label{sec:methods-sweeps}
+
+Four sweeps support the four findings; all fix the perceptual cell
+($\Nloc = 4$, $\dprimemax = 2$, $f_0 = 0.5$, $h = \sqrt{\,\cdot\,}$) and
+run at $\corr \in \{0, 0.2\}$.
+
+\begin{enumerate}
+\item \textbf{Distributional sweep (criterion fraction).} A primary grid
+  of $22$ benefit/cost ratios $\Rsens$ (log-spaced over $[0.1, 10]$,
+  with $\Rsens = 1$ pinned) $\times\,21$ validities $\valid$ (uniformly
+  spaced over $[1/\Nloc, 1]$) $\times\,5$ values $\val \in \{1, 2, 3, 4,
+  5\}$ $\times\,2$ reward variants. Of the $4{,}620$ nominal cells,
+  $4{,}410$ ($2{,}205$ per variant) yield valid non-degenerate optima
+  and enter the $\CF$ distribution.
+\item \textbf{Value-directed-attention curves.} The benefit $\VDA$ as a
+  function of $\Rsens$ on a high-resolution grid of $84$ ratios
+  ($83$ log-spaced, with the escape and peak neighbourhoods pinned), for
+  a value family $\val \in \{2, 3, 5, 8, 10\}$, used to locate the peak
+  ratio
+  $\Rsens^{*}$ and compare it against the closed-form escape threshold
+  $\rdagger(\val)$ of Equation~(\ref{eq:r-dagger}).
+\item \textbf{Iso-VDA maps.} A $31 \times 19 \times 3 \times 2 = 3{,}534$
+  cell sweep over $\valid \in [0.25, 1]$ ($31$ points), $\val \in [1, 10]$
+  ($19$ points), $\Rsens \in \{0.3, 1, 3\}$, and $\corr \in \{0, 0.2\}$,
+  used to draw the iso-VDA contour band over the $(\valid, \val)$
+  experimental-design plane and to evaluate the high-validity design
+  recommendation.
+\item \textbf{Inversion analysis.} The closed-form inversion threshold
+  $\rstarinv(\valid, \val, \Nloc, \CR, \corr)$ of
+  Equation~(\ref{eq:r-inv}) is evaluated on the primary
+  $(\valid, \val)$ grid ($21 \times 5 \times 2$ variants $\times\, 2$
+  correlations $= 420$ cells). The optimal allocation is then verified
+  directly by sweeping $\Rpone$ over the extended attention grid
+  ($197$ points on $[0.02, 1]$) at the most adversarial high-ratio
+  cells, and the counter-predictive regime is probed on a dedicated
+  grid of validities below chance, $\valid \in \{0.05, 0.10, 0.15,
+  0.20\}$ $\times\,\val \in \{1, 3, 5\}$ $\times\,\Rsens \in \{0.1, 0.5,
+  1, 3, 5, 10\}$ $\times\,\corr \in \{0, 0.2\}$. The allocation map
+  $\alphacued^{*}(\valid, \Rsens)$ at $\val = 5$ is computed on a
+  $17 \times 16 \times 2 = 544$ cell grid.
+\end{enumerate}
+
+Robustness checks vary the transfer function over the four forms of
+Equation~(\ref{eq:h-forms}), the location count $\Nloc$, and the
+conservation form (Section~\ref{sec:appendix}).
+
+% ---------------------------------------------------------------------
+\subsection{Validation}
+\label{sec:methods-validation}
+
+Two internal consistency checks anchor the correlated-noise
+implementation. First, the \emph{recovery contract}
+(Equation~(\ref{eq:rho-zero-recovery})): at $\corr = 0$ the integrand of
+Equation~(\ref{eq:pnofa-rho}) is constant in the latent factor, and the
+quadrature reduces to the closed-form product
+Equation~(\ref{eq:pnofa-indep}). Evaluated numerically, $\PnoFA$, the
+expected reward, $\VDA$, and $\CF$ at $\corr = 0$ coincide with the
+independent-noise computation to floating-point precision (maximum
+absolute difference below $10^{-6}$ across the full distributional
+grid), so every reported quantity contains the independent-noise case as
+its exact $\corr = 0$ limit. Second, the closed-form thresholds are
+cross-checked against the grid optima they predict: the escape threshold
+$\rdagger(\val)$ orders correctly against the empirically located peak
+ratio $\Rsens^{*}$ across the value family (Section~\ref{sec:results}),
+and the inversion threshold satisfies the exact symmetric-corner
+identity $\rstarinv(1/\Nloc, 1, \Nloc, \CR, \corr) = 1$
+(Equation~(\ref{eq:r-inv-corner})) independent of variant and $\corr$.
+By the Slepian inequality \cite{Slepian1962}, $\PnoFA(\corr)$ is
+non-decreasing in $\corr$ at fixed criteria and sensitivities, providing
+a sign check on the correlated channel.
+
+% ---------------------------------------------------------------------
+\subsection{Reproducibility}
+\label{sec:methods-reproducibility}
+
+All computations are deterministic. No Monte-Carlo sampling is used: the
+expected-reward expression is evaluated in closed form up to the
+one-dimensional Gauss--Hermite quadrature, and every optimisation is an
+exhaustive search over fixed grids. The parameter grids, quadrature
+nodes, and standard-normal evaluations are fixed across runs, so each
+sweep reproduces identical numerical output on re-execution. The full
+distributional sweep completes in under two minutes on a contemporary
+laptop. Computations were carried out in Python using standard numerical
+and special-function libraries.

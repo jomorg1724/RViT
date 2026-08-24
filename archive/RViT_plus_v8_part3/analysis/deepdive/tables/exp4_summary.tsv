@@ -1,0 +1,11 @@
+region	|Δhit|	|Δprem|	|ΔVadv|	|Δqent|	decision	uncertainty	verdict
+patch	0.090	0.000	0.073	0.073	0.090	0.073	DECISION-moving
+memory	0.086	0.000	0.077	0.047	0.086	0.077	DECISION-moving
+quad_S1	0.059	0.004	0.011	0.003	0.059	0.011	DECISION-moving
+quad_S4	0.027	0.000	0.028	0.016	0.027	0.028	inert
+memquad_S1	0.051	0.000	0.009	0.013	0.051	0.013	DECISION-moving
+S1_patch_invalid	0.008	0.004	0.004	0.000	0.008	0.004	inert
+S4_patch_invalid	0.023	0.000	0.010	0.013	0.023	0.013	inert
+patch_invalid	0.027	0.004	0.068	0.076	0.027	0.076	uncertainty/value-moving
+memory_invalid	0.082	0.000	0.086	0.046	0.082	0.086	uncertainty/value-moving
+memquad_S1_invalid	0.148	0.004	0.011	0.006	0.148	0.011	DECISION-moving

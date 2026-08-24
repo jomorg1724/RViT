@@ -1,0 +1,169 @@
+{
+  "block0_validation": {
+    "cf_headline_r1": 0.7282279801682813,
+    "cf_headline_r1_alpha_p1": 1.0,
+    "vda_peak_r": 0.3981071705534973,
+    "vda_peak_value": 0.07973611310151218,
+    "prop1_pointwise_identity_max_err": 1.1102230246251565e-16,
+    "note": "CF\u22480.728 and VDA peak\u22480.0799@r\u22480.383 reproduce C1/C2; Prop-1 identity holds to machine precision."
+  },
+  "block1_fixed_noise": {
+    "rows": [
+      {
+        "s_c": 1.0,
+        "s_u": 1.0,
+        "cf_explicit": 0.7282734462795375,
+        "cf_reparam": 0.7282734462795375,
+        "abs_diff": 0.0
+      },
+      {
+        "s_c": 1.0,
+        "s_u": 1.25,
+        "cf_explicit": 0.7507002665965754,
+        "cf_reparam": 0.7507002418006631,
+        "abs_diff": 2.479591232340539e-08
+      },
+      {
+        "s_c": 1.0,
+        "s_u": 1.5,
+        "cf_explicit": 0.7679083161986008,
+        "cf_reparam": 0.767908225935624,
+        "abs_diff": 9.026297675962525e-08
+      },
+      {
+        "s_c": 1.0,
+        "s_u": 2.0,
+        "cf_explicit": 0.7885474378312946,
+        "cf_reparam": 0.7885299906761066,
+        "abs_diff": 1.7447155187921837e-05
+      },
+      {
+        "s_c": 1.25,
+        "s_u": 1.0,
+        "cf_explicit": 0.7323857328004013,
+        "cf_reparam": 0.7323804788552801,
+        "abs_diff": 5.253945121186376e-06
+      },
+      {
+        "s_c": 1.5,
+        "s_u": 1.5,
+        "cf_explicit": 0.7791747856901349,
+        "cf_reparam": 0.7791747856901345,
+        "abs_diff": 3.3306690738754696e-16
+      }
+    ],
+    "max_abs_diff_explicit_vs_reparam": 1.7447155187921837e-05,
+    "grid_convergence_worst_case": [
+      {
+        "dc_step": 0.05,
+        "cf_explicit": 0.7884091818845957,
+        "cf_reparam": 0.7883916424165635,
+        "abs_diff": 1.753946803229045e-05
+      },
+      {
+        "dc_step": 0.02,
+        "cf_explicit": 0.7885703480524192,
+        "cf_reparam": 0.7885527825781823,
+        "abs_diff": 1.7565474236924672e-05
+      },
+      {
+        "dc_step": 0.01,
+        "cf_explicit": 0.7885474378312946,
+        "cf_reparam": 0.7885299906761066,
+        "abs_diff": 1.7447155187921837e-05
+      },
+      {
+        "dc_step": 0.005,
+        "cf_explicit": 0.7885474378312946,
+        "cf_reparam": 0.7885299906757025,
+        "abs_diff": 1.7447155592043018e-05
+      }
+    ],
+    "c_grid_range": [
+      -8.0,
+      8.0
+    ],
+    "note": "Prop 1: fixed heterogeneous decision noise is absorbed into effective d'_i = d'_i/s_i (Block-0 pointwise identity, err~1e-16). On a criterion grid wide enough that neither the explicit nor the reparametrised search clips ([-8,8]), CF computed the two ways AGREES to grid resolution and the residual \u21920 as \u0394c\u21920 \u21d2 the P1\u2013P4 decomposition is structurally invariant: criterion still per-location-optimised, attention still the \u03b1-lever; only the per-location effective sensitivity changes (same class as a d'_max/f_0 perturbation). NOTE: the default [-3,3] grid clips the uncued criterion for large s_u, spuriously inflating CF \u2014 a grid caveat, not a structural break."
+  },
+  "block2_coupled_noise": {
+    "rows": [
+      {
+        "kappa": 0.0,
+        "criterion_fraction": 0.7282279801682813,
+        "VDA": 0.03982512744634903,
+        "alpha_p1": 1.0,
+        "R_p1": 2.317238824377106,
+        "R_p3": 2.148581181625177,
+        "R_p4": 1.696653810304055,
+        "total_gain": 0.6205850140730509,
+        "criterion_gain": 0.45192737132112226,
+        "s_c_uniform": 1.0
+      },
+      {
+        "kappa": 0.25,
+        "criterion_fraction": 0.6919675129218975,
+        "VDA": 0.02469266104705614,
+        "alpha_p1": 1.0,
+        "R_p1": 2.3162033052121647,
+        "R_p3": 2.1083623492573356,
+        "R_p4": 1.6414661762607938,
+        "total_gain": 0.6747371289513708,
+        "criterion_gain": 0.46689617299654174,
+        "s_c_uniform": 1.0606601717798212
+      },
+      {
+        "kappa": 0.5,
+        "criterion_fraction": 0.667298923322757,
+        "VDA": 0.006412343329031955,
+        "alpha_p1": 1.0,
+        "R_p1": 2.3132990766045376,
+        "R_p3": 2.0742902159775447,
+        "R_p4": 1.5949098756616804,
+        "total_gain": 0.7183892009428572,
+        "criterion_gain": 0.4793803403158643,
+        "s_c_uniform": 1.118033988749895
+      },
+      {
+        "kappa": 1.0,
+        "criterion_fraction": 0.6380163181319728,
+        "VDA": 0.0,
+        "alpha_p1": 0.995,
+        "R_p1": 2.3013470117746286,
+        "R_p3": 2.0186624163832634,
+        "R_p4": 1.5204151368001457,
+        "total_gain": 0.7809318749744829,
+        "criterion_gain": 0.49824727958311765,
+        "s_c_uniform": 1.224744871391589
+      }
+    ],
+    "vda_peaks": {
+      "kappa_0.0": {
+        "r_peak": 0.3981071705534973,
+        "vda_peak": 0.07973611310151218
+      },
+      "kappa_1.0": {
+        "r_peak": 0.1,
+        "vda_peak": 0.0013224712774868586
+      }
+    },
+    "cf_kappa0": 0.7282279801682813,
+    "cf_kappa1": 0.6380163181319728,
+    "cf_shift": -0.09021166203630848,
+    "cf_kappa0_widegrid": 0.7282734462795375,
+    "cf_kappa1_widegrid": 0.6260356011809539,
+    "cf_shift_widegrid": -0.10223784509858358,
+    "note": "Prop 2: attention-coupled decision noise s(\u03b1) makes 'attention' a compound lever (spatial d'-reallocation + noise reduction). The criterion fraction is no longer a clean criterion-vs-attention partition; reported shift is the magnitude at the headline cell."
+  },
+  "metadata": {
+    "phi_backend": "scipy.special.ndtr",
+    "c_grid_step": 0.05,
+    "alpha_grid_step": 0.005,
+    "claim_id": "A6",
+    "attack_vector": "re-derivation",
+    "run_id": "run-018",
+    "task_id": "CR-011",
+    "prompt_version": "0.2",
+    "date": "2026-05-25",
+    "elapsed_s": 34.2
+  }
+}

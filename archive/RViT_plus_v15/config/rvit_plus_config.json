@@ -1,0 +1,85 @@
+{
+    "_comment": "RViT+ V15 configuration: v12's GRADIENT-LEARNED CODEBOOK + a VQ-VAE-style ENERGY term (REDUCES TO v12). CONV-FREE, RL-ONLY. Keeps the v12 mechanism that worked (codebook C = nn.Parameter, pulled by softmax over Q=W_q*X / K=W_k*H2) and adds an energy on top. Per frame: (E) ENERGY transformer energizes the codebook from the current memory: energy = T_E(Q=C, K=H2, V=H2, skip=C) [zero-init output ⇒ energy≈0 at init]; Z = C + energy. (R) READOUT (v12) but V=Z (the energized codebook) instead of C: Z_read = W_o*(softmax(W_q*X·(W_k*H2)') @ Z) + FFN; H2<-LSTM(X+Z_read); actor+critic read Z_read. THREE-WAY LOSS (VQ-VAE): (1) RL task on Z_read; (2) ppo.energy_coef*mean||energy||²=||Z-C||² (commitment / 'energy cost' — keeps Z near C); (3) ppo.codebook_ema_rate: C += r*mean(energy) (EMA codebook toward Z = consolidation). When energy->0, Z=C ⇒ byte-for-byte v12 (the floor; C is gradient-learned so it can't collapse below v12). The energy = fast adaptation, the EMA = slow consolidation, the commitment = the cost — the mechanism for adaptation/generalization on top of a working base. Priority: CLI arg > this config > script default.",
+
+    "run": {
+        "_note_init_mode": "fresh = random init (checkpoint_path ignored); warm_start = partial load; resume = strict load. The SOFT-attention v12 is a NEW mechanism (different grad flow from the failed sampled run) — start FRESH so the old sampled checkpoint is not loaded. (Set to resume ONLY after a soft checkpoint exists, to continue; running fresh re-trains from scratch AND overwrites the saved checkpoint.)",
+        "init_mode": "resume",
+        "_note_checkpoint_location": "checkpoint_dir points OUTSIDE the repo (~/rvit_plus_checkpoints/v15) on purpose: the AttentionManuscript repo is a Google Drive sync root and Drive was observed rewriting checkpoints mid-session, which can corrupt a run. Keep live checkpoints in a non-synced home dir.",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/v15/rvit_plus_v15_rl_latest.pt",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/v15",
+        "seed": 0,
+        "device": "",
+        "log_every": 5,
+        "save_every": 200
+    },
+
+    "environment": {
+        "_comment": "ChangeDetectionEnv parameters — matched to the v3/HRA defaults for apples-to-apples comparison.",
+        "min_change_time": 11,
+        "max_change_time": 25
+    },
+
+    "model": {
+        "_comment": "Conv-free patch + cross-attention-over-memory block (8 heads) + 2 stacked per-token LSTMs + 1D-conv actor/critic heads.",
+        "_note_patch": "patch_size must divide the 50x50 image: {1,2,5,10,25,50}. patch_size=5 → 10x10 grid = 100 tokens (each 25x25 Gabor quadrant = a 5x5 patch block).",
+        "patch_size": 5,
+        "_note_patch_hidden": "The raw flattened patch is small (patch_dim = C*p*p = 3*5*5 = 75). A per-patch MLP (Linear→GELU→Linear→LayerNorm) of hidden width patch_hidden expands it up to d_model. Default 128 = d_model.",
+        "patch_hidden": 128,
+        "d_model": 128,
+        "d_mem": 128,
+        "_note_d_model": "d_model = transformer/token width; d_mem = LSTM hidden = recurrent-state width the heads read. MUST be equal (128): memory (H1,H2) is concatenated into the d_model token stream as cross-attention keys/values. LSTM1 ingests the d_model attention output Z; later LSTMs ingest the previous d_mem hidden.",
+        "_note_tx": "VQ codebook attention, tx_heads heads (default 1 = a SINGLE codebook; >1 = a product/multi-head codebook, each head with its own blend/slot). Q=W_q*X, K=W_k*H2, V=codebook; DEFAULT weights = softmax(QK'/sqrt(d)/tau) (soft blend over slots); Z=W_o*(weights @ codebook)+FFN, NO X-residual. Shared positional embedding added to queries and keys.",
+        "tx_heads": 1,
+        "tx_layers": 1,
+        "_note_n_lstm": "Must be 1 — the ONLY recurrent state is the key-memory H2 (updated by LSTM from X+Z, carried (B,n_tokens,d_mem) across frames). The VALUE codebook is now a STATIC learnable table (nn.Parameter, n_tokens slots), addressed by the evolving keys — NOT recurrent. The heads read the transformer output Z (rec=[Z]). Knobs (model defaults, not wired into train_rl): vq_mode='soft' (DEFAULT — plain soft softmax blend, fully differentiable, no sampling; this is the current run) | 'sample' (multinomial, straight-through) | 'argmax' (deterministic, straight-through; the failed sampled run used these hard modes), vq_temperature=1.0 (lower=sharper).",
+        "n_lstm": 1,
+        "_note_head": "Actor & critic decoders are 1D-CONV, BOTH reading the transformer output Z arranged as (B, d_model channels, n_tokens length), run through n_conv_layers stride-2 Conv1d layers (kernel conv_kernel, conv_channels each) over the TOKEN axis, then flatten + Linear. PRESERVES the spatial token layout. No CLS, no action-as-input encoding. Final Linear small-init'd; actor init_action_bias on its bias. With n_tokens=100/3 stride-2 layers the token axis is 100→50→25→13.",
+        "conv_channels": 64,
+        "n_conv_layers": 3,
+        "conv_kernel": 5,
+
+        "_note_rl_heads": "Actor logits (B,n_actions) + distributional critic Q (B,n_actions,n_quantiles), each from H2 via a SEPARATE Conv1d-over-tokens trunk → flatten → Linear. init_action_bias = [wait_bias, press_bias]; [0.0,-1.5] gives initial P(press)≈0.18.",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "init_action_bias": [0.0, -1.5]
+        }
+    },
+
+    "ppo": {
+        "_comment": "PAC actor loss (MPO E-step + BC) + distributional QR-DQN critic + prioritized episode replay. RL ONLY — no recon, no PC, no pretrain.",
+        "iters": 5000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 3e-4,
+        "n_epochs": 4,
+        "grad_clip": 0.5,
+
+        "value_coef": 0.5,
+        "entropy_coef": 0.01,
+        "_note_energy_coef": "VQ-VAE COMMITMENT / ENERGY COST (v15). Weight on mean||energy||²=mean||Z-C||² over valid steps. Keeps the energized codebook Z near the codebook C — the 'energy cost' of deviating. Higher → the model stays closer to v12 (energy→0); lower → the energy can adapt more freely. 0 disables. Default 0.01.",
+        "energy_coef": 0.01,
+        "_note_codebook_ema_rate": "VQ-VAE CODEBOOK EMA (v15). After each update, C += codebook_ema_rate*mean_over_valid(energy) — i.e. EMA the codebook TOWARD the energized Z = C + energy. The slow consolidation ON TOP of the gradient-learned codebook (the v12 core). SMALL (default 1e-3); 0 = pure v12 + a penalized energy term (no consolidation). Logged as cbΔ.",
+        "codebook_ema_rate": 0.001,
+        "qr_kappa": 1.0,
+        "gamma": 0.99,
+
+        "_note_pac_actor": "PAC (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. Discrete MPO E-step is closed-form: q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]; M-step + BC blend gives L_actor = (1−α)·[−Σ_a q(a|s)·log π_θ(a|s)] + α·[−log π_θ(a_t|s)]. η = mpo_temperature, α = bc_alpha.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+
+        "_note_target_network": "PAC target network θ' (Springenberg et al. 2024, §3.2): the critic's distributional TD target AND the MPO E-step reference policy π_θ' BOTH come from a periodically hard-copied, time-lagged copy of θ. target_update_period = hard-copy θ→θ' every N optimizer steps; 0 disables (online bootstrap). The main stabilizer for the bootstrapped actor-critic; was missing in the original implementation.",
+        "target_update_period": 100,
+
+        "_note_burn_in": "Burn-in / wait-pretrain (v3's recon_pretrain_iters, restored 2026-06-06). For the first burn_in_iters iterations the agent is FORCED to wait (action=0) so episodes run full-length, and only the critic is trained with the actor FROZEN at init — warming up the value function and recurrent representation on clean full trajectories before the policy acts. v5 has no decoder/recon (and no contrastive), so the critic/representation warm up alone. 0 disables.",
+        "burn_in_iters": 20,
+
+        "_note_per": "Prioritized episode replay (Schaul et al. 2016, episode-level). Fresh on-policy episodes are augmented with per_n_replay replay episodes sampled ∝ priority^per_alpha (priority = mean per-step quantile-Huber error, clipped at per_priority_clip×median). IS weights (1/(N·p))^β with β annealed per_beta_start→per_beta_end over the run. per_n_replay=0 disables replay.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

@@ -1,0 +1,117 @@
+\begin{thebibliography}{10}
+
+\bibitem{MullerFindlay1987}
+Hermann~J. M{\"u}ller and John~M. Findlay.
+\newblock Sensitivity and criterion effects in the spatial cuing of visual
+  attention.
+\newblock {\em Perception \& Psychophysics}, 42(4):383--399, 1987.
+
+\bibitem{posner1980_orienting}
+Michael~I. Posner, Charles~R. Snyder, and Brian~J. Davidson.
+\newblock Attention and the detection of signals.
+\newblock {\em Journal of Experimental Psychology: General}, 109(2):160--174,
+  1980.
+
+\bibitem{CohenMaunsell2009}
+Marlene~R. Cohen and John H.~R. Maunsell.
+\newblock Attention improves performance primarily by reducing interneuronal
+  correlations.
+\newblock {\em Nature Neuroscience}, 12(12):1594--1600, 2009.
+
+\bibitem{failing_theeuwes2018_selection_history}
+Michel Failing and Jan Theeuwes.
+\newblock Selection history: How reward modulates selectivity of visual
+  attention.
+\newblock {\em Psychonomic Bulletin \& Review}, 25(2):514--538, 2018.
+
+\bibitem{hickey2010_reward_salience_acc}
+Clayton Hickey, Leonardo Chelazzi, and Jan Theeuwes.
+\newblock Reward changes salience in human vision via the anterior cingulate.
+\newblock {\em Journal of Neuroscience}, 30(33):11096--11103, 2010.
+
+\bibitem{RuffCohen2016}
+Douglas~A. Ruff and Marlene~R. Cohen.
+\newblock Attention increases spike count correlations between visual cortical
+  areas.
+\newblock {\em Journal of Neuroscience}, 36(28):7523--7534, 2016.
+
+\bibitem{Srinath2021}
+Ramanujan Srinath, Douglas~A. Ruff, and Marlene~R. Cohen.
+\newblock Attention improves information flow between neuronal populations
+  without changing the communication subspace.
+\newblock {\em Current Biology}, 31(23):5299--5313.e4, 2021.
+
+\bibitem{reynolds_heeger2009_normalization}
+John~H. Reynolds and David~J. Heeger.
+\newblock The normalization model of attention.
+\newblock {\em Neuron}, 61(2):168--185, 2009.
+
+\bibitem{treue_martinez_trujillo1999_feature_attention}
+Stefan Treue and Julio~C. Mart{\'\i}nez~Trujillo.
+\newblock Feature-based attention influences motion processing gain in macaque
+  visual cortex.
+\newblock {\em Nature}, 399:575--579, 1999.
+
+\bibitem{mcadams_maunsell1999_v4_tuning}
+Carrie~J. McAdams and John H.~R. Maunsell.
+\newblock Effects of attention on orientation-tuning functions of single
+  neurons in macaque cortical area {V}4.
+\newblock {\em Journal of Neuroscience}, 19(1):431--441, 1999.
+
+\bibitem{Slepian1962}
+David Slepian.
+\newblock The one-sided barrier problem for {G}aussian noise.
+\newblock {\em Bell System Technical Journal}, 41(2):463--501, 1962.
+
+\bibitem{wang_theeuwes2018_statistical_learning_distractor_suppression}
+Benchi Wang and Jan Theeuwes.
+\newblock Statistical regularities modulate attentional capture.
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 44(1):13--17, 2018.
+
+\bibitem{wang_samara_theeuwes2019}
+Benchi Wang, Iliana Samara, and Jan Theeuwes.
+\newblock Statistical regularities bias overt attention.
+\newblock {\em Attention, Perception, \& Psychophysics}, 81(6):1813--1821,
+  2019.
+
+\bibitem{kong_li_wang_theeuwes2020}
+Shaoyi Kong, Xinyi Li, Benchi Wang, and Jan Theeuwes.
+\newblock Proactively location-based suppression elicited by statistical
+  learning.
+\newblock {\em PLoS ONE}, 15(6):e0233544, 2020.
+
+\bibitem{carrasco2011_visual_attention_25y}
+Marisa Carrasco.
+\newblock Visual attention: the past 25 years.
+\newblock {\em Vision Research}, 51(13):1484--1525, 2011.
+
+\bibitem{Tong1990}
+Y.~L. Tong.
+\newblock {\em The Multivariate Normal Distribution}.
+\newblock Springer Series in Statistics. Springer-Verlag, New York, 1990.
+
+\bibitem{Sterbenz1974}
+Pat~H. Sterbenz.
+\newblock {\em Floating-Point Computation}.
+\newblock Prentice-Hall, Englewood Cliffs, NJ, 1974.
+\newblock Theorem 4.3.1 (subtraction without round-off, the ``Sterbenz
+  lemma''): if $a/2 \le x \le 2a$ then $\mathrm{fl}(x - a) = x - a$ exactly
+  under any IEEE-754 round-to-nearest mode.
+
+\bibitem{Goldberg1991}
+David Goldberg.
+\newblock What every computer scientist should know about floating-point
+  arithmetic.
+\newblock {\em ACM Computing Surveys}, 23(1):5--48, 1991.
+\newblock Theorem 11 (the Sterbenz lemma, re-stated in IEEE-754 notation):
+  exact subtraction holds inside the band $[a/2, 2a]$.
+
+\bibitem{HLP1934}
+G.~H. Hardy, J.~E. Littlewood, and G.~P{\'o}lya.
+\newblock {\em Inequalities}.
+\newblock Cambridge University Press, Cambridge, UK, 1934.
+\newblock 2nd ed.\ 1952; reprinted 1988. Power-mean monotonicity at §2.9
+  ($M_p(\mathbf{x})$ is non-decreasing in $p$ for positive $\mathbf{x}$).
+
+\end{thebibliography}

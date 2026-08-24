@@ -1,0 +1,88 @@
+% intro.tex — Introduction.
+
+\section{Introduction}
+\label{sec:intro}
+
+When sensory cues signal that some spatial locations are more rewarding
+than others, how should an observer allocate limited processing
+resources? This question is central both to understanding biological
+attention and to designing the experiments that probe it. An observer
+informed that a change at one location is worth several times the
+reward of a change elsewhere could, in principle, exploit that
+information in more than one way, and the mechanisms differ in what they
+cost.
+
+The first mechanism is \emph{criterion adjustment}: shifting the
+decision threshold at the high-value location to become more liberal,
+accepting more false alarms in exchange for more hits
+\cite{MullerFindlay1987, posner1980_orienting}. Criterion adjustment is
+``free'' in the sense that it requires no perceptual reallocation --- the
+observer simply changes how much evidence is needed to declare a change
+at each location, and a shift at one location leaves sensitivity
+elsewhere untouched.
+
+The second mechanism is \emph{value-directed attention} (VDA):
+re-allocating spatial attention toward the high-value location,
+improving perceptual sensitivity ($\dprime$) there at the cost of
+reduced sensitivity elsewhere \cite{CohenMaunsell2009}. Unlike criterion
+adjustment, VDA involves a genuine perceptual trade-off --- resources
+gained at one location must be taken from another. Reward-associated
+stimuli can capture spatial attention
+\cite{failing_theeuwes2018_selection_history, hickey2010_reward_salience_acc},
+providing a candidate substrate for such re-allocation.
+
+A third lever becomes available once we abandon the assumption that
+detection noise is independent across locations. When the population
+code carries noise that is correlated across locations, an observer can
+adapt to value by \emph{decorrelating} the encoded signal --- and
+attention is known to reduce interneuronal correlations in visual cortex
+\cite{CohenMaunsell2009, RuffCohen2016, Srinath2021}. We therefore treat
+the cross-location correlation $\corr$ as a model parameter rather than
+fixing it at zero, which yields a three-lever decomposition of the
+value response --- criterion, sensitivity, and decorrelation
+(Section~\ref{sec:model}). The familiar criterion-versus-sensitivity
+account is recovered as the $\corr = 0$ special case.
+
+A further consideration is that the benefit and cost of attention are
+not necessarily symmetric. Attentional enhancement at attended locations
+and suppression at unattended locations are dissociable mechanisms that
+can be modulated independently
+\cite{reynolds_heeger2009_normalization, treue_martinez_trujillo1999_feature_attention, mcadams_maunsell1999_v4_tuning},
+so a normative model that assumes symmetric benefit and cost may reach
+conclusions specific to that assumption rather than general properties
+of the task. We therefore equip the model with an explicit asymmetry
+ratio $\Rsens > 0$ that parameterises the relative efficacy of
+enhancement versus suppression. The normative question is then: under
+what conditions does VDA gain meaningfully over an observer that has
+already optimised its criteria and its validity-driven attention? If
+the criterion lever captures most of the available reward, the neural
+machinery supporting value-driven re-allocation is, for this class of
+tasks, redundant, and experiments designed to observe VDA in that regime
+will tend to produce null results. Conversely, identifying the
+parameter regimes in which VDA is essential provides a recipe for
+experimental designs that can isolate value-driven attentional effects
+from criterion-based strategies.
+
+Our analysis yields four conclusions
+(Section~\ref{sec:results}). First, criterion adjustment is
+\emph{typically} the dominant lever for encoding value: across a broad
+parameter sweep the share of the reward gain it captures has a median
+near $0.76$ and is concentrated in $[0.30, 1.00]$, a central tendency
+with a substantial tail toward attention-dominated outcomes that grows
+as correlated noise ($\corr > 0$) is admitted. Second, the advantage of VDA is \emph{non-monotonic} in the
+benefit/cost ratio $\Rsens$, peaking in a cost-dominant regime where
+value-blind attention is too expensive to deploy; we strengthen this
+finding with a closed-form threshold $\rdagger(\val)$ that marks the
+lower edge of the VDA-active band. Third, this advantage is concentrated
+in a \emph{graded} regime --- low cue validity, high value contrast,
+moderate-to-cost-dominant asymmetry, and low baseline sensitivity ---
+which we map as an iso-VDA contour band over $(\valid, \val, \Rsens)$. Fourth, re-allocating
+attention \emph{away} from the high-value location is not optimal under
+predictive cues, a result that holds as a conditional theorem with the
+explicit condition $\valid \ge 1/\Nloc$; outside that condition, in the
+counter-predictive ``anti-cue'' regime ($\valid < 1/\Nloc$), inverted
+allocation can become optimal, which we report as a new falsifiable
+prediction of the model. Outside the graded VDA regime --- which
+includes the operating point of many standard spatial-cueing paradigms
+--- an observer that adjusts criteria optimally loses little by treating
+attention as value-blind.

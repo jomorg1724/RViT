@@ -1,0 +1,81 @@
+{
+    "_comment": "RViT+ v8_part2 configuration. CONV-FREE, RL-ONLY. v8 with MEMORY-ONLY K/V: patch tokens are queries only; keys/values are [H1 ++ H2] (no visual content in the value stream). Visual information reaches the recurrent state only through query-side gating over the mnemonic codebook. Then TWO stacked PER-TOKEN LSTMs + 1D-conv actor/critic heads. Training = PAC + QR-DQN + PER, identical to v8.",
+
+    "run": {
+        "_note_init_mode": "fresh = random init (checkpoint_path ignored); warm_start = partial load (skip name/shape mismatches silently); resume = strict load (fail on any mismatch). v5_part2 is a new architecture — starts fresh.",
+        "init_mode": "resume",
+        "_note_checkpoint_location": "checkpoint_dir points OUTSIDE the repo (~/rvit_plus_checkpoints/v8_part2) on purpose: the AttentionManuscript repo is a Google Drive sync root and Drive was observed rewriting checkpoints mid-session, which can corrupt a run. Keep live checkpoints in a non-synced home dir.",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/v8_part2/rvit_plus_v8_part2_rl_latest.pt",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/v8_part2",
+        "seed": 0,
+        "device": "",
+        "log_every": 5,
+        "save_every": 200
+    },
+
+    "environment": {
+        "_comment": "ChangeDetectionEnv parameters — matched to the v3/HRA defaults for apples-to-apples comparison.",
+        "min_change_time": 11,
+        "max_change_time": 25
+    },
+
+    "model": {
+        "_comment": "Conv-free patch + cross-attention-over-memory block (8 heads) + 2 stacked per-token LSTMs + 1D-conv actor/critic heads.",
+        "_note_patch": "patch_size must divide the 50x50 image: {1,2,5,10,25,50}. patch_size=5 → 10x10 grid = 100 tokens (each 25x25 Gabor quadrant = a 5x5 patch block).",
+        "patch_size": 5,
+        "_note_patch_hidden": "The raw flattened patch is small (patch_dim = C*p*p = 3*5*5 = 75). A per-patch MLP (Linear→GELU→Linear→LayerNorm) of hidden width patch_hidden expands it up to d_model. Default 128 = d_model.",
+        "patch_hidden": 128,
+        "d_model": 128,
+        "d_mem": 128,
+        "_note_d_model": "d_model = transformer/token width; d_mem = LSTM hidden = recurrent-state width the heads read. MUST be equal (128): memory (H1,H2) is concatenated into the d_model token stream as cross-attention keys/values. LSTM1 ingests the d_model attention output Z; later LSTMs ingest the previous d_mem hidden.",
+        "_note_tx": "The encoder is tx_layers cross-attention block(s) (default 1) with tx_heads=8: queries from the 100 patch tokens X, keys/values from [H1 ++ H2] = 2*n_tokens tokens ONLY (memory-as-tokens; no patch in K/V). Visual info enters only via query-side gating. H1,H2 = previous-frame LSTM states, tagged by source + shared memory positional embedding.",
+        "tx_heads": 8,
+        "tx_layers": 1,
+        "_note_n_lstm": "Number of stacked per-token LSTMs after the transformer = number of recurrent memory states. n_lstm=2: Z→LSTM1→H1→LSTM2→H2, each (B,n_tokens,d_mem) carried across frames. The heads read the TOP state H2.",
+        "n_lstm": 2,
+        "_note_head": "Actor & critic decoders are 1D-CONV: each arranges the top state H2 as (B, d_mem channels, n_tokens length) and runs n_conv_layers stride-2 Conv1d layers (kernel conv_kernel, conv_channels each) over the TOKEN axis, then flattens + Linear to the outputs. This PRESERVES the spatial token layout (an earlier mean-pool variant discarded it and didn't learn). No CLS, no action-as-input encoding. Final Linear small-init'd; actor init_action_bias on its bias. With n_tokens=100/3 stride-2 layers the token axis is 100→50→25→13.",
+        "conv_channels": 64,
+        "n_conv_layers": 3,
+        "conv_kernel": 5,
+
+        "_note_rl_heads": "Actor logits (B,n_actions) + distributional critic Q (B,n_actions,n_quantiles), each from H2 via a SEPARATE Conv1d-over-tokens trunk → flatten → Linear. init_action_bias = [wait_bias, press_bias]; [0.0,-1.5] gives initial P(press)≈0.18.",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "init_action_bias": [0.0, -1.5]
+        }
+    },
+
+    "ppo": {
+        "_comment": "PAC actor loss (MPO E-step + BC) + distributional QR-DQN critic + prioritized episode replay. RL ONLY — no recon, no PC, no pretrain.",
+        "iters": 50000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 3e-4,
+        "n_epochs": 4,
+        "grad_clip": 0.5,
+
+        "value_coef": 0.5,
+        "entropy_coef": 0.01,
+        "qr_kappa": 1.0,
+        "gamma": 0.99,
+
+        "_note_pac_actor": "PAC (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. Discrete MPO E-step is closed-form: q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]; M-step + BC blend gives L_actor = (1−α)·[−Σ_a q(a|s)·log π_θ(a|s)] + α·[−log π_θ(a_t|s)]. η = mpo_temperature, α = bc_alpha.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+
+        "_note_target_network": "PAC target network θ' (Springenberg et al. 2024, §3.2): the critic's distributional TD target AND the MPO E-step reference policy π_θ' BOTH come from a periodically hard-copied, time-lagged copy of θ. target_update_period = hard-copy θ→θ' every N optimizer steps; 0 disables (online bootstrap). The main stabilizer for the bootstrapped actor-critic; was missing in the original implementation.",
+        "target_update_period": 100,
+
+        "_note_burn_in": "Burn-in / wait-pretrain (v3's recon_pretrain_iters, restored 2026-06-06). For the first burn_in_iters iterations the agent is FORCED to wait (action=0) so episodes run full-length, and only the critic is trained with the actor FROZEN at init — warming up the value function and recurrent representation on clean full trajectories before the policy acts. v5 has no decoder/recon (and no contrastive), so the critic/representation warm up alone. 0 disables.",
+        "burn_in_iters": 20,
+
+        "_note_per": "Prioritized episode replay (Schaul et al. 2016, episode-level). Fresh on-policy episodes are augmented with per_n_replay replay episodes sampled ∝ priority^per_alpha (priority = mean per-step quantile-Huber error, clipped at per_priority_clip×median). IS weights (1/(N·p))^β with β annealed per_beta_start→per_beta_end over the run. per_n_replay=0 disables replay.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

@@ -1,0 +1,7 @@
+source,peak_acc,shuffle
+h1_mean,0.434,0.284
+h2_mean,0.433,0.271
+h1_quad,0.851,0.281
+h2_quad,0.928,0.292
+actor_cls,0.908,0.264
+critic_press_cls,0.897,0.273

@@ -1,0 +1,56 @@
+=== PSYCHOMETRIC/CHRONOMETRIC on final.pt (iter 1999) ===
+[loaded] RViT_plus_v2/checkpoints/rvit_plus_rl_final.pt (iter=1999)  device=cpu
+
+[EXP 1] signal-strength psychometric / chronometric (valid vs invalid)
+  |Δθ|=  2.0  VALID hit=0.043 rt=10.00 | INVALID hit=0.051 rt=8.00
+  |Δθ|=  5.0  VALID hit=0.070 rt=9.50 | INVALID hit=0.070 rt=4.00
+  |Δθ|=  9.0  VALID hit=0.199 rt=5.00 | INVALID hit=0.125 rt=6.50
+  |Δθ|= 14.0  VALID hit=0.504 rt=2.00 | INVALID hit=0.340 rt=2.00
+  |Δθ|= 20.0  VALID hit=0.859 rt=0.00 | INVALID hit=0.629 rt=1.00
+  |Δθ|= 30.0  VALID hit=0.992 rt=0.00 | INVALID hit=0.945 rt=0.00
+  |Δθ|= 44.0  VALID hit=0.988 rt=0.00 | INVALID hit=0.984 rt=0.00
+  |Δθ|= 64.0  VALID hit=0.965 rt=0.00 | INVALID hit=0.945 rt=0.00
+[saved] RViT_plus_v2/analysis/figures/psychometric_chronometric_signal.png
+[saved] RViT_plus_v2/analysis/figures/psychometric_signal.csv
+
+[EXP 2] validity scaling (cued)
+  validity=0.25  hit=0.562  rt=2.00
+  validity=0.50  hit=0.527  rt=3.00
+  validity=0.75  hit=0.551  rt=3.00
+  validity=1.00  hit=0.457  rt=3.00
+[saved] RViT_plus_v2/analysis/figures/psychometric_chronometric_validity.png
+[saved] RViT_plus_v2/analysis/figures/psychometric_validity.csv
+
+[EXP 3] value scaling (cued)
+  value=1 (blue )  hit=0.500  rt=2.00
+  value=3 (green)  hit=0.531  rt=2.00
+  value=5 (red  )  hit=0.477  rt=2.00
+[saved] RViT_plus_v2/analysis/figures/psychometric_chronometric_value.png
+[saved] RViT_plus_v2/analysis/figures/psychometric_value.csv
+
+[done]
+=== AVG ATTENTION MAPS on final.pt (iter 1999) ===
+[loaded] RViT_plus_v2/checkpoints/rvit_plus_rl_final.pt (iter=1999)  device=cpu
+[fixed change] quadrant=S1 top-left  t=15  |Δθ|=64.0
+  [cue left · ring 1.0 (VALID)] done  (layer ranges: L1=[0.43,0.73], L2=[2.48,3.40], L3=[12.95,22.01])
+  [cue right · ring 1.0 (INVALID)] done  (layer ranges: L1=[0.43,0.67], L2=[2.49,3.46], L3=[12.95,22.00])
+  [cue left · ring 0.25 (VALID)] done  (layer ranges: L1=[0.43,0.76], L2=[2.48,3.44], L3=[12.95,22.02])
+  [cue right · ring 0.25 (INVALID)] done  (layer ranges: L1=[0.43,0.77], L2=[2.49,3.40], L3=[12.95,22.01])
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L1_cueleft_ring1.0VALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L1_cueright_ring1.0INVALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L1_cueleft_ring0.25VALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L1_cueright_ring0.25INVALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_alpha_L1_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L2_cueleft_ring1.0VALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L2_cueright_ring1.0INVALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L2_cueleft_ring0.25VALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L2_cueright_ring0.25INVALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_alpha_L2_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L3_cueleft_ring1.0VALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L3_cueright_ring1.0INVALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L3_cueleft_ring0.25VALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_L3_cueright_ring0.25INVALID_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_alpha_L3_chg0_t15.png
+[saved] RViT_plus_v2/analysis/figures/avg_attn_chg0_t15.npz
+[done]
+=== ALL DONE ===

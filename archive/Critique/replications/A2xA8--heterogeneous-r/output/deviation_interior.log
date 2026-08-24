@@ -1,0 +1,34 @@
+================================================================
+INTERIOR-α deviation: V=0.5 variant A sqrt; value-blind cost-dominant cells (P2/P3 regime)
+
+  P3  α=1/N, r_cued=0.3  (B=0.750)
+     spread=0.0  var(r)=0.00000  ΔR=0.000e+00
+     spread=0.1  var(r)=0.00060  ΔR=0.000e+00
+     spread=0.2  var(r)=0.00240  ΔR=0.000e+00
+     spread=0.3  var(r)=0.00540  ΔR=0.000e+00
+     ΔR/var(r) ratios: ['0.000e+00', '0.000e+00', '0.000e+00']  (≈const ⇒ ΔR=O(var r))
+
+  P3  α=1/N, r_cued=0.2  (B=0.750)
+     spread=0.0  var(r)=0.00000  ΔR=0.000e+00
+     spread=0.1  var(r)=0.00027  ΔR=0.000e+00
+     spread=0.2  var(r)=0.00107  ΔR=0.000e+00
+     spread=0.3  var(r)=0.00240  ΔR=0.000e+00
+     ΔR/var(r) ratios: ['0.000e+00', '0.000e+00', '0.000e+00', '0.000e+00']  (≈const ⇒ ΔR=O(var r))
+
+  P2  α*(v=1)=0.26, r_cued=0.3  (B=0.740)
+     spread=0.0  var(r)=0.00000  ΔR=0.000e+00
+     spread=0.1  var(r)=0.00060  ΔR=7.041e-06 best=[0.25, 0.25, 0.24]
+     spread=0.2  var(r)=0.00240  ΔR=1.834e-05 best=[0.25, 0.25, 0.24]
+     spread=0.3  var(r)=0.00540  ΔR=2.952e-05 best=[0.25, 0.25, 0.24]
+     ΔR/var(r) ratios: ['1.173e-02', '7.640e-03', '5.467e-03']  (≈const ⇒ ΔR=O(var r))
+
+  P2  α*(v=1)=0.32, r_cued=0.4  (B=0.680)
+     spread=0.0  var(r)=0.00000  ΔR=0.000e+00
+     spread=0.1  var(r)=0.00107  ΔR=2.818e-05 best=[0.25, 0.22, 0.21]
+     spread=0.2  var(r)=0.00427  ΔR=8.504e-05 best=[0.25, 0.225, 0.205]
+     spread=0.3  var(r)=0.00960  ΔR=1.497e-04 best=[0.25, 0.25, 0.18]
+     ΔR/var(r) ratios: ['0.000e+00', '2.642e-02', '1.993e-02', '1.559e-02']  (≈const ⇒ ΔR=O(var r))
+================================================================
+  MAX ΔR over all interior cells & spreads = 1.497e-04
+  CR-045 homogeneous-case slack = 1.4e-4;  C2 VDA scale ~0.077, CF scale ~0.3–0.9
+  deviation_interior.json written.

@@ -1,0 +1,8 @@
+variable,kind,best_latent,peak,shuffle,delta
+cue_color,acc,h1_mean,1.000,0.355,+0.645
+cue_proportion,acc,h1_mean,1.000,0.288,+0.712
+change_location,acc,h2_quad,0.928,0.292,+0.635
+change_magnitude,R2,h2_mean,0.669,-0.002,+0.671
+change_onset,R2,h2_mean,0.777,-0.005,+0.783
+change_present,acc,h2_mean,0.898,0.515,+0.383
+abs_time,R2,h2_mean(pooled),0.998,-0.003,+1.000

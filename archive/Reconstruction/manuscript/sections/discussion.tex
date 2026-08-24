@@ -1,0 +1,197 @@
+% =====================================================================
+% discussion.tex
+% Content: why criterion adjustment typically dominates; the benefit/
+% cost asymmetry and its biological reading; experimental-design
+% guidance; new falsifiable predictions (anti-cue inversion, the
+% decorrelation channel, conservation-form sensitivity); scoped
+% limitations.
+% =====================================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+We set out to ask when value-directed attention matters: under what
+conditions does re-allocating perceptual resources toward a high-value
+location gain meaningfully over an observer that has already optimised
+its decision criteria and its validity-driven attention? The model
+returns a layered answer. Across a broad parameter space, criterion
+adjustment is typically the dominant lever for encoding value, capturing
+a median of roughly three-quarters of the reward gain
+(Section~\ref{sec:results-criterion}). The advantage of value-directed
+attention, where it exists, is non-monotonic in the benefit/cost ratio
+$\Rsens$ and is governed by a closed-form lower edge $\rdagger(\val)$
+(Section~\ref{sec:results-vda-nonmonotonic}); it is concentrated in a
+graded corner of the design space rather than distributed across it
+(Section~\ref{sec:results-graded}); and the direction of optimal
+allocation never inverts when the cue is predictive, a conditional
+theorem holding for $\valid \ge 1/\Nloc$
+(Section~\ref{sec:results-noninversion}). Together these results
+describe a task class in which the neural machinery for value-driven
+re-allocation is, over much of the natural operating range, redundant
+with a simpler criterion-based strategy --- and they delimit precisely
+where it is not.
+
+\subsection*{Why criterion adjustment is typically dominant}
+
+Criterion adjustment and value-directed attention exploit the same cued
+information by different routes, and the routes differ in price. Shifting
+the decision threshold at a high-value location requires no perceptual
+reallocation: a more liberal criterion there trades false alarms for
+hits while leaving sensitivity at every other location untouched. Spatial
+re-allocation, by contrast, pays a genuine perceptual cost --- gain
+acquired at the cued location is taken from the others. When the cue is
+predictive, validity-driven attention has already concentrated processing
+where it is most likely to be needed, and the residual value information
+is most economically booked into the decision thresholds rather than into
+further perceptual gain. This is why, across the sweep, the criterion
+fraction $\CF$ concentrates well above one-half (median $0.7552$ for the
+value-coupled reward variant and $0.7682$ for the equal-reward
+variant, both at the additive conservation rule), with most of the
+distribution lying in $[0.30, 1.00]$
+(Section~\ref{sec:results-criterion}). The lever does not dominate
+everywhere: in the benefit-dominant, low-validity corner --- where
+attentional enhancement is efficient and the cue is weakly informative
+--- the criterion fraction falls and value-directed attention contributes
+materially. The summary is therefore a central tendency with a
+substantial tail across the parameter space.
+
+\subsection*{The benefit/cost asymmetry and its biological reading}
+
+The benefit/cost ratio $\Rsens$ is the model's compact summary of a
+dissociation observed in cortex: attentional enhancement at attended
+locations and suppression at unattended locations are separately
+modulable, and the normalisation framework that captures single-unit
+gain effects treats them as distinct operations rather than two ends of
+one knob
+\cite{reynolds_heeger2009_normalization, mcadams_maunsell1999_v4_tuning,
+treue_martinez_trujillo1999_feature_attention, carrasco2011_visual_attention_25y}.
+A large $\Rsens$ describes an enhancement-dominant regime in which
+attending a location buys more sensitivity than is lost elsewhere; a
+small $\Rsens$ describes a suppression- or cost-dominant regime in which
+re-allocation is expensive. The non-monotonicity of the value-directed
+advantage in $\Rsens$ (Section~\ref{sec:results-vda-nonmonotonic}) then
+has a clean reading. When enhancement is cheap (large $\Rsens$), a
+value-blind observer already attends the cued location and value adds
+little; when enhancement is very expensive (small $\Rsens$), no observer
+should re-allocate and again value adds little. The advantage peaks in
+between, in a cost-dominant window where value-blind attention is too
+expensive to deploy but the value differential makes targeted
+re-allocation worthwhile --- exactly the band whose lower edge the
+closed-form threshold $\rdagger(\val)$ marks
+\eqref{eq:r-dagger}. The model thus locates value-directed attention not
+where attention is easiest but where value is the deciding factor, which
+is a more demanding and more diagnostic regime than the one many designs
+target.
+
+\subsection*{Guidance for experimental design}
+
+These results carry directly into how one should design an experiment to
+observe value-directed attention. Because the advantage is concentrated
+in a graded corner --- low cue validity, high value contrast,
+cost-dominant asymmetry, and low baseline sensitivity
+(Section~\ref{sec:results-graded}) --- a design placed outside that
+corner will tend to produce null value-directed effects even when the
+underlying mechanism is intact, simply because optimal criterion
+adjustment already captures nearly all of the available reward. Many
+standard spatial-cueing paradigms, which use highly valid cues and
+moderate value manipulations, operate in this dormant regime. The model
+makes the boundary quantitative: at cue validity $\valid \ge 0.95$ the
+predicted advantage sits at the grid floor for every asymmetry and
+correlation we examined; the dormancy survives down to $\valid \ge 0.80$
+when cross-location correlation is negligible but admits a small
+correlation-conditional signal otherwise; and a $\valid \ge 0.75$
+criterion is too permissive, because cost-dominant designs in
+$\valid \in [0.60, 0.80)$ admit a peak advantage near $0.16$
+(Section~\ref{sec:results-graded}). An experiment aiming to isolate
+value-driven attention from criterion-based strategy should therefore
+move deliberately into the cost-dominant, low-to-moderate-validity,
+high-contrast corner rather than maximising cue validity.
+
+\subsection*{New predictions}
+
+The model makes three predictions that go beyond restating where the
+advantage lives. First, although optimal allocation never inverts under a
+predictive cue, it \emph{can} invert under a counter-predictive
+``anti-cue'': when validity falls below chance, $\valid < 1/\Nloc$,
+re-allocating attention \emph{away} from the nominally cued location
+becomes optimal in a substantial fraction of cells
+(Section~\ref{sec:results-noninversion}). The inversion is sharply
+bounded in value contrast --- it is confined below the closed-form
+boundary $\valid < 1/[(\Nloc-1)\val + 1]$ --- and is absent throughout
+the predictive regime, which makes it a clean, falsifiable signature: an
+observer who is genuinely re-allocating perceptual resources, rather than
+only shifting criteria, should show inverted allocation under an
+anti-predictive cue and never under a predictive one.
+
+Second, the cross-location correlation $\corr$ is an active lever, not a
+nuisance term, and its effect on the value-directed advantage changes
+sign with the benefit/cost ratio. In cost-dominant designs ($\Rsens$
+small) raising $\corr$ suppresses the advantage, whereas in
+balanced-to-enhancement-dominant designs ($\Rsens \gtrsim 1$) it
+amplifies it (Section~\ref{sec:results-graded}). The amplification can be
+dramatic at design points that look dormant under independent noise: at
+one cost-dominant high-contrast cell the advantage rises from a
+negligible $0.0007$ at $\corr = 0$ to $0.0676$ at $\corr = 0.2$, roughly
+a hundredfold increase driven entirely by admitting the empirically
+typical level of inter-neuronal correlation
+\cite{CohenMaunsell2009, RuffCohen2016, Srinath2021}. The prediction is
+that whether a given design reveals value-directed attention can depend
+on the correlation structure of the neural code, so that a paradigm that
+is null under one correlation regime may not be under another.
+
+Third, the position of the criterion/attention split is sensitive to the
+form of the benefit/cost conservation rule. Replacing the additive rule
+($\benefit + \cost = 2$) with the multiplicative endpoint
+($\benefit \cdot \cost = 1$) leaves the central tendency of $\CF$ almost
+unchanged --- the median moves by less than $0.005$ --- but it deepens
+the tail: the fraction of cells with $\CF < 0.5$ roughly doubles, and the
+per-cell criterion fraction never rises under the multiplicative rule
+(Section~\ref{sec:results-criterion}). The dominance of criterion
+adjustment is thus robust as a central claim but rule-dependent in its
+tail, and the size of the attention-favourable tail is itself an
+observable consequence of how enhancement and suppression trade off ---
+a structural prediction about the resource constraint, not a free
+parameter. The equal-reward convention sharpens the same point: its
+deeper $\CF$ tail and its lower median inversion threshold
+(Table~\ref{tab:noninv-tally}) indicate a somewhat larger
+attention-favourable region and a somewhat higher anti-cue inversion
+incidence than the value-coupled reward variant, so the reward
+structure of a task is itself a design variable that shifts the regime
+boundaries.
+
+\subsection*{Scope and limitations}
+
+Several boundaries delimit these statements. The benefit/cost
+conservation constraint relating the benefit and cost weights
+(Section~\ref{sec:model}, Equation~\eqref{eq:beta-gamma}) is one member
+of a one-parameter family spanning the additive
+($\benefit + \cost = 2$) and multiplicative ($\benefit \cdot \cost = 1$)
+endpoints; the headline numbers are reported under the additive rule
+with a band over the family, and which member corresponds to a
+particular biological resource constraint is not fixed by the model. The single asymmetry ratio $\Rsens$ summarises a
+homogeneous population; lifting it to a per-location vector and the uncued
+allocation to the full $\Nloc$-dimensional simplex leaves the optima
+essentially intact under modest heterogeneity, but the closed-form
+dependence of the optimum on the spread of $\Rsens$ across locations is
+not derived here. The decision rule treats per-location decision noise as
+fixed; an attention-coupled noise channel $\sigma_i(\alpha)$ would, if it
+were operative, enter alongside decorrelation as a further axis of the
+decomposition and would shift the interpretation of the criterion
+fraction in the cost-dominant regime, and we leave it as a natural
+extension rather than including it. The transfer function relating
+attention to sensitivity is taken from a family of monotonic forms; the
+mechanism statements (Definition~\ref{def:three-levers},
+Equation~\eqref{eq:r-dagger}) are stated for a generic transfer function
+and do not depend on the particular family, though the empirical bands
+do. The correlation lever assumes a single equicorrelated structure;
+distance- or feature-dependent covariances break the one-factor
+reduction and are out of scope. Finally, the model is normative and
+stationary: it describes the optimal policy for an observer at a fixed
+parameter setting, not how that policy is learned, and it makes no claim
+about the neural implementation of any of the three levers beyond the
+correspondence between the asymmetry ratio and the enhancement/suppression
+operations of cortical gain control. Its contribution is a quantitative
+map of when value-directed attention is the deciding mechanism and when an
+optimally-set criterion suffices --- a map that a downstream empirical or
+computational program can use to place its experiments where the
+mechanism it cares about is actually at stake.

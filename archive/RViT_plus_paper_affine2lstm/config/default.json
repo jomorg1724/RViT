@@ -1,0 +1,35 @@
+{
+  "_comment": "Paper Recurrent ViT with AFFINE feedback (Γ·X+β before SA) + dual xLSTM stack (LSTM1→attention, LSTM2(H1)→heads). Same harness as RViT_plus_paper. Checkpoints OUTSIDE Drive-synced repo.",
+  "run": {
+    "_note_init_mode": "fresh for first run; resume to continue. Do NOT warm-start from plain affine or two_lstm alone — architecture differs.",
+    "init_mode": "fresh",
+    "checkpoint_path": "",
+    "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/paper_affine2lstm_vae",
+    "seed": 0,
+    "device": "",
+    "log_every": 5,
+    "save_every": 200
+  },
+  "environment": {
+    "_note": "paper 7-step task; change fixed at t=5; frozen VAE front-end",
+    "T": 7, "min_change_time": 5, "max_change_time": 5, "noise_multiplier": 5.0
+  },
+  "model": {
+    "_note": "feedback=affine: memory derives scale matrix Γ + shift β, then plain self-attention on X′. two_lstm: LSTM1(H1) feeds affine block; LSTM2(H1)→H2 feeds actor/critic.",
+    "feedback": "affine",
+    "two_lstm": true,
+    "vae_checkpoint": "/Users/jonathanmorgan/rvit_plus_checkpoints/paper_vae/vae.pt",
+    "freeze_vae": true,
+    "rl": { "n_actions": 2, "n_quantiles": 5, "init_action_bias": [0.0, -1.5] }
+  },
+  "ppo": {
+    "_note": "150k episodes = 18,750 iters × 8. Matches the successful paper_vae_frozen / paper_2lstm runs.",
+    "iters": 18750, "episodes_per_iter": 8,
+    "lr": 0.0003, "n_epochs": 4, "grad_clip": 0.5, "value_coef": 0.5,
+    "entropy_coef": 0.01, "qr_kappa": 1.0, "gamma": 0.95,
+    "mpo_temperature": 0.1, "bc_alpha": 0.1,
+    "target_update_period": 0, "ema_decay": 0.995,
+    "burn_in_iters": 20, "buffer_capacity": 1000, "per_n_replay": 4,
+    "per_alpha": 0.6, "per_beta_start": 0.4, "per_beta_end": 1.0, "per_priority_clip": 50.0
+  }
+}

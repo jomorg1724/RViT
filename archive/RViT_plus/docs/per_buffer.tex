@@ -1,0 +1,354 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{microtype}
+
+\title{Prioritized Episode Replay for RViT$+$ \\
+\large On-policy PPO with an off-policy auxiliary buffer}
+\author{RViT$+$ implementation note}
+\date{\today}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\indicator}{\mathbf{1}}
+\newcommand{\given}{\,|\,}
+
+\begin{document}
+\maketitle
+
+\section{Motivation}
+
+The PPO loop in RViT$+$ collects a fresh batch of $B = $ \texttt{episodes\_per\_iter}
+on-policy episodes per iteration and discards them after the update.
+With a deterministic actor (e.g.\ ``always wait''), this batch is
+dominated by a single $(\text{action}, \text{reward})$ class, depriving
+the contrastive auxiliary losses of the diverse pair structure they
+need. We introduce a prioritized episode replay buffer that augments
+each PPO update with a small number of \emph{additional} episodes
+drawn from past iterations. The fresh on-policy batch is still used in
+its entirety; the replay batch is concatenated to it and weighted by
+importance-sampling (IS) coefficients so the prioritized expectation
+remains unbiased in the limit.
+
+\paragraph{Why this is compatible with PPO.}
+PPO's clipped surrogate already absorbs mildly off-policy samples: a
+sample whose ratio $\pi_{\text{new}}/\pi_{\text{old}}$ moves outside
+$[1-\epsilon, 1+\epsilon]$ contributes zero gradient to the policy
+update. The distributional value loss, the reconstruction auxiliary,
+and the contrastive auxiliaries are all off-policy compatible.
+Therefore the only correction required is the standard PER IS weight.
+
+\section{Data Structure}
+
+The buffer is a FIFO ring of episodes, each represented as the contents
+of one row of a $\texttt{RolloutBatch}$ (the observations
+$o_{0:T-1}$, executed actions $a_{0:T-1}$, rewards $r_{0:T-1}$,
+done flags, valid mask, behaviour log-probabilities $\log \pi_{\text{old}}(a_t|s_t)$,
+baseline values $V_{\text{old}}$, distributional baselines $V^{\text{dist}}_{\text{old}}$,
+bootstrap target $V^{\text{dist}}_{\text{last}}$, and episode length).
+Storage is on CPU; tensors move to the training device only when an
+episode is sampled. Each entry $i$ has an associated scalar priority
+$p_i \geq 0$.
+
+The buffer supports three operations:
+\begin{itemize}
+  \item \texttt{push(batch, priorities)} — append every episode of
+        $\texttt{batch}$ with the supplied priorities (or with the
+        current maximum priority if none are given).
+  \item \texttt{sample(n, $\alpha$, $\beta$)} — draw $n$ episodes
+        proportional to $p_i^{\alpha}$ and return them with their
+        IS weights.
+  \item \texttt{update\_priorities(idxs, new\_priorities)} — refresh
+        the stored priorities after the sampled entries contribute to
+        an update.
+\end{itemize}
+
+\section{Priority Signal}
+
+Each episode's priority is the mean per-step quantile-Huber error
+over its valid timesteps, evaluated under the current critic at the
+end of the PPO update. Let
+\begin{equation}
+\rho^{\text{QH}}_{b,t} \;=\;
+\frac{1}{N^2} \sum_{i=1}^{N}\sum_{j=1}^{N}
+\bigl|\,\tau_i \;-\; \indicator(\delta_{ij} < 0)\,\bigr| \,
+\ell_{\kappa}(\delta_{ij}),
+\end{equation}
+where $\delta_{ij} = y_j - q_i$ is the gap between target quantile
+$y_j$ and predicted quantile $q_i$ of the executed action at step
+$(b,t)$, $\tau_i = (i + 1/2)/N$ are the midpoint quantile fractions,
+and $\ell_{\kappa}$ is the Huber loss with parameter $\kappa$. Then
+the per-episode priority is
+\begin{equation}
+\boxed{ \;
+p_b \;=\;
+\frac{\sum_{t} m_{b,t}\, \rho^{\text{QH}}_{b,t}}{\sum_{t} m_{b,t}}
+\;}
+\label{eq:priority}
+\end{equation}
+with $m_{b,t} \in \{0,1\}$ the valid mask. This is computed in
+$\texttt{ppo\_update}$ from the final epoch's forward pass and returned
+to the trainer for the buffer refresh step.
+
+\section{Sampling Distribution}
+
+Given priorities $\{p_i\}_{i=1}^{N_{\text{buf}}}$, we first clip them
+at $\texttt{per\_priority\_clip}\cdot \mathrm{median}(p)$ to prevent a
+single outlier episode from absorbing all sampling probability. We
+then form
+\begin{equation}
+P(i) \;=\; \frac{ (\,\tilde p_i\,)^{\alpha} }{\sum_{j=1}^{N_{\text{buf}}} (\,\tilde p_j\,)^{\alpha} },
+\qquad \tilde p_i = \min(p_i,\, c\cdot \mathrm{median}(p)),
+\label{eq:sampling}
+\end{equation}
+where $\alpha \in [0,1]$ controls how strongly priorities bias the
+distribution. $\alpha = 0$ recovers uniform sampling; $\alpha = 1$
+recovers proportional priority sampling. We default to
+$\alpha = 0.6$ following Schaul et al.~(2016).
+
+\section{Importance-Sampling Correction}
+
+Replacing uniform sampling with $P(i)$ biases any expectation over
+buffer entries. The standard PER correction multiplies each sample's
+loss contribution by
+\begin{equation}
+w_i \;=\; \biggl(\, \frac{1}{N_{\text{buf}} \cdot P(i)} \,\biggr)^{\!\beta},
+\qquad
+\hat w_i \;=\; \frac{w_i}{\max_j w_j},
+\label{eq:is_weight}
+\end{equation}
+where the max-normalisation keeps gradient magnitudes bounded across
+batches. Fresh on-policy episodes are not sampled from $P$, so they
+take $\hat w_i = 1$.
+
+The exponent $\beta$ governs how strongly we correct the bias.
+$\beta = 0$ is no correction (full prioritization bias); $\beta = 1$
+is full correction (the expectation is exactly that of uniform
+sampling). We linearly anneal $\beta$ from
+$\texttt{per\_beta\_start}$ (default $0.4$) to
+$\texttt{per\_beta\_end}$ (default $1.0$) across training:
+\begin{equation}
+\beta(t) \;=\; \beta_{\text{start}} +
+(\beta_{\text{end}} - \beta_{\text{start}})\, \min\!\Bigl(\frac{t}{\,T_{\text{train}}-1\,}, 1\Bigr).
+\end{equation}
+Early in training, $\beta$ is small to amplify the learning signal
+from prioritized samples; by the end of training, $\beta$ reaches
+$1$ and the prioritized expectation is unbiased.
+
+\section{Combined Batch and Weighted Losses}
+
+At each iteration $t$, the trainer constructs a combined batch by
+concatenating along the batch dimension:
+\begin{equation}
+\mathcal{B}_t \;=\; \mathcal{B}^{\text{fresh}}_t \;\Vert\; \mathcal{B}^{\text{replay}}_t,
+\qquad
+B_{\text{tot}} = B + B_{\text{replay}},
+\end{equation}
+where $\mathcal{B}^{\text{fresh}}_t$ contains the freshly collected
+$B$ on-policy episodes (each with $\hat w = 1$) and
+$\mathcal{B}^{\text{replay}}_t$ contains $B_{\text{replay}} =
+\texttt{per\_n\_replay}$ episodes drawn from the buffer with their
+PER weights.
+
+Let $\hat w_b$ denote the per-episode IS weight ($\hat w_b = 1$ for
+fresh, $\hat w_b$ given by~\eqref{eq:is_weight} for replay), and
+$m_{b,t}$ the valid-step mask. The \emph{effective weight} is
+\begin{equation}
+\mu_{b,t} \;=\; m_{b,t}\cdot \hat w_b,
+\qquad
+M \;=\; \sum_{b,t} \mu_{b,t}.
+\end{equation}
+Every loss term that took a masked mean now takes a weighted
+masked mean using $\mu$:
+\begin{align}
+\mathcal{L}_{\text{policy}} &\;=\;
+- \frac{1}{M}\sum_{b,t}\, \mu_{b,t}\,
+\min\!\Bigl(r_{b,t}\,A_{b,t},\, \mathrm{clip}(r_{b,t}, 1{-}\epsilon, 1{+}\epsilon)\,A_{b,t}\Bigr),\\
+\mathcal{L}_{\text{value}} &\;=\; \frac{1}{M}\sum_{b,t}\, \mu_{b,t}\, \rho^{\text{QH}}_{b,t},\\
+\mathcal{L}_{\text{entropy}} &\;=\; -\frac{1}{M}\sum_{b,t}\, \mu_{b,t}\, \mathcal{H}[\pi(\,\cdot\,|s_{b,t})],
+\end{align}
+where $r_{b,t} = \pi_{\theta}(a_{b,t}|s_{b,t})/\pi_{\text{old}}(a_{b,t}|s_{b,t})$
+is the PPO ratio and $A_{b,t}$ are the GAE advantages computed
+\emph{at collection time} for both fresh and replay entries. The
+reconstruction auxiliary uses the same content-weighted mask scaled
+by $\hat w_b$. The contrastive auxiliaries operate on pairs of valid
+$(b,t)$ entries; their pair masks are formed without further IS
+correction because the contrastive losses shape representations
+rather than estimate an unbiased expectation.
+
+\section{Algorithm}
+
+\begin{algorithm}[H]
+\caption{PPO update with prioritized episode replay}
+\begin{algorithmic}[1]
+\State Initialise ring buffer $\mathcal{R}$ of capacity $C$; optimizer $\mathcal{O}$.
+\For{$t = 0, 1, \ldots, T_{\text{train}}-1$}
+  \State $\mathcal{B}^{\text{fresh}}_t \gets$ collect $B$ on-policy episodes
+  \State $\beta_t \gets \beta_{\text{start}} + (\beta_{\text{end}} - \beta_{\text{start}})\, \min(t/(T_{\text{train}}-1), 1)$
+  \If{$|\mathcal{R}| > 0$ \textbf{and} $B_{\text{replay}} > 0$}
+    \State Compute $P(i)$ per Eq.~\eqref{eq:sampling}
+    \State Sample indices $I = \{i_1, \ldots, i_{B_{\text{replay}}}\} \sim P$
+    \State $\hat w_k \gets (1/(N_{\text{buf}}\cdot P(i_k)))^{\beta_t}$, then $\hat w_k \gets \hat w_k / \max \hat w$
+    \State $\mathcal{B}^{\text{replay}}_t \gets \mathcal{R}[I]$ with weights $\hat w$
+  \Else
+    \State $\mathcal{B}^{\text{replay}}_t \gets \emptyset$, $I \gets \emptyset$
+  \EndIf
+  \State $\mathcal{B}_t \gets \mathcal{B}^{\text{fresh}}_t \Vert \mathcal{B}^{\text{replay}}_t$ \Comment{Eq.~\ref{eq:is_weight}}
+  \For{$k = 1, \ldots, n_{\text{epochs}}$}
+    \State Forward + compute $\rho^{\text{QH}}_{b,t}$ per~\eqref{eq:priority}
+    \State Compute weighted losses $\mathcal{L}_{\text{policy}}, \mathcal{L}_{\text{value}}, \ldots$
+    \State $\mathcal{O}.\text{step}(\nabla_\theta \mathcal{L})$
+  \EndFor
+  \State Compute final per-episode priorities $\{p_b\}_{b=1}^{B_{\text{tot}}}$ per Eq.~\eqref{eq:priority}
+  \State $\mathcal{R}.\text{update\_priorities}(I,\, \{p_b\}_{b > B})$ \Comment{refresh replay entries}
+  \State $\mathcal{R}.\text{push}(\mathcal{B}^{\text{fresh}}_t,\, \{p_b\}_{b \leq B})$ \Comment{enqueue fresh}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\section{Bias Analysis}
+
+The Monte-Carlo estimator of any per-transition expectation
+$\E_{i \sim \text{uniform}}[f(i)]$ under prioritized sampling is
+\begin{equation}
+\hat\E\bigl[f\bigr]_{\text{PER}} \;=\;
+\frac{1}{n} \sum_{k=1}^{n} \frac{1}{N_{\text{buf}}\, P(i_k)}\, f(i_k),
+\quad i_k \sim P.
+\end{equation}
+With the full IS weight $w_i = 1/(N_{\text{buf}} P(i))$ (i.e.\ $\beta = 1$),
+$\E_{P}[\hat\E] = \E_{\text{uniform}}[f]$ exactly. With $\beta < 1$ the
+estimator is biased toward the prioritized distribution. The
+max-normalisation $\hat w = w / \max w$ rescales the gradient
+magnitude but does not change the relative weighting; it preserves
+the unbiased property in the limit $\beta \to 1$ up to an overall
+constant.
+
+The priority clipping in Eq.~\eqref{eq:sampling} introduces a small
+controlled bias even at $\beta = 1$, because the truncated
+distribution $\tilde p$ differs from the true $p$ at extreme entries.
+This is intentional — we trade a small expectation bias for protection
+against a single high-error episode capturing all sampling
+probability.
+
+\section{Hyperparameters and Defaults}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Symbol & Config key & Default \\
+\midrule
+$C$ (capacity)             & \texttt{buffer\_capacity}    & $200$ episodes \\
+$B_{\text{replay}}$        & \texttt{per\_n\_replay}      & $4$ \\
+$\alpha$                   & \texttt{per\_alpha}          & $0.6$ \\
+$\beta_{\text{start}}$     & \texttt{per\_beta\_start}    & $0.4$ \\
+$\beta_{\text{end}}$       & \texttt{per\_beta\_end}      & $1.0$ \\
+$c$ (priority clip mult.)  & \texttt{per\_priority\_clip} & $50.0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Setting \texttt{per\_n\_replay} $= 0$ disables replay and
+restores pure on-policy PPO.
+
+\section{Empirical Observation (Confirmed, 2026-05-25)}
+
+\paragraph{Status upgrade.} The result documented below was originally
+recorded as preliminary based on short-horizon training. As of
+2026-05-25 it is \emph{confirmed} as the first sustained task-competent
+RViT$+$ configuration on Posner change-detection. At iter
+$\approx 1450$--$1670$ (over 200 iterations of steady-state behaviour)
+the model holds \texttt{correct} $\in [0.70, 0.78]$, \texttt{return}
+$\in [2.1, 2.3]$, episode \texttt{length} $\in [22, 28]$ out of
+$T = 29$, with policy entropy $H[\pi] \in [0.01, 0.04]$ — committed
+without being deterministic-collapsed. The full working baseline
+combines PER (this document) with predictive-coding auxiliaries,
+contrastive auxiliaries, and the PAC actor loss (Springenberg et
+al., 2024). See
+\texttt{research\_db/threads/rvit\_plus\_engineering.md} section
+``Working baseline (2026-05-25)'' for the complete loss decomposition
+and hyperparameter table.
+
+\paragraph{Mechanism catalogue (preserved from preliminary notes).}
+
+Across the RViT$+$ development arc — adaptive certainty-decay
+$\sigma$-gates, intrinsic UCB exploration via critic uncertainty,
+actor-pull terms weighted by Q-entropy, per-action critic-decay
+penalties on unchosen actions, single-cell and triplet-input
+contrastive heads with binary and continuous-weight loss formulations,
+multiple coefficient sweeps, and several margin / scale schedules —
+\emph{prioritized episode replay is the first mechanism that
+empirically breaks the symmetry of the encoder's internal
+representations and holds the actor's output entropy above the
+deterministic-collapse floor}. Every earlier approach either had no
+discernible effect, collapsed the actor to a single action within
+$\mathcal{O}(10^2)$ iterations, or pinned the auxiliary gate
+$\sigma$ to its boundary.
+
+This result is not yet conclusive. The current findings are based on
+short-horizon training runs and the long-term dynamics under PER on
+this architecture remain to be characterised. We are not claiming
+that PER will succeed where the symmetry-shaping losses failed; we
+are only recording that PER is, at this stage, the only mechanism
+that has produced the qualitative signature we were looking for from
+the others: persistent representation diversity coupled to a
+non-collapsed policy. We consider this sufficiently promising to
+make PER the default training configuration going forward.
+
+\paragraph{Gradient-magnitude restoration.}
+A companion empirical observation: the max-absolute gradient element
+\texttt{gmax} jumps by roughly four-to-five orders of magnitude
+between the pre-PER and post-PER regimes. Pre-PER (any of the
+symmetry-shaping mechanisms above, in their collapsed-actor regimes)
+\texttt{gmax} settles around $10^{-2}$. Post-PER, after the buffer
+warms and replay episodes begin contributing,
+\texttt{gmax} settles in the $10^{2}$--$10^{3}$ range. The two-stage
+gradient clip (per-element cap at $10^{6}$ and L2-norm cap at $0.5$)
+handles this magnitude cleanly and the individual loss terms remain
+bounded, so the change is not a stability concern. Rather, the
+collapsed batch was producing essentially no contrast signal: all
+pairs shared the same $(a, r)$ class, the value loss had no novel
+transitions to fit, and the per-step quantile-Huber error was
+uniformly small. PER reintroduces diverse, informative transitions
+into every update; the resulting gradient magnitude is the
+characteristic regime of an actively-learning network rather than
+the flat-collapse-point regime. The restoration tracks the
+contrastive cosine separation 1:1 across iterations.
+
+\section{Practical Notes}
+
+\paragraph{Pretraining.}
+During the reconstruction pretraining phase
+($t < \texttt{recon\_pretrain\_iters}$) we still push fresh episodes
+into the buffer (with initial priority equal to the running maximum),
+but do not sample from it. This warms the buffer before PPO begins.
+
+\paragraph{Stale-policy gradient.}
+A replay sample collected $k$ iterations ago has a behaviour policy
+$\pi_{\text{old}}$ that may have drifted from $\pi_{\theta}$. PPO's
+clip range $\epsilon$ silently zeroes the policy gradient whenever
+$r_{b,t}$ moves outside $[1-\epsilon, 1+\epsilon]$, which means stale
+replay samples contribute essentially nothing to
+$\mathcal{L}_{\text{policy}}$. The value, reconstruction, and
+contrastive losses remain off-policy compatible and continue to
+benefit from the additional data.
+
+\paragraph{Mixing ratio.}
+We keep $B_{\text{replay}} \leq B$ in practice (default 4 vs 8) so
+that on-policy episodes always dominate the combined batch. This
+preserves PPO's locally-optimal step direction while still injecting
+the rare-event coverage the auxiliary losses need.
+
+\paragraph{Logging.}
+Each iteration the trainer prints buffer fill, current $\beta$, and
+the number of replay episodes used:
+\begin{center}\texttt{buf=8/200\ \ \(\beta\)=0.42\ \ +rep=4}\end{center}
+which can be cross-referenced with the contrastive cosine
+diagnostics \texttt{cos[+/-]} to confirm that replay is in fact
+increasing pair diversity.
+
+\end{document}

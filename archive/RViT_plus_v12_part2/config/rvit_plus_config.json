@@ -1,0 +1,87 @@
+{
+    "_comment": "RViT+ V12_PART2 configuration: ADAPTIVE CODEBOOK with an energetic maintenance cost. CONV-FREE, RL-ONLY. Develops v12 (a static learnable value codebook read by SOFT attention) by letting the agent SPEND ENERGY to deform the codebook toward the current environment, while the codebook always DECAYS back to the static learned table. Per frame, the encoder runs TWO blocks. (1) ENERGY MODULATION (a transformer that edits the codebook; codebook = residual): C_in = C_base + D_{t-1}; Q = C_in (the codebook slots, 'H1'); K=V = [X || H2] (image patches ++ key-memory, 2N tokens); energy = SAblock(C_in,[X,H2]) - C_in; D_t = codebook_decay*D_{t-1} + energy (a leaky integrator → relaxes to 0); C_t = C_base + D_t. The maintenance cost mean||D_t||^2 is added to the RL loss (ppo.energy_coef) so deforming the codebook costs reward → the agent falls back on the static codebook unless adapting pays. (2) READOUT (the v12 mechanism over the ADAPTED codebook): Q=W_q*X, K=W_k*H2, V=C_t; weights=softmax(QK'/sqrt(d)/tau); Z=W_o*(weights @ C_t)+FFN (NO X-residual). H2<-LSTM(X+Z); the actor AND critic read Z. Recurrent state = the codebook deviation D (starts at 0 = static) + the key-memory H2. 1D-conv heads over Z; PAC + QR-DQN + PER trainer + the added energy term. Priority for any setting: CLI arg > this config > script-hardcoded default.",
+
+    "run": {
+        "_note_init_mode": "fresh = random init (checkpoint_path ignored); warm_start = partial load; resume = strict load. v12_part2 is a NEW architecture (adaptive codebook + energy module) — start FRESH. (Set to resume ONLY after a v12_part2 checkpoint exists, to continue; running fresh re-trains from scratch AND overwrites the saved checkpoint.)",
+        "init_mode": "fresh",
+        "_note_checkpoint_location": "checkpoint_dir points OUTSIDE the repo (~/rvit_plus_checkpoints/v12_part2) on purpose: the AttentionManuscript repo is a Google Drive sync root and Drive was observed rewriting checkpoints mid-session, which can corrupt a run. Keep live checkpoints in a non-synced home dir. NOTE: this is a SEPARATE dir from v12 (~/rvit_plus_checkpoints/v12) so it never collides with a v12 run.",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/v12_part2/rvit_plus_v12_part2_rl_latest.pt",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/v12_part2",
+        "seed": 0,
+        "device": "",
+        "log_every": 5,
+        "save_every": 200
+    },
+
+    "environment": {
+        "_comment": "ChangeDetectionEnv parameters — matched to the v3/HRA defaults for apples-to-apples comparison.",
+        "min_change_time": 11,
+        "max_change_time": 25
+    },
+
+    "model": {
+        "_comment": "Conv-free patch + adaptive-codebook encoder (energy-modulation transformer + decaying deviation + soft-attention readout) + 1D-conv actor/critic heads.",
+        "_note_patch": "patch_size must divide the 50x50 image: {1,2,5,10,25,50}. patch_size=5 → 10x10 grid = 100 tokens (each 25x25 Gabor quadrant = a 5x5 patch block).",
+        "patch_size": 5,
+        "_note_patch_hidden": "The raw flattened patch is small (patch_dim = C*p*p = 3*5*5 = 75). A per-patch MLP (Linear→GELU→Linear→LayerNorm) of hidden width patch_hidden expands it up to d_model. Default 128 = d_model.",
+        "patch_hidden": 128,
+        "d_model": 128,
+        "d_mem": 128,
+        "_note_d_model": "d_model = transformer/token width; d_mem = LSTM hidden = recurrent-state width the heads read. MUST be equal (128): memory (H1,H2) is concatenated into the d_model token stream as cross-attention keys/values. LSTM1 ingests the d_model attention output Z; later LSTMs ingest the previous d_mem hidden.",
+        "_note_tx": "tx_heads heads in BOTH attention blocks (default 1). ENERGY block: Q=codebook (C_base+D_{t-1}), K=V=[X||H2] (2N tokens), residual=codebook, energy = block_out - C_in; D integrates energy with decay. READOUT block: Q=W_q*X, K=W_k*H2, V=adapted codebook C_t; weights=softmax(QK'/sqrt(d)/tau); Z=W_o*(weights @ C_t)+FFN, NO X-residual. A shared spatial positional embedding (codebook slot n ↔ patch n ↔ H2 token n) + a 3-way modality tag (codebook-query / X-key / H2-key) feed the energy block.",
+        "tx_heads": 1,
+        "tx_layers": 1,
+        "_note_n_lstm": "Must be 1 — only the key-memory H2 is a true LSTM state (updated by LSTM from X+Z, carried (B,n_tokens,d_mem)). The other recurrent state is the codebook DEVIATION D (B,n_tokens,d_mem), a non-LSTM leaky integrator that starts at 0 (codebook = static C_base) and decays back toward 0. The heads read the readout output Z (rec=[Z]).",
+        "n_lstm": 1,
+        "_note_codebook_decay": "λ in the codebook-deviation leaky integrator D_t = codebook_decay*D_{t-1} + energy. Must be in [0,1) — the codebook MUST decay back to the static learned table (half-life ≈ ln2/ln(1/λ) steps; 0.9 ≈ 6.6 steps over the T=29 episode). 0.0 = the codebook is whatever this step's energy makes it (no memory). 1.0 is REJECTED (no leak ⇒ D never relaxes and ‖D‖² can blow up).",
+        "codebook_decay": 0.9,
+        "_note_temperature": "Softmax temperature τ for the READOUT attention over the codebook (Z = W_o*(softmax(QK'/sqrt(d)/τ) @ C_t)+FFN). 1.0 = standard; lower = sharper (more peaked slot selection).",
+        "temperature": 1.0,
+        "_note_head": "Actor & critic decoders are 1D-CONV, BOTH reading the transformer output Z arranged as (B, d_model channels, n_tokens length), run through n_conv_layers stride-2 Conv1d layers (kernel conv_kernel, conv_channels each) over the TOKEN axis, then flatten + Linear. PRESERVES the spatial token layout. No CLS, no action-as-input encoding. Final Linear small-init'd; actor init_action_bias on its bias. With n_tokens=100/3 stride-2 layers the token axis is 100→50→25→13.",
+        "conv_channels": 64,
+        "n_conv_layers": 3,
+        "conv_kernel": 5,
+
+        "_note_rl_heads": "Actor logits (B,n_actions) + distributional critic Q (B,n_actions,n_quantiles), each from H2 via a SEPARATE Conv1d-over-tokens trunk → flatten → Linear. init_action_bias = [wait_bias, press_bias]; [0.0,-1.5] gives initial P(press)≈0.18.",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "init_action_bias": [0.0, -1.5]
+        }
+    },
+
+    "ppo": {
+        "_comment": "PAC actor loss (MPO E-step + BC) + distributional QR-DQN critic + prioritized episode replay. RL ONLY — no recon, no PC, no pretrain.",
+        "iters": 5000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 3e-4,
+        "n_epochs": 4,
+        "grad_clip": 0.5,
+
+        "value_coef": 0.5,
+        "entropy_coef": 0.01,
+        "_note_energy_coef": "ENERGETIC MAINTENANCE COST (v12_part2). Adds energy_coef * mean over valid steps of mean||D_t||^2 to the TRAINING OBJECTIVE — the 'cost to maintain' a deformed codebook. This is a penalty on the encoder dynamics, NOT a cost in the agent's reward/return: the task gradient (which reaches the codebook through the readout output Z) must OVERCOME this penalty to justify holding a deformation, so the model deforms only where it improves task performance more than it costs. (Deliberately NOT folded into the return: the deformation D is internal and the wait/press action cannot control it, so a return cost would just push the policy to end episodes early instead of adapting less.) Raise it to push harder toward the static codebook, lower it to let the codebook adapt more freely; 0 disables. Applied in both burn-in and acting phases; uses the plain valid-step mask (not PER weights).",
+        "energy_coef": 0.01,
+        "qr_kappa": 1.0,
+        "gamma": 0.99,
+
+        "_note_pac_actor": "PAC (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. Discrete MPO E-step is closed-form: q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]; M-step + BC blend gives L_actor = (1−α)·[−Σ_a q(a|s)·log π_θ(a|s)] + α·[−log π_θ(a_t|s)]. η = mpo_temperature, α = bc_alpha.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+
+        "_note_target_network": "PAC target network θ' (Springenberg et al. 2024, §3.2): the critic's distributional TD target AND the MPO E-step reference policy π_θ' BOTH come from a periodically hard-copied, time-lagged copy of θ. target_update_period = hard-copy θ→θ' every N optimizer steps; 0 disables (online bootstrap). The main stabilizer for the bootstrapped actor-critic; was missing in the original implementation.",
+        "target_update_period": 100,
+
+        "_note_burn_in": "Burn-in / wait-pretrain (v3's recon_pretrain_iters, restored 2026-06-06). For the first burn_in_iters iterations the agent is FORCED to wait (action=0) so episodes run full-length, and only the critic is trained with the actor FROZEN at init — warming up the value function and recurrent representation on clean full trajectories before the policy acts. v5 has no decoder/recon (and no contrastive), so the critic/representation warm up alone. 0 disables.",
+        "burn_in_iters": 20,
+
+        "_note_per": "Prioritized episode replay (Schaul et al. 2016, episode-level). Fresh on-policy episodes are augmented with per_n_replay replay episodes sampled ∝ priority^per_alpha (priority = mean per-step quantile-Huber error, clipped at per_priority_clip×median). IS weights (1/(N·p))^β with β annealed per_beta_start→per_beta_end over the run. per_n_replay=0 disables replay.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

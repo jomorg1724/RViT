@@ -1,0 +1,23 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v5_part2/v5p2_analysis_snapshot.pt (iter=4999) device=cpu
+[collect] 2400 forced-wait trials ...
+[collect] done: T=29, B=2400, change-trials=1278
+  cue_color          peak=1.000
+  cue_proportion     peak=1.000
+  cue_prop_reg       peak=1.000
+  change_location    peak=0.904
+  change_magnitude   peak=0.539
+  change_onset       peak=0.770
+  abs_time (h2_mean pooled) R^2=0.996 (shuffle -0.002)
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/tables/exp3_decoding.json
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/tables/exp3_summary.csv
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/tables/exp3_change_location_by_source.csv
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/figs/exp3_temporal_decoding.png
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v5_part2/analysis/deepdive/figs/exp3_change_location_sources.png
+[change_location by source]
+    h1_mean            peak=0.449 (shuffle 0.273)
+    h2_mean            peak=0.464 (shuffle 0.265)
+    h1_quad            peak=0.856 (shuffle 0.290)
+    h2_quad            peak=0.904 (shuffle 0.269)
+    actor_cls          peak=0.810 (shuffle 0.283)
+    critic_press_cls   peak=0.825 (shuffle 0.260)
+[done]

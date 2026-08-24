@@ -1,0 +1,89 @@
+{
+    "_comment": "RViT+ V12_PART3 configuration: an EMA codebook (a buffer, NOT gradient-learned) WRITTEN by a gated image-content stream. CONV-FREE, RL-ONLY. Redesigned 2026-06-17 (user design) after earlier EMA versions collapsed to always-WAIT. Per frame, three recurrent objects (readout key-memory H2, write-stream memory H3, EMA codebook C_base). (1) WRITE STREAM (a transformer+LSTM that writes image content to the codebook): Q3=W_q3*C_base (queries from the codebook), K3=W_k3*H3 (keys from the write-stream memory), V3=W_v3*X (values from the IMAGE); Z3=W_o3*softmax(Q3 K3'/sqrt(d)) V3 + FFN3; H3<-LSTM3(Z3); gate=sigmoid(W_g*H3); write=gate*H3; C_t=C_base+write ('add gated H3 to the codebook'). The GATE is the throttle: closing it -> C_t=C_base (relaxation, replaces the old decay). (2) READOUT over C_t (v12): Q=W_q*X, K=W_k*H2, V=C_t; Z=W_o*(softmax(QK'/sqrt(d)/tau) @ C_t)+FFN; H2<-LSTM2(X+Z); actor+critic read Z. (3) EMA CONSOLIDATION: C_base <- (1-r)*C_base + r*mean(C_t) = C_base + r*mean(gate*H3) (target is C_t, not the write alone, so C_base keeps scale + accumulates the write). A WARMED gate-openness penalty (gate_coef) is the energy cost. C_base inits at ZERO (built only by consolidation); perception is gradient-grounded through the write (Z->C_t->write->H3->LSTM3->X), which avoids the collapse. WATCH: press rate>0 + correct>chance (collapse gone) AND ||C_base-init|| climbing + gate openness FALLING as content consolidates. Priority: CLI arg > this config > script default.",
+
+    "run": {
+        "_note_init_mode": "fresh = random init (checkpoint_path ignored); warm_start = partial load; resume = strict load. v12_part3 is a NEW architecture (adaptive codebook + EMA-consolidated resting table) — start FRESH. NOTE: the resting codebook is a BUFFER, so it IS in the state_dict and is saved/loaded on resume (the EMA momentum persists). (Set to resume ONLY after a v12_part3 checkpoint exists; running fresh re-trains from scratch AND overwrites the saved checkpoint.)",
+        "init_mode": "fresh",
+        "_note_checkpoint_location": "checkpoint_dir points OUTSIDE the repo (~/rvit_plus_checkpoints/v12_part3) on purpose: the AttentionManuscript repo is a Google Drive sync root and Drive was observed rewriting checkpoints mid-session, which can corrupt a run. Keep live checkpoints in a non-synced home dir. NOTE: this is a SEPARATE dir from v12 (~/rvit_plus_checkpoints/v12) so it never collides with a v12 run.",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/v12_part3/rvit_plus_v12_part3_rl_latest.pt",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/v12_part3",
+        "seed": 0,
+        "device": "",
+        "log_every": 5,
+        "save_every": 200
+    },
+
+    "environment": {
+        "_comment": "ChangeDetectionEnv parameters — matched to the v3/HRA defaults for apples-to-apples comparison.",
+        "min_change_time": 11,
+        "max_change_time": 25
+    },
+
+    "model": {
+        "_comment": "Conv-free patch + gated-write-stream encoder (LSTM3 write stream with V=image + per-element gate + EMA codebook + soft-attention readout LSTM2) + 1D-conv actor/critic heads.",
+        "_note_patch": "patch_size must divide the 50x50 image: {1,2,5,10,25,50}. patch_size=5 → 10x10 grid = 100 tokens (each 25x25 Gabor quadrant = a 5x5 patch block).",
+        "patch_size": 5,
+        "_note_patch_hidden": "The raw flattened patch is small (patch_dim = C*p*p = 3*5*5 = 75). A per-patch MLP (Linear→GELU→Linear→LayerNorm) of hidden width patch_hidden expands it up to d_model. Default 128 = d_model.",
+        "patch_hidden": 128,
+        "d_model": 128,
+        "d_mem": 128,
+        "_note_d_model": "d_model = transformer/token width; d_mem = LSTM hidden = recurrent-state width the heads read. MUST be equal (128): memory (H1,H2) is concatenated into the d_model token stream as cross-attention keys/values. LSTM1 ingests the d_model attention output Z; later LSTMs ingest the previous d_mem hidden.",
+        "_note_tx": "tx_heads heads in BOTH attention blocks (default 1). WRITE STREAM (stream 3): Q3=W_q3*C_base (queries from the codebook), K3=W_k3*H3 (keys from the write-stream LSTM memory), V3=W_v3*X (values from the image patches); Z3=W_o3*softmax(Q3 K3'/sqrt(d)) V3 + FFN3; H3<-LSTM3(Z3); gate=sigmoid(W_g*H3); write=gate*H3; C_t=C_base+write. READOUT block (v12): Q=W_q*X, K=W_k*H2, V=C_t; weights=softmax(QK'/sqrt(d)/tau); Z=W_o*(weights @ C_t)+FFN, NO X-residual; H2<-LSTM2(X+Z). A shared spatial positional embedding (slot n ↔ patch n ↔ memory token n) feeds all projections.",
+        "tx_heads": 1,
+        "tx_layers": 1,
+        "_note_n_lstm": "Config parity only — the architecture is FIXED with TWO LSTMs: LSTM2 (readout key-memory H2 ← X+Z) and LSTM3 (write-stream memory H3 ← Z3). The codebook C_base is an EMA BUFFER (NOT a gradient parameter, inits at ZERO) — see ppo.codebook_ema_rate. The heads read the readout output Z (rec=[Z]).",
+        "n_lstm": 1,
+        "_note_temperature": "Softmax temperature τ for the READOUT attention over the codebook (Z = W_o*(softmax(QK'/sqrt(d)/τ) @ C_t)+FFN). 1.0 = standard; lower = sharper (more peaked slot selection).",
+        "temperature": 1.0,
+        "_note_head": "Actor & critic decoders are 1D-CONV, BOTH reading the transformer output Z arranged as (B, d_model channels, n_tokens length), run through n_conv_layers stride-2 Conv1d layers (kernel conv_kernel, conv_channels each) over the TOKEN axis, then flatten + Linear. PRESERVES the spatial token layout. No CLS, no action-as-input encoding. Final Linear small-init'd; actor init_action_bias on its bias. With n_tokens=100/3 stride-2 layers the token axis is 100→50→25→13.",
+        "conv_channels": 64,
+        "n_conv_layers": 3,
+        "conv_kernel": 5,
+
+        "_note_rl_heads": "Actor logits (B,n_actions) + distributional critic Q (B,n_actions,n_quantiles), each from H2 via a SEPARATE Conv1d-over-tokens trunk → flatten → Linear. init_action_bias = [wait_bias, press_bias]; [0.0,-1.5] gives initial P(press)≈0.18.",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "init_action_bias": [0.0, -1.5]
+        }
+    },
+
+    "ppo": {
+        "_comment": "PAC actor loss (MPO E-step + BC) + distributional QR-DQN critic + prioritized episode replay. RL ONLY — no recon, no PC, no pretrain.",
+        "iters": 50000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 3e-4,
+        "n_epochs": 4,
+        "grad_clip": 0.5,
+
+        "value_coef": 0.5,
+        "entropy_coef": 0.01,
+        "_note_gate_coef": "GATE ('energy') COST (v12_part3). Penalizes the write-gate openness mean(gate) — the cost of writing to the codebook. WARMED IN: silent for the first gate_warmup_iters (so the gated write flows freely and grounds the readout while C_base is still ~0), then ramps linearly to gate_coef by gate_ramp_end_iter, biasing the gate CLOSED so the write relaxes (C_t -> C_base) once content has consolidated into C_base. The gate replaces the old leaky-integrator decay (closing it = the codebook falling back to resting) and the old ||D||^2 penalty. Default 0.001; raise to close harder.",
+        "gate_coef": 0.0001,
+        "gate_warmup_iters": 2000,
+        "gate_ramp_end_iter": 4000,
+        "_note_codebook_ema_rate": "CODEBOOK CONSOLIDATION (v12_part3, VQ-VAE-EMA). The codebook C_base is a BUFFER, NOT gradient-learned (inits at ZERO). After each update it is moved by a slow EMA toward the WRITTEN codebook C_t: C_base <- (1-r)*C_base + r*mean_over_valid(C_t) = C_base + r*mean(gate*H3). The EMA target is C_t (NOT the write gate*H3 alone) so C_base keeps its scale and ACCUMULATES the gated write rather than decaying toward the near-zero write when the gate closes. The write carries processed image content (V3=W_v3*X) and is gradient-grounded (Z->C_t->write->H3->LSTM3->X), so perception is reliable and C_base fills with real structure — fixing the v1 always-WAIT collapse (where C_base stayed at random init, ||C_base|| 11.4->10.9). r=codebook_ema_rate VERY SMALL, default 2e-3. Applied once per ppo_update, no_grad. Logged as cbΔ; WATCH ||C_base - init|| climb (success signal).",
+        "codebook_ema_rate": 0.02,
+        "qr_kappa": 1.0,
+        "gamma": 0.99,
+
+        "_note_pac_actor": "PAC (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. Discrete MPO E-step is closed-form: q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]; M-step + BC blend gives L_actor = (1−α)·[−Σ_a q(a|s)·log π_θ(a|s)] + α·[−log π_θ(a_t|s)]. η = mpo_temperature, α = bc_alpha.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+
+        "_note_target_network": "PAC target network θ' (Springenberg et al. 2024, §3.2): the critic's distributional TD target AND the MPO E-step reference policy π_θ' BOTH come from a periodically hard-copied, time-lagged copy of θ. target_update_period = hard-copy θ→θ' every N optimizer steps; 0 disables (online bootstrap). The main stabilizer for the bootstrapped actor-critic; was missing in the original implementation.",
+        "target_update_period": 100,
+
+        "_note_burn_in": "Burn-in / wait-pretrain (v3's recon_pretrain_iters, restored 2026-06-06). For the first burn_in_iters iterations the agent is FORCED to wait (action=0) so episodes run full-length, and only the critic is trained with the actor FROZEN at init — warming up the value function and recurrent representation on clean full trajectories before the policy acts. v5 has no decoder/recon (and no contrastive), so the critic/representation warm up alone. 0 disables.",
+        "burn_in_iters": 20,
+
+        "_note_per": "Prioritized episode replay (Schaul et al. 2016, episode-level). Fresh on-policy episodes are augmented with per_n_replay replay episodes sampled ∝ priority^per_alpha (priority = mean per-step quantile-Huber error, clipped at per_priority_clip×median). IS weights (1/(N·p))^β with β annealed per_beta_start→per_beta_end over the run. per_n_replay=0 disables replay.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

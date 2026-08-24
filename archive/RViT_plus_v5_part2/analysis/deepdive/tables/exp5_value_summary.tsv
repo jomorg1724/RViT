@@ -1,0 +1,8 @@
+colour	reward	V@cue(t1)	V@change	V@peak	qadv_zero_cross_t
+red	5	3.829	4.718	4.980	23
+green	3	2.241	3.005	3.005	20
+blue	1	0.740	0.932	2.222	21
+no-change	-	2.220	2.337	2.466	-
+
+calibration (argmax MC return-to-go vs V): slope=1.007	intercept=0.032	R2=0.655	n=30984
+critic entropy pre-change=0.469	post-change=0.558

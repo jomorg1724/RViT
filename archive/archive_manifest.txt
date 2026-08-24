@@ -1,0 +1,74 @@
+﻿# AttentionManuscript archive manifest
+# created: 2026-08-20 21:13:44
+# rule: archive everything not accessed or modified since 2026-07-20 21:13 (1 month)
+# kept (wiki + system): research_db, README.md, RVIT_PLUS_NOTES.md, MODEL_DESIGN.md, RVIT_PLUS_DESIGN.md, desktop.ini, archive
+# archived: 68 items
+
+.claude  |  write=2026-05-17 14:47  access=2026-05-26 06:42
+.hermes  |  write=2026-07-11 08:52  access=2026-07-11 08:52
+.pytest_cache  |  write=2026-07-11 09:07  access=2026-07-11 09:07
+.venv  |  write=2026-05-20 19:01  access=2026-05-26 06:42
+_vizdoom.ini  |  write=2026-06-14 10:25  access=2026-06-14 10:25
+AGENT_HANDOFF  |  write=2026-07-03 20:55  access=2026-07-03 20:55
+agents  |  write=2026-05-25 09:00  access=2026-05-26 06:43
+analysis_t29  |  write=2026-06-23 08:13  access=2026-06-23 08:13
+battery_sweep_results  |  write=2026-07-05 07:13  access=2026-07-18 12:31
+Critique  |  write=2026-05-17 19:42  access=2026-05-26 06:42
+HRA  |  write=2026-05-20 18:22  access=2026-05-26 06:42
+Prism  |  write=2026-05-12 19:49  access=2026-05-26 06:42
+PrismV2  |  write=2026-05-12 19:46  access=2026-05-26 06:42
+Rebuild  |  write=2026-05-25 22:17  access=2026-05-26 06:42
+Reconstruction  |  write=2026-05-30 14:06  access=2026-05-30 14:06
+reports  |  write=2026-06-19 20:28  access=2026-07-19 13:23
+requirements.txt  |  write=2026-07-11 11:05  access=2026-07-11 11:05
+requirements-dev.txt  |  write=2026-07-11 09:08  access=2026-07-11 09:08
+runs  |  write=2026-07-11 11:31  access=2026-07-11 11:31
+RViT_plus  |  write=2026-05-25 20:17  access=2026-05-26 06:42
+RViT_plus_affine2lstm_jepa  |  write=2026-06-26 18:20  access=2026-06-26 18:20
+RViT_plus_battery  |  write=2026-06-21 09:10  access=2026-06-21 09:10
+RViT_plus_conv  |  write=2026-06-22 13:25  access=2026-06-22 13:25
+RViT_plus_dmd_transformer  |  write=2026-06-27 09:15  access=2026-06-27 09:15
+RViT_plus_jump  |  write=2026-06-27 21:13  access=2026-06-27 21:13
+RViT_plus_jump_softmax  |  write=2026-06-28 14:55  access=2026-06-28 14:55
+RViT_plus_paper  |  write=2026-06-22 06:48  access=2026-06-22 06:48
+RViT_plus_paper_affine2lstm  |  write=2026-06-26 17:49  access=2026-06-26 17:49
+RViT_plus_paper_jepa  |  write=2026-06-28 18:34  access=2026-06-28 18:34
+RViT_plus_paper_jepa_conv  |  write=2026-06-29 16:57  access=2026-06-29 16:57
+RViT_plus_paper_jepa_fr  |  write=2026-06-28 20:54  access=2026-06-28 20:54
+RViT_plus_paper_jepa_grid9  |  write=2026-06-29 21:39  access=2026-07-18 12:34
+RViT_plus_paper_jepa_smem  |  write=2026-06-29 13:56  access=2026-06-29 13:56
+RViT_plus_paper_softmaxhead  |  write=2026-06-28 16:01  access=2026-06-28 16:01
+RViT_plus_recur  |  write=2026-06-28 13:16  access=2026-06-28 13:17
+RViT_plus_setsize9  |  write=2026-06-20 09:46  access=2026-06-20 09:46
+RViT_plus_setsize9_broadcast  |  write=2026-06-20 13:04  access=2026-06-20 13:04
+RViT_plus_setsize9_v12  |  write=2026-06-20 20:00  access=2026-06-20 20:00
+RViT_plus_triplet_codebook  |  write=2026-06-26 19:43  access=2026-06-26 19:43
+RViT_plus_v11  |  write=2026-06-13 09:42  access=2026-06-13 09:42
+RViT_plus_v11_broadcast  |  write=2026-06-20 12:34  access=2026-06-20 12:34
+RViT_plus_v11_part2  |  write=2026-06-14 09:21  access=2026-06-14 09:21
+RViT_plus_v11_part2_broadcast  |  write=2026-06-20 12:15  access=2026-06-20 12:15
+RViT_plus_v11_part3  |  write=2026-06-14 10:51  access=2026-06-14 10:51
+RViT_plus_v11_part3_broadcast  |  write=2026-06-20 12:33  access=2026-06-20 12:33
+RViT_plus_v11_part4  |  write=2026-06-14 18:46  access=2026-06-14 18:46
+RViT_plus_v11_part4_broadcast  |  write=2026-06-20 12:34  access=2026-06-20 12:34
+RViT_plus_v11_part5  |  write=2026-06-14 19:34  access=2026-06-14 19:34
+RViT_plus_v11_part5_broadcast  |  write=2026-06-20 12:33  access=2026-06-20 12:33
+RViT_plus_v12  |  write=2026-06-15 18:07  access=2026-06-15 18:07
+RViT_plus_v12_part2  |  write=2026-06-16 18:35  access=2026-06-16 18:35
+RViT_plus_v12_part3  |  write=2026-06-16 20:00  access=2026-06-16 20:00
+RViT_plus_v13  |  write=2026-06-18 20:27  access=2026-06-18 20:27
+RViT_plus_v14  |  write=2026-06-19 10:36  access=2026-06-19 10:36
+RViT_plus_v15  |  write=2026-06-19 19:45  access=2026-06-19 19:45
+RViT_plus_v2  |  write=2026-05-25 21:24  access=2026-05-26 06:42
+RViT_plus_v3  |  write=2026-05-30 08:34  access=2026-05-30 08:34
+RViT_plus_v4  |  write=2026-06-03 20:12  access=2026-06-03 20:12
+RViT_plus_v5  |  write=2026-06-03 21:02  access=2026-06-03 21:02
+RViT_plus_v5_part2  |  write=2026-06-08 14:49  access=2026-06-08 14:49
+RViT_plus_v7  |  write=2026-06-09 21:47  access=2026-06-09 21:47
+RViT_plus_v8  |  write=2026-06-10 20:43  access=2026-06-10 20:43
+RViT_plus_v8_part2  |  write=2026-06-12 19:30  access=2026-06-12 19:30
+RViT_plus_v8_part3  |  write=2026-06-13 10:28  access=2026-06-13 10:28
+RViT_plus_v9  |  write=2026-06-11 21:41  access=2026-06-11 21:41
+v10_VizdoomArena  |  write=2026-06-12 15:45  access=2026-06-12 15:45
+v6_VizdoomArena  |  write=2026-06-09 21:01  access=2026-06-09 21:01
+VDA4_memory_decay  |  write=2026-07-13 17:48  access=2026-07-13 17:48

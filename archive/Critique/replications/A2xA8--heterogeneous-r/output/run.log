@@ -1,0 +1,37 @@
+================================================================
+VALIDATION — spread=0 reduces to the single-r model
+  C2 peak (homog): VDA*=0.0771 at r_cued=0.398   [paper Fig4 ~0.080 @ r≈0.3; run-010/012 0.0769–0.0797]
+  C1 CF (homog) at r=0.3/1.0/3.2: {'r=0.3': 0.8662, 'r=1.0': 0.7287, 'r=3.2': 0.6403}   [run-003: 0.85/0.73/0.64]
+================================================================
+(a) CRITICALITY of equal-split on the uncued simplex
+  cell: V=0.5 v=5 variant A, r_cued=0.4, α*≈1.000 (B≈0.000)
+  spread=0.0  uncued r_i=[0.4, 0.4, 0.4]
+      free partials g_i = [0.39942, 0.39942, 0.39942]
+      tangent grad g_i−mean = [0.0, 0.0, 0.0]   ||tang||=0.00e+00
+  spread=0.3  uncued r_i=[0.28, 0.4, 0.52]
+      free partials g_i = [0.4568, 0.39941, 0.35566]
+      tangent grad g_i−mean = [0.052846, -0.004548, -0.048298]   ||tang||=7.17e-02
+================================================================
+(b) ALLOCATION DEVIATION  ΔR = V(simplex-opt) − V(equal)
+  b1) COST-DOMINANT (r_cued=0.4): expect ΔR small, ∝ var(r_i)
+     spread=0.0 var(r_i)=0.00000  ΔR=0.000e+00  best_uncued=None
+     spread=0.1 var(r_i)=0.00107  ΔR=0.000e+00  best_uncued=None
+     spread=0.2 var(r_i)=0.00427  ΔR=0.000e+00  best_uncued=None
+     spread=0.3 var(r_i)=0.00960  ΔR=0.000e+00  best_uncued=None
+  b2) BENEFIT-DOMINANT (r_cued=3.0, V=0.5,v=5): expect α*→1, B→0, ΔR≈0
+     α*≈1.000  B≈0.000  ΔR(±30%)=0.000e+00
+================================================================
+(c) C2 REFRAMING — VDA-vs-r_cued peak under uncued spread
+  spread=0.0  VDA*=0.0771 @ r_cued=0.398
+  spread=0.1  VDA*=0.0771 @ r_cued=0.398
+  spread=0.2  VDA*=0.0771 @ r_cued=0.398
+  spread=0.3  VDA*=0.0770 @ r_cued=0.398
+  larger spreads (uncued r_i = r_cued·{1/k,1,k}):
+     k=1.5: VDA*=0.0798 @ r_cued=0.355
+     k=3.0: VDA*=0.0765 @ r_cued=0.355
+================================================================
+C1 contested corner (r_cued=10, V=0.25, v=4, variant B)
+  spread=0.0  CF=0.3040  α*=0.980   [additive homog CF≈0.304 (run-003/011)]
+  spread=0.3  CF=0.3055  α*=0.980   [additive homog CF≈0.304 (run-003/011)]
+================================================================
+results.json written.

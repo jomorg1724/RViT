@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "last_run_id": "2C4E6A80-1D3F-4B52-9C61-7A84E2F5B903",
+  "last_run_ended": "2026-05-31T14:30:00Z",
+  "runs_completed": 14,
+  "sections_written": ["intro", "model", "results-4.1", "results-4.2", "results-4.3", "results-4.4", "discussion", "methods", "supplementary", "abstract"],
+  "coherence_passes_done": 3,
+  "firewall_clean": true,
+  "firewall_violations_outstanding": 0,
+  "gaps_open": ["G-001"],
+  "gaps_closed": [],
+  "manuscript_compiles": true,
+  "manuscript_pages": 33,
+  "open_task_ids": ["SY-014"],
+  "done_task_ids": ["SY-001","SY-002","SY-003","SY-004","SY-005","SY-006","SY-007","SY-008","SY-009","SY-010","SY-011","SY-012","SY-013","SY-015"],
+  "blocked_task_ids": [],
+  "next_task_id_counter": 16,
+  "next_gap_id_counter": 2,
+  "bootstrap_complete": true,
+  "prompt_version_observed_at_end_of_run": "0.2"
+}

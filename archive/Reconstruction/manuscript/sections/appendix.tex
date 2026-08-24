@@ -1,0 +1,697 @@
+% =====================================================================
+% supplementary.tex
+% Heavy derivations and extension analyses supporting the main text:
+%   - the correlated no-false-alarm integral and its monotonicity
+%   - the closed-form value-directed-attention escape threshold
+%   - symmetric recovery at unit benefit/cost ratio
+%   - the power-mean conservation family
+% =====================================================================
+
+\appendix
+\section{Supplementary derivations and extensions}
+\label{sec:appendix}
+
+This material derives the results used in the main text and develops the
+model's scope. Section~\ref{sec:supp-decorrelation} derives the
+one-dimensional integral for the no-false-alarm probability under
+correlated decision noise and establishes its monotonicity in the
+correlation. Section~\ref{sec:supp-escape} derives the closed-form
+escape threshold for value-directed attention and extends it across the
+correlation family. Section~\ref{sec:supp-symmetric} records the exact
+recovery of the symmetric model at unit benefit/cost ratio.
+Section~\ref{sec:supp-conservation} develops the one-parameter
+conservation family that generalises the benefit/cost weighting and
+establishes the invariances on which the headline results rest.
+Throughout, $\varphi$ is the standard normal density, $\Phinorm$ its
+cumulative distribution function, and $b_i := c_i + \dprime_i/2$ the
+$z$-score the no-change decision variable must stay below at location
+$i$.
+
+% ---------------------------------------------------------------------
+\subsection{The correlated no-false-alarm probability and its
+monotonicity}
+\label{sec:supp-decorrelation}
+
+The only cross-location term in the expected reward
+\eqref{eq:expected-reward} is the probability $\PnoFA$ that no location
+produces a false alarm on a no-change trial
+(Section~\ref{sec:model-reward}). Under independent per-location
+decision variables this is the product
+\eqref{eq:pnofa-indep}; here we derive its exact form when the decision
+variables share an equicorrelation $\corr$ and show that admitting
+positive correlation can only raise it.
+
+\paragraph{The exact one-dimensional reduction.}
+Let the no-change decision variables be jointly Gaussian with
+standardised marginals and equicorrelation, as in
+\eqref{eq:equicorr-cov}. The one-factor representation
+\begin{equation}
+  X_i \;=\; \mu_i \,+\, \sqrt{\corr}\;Z \,+\, \sqrt{1 - \corr}\;\varepsilon_i,
+  \qquad
+  Z, \varepsilon_1, \dots, \varepsilon_\Nloc
+  \stackrel{\text{iid}}{\sim} \mathcal{N}(0, 1),
+  \label{eq:one-factor}
+\end{equation}
+with $\mu_i = -\dprime_i/2$, reproduces $\operatorname{Var}(X_i) = 1$
+and $\operatorname{Cov}(X_i, X_j) = \corr$ for $i \neq j$, and makes the
+$X_i$ conditionally independent given the shared latent $Z$. Conditional
+on $Z = z$, the per-location no-false-alarm event $\{X_i \le c_i\}$ has
+probability
+\begin{equation}
+  \Pr(X_i \le c_i \mid Z = z)
+  \;=\;
+  \Phinorm\!\left(\frac{c_i - \mu_i - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+  \;=\;
+  \Phinorm\!\left(\frac{b_i - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right).
+  \label{eq:conditional-noFA}
+\end{equation}
+Multiplying across the conditionally independent locations and
+integrating $Z$ out against $\varphi$ gives the exact one-dimensional
+integral \eqref{eq:pnofa-rho}. Equation~\eqref{eq:pnofa-rho} holds for
+any $\Nloc$ and any $\corr \in [0, 1)$: equicorrelation collapses the
+$\Nloc$-dimensional orthant integral to a single dimension, with no
+multivariate-normal cumulative distribution function required. At
+$\corr = 0$ the integrand of \eqref{eq:pnofa-rho} is constant in $z$ and
+the integral reduces to the independent product
+\eqref{eq:rho-zero-recovery}. The model evaluates
+\eqref{eq:pnofa-rho} by $64$-node Gauss--Hermite quadrature; with the
+substitution $z = \sqrt{2}\,t$ the integrand carries weight $e^{-t^2}$,
+and the $64$-node rule agrees with a $128$-node reference to better than
+$10^{-15}$ across the operating band $\corr \in
+\{0, 0.05, 0.1, 0.2, 0.3, 0.4\}$.
+
+\paragraph{Monotonicity in the correlation.}
+\begin{proposition}[Orthant monotonicity]
+\label{prop:orthant-monotone}
+For jointly Gaussian decision variables with standardised marginals and
+equicorrelation $\corr \in [0, 1)$, the no-false-alarm probability
+$\PnoFA(\corr)$ of \eqref{eq:pnofa-rho} is non-decreasing in $\corr$ at
+every fixed threshold pair $(b_c, b_u)$, with strict increase for
+$\corr > 0$ at finite thresholds:
+\begin{equation}
+  \PnoFA(\corr) \;\ge\; \PnoFA(0)
+  \;=\; \Phinorm(b_c)\,\Phinorm(b_u)^{\Nloc - 1}
+  \qquad \forall\,\corr \in [0, 1).
+  \label{eq:orthant-monotone}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Equation~\eqref{eq:orthant-monotone} is the equicorrelated case of
+Slepian's monotonicity inequality for Gaussian orthant probabilities,
+which states that $\Pr\!\big(\bigcap_i \{X_i \le c_i\}\big)$ is
+non-decreasing in each off-diagonal correlation entry at fixed
+thresholds \cite{Slepian1962}; applying it to every pair correlation
+simultaneously gives monotonicity in the common value $\corr$. A modern
+treatment is given in \cite{Tong1990}.
+\end{proof}
+
+Positive correlation relaxes the multiple-comparisons pressure that, in
+the independent model, drives the $\Nloc$-fold no-false-alarm product
+toward zero whenever any single $\Phinorm(b_i)$ falls below one. The
+independent corner $\corr = 0$ is therefore the stiffest-penalty
+boundary of the family: it maximises the aggregate cost of holding
+$\Nloc$ false-alarm rates below threshold at once. Because the
+change-trial bracket of \eqref{eq:expected-reward} involves only
+marginal hit rates and is independent of $\corr$, and the no-change
+bracket scales linearly in $\PnoFA(\corr)$ with the non-negative
+coefficient $\tfrac{1}{2}\CR$, Proposition~\ref{prop:orthant-monotone}
+gives a pointwise reward bound that survives the supremum over criteria.
+
+\begin{corollary}[Per-policy reward monotonicity]
+\label{cor:policy-monotone}
+At any fixed allocation $\alpha$, the criterion-optimised expected reward
+$\Rew^\star(\alpha; \corr) := \sup_{c_c, c_u}
+\mathbb{E}[\Rew](\alpha, c_c, c_u; \corr)$ is non-decreasing in $\corr$.
+Consequently each of the nested policies~P1--P4 of
+Section~\ref{sec:model-policies} has its optimal reward non-decreasing
+in $\corr$.
+\end{corollary}
+
+Corollary~\ref{cor:policy-monotone} bounds the reward \emph{levels} but
+not their \emph{difference}: the value-directed-attention benefit
+$\VDA(\corr) = \Rpone(\corr) - \Rptwo(\corr)$ is the gap between two
+quantities that both rise with $\corr$, and such a gap can move in
+either direction. The sign of $\partial \VDA / \partial \corr$ is
+therefore a property of the model to be determined, not a corollary of
+monotonicity. Two mechanisms compete. Raising $\corr$ inflates
+$\PnoFA(\corr)$ most at liberal criteria, flattening the no-change
+bracket across $(c_c, c_u)$ and \emph{devaluing} the criterion lever;
+this is the channel that drives the criterion fraction $\CF(\corr)$
+downward (Section~\ref{sec:results-criterion}). At the same time, when
+the optimal allocation concentrates attention on the cued location the
+uncued sensitivity falls and the uncued false-alarm rate rises,
+compounded across $\Nloc - 1$ locations through the no-false-alarm
+product; Proposition~\ref{prop:orthant-monotone} shows this aggregate
+penalty is \emph{relaxed} under correlation, making concentration
+cheaper and \emph{amplifying} $\VDA$. The criterion-devaluation channel
+dominates in the cost-dominant regime (small $\Rsens$) and the
+concentration-relaxation channel dominates in the benefit-dominant
+regime (large $\Rsens$), so the sign of $\partial \VDA / \partial \corr$
+flips with $\Rsens$ — the model property reported across the parameter
+plane in Sections~\ref{sec:results-vda-nonmonotonic}
+and~\ref{sec:results-graded}.
+
+% ---------------------------------------------------------------------
+\subsection{Closed-form escape threshold for value-directed attention}
+\label{sec:supp-escape}
+
+Here we derive the escape threshold $\rdagger(\val)$ of
+\eqref{eq:r-dagger}--\eqref{eq:K-u} and extend it across the correlation
+family. The threshold is the value of the benefit/cost ratio below which
+the value-aware optimum is still pinned at uniform allocation
+$\alpha = 1/\Nloc$, and above which the optimiser begins to move
+sensitivity toward the cued location.
+
+\paragraph{Setup at the boundary.}
+At the uniform allocation $\alpha = 1/\Nloc$ the asymmetric sensitivity
+rule of Section~\ref{sec:model-mapping} collapses:
+$\dprime_c = \dprime_u = \dprime_{\mathrm{base}} := \dprimemax\,
+f(1/\Nloc)$, independent of $(\Rsens, \corr)$, because the
+gain bracket $\dprimemax\, f(1/\Nloc) - \dprime_{\mathrm{base}}$ vanishes
+before being weighted by $\benefit(\Rsens)$ or $\cost(\Rsens)$. The
+criterion optimum at this allocation is therefore the joint maximiser of
+the expected reward over a fixed-$\dprime$ landscape that depends on
+$\corr$ only through the correlated no-false-alarm term:
+\begin{equation}
+  \bigl(c_c^\star(\corr),\, c_u^\star(\corr)\bigr)
+  \;:=\;
+  \operatorname*{arg\,max}_{(c_c, c_u)}\,
+  \Rew\bigl(\dprime_{\mathrm{base}},\, \dprime_{\mathrm{base}},\,
+           c_c,\, c_u;\, \valid, \val, \Nloc, \CR, \corr\bigr).
+  \label{eq:boundary-crit}
+\end{equation}
+At the headline cell $(\Nloc, \valid, \val) = (4, 0.5, 5)$ with
+$\CR = \valid\val + (1 - \valid) = 3.0$, the optimal pair
+$(c_c^\star, c_u^\star) = (0.10, 1.75)$ at $\corr = 0$ shifts to
+$(0.05, 1.80)$ at $\corr = 0.2$: the cued criterion becomes more liberal
+(a cued false alarm is partially explained away by correlated false
+alarms at the other locations) and the uncued criterion more
+conservative (an uncued false alarm now also degrades the cued
+no-false-alarm joint event).
+
+\paragraph{The correlation-aware gradient integrals.}
+Differentiating $\PnoFA(\corr)$ of \eqref{eq:pnofa-rho} under the
+integral sign — the integrand and its $\dprime$-derivatives are bounded,
+so dominated convergence applies — gives two one-dimensional
+Gauss--Hermite integrals,
+\begin{align}
+  I_c(b_c, b_u; \corr, \Nloc)
+  &\;:=\;
+  \int_{-\infty}^{\infty}
+  \frac{1}{\sqrt{1 - \corr}}\,
+  \varphi\!\left(\frac{b_c - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+  \Phinorm\!\left(\frac{b_u - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)^{\Nloc - 1}
+  \varphi(z)\,dz,
+  \label{eq:gh-grad-c}
+  \\[2pt]
+  I_u(b_c, b_u; \corr, \Nloc)
+  &\;:=\;
+  \int_{-\infty}^{\infty}
+  \frac{1}{\sqrt{1 - \corr}}\,
+  \Phinorm\!\left(\frac{b_c - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+  \Phinorm\!\left(\frac{b_u - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)^{\Nloc - 2}
+  \varphi\!\left(\frac{b_u - \sqrt{\corr}\,z}{\sqrt{1 - \corr}}\right)
+  \varphi(z)\,dz.
+  \label{eq:gh-grad-u}
+\end{align}
+At $\corr = 0$ these reduce to the independent products
+\begin{equation*}
+  I_c^0 = \varphi(b_c)\,\Phinorm(b_u)^{\Nloc - 1},
+  \qquad
+  I_u^0 = \Phinorm(b_c)\,\Phinorm(b_u)^{\Nloc - 2}\,\varphi(b_u),
+\end{equation*}
+and they share the same Gauss--Hermite nodes used to evaluate
+$\PnoFA(\corr)$ itself.
+
+\paragraph{Boundary first-order condition.}
+The chain-rule expansion of $\partial \Rew / \partial\alpha$ at
+$\alpha = 1/\Nloc^{+}$ collects the asymmetric criterion booking into
+\begin{equation}
+  \frac{\partial \Rew}{\partial\alpha}\bigg|_{1/\Nloc^{+}}\!(\corr)
+  \;=\;
+  \dprimemax\, f'(1/\Nloc)\,
+  \Bigl[\,\benefit(\Rsens)\,K_c(\val; \corr)
+        \;-\; \cost(\Rsens)\,\frac{K_u(\val; \corr)}{\Nloc - 1}\,\Bigr],
+  \label{eq:boundary-foc-rho}
+\end{equation}
+with correlation-aware coefficients
+\begin{align}
+  K_c(\val; \corr)
+  &= \tfrac{1}{4}\Big[\valid\,\val\,
+       \varphi\!\big(\tfrac{\dprime_b}{2} - c_c^\star(\corr)\big)
+       \;+\; \CR\,
+       I_c\bigl(b_c^\star(\corr), b_u^\star(\corr); \corr, \Nloc\bigr)\Big],
+  \label{eq:Kc-rho}
+  \\[2pt]
+  K_u(\val; \corr)
+  &= \tfrac{1}{4}\Big[(1 - \valid)\,
+       \varphi\!\big(\tfrac{\dprime_b}{2} - c_u^\star(\corr)\big)
+       \;+\; (\Nloc - 1)\,\CR\,
+       I_u\bigl(b_c^\star(\corr), b_u^\star(\corr); \corr, \Nloc\bigr)\Big],
+  \label{eq:Ku-rho}
+\end{align}
+where $b_i^\star(\corr) := c_i^\star(\corr) + \dprime_{\mathrm{base}}/2$,
+$\dprime_b \equiv \dprime_{\mathrm{base}}$, and $f'(a) = (1 - f_0)\,h'(a)$.
+The change-trial density terms depend on $\corr$ only through
+$c_i^\star(\corr)$; the no-false-alarm terms $I_c, I_u$ carry the full
+correlation dependence of the quadrature. Both $K_c$ and $K_u$ are
+positive.
+
+\begin{proposition}[Escape threshold under equicorrelation]
+\label{prop:escape-rho}
+Fix $(\Nloc, \valid, \val, \dprimemax, f_0, h, \CR, \corr)$ with
+$\corr \in [0, 1)$, and let $(c_c^\star(\corr), c_u^\star(\corr))$ solve
+\eqref{eq:boundary-crit}. Then the value-aware optimum satisfies
+$\alphacued^\star = 1/\Nloc$ for $\Rsens \le \rdagger(\val; \corr)$ and
+$\alphacued^\star > 1/\Nloc$ for $\Rsens > \rdagger(\val; \corr)$, with
+\begin{equation}
+  \boxed{\;
+    \rdagger(\val; \corr)
+    \;=\;
+    \frac{K_u(\val; \corr)}{(\Nloc - 1)\,K_c(\val; \corr)}.
+  \;}
+  \label{eq:r-dagger-rho}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Setting \eqref{eq:boundary-foc-rho} to zero and dividing out the
+strictly positive prefactor
+$\dprimemax\, f'(1/\Nloc)\,\cost(\Rsens) > 0$ gives
+$\Rsens\, K_c(\val; \corr) = K_u(\val; \corr)/(\Nloc - 1)$, using
+$\benefit(\Rsens)/\cost(\Rsens) = \Rsens$ (which holds for every member
+of the conservation family of Section~\ref{sec:supp-conservation});
+solving for $\Rsens$ gives \eqref{eq:r-dagger-rho}. The corner maximum at
+$\alpha = 1/\Nloc$ becomes a saddle as $\Rsens$ crosses the threshold; a
+one-sided finite-difference check at
+$\Rsens = \rdagger(\val; \corr) \pm 0.05$ confirms the boundary slope
+changes sign at every $(\val, \corr) \in \{1, 2, 3\} \times \{0, 0.2\}$
+tested.
+\end{proof}
+
+\paragraph{Recovery at zero correlation.}
+At $\corr = 0$ the integrand of \eqref{eq:gh-grad-c} loses its
+$z$-dependence and $I_c \to I_c^0$, $I_u \to I_u^0$; the criterion
+optimum \eqref{eq:boundary-crit} reduces to the corresponding optimum at
+$\corr = 0$, so $K_c(\val; 0) = K_c(\val)$ and $K_u(\val; 0) = K_u(\val)$
+of \eqref{eq:K-c}--\eqref{eq:K-u}, and
+Proposition~\ref{prop:escape-rho} reduces to \eqref{eq:r-dagger}. The
+recovery is structural — the integrals collapse term by term — and the
+threshold computed from \eqref{eq:r-dagger-rho} at $\corr = 0$
+reproduces Table~\ref{tab:r-dagger-family} across $\val \in \{1, 2, 3,
+5, 8, 10\}$ to within the criterion-grid resolution
+($\le 5 \times 10^{-4}$ in $\rdagger$).
+
+\paragraph{Drift under correlation.}
+Evaluating \eqref{eq:r-dagger-rho} at the headline cell quantifies how
+the escape threshold moves when correlation is admitted
+(Table~\ref{tab:r-dagger-rho-drift}).
+%
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{r r r r r c}
+    \toprule
+    $\val$ &
+    $\rdagger(\val; 0)$ &
+    $\rdagger(\val; 0.2)$ &
+    $\Delta\rdagger$ &
+    $\%\,\Delta\rdagger$ &
+    sign-match $r^\star$? \\
+    \midrule
+    $1$  & $0.343$ & $0.354$ & $+0.0103$ & $+3.0\%$  & --- (reference) \\
+    $2$  & $0.168$ & $0.173$ & $+0.0051$ & $+3.0\%$  & \checkmark \\
+    $3$  & $0.099$ & $0.113$ & $+0.0132$ & $+13.2\%$ & \checkmark \\
+    $5$  & $0.050$ & $0.058$ & $+0.0077$ & $+15.2\%$ & \checkmark \\
+    $8$  & $0.022$ & $0.029$ & $+0.0066$ & $+29.7\%$ & \checkmark \\
+    $10$ & $0.016$ & $0.019$ & $+0.0030$ & $+18.7\%$ & \checkmark \\
+    \bottomrule
+  \end{tabular}
+  \caption{Drift of the escape threshold under correlation at the
+  headline cell $(\Nloc, \valid, \dprimemax, f_0, h) =
+  (4,\, 0.5,\, 2,\, 0.5,\, \sqrt{\;\cdot\;})$, value-coupled correct
+  rejection, additive conservation. $\rdagger(\val; \corr)$ from
+  \eqref{eq:r-dagger-rho}; $\Delta\rdagger := \rdagger(\val; 0.2) -
+  \rdagger(\val; 0)$. The drift is positive at every cued value,
+  including the value-blind reference $\val = 1$: the regime in which the
+  optimum is pinned at uniform allocation \emph{widens} as correlation
+  grows. The sign of $\Delta\rdagger$ matches the sign of the empirical
+  peak drift $\Delta r^\star$ of Table~\ref{tab:rho-sensitivity} at all
+  five $\val \ne 1$ rows.}
+  \label{tab:r-dagger-rho-drift}
+\end{table}
+%
+Two features follow. First, $\Delta\rdagger(\val) > 0$ at every $\val$:
+the lower edge of the active band moves up under correlation across the
+whole value family, and because the peak of the value-directed-attention
+benefit cannot lie below the escape threshold, the peak must drift up
+with it — the behaviour reported in
+Section~\ref{sec:results-vda-nonmonotonic}. Second, the absolute drift in
+the threshold is bounded by $\le 0.014$ across the family, while the
+empirical peak drift in Table~\ref{tab:rho-sensitivity} reaches $0.13$ at
+$\val = 2$: the peak responds not only to the lower edge but also to the
+upward drift of the value-blind reference threshold (which widens the
+band's upper edge) and to how steeply the optimal allocation climbs above
+uniform once it escapes. Equation~\eqref{eq:r-dagger-rho} pins the
+lower-edge drift exactly; a closed form for the peak location itself,
+which would additionally model the climb of $\alphacued^\star$ above the
+threshold, is a natural further step. The two gradient integrals
+\eqref{eq:gh-grad-c}--\eqref{eq:gh-grad-u} make the concentration-cost
+channel of Section~\ref{sec:supp-decorrelation} analytic on the lower
+edge: the same one-factor reduction that renders $\PnoFA(\corr)$
+tractable renders the boundary slope tractable.
+
+% ---------------------------------------------------------------------
+\subsection{Symmetric recovery at unit benefit/cost ratio}
+\label{sec:supp-symmetric}
+
+At $\Rsens = 1$ the asymmetric benefit/cost weighting
+$\benefit(\Rsens) = 2\Rsens/(\Rsens + 1)$,
+$\cost(\Rsens) = 2/(\Rsens + 1)$ collapses to the symmetric special case
+$\benefit = \cost = 1$, in which a single shared transfer function drives
+both the cued and the uncued sensitivity. We record the recovery at the
+strength the model supports: a real-number identity that holds
+universally, and a bit-exact identity that holds at the validation
+configuration.
+
+\paragraph{The collapse as a real-number identity.}
+The asymmetric sensitivity rule of Section~\ref{sec:model-mapping} writes
+$\dprime_i(\alpha) = \dprime_{\mathrm{base}} + s_i(\Rsens)\,
+(\dprimemax\, f(\alpha) - \dprime_{\mathrm{base}})$ with
+$s_i \in \{\benefit, \cost\}$ according to whether location $i$ is
+attended; at $\Rsens = 1$ both slopes are unit and the expression
+collapses to $\dprime_i(\alpha) = \dprimemax\, f(\alpha)$, the symmetric
+rule. Because the downstream signal-detection, expected-reward, and
+criterion-optimisation stack is a deterministic function of the
+$\dprime$ arrays alone, identical arrays force identical optima.
+
+\begin{proposition}[Real-number recovery at unit ratio]
+\label{prop:symmetric-recovery}
+For every $(\valid, \val, \Nloc, \dprimemax, f_0, h)$ in the model's
+domain and at any correlation $\corr \in [0, 1)$, the asymmetric model
+evaluated at $\Rsens = 1$ produces the same $\dprime$ arrays as the
+symmetric special case $\benefit = \cost = 1$. Consequently the optimal
+cued share, the optimal cued and uncued criteria, the optimal reward, and
+the criterion fraction all match the symmetric baseline as real-number
+identities.
+\end{proposition}
+
+This is a property of the algebra rather than of the numerical
+implementation: the cancellation
+$\dprime_{\mathrm{base}} - \dprime_{\mathrm{base}} = 0$ is the entire
+content of the recovery.
+
+\paragraph{Bit-exact identity at the validation configuration.}
+A sharper statement holds at the configuration used to validate the
+model. The asymmetric code path at $\Rsens = 1$ forms
+$\mathrm{fl}\big(a + \mathrm{fl}(1.0 \cdot \mathrm{fl}(x - a))\big)$ with
+$a = \dprime_{\mathrm{base}}$ and $x = \dprimemax\, f(\alpha)$. Three
+facts compose: (i) $\benefit(1)$ and $\cost(1)$ are the exact binary
+float $1.0$, so the multiplicative slope round-trips identically; (ii)
+Sterbenz's lemma~\cite{Sterbenz1974, Goldberg1991} guarantees
+$\mathrm{fl}(x - a) = x - a$ exactly whenever $a/2 \le x \le 2a$; and
+(iii) at the validation configuration
+$(\Nloc, \dprimemax, f_0, h) = (4, 2.0, 0.5, \sqrt{\;\cdot\;})$, value-coupled
+correct rejection, the baseline is
+$a = \dprimemax(f_0 + (1 - f_0)\,h(1/\Nloc)) = 1.5$ and the swept range
+$x = \dprimemax\, f(\alpha) \in [1.0, 2.0]$ lies inside the Sterbenz band
+$[a/2, 2a] = [0.75, 3.0]$ at every grid point.
+
+\begin{proposition}[Bit-exact symmetric recovery]
+\label{prop:bitexact-recovery}
+Under value-coupled correct rejection at the validation configuration,
+the asymmetric implementation evaluated at $\Rsens = 1$ returns
+$\dprime$ arrays bit-identical to the symmetric implementation; hence the
+optimal cued share and optimal reward match it to zero difference, not
+merely to machine epsilon.
+\end{proposition}
+
+The hypothesis of Proposition~\ref{prop:bitexact-recovery} is sufficient
+but not necessary, and fails once the smallest swept output $\dprimemax\,
+f_0$ drops below $\dprime_{\mathrm{base}}/2$, i.e.\ once
+\begin{equation}
+  f_0 \;<\; \frac{h(1/\Nloc)}{1 + h(1/\Nloc)} \;=\; \frac{1}{3}
+  \qquad (h = \sqrt{\;\cdot\;},\; \Nloc = 4).
+  \label{eq:sterbenz-threshold}
+\end{equation}
+Off-band, bit-identity is lost and the two paths drift at the order of a
+unit in the last place. The universal statement is therefore that the
+symmetric recovery is exact to machine precision; the bit-for-bit
+identity is a structural guarantee of the chosen configuration rather
+than a property of the model.
+
+\paragraph{Unit ratio is the smooth centre of the family.}
+The collapse at $\Rsens = 1$ is the interior of a smooth, two-sided
+family, not a removable singularity. The slope ratio
+$\benefit(\Rsens)/\cost(\Rsens) = \Rsens$ is continuous and
+differentiable through $\Rsens = 1$, with
+$d\benefit/d\Rsens|_{1} = 1/2$ and $d\cost/d\Rsens|_{1} = -1/2$. A
+continuity check at $\Rsens = 1 \pm \epsilon$ confirms that the maximum
+reward difference against the symmetric model scales linearly in
+$|\Rsens - 1|$, with slope $\approx 0.084$ reward units per unit shift.
+Unit ratio is the balanced point of the enhancement-versus-suppression
+trade-off (Definition~\ref{def:three-levers}), the natural null about
+which the value-directed-attention effects of
+Section~\ref{sec:results} are organised. The recovery is invariant to the
+conservation rule: at $\Rsens = 1$ the ratio identity
+$\benefit/\cost = 1$ forces $\benefit = \cost$, and any conservation
+constraint in the family of Section~\ref{sec:supp-conservation} then
+forces $\benefit = \cost = 1$, so
+Propositions~\ref{prop:symmetric-recovery}--\ref{prop:bitexact-recovery}
+hold under every conservation order without modification
+(Corollary~\ref{cor:symmetric-invariance}).
+
+% ---------------------------------------------------------------------
+\subsection{The power-mean conservation family}
+\label{sec:supp-conservation}
+
+The benefit/cost weights satisfy the asymmetry ratio
+$\benefit/\cost = \Rsens$ together with a conservation constraint; the
+main text uses the additive rule $\benefit + \cost = 2$
+(Eq.~\ref{eq:beta-gamma}). This subsection embeds that rule in a
+one-parameter family, derives the family's monotonicity, and establishes
+the two invariances on which the escape threshold and the symmetric
+recovery rest.
+
+\paragraph{The family and its closed-form weights.}
+For $p \in \mathbb{R}$, the power (Hölder) mean of order $p$ on positive
+reals $(x, y)$ is
+\begin{equation}
+  M_p(x, y) \;=\;
+  \begin{cases}
+    \displaystyle \left( \frac{x^p + y^p}{2} \right)^{1/p}, & p \ne 0, \\[4pt]
+    \displaystyle \sqrt{x\,y}, & p = 0,
+  \end{cases}
+  \label{eq:power-mean}
+\end{equation}
+with limiting cases $M_{-\infty} = \min$ and $M_{+\infty} = \max$
+\cite{HLP1934}. The conservation family is the constraint
+$M_p(\benefit, \cost) = 1$ together with $\benefit/\cost = \Rsens$.
+Substituting $\benefit = \Rsens\,\cost$ for $p \ne 0$ gives the
+closed-form weights
+\begin{equation}
+  \boxed{\;
+    \cost(\Rsens; p) \;=\;
+    \left( \frac{2}{\Rsens^{\,p} + 1} \right)^{1/p},
+    \qquad
+    \benefit(\Rsens; p) \;=\; \Rsens\,\cost(\Rsens; p),
+  \;}
+  \label{eq:power-mean-weights}
+\end{equation}
+with the geometric-mean limit $\cost(\Rsens; 0) = 1/\sqrt{\Rsens}$,
+$\benefit(\Rsens; 0) = \sqrt{\Rsens}$. The case $p = 1$ recovers the
+additive rule $\benefit = 2\Rsens/(\Rsens + 1)$,
+$\cost = 2/(\Rsens + 1)$; $p = 0$ is the multiplicative
+(geometric-mean) endpoint $\benefit\cost = 1$. Three identities hold at
+every $p$: $\benefit/\cost = \Rsens$ by construction;
+$\benefit(1; p) = \cost(1; p) = 1$; and
+$\operatorname{sgn}(\benefit - \cost) = \operatorname{sgn}(\Rsens - 1)$.
+
+\paragraph{Monotonicity in the conservation order.}
+The classical power-mean inequality makes $p \mapsto M_p(x, y)$ strictly
+increasing for fixed $x \ne y$ \cite{HLP1934}. Under the constrained form
+$M_p(\benefit, \cost) = 1$, this translates into an exact identity on
+$\partial \ln \cost / \partial p$. Writing
+$L(p) = \ln \cost(\Rsens; p) = (1/p)\ln\!\big(2/(\Rsens^p + 1)\big)$ and
+$\theta_p := \Rsens^p / (\Rsens^p + 1)$, direct differentiation gives
+\begin{equation}
+  \boxed{\;
+    \frac{\partial}{\partial p}\,\ln \cost(\Rsens; p)
+    \;=\;
+    -\frac{1}{p^2}\,
+    \DKL\!\bigl(\,\mathrm{Bern}(\theta_p)\,\big\|\,
+                    \mathrm{Bern}(1/2)\,\bigr),
+  \;}
+  \label{eq:hlp-kl}
+\end{equation}
+where the bracket of the expansion,
+$\ln(2/(\Rsens^p + 1)) + p\,\theta_p \ln \Rsens$, equals
+$\theta_p \ln(2\theta_p) + (1 - \theta_p)\ln(2(1 - \theta_p)) =
+\DKL(\mathrm{Bern}(\theta_p)\,\|\,\mathrm{Bern}(1/2))$. Since
+$\DKL \ge 0$ with equality only at $\theta_p = 1/2$ (i.e.\ $\Rsens = 1$),
+\eqref{eq:hlp-kl} yields, for every $\Rsens \ne 1$ and every
+$p \ne 0$,
+\begin{equation}
+  \frac{\partial \cost}{\partial p}(\Rsens; p) \;<\; 0,
+  \qquad
+  \frac{\partial \benefit}{\partial p}(\Rsens; p)
+  \;=\; \Rsens\,\frac{\partial \cost}{\partial p} \;<\; 0.
+  \label{eq:mono-sign}
+\end{equation}
+Continuity through $p = 0$ holds by series expansion, with
+$\lim_{p \to 0}\partial \ln \cost / \partial p = -(\ln \Rsens)^2 / 8$.
+Both weights therefore increase strictly as the conservation order
+decreases, at every $\Rsens \ne 1$. A finite-difference cross-check of
+\eqref{eq:hlp-kl} across a range of $(\Rsens, p)$ pairs agrees to
+$\le 1.5 \times 10^{-10}$.
+
+\paragraph{The symmetric corner and the recovery at unit ratio.}
+\begin{proposition}[Symmetric-corner identity]
+\label{prop:symmetric-corner}
+For every $p \in \mathbb{R}$ (including $p = 0$),
+$\benefit(1; p) = \cost(1; p) = 1$.
+\end{proposition}
+
+\begin{proof}
+At $\Rsens = 1$, $\Rsens^p = 1$ for every $p$, so
+\eqref{eq:power-mean-weights} gives $\cost = (2/2)^{1/p} = 1$ and
+$\benefit = 1$ for $p \ne 0$; the geometric-mean limit gives
+$\cost = 1/\sqrt{1} = 1$, $\benefit = 1$ at $p = 0$.
+\end{proof}
+
+\begin{corollary}[Conservation-form invariance of the symmetric recovery]
+\label{cor:symmetric-invariance}
+The symmetric recovery of Proposition~\ref{prop:symmetric-recovery} holds
+at every conservation order: at $\Rsens = 1$ and any $p$, the asymmetric
+$\dprime$-map collapses pointwise to the symmetric baseline,
+$\dprime_c(\alpha; 1, p) = \dprime_u\big((1 - \alpha)/(\Nloc - 1); 1, p\big)
+= \dprimemax\, f(\alpha)$.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:symmetric-corner},
+$\benefit(1; p) = \cost(1; p) = 1$ at every $p$, so the $\dprime$-map at
+$\Rsens = 1$ reads $\dprime_c(\alpha; 1, p) = \dprime_{\mathrm{base}} +
+1 \cdot (\dprimemax\, f(\alpha) - \dprime_{\mathrm{base}}) = \dprimemax\,
+f(\alpha)$ with no $p$-dependence; the uncued counterpart is identical.
+The optima then coincide with the symmetric baseline as in
+Proposition~\ref{prop:symmetric-recovery}.
+\end{proof}
+
+\paragraph{Conservation-form invariance of the escape threshold.}
+\begin{proposition}[Escape threshold is conservation-form invariant]
+\label{prop:escape-invariance}
+The escape threshold $\rdagger(\val) = K_u(\val)/[(\Nloc - 1) K_c(\val)]$
+of \eqref{eq:r-dagger} is independent of the conservation order $p$.
+\end{proposition}
+
+\begin{proof}
+\textbf{(Step 1)} At the uniform allocation $\alpha = 1/\Nloc$ the
+$\dprime$-map reads
+$\dprime_c(1/\Nloc; \Rsens, p) = \dprime_{\mathrm{base}} +
+\benefit(\Rsens; p)\,(\dprimemax\, f(1/\Nloc) - \dprime_{\mathrm{base}})
+= \dprime_{\mathrm{base}}$, because the bracket vanishes by the
+definition $\dprime_{\mathrm{base}} := \dprimemax\, f(1/\Nloc)$. The
+vanishing bracket annihilates any value of $\benefit(\Rsens; p)$, so
+$\dprime_c$ at uniform allocation is $p$-independent; the uncued
+per-location allocation is also $1/\Nloc$, so $\dprime_u =
+\dprime_{\mathrm{base}}$ likewise. The pair
+$(\dprime_{\mathrm{base}}, \dprime_{\mathrm{base}})$ is therefore
+independent of $p$ (and of $\Rsens$).
+\textbf{(Step 2)} At this fixed allocation the criterion-optimal pair
+$(c_c^\star, c_u^\star)$ is the argmax of a reward functional whose only
+$p$-dependence entered through $(\dprime_c, \dprime_u)$; by Step 1 those
+are $p$-independent, so the criteria are too.
+\textbf{(Step 3)} The gradient coefficients $K_c(\val), K_u(\val)$ are
+the sensitivity partials of the reward evaluated at the $p$-independent
+$(\dprime_{\mathrm{base}}, \dprime_{\mathrm{base}}, c_c^\star, c_u^\star)$,
+and the functional form depends only on $(\valid, \val, \Nloc, \CR)$;
+hence $K_c, K_u$ and their ratio $\rdagger(\val)$ are $p$-independent.
+\end{proof}
+
+The escape threshold is thus an algebraic invariant of the family: the
+left edge of the active band is fixed across conservation orders, while
+the peak inside the band — set at allocations $\alpha \ne 1/\Nloc$, where
+the gain bracket no longer vanishes — varies with $p$ and is reported as
+a band in Section~\ref{sec:results-vda-nonmonotonic}.
+
+\paragraph{The criterion fraction under the conservation order.}
+The dependence of the criterion fraction on $p$ admits a chain-rule sign
+analysis. With $\CF = (\Rpthree - \Rpone)/(\Rpfour - \Rpone)$
+(Eq.~\ref{eq:cf-def}) and the envelope theorem applied at each policy's
+own optimum, the $p$-partials thread through the $\dprime$-map:
+\begin{equation}
+  \frac{\partial \Rpone}{\partial p}
+  \;=\;
+  \frac{\partial \Rpone}{\partial \dprime_c}\bigg|_{\star}
+  \frac{\partial \dprime_c}{\partial p}
+  \;+\;
+  \frac{\partial \Rpone}{\partial \dprime_u}\bigg|_{\star}
+  \frac{\partial \dprime_u}{\partial p},
+  \label{eq:cf-chain-rule}
+\end{equation}
+with
+\begin{equation}
+  \frac{\partial \dprime_c}{\partial p}
+  = \frac{\partial \benefit}{\partial p}\,
+    \big(\dprimemax\, f(\alpha) - \dprime_{\mathrm{base}}\big),
+  \qquad
+  \frac{\partial \dprime_u}{\partial p}
+  = \frac{\partial \cost}{\partial p}\,
+    \big(\dprimemax\, f((1 - \alpha)/(\Nloc - 1)) - \dprime_{\mathrm{base}}\big).
+  \label{eq:dprime-of-p}
+\end{equation}
+By \eqref{eq:mono-sign}, both $\partial \benefit/\partial p$ and
+$\partial \cost/\partial p$ are negative for $\Rsens \ne 1$; for
+$\alpha \ge 1/\Nloc$ the first bracket of \eqref{eq:dprime-of-p} is
+non-negative and the second non-positive, so the cued and uncued
+sensitivity channels move with opposite sign in $p$.
+
+\begin{proposition}[Criterion-only reward is invariant at uniform
+allocation]
+\label{prop:p3-invariance}
+At the criterion-only policy~P3, fixed at $\alpha = 1/\Nloc$,
+$\partial \Rpthree / \partial p \equiv 0$.
+\end{proposition}
+
+\begin{proof}
+By Step 1 of Proposition~\ref{prop:escape-invariance} the brackets in
+\eqref{eq:dprime-of-p} vanish at $\alpha = 1/\Nloc$, so
+$\partial \dprime_c/\partial p = \partial \dprime_u/\partial p = 0$ and
+\eqref{eq:cf-chain-rule} gives $\partial \Rpthree/\partial p = 0$.
+\end{proof}
+
+Using Proposition~\ref{prop:p3-invariance}, the criterion-fraction
+gradient simplifies to
+\begin{equation*}
+  \frac{\partial \CF}{\partial p}
+  \;=\;
+  \frac{-(\Rpfour - \Rpone)\,\partial_p \Rpone
+        \;-\; (\Rpthree - \Rpone)\,(\partial_p \Rpfour - \partial_p \Rpone)}
+       {(\Rpfour - \Rpone)^2},
+\end{equation*}
+whose sign reduces to a competition between $-\partial_p \Rpone \ge 0$
+and $-(\partial_p \Rpfour - \partial_p \Rpone)$. The uniform inequality
+$|\partial_p \Rpfour| \le |\partial_p \Rpone|$ would make
+$\partial \CF/\partial p \le 0$ pointwise; this holds empirically across
+the full parameter sweep, where swapping the additive rule ($p = 1$) for
+the multiplicative endpoint ($p = 0$) gives $\Delta\CF \le 0$ in every
+one of the $4{,}410$ valid cells, with no reverse flips, doubling the
+fraction of cells with $\CF < 0.5$ from $4.0\%$ to $8.3\%$ while moving
+the median by less than $0.005$. A closed-form proof of the uniform
+inequality is left open: both $\partial_p \Rpone$ and
+$\partial_p \Rpfour$ carry the moving optimum $\alpha^\star(p)$ that
+the chain rule does not collapse.
+
+\paragraph{Scope.}
+The conservation-order analysis is carried at zero correlation; the
+joint dependence on $(p, \corr)$ would compose the power-mean gradient
+\eqref{eq:hlp-kl} with the correlation gradients
+\eqref{eq:gh-grad-c}--\eqref{eq:gh-grad-u} and is a natural further step.
+The analysis assumes a single global benefit/cost ratio and homogeneous
+uncued allocation; relaxing either to per-location heterogeneity or to
+the full $\Nloc$-dimensional allocation simplex leaves the
+conservation weights $(\benefit, \cost)$ entering the per-location
+$\dprime$-map unchanged, so the two relaxations compose with the
+conservation order.

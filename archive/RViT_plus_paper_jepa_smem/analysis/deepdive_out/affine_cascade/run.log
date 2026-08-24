@@ -1,0 +1,11 @@
+[dd] affine_cascade snapshot iter=23999  params=14,928,228
+[exp1] cued hit@Δ64 0.985 | FA 0.083
+[exp2] change@S1 T1 spike t5 0.928 T2 spike 0.349
+[exp3] cue-loc decode pre-change(t4) H1 1.00 H2 0.55 | change-loc post(t6) H1 0.38 H2 0.30
+[exp4] hit Δ(+6 vs -6): T1 -0.092  T2 +0.008
+/Users/jonathanmorgan/AttentionManuscript/.venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3023: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/jonathanmorgan/AttentionManuscript/.venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3024: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+[exp5] value calib r=nan  unc(Δ4)=0.284→unc(Δ64)=0.056
+DD DONE

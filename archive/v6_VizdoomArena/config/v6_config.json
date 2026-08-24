@@ -1,0 +1,88 @@
+{
+    "_comment": "V6 configuration — Multi-Layer Feedback Transformer on ViZDoom deathmatch (the arena). Encoder: per-layer CROSS-attention (Q = patch tokens; K/V = [X ++ ALL layer memories ++ game-state tokens]) + per-layer per-token LSTM (hierarchical update order, v5 lineage). Decoders: CLS transformers over [H1..HL]; critic is single-pass distributional QR-DQN (A x n_quantiles from the CLS). Trainer: PAC actor loss (MPO E-step + BC) + quantile-Huber critic + prioritized SEGMENT replay (R2D2 stored-state, burn-in) + EMA target network. Priority for any setting: CLI arg > this config > script default.",
+
+    "run": {
+        "_note_init_mode": "fresh = random init; warm_start = partial load (skip mismatches); resume = strict load.",
+        "init_mode": "fresh",
+        "_note_checkpoint_location": "checkpoint_dir points OUTSIDE the repo on purpose: AttentionManuscript is a Google Drive sync root and Drive was observed rewriting checkpoints mid-session (corrupted a run). Keep live checkpoints in a non-synced home dir.",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/v6_vizdoom_arena/v6_latest.pt",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/v6_vizdoom_arena",
+        "seed": 0,
+        "device": "",
+        "log_every": 5,
+        "save_every": 100
+    },
+
+    "environment": {
+        "_comment": "deathmatch.cfg — the arena. Reward REVISED after the run-1 postmortem (2026-06-10): KILLCOUNT is the GLOBAL map kill tally (a noop policy earns ~1 kill/ep from monster infighting — verified over 60 episodes), so the old +1*dKILLCOUNT term was non-contingent free credit and the policy collapsed into wall-shooting. Now: kill bonus GATED on same-step player damage/hits; player-attributed DAMAGECOUNT/HITCOUNT carry the signal; firing costs ammo so wall-spray is strictly negative; medkit pickups pay. KILLCOUNT remains the headline METRIC.",
+        "frame_skip": 4,
+        "reward_kill": 1.0,
+        "reward_damage": 0.02,
+        "reward_hit": 0.5,
+        "reward_taken": 0.005,
+        "reward_ammo_spent": 0.01,
+        "reward_health_gain": 0.01,
+        "reward_death": 1.0,
+        "reward_clip": 5.0
+    },
+
+    "model": {
+        "_note_patch": "obs is (3,60,80) (RES_160X120 avg-pooled 2x). patch_size=10 -> 6x8 grid = 48 tokens, each covering 20x20 native pixels.",
+        "patch_size": 10,
+        "patch_hidden": 128,
+        "d_model": 128,
+        "d_mem": 128,
+        "_note_enc": "enc_layers = feedback layers = recurrent memory states. Each layer cross-attends Q=patch over [X ++ H1..HL ++ 3 state tokens] = N*(1+L)+3 keys. 8 heads (16-d) — the v5_part2 choice.",
+        "enc_heads": 8,
+        "enc_layers": 2,
+        "dec_heads": 8,
+        "dec_layers": 2,
+        "head_hidden": 128,
+        "head_layers": 2,
+        "drop": 0.1,
+        "rl": {
+            "_note_actions": "14 button combos — see env.ACTION_NAMES. init_action_bias zeros: warmup collects with a uniform-random policy anyway.",
+            "n_quantiles": 51
+        }
+    },
+
+    "trainer": {
+        "_comment": "PAC (MPO+BC) + QR-DQN + segment PER + EMA target.",
+        "iters": 20000,
+        "seg_len": 64,
+        "segments_per_iter": 4,
+        "lr": 3e-4,
+        "n_epochs": 1,
+        "grad_clip": 0.5,
+
+        "value_coef": 0.5,
+        "_note_entropy": "Run-1 postmortem: 0.01 was 10-100x too weak to oppose the E-step feedback runaway (entropy collapsed 2.64->0.3 and the policy froze on 3/14 actions). 0.1 is within the verified-needed range.",
+        "entropy_coef": 0.1,
+        "qr_kappa": 1.0,
+        "gamma": 0.99,
+        "_note_n_step": "n-step distributional TD target (n=1 recovers v5's exact 1-step form). 3 is the standard sparse-reward choice (R2D2 uses 5).",
+        "n_step": 3,
+
+        "_note_mpo": "Run-1 postmortem: the E-step reference pi_theta' is the EMA of the SAME policy being trained -> positive-feedback runaway. Simulated: eta=0.1 collapses entropy 2.64->0.003 on a 0.05 Q-edge (even with bc_alpha=0); eta=1.0 stable. ref_uniform_mix mixes the reference with uniform so it can never zero-out an action (breaks the loop at the source); bc_alpha halved (self-imitation amplifier); explore_eps = uniform-random floor during collection so the replay distribution never collapses.",
+        "mpo_temperature": 1.0,
+        "bc_alpha": 0.05,
+        "ref_uniform_mix": 0.05,
+        "explore_eps": 0.05,
+
+        "_note_ema": "EMA/Polyak target after EVERY optimizer step: theta' <- (1-tau)theta' + tau*theta. tau=0.01 -> ~100-step time constant, the same lag scale as v5's hard copy every 100 steps. Provides BOTH the TD bootstrap and the MPO E-step reference policy.",
+        "ema_tau": 0.01,
+
+        "_note_warmup": "First N iters: uniform-random actions, critic-only training (actor frozen) — fills the PER buffer and settles the value scale before the policy moves.",
+        "warmup_iters": 50,
+
+        "_note_burn_in": "Per-segment loss-masked prefix: re-encoded from the stored (slightly stale) recurrent state, these steps warm the state but contribute to no loss and no priority (R2D2 burn-in).",
+        "replay_burn_in": 8,
+
+        "buffer_capacity": 512,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

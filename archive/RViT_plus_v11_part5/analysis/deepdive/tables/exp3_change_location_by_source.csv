@@ -1,0 +1,11 @@
+source,peak_acc,shuffle
+z_sal_mean,0.425,0.308
+z_td_mean,0.455,0.288
+h1_mean,0.469,0.296
+h2_mean,0.480,0.294
+z_sal_quad,0.475,0.300
+z_td_quad,0.745,0.283
+h1_quad,0.832,0.291
+h2_quad,0.506,0.312
+actor_cls,0.475,0.299
+critic_press_cls,0.511,0.313

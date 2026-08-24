@@ -1,0 +1,15 @@
+---
+title: "Two Selectivities for One Decision"
+subtitle: "Spatial filtering of uncued distractors and a value gate in a recurrent attention agent"
+date: "2026"
+geometry: "margin=1in"
+fontsize: 11pt
+linkcolor: blue
+urlcolor: blue
+header-includes:
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \captionsetup{font=small,labelfont=bf}
+  - \setlength{\parskip}{0.4em}
+---

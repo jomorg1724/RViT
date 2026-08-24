@@ -1,0 +1,75 @@
+{
+    "_comment": "RViT+ V11_part5 configuration. ARCHITECTURE IDENTICAL TO v11_part2 (cross-talk split-readout dual-stream): conv-free patch MLP -> PARALLEL DUAL-STREAM cross-attention, SINGLE head each (Tμ SALIENCE: Q=X, K=V=[H1‖H2] source-tagged, residual=X -> ACTOR; TQ TOP-DOWN: Q=X, K=V=H2, residual=H2 -> CRITIC) -> 2 per-token LSTMs (H1=LSTM1(X), H2=LSTM2(Z_sal); the two streams SHARE H2 = cross-talk, NOT independent — contrast v11_part4) -> SPLIT 1D-conv readout (actor<-Z_sal, critic<-Z_td); PAC + QR-DQN + PER trainer. WHAT CHANGES vs v11_part2 IS THE ENVIRONMENT (taken from v7): the cue picks a response-relevant SIDE and the UNCUED side independently changes with probability distractor_prob — a DISTRACTOR the agent must IGNORE (pressing on it = false alarm, 0 reward, episode ends). Reward keyed to the target only. Priority: CLI arg > this config > script default.",
+    "run": {
+        "_note_init_mode": "fresh = random init; warm_start = partial load; resume = strict load. v11 is a new architecture (parallel dual-stream + transformer-output readout) — starts fresh.",
+        "init_mode": "resume",
+        "_note_checkpoint_location": "checkpoint_dir points OUTSIDE the repo (~/rvit_plus_checkpoints/v11_part5) on purpose: the AttentionManuscript repo is a Google Drive sync root and Drive was observed rewriting checkpoints mid-session, which can corrupt a run. Keep live checkpoints in a non-synced home dir.",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/v11_part5/rvit_plus_v11_part5_rl_latest.pt",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/v11_part5",
+        "seed": 0,
+        "device": "",
+        "log_every": 5,
+        "save_every": 200
+    },
+    "environment": {
+        "_comment": "v7 ChangeDetectionEnv: cued-SIDE task with distractors. Cue at S1 (left) => respond ONLY to left-side changes (target at S1 w.p. proportion, else S2); mirrored for cue at S4 (right). Independently, the UNCUED side may also change with probability distractor_prob (independent quadrant/magnitude/time) — a DISTRACTOR that must be ignored (pressing on it lands in the press-before-target branch = false alarm, 0 reward, episode ends). distractor_prob=0 recovers a within-side-only task. NOTE: this trainer constructs the env with constructor defaults (min_change_time=11, max_change_time=25, distractor_prob=0.5); these keys are documentation unless wired into train_rl.",
+        "min_change_time": 11,
+        "max_change_time": 25,
+        "distractor_prob": 0.5
+    },
+    "model": {
+        "_comment": "Conv-free patch + cross-attention-over-memory block (8 heads) + 2 stacked per-token LSTMs + 1D-conv actor/critic heads.",
+        "_note_patch": "patch_size must divide the 50x50 image: {1,2,5,10,25,50}. patch_size=5 → 10x10 grid = 100 tokens (each 25x25 Gabor quadrant = a 5x5 patch block).",
+        "patch_size": 5,
+        "_note_patch_hidden": "The raw flattened patch is small (patch_dim = C*p*p = 3*5*5 = 75). A per-patch MLP (Linear→GELU→Linear→LayerNorm) of hidden width patch_hidden expands it up to d_model. Default 128 = d_model.",
+        "patch_hidden": 128,
+        "d_model": 128,
+        "d_mem": 128,
+        "_note_d_model": "d_model = transformer/token width; d_mem = LSTM hidden = recurrent-state width the heads read. MUST be equal (128): memory (H1,H2) is concatenated into the d_model token stream as cross-attention keys/values. LSTM1 ingests the d_model attention output Z; later LSTMs ingest the previous d_mem hidden.",
+        "_note_tx": "Two PARALLEL cross-attention streams, SINGLE head each (tx_heads=1; tx_layers accepted for parity but fixed at one block per stream). BOTH query with the patch tokens X. Tμ SALIENCE: K=V=[H1 ‖ H2] (source-tagged + shared positional embedding) = 2*n_tokens keys, residual=X → feeds the ACTOR. TQ TOP-DOWN: K=V=H2 (+pos) = n_tokens keys, residual=H2 → feeds the CRITIC. Attention weights: salience (B,1,N,2N), top-down (B,1,N,N).",
+        "tx_heads": 1,
+        "tx_layers": 1,
+        "_note_n_lstm": "Must be 2: H1 (LSTM1, ingests the raw image X) = bottom-up sensory memory; H2 (LSTM2, ingests the salience output Z_sal) = deep memory. In v11_part5 the salience K/V reads BOTH H1 and H2; the top-down K/V + residual read H2. Each (B,n_tokens,d_mem) carried across frames. The heads do NOT read H1/H2 directly — they read the transformer outputs, SPLIT: actor←Z_sal, critic←Z_td.",
+        "n_lstm": 2,
+        "_note_head": "Actor & critic decoders are 1D-CONV with a SPLIT readout: the ACTOR reads ONLY the Tμ salience output Z_sal; the CRITIC reads ONLY the TQ top-down output Z_td. Each ingests a SINGLE stream (d_model channels), arranged (B, d_model, n_tokens) and run through n_conv_layers stride-2 Conv1d layers (kernel conv_kernel, conv_channels each) over the TOKEN axis, then flatten + Linear. This PRESERVES the spatial token layout. No CLS, no action-as-input encoding. Final Linear small-init'd; actor init_action_bias on its bias. With n_tokens=100/3 stride-2 layers the token axis is 100→50→25→13.",
+        "conv_channels": 64,
+        "n_conv_layers": 3,
+        "conv_kernel": 5,
+        "_note_rl_heads": "Actor logits (B,n_actions) + distributional critic Q (B,n_actions,n_quantiles), each from H2 via a SEPARATE Conv1d-over-tokens trunk → flatten → Linear. init_action_bias = [wait_bias, press_bias]; [0.0,-1.5] gives initial P(press)≈0.18.",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "init_action_bias": [
+                0.0,
+                -1.5
+            ]
+        }
+    },
+    "ppo": {
+        "_comment": "PAC actor loss (MPO E-step + BC) + distributional QR-DQN critic + prioritized episode replay. RL ONLY — no recon, no PC, no pretrain.",
+        "iters": 15000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 0.0003,
+        "n_epochs": 4,
+        "grad_clip": 0.5,
+        "value_coef": 0.5,
+        "entropy_coef": 0.01,
+        "qr_kappa": 1.0,
+        "gamma": 0.99,
+        "_note_pac_actor": "PAC (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. Discrete MPO E-step is closed-form: q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]; M-step + BC blend gives L_actor = (1−α)·[−Σ_a q(a|s)·log π_θ(a|s)] + α·[−log π_θ(a_t|s)]. η = mpo_temperature, α = bc_alpha.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+        "_note_target_network": "PAC target network θ' (Springenberg et al. 2024, §3.2): the critic's distributional TD target AND the MPO E-step reference policy π_θ' BOTH come from a periodically hard-copied, time-lagged copy of θ. target_update_period = hard-copy θ→θ' every N optimizer steps; 0 disables (online bootstrap). The main stabilizer for the bootstrapped actor-critic; was missing in the original implementation.",
+        "target_update_period": 100,
+        "_note_burn_in": "Burn-in / wait-pretrain (v3's recon_pretrain_iters, restored 2026-06-06). For the first burn_in_iters iterations the agent is FORCED to wait (action=0) so episodes run full-length, and only the critic is trained with the actor FROZEN at init — warming up the value function and recurrent representation on clean full trajectories before the policy acts. v5 has no decoder/recon (and no contrastive), so the critic/representation warm up alone. 0 disables.",
+        "burn_in_iters": 20,
+        "_note_per": "Prioritized episode replay (Schaul et al. 2016, episode-level). Fresh on-policy episodes are augmented with per_n_replay replay episodes sampled ∝ priority^per_alpha (priority = mean per-step quantile-Huber error, clipped at per_priority_clip×median). IS weights (1/(N·p))^β with β annealed per_beta_start→per_beta_end over the run. per_n_replay=0 disables replay.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

@@ -1,0 +1,81 @@
+{
+    "_comment": "RViT+ V4 configuration. CONV-FREE, RL-ONLY variant. Sibling of RViT_plus_v5/ — IDENTICAL setup (patch embed, MLP-head 2-layer Transformer actor/critic decoders with critic action-as-input encoding, PAC+QR-DQN+PER trainer, ALL hyperparameters) EXCEPT the encoder: v4 uses the FiLM-modulated Feedback Transformer (Palladio RecBlock: carried memory STEERS attention via a +1-centered FiLM gate on Q/K/V, Q=(1+g(H))*proj(X)+b(H), plus a shared LSTMCell) where v5 uses memory-as-tokens. The two recurrent states H1,H2 are concatenated and read by the decoders with a CLS token. NO contrastive, NO recon, NO VAE, NO predictive-coding/JEPA. Training = PAC actor loss (MPO E-step + BC) + distributional QR-DQN critic + prioritized episode replay. Priority for any setting: CLI arg > this config > script-hardcoded default.",
+
+    "run": {
+        "_note_init_mode": "fresh = random init (checkpoint_path ignored); warm_start = partial load (skip name/shape mismatches silently); resume = strict load (fail on any mismatch). The REBUILT v4 (v5-parity MLP decoder + critic action_emb, no contrastive heads) shares no compatible checkpoint with the OLD v4, so it starts fresh.",
+        "init_mode": "resume",
+        "_note_checkpoint_location": "checkpoint_dir points OUTSIDE the repo (~/rvit_plus_checkpoints/v4) on purpose: the AttentionManuscript repo is a Google Drive sync root (.tmp.driveupload/.tmp.drivedownload at its top level) and Drive was observed rewriting checkpoints mid-session, which can corrupt a run. Keep live checkpoints in a non-synced home dir; copy a final one back into the repo manually if you want it backed up (but NOT during a live run).",
+        "checkpoint_path": "/Users/jonathanmorgan/rvit_plus_checkpoints/v4/rvit_plus_v4_rl_latest.pt",
+        "checkpoint_dir": "/Users/jonathanmorgan/rvit_plus_checkpoints/v4",
+        "seed": 0,
+        "device": "",
+        "log_every": 5,
+        "save_every": 200
+    },
+
+    "environment": {
+        "_comment": "ChangeDetectionEnv parameters — matched to the v3/HRA defaults for apples-to-apples comparison.",
+        "min_change_time": 11,
+        "max_change_time": 25
+    },
+
+    "model": {
+        "_comment": "Conv-free patch + 2-layer Feedback Transformer + 2-layer Transformer actor/critic decoders.",
+        "_note_patch": "patch_size must divide the 50x50 image: {1,2,5,10,25,50}. patch_size=5 → 10x10 grid = 100 tokens (each 25x25 Gabor quadrant = a 5x5 patch block). 50 is not divisible by 16, so a literal 16x16 grid does not tile the image; 5 is the cleanest fine-grid divisor.",
+        "patch_size": 5,
+        "_note_patch_hidden": "The raw flattened patch is small (patch_dim = C*p*p = 3*5*5 = 75, of which only ~25 are unique because the env replicates each Gabor across the 3 RGB channels). A per-patch MLP (Linear→GELU→Linear→LayerNorm) of hidden width patch_hidden expands it up to d_model before the recurrent/transformer nets — the conv-free analog of v3's normed V1 stem. Default 128 = d_model.",
+        "patch_hidden": 128,
+        "d_model": 128,
+        "d_mem": 128,
+        "enc_heads": 4,
+        "_note_enc_layers": "Number of feedback-transformer layers. Each layer keeps its own recurrent memory, so enc_layers ALSO equals the number of recurrent states the decoders read (the spec's '2-layer feedback transformer' → 2 states → decoders see 2*n_tokens tokens).",
+        "enc_layers": 2,
+        "_note_n_FR": "Inner feedback iterations per frame. 1 = one pass per frame (Palladio behavior; top-down feedback comes from the previous frame's memory). >1 re-reads the same frame while the memory settles.",
+        "n_FR": 1,
+        "dec_heads": 4,
+        "dec_layers": 2,
+
+        "_note_rl_heads": "Actor + distributional critic, each a 2-layer Transformer reading [CLS] + concat(H1,H2). init_action_bias = [wait_bias, press_bias]; [0.0, -1.5] gives initial P(press)≈0.18 so episodes run long enough to generate a learning signal before the policy moves.",
+        "rl": {
+            "n_actions": 2,
+            "n_quantiles": 51,
+            "init_action_bias": [0.0, -1.5]
+        },
+        "_note_head": "Each decoder reads its CLS vector through an MLP readout head of head_layers Linear layers (min 2), hidden width head_hidden: head_layers=2 → Linear(d_mem→head_hidden)→GELU→Dropout→Linear. Final Linear small-init'd (logits/values ≈0 at start); actor init_action_bias sits on its bias. Matches v5.",
+        "head_hidden": 128,
+        "head_layers": 2
+    },
+
+    "ppo": {
+        "_comment": "PAC actor loss (MPO E-step + BC) + distributional QR-DQN critic + prioritized episode replay. RL ONLY — no recon, no PC, no pretrain.",
+        "iters": 2000,
+        "episodes_per_iter": 8,
+        "seq_len": 29,
+        "lr": 3e-4,
+        "n_epochs": 4,
+        "grad_clip": 0.5,
+
+        "value_coef": 0.5,
+        "entropy_coef": 0.01,
+        "qr_kappa": 1.0,
+        "gamma": 0.99,
+
+        "_note_pac_actor": "PAC (Springenberg, Abdolmaleki et al., DeepMind 2024) REPLACES PPO's clipped surrogate. Discrete MPO E-step is closed-form: q(a|s) = softmax_a[ log π_old(a|s) + Q̄(s,a)/η ]; M-step + BC blend gives L_actor = (1−α)·[−Σ_a q(a|s)·log π_θ(a|s)] + α·[−log π_θ(a_t|s)]. η = mpo_temperature, α = bc_alpha.",
+        "mpo_temperature": 0.1,
+        "bc_alpha": 0.1,
+
+        "_note_target_network": "PAC target network θ' (Springenberg et al. 2024, 'Offline Actor-Critic RL Scales', §3.2): the critic's distributional TD target AND the MPO E-step reference policy π_θ' BOTH come from a periodically hard-copied, time-lagged copy of θ. This was specified in PAC from the start and is the main stabilizer for the bootstrapped actor-critic; it was missing in the original implementation. target_update_period = hard-copy θ→θ' every N optimizer steps; 0 disables (online bootstrap, the old behavior).",
+        "target_update_period": 100,
+
+        "_note_burn_in": "Burn-in / wait-pretrain. For the first burn_in_iters iterations the agent is FORCED to wait (action=0) so episodes run full-length, and only the critic is trained with the actor FROZEN at init — warming up the value function and recurrent representation on clean full trajectories before the policy starts acting. v4 has no decoder/recon (and no contrastive), so the critic/representation warm up alone. 0 disables. Matches v5.",
+        "burn_in_iters": 20,
+
+        "_note_per": "Prioritized episode replay (Schaul et al. 2016, episode-level). Fresh on-policy episodes are augmented with per_n_replay replay episodes sampled ∝ priority^per_alpha (priority = mean per-step quantile-Huber error, clipped at per_priority_clip×median). IS weights (1/(N·p))^β with β annealed per_beta_start→per_beta_end over the run. per_n_replay=0 disables replay.",
+        "buffer_capacity": 200,
+        "per_n_replay": 4,
+        "per_alpha": 0.6,
+        "per_beta_start": 0.4,
+        "per_beta_end": 1.0,
+        "per_priority_clip": 50.0
+    }
+}

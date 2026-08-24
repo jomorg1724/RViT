@@ -1,0 +1,10 @@
+region	|Δhit|	|Δprem|	|ΔVadv|	|Δqent|	decision	uncertainty	verdict
+sal_all	0.010	0.003	0.009	0.017	0.010	0.017	inert
+td_all	0.037	0.003	0.008	0.003	0.037	0.008	inert
+sal_h2_cued	0.043	0.000	0.011	0.034	0.043	0.034	inert
+sal_h1_cued	0.093	0.003	0.026	0.225	0.093	0.225	uncertainty/value-moving
+td_cued	0.017	0.000	0.029	0.143	0.017	0.143	uncertainty/value-moving
+sal_h2_changeS1_invalid	0.040	0.007	0.017	0.082	0.040	0.082	uncertainty/value-moving
+td_changeS1_invalid	0.007	0.007	0.052	0.133	0.007	0.133	uncertainty/value-moving
+sal_all_invalid	0.040	0.007	0.007	0.004	0.040	0.007	inert
+td_all_invalid	0.003	0.003	0.023	0.059	0.003	0.059	uncertainty/value-moving

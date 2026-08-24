@@ -1,0 +1,15 @@
+---
+title: "A Split-Readout Dual-Stream Vision Agent"
+subtitle: "Routing salience to the actor and a top-down gate to the critic in cued, value-weighted change detection"
+date: "2026"
+geometry: "margin=1in"
+fontsize: 11pt
+linkcolor: blue
+urlcolor: blue
+header-includes:
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \captionsetup{font=small,labelfont=bf}
+  - \setlength{\parskip}{0.4em}
+---

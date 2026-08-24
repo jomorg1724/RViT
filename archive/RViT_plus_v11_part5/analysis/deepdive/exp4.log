@@ -1,0 +1,94 @@
+[loaded] /Users/jonathanmorgan/rvit_plus_checkpoints/v11_part2/v11_part2_analysis_snapshot.pt (iter=10399) device=cpu  dual-stream 1H/stream, N=100  (salience keys=H1 rows, top-down keys=H2 rows)
+[setup] near-threshold |Δθ|=14.0 ring=0.75 change@t=15 n=300 biases=[-6, -4, -2, -1, 0, 1, 2, 4, 6]
+[baseline cued] hit=0.753 rt=3.00 prem=0.007 Vadv=-1.688 qent=0.014 qstd=0.911 Hpi=0.019
+
+=== ALL-HEADS region sweeps (change_index_mode='cued', cue=left → changed quad=S1) ===
+
+[sal_all] salience keys [H1‖H2] (→ actor), all
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.747   3.0  0.003  -1.692  +0.032  0.914  0.017
+   -4.0  0.683   3.0  0.007  -1.698  +0.025  0.918  0.016
+   -2.0  0.750   3.0  0.003  -1.684  +0.037  0.911  0.011
+   -1.0  0.713   3.0  0.000  -1.697  +0.011  0.916  0.012
+   +0.0  0.740   3.0  0.003  -1.693  +0.034  0.911  0.010
+   +1.0  0.737   3.0  0.007  -1.695  +0.016  0.911  0.009
+   +2.0  0.703   3.0  0.003  -1.685  +0.022  0.908  0.010
+   +4.0  0.713   3.0  0.000  -1.739  -0.006  0.921  0.007
+   +6.0  0.757   3.0  0.000  -1.701  +0.014  0.915  0.009
+  Δ(full sweep): hit=+0.010 prem=-0.003 Vadv=-0.009 qent=-0.017 Hpi=-0.008
+
+[td_all] top-down keys H2 (→ critic), all
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.703   3.0  0.003  -1.722  +0.006  0.920  0.010
+   -4.0  0.723   3.0  0.003  -1.757  -0.016  0.928  0.013
+   -2.0  0.713   3.0  0.003  -1.685  +0.025  0.912  0.011
+   -1.0  0.750   3.0  0.000  -1.686  +0.031  0.911  0.014
+   +0.0  0.710   3.0  0.003  -1.717  +0.018  0.918  0.015
+   +1.0  0.727   3.0  0.000  -1.692  +0.022  0.911  0.015
+   +2.0  0.743   3.0  0.010  -1.665  +0.046  0.907  0.012
+   +4.0  0.770   3.0  0.003  -1.704  +0.014  0.915  0.013
+   +6.0  0.740   3.0  0.000  -1.714  +0.009  0.912  0.008
+  Δ(full sweep): hit=+0.037 prem=-0.003 Vadv=+0.008 qent=+0.003 Hpi=-0.002
+
+[sal_h2_cued] salience H2-keys @ changed quad (S1)
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.707   3.0  0.000  -1.673  +0.029  0.905  0.011
+   -4.0  0.697   3.0  0.003  -1.717  +0.033  0.917  0.014
+   -2.0  0.703   3.0  0.000  -1.698  +0.026  0.915  0.014
+   -1.0  0.733   3.0  0.010  -1.678  +0.042  0.912  0.010
+   +0.0  0.690   3.0  0.000  -1.717  -0.007  0.916  0.010
+   +1.0  0.780   3.0  0.003  -1.703  +0.050  0.914  0.015
+   +2.0  0.757   3.0  0.000  -1.711  +0.020  0.915  0.013
+   +4.0  0.717   3.0  0.007  -1.721  +0.018  0.919  0.013
+   +6.0  0.750   3.0  0.000  -1.662  +0.063  0.912  0.013
+  Δ(full sweep): hit=+0.043 prem=+0.000 Vadv=+0.011 qent=+0.034 Hpi=+0.001
+
+[sal_h1_cued] salience H1-keys @ changed quad (S1)
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.700   3.0  0.003  -1.634  +0.169  0.920  0.011
+   -4.0  0.707   3.0  0.007  -1.672  +0.094  0.920  0.011
+   -2.0  0.710   3.0  0.000  -1.695  +0.071  0.923  0.008
+   -1.0  0.727   3.0  0.003  -1.701  +0.040  0.919  0.013
+   +0.0  0.753   3.0  0.007  -1.716  +0.021  0.920  0.011
+   +1.0  0.710   3.0  0.003  -1.670  +0.049  0.906  0.018
+   +2.0  0.750   3.0  0.003  -1.707  -0.006  0.910  0.012
+   +4.0  0.733   3.5  0.003  -1.745  -0.094  0.912  0.010
+   +6.0  0.793   3.0  0.000  -1.660  -0.055  0.892  0.011
+  Δ(full sweep): hit=+0.093 prem=-0.003 Vadv=-0.026 qent=-0.225 Hpi=-0.000
+
+[td_cued] top-down H2-keys @ changed quad (S1)
+  b      hit    rt    prem    Vadv    qent    qstd    Hpi
+   -6.0  0.723   3.0  0.000  -1.669  +0.127  0.920  0.012
+   -4.0  0.773   3.0  0.000  -1.678  +0.097  0.918  0.010
+   -2.0  0.740   3.0  0.013  -1.660  +0.114  0.912  0.011
+   -1.0  0.707   3.0  0.000  -1.657  +0.079  0.908  0.011
+   +0.0  0.713   3.0  0.003  -1.687  +0.019  0.913  0.016
+   +1.0  0.690   3.0  0.003  -1.702  -0.002  0.909  0.009
+   +2.0  0.717   3.0  0.000  -1.710  -0.025  0.915  0.011
+   +4.0  0.783   3.0  0.003  -1.696  -0.027  0.913  0.019
+   +6.0  0.707   3.0  0.000  -1.698  -0.016  0.907  0.007
+  Δ(full sweep): hit=-0.017 prem=+0.000 Vadv=-0.029 qent=-0.143 Hpi=-0.006
+
+=== Invalid-alignment control: change ALWAYS at S1, cue FIXED right (cued quad=S4) ===
+[baseline changeS1/cueS4] hit=0.643 prem=0.003 Vadv=-1.749 qent=-0.044
+[sal_h2_changeS1_invalid] Δ hit=+0.040 prem=-0.007 Vadv=+0.017 qent=+0.082
+[td_changeS1_invalid] Δ hit=+0.007 prem=+0.007 Vadv=+0.052 qent=+0.133
+[sal_all_invalid] Δ hit=-0.040 prem=+0.007 Vadv=+0.007 qent=+0.004
+[td_all_invalid] Δ hit=+0.003 prem=-0.003 Vadv=+0.023 qent=+0.059
+
+=== DECISION-vs-UNCERTAINTY summary ===
+region	|Δhit|	|Δprem|	|ΔVadv|	|Δqent|	decision	uncertainty	verdict
+sal_all	0.010	0.003	0.009	0.017	0.010	0.017	inert
+td_all	0.037	0.003	0.008	0.003	0.037	0.008	inert
+sal_h2_cued	0.043	0.000	0.011	0.034	0.043	0.034	inert
+sal_h1_cued	0.093	0.003	0.026	0.225	0.093	0.225	uncertainty/value-moving
+td_cued	0.017	0.000	0.029	0.143	0.017	0.143	uncertainty/value-moving
+sal_h2_changeS1_invalid	0.040	0.007	0.017	0.082	0.040	0.082	uncertainty/value-moving
+td_changeS1_invalid	0.007	0.007	0.052	0.133	0.007	0.133	uncertainty/value-moving
+sal_all_invalid	0.040	0.007	0.007	0.004	0.040	0.007	inert
+td_all_invalid	0.003	0.003	0.023	0.059	0.003	0.059	uncertainty/value-moving
+
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v11_part2/analysis/deepdive/tables/exp4_causal.json
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v11_part2/analysis/deepdive/tables/exp4_summary.tsv
+[saved] /Users/jonathanmorgan/AttentionManuscript/RViT_plus_v11_part2/analysis/deepdive/figs/exp4_region_behaviour.png, exp4_salience_vs_topdown_value.png
+[done]

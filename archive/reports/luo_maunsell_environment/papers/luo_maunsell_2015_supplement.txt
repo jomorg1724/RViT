@@ -1,0 +1,678 @@
+SUPPLEMENTAL INFORMATION
+
+
+Neuronal modulations in visual cortex are associated with only one of multiple
+components of attention
+Thomas Zhihao Luo and John H. R. Maunsell
+
+
+Supplemental Data
+      Figure S1
+      Figure S2
+      Figure S3
+      Figure S4
+
+
+Supplemental Experimental Procedures
+      Neurophysiological Recording
+      Neuronal Analyses
+             Inclusion of Neurons and Trials
+             Noise Correlation and Fano Factor
+             Modulation Index
+      Standard Attention Task
+      Dissociation Task
+             Reward Titration
+             Priming Trials
+             Choice of Reward Parameters
+             Sessions
+             Inclusion of Sessions
+             Confidence Intervals
+      Methods for Figure S2
+             Figure S2A
+             Figure S2B-C
+
+
+Supplemental References
+
+
+                                                                                 1
+SUPPLEMENTAL*DATA*
+
+
+
+
+Figure S1 [related to Figure 1]. Different attention manipulations in the standard attention task
+(preliminary experiment) all changed criterion and sensitivity between attention conditions.
+Data are from the same sessions shown in Figure 1B, E and Figure S2. (A) In some sessions, attention was
+controlled by setting the target probability to be 2 to 4 times higher at the attended location (n = 17). In different
+sessions, the reward size was 2 to 4 times larger at the attended location (n = 75). In the remaining sessions, we
+changed both target probability and reward size (n = 23). All three manipulations increased the subject’s hit rate
+between attention conditions. (B) Both criterion (c) and sensitivity (d’) changed between task conditions for all
+three manipulations. (C-E) Top: monkey F; bottom: monkey L. The bootstrapped 95% confidence interval is
+shown for a representative session for each monkey. (C) Changes in criterion (Δc) and sensitivity (Δd’) between
+attention conditions in each session. (D) Criterion (c) and sensitivity (d’) for attention condition of each session.
+Each circle represents the behavior in one attention condition of each session, and each line connects the two
+attention conditions of each session. (E) Plots of the hit rate and false alarm rate of each attention condition of
+
+                                                                                                                         2
+each session. Each circle represents the behavior in one attention condition of each session. Each solid line
+connects the two attention conditions of each session. Dashed lines indicate isosensitivity and isocriterion lines.
+Because the overall false alarm rates were low (~10% or less), the x-axis is plotted in logarithmic scale.
+(F) Median values of behavioral measurements across sessions.
+
+
+
+
+                                                                                                                      3
+Figure S2 [related to Results]. Criterion changes accounted for most of the improvement in hit rate in the
+standard attention task (preliminary experiment). Same sessions as in Figure 1B, E and Figure S1. Monkey F,
+n = 65; monkey L, n = 50. (A) Because changes in both criterion and sensitivity contribute to the changes in hit
+rate, for each session we computed the proportion of the change in hit rate (ΔH) separately due to the change in
+criterion (Δc) or the change in sensitivity (Δd’). (B) Because Δc and Δd’ interact nonlinearly to produce the change
+in hit rate, we also computed the theoretically minimum proportions of the observed change in hit rate separately
+due to the observed Δc and Δd’. (C) The theoretically maximum proportions. All measures indicate that criterion
+changes accounted for most of the changes in hit rate in the standard attention task.
+
+
+
+
+                                                                                                                    4
+Figure S3 [related to Figure 2]. Control of sensitivity and criterion in the dissociation task. (A) Reward time
+course for an example criterion session and example sensitivity session. (B) Criterion (c) and sensitivity (d’) of all
+sessions. Each circle plots the behavior of each task condition, and each line connects the two task conditions of
+each session. Error bars indicate 95% bootstrapped confidence intervals. (C) Median values of behavioral
+measurements across sessions. (B-C) Data are from the same sessions shown in Figure 2, Figure 3, Figure S4C,
+and Table 1.
+
+                                                                                                                         5
+Figure S4 [related to Figure 3]. Changes
+in neuronal firing rate and pairwise
+correlations. (A) Two example neurons
+from a criterion session. Each of the top
+panels shows the trial-averaged PSTH of
+one neuron in the low c and high c task
+conditions. Gray bar indicates the trial
+epoch used to compute noise correlation
+(sample period; 60 ms to 260 ms after
+sample onset). Each of the bottom panels
+shows the noise correlation between the
+two neurons in either the low c or high c
+task condition. The color map for the
+correlations plots the numbers of trials for a
+given spike count pairing. (B) Two example
+neurons from a sensitivity session and their
+noise correlation in the high d’ and low d’
+task conditions. Although large changes in
+pairwise correlations were evident for the
+population of neurons (Figure 3B), the data
+from individual neurons were noisy.
+(C) The distribution of modulation indices
+of firing rate during the sample period (60
+ms to 260 ms after sample onset) for all
+responsive neurons in criterion sessions
+and in sensitivity sessions.
+
+
+
+
+                                              6
+SUPPLEMENTAL EXPERIMENTAL PROCEDURES
+
+Neurophysiological Recording
+         Neuronal activity was recorded while the animal performed the dissociation task as part of the
+main experiment. Only behavior was recorded for the standard attention task as part of the preliminary
+experiment.
+         At the beginning of each recording session, we presented a variety of Gabor stimuli to
+characterize the receptive fields of the neurons, and then we optimized stimulus parameters in the
+dissociation task to drive as many neurons as possible. The stimulus inside the receptive fields of the
+recorded neurons was set to an orientation 90º from the orientation of stimulus in the opposite hemifield
+to minimize effects of feature attention. The receptive fields were in the lower hemifield and had
+eccentricities 2-4° for monkey F and 5-7° for monkey L.
+         Action potential waveforms were sorted offline using spike-sorting software (Plexon) that
+computes principal component analysis scores for each spike. Waveforms were classified as a single
+unit if the waveforms formed a cluster that was separate from other waveforms.
+
+
+Neuronal Analyses
+
+
+Neuronal Analyses – Inclusion of Neurons and Trials
+         A neuronal unit was classified as visually responsive if its firing rate in the sample period (60 ms
+to 260 ms after the onset of the sample stimulus) was on average greater than its firing rate during the
+fixation period (200 ms to 0 ms before sample onset), and if its responses in the two periods were
+significantly different (p < 0.01, t-test). The median number of responsive units per session and their
+percentage among all recorded units were 50 units and 88% for monkey F and 80 units and 93% for
+monkey L. Only responsive neurons were included in the PSTH in Figure 3A and in analyses of firing
+rate and Fano factor. All neurons regardless of responsiveness were considered for computing pairwise
+noise correlation (the results were almost identical if only responsive neurons were used).
+         Single units and multiunits were combined for analyses. Separate analyses for the two
+populations showed highly similar results, corresponding to previous findings (Cohen and Maunsell,
+2009).
+         Both correct (H and CR) and incorrect (M and FA) trials were used for neuronal analyses, but
+we excluded trials with premature fixation breaks and priming trials. The results were highly similar if
+only correct trials were used instead of both correct and incorrect trials. We included both correct and
+
+
+
+                                                                                                            7
+incorrect trials in the analyses because that would allow us to use the same set of trials to calculate
+behavioral and neuronal changes.
+
+
+Neuronal Analyses – Noise Correlation and Fano factor
+        Noise correlation between each pair of simultaneously recorded neurons was computed as the
+Pearson’s correlation coefficient of their firing rates across all trials.
+
+
+                                                           Cov (FRi , FR j )
+                                       ρ (FRi , FR j ) =
+                                                                σi σ j
+
+
+
+                                                                         (      )
+The noise correlation of the ith neuron and jth neuron, denoted ρ FR i , FR j , is the covariance of the
+
+firing rates of the two neurons across trials divided by the product of the standard deviations of each
+neuron’s firing rates.
+                                                           €
+        In Figure 3B, the noise correlation of each pair of neurons is binned according to the geometric
+mean of the evoked response of the two neurons. The evoked response of each neuron was calculated
+as the firing rate during the sample period (60 ms to 260 ms after sample stimulus onset), averaged
+across trials, minus the firing rate in the fixation period (200 ms to 0 ms before sample onset), also
+averaged across trials. The bin less than 0 spikes/s includes all pairs of neurons whose geometric
+mean evoked response is less than 0 spikes/s, and the bin greater than 30 spikes/s includes all pairs of
+neurons whose mean evoked response is greater than 30 spikes/s.
+        A single value of Fano factor was computed for each task condition of each session. For each
+task condition, the spike count variance of each responsive unit was plotted against its spike count
+mean, and we then fitted a line that was constrained to pass through zero. The slope of the regression
+line was then taken as the Fano factor. Similar results were found if we instead computed a single Fano
+factor for each responsive neuron in each task condition and then average across neurons to compute
+the Fano factor for that task condition.
+
+
+Neuronal Analyses – Modulation Index
+        Modulation indices of firing rate were defined as the difference in mean firing rate between the
+two task conditions divided by the sum. In sensitivity sessions, the modulation index was defined such
+that a positive index indicates higher firing rates in the high d’ condition.
+
+
+
+
+                                                                                                           8
+                                          Δd '
+                                        MIFR   =
+                                                   (FR   high d '   − FR low d '   )
+                                                   (FR   high d '   + FR low d '   )
+In criterion sessions, a positive index indicates higher firing rates in the low c condition (the task
+                              €
+condition with the higher hit rate).
+
+
+
+                                           Δc
+                                         MIFR =
+                                                   (FR   low c      − FR high c   )
+                                                   (FR   low c   + FR high c      )
+        Modulation indices for noise correlation and Fano factor were similarly defined: a positive index
+                              €
+indicates a higher value in the high d’ condition in sensitivity sessions and a higher value in the low c
+condition in criterion sessions.
+        For firing rates, a modulation index was computed for each neuron and then averaged across
+the visually responsive neurons recorded in each session to provide a single modulation index for that
+session. Highly similar results were found if we pool spikes across visually responsive neurons to
+compute a population firing rate and calculate a modulation index of the population firing rate.
+        Noise correlation was first averaged across all pairs of simultaneously recorded neurons for
+each task condition. The noise correlation of the two task conditions of a daily session was then used to
+compute the modulation index for that session.
+        Fano factor was computed for each task condition as a single value (as described above), and
+the modulation index was calculated using the Fano factor of each condition.
+        In each session, the sample stimuli had one of two different orientations: the base or the base
+plus change (e.g. 40° and 60° in a session in which the orientation change was 20°). Modulation indices
+were computed separately for each orientation and then averaged between the two orientations to
+provide a single index for each session.
+
+
+Standard Attention Task
+        The standard attention task was part of the preliminary experiment. Video display and visual
+stimuli were the same as those in the dissociation task of the main experiment. The standard attention
+task was a variant of the Posner attention paradigm frequently used in single-neuron studies of
+attention. In each trial, monkeys fixated within a 1.5° window in the center of a video display. Two
+Gabor stimuli flashed on for 200 ms and off for 200-400 ms, one in each visual hemifield. At an
+unexpected time, a target stimulus appeared in one of the two locations. The monkey had to look at the
+
+
+                                                                                                            9
+target to receive a juice reward. The target was a change in the stimulus: an orientation change for
+monkey L and a small white spot in the center of the Gabor for monkey F. When the target appeared,
+the monkey had to saccade to it within 100-500 ms to receive a juice reward. The target could appear
+on the third through seventh stimulus presentation (selected from a uniform distribution to discourage
+guessing at the beginning of trials). No target appeared in 5% of the trials, and the monkey received a
+reward if it maintained fixation past the seventh stimulus appearance.
+       Monkeys alternated between blocks of 100-200 trials in which attention was directed to one of
+two locations. Attention was controlled by setting the target probability to be 2 to 4 times higher at the
+attended location, or in different sessions, the reward size to be 2 to 4 times larger at the attended
+location. In the remaining sessions, we changed both target probability and reward size.
+       To compute c and d’, each stimulus presentation in which a target could occur (third to seventh)
+was categorized as a hit (H), miss (M), false alarm (FA), or correct rejection (CR). Stimulus
+presentations with no target were classified as either correct rejections or false alarms, and
+presentations with a target were categorized as hits or misses. Each presentation that was categorized
+as a correct rejection was scored for both stimulus locations, and each presentation that was classified
+as a hit, false alarm, or miss was scored only for the stimulus location where the target occurred or the
+saccade was directed. For presentations that were hits, false alarms, or misses, it was equally valid to
+score a correct rejection for other stimulus location or not to do so. We tried both methods of scoring,
+and the results were highly similar because of the large number of correct rejections. We chose not to
+score a correct rejection for the other stimulus location for presentations that were hits, misses, or false
+alarms.
+
+
+Dissociation Task
+
+
+Dissociation Task – Reward Titration
+       At the beginning of each session, reward parameters were set to values that were expected to
+approximately isolate the behavioral difference appropriate for that session. As described in the
+Experimental Procedures, a difference between the H:CR reward ratio at each stimulus location results
+in a criterion difference between locations, and a difference between the overall reward size of the two
+locations results in a sensitivity difference between locations. However, the animal’s criterion and
+sensitivity at each stimulus location fluctuates over the course of a session. If reward contingencies
+were kept constant throughout the session, we would not achieve reliable behavioral isolation
+throughout each session. To achieve reliable isolation within each session, we adjusted the reward
+
+
+
+
+                                                                                                             10
+sizes by a small amount (typically 10%) to control for the animal’s fluctuating criterion and sensitivity
+(reward time courses of two example sessions are shown in Figure S3A).
+       In criterion sessions, reward was titrated after every 10-20 trials. If the animal’s d’ fluctuates to
+be higher at one location than the other, the overall reward size for the location with higher d’ would be
+decreased by a small amount, and reward at the location with lower d’ would be increased by the same
+amount. The overall reward at the low c location averaged 90% of the reward at the high c location. The
+H:CR ratios were adjusted to keep the criterion at the low c location near c = –1 and at the high c
+location near c = 1. We found these values to produce the largest criterion difference while providing
+statistically reliable measures of c and d’ given the number of trials an animal typically worked in a day.
+       In sensitivity sessions, after each miss trial at either location, the hit reward at that location
+would be increased by a small amount (typically 10%) and the CR reward at that location would be
+decreased by the same amount. After each FA trial, the CR reward would be increased by a small
+amount and the hit reward would be decreased by the same amount at the location of the error. The
+ratio in overall reward size between the high d’ and low d’ locations averaged 5:1, and this ratio was
+adjusted after every 10-20 trials. This difference in reward size between locations was adjusted to
+maximize d’ difference while at the same time keeping the animal motivated to respond to the low d’
+location so that we could obtain accurate behavioral measures at that location.
+
+
+Dissociation Task – Priming Trials
+       At the beginning of each task condition (one block of 240-360 trials), 10-80 priming trials were
+presented to habituate the monkey to the reward contingencies of that task condition. In priming trials,
+the test stimulus occurred at only one stimulus location, rather than appearing at a random one of the
+two locations. Priming trials were presented as a continuous sequence and never interleaved with non-
+priming trials and not used in behavioral or neuronal analyses.
+       Priming trials were important for producing large, isolated differences in criterion or sensitivity.
+Repeatedly testing the same location helped the animal to recognize the reward contingencies at that
+location and stabilized its behavior. Typically, priming trials were presented to test a single location until
+the monkey’s behavior stabilized for that location, and then priming trials were presented to test the
+other location until behavior stabilizes there. Occasionally, a continuous sequence of 5-20 priming trials
+was presented in the middle of a block to stabilize the animal’s behavior. On average, priming trials
+made up 8% of all trials in a session for monkey F and 10% of all trials for monkey L.
+
+
+Dissociation task – Choice of Reward Parameters
+
+
+
+
+                                                                                                              11
+          We chose to manipulate reward size and not target probability (probability of an orientation
+change) because the animals adjusted their behavior more quickly to changes in reward size than to
+changes in target probability. This was expected, as changes in reward size are apparent within a
+single trial, whereas changes in target probability can only be assessed over many trials. We could
+achieve much finer control over the animal’s behavior using reward size. Additionally, for a given
+number of trials, more reliable statistics of behavioral performance are obtained when target probability
+is 0.5.
+          Either reward size or target probability would likely elicit the same neuronal signal, because
+neuronal modulations associated with larger reward size and with higher target probability have similar
+magnitude and timing, and these two types of neuronal modulations are also strongly correlated among
+neurons in visual cortex (Stanisor et al., 2013).
+          One potential concern is that because the behavioral changes in d’ are induced by differences
+in relative reward, it is plausible that corresponding neuronal changes are more closely associated with
+spatial differences in relative reward than with d’ changes. But there is good reason to believe that the
+V4 neuronal changes are more closely associated with behavioral d’ than with relative reward. Task
+difficulty modulates V4 responses in much the same ways as does attention (Spitzer et al. 1988;
+Boudreau et al., 2006; Ruff and Cohen, 2014), even though changes in task difficulty do not involve any
+change in relative reward. But, like higher relative reward, higher task difficulty increases behavioral d’.
+Because higher relative reward and higher task difficulty are two separate experimental manipulations
+that increase both the subject’s d’ and neuronal responses, we view the V4 modulations that we
+observed in this study to be more closely related to changes in d’ than to changes in relative reward.
+
+
+Dissociation Task – Sessions
+          On each day, the monkey performed only a criterion session or only a sensitivity session. We
+focused on isolating a single behavioral change each day to maximize the number of trials, which
+maximized the statistical reliability of the behavioral measurements of criterion and sensitivity.
+          Only two orientations were used for the sample and test stimuli at each location in each session.
+On each trial, either orientation was equally likely to be selected to be the sample, and the orientation
+was independently selected at each location. The difference between the two orientations specified the
+task difficulty for that session, and it was selected to keep the animal challenged.
+          Task difficulty was similar between criterion and sensitivity sessions for each monkey. For
+monkey F, the orientation change averaged 20º (16º to 23º) in criterion sessions and 18º (14º to 25º) in
+sensitivity sessions. For monkey L, the change was 90º for both criterion and sensitivity sessions.
+
+
+
+
+                                                                                                            12
+       The session type was alternated every six to eight days for monkey F. For monkey L, we
+alternated after 31 days, but neuronal signals from the array degraded after 41 days of recording. For
+each monkey and each session type, the results from the first half of the sessions were highly similar to
+the results to the second half.
+
+
+Dissociation Task – Inclusion of Sessions
+       A session was excluded from analysis if the magnitude of the behavioral measure we sought to
+keep constant (c or d’) had a z-score greater than 0.3 (resulting median 0.04) or if that measure was
+greater than 1/3 of the behavioral measure we sought to vary (resulting median ratio 1/34). We
+excluded 1 of 45 sessions for monkey F and 6 of 41 sessions for monkey L. Including these sessions in
+the analyses did not affect the conclusions.
+
+
+Dissociation task – Confidence intervals
+       We calculated binomial confidence intervals for the hit rate and false alarm rate in each task
+condition (Figure 3C-D, Figure S1E). Confidence intervals for c and d’ in each task condition (Figure
+S3B) were computed through a bootstrapping method assuming binomial error around the observed hit
+rate and false alarm rate. Confidence intervals were similarly calculated for the difference in c and d’
+between the two task conditions of each session (Figure 3E).
+
+
+Methods for Figure S2
+
+
+Figure S2A: Proportion of the change in hit rate (Δ H) separately due to criterion change (Δ c)
+alone or due to sensitivity change (Δ d’) alone
+       In most sessions, changes in both criterion and sensitivity contributed to the changes in hit rate
+between attention conditions in the standard attention task. Figure S2 shows analyses that isolate the
+proportion of the change in hit rate (ΔH) separately due to the change in criterion (Δc) or the change in
+sensitivity (Δd’). The intuition behind these analyses is to recalculate ΔH while keeping either c or d’ to
+be the same in the high attention condition as in the low attention condition. The recomputed ΔH is then
+divided by the observed ΔH to obtain a proportion of the observed ΔH that is due to Δc alone or due to
+Δd’ alone.
+       We first denote the hit rate (H) as a function of c or d’:
+
+
+                                                     $d ' '
+                                               H = Φ & − c)
+                                                     %2   (
+
+                                                                                                           13
+                                    €
+    In this equation, Φ is the normal cumulative distribution function. The hit rate for each attention
+    condition (high attention or low attention) can be denoted as a function of the c and d’ measured in that
+    condition.
+
+
+                                                               #d '                                &
+                                          H high attention = Φ % high attention − c high attention (
+                                                               $     2                             '
+
+                                                              #d '                              &
+                                          H low attention = Φ % low attention − c low attention (
+                                                              $    2                            '
+
+
+    For each session, the observed change in hit rate (ΔH) between the two attention conditions is the
+    difference in hit rate between the high attention condition and the hit rate in the low attention condition.
+
+
+                                       ΔH = H high attention − H low attention
+
+
+                                              $d '                                '
+                                       ΔH = Φ & high attention − c high attention ) − H low attention
+                                              %     2                             (
+
+
+            We first show the calculations for the proportion of ΔH due to Δc alone. To obtain this proportion,
+                                 Δc
+    we recalculate ΔH as ΔH           , the change in hit rate solely due to the change in criterion. To compute
+    ΔH Δc , we recalculated the hit rate for the high attention condition by fixing the d’ to be the same as the
+    d’ in the low attention condition:
+
+€
+                                                d ' equalized
+                                      ΔH Δc = H high  attention − H low attention
+
+
+
+                                                $d '                               '
+                                      ΔH Δc = Φ & low attention − c high attention ) − H low attention
+                                                %    2                             (
+
+
+                         d ' equalized
+    The expression for H high  attention is the expression for H high attention except that d'high attention is changed to
+
+
+    d'low attention . Finally, to obtain the proportion of ΔH solely due to the Δc, we divided ΔH Δc by observed
+    ΔH.        €                                         €                                €
+
+€                                                                                                   €
+
+                                                                                                                             14
+                                                                                           ΔH Δc
+                                       Proportion of ΔH due to Δc alone =
+                                                                                            ΔH
+
+
+            We then similarly calculate the proportion of ΔH due to Δd’ alone. To obtain this proportion, we
+                                                                         €
+    need to calculate ΔH Δd ' , the change in hit rate solely due to the change in sensitivity.
+
+
+                                   ΔH Δd ' = H high
+                                               c equalized
+                                                    attention − H low attention
+            €
+
+                                               % d 'high attention                   (
+                                   ΔH Δd ' = Φ '                   − c low attention * − H low attention
+                                               &        2                            )
+
+
+    In the second equation, the first term is the expression for H high attention except with c high attention changed
+                       €
+    to c low attention . Finally, to obtain the proportion of ΔH solely due to the change in d’, we divided ΔH Δd ' by
+
+    the observed ΔH.
+                                                                €                                 €
+                                                                                                Δd '
+                                                                                           ΔH              €
+€                                     Proportion of ΔH due to Δd’ alone =
+                                                                                            ΔH
+
+
+            These proportions are computed for each session and averaged across sessions to provide the
+                                                                         €
+    plot in Figure S2A.
+
+
+    Figure S2B-C: Minimum and maximum proportions of the change in hit rate (Δ H) separately due
+    to criterion change (Δ c) alone or due to sensitivity change (Δ d’) alone
+
+
+            The analyses shown in Figure S2B and S2C were performed because Δc and Δd’ interact
+    nonlinearly to determine ΔH. For each session we computed the theoretically minimum and maximum
+    proportions of the observed ΔH separately due to the observed Δc and Δd’.
+            We first show computations for the minimum proportion of observed ΔH that could be attributed
+                                                                             Δc
+    to the observed Δc. To obtain this proportion, we needed to calculate ΔH min , the minimum ΔH that
+                                                 Δc
+    could be attributed to Δc. In calculating ΔH min , criterion values for both attention conditions are not
+    changed from the observed values, while d’ is a parameter that is varied to minimize the difference in
+                                                                                  €
+    hit rate between attention conditions.
+                                     €
+
+
+
+
+                                                                                                                     15
+                              Δc
+                           ΔH min              [
+                                          varying d '
+                                  = min H high
+                                          d'
+                                                             varying d '
+                                               attention − H low attention          ]
+
+                              Δc
+                                        + %d '                  (     %d '                (.
+                           ΔH min = min -Φ ' − c high attention * − Φ ' − c low attention * 0
+                                     d' ,  &2                   )     &2                  )/
+
+
+                                  [
+                           d ' ∈ d 'low attention , d 'high attention   ]
+                                                                            Δc
+A single value of d’ is chosen for both attention conditions to minimize ΔH min . This value of d’ is
+                €
+selected from the interval delimited by the observed d’ values in the low attention and high attention
+                                                                                               Δc
+task conditions (d’low attention and d’high attention, respectively). The d’ that minimizes ΔH min was obtained
+                                                                                €
+using the MATLAB algorithm fminbnd. Finally, we obtained the minimum proportion of observed ΔH that
+could be attributed to the observed Δc:
+                                                                                            €
+
+                                                                         Δc
+                                                                      ΔH min
+                                 Minimum proportion of ΔH due to Δc =
+                                                                       ΔH
+
+
+        We similarly computed maximum proportion of observed ΔH that could be attributed to the
+                                                                            €
+observed Δc:
+
+
+                             Δc
+                          ΔH max               [
+                                         varying d '
+                                 = max H high
+                                          d'
+                                                            varying d '
+                                              attention − H low attention           ]
+
+                             Δc
+                                       + %d '                  (     %d '                (.
+                          ΔH max = max -Φ ' − c high attention * − Φ ' − c low attention * 0
+                                    d' , &2                    )     &2                  )/
+
+
+                                 [
+                          d ' ∈ d 'low attention , d 'high attention   ]
+                                                                                           Δc
+                                                                                        ΔH max
+               €           Maximum proportion of ΔH due to Δc =
+                                                                                         ΔH
+
+
+        The minimum and maximum proportions of observed ΔH that could be attributed to the
+                                                             Δd '
+                                                                       € Δd '
+observed Δd’ were similarly calculated. We first computed ΔH min  and ΔH max  , the minimum and
+                                                         Δd '        Δd '
+maximum ΔH that could be attributed to Δd’. To obtain ΔH min  and ΔH max  , sensitivity values for both
+
+                                                               €                €
+                                                         €                  €                                     16
+attention conditions are not changed from the observed values, while c is a parameter that is varied to
+minimize or maximize the difference in hit rate between attention conditions.
+
+
+                               Δd '
+                            ΔH min  = min #$H high
+                                              varying c          varying c     %
+                                                   attention − H low attention &
+                                            c
+
+
+
+                                          # (d '                  +     (d '                +%
+                               Δd '
+                            ΔH min  = min .Φ * high attention − c - − Φ * low attention − c -/
+                                       c
+                                          $ )      2              ,     )    2              ,&
+
+
+                            c ∈ #$c high attention , c low attention %&
+
+
+
+                              Δd '
+                           ΔH max                 [
+                                           varying c
+                                   = max H high
+                                            c
+                                                              varying c
+                                                attention − H low attention        ]
+                                         + % d 'high attention    (     % d 'low attention     (.
+                              Δd '
+                           ΔH max  = max -Φ '                  − c* − Φ '                  − c *0
+                                      c
+                                         , &        2             )     &        2             )/
+
+
+                                 [
+                           c ∈ c high attention , c low attention   ]
+                                                                           Δd '                Δd '
+A single value of c is chosen for both attention conditions to minimize ΔH min  or maximize ΔH max  , and
+               €
+this value comes from the interval determined by observed c values in the low attention and high
+                                                                                          Δd '        Δd '
+attention task conditions (clow attention and chigh attention, respectively). Finally, ΔH min  and ΔH max  are each
+                                                                              €                  €
+divided by ΔH to obtain the proportions:
+
+                                                                                 €
+                                                                              Δd '
+                                                                                   €
+                                                                           ΔH min
+                                     Minimum proportion of ΔH due to Δd’ =
+                                                                            ΔH
+
+                                                                                          Δd '
+                                                                                       ΔH max
+                                                         due to Δd’ =
+                                 Maximum proportion of ΔH €
+                                                                                        ΔH
+
+
+
+                                                                          €
+
+
+
+
+                                                                                                                      17
+SUPPLEMENTAL REFERENCES
+
+Boudreau, C.E., Williford, T.H., and Maunsell, J.H.R. (2006). Effects of task difficulty and target
+likelihood in Area V4 of macaque monkeys. J. Neurophysiol. 96, 2377–2387.
+
+
+Ruff, D.A., and Cohen, M.R. (2014). Global cognitive factors modulate correlated response variability
+between V4 neurons. J. Neurosci. 34, 16408–16416.
+
+
+Spitzer, H., Desimone, R., and Moran, J. (1988). Increased attention enhances both behavioral and
+neuronal performance. Science 240, 338–340.
+
+
+Stanisor, L., van der Togt, C., Pennartz, C.M.A., and Roelfsema, P.R. (2013). A unified selection signal
+for attention and reward in primary visual cortex. Proc. Natl. Acad. Sci. USA 110, 9136–9141.
+
+
+
+
+                                                                                                        18
+

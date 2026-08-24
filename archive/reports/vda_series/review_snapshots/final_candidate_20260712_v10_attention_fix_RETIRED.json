@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "snapshot": "final_candidate_20260712_v10_attention_fix",
+  "snapshot_manifest_sha256": "3b43160b2251af1d1441c9c8dde6d8860159b5d290159713256b6cad8034c21f",
+  "status": "RETIRED",
+  "reason": "Independent artifact review found that build_manifest.py required obsolete visual-QA marker strings rather than the v10 hash-bound QA schema, mechanically blocking final BUILD_MANIFEST.json generation. The validator and its regression coverage require correction.",
+  "superseded_by": "final_candidate_20260712_v11_attention_fix",
+  "verdict_effect": "All v10 review verdicts are stale for subsequent candidates, including substantively approving verdicts.",
+  "retired_at": "2026-07-12T11:50:00-07:00"
+}

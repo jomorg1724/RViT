@@ -1,0 +1,114 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size11.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/lmodern.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mathtools.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mhsetup.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.
+sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
+ing.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)
+)) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/rerunfilecheck/rerunfilechec
+k.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/uniquecounter/uniquecounte
+r.sty))) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmr.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+)) (./main.out) (./main.out)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ot1lmr.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omllmm.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omslmsy.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omxlmex.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(./sections/abstract.tex) (./sections/intro.tex [1{/usr/local/texlive/2026basic
+/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2026basic/tex
+mf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2026basic/texmf-dist/f
+onts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/
+dvips/lm/lm-mathit.enc}{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips
+/lm/lm-mathsy.enc}] [2]) (./sections/model.tex [3] [4 <./figures/fig_model_sche
+matic_affine_ew.png>]
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ts1lmr.fd) [5{/usr/local/
+texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [6{/usr/local/texl
+ive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]) [7]
+(./sections/results_luomaunsell.tex [8] [9 <./figs/luo_repro.png>])
+(./sections/results_detection.tex [10]
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmtt.fd) [11 <./figs/lu
+o_mechanism.png>] [12] [13 <./figures/detection_psychometrics.png>] [14]
+[15 <./figures/detection_attention.png>] [16] [17])
+(./sections/results_value.tex [18] [19]) (./sections/results_vda_battery.tex
+[20] [21] [22] [23]) (./sections/results_capacity.tex)
+(./sections/results_rehearsal.tex [24]) (./sections/discussion.tex [25]
+[26] [27]) (./sections/methods.tex [28] [29] [30] [31] [32] [33]
+Overfull \hbox (18.85422pt too wide) in paragraph at lines 483--495
+\T1/lmtt/m/n/10.95 sweep / vda _ fig _ decode . py$ \T1/lmr/m/n/10.95 on the ca
+non-i-cal $\T1/lmtt/m/n/10.95 battery _ sweep _ results / pod2 / ckpt2 / vda4 _
+ affine _
+) (./sections/appendix.tex [34]) (./main.bbl [35] [36]) [37] [38 <./figures/fig
+_attn_maps_valid.png> <./figures/fig_attn_maps_invalid.png> <./figures/fig_attn
+_value_maps.png> <./figures/fig_attn_timecourse.png>] [39 <./figures/detection_
+sdt_curves.png> <./figures/detection_uncertainty.png>] [40 <./figures/detection
+_decoding.png>] [41 <./figures/detection_microstim.png> <./figures/fig_value_va
+lidity4.png>] [42 <./figures/fig_env_vda1.png> <./figures/fig_env_vda2.png>]
+[43 <./figures/fig_env_vda4.png> <./figures/fig_env_vda9.png>] [44 <./figures/f
+ig_attn_maps.png> <./figures/fig_attn_value_validity.png>] [45 <./figures/fig_v
+alidity_by_setsize.png> <./figures/fig_sdt_by_setsize.png>] [46 <./figures/fig_
+decode_by_setsize.png

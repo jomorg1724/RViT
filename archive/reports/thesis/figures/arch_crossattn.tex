@@ -1,0 +1,52 @@
+% CROSS-ATTENTION over image + memory.
+% Convention: front-end at left, attention in the middle (the variable part), xLSTM + heads
+% at right; solid black = forward dataflow, dashed red = recurrent feedback from frame t-1.
+% Distinguishing wiring: Q from the IMAGE only; K,V from BOTH the image X and the memory
+% tokens H1 (2N keys, concatenated); residual on X; TWO xLSTMs — LSTM1 supplies the memory
+% keys/values (fed back), LSTM2 is read by the heads.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block (THE distinguishing part) -------------------------------------
+  \node[attn,right=13mm of X,minimum width=24mm,minimum height=12mm] (sa)
+        {Cross-\\attention};
+  % K,V merge node: image tokens X concatenated with memory tokens H1 (2N keys)
+  \node[op,above=4mm of sa] (kv) {$\|$};
+  \node[lbl,above=0.4mm of kv,font=\tiny] {$K,V$ \,({\scriptsize $2N$})};
+  \node[lbl,below=1.2mm of sa,align=center,font=\tiny]
+        {$Q{=}W_qX$, \ $K{=}V{=}[\,W_xX \,\|\, W_hH_1\,]$\\[1pt]
+         $Z{=}X+\mathrm{softmax}(QK^{\!\top}/\sqrt d)V$};
+  % ---- memory + readout --------------------------------------------------------------
+  % LSTM1 feeds the memory keys/values; LSTM2 is read by the heads.
+  \node[mem,above right=2mm and 12mm of sa] (lstm1) {spatial\\xLSTM$_1$};
+  \node[lbl,right=1mm of lstm1,font=\tiny] {$H_1$};
+  \node[mem,below right=2mm and 12mm of sa] (lstm2) {spatial\\xLSTM$_2$};
+  \node[tok,right=8mm of lstm2,minimum width=12mm] (H) {$H'$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X);
+  \draw[flow] (X)--(sa);                                          % image -> attention (as Q + residual)
+  \draw[flow] (sa.east) -- ++(5mm,0) |- (lstm1.west);            % Z -> LSTM1
+  \draw[flow] (sa.east) -- ++(5mm,0) |- (lstm2.west);            % Z -> LSTM2
+  \draw[flow] (lstm2)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  % ---- Q,K,V construction ------------------------------------------------------------
+  \draw[qkv] (X.north) |- (kv.west);                             % image tokens into K,V
+  \node[lbl,left=0.5mm of kv,font=\tiny,xshift=-1mm] {$X$};
+  % ---- recurrence + feedback ---------------------------------------------------------
+  % H1 from the previous frame supplies the memory half of K,V (dashed red).
+  \draw[fb] (lstm1.north) .. controls +(0,10mm) and +(0,12mm) .. (kv.north)
+        node[pos=.62,above,font=\tiny,text=Red!70] {$H_1^{\,t-1}\!\to K,V$};
+  \draw[fb] (lstm1.east) .. controls +(8mm,0) and +(8mm,0) .. (lstm1.south east)
+        node[pos=.5,right,font=\tiny,text=Red!70] {carry $H_1$};
+  \draw[fb] (lstm2.south) .. controls +(0,-8mm) and +(0,-8mm) .. (lstm2.south west)
+        node[midway,below,font=\tiny,text=Red!70] {carry $H_2^{t}\!\to\!H_2^{t+1}$};
+\end{tikzpicture}

@@ -1,0 +1,75 @@
+\section{Test environments}
+\label{sec:env}
+
+All experiments use spatially cued orientation-change-detection tasks built to
+reproduce the essential structure of the paradigms used to study covert attention
+in non-human primates \citep{posner1980attention, cohen2009attention,
+herman2017color, srinath2021attention}. The agent views a sequence of
+$50\times50$ frames and, on each frame, chooses to \emph{wait} or to \emph{declare
+a change}. The design isolates internal attentional state from sensory processing
+by separating the cue in time from the change it predicts \citep{posner1980attention,
+muller1987spatial}, and it makes attentional engagement parametric through cue
+\emph{reliability} (validity) \citep{mayo2016graded}.
+
+\subsection{Base task: cued change detection with value}
+\label{sec:env-base}
+Each trial unfolds over a fixed number of frames. The trial opens with a blank
+frame; a spatial cue is then presented briefly and removed, after which the display
+is blank again before the stimulus array appears; the array of oriented
+``Gabor''-like patches is then shown for the remainder of the trial. On half of
+trials, at a change time that is \emph{jittered across frames}, the orientation of
+one patch steps by a magnitude $\Delta$ and persists; on the other half no change
+occurs. Frame-to-frame orientation noise is added throughout to titrate difficulty
+and to require genuine evidence integration rather than single-frame comparison.
+
+The cue carries two pieces of information. Its \emph{location} (here, a side ---
+left or right of the array) indicates where a change is most likely to occur, and
+its \emph{reliability} (validity) --- the probability that a change, if one occurs,
+appears at the cued location --- is drawn from $\{0.25, 0.50, 0.75, 1.00\}$ and is
+displayed by the completeness of a ring around the cue. The cue's \emph{colour}
+sets the reward magnitude available on that trial (a value manipulation, analogous
+to reward-biased attention paradigms \citep{stanisor2013neural, baruni2015reward,
+maunsell2004neuronal}). Reward is delivered for a correct decision: declaring at or
+after the change is a hit (rewarded by the cue-colour value); declaring before the
+change is a false alarm; waiting through a no-change trial is a correct rejection
+(rewarded); failing to declare a change is a miss. Because change onset is jittered
+and the response is event-locked, the agent cannot exploit a fixed temporal
+strategy and must instead maintain the cue and monitor for the change.
+
+This base task is the setting for the central architectural comparison
+(Section~\ref{sec:results}). It combines a \emph{validity} manipulation (graded cue
+reliability) with a \emph{value} manipulation (cue colour), so that the trained
+agent can be probed both for the classic reliability-scaled cueing benefit and for
+value-directed responding.
+
+\subsection{Set-size variant: nine stimuli}
+\label{sec:env-setsize}
+To ask how attentional benefit scales with the number of competing locations --- a
+question with a long history in the human and animal literatures
+\citep{palmer1995psychophysics, mazyar2012does, eckstein2013visual} --- we
+constructed a set-size variant with nine stimuli arranged in a $3\times3$ grid. A
+location cue marks one of the nine cells, and its ring completeness again signals
+reliability, now drawn from five levels $\{0, 0.25, 0.50, 0.75, 1.00\}$, where a
+proportion of $0$ is an uninformative cue (uniform over all nine locations) and a
+proportion of $1$ is a perfectly valid cue. Reward is uniform across locations
+(removing the value manipulation) so that any reliability-graded effect reflects
+validity alone. With nine locations rather than four, knowing where to look should
+be worth more: the set-size variant tests whether the cue-reliability benefit, and
+the proportion-graded recruitment of attention, \emph{grow} with set size --- the
+set-size $\times$ validity interaction analysed in Section~\ref{sec:setsize}.
+
+\subsection{Distractor variant}
+\label{sec:env-distractor}
+The base task contains no competing events: when a change occurs it is always the
+task-relevant target. Natural attention, however, is defined by the need to select
+a target while \emph{suppressing} salient but irrelevant events
+\citep{desimone1995neural, sprague2018rescuing, cosman2018prefrontal}. We therefore
+constructed a distractor variant in which, independently of the target, the uncued
+side may undergo its own orientation change with probability $p_{\mathrm{dist}}$
+(with its own location, magnitude and timing). A change on the uncued side is a
+distractor that must be ignored: declaring in response to it is a false alarm that
+ends the trial without reward. Reward remains keyed to the target alone. The
+distractor variant thus turns the task into a selective-attention problem and lets
+us ask, of the split architecture, \emph{where} in the two pathways an irrelevant
+event is filtered, and whether value modulates that filter
+(Section~\ref{sec:distractor}).

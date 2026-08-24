@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "source_object": "M2",
+  "claim_class": "model specification",
+  "is_model_result": false,
+  "families": [
+    "affine_ew",
+    "crossattn1"
+  ],
+  "panel_map": {
+    "M2a": "patching and visual features",
+    "M2b": "routing/allocation mechanism",
+    "M2c": "recurrent memory update",
+    "M2d": "actor and critic readouts"
+  },
+  "specifications": {
+    "affine_ew": {
+      "family": "affine_ew",
+      "claim_class": "model specification",
+      "is_model_result": false,
+      "shared_pipeline": [
+        "RGB frame",
+        "patch front end",
+        "feedback routing",
+        "spatial xLSTM",
+        "actor and QR critic"
+      ],
+      "routing_equations": "b = tanh(B(H_prev)); gamma = G_scale(b); beta = G_shift(b); X_prime = gamma * X + beta; Q,K,V = W(X_prime); A = softmax(Q K^T / sqrt(d)); Z = X + A V",
+      "source_paths": [
+        "model.py",
+        "paper_encoder.py",
+        "paper_heads.py"
+      ]
+    },
+    "crossattn1": {
+      "family": "crossattn1",
+      "claim_class": "model specification",
+      "is_model_result": false,
+      "shared_pipeline": [
+        "RGB frame",
+        "patch front end",
+        "feedback routing",
+        "spatial xLSTM",
+        "actor and QR critic"
+      ],
+      "routing_equations": "Q = W_q(X); K = concat(W_kx(X), W_kh(H_prev)); V = concat(W_vx(X), W_vh(H_prev)); A = softmax(Q K^T / sqrt(d)); Z = X + A V",
+      "source_paths": [
+        "model.py",
+        "paper_encoder.py",
+        "paper_heads.py"
+      ]
+    }
+  },
+  "source_sha256": {
+    "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+    "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+    "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+    "conv_frontend.py": "cf6c13f8e191d2c66550d4a1a0f6e5288b3e17398c642a0722fea1e9bc5ea236"
+  },
+  "producer": "/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_series/architecture_figures.py",
+  "outputs": {
+    "pdf": "m2_architecture.pdf",
+    "svg": "m2_architecture.svg",
+    "png": "m2_architecture.png",
+    "manuscript_panels": {
+      "a": {
+        "pdf": "m2_architecture_a.pdf",
+        "svg": "m2_architecture_a.svg",
+        "png": "m2_architecture_a.png"
+      },
+      "b": {
+        "pdf": "m2_architecture_b.pdf",
+        "svg": "m2_architecture_b.svg",
+        "png": "m2_architecture_b.png"
+      },
+      "c": {
+        "pdf": "m2_architecture_c.pdf",
+        "svg": "m2_architecture_c.svg",
+        "png": "m2_architecture_c.png"
+      },
+      "d": {
+        "pdf": "m2_architecture_d.pdf",
+        "svg": "m2_architecture_d.svg",
+        "png": "m2_architecture_d.png"
+      }
+    }
+  },
+  "claim_boundary": "This figure documents implemented computation and is not evidence of learning, performance, or biological mechanism."
+}

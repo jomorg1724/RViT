@@ -1,0 +1,732 @@
+\begin{thebibliography}{100}
+
+\bibitem{carrasco2011visual}
+Marisa Carrasco.
+\newblock Visual attention: The past 25 years.
+\newblock {\em Vision research}, 51(13):1484--1525, 2011.
+
+\bibitem{clark2015visual}
+Kelsey Clark, Ryan~Fox Squire, Yaser Merrikhi, and Behrad Noudoost.
+\newblock Visual attention: Linking prefrontal sources to neuronal and
+  behavioral correlates.
+\newblock {\em Progress in neurobiology}, 132:59--80, 2015.
+
+\bibitem{hoffman2016visual}
+James~E Hoffman.
+\newblock Visual attention and eye movements.
+\newblock {\em Attention}, pages 119--153, 2016.
+
+\bibitem{bhatnagar2022meta}
+Roopali Bhatnagar and Jacob~L Orquin.
+\newblock A meta-analysis on the effect of visual attention on choice.
+\newblock {\em Journal of Experimental Psychology: General}, 151(10):2265,
+  2022.
+
+\bibitem{rust2022priority}
+Nicole~C Rust and Marlene~R Cohen.
+\newblock Priority coding in the visual system.
+\newblock {\em Nature Reviews Neuroscience}, 23(6):376--388, 2022.
+
+\bibitem{mcadams1999effects}
+Carrie~J McAdams and John~HR Maunsell.
+\newblock Effects of attention on the reliability of individual neurons in
+  monkey visual cortex.
+\newblock {\em Neuron}, 23(4):765--773, 1999.
+
+\bibitem{mcadams1999effects_orientation}
+Carrie~J McAdams and John~HR Maunsell.
+\newblock Effects of attention on orientation-tuning functions of single
+  neurons in macaque cortical area v4.
+\newblock {\em Journal of Neuroscience}, 19(1):431--441, 1999.
+
+\bibitem{thiele2018neuromodulation}
+Alexander Thiele and Mark~A Bellgrove.
+\newblock Neuromodulation of attention.
+\newblock {\em Neuron}, 97(4):769--785, 2018.
+
+\bibitem{cohen2009attention}
+Marlene~R Cohen and John~HR Maunsell.
+\newblock Attention improves performance primarily by reducing interneuronal
+  correlations.
+\newblock {\em Nature neuroscience}, 12(12):1594--1600, 2009.
+
+\bibitem{ruff2016attention}
+Douglas~A Ruff and Marlene~R Cohen.
+\newblock Attention increases spike count correlations between visual cortical
+  areas.
+\newblock {\em Journal of Neuroscience}, 36(28):7523--7534, 2016.
+
+\bibitem{posner1980attention}
+Michael~I Posner, Charles~R Snyder, and Brian~J Davidson.
+\newblock Attention and the detection of signals.
+\newblock {\em Journal of experimental psychology: General}, 109(2):160, 1980.
+
+\bibitem{awh2006interactions}
+Edward Awh, Edward~K Vogel, and S-H Oh.
+\newblock Interactions between attention and working memory.
+\newblock {\em Neuroscience}, 139(1):201--208, 2006.
+
+\bibitem{gazzaley2012top}
+Adam Gazzaley and Anna~C Nobre.
+\newblock Top-down modulation: bridging selective attention and working memory.
+\newblock {\em Trends in cognitive sciences}, 16(2):129--135, 2012.
+
+\bibitem{kiyonaga2013working}
+Anastasia Kiyonaga and Tobias Egner.
+\newblock Working memory as internal attention: Toward an integrative account
+  of internal and external selection processes.
+\newblock {\em Psychonomic bulletin \& review}, 20:228--242, 2013.
+
+\bibitem{panichello2021attvwm}
+Matthew~F. Panichello and Timothy~J. Buschman.
+\newblock {Shared mechanisms underlie the control of working memory and
+  attention}.
+\newblock {\em Nature}, 592(7855):601--605, 2021.
+
+\bibitem{oberauer2002access}
+Klaus Oberauer.
+\newblock Access to information in working memory: exploring the focus of
+  attention.
+\newblock {\em Journal of Experimental Psychology: Learning, Memory, and
+  Cognition}, 28(3):411, 2002.
+
+\bibitem{mcnab2008prefrontal}
+Fiona McNab and Torkel Klingberg.
+\newblock Prefrontal cortex and basal ganglia control access to working memory.
+\newblock {\em Nature neuroscience}, 11(1):103--107, 2008.
+
+\bibitem{carlisle2011attentional}
+Nancy~B Carlisle, Jason~T Arita, Deborah Pardo, and Geoffrey~F Woodman.
+\newblock Attentional templates in visual working memory.
+\newblock {\em Journal of neuroscience}, 31(25):9315--9322, 2011.
+
+\bibitem{van2014competition}
+Dirk van Moorselaar, Jan Theeuwes, and Christian~NL Olivers.
+\newblock In competition for the attentional template: Can multiple items
+  within visual working memory guide attention?
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 40(4):1450, 2014.
+
+\bibitem{berggren2018visual}
+Nick Berggren and Martin Eimer.
+\newblock Visual working memory load disrupts template-guided attentional
+  selection during visual search.
+\newblock {\em Journal of Cognitive Neuroscience}, 30(12):1902--1915, 2018.
+
+\bibitem{carlisle2018visual}
+Nancy~B Carlisle and {\'A}rni Kristj{\'a}nsson.
+\newblock How visual working memory contents influence priming of visual
+  attention.
+\newblock {\em Psychological Research}, 82:833--839, 2018.
+
+\bibitem{van2019human}
+Freek van Ede, Sammi~R Chekroud, and Anna~C Nobre.
+\newblock Human gaze tracks the focusing of attention within the internal space
+  of visual working memory.
+\newblock {\em Journal of Vision}, 19(10):133b--133b, 2019.
+
+\bibitem{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock {\em Advances in neural information processing systems}, 30, 2017.
+
+\bibitem{dosovitskiy2020image}
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn,
+  Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg
+  Heigold, Sylvain Gelly, et~al.
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+\newblock {\em arXiv preprint arXiv:2010.11929}, 2020.
+
+\bibitem{khan2022transformers}
+Salman Khan, Muzammal Naseer, Munawar Hayat, Syed~Waqas Zamir, Fahad~Shahbaz
+  Khan, and Mubarak Shah.
+\newblock Transformers in vision: A survey.
+\newblock {\em ACM computing surveys (CSUR)}, 54(10s):1--41, 2022.
+
+\bibitem{itti2001computational}
+Laurent Itti and Christof Koch.
+\newblock Computational modelling of visual attention.
+\newblock {\em Nature reviews neuroscience}, 2(3):194--203, 2001.
+
+\bibitem{le2006coherent}
+Olivier Le~Meur, Patrick Le~Callet, Dominique Barba, and Dominique Thoreau.
+\newblock A coherent computational approach to model bottom-up visual
+  attention.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  28(5):802--817, 2006.
+
+\bibitem{kruger2017measuring}
+Alexander Krger, Jan Tnnermann, and Ingrid Scharlau.
+\newblock Measuring and modeling salience with the theory of visual attention.
+\newblock {\em Attention, Perception, \& Psychophysics}, 79:1593--1614, 2017.
+
+\bibitem{zou2023human}
+Jiajie Zou, Yuran Zhang, Jialu Li, Xing Tian, and Nai Ding.
+\newblock Human attention during goal-directed reading comprehension relies on
+  task optimization.
+\newblock {\em Elife}, 12:RP87197, 2023.
+
+\bibitem{mehrani2023self}
+Paria Mehrani and John~K Tsotsos.
+\newblock Self-attention in vision transformers performs perceptual grouping,
+  not attention.
+\newblock {\em arXiv preprint arXiv:2303.01542}, 2023.
+
+\bibitem{yamamoto2024emergence}
+Takuto Yamamoto, Hirosato Akahoshi, and Shigeru Kitazawa.
+\newblock Emergence of human-like attention in self-supervised vision
+  transformers: an eye-tracking study.
+\newblock {\em arXiv preprint arXiv:2410.22768}, 2024.
+
+\bibitem{bardes2023v}
+Adrien Bardes, Quentin Garrido, Jean Ponce, Xinlei Chen, Michael Rabbat, Yann
+  LeCun, Mido Assran, and Nicolas Ballas.
+\newblock V-jepa: Latent video prediction for visual representation learning.
+\newblock 2023.
+
+\bibitem{luck1997capacity}
+Steven~J Luck and Edward~K Vogel.
+\newblock The capacity of visual working memory for features and conjunctions.
+\newblock {\em Nature}, 390(6657):279--281, 1997.
+
+\bibitem{luck2013visual}
+Steven~J Luck and Edward~K Vogel.
+\newblock Visual working memory capacity: from psychophysics and neurobiology
+  to individual differences.
+\newblock {\em Trends in cognitive sciences}, 17(8):391--400, 2013.
+
+\bibitem{brady2013probabilistic}
+Timothy~F Brady and Joshua~B Tenenbaum.
+\newblock A probabilistic model of visual working memory: Incorporating higher
+  order regularities into working memory capacity estimates.
+\newblock {\em Psychological review}, 120(1):85, 2013.
+
+\bibitem{emrich2017attention}
+Stephen~M Emrich, Holly~A Lockhart, and Naseem Al-Aidroos.
+\newblock Attention mediates the flexible allocation of visual working memory
+  resources.
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 43(7):1454, 2017.
+
+\bibitem{olivers2011different}
+Christian~NL Olivers, Judith Peters, Roos Houtkamp, and Pieter~R Roelfsema.
+\newblock Different states in visual working memory: When it guides attention
+  and when it does not.
+\newblock {\em Trends in cognitive sciences}, 15(7):327--334, 2011.
+
+\bibitem{teng2019visual}
+Chunyue Teng and Dwight~J Kravitz.
+\newblock Visual working memory directly alters perception.
+\newblock {\em Nature human behaviour}, 3(8):827--836, 2019.
+
+\bibitem{bays2024representation}
+Paul~M Bays, Sebastian Schneegans, Wei~Ji Ma, and Timothy~F Brady.
+\newblock Representation and computation in visual working memory.
+\newblock {\em Nature Human Behaviour}, pages 1--19, 2024.
+
+\bibitem{hochreiter1997long}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9(8):1735--1780, 1997.
+
+\bibitem{beck2024xlstm}
+Maximilian Beck, Korbinian Pppel, Markus Spanring, Andreas Auer, Oleksandra
+  Prudnikova, Michael Kopp, Gnter Klambauer, Johannes Brandstetter, and Sepp
+  Hochreiter.
+\newblock xlstm: Extended long short-term memory.
+\newblock {\em arXiv preprint arXiv:2405.04517}, 2024.
+
+\bibitem{srinath2021attention}
+Ramanujan Srinath, Douglas~A Ruff, and Marlene~R Cohen.
+\newblock Attention improves information flow between neuronal populations
+  without changing the communication subspace.
+\newblock {\em Current Biology}, 31(23):5299--5313, 2021.
+
+\bibitem{moore2003selective}
+Tirin Moore and Katherine~M Armstrong.
+\newblock Selective gating of visual signals by microstimulation of frontal
+  cortex.
+\newblock {\em Nature}, 421(6921):370--373, 2003.
+
+\bibitem{cavanaugh2004subcortical}
+James Cavanaugh and Robert~H Wurtz.
+\newblock Subcortical modulation of attention counters change blindness.
+\newblock {\em Journal of Neuroscience}, 24(50):11236--11243, 2004.
+
+\bibitem{cavanaugh2006enhanced}
+James Cavanaugh, Bryan~D Alvarez, and Robert~H Wurtz.
+\newblock Enhanced performance with brain stimulation: attentional shift or
+  visual cue?
+\newblock {\em Journal of Neuroscience}, 26(44):11347--11358, 2006.
+
+\bibitem{egly1994shifting}
+Robert Egly, Jon Driver, and Robert~D Rafal.
+\newblock Shifting visual attention between objects and locations: evidence
+  from normal and parietal lesion subjects.
+\newblock {\em Journal of Experimental Psychology: General}, 123(2):161, 1994.
+
+\bibitem{thomsen2005processing}
+Tormod Thomsen, Karsten Specht, Lars Ersland, and Kenneth Hugdahl.
+\newblock Processing of conflicting cues in an attention-shift paradigm studied
+  with fmri.
+\newblock {\em Neuroscience letters}, 380(1-2):138--142, 2005.
+
+\bibitem{brisson2008express}
+Benoit Brisson and Pierre Jolicoeur.
+\newblock Express attentional re-engagement but delayed entry into
+  consciousness following invalid spatial cues in visual search.
+\newblock {\em PLoS One}, 3(12):e3967, 2008.
+
+\bibitem{lu1998sens}
+Z~L Lu and B~Dosher.
+\newblock {External noise distinguishes attention mechanisms.}
+\newblock {\em Vision research}, 38(9):1183 -- 1198, 05 1998.
+
+\bibitem{solomon2004sens}
+Joshua~A. Solomon.
+\newblock {The effect of spatial cues on visual sensitivity}.
+\newblock {\em Vision Research}, 44(12):1209--1216, 2004.
+
+\bibitem{cameron2002sens}
+E.Leslie Cameron, Joanna~C Tai, and Marisa Carrasco.
+\newblock Covert attention affects the psychometric function of contrast
+  sensitivity.
+\newblock {\em Vision Research}, 42(8):949--967, 2002.
+
+\bibitem{muller1987sensitivity}
+Hermann~J Mller and John~M Findlay.
+\newblock Sensitivity and criterion effects in the spatial cuing of visual
+  attention.
+\newblock {\em Perception \& Psychophysics}, 42(4):383--399, 1987.
+
+\bibitem{hawkins1990visual}
+Harold~L Hawkins, Steven~A Hillyard, Steven~J Luck, Mustapha Mouloua, Cathryn~J
+  Downing, and Donald~P Woodward.
+\newblock Visual attention modulates signal detectability.
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 16(4):802, 1990.
+
+\bibitem{saltzman1948reaction}
+IJ~Saltzman and WR~Garner.
+\newblock Reaction time as a measure of span of attention.
+\newblock {\em The Journal of psychology}, 25(2):227--241, 1948.
+
+\bibitem{carlson1983reaction}
+Jerry~S Carlson, C~Mark Jensen, and Keith~F Widaman.
+\newblock Reaction time, intelligence, and attention.
+\newblock {\em Intelligence}, 7(4):329--344, 1983.
+
+\bibitem{prinzmetal2005attention}
+William Prinzmetal, Christin McCool, and Samuel Park.
+\newblock Attention: reaction time and accuracy reveal different mechanisms.
+\newblock {\em Journal of Experimental Psychology: General}, 134(1):73, 2005.
+
+\bibitem{jehu2015prioritizing}
+Deborah~A Jehu, Alyssa Desponts, Nicole Paquet, and Yves Lajoie.
+\newblock Prioritizing attention on a reaction time task improves postural
+  control and reaction time.
+\newblock {\em International Journal of Neuroscience}, 125(2):100--106, 2015.
+
+\bibitem{herman2017colorchange}
+James~P. Herman and Richard~J. Krauzlis.
+\newblock {Color-Change Detection Activity in the Primate Superior Colliculus}.
+\newblock {\em eNeuro}, 4(2):ENEURO.0046--17.2017, 3 2017.
+
+\bibitem{ghose2002temporal}
+Geoffrey~M. Ghose and John H.~R. Maunsell.
+\newblock {Attentional modulation in visual cortex depends on task timing}.
+\newblock {\em Nature}, 419(6907):616--620, 2002.
+
+\bibitem{ilaria2017v4gain}
+Ilaria Sani, Elisa Santandrea, Maria~Concetta Morrone, and Leonardo Chelazzi.
+\newblock Temporally evolving gain mechanisms of attention in macaque area v4.
+\newblock {\em Journal of Neurophysiology}, 118(2):964--985, 2017.
+\newblock PMID: 28468996.
+
+\bibitem{wang2015v1att}
+Feng Wang, Minggui Chen, Yin Yan, Li~Zhaoping, and Wu~Li.
+\newblock Modulation of neuronal responses by exogenous attention in macaque
+  primary visual cortex.
+\newblock {\em Journal of Neuroscience}, 35(39):13419--13429, 2015.
+
+\bibitem{thompson1996fef}
+K.~G. Thompson, D.~P. Hanes, N.~P. Bichot, and J.~D. Schall.
+\newblock {Perceptual and motor processing stages identified in the activity of
+  macaque frontal eye field neurons during visual search}.
+\newblock {\em Journal of Neurophysiology}, 76(6):4040--4055, 1996.
+
+\bibitem{sharma2015temporal}
+Jitendra Sharma, Hiroki Sugihara, Yarden Katz, James Schummers, Joshua
+  Tenenbaum, and Mriganka Sur.
+\newblock {Spatial Attention and Temporal Expectation Under Timed Uncertainty
+  Predictably Modulate Neuronal Responses in Monkey V1}.
+\newblock {\em Cerebral Cortex}, 25(9):2894--2906, 2015.
+
+\bibitem{jaramillo2011temporal}
+Santiago Jaramillo and Anthony~M Zador.
+\newblock {The auditory cortex mediates the perceptual effects of acoustic
+  temporal expectation}.
+\newblock {\em Nature Neuroscience}, 14(2):246--251, 2011.
+
+\bibitem{nobre2018temporal}
+Anna~C. Nobre and Freek~van Ede.
+\newblock {Anticipated moments: temporal structure in attention}.
+\newblock {\em Nature Reviews Neuroscience}, 19(1):34--48, 2018.
+
+\bibitem{mirpour2010microstimulation}
+Koorosh Mirpour, Wei~Song Ong, and James~W Bisley.
+\newblock Microstimulation of posterior parietal cortex biases the selection of
+  eye movement goals during search.
+\newblock {\em Journal of neurophysiology}, 104(6):3021--3028, 2010.
+
+\bibitem{bollimunta2018fefsc}
+Anil Bollimunta, Amarender~R. Bogadhi, and Richard~J. Krauzlis.
+\newblock Comparing frontal eye field and superior colliculus contributions to
+  covert spatial attention.
+\newblock {\em Nature Communications}, 9(1):3553, 2018.
+
+\bibitem{monosov2011fef}
+Ilya~E. Monosov, David~L. Sheinberg, and Kirk~G. Thompson.
+\newblock The effects of prefrontal cortex inactivation on object responses of
+  single neurons in the inferotemporal cortex during visual search.
+\newblock {\em Journal of Neuroscience}, 31(44):15956--15961, 2011.
+
+\bibitem{zenon2012attention}
+Alexandre Z{\'e}non and Richard~J Krauzlis.
+\newblock Attention deficits without cortical neuronal deficits.
+\newblock {\em Nature}, 489(7416):434--437, 2012.
+
+\bibitem{herman2018midbrain}
+James~P Herman, Leor~N Katz, and Richard~J Krauzlis.
+\newblock Midbrain activity can explain perceptual decisions during an
+  attention task.
+\newblock {\em Nature neuroscience}, 21(12):1651--1655, 2018.
+
+\bibitem{sridharan2017does}
+Devarajan Sridharan, Nicholas~A Steinmetz, Tirin Moore, and Eric~I Knudsen.
+\newblock Does the superior colliculus control perceptual sensitivity or choice
+  bias during attention? evidence from a multialternative decision framework.
+\newblock {\em Journal of Neuroscience}, 37(3):480--511, 2017.
+
+\bibitem{luo2018attentional}
+Thomas~Zhihao Luo and John~HR Maunsell.
+\newblock Attentional changes in either criterion or sensitivity are associated
+  with robust modulations in lateral prefrontal cortex.
+\newblock {\em Neuron}, 97(6):1382--1393, 2018.
+
+\bibitem{baluch2011mechanisms}
+Farhan Baluch and Laurent Itti.
+\newblock Mechanisms of top-down attention.
+\newblock {\em Trends in neurosciences}, 34(4):210--224, 2011.
+
+\bibitem{bisley2010lip}
+James~W Bisley and Michael~E Goldberg.
+\newblock {Attention, Intention, and Priority in the Parietal Lobe}.
+\newblock {\em Annual review of neuroscience}, 33(1):1 -- 21, 2010.
+
+\bibitem{knudsen2007fundamental}
+Eric~I Knudsen.
+\newblock Fundamental components of attention.
+\newblock {\em Annu. Rev. Neurosci.}, 30(1):57--78, 2007.
+
+\bibitem{lamy2006grouping}
+Dominique Lamy, Hannah Segal, and Lital Ruderman.
+\newblock Grouping does not require attention.
+\newblock {\em Perception \& Psychophysics}, 68(1):17--31, 2006.
+
+\bibitem{bahle2018architecture}
+Brett Bahle, Valerie~M Beck, and Andrew Hollingworth.
+\newblock The architecture of interaction between visual working memory and
+  visual attention.
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 44(7):992, 2018.
+
+\bibitem{wheeler2002binding}
+Mary~E Wheeler and Anne~M Treisman.
+\newblock Binding in short-term visual memory.
+\newblock {\em Journal of experimental psychology: General}, 131(1):48, 2002.
+
+\bibitem{botta2014spatial}
+Fabiano Botta and Juan Lupi{\'a}{\~n}ez.
+\newblock Spatial distribution of attentional bias in visuo-spatial working
+  memory following multiple cues.
+\newblock {\em Acta psychologica}, 150:1--13, 2014.
+
+\bibitem{desimone1995neural}
+Robert Desimone, John Duncan, et~al.
+\newblock Neural mechanisms of selective visual attention.
+\newblock {\em Annual review of neuroscience}, 18(1):193--222, 1995.
+
+\bibitem{krauzlis2013superior}
+Richard~J Krauzlis, Lee~P Lovejoy, and Alexandre Z{\'e}non.
+\newblock Superior colliculus and visual spatial attention.
+\newblock {\em Annual review of neuroscience}, 36:165--182, 2013.
+
+\bibitem{silver2005topographic}
+Michael~A Silver, David Ress, and David~J Heeger.
+\newblock Topographic maps of visual spatial attention in human parietal
+  cortex.
+\newblock {\em Journal of neurophysiology}, 94(2):1358--1371, 2005.
+
+\bibitem{huda2020distinct}
+Rafiq Huda, Grayson~O Sipe, Vincent Breton-Provencher, K~Guadalupe Cruz,
+  Gerald~N Pho, Elie Adam, Liadan~M Gunter, Austin Sullins, Ian~R Wickersham,
+  and Mriganka Sur.
+\newblock Distinct prefrontal top-down circuits differentially modulate
+  sensorimotor behavior.
+\newblock {\em Nature communications}, 11(1):6007, 2020.
+
+\bibitem{bolton2015diencephalic}
+Andrew~D Bolton, Yasunobu Murata, Rory Kirchner, Sung-Yon Kim, Andrew Young,
+  Tru Dang, Yuchio Yanagawa, and Martha Constantine-Paton.
+\newblock A diencephalic dopamine source provides input to the superior
+  colliculus, where d1 and d2 receptors segregate to distinct functional zones.
+\newblock {\em Cell reports}, 13(5):1003--1015, 2015.
+
+\bibitem{pradel2021superior}
+Kamil Pradel, Gniewosz Drwiega, and Tomasz Basiak.
+\newblock Superior colliculus controls the activity of the rostromedial
+  tegmental nuclei in an asymmetrical manner.
+\newblock {\em Journal of Neuroscience}, 41(18):4006--4022, 2021.
+
+\bibitem{essig2016warning}
+Jaclyn Essig and Gidon Felsen.
+\newblock Warning! dopaminergic modulation of the superior colliculus.
+\newblock {\em Trends in neurosciences}, 39(1):2--4, 2016.
+
+\bibitem{perez2017direct}
+Juan Prez-Fernndez, Andreas~A Kardamakis, Daichi~G Suzuki, Brita Robertson, and
+  Sten Grillner.
+\newblock Direct dopaminergic projections from the snc modulate visuomotor
+  transformation in the lamprey tectum.
+\newblock {\em Neuron}, 96(4):910--924, 2017.
+
+\bibitem{hikosaka2006basal}
+Okihide Hikosaka, Kae Nakamura, and Hiroyuki Nakahara.
+\newblock Basal ganglia orient eyes to reward.
+\newblock {\em Journal of neurophysiology}, 95(2):567--584, 2006.
+
+\bibitem{hickey2010reward}
+Clayton Hickey, Leonardo Chelazzi, and Jan Theeuwes.
+\newblock Reward changes salience in human vision via the anterior cingulate.
+\newblock {\em Journal of Neuroscience}, 30(33):11096--11103, 2010.
+
+\bibitem{failing2018selection}
+Michel Failing and Jan Theeuwes.
+\newblock Selection history: How reward modulates selectivity of visual
+  attention.
+\newblock {\em Psychonomic bulletin \& review}, 25(2):514--538, 2018.
+
+\bibitem{friston2006free}
+Karl Friston, James Kilner, and Lee Harrison.
+\newblock A free energy principle for the brain.
+\newblock {\em Journal of physiology-Paris}, 100(1-3):70--87, 2006.
+
+\bibitem{feldman2010attention}
+Harriet Feldman and Karl~J Friston.
+\newblock Attention, uncertainty, and free-energy.
+\newblock {\em Frontiers in human neuroscience}, 4:215, 2010.
+
+\bibitem{friston2012dopamine}
+Karl~J Friston, Tamara Shiner, Thomas FitzGerald, Joseph~M Galea, Rick Adams,
+  Harriet Brown, Raymond~J Dolan, Rosalyn Moran, Klaas~Enno Stephan, and Sven
+  Bestmann.
+\newblock Dopamine, affordance and active inference.
+\newblock {\em PLoS computational biology}, 8(1):e1002327, 2012.
+
+\bibitem{khezri2022free}
+Bijan Khezri.
+\newblock Free energy principle (fep).
+\newblock In {\em Governing Continuous Transformation: Re-framing the
+  Strategy-Governance Conversation}, pages 33--41. Springer, 2022.
+
+\bibitem{mazzaglia2022free}
+Pietro Mazzaglia, Tim Verbelen, and volume={24} number={2} pages={301}
+  year={2022}~publisher={Mdpi} {Catal, Ozan and Dhoedt, Bart},
+  journal={Entropy}.
+\newblock The free energy principle for perception and action: A deep learning
+  perspective.
+
+\bibitem{hassanin2024visattmod}
+Mohammed Hassanin, Saeed Anwar, Ibrahim Radwan, Fahad~Shahbaz Khan, and Ajmal
+  Mian.
+\newblock {Visual attention methods in deep learning: An in-depth survey}.
+\newblock {\em Information Fusion}, 108:102417, 2024.
+
+\bibitem{reynolds1999competitive}
+John~H Reynolds, Leonardo Chelazzi, and Robert Desimone.
+\newblock Competitive mechanisms subserve attention in macaque areas v2 and v4.
+\newblock {\em Journal of Neuroscience}, 19(5):1736--1753, 1999.
+
+\bibitem{bisley2019neural}
+James~W Bisley and Koorosh Mirpour.
+\newblock The neural instantiation of a priority map.
+\newblock {\em Current opinion in psychology}, 29:108--112, 2019.
+
+\bibitem{wolfe2021guided}
+Jeremy~M Wolfe.
+\newblock Guided search 6.0: An updated model of visual search.
+\newblock {\em Psychonomic Bulletin \& Review}, 28(4):1060--1092, 2021.
+
+\bibitem{desimone1996neural}
+Robert Desimone.
+\newblock Neural mechanisms for visual memory and their role in attention.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  93(24):13494--13499, 1996.
+
+\bibitem{van2009limits}
+Stefan Van~der Stigchel, Artem~V Belopolsky, Judith~C Peters, Jasper~G Wijnen,
+  Martijn Meeter, and Jan Theeuwes.
+\newblock The limits of top-down control of visual attention.
+\newblock {\em Acta psychologica}, 132(3):201--212, 2009.
+
+\bibitem{lee2015encoding}
+Tae-Ho Lee, Steven~G Greening, and Mara Mather.
+\newblock Encoding of goal-relevant stimuli is strengthened by emotional
+  arousal in memory.
+\newblock {\em Frontiers in psychology}, 6:1173, 2015.
+
+\bibitem{herman2020attention}
+James~P Herman, Fabrice Arcizet, and Richard~J Krauzlis.
+\newblock Attention-related modulation of caudate neurons depends on superior
+  colliculus activity.
+\newblock {\em eLife}, 9:e53998, sep 2020.
+
+\bibitem{bettencourt2009effects}
+Katherine~C Bettencourt and David~C Somers.
+\newblock Effects of target enhancement and distractor suppression on multiple
+  object tracking capacity.
+\newblock {\em Journal of vision}, 9(7):9--9, 2009.
+
+\bibitem{meyerhoff2017studying}
+Hauke~S Meyerhoff, Frank Papenmeier, and Markus Huff.
+\newblock Studying visual attention using the multiple object tracking
+  paradigm: A tutorial review.
+\newblock {\em Attention, Perception, \& Psychophysics}, 79:1255--1274, 2017.
+
+\bibitem{wolfe2011visual}
+Jeremy~M Wolfe, Melissa L-H V{\~o}, Karla~K Evans, and Michelle~R Greene.
+\newblock Visual search in scenes involves selective and nonselective pathways.
+\newblock {\em Trends in cognitive sciences}, 15(2):77--84, 2011.
+
+\bibitem{tas2016relationship}
+A~Caglar Tas, Steven~J Luck, and Andrew Hollingworth.
+\newblock The relationship between visual attention and visual working memory
+  encoding: A dissociation between covert and overt orienting.
+\newblock {\em Journal of experimental psychology: human perception and
+  performance}, 42(8):1121, 2016.
+
+\bibitem{gresch2024shifting}
+Daniela Gresch, Sage~EP Boettcher, Freek van Ede, and Anna~C Nobre.
+\newblock Shifting attention between perception and working memory.
+\newblock {\em Cognition}, 245:105731, 2024.
+
+\bibitem{gupta2024presaccadic}
+Priyanka Gupta and Devarajan Sridharan.
+\newblock Presaccadic attention does not facilitate the detection of changes in
+  the visual field.
+\newblock {\em PLoS Biology}, 22(1):e3002485, 2024.
+
+\bibitem{felleman1991distributed}
+Daniel~J Felleman and David~C Van~Essen.
+\newblock Distributed hierarchical processing in the primate cerebral cortex.
+\newblock {\em Cerebral cortex (New York, NY: 1991)}, 1(1):1--47, 1991.
+
+\bibitem{kietzmann2019recurrence}
+Tim~C Kietzmann, Courtney~J Spoerer, Lynn~KA S{\"o}rensen, Radoslaw~M Cichy,
+  Olaf Hauk, and Nikolaus Kriegeskorte.
+\newblock Recurrence is required to capture the representational dynamics of
+  the human visual system.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  116(43):21854--21863, 2019.
+
+\bibitem{zhuang2021unsupervised}
+Chengxu Zhuang, Siming Yan, Aran Nayebi, Martin Schrimpf, Michael~C Frank,
+  James~J DiCarlo, and Daniel~LK Yamins.
+\newblock Unsupervised neural network models of the ventral visual stream.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  118(3):e2014196118, 2021.
+
+\bibitem{botvinick2020deep}
+Matthew Botvinick, Jane~X Wang, Will Dabney, Kevin~J Miller, and Zeb
+  Kurth-Nelson.
+\newblock Deep reinforcement learning and its neuroscientific implications.
+\newblock {\em Neuron}, 107(4):603--616, 2020.
+
+\bibitem{babayan2018belief}
+Benedicte~M Babayan, Naoshige Uchida, and Samuel~J Gershman.
+\newblock Belief state representation in the dopamine system.
+\newblock {\em Nature communications}, 9(1):1891, 2018.
+
+\bibitem{monosov2020outcome}
+Ilya~E Monosov.
+\newblock How outcome uncertainty mediates attention, learning, and
+  decision-making.
+\newblock {\em Trends in neurosciences}, 43(10):795--809, 2020.
+
+\bibitem{mante2013context}
+Valerio Mante, David Sussillo, Krishna~V Shenoy, and William~T Newsome.
+\newblock Context-dependent computation by recurrent dynamics in prefrontal
+  cortex.
+\newblock {\em nature}, 503(7474):78--84, 2013.
+
+\bibitem{gattass2014effect}
+Ricardo Gattass and Robert Desimone.
+\newblock Effect of microstimulation of the superior colliculus on visual space
+  attention.
+\newblock {\em Journal of cognitive neuroscience}, 26(6):1208--1219, 2014.
+
+\bibitem{miconi2016feedback}
+Thomas Miconi and Rufin VanRullen.
+\newblock A feedback model of attention explains the diverse effects of
+  attention on neural firing rates and receptive field structure.
+\newblock {\em PLoS computational biology}, 12(2):e1004770, 2016.
+
+\bibitem{liu2024human}
+Guoyang Liu, Jindi Zhang, Antoni~B Chan, and Janet~H Hsiao.
+\newblock Human attention guided explainable artificial intelligence for
+  computer vision models.
+\newblock {\em Neural Networks}, 177:106392, 2024.
+
+\bibitem{cartella2024trends}
+Giuseppe Cartella, Marcella Cornia, Vittorio Cuculo, Alessandro D'Amelio, Dario
+  Zanca, Giuseppe Boccignone, and Rita Cucchiara.
+\newblock Trends, applications, and challenges in human attention modelling.
+\newblock {\em arXiv preprint arXiv:2402.18673}, 2024.
+
+\bibitem{pertzov2014privileged}
+Yoni Pertzov and Masud Husain.
+\newblock The privileged role of location in visual working memory.
+\newblock {\em Attention, Perception, \& Psychophysics}, 76:1914--1924, 2014.
+
+\bibitem{schneegans2017neural}
+Sebastian Schneegans and Paul~M Bays.
+\newblock Neural architecture for feature binding in visual working memory.
+\newblock {\em Journal of Neuroscience}, 37(14):3913--3925, 2017.
+
+\bibitem{tsotsos1988complexity}
+John~K Tsotsos.
+\newblock A ‘complexity level’analysis of immediate vision.
+\newblock {\em International journal of computer vision}, 1(4):303--320, 1988.
+
+\bibitem{koch1984selecting}
+Christof Koch and Shimon Ullman.
+\newblock Selecting one among the many: A simple network implementing shifts in
+  selective visual attention.
+\newblock 1984.
+
+\bibitem{sutton2018reinforcement}
+Richard~S Sutton.
+\newblock Reinforcement learning: An introduction.
+\newblock {\em A Bradford Book}, 2018.
+
+\bibitem{springenberg2024offline}
+Jost~Tobias Springenberg, Abbas Abdolmaleki, Jingwei Zhang, Oliver Groth,
+  Michael Bloesch, Thomas Lampe, Philemon Brakel, Sarah Bechtle, Steven
+  Kapturowski, Roland Hafner, et~al.
+\newblock Offline actor-critic reinforcement learning scales to large models.
+\newblock {\em arXiv preprint arXiv:2402.05546}, 2024.
+
+\end{thebibliography}

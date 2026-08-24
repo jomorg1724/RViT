@@ -1,0 +1,98 @@
+\chapter{The model architecture}
+\label{ch:model}
+
+The recurrent vision transformer has four stages: a patch front-end, a recurrent
+self-attention block, a spatial recurrent memory, and an actor--critic readout. This
+chapter gives the canonical (paper) form of each; later chapters vary one stage at a time.
+
+\section{Patch front-end}
+Each $50\times50$ frame is divided into four $25\times25$ quadrants. In the canonical
+network each quadrant is encoded by the encoder of a variational autoencoder (VAE) up to
+its second flattened layer, a $128$-dimensional feature $\oflat$ (the paper feeds the ViT
+this layer, not the stochastic latent). Per-patch positional and per-frame temporal
+one-hot codes are concatenated, giving a $140$-dimensional token, and the four tokens form
+$\X^{(t)}\in\mathbb R^{4\times140}$. The role of the VAE --- and the consequence of
+training it from reward versus from reconstruction --- is the subject of
+Chapter~\ref{ch:perception}.
+
+\section{Recurrent multiplicative self-attention}
+The canonical attention is single-head and \emph{multiplicatively gated} by memory. With
+the previous-frame memory $\Hone^{(t-1)}\in\mathbb R^{4\times\dmem}$ ($\dmem=1024$),
+\begin{align}
+\mathbf Q &= (\X\,\mathbf W_{XQ})\odot(\Hone\,\mathbf W_{HQ}), &
+\mathbf K &= (\X\,\mathbf W_{XK})\odot(\Hone\,\mathbf W_{HK}), &
+\mathbf V &= (\X\,\mathbf W_{XV})\odot(\Hone\,\mathbf W_{HV}),
+\label{eq:mult}
+\end{align}
+with $\mathbf W_{X\cdot}\in\mathbb R^{140\times140}$, $\mathbf W_{H\cdot}\in\mathbb
+R^{1024\times140}$, $\odot$ the Hadamard product, and the attention
+\begin{equation}
+\mathbf V_{\text{filt}}=\mathrm{softmax}(\mathbf Q\mathbf K^\top)\mathbf V,\qquad
+\mathbf Z^{(t)}=\X^{(t)}+\mathbf V_{\text{filt}}\in\mathbb R^{4\times140}.
+\label{eq:z}
+\end{equation}
+The multiplicative form is the program's neuro-motivated gain-modulation: memory does not
+add to the image, it \emph{scales} the bottom-up query/key/value projections. As
+Chapter~\ref{ch:attention} documents, this exact form has an important consequence ---
+when memory is uninformative the gate is near zero and the attention is uniform --- which
+is at the heart of the attention/memory dissociation. The cross-attention and FiLM
+variants replace Eq.~\eqref{eq:mult} with, respectively, $\mathbf K,\mathbf V$ formed by
+concatenating image and memory tokens, and a $(1+\Hone\mathbf W_{H})$ identity-floored
+gate.
+
+\section{Spatial recurrent memory}
+The percept $\mathbf Z$ writes a per-patch memory through an exponential-gated spatial
+LSTM (an adaptation of the xLSTM), maintained independently per patch so that
+self-attention is the only route by which spatial locations exchange information:
+\begin{align*}
+\tilde{\mathbf I}&=\mathbf Z\mathbf W_i+\mathbf H\mathbf R_i, &
+\tilde{\mathbf F}&=\mathbf Z\mathbf W_f+\mathbf H\mathbf R_f, &
+\tilde{\mathbf O}&=\mathbf Z\mathbf W_o+\mathbf H\mathbf R_o, &
+\tilde{\mathbf U}&=\mathbf Z\mathbf W_u+\mathbf H\mathbf R_z,\\
+\mathbf M&=\max(\tilde{\mathbf F}+\mathbf M',\tilde{\mathbf I}), &
+\mathbf I&=e^{\tilde{\mathbf I}-\mathbf M}, &
+\mathbf F&=e^{\tilde{\mathbf F}+\mathbf M'-\mathbf M}, &
+\mathbf O&=\sigma(\tilde{\mathbf O}),
+\end{align*}
+\[
+\mathbf N=\mathbf F\odot\mathbf N'+\mathbf I,\quad
+\mathbf C=\mathbf C'\odot\mathbf F+\tanh(\tilde{\mathbf U})\odot\mathbf I,\quad
+\mathbf H=\mathbf O\odot(\mathbf C/\mathbf N),
+\]
+with $\dmem=1024$, $\mathbf W_x\in\mathbb R^{140\times1024}$, $\mathbf
+R_x\in\mathbb R^{1024\times1024}$, and the stabiliser/normaliser states $\mathbf M,\mathbf
+N$. The memory is the agent's working memory: it carries the cue and the accumulating
+evidence across the blank interval.
+
+\section{Actor--critic readout}
+The four-patch structure is retained through attention and memory but \emph{flattened} at
+the reinforcement-learning agent: the readout is $\mathbf H'\in\mathbb R^{4096}$. A
+four-layer feed-forward actor maps $\mathbf H'$ to a two-way policy (wait / declare); a
+distributional critic maps $\mathbf H'$ to a value distribution. Which internal state is
+read --- the flattened memory $\mathbf H$ (canonical) versus the attention output
+$\mathbf Z$ (the cross-talk and codebook variants) --- is itself an architectural variable
+that, we find, changes the phenotype.
+
+\begin{table}[t]
+\centering
+\caption{Components of the canonical recurrent vision transformer and the axes along which
+the architecture zoo varies them.}
+\label{tab:components}
+\small
+\begin{tabular}{p{2.6cm}p{4.6cm}p{5.4cm}}
+\toprule
+Stage & Canonical form & Variation axis explored \\
+\midrule
+Front-end & VAE encoder $\to\oflat$ (128-d), 4 tokens & raw-pixel vs.\ conv vs.\ frozen
+VAE; 4 vs.\ 100 tokens \\
+Attention & multiplicative gate, single head & cross-attention, FiLM $(1{+}\cdot)$,
+fast-weights, codebook, dual-head \\
+Feedback source & memory $\Hone$ scales Q/K/V & memory as keys/values; memory generates
+weights; memory as queries \\
+Memory & one xLSTM, $\dmem{=}1024$ & two LSTMs (feedback vs.\ decision); parallel vs.\
+stacked; LSTM vs.\ vanilla \\
+Readout & flattened $\mathbf H$ (4096) & read $\mathbf Z$; split $\mu/q$; codebook
+selection \\
+\bottomrule
+\end{tabular}
+\end{table}

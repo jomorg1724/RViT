@@ -1,0 +1,102 @@
+\section{Coupling is required for learning}
+\label{sec:results}
+
+\subsection{Cross-talk is the difference between a competent detector and a
+non-learner}
+\label{sec:results-main}
+We trained each of the three configurations of Section~\ref{sec:configs} on the
+base cued change-detection task (Section~\ref{sec:env-base}) with identical task,
+algorithm, hyperparameters and number of updates, and evaluated each on 500 fresh
+episodes under a stochastic policy. Outcomes were scored by signal-detection
+category --- hit, miss, false alarm, correct rejection --- and summarised by
+overall accuracy, hit rate on change trials, false-alarm rate on no-change trials,
+and reaction time on hits (Table~\ref{tab:configs}, Figure~\TODO{fig:behavior}).
+
+\begin{table}[t]
+\centering
+\caption{Behavioural outcomes of the three pathway configurations on the base task
+(500 episodes each). The shared-memory (cross-talk) agent is a calibrated detector;
+both the independent and swapped-routing agents collapse to never declaring a
+change. Numbers are the trained checkpoints reported in the cross-talk analysis;
+final-figure values to be regenerated.}
+\label{tab:configs}
+\small
+\begin{tabular}{lcccccl}
+\toprule
+Configuration & Accuracy & Hit rate & FA rate & RT (frames) & Phenotype \\
+\midrule
+Shared memory (cross-talk) & \textbf{0.868} & \textbf{0.794} & 0.067 & 1.95 & active, calibrated detector \\
+Independent (no cross-talk) & 0.504 & 0.000 & 0.000 & --- & always-wait collapse \\
+Swapped routing & 0.420 & 0.000 & 0.000 & --- & always-wait collapse \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The shared-memory agent is a genuine psychophysical detector: it catches roughly
+four of every five real changes, rarely fires on no-change trials
+($\mathrm{FAR}=6.7\%$), and responds quickly --- about two frames after change
+onset. The independent agent does not partially learn the task; across 500 episodes
+it \emph{never once} declares a change. Its hit rate is exactly zero and its
+accuracy, $50.4\%$, is precisely the rate obtained by waiting out every trial and
+being correct only on the half that contain no change. The policy has retreated to
+the single safe action --- always wait --- that can never incur a false-alarm
+penalty, and it never discovers that declaring a change is ever worthwhile. The
+$50.4$-percentage-point accuracy gap, and the $79.4$-point hit-rate gap, between the
+coupled and uncoupled designs is not a matter of degree: it is the difference
+between a competent detector and a non-learner, produced by a single structural edit.
+
+\subsection{The collapse is specific to coupling, not to ``having two streams''}
+\label{sec:results-swap}
+The swapped-routing control rules out the trivial explanation that any split of
+policy and value into separate streams fails (or that any such split succeeds).
+Configuration~3 \emph{keeps} the cross-talk and the shared memory and changes only
+which pathway issues the press decision; it collapses identically --- zero hits,
+always wait. Two conditions are therefore jointly necessary. The pathways must be
+\emph{coupled} through a shared memory (Configuration~2 fails without it), and the
+\emph{grounded, image-reading pathway must drive the policy} (Configuration~3 fails
+when it does not). Only the configuration that satisfies both --- the shared-memory
+agent with the $\mu$ pathway commanding the actor --- learns. We return to why in
+Section~\ref{sec:mechanism}.
+
+\subsection{The working agent reproduces the attentional cueing signature}
+\label{sec:results-signature}
+A non-collapsed accuracy number is necessary but not sufficient evidence that the
+right computation has emerged. The discriminating test is whether the agent
+displays the behavioural fingerprint of covert spatial attention: a benefit for
+changes at the cued location that \emph{scales with how reliable the cue is}
+\citep{posner1980attention, carrasco2011visual, mayo2016graded}. Detailed
+characterisation of the shared-memory agent confirms this signature
+(Figure~\TODO{fig:cueing}).
+
+\paragraph{Reliability-scaled validity benefit.}
+Splitting performance by cue reliability reveals a graded cueing effect: the
+advantage for a change at the cued location over an equivalent change at an uncued
+location \emph{grows} as the cue's reliability rises from $0.25$ to $1.00$
+(\TODO{valid$-$invalid $\Delta$ by reliability}). At the lowest reliability, where
+the cue carries no predictive spatial information, there is no cueing effect; at the
+highest, a robust advantage emerges. The benefit is expressed primarily as a
+leftward shift of the psychometric function --- a lower perceptual threshold for the
+attended location --- mirroring the canonical sensitivity-enhancing signature of
+attention in primates \citep{treue1999reshaping, reynolds2000attention,
+cameron2002sens}.
+
+\paragraph{Value-directed responding.}
+Because the cue colour sets the reward magnitude, the agent's behaviour can also be
+read for value direction. Across the cue-colour reward structure the agent grades
+its responding by value (\TODO{value effect on criterion / response rate}), without
+abandoning low-value trials --- the split between the policy and value pathways lets
+the value information shape behaviour without collapsing detection. The interaction
+between reliability and value, and the relative weight the agent places on each, is
+quantified in Section~\TODO{sec:value-analysis}.
+
+\paragraph{Change-locked, fast decisions.}
+The agent's declarations are tightly locked to change onset (median reaction time
+$\approx 2$ frames; Table~\ref{tab:configs}), and attention allocated to the cued
+location is maintained through the blank interval after the cue and reactivated in
+anticipation of the change --- the recurrent self-attention dynamics that a
+single-stream version of this model was previously shown to reproduce
+\citep{herman2017color, ghose2002attentional, nobre2018anticipated}. The two
+collapsed variants, by contrast, have no behavioural signature to characterise: an
+agent that never presses produces a flat zero hit rate at every reliability and
+validity condition. The capacity to express spatial attention is downstream of the
+capacity to act at all, and only the coupled architecture clears that first bar.

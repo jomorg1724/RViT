@@ -1,0 +1,39 @@
+\appendix
+\section{Supplementary material}
+\label{sec:appendix}
+
+\paragraph{Figure inventory.} The analyses of Section~\ref{sec:detection} are rendered
+from the frozen analysis outputs of the trained model: psychometric and reaction-time
+curves, per-condition attention super-figures and the $\alpha_c$ time-course, the
+signal-detection $c(\alpha_c)$ and $d'(\alpha_c)$ curves under the graded attention
+clamp, the distributional-critic uncertainty panels, the temporal-decoding curves, and
+the microstimulation false-detection curves. The value-directed results
+(Section~\ref{sec:value}) and the preliminary Luo--Maunsell comparison
+(Section~\ref{sec:luomaunsell}) are rendered from their respective analysis harnesses.
+Figure sources are noted inline in each section as \texttt{\% FIGURE:} comments.
+
+\paragraph{Current battery status.} The VDA1/2/4/9 affine $d_{\mathrm{mem}}=128$
+battery is reported in Section~\ref{sec:vda-battery}; it is a completed analysis in
+this manuscript rather than a promised future appendix.
+Each point uses one canonical checkpoint with a 20{,}000-row logged phase, and VDA2
+uses the \texttt{\_2x2} checkpoint. VDA16 remains incomplete at checkpoint 599 and is
+not a quantitative endpoint. Preserved $d_{\mathrm{mem}}=256$ checkpoints exist, but
+the matched width battery is pending (Section~\ref{sec:capacity}). The delay-probe
+environment is implemented, but no delay-probe or causal delay-clamp result is reported
+(Section~\ref{sec:rehearsal}).
+
+\paragraph{Invalid legacy artifacts.} The 2026-07-07 NPZ archives are retained for
+provenance rather than overwritten. The VDA2/VDA9 change-location fields in
+\path{vda_sweep/figs/decode.npz} are invalid because the legacy collector produced
+degenerate labels. The high-token VDA9 \texttt{crossattn1} clamp fields in
+\path{vda_sweep/figs/sdt.npz} are also invalid for cross-routing comparison because
+the legacy indexer failed to bias the paired memory key. Neither field supports a
+claim in this affine-only manuscript; the evidence ledger records the field-level
+status without altering the archives. Corrected artifacts are pending in a versioned
+derived path.
+
+\paragraph{Failed filtering-task trace.} The attend-here/ignore-here training failure
+described in the Discussion is recorded in the preserved run summary
+\path{../ACT_II_RESULTS.md}, lines 68--77: both attempted checkpoints remained at the
+starting difficulty and collapsed to always waiting (zero declarations on both cued
+and foil-change trials). This trace is a failure record, not a quantitative endpoint.

@@ -1,0 +1,99 @@
+\chapter{Finding IV --- the working model reproduces the paper}
+\label{ch:deepdive}
+
+With perception fixed by the frozen VAE (Chapter~\ref{ch:perception}), the exact paper
+network on the seven-step task is a real psychophysical detector, and it reproduces the
+core behavioural figures of the published manuscript. This chapter is the quantitative
+deep dive on that model.
+
+\section{Baseline behaviour}
+Under a greedy policy the model catches $79\%$ of real changes, false-alarms on $8\%$ of
+no-change trials, and presses with a median reaction time of five frames --- the instant a
+change can appear. It is not a degenerate $0.5$ model; it discriminates change from
+no-change with a healthy sensitivity.
+
+\section{Psychometrics: the reliability-scaled cueing benefit}
+The discriminating test of attention is not accuracy but the \emph{cueing signature}: a
+detection advantage for changes at the cued location that scales with how reliable the cue
+is. We measured it by presenting a cue of a given validity, forcing the change at the cued
+($S_1$) or uncued ($S_4$) location at a fixed magnitude $\Delta$, and fitting a
+four-parameter logistic to the detection-rate-versus-$\Delta$ curve. The threshold (the
+logistic's position) is the sensitivity readout. The result (Fig.~\ref{fig:psy},
+Table~\ref{tab:thr}) is the paper's headline:
+the cued threshold falls below the uncued threshold by an amount that \emph{grows
+monotonically with validity} --- a negligible $+1.5^\circ$ at $25\%$, a robust $+7.5^\circ$
+at $100\%$. At $25\%$ validity (no predictive spatial information) there is essentially no
+cueing effect; at $100\%$ there is a large one, carried by the threshold/sensitivity
+parameter rather than the guess or lapse rates. This is the canonical sensitivity-enhancing
+signature of primate spatial attention, reproduced.
+
+\begin{table}[t]
+\centering
+\caption{Psychometric thresholds (four-parameter logistic position, degrees) for cued
+versus uncued changes by cue validity, and the resulting cueing benefit. The benefit scales
+with validity --- the paper's central behavioural result.}
+\label{tab:thr}
+\small
+\begin{tabular}{lccc}
+\toprule
+Cue validity & Cued threshold & Uncued threshold & Cueing benefit \\
+\midrule
+25\% & 13.6 & 15.1 & $+1.5$ \\
+50\% & 14.3 & 19.2 & $+4.8$ \\
+75\% & 11.3 & 17.5 & $+6.1$ \\
+100\% & 11.8 & 19.4 & $\mathbf{+7.5}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.49\linewidth]{fig_psychometric.pdf}\hfill
+\includegraphics[width=0.46\linewidth]{fig_cueing_benefit.pdf}
+\caption{Left: psychometric detection-rate curves by cue validity (cued changes) and the
+cued-versus-uncued comparison at low and high validity. Right: the cueing benefit
+(uncued$-$cued threshold) scales monotonically with validity.}
+\label{fig:psy}
+\end{figure}
+
+\section{Chronometrics: the reaction-time story}
+Reaction time is pinned at change onset ($\approx5$ frames) with only a faint difficulty
+effect (slightly slower for the hardest changes) and \emph{no} reaction-time cueing benefit
+(cued and uncued reaction times are equal to within $0.06$ frames; Fig.~\ref{fig:chrono}).
+This is not a failure to reproduce so much as a consequence of the instantaneous-perception
+mechanism (Chapter~\ref{ch:horizon}): the cue moves the decision \emph{criterion}
+(accuracy) but cannot speed a response that is already at the floor. It is a specific,
+testable prediction --- good perception yields a criterion-shift cueing effect without a
+reaction-time benefit --- and it is one of the places the model diverges, informatively,
+from a slower flow-based detector.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.46\linewidth]{fig_chronometric.pdf}\hfill
+\includegraphics[width=0.49\linewidth]{fig_causal.pdf}
+\caption{Left: reaction time versus change magnitude by cue validity --- pinned near five
+frames, a weak difficulty effect, no validity benefit. Right: the causal attention
+manipulation --- biasing attention toward the changed location improves detection,
+biasing it toward a distractor impairs it, without inducing false alarms.}
+\label{fig:chrono}
+\end{figure}
+
+\section{Causal attention manipulation}
+The paper's causal result is that attention is causally linked to perceptual sensitivity,
+not merely correlated with it. We tested this by clamping the attention onto a target
+patch during the stimulus frames and measuring detection of a sub-threshold change
+(Fig.~\ref{fig:chrono}, right). Biasing attention \emph{toward} the changed location
+improves the hit rate from $0.265$ to $0.350$ ($+8.5\%$); biasing it \emph{toward a
+distractor} impairs it to $0.185$ ($-8.0\%$); and biasing attention on a no-change trial
+barely moves the false-alarm rate ($+1\%$). The effect is bidirectional and clean ---
+exactly the hallmark causal signature of attention (enhanced sensitivity at the attended
+location, like sub-threshold superior-colliculus or frontal-eye-field microstimulation).
+Crucially, biasing attention does not \emph{manufacture} a change percept; it gates
+\emph{which} location's content reaches the decision.
+
+\section{Scorecard}
+On the seven-step task the working model reproduces the two results the published
+manuscript is built on --- the reliability-scaled psychometric cueing benefit and the
+causal attention-to-sensitivity link --- cleanly. The reaction-time cueing benefit does not
+reproduce (reaction time is floored by instantaneous detection), and the attention-
+\emph{dynamics} story is its own subject, taken up next.

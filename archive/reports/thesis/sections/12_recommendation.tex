@@ -1,0 +1,104 @@
+\chapter{Where this leaves us: an architecture recommendation}
+\label{ch:recommendation}
+
+This chapter turns the findings into a recommendation for the network to carry into the
+empirical manuscript and to standardise on for the cross-task generalisation goal. We state
+the decision criteria, score the candidates against them, and give a contingent
+recommendation that names what must be resolved before it is final.
+
+\section{Decision criteria}
+A network is a good choice for this program to the extent that it:
+\begin{enumerate}
+\item \textbf{reproduces the behavioural signatures} --- the reliability-scaled cueing
+benefit and the causal attention-to-sensitivity link (Chapter~\ref{ch:deepdive});
+\item \textbf{exposes an interpretable, causally manipulable attention signal} --- the
+attention must be readable and a genuine lever on behaviour (the microstimulation-like
+causal result, Chapter~\ref{ch:deepdive}). Note the matched family showed that on the
+short task the cueing itself is carried by \emph{memory}, not expressed as a cue-orienting
+map (Chapter~\ref{ch:attention}), so this criterion is about a manipulable attention
+\emph{lever}, with cue-orienting treated as a regime-dependent property, not a requirement;
+\item \textbf{generalises across the task battery} (validity, set-size, value, distractor,
+reward-structure) with the same architecture and harness;
+\item \textbf{is neuro-plausible} --- recurrent gain modulation, a capacity-limited working
+memory, reward-driven learning, and a manipulable priority signal; and
+\item \textbf{trains reliably} under the stable harness with the frozen-VAE front-end.
+\end{enumerate}
+
+\section{Two non-negotiables}
+Two components are settled by the evidence and should be fixed regardless of the remaining
+choices. First, the \textbf{frozen pretrained VAE front-end} (Chapter~\ref{ch:perception}):
+perception cannot be learned from reward by supervised reconstruction on the short task, the
+VAE is task-parameter-invariant, and freezing it makes architecture comparisons clean.
+Chapter~\ref{ch:jepa} shows the requirement is more precisely \emph{a front-end that reliably
+encodes the task variable}, satisfiable by a frozen pretrained VAE \emph{or} by a
+self-supervised V-JEPA predictive auxiliary (with anti-collapse machinery) paired with
+frame-repeat or a convolutional encoder; the frozen VAE remains the recommended default for
+the empirical manuscript on grounds of simplicity and characterisation. Second, the \textbf{stable
+harness} --- PAC actor, distributional critic, prioritised episode replay, a time-lagged
+target, and burn-in --- which is what makes a bootstrapped recurrent actor--critic learn on
+a task with a $0.5$ harbor.
+
+\section{The attention-mechanism choice (now decided)}
+The matched family (Chapter~\ref{ch:attention}, Table~\ref{tab:familyresults}) was built to
+settle this, and it did --- by eliminating the premise that one wiring would restore
+cue-orienting attention. Reading the family against the criteria:
+\begin{itemize}
+\item The \textbf{pure multiplicative single-stream} form is the most faithful to the
+published equation and reproduces the behaviour (correct $0.804$, hit $0.705$); its
+attention is change-locked (spike $+0.143$, orient $\approx0$). On the new criterion (2) it
+passes --- the attention is a readable, causally manipulable change detector --- it simply
+does not orient to the cue, which the family shows \emph{nothing} on this task does.
+\item The \textbf{two-LSTM} variant is the same paper-faithful multiplicative attention with
+a second stacked memory feeding the heads, and it is the \emph{best detector in the family}
+(correct $0.872$, hit $0.836$), while keeping the same interpretable, change-locked,
+causally-manipulable attention. It is the strongest candidate on criteria (1), (4), (5) and
+the new (2), at a minimal, well-motivated departure from the published network.
+\item The \textbf{cross-attention} and \textbf{dual-memory} variants work (correct $0.840$,
+$0.828$) but attend \emph{below} uniform at the cued image location (cue-orient $-0.179$,
+$-0.174$): they route processing through memory keys rather than the image, which neither
+helps behaviour over two-LSTM nor yields the cue-orienting map the lineage showed on the
+older long-task setup. The earlier expectation that cross-attention would orient here was
+not borne out on the controlled frozen-VAE short-task base.
+\item The \textbf{affine} modulation \emph{failed} (always-wait collapse, hit $0$); it is
+out. The \textbf{dual-head} sensory head is the only positive cue-orient ($+0.038$) but far
+too weak to feature.
+\item The \textbf{split priority/value (cross-talk)} architecture remains the vehicle for
+mechanistic dissociations (Chapter~\ref{ch:crosstalk}); its $\mu/q$ mapping onto anatomy is
+delicate, and the empirical paper's scope (per James) excludes architecture variants. It is
+the subject of a \emph{separate} paper, not the recommended manuscript network.
+\end{itemize}
+
+\section{Recommendation}
+\textbf{For the empirical manuscript:} a single-stream recurrent vision transformer with
+(i) the frozen pretrained VAE front-end, (ii) the \textbf{multiplicative recurrent attention
+block with a second stacked xLSTM memory} (the \code{two-lstm} variant) --- the best detector
+in the matched family and a minimal, paper-faithful change to the published equation ---
+(iii) a spatial xLSTM working memory, and (iv) a distributional actor--critic readout,
+trained by the stable harness across the full task battery. This satisfies criteria
+(1), (3), (4), (5) and the reframed (2): the attention is interpretable and a causal lever
+on sensitivity, while the cueing benefit is carried, honestly and demonstrably, by working
+memory.
+
+The accompanying scientific claim is that, on the seven-step task, \textbf{the cueing
+benefit is memory-borne and the attention map is a bottom-up change detector} --- a result
+now established across six wirings, not assumed. The manuscript's attention figure should
+therefore be the \emph{causal} one (biasing attention shifts sensitivity, with no induced
+false alarms; Chapter~\ref{ch:deepdive}), not a cue-orienting map the mechanism does not
+produce. Whether a longer delay or harder cue \emph{forces} pre-orienting --- as the lab's
+older long-task networks displayed --- is a regime question to test with this same network,
+not a reason to change the architecture.
+
+\textbf{For the separate architecture line:} the split priority/value cross-talk network is
+the vehicle for the coupling-required and double-dissociation results --- a strong paper in
+its own right, kept out of the empirical manuscript by design.
+
+\section{What must be resolved before this is final}
+The attention-mechanism question is now settled; what remains: (1) the chosen network
+(\code{two-lstm}) must be shown to generalise across at least the value (\code{vda4}) and
+set-size (\code{setsize9}) tasks with no architecture change; (2) the cross-talk coupling
+result must be replicated on the short task with the frozen VAE to confirm it survives the
+perception fix; and (3) the regime question --- does a longer delay restore cue-orienting
+attention in the recommended network? --- should be tested, since it bears on whether the
+published orienting figure is reproducible at all in our setup or is specific to the long
+task. Frozen VAE, the stable harness, and now the two-LSTM multiplicative attention are
+fixed; the open items are generalisation and two targeted controls.

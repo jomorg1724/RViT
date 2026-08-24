@@ -1,0 +1,61 @@
+% HYPER — Fast-weight / hypernetwork attention.
+% Memory H generates the Q/K/V projection WEIGHTS (fast weights) rather than gating
+% activations: b=tanh(bott(H)); W_Q,W_K,W_V=gen(b); then Q=XW_Q,K=XW_K,V=XW_V.
+% Front-end + heads identical to the reference; only the middle + feedback change.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block ---------------------------------------------------------------
+  \node[attn,right=30mm of X,minimum width=24mm,minimum height=12mm] (sa)
+        {fast-weight\\self-attention};
+  % ---- weight generators (the distinguishing part) -----------------------------------
+  % bottleneck of H -> three small fast-weight generators producing W_Q,W_K,W_V (d x d),
+  % stacked in a tidy column between X and the attention block.
+  \coordinate (wcol) at ($(X)!.5!(sa)$);
+  \node[cb,minimum width=10mm,minimum height=5.2mm] (wq) at (wcol|-0,9mm)  {$W_Q$};
+  \node[cb,minimum width=10mm,minimum height=5.2mm] (wk) at (wcol|-0,0)    {$W_K$};
+  \node[cb,minimum width=10mm,minimum height=5.2mm] (wv) at (wcol|-0,-9mm) {$W_V$};
+  \node[lbl,above=0.4mm of wq,font=\tiny] {generated fast weights ($d{\times}d$)};
+  % bottleneck node, centred above the generator column
+  \node[mem,above=6mm of wq,minimum width=15mm,minimum height=6.5mm] (bott)
+        {$b{=}\tanh(\mathrm{bott}(H))$};
+  % ---- caption / equations (shifted right, clear of the W_V generator) ----------------
+  \node[lbl,align=center,font=\tiny,anchor=north] at ($(sa.south)+(7mm,-3.5mm)$)
+        {$W_{Q},W_{K},W_{V}{=}\mathrm{gen}(b)$;\ $Q{=}XW_Q$ etc.\\[1pt]
+         $Z{=}X+\mathrm{softmax}(QK^{\!\top}/\sqrt d)V$};
+  \node[lbl,align=center,font=\tiny,text=Red!70,anchor=north] at ($(sa.south)+(7mm,-9.0mm)$)
+        {(always-press collapse; iter 8999, incomplete)};
+  % ---- memory + readout --------------------------------------------------------------
+  \node[mem,right=12mm of sa] (lstm) {spatial\\xLSTM};
+  \node[tok,right=8mm of lstm,minimum width=12mm] (H) {$H'$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X);
+  \draw[flow] (X.east) -- (X.east-|wk.west) (wk.east) -- (sa.west);   % X -> (projected) -> attn
+  \draw[flow] (sa)--(lstm); \draw[flow] (lstm)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  % b -> the three weight generators
+  \draw[flow] (bott.south) -- (wq.north);
+  \draw[flow] (wq.south) -- (wk.north);
+  \draw[flow] (wk.south) -- (wv.north);
+  % X feeds the generated projections (thin gray = into Q/K/V construction)
+  \draw[qkv] (X.north) |- (wq.west);
+  \draw[qkv] (X.south) |- (wv.west);
+  % generated fast weights project X into Q/K/V, entering the attention block
+  \draw[qkv] (wq.east) -| ($(wk.east)!.5!(sa.west)$) |- (sa.north west);
+  \draw[qkv] (wv.east) -| ($(wk.east)!.5!(sa.west)$) |- (sa.south west);
+  % ---- recurrence + feedback ---------------------------------------------------------
+  \draw[fb] (lstm.north) .. controls +(0,9mm) and +(0,9mm) .. (lstm.north west)
+        node[midway,above,font=\tiny,text=Red!70] {carry $H^{t}\!\to\!H^{t+1}$};
+  % dashed-red feedback drives the weight generators (H from t-1 -> bottleneck)
+  \draw[fb] (lstm.north) .. controls +(0,17mm) and +(20mm,8mm) .. (bott.east)
+        node[pos=.9,above,font=\tiny,text=Red!70] {$H^{t-1}$};
+\end{tikzpicture}

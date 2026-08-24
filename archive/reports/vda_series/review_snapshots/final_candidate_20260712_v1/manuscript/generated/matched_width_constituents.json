@@ -1,0 +1,428 @@
+{
+  "artifact_class": "hash-verified constituent values behind matched-width difference plots",
+  "behavior": [
+    {
+      "displayed_validity": 0.75,
+      "feedback": "affine_ew",
+      "location": "valid",
+      "response_probability": [
+        0.13333333333333333,
+        0.25,
+        0.46,
+        0.6966666666666667,
+        0.9033333333333333,
+        0.9233333333333333,
+        0.96,
+        0.9566666666666667,
+        0.9533333333333334,
+        0.9466666666666667
+      ],
+      "task": "vda1",
+      "width": 128
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "affine_ew",
+      "location": "valid",
+      "response_probability": [
+        0.12333333333333334,
+        0.23,
+        0.4866666666666667,
+        0.6533333333333333,
+        0.9066666666666666,
+        0.9166666666666666,
+        0.9533333333333334,
+        0.9533333333333334,
+        0.9466666666666667,
+        0.9633333333333334
+      ],
+      "task": "vda1",
+      "width": 256
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "crossattn1",
+      "location": "valid",
+      "response_probability": [
+        0.06,
+        0.12333333333333334,
+        0.31333333333333335,
+        0.52,
+        0.7166666666666667,
+        0.8433333333333334,
+        0.8633333333333333,
+        0.8733333333333333,
+        0.89,
+        0.8566666666666667
+      ],
+      "task": "vda1",
+      "width": 128
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "crossattn1",
+      "location": "valid",
+      "response_probability": [
+        0.17666666666666667,
+        0.2866666666666667,
+        0.48,
+        0.73,
+        0.81,
+        0.91,
+        0.8966666666666666,
+        0.9066666666666666,
+        0.9233333333333333,
+        0.8966666666666666
+      ],
+      "task": "vda1",
+      "width": 256
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "affine_ew",
+      "location": "valid",
+      "response_probability": [
+        0.09333333333333334,
+        0.17666666666666667,
+        0.43666666666666665,
+        0.6633333333333333,
+        0.8333333333333334,
+        0.9466666666666667,
+        0.9733333333333334,
+        0.9966666666666667,
+        1.0,
+        1.0
+      ],
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "affine_ew",
+      "location": "valid",
+      "response_probability": [
+        0.12,
+        0.33666666666666667,
+        0.5866666666666667,
+        0.7766666666666666,
+        0.9333333333333333,
+        0.98,
+        0.99,
+        0.9966666666666667,
+        0.9966666666666667,
+        1.0
+      ],
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "crossattn1",
+      "location": "valid",
+      "response_probability": [
+        0.06333333333333334,
+        0.14,
+        0.41,
+        0.6166666666666667,
+        0.8033333333333333,
+        0.9666666666666667,
+        0.98,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "crossattn1",
+      "location": "valid",
+      "response_probability": [
+        0.03666666666666667,
+        0.11333333333333333,
+        0.30333333333333334,
+        0.4866666666666667,
+        0.69,
+        0.9233333333333333,
+        0.9533333333333334,
+        0.9933333333333333,
+        1.0,
+        1.0
+      ],
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "affine_ew",
+      "location": "valid",
+      "response_probability": [
+        0.07333333333333333,
+        0.17,
+        0.42,
+        0.64,
+        0.8633333333333333,
+        0.97,
+        0.99,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "task": "vda9",
+      "width": 128
+    },
+    {
+      "displayed_validity": 0.75,
+      "feedback": "affine_ew",
+      "location": "valid",
+      "response_probability": [
+        0.08666666666666667,
+        0.14,
+        0.4066666666666667,
+        0.5966666666666667,
+        0.8133333333333334,
+        0.9633333333333334,
+        0.9833333333333333,
+        0.9966666666666667,
+        1.0,
+        1.0
+      ],
+      "task": "vda9",
+      "width": 256
+    }
+  ],
+  "change_magnitudes_degrees": [
+    2.0,
+    6.0,
+    10.0,
+    14.0,
+    18.0,
+    22.0,
+    26.0,
+    30.0,
+    34.0,
+    38.0
+  ],
+  "clamp": [
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -1.681368481074189,
+        -1.124185969752808,
+        0.0,
+        -0.4744239278473772,
+        -0.5723793393407357
+      ],
+      "feedback": "affine_ew",
+      "task": "vda1",
+      "width": 128
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -0.01715635385624603,
+        -0.01715635385624603,
+        0.0,
+        -0.01715635385624603,
+        -0.019765945454138123
+      ],
+      "feedback": "affine_ew",
+      "task": "vda1",
+      "width": 256
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -0.4698641417616809,
+        0.053974301143971726,
+        0.0,
+        0.07069782293830018,
+        0.13703060357112884
+      ],
+      "feedback": "crossattn1",
+      "task": "vda1",
+      "width": 128
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        0.08672988012249228,
+        0.027582797497553102,
+        0.0,
+        -0.01909010040866921,
+        -0.10235429491014836
+      ],
+      "feedback": "crossattn1",
+      "task": "vda1",
+      "width": 256
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -1.3840130617246442,
+        -0.621944974983802,
+        0.0,
+        0.2472349069263715,
+        0.09245846940572733
+      ],
+      "feedback": "affine_ew",
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "condition": "invalid",
+      "dprime_change_from_zero_bias": [
+        0.37452339048926575,
+        0.35136759529722594,
+        0.0,
+        -0.7846530422229516,
+        -1.4838843628045875
+      ],
+      "feedback": "affine_ew",
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -0.49094598447428783,
+        -0.17637722886583784,
+        0.0,
+        0.045727080307897516,
+        -0.155647423800084
+      ],
+      "feedback": "affine_ew",
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "condition": "invalid",
+      "dprime_change_from_zero_bias": [
+        0.2844821779549649,
+        0.1455502427276978,
+        0.0,
+        -0.37690470997318304,
+        -0.7867501621081944
+      ],
+      "feedback": "affine_ew",
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -0.5435223006806806,
+        -0.42617665910976,
+        0.0,
+        -0.2973911696321929,
+        -0.4560706972242854
+      ],
+      "feedback": "crossattn1",
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "condition": "invalid",
+      "dprime_change_from_zero_bias": [
+        0.17161653189546944,
+        0.17161653189546944,
+        0.0,
+        -0.6100641600010521,
+        -0.7503547600748759
+      ],
+      "feedback": "crossattn1",
+      "task": "vda4",
+      "width": 128
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -0.7355708497660238,
+        -0.5771055141684451,
+        0.0,
+        -0.008586249573111715,
+        -0.0472399001003474
+      ],
+      "feedback": "crossattn1",
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "condition": "invalid",
+      "dprime_change_from_zero_bias": [
+        0.11651689294527934,
+        0.13295028229510408,
+        0.0,
+        -0.4344282098147576,
+        -0.5740054574102232
+      ],
+      "feedback": "crossattn1",
+      "task": "vda4",
+      "width": 256
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -0.9781182396626316,
+        -0.3004363174171383,
+        0.0,
+        -0.09695833651850227,
+        -0.19946426841002474
+      ],
+      "feedback": "affine_ew",
+      "task": "vda9",
+      "width": 128
+    },
+    {
+      "condition": "invalid",
+      "dprime_change_from_zero_bias": [
+        0.41989832690898643,
+        0.39112358958214033,
+        0.0,
+        -0.18662132409685528,
+        -0.4619849518555519
+      ],
+      "feedback": "affine_ew",
+      "task": "vda9",
+      "width": 128
+    },
+    {
+      "condition": "valid",
+      "dprime_change_from_zero_bias": [
+        -0.04577171573705607,
+        0.04022519270926184,
+        0.0,
+        0.08565169278395945,
+        0.09671266340878981
+      ],
+      "feedback": "affine_ew",
+      "task": "vda9",
+      "width": 256
+    },
+    {
+      "condition": "invalid",
+      "dprime_change_from_zero_bias": [
+        0.14992062285301966,
+        0.0759585073431428,
+        0.0,
+        -0.16024098293997113,
+        -0.3782666969542301
+      ],
+      "feedback": "affine_ew",
+      "task": "vda9",
+      "width": 256
+    }
+  ],
+  "clamp_key_logit_biases": [
+    -6.0,
+    -3.0,
+    0.0,
+    3.0,
+    6.0
+  ],
+  "contrast_boundary": "absolute checkpoint behavior and within-checkpoint D_w,x(b) values; no causal width estimand",
+  "schema_version": 1,
+  "upstream_manifest_path": "reports/vda_series/matched_width_20260712_production_v15/provenance/UPSTREAM_MANIFEST.json",
+  "upstream_manifest_sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11"
+}

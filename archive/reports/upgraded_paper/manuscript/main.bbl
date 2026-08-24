@@ -1,0 +1,145 @@
+\begin{thebibliography}{10}
+
+\bibitem{morgan_albanna_herman2025_rvit}
+Jonathan Morgan, Badr Albanna, and James~P. Herman.
+\newblock A recurrent vision transformer shows signatures of primate visual
+  attention, 2025.
+
+\bibitem{morgan_albanna_herman2026_vda}
+Jonathan Morgan, Badr Albanna, and James~P. Herman.
+\newblock When does value-directed attention matter? a normative account of
+  criterion, sensitivity, and decorrelation.
+\newblock Manuscript, 2026.
+
+\bibitem{carrasco2011_visual_attention_25y}
+Marisa Carrasco.
+\newblock Visual attention: the past 25 years.
+\newblock {\em Vision Research}, 51(13):1484--1525, 2011.
+
+\bibitem{posner1980_orienting}
+Michael~I. Posner, Charles~R. Snyder, and Brian~J. Davidson.
+\newblock Attention and the detection of signals.
+\newblock {\em Journal of Experimental Psychology: General}, 109(2):160--174,
+  1980.
+
+\bibitem{reynolds_heeger2009_normalization}
+John~H. Reynolds and David~J. Heeger.
+\newblock The normalization model of attention.
+\newblock {\em Neuron}, 61(2):168--185, 2009.
+
+\bibitem{mcadams_maunsell1999_v4_tuning}
+Carrie~J. McAdams and John H.~R. Maunsell.
+\newblock Effects of attention on orientation-tuning functions of single
+  neurons in macaque cortical area {V}4.
+\newblock {\em Journal of Neuroscience}, 19(1):431--441, 1999.
+
+\bibitem{treue_martinez_trujillo1999_feature_attention}
+Stefan Treue and Julio~C. Mart{\'\i}nez~Trujillo.
+\newblock Feature-based attention influences motion processing gain in macaque
+  visual cortex.
+\newblock {\em Nature}, 399:575--579, 1999.
+
+\bibitem{sani2017_temporal_v4_gain}
+Ilaria Sani, Elisa Santandrea, Maria~Concetta Morrone, and Leonardo Chelazzi.
+\newblock Temporally evolving gain mechanisms of attention in macaque area
+  {V}4.
+\newblock {\em Journal of Neurophysiology}, 118(2):800--816, 2017.
+
+\bibitem{CohenMaunsell2009}
+Marlene~R. Cohen and John H.~R. Maunsell.
+\newblock Attention improves performance primarily by reducing interneuronal
+  correlations.
+\newblock {\em Nature Neuroscience}, 12(12):1594--1600, 2009.
+
+\bibitem{MullerFindlay1987}
+Hermann~J. M{\"u}ller and John~M. Findlay.
+\newblock Sensitivity and criterion effects in the spatial cuing of visual
+  attention.
+\newblock {\em Perception \& Psychophysics}, 42(4):383--399, 1987.
+
+\bibitem{luo_maunsell2018_criterion_sensitivity}
+Thomas~Zhihao Luo and John H.~R. Maunsell.
+\newblock Attentional changes in either criterion or sensitivity are associated
+  with robust modulations in lateral prefrontal cortex.
+\newblock {\em Neuron}, 97(6):1382--1393, 2018.
+
+\bibitem{baruni2015}
+Jalal~K. Baruni, Brian Lau, and C.~Daniel Salzman.
+\newblock Reward expectation differentially modulates attentional behavior and
+  activity in visual area v4.
+\newblock {\em Nature Neuroscience}, 18(11):1656--1663, 2015.
+
+\bibitem{awh_jonides2001_overlapping_attention_wm}
+Edward Awh and John Jonides.
+\newblock Overlapping mechanisms of attention and spatial working memory.
+\newblock {\em Trends in Cognitive Sciences}, 5(3):119--126, 2001.
+
+\bibitem{awh1998_rehearsal}
+Edward Awh, John Jonides, and Patricia~A. Reuter-Lorenz.
+\newblock Rehearsal in spatial working memory.
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 24(3):780--790, 1998.
+
+\bibitem{kane2001_controlled_attention}
+Michael~J. Kane, M.~Kathryn Bleckley, Andrew R.~A. Conway, and Randall~W.
+  Engle.
+\newblock A controlled-attention view of working-memory capacity.
+\newblock {\em Journal of Experimental Psychology: General}, 130(2):169--183,
+  2001.
+
+\bibitem{bisley_goldberg2010}
+James~W. Bisley and Michael~E. Goldberg.
+\newblock Attention, intention, and priority in the parietal lobe.
+\newblock {\em Annual Review of Neuroscience}, 33:1--21, 2010.
+
+\bibitem{failing_theeuwes2018_selection_history}
+Michel Failing and Jan Theeuwes.
+\newblock Selection history: How reward modulates selectivity of visual
+  attention.
+\newblock {\em Psychonomic Bulletin \& Review}, 25(2):514--538, 2018.
+
+\bibitem{hickey2010_reward_salience_acc}
+Clayton Hickey, Leonardo Chelazzi, and Jan Theeuwes.
+\newblock Reward changes salience in human vision via the anterior cingulate.
+\newblock {\em Journal of Neuroscience}, 30(33):11096--11103, 2010.
+
+\bibitem{ghose_maunsell2002_task_timing}
+Geoffrey~M. Ghose and John H.~R. Maunsell.
+\newblock Attentional modulation in visual cortex depends on task timing.
+\newblock {\em Nature}, 419:616--620, 2002.
+
+\bibitem{RuffCohen2016}
+Douglas~A. Ruff and Marlene~R. Cohen.
+\newblock Attention increases spike count correlations between visual cortical
+  areas.
+\newblock {\em Journal of Neuroscience}, 36(28):7523--7534, 2016.
+
+\bibitem{Srinath2021}
+Ramanujan Srinath, Douglas~A. Ruff, and Marlene~R. Cohen.
+\newblock Attention improves information flow between neuronal populations
+  without changing the communication subspace.
+\newblock {\em Current Biology}, 31(23):5299--5313.e4, 2021.
+
+\bibitem{wang_theeuwes2018_statistical_learning_distractor_suppression}
+Benchi Wang and Jan Theeuwes.
+\newblock Statistical regularities modulate attentional capture.
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 44(1):13--17, 2018.
+
+\bibitem{awh_vogel_oh2006}
+Edward Awh, Edward~K. Vogel, and Sei-Hwan Oh.
+\newblock Interactions between attention and working memory.
+\newblock {\em Neuroscience}, 139(1):201--208, 2006.
+
+\bibitem{awh_jonides_reuterlorenz1998_rehearsal}
+Edward Awh, John Jonides, and Patricia~A. Reuter-Lorenz.
+\newblock Rehearsal in spatial working memory.
+\newblock {\em Journal of Experimental Psychology: Human Perception and
+  Performance}, 24(3):780--790, 1998.
+
+\bibitem{baddeley1992working}
+Alan Baddeley.
+\newblock Working memory.
+\newblock {\em Science}, 255(5044):556--559, 1992.
+
+\end{thebibliography}

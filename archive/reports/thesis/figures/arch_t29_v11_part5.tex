@@ -1,0 +1,85 @@
+% v11_part5 — SPLIT-READOUT DUAL-STREAM CROSS-TALK (distractor task).
+% Architecturally identical to v11_part2; the difference is the TASK (cued-side change
+% detection WITH distractors). Two single-head attention streams share the image X and
+% cross-talk through the memories:
+%   SALIENCE : Q=X, K=V=[H1 || H2], residual=X  -> Z_sal -> ACTOR
+%   TOP-DOWN : Q=X, K=V=H2,         residual=H2  -> Z_td  -> CRITIC
+% Memories: H1 = LSTM1(X)  ;  H2 = LSTM2(Z_sal). Dashed red = recurrent feedback (frame t-1).
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (T=29 conv patch-embed) ---------------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt]
+        (patch.north)--(patch.south) (patch.west)--(patch.east)
+        ($(patch.north west)!.5!(patch.north)$)--($(patch.south west)!.5!(patch.south)$)
+        ($(patch.north)!.5!(patch.north east)$)--($(patch.south)!.5!(patch.south east)$)
+        ($(patch.north west)!.5!(patch.west)$)--($(patch.north east)!.5!(patch.east)$)
+        ($(patch.west)!.5!(patch.south west)$)--($(patch.east)!.5!(patch.south east)$);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $50{\times}50$}};
+  \node[vae,right=of patch,align=center] (vae) {conv patch-embed\\(3 conv)};
+  \node[tok,right=8mm of vae,align=center] (X) {$X$\\[-1pt]{\tiny 100 tok ($10{\times}10$)}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+
+  % ---- attention block: TWO single-head streams (the distinguishing part) ------------
+  \node[attn,right=15mm of X,minimum width=29mm,minimum height=10mm,yshift=9mm] (sal)
+        {salience stream\\{\tiny $Q{=}X,\ K{=}V{=}[H_1\Vert H_2]$}};
+  \node[attn,right=15mm of X,minimum width=29mm,minimum height=10mm,yshift=-9mm] (td)
+        {top-down stream\\{\tiny $Q{=}X,\ K{=}V{=}H_2$}};
+  % residual adders on each stream output
+  \node[op,right=6mm of sal] (psal) {$+$};
+  \node[op,right=6mm of td]  (ptd)  {$+$};
+  \node[lbl,above=0.3mm of psal,font=\tiny] {$Z_{\mathrm{sal}}$};
+  \node[lbl,below=0.3mm of ptd,font=\tiny]  {$Z_{\mathrm{td}}$};
+
+  % ---- memories (a tidy column to the right of the streams) ---------------------------
+  \node[mem,right=10mm of psal,align=center,yshift=-1mm] (lstm1) {spatial\\xLSTM$_1$};
+  \node[mem,right=10mm of ptd,align=center,yshift=1mm]  (lstm2) {spatial\\xLSTM$_2$};
+  \node[lbl,above=0.4mm of lstm1,font=\tiny] {$H_1$};
+  \node[lbl,below=0.4mm of lstm2,font=\tiny] {$H_2$};
+
+  % ---- heads (split readout) ---------------------------------------------------------
+  \node[head,right=13mm of lstm1,yshift=3mm,align=center] (actor)  {Actor\\{\tiny softmax(2)}};
+  \node[head,right=13mm of lstm2,yshift=-3mm,align=center] (critic) {Critic\\{\tiny QR, 5 quant.}};
+  % ---- distractor-task note (directly under the Critic) ------------------------------
+  \node[lbl,below=4mm of critic.south,anchor=north,align=center,font=\tiny,text=black!60]
+        {\textit{trained with distractors}\\[-1pt]\textit{(suppress uncued-side changes)}};
+
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X);
+  \draw[flow] (X.east) -- ++(4mm,0) |- (sal.west);
+  \draw[flow] (X.east) -- ++(4mm,0) |- (td.west);
+  \draw[flow] (sal)--(psal);
+  \draw[flow] (td)--(ptd);
+  % residuals into the adders
+  \draw[flow] (X.north) .. controls +(0,16mm) and +(0,7mm) .. (psal.north)
+        node[pos=.76,above,font=\tiny,text=black!70] {residual $X$};
+  \draw[flow] (td.south) .. controls +(0,-5mm) and +(0,-5mm) .. (ptd.south)
+        node[pos=.5,below,font=\tiny,text=black!70] {residual $H_2$};
+  % split readout: salience -> Actor, top-down -> Critic (memories sit on the path)
+  \draw[flow] (psal) -- (lstm1);
+  \draw[flow] (ptd)  -- (lstm2);
+  \draw[flow] (lstm1.east) -- ++(3mm,0) |- (actor.west);
+  \draw[flow] (lstm2.east) -- ++(3mm,0) |- (critic.west);
+
+  % ---- cross-talk wiring: Z_sal drives H2 ; X drives H1 ------------------------------
+  % H2 = LSTM2(Z_sal): salience output feeds the second memory
+  \draw[flow] (psal.east) .. controls +(5mm,0) and +(0,11mm) .. (lstm2.north)
+        node[pos=.80,right,font=\tiny] {$Z_{\mathrm{sal}}$};
+  % H1 = LSTM1(X): image drives the first memory
+  \draw[flow] (X.north) .. controls +(0,11mm) and +(-12mm,2mm) .. (lstm1.north west)
+        node[pos=.86,above,font=\tiny] {$X$};
+
+  % ---- recurrence + feedback (dashed red, frame t-1) ---------------------------------
+  % H1,H2 (prev frame) feed the salience K,V ; H2 (prev frame) feeds the top-down K,V.
+  \draw[fb] (lstm1.south) .. controls +(0,-7mm) and +(0,-9mm) .. (sal.south east)
+        node[pos=.6,below,font=\tiny,text=Red!70] {$H_1^{t-1}\!\to[K,V]_{\mathrm{sal}}$};
+  \draw[fb] (lstm2.south west) .. controls +(-4mm,-7mm) and +(4mm,-7mm) .. (td.south east)
+        node[pos=.5,below,font=\tiny,text=Red!70] {$H_2^{t-1}\!\to[K,V]_{\mathrm{td}}$};
+  \draw[fb] (lstm2.north west) .. controls +(-3mm,5mm) and +(3mm,3mm) .. (sal.east)
+        node[pos=.62,right,font=\tiny,text=Red!70] {$H_2^{t-1}$};
+
+  % ---- defining equations (compact band beneath the streams) -------------------------
+  \node[lbl,below=11mm of td.south,anchor=north,align=left,font=\tiny]
+        {salience: $Z_{\mathrm{sal}}{=}X+\mathrm{softmax}(QK^{\!\top})V,\quad K{=}V{=}[H_1\Vert H_2]$\\[1pt]
+         top-down: $Z_{\mathrm{td}}{=}H_2+\mathrm{softmax}(QK^{\!\top})V,\quad K{=}V{=}H_2$\\[1pt]
+         $H_1{=}\mathrm{LSTM}_1(X)$,\qquad $H_2{=}\mathrm{LSTM}_2(Z_{\mathrm{sal}})$};
+\end{tikzpicture}

@@ -1,0 +1,24 @@
+\begin{abstract}
+\noindent How attention improves perception has been debated for a quarter century:
+proposals range from enhancement of the sensory signal, to reduction of external
+noise and more efficient selection, to shifts in the observer's decision criterion
+and reductions of spatial uncertainty. These accounts are not mutually exclusive ---
+all are thought to contribute --- but behaviour alone cannot cleanly separate them.
+Here we show that an affine-feedback recurrent vision-transformer architecture with a spatial
+working-memory state, trained with reinforcement learning plus a temporal joint-embedding
+predictive auxiliary loss (weight $0.5$), reproduces several signatures of primate visual attention across
+separately trained checkpoints. Because its internal attention can be read out and perturbed,
+the model directly operationalizes two components of attentional performance: its decision
+criterion shifts toward liberal reporting and its perceptual sensitivity ($d'$) depends on
+the attention clamp. Injected attention also evokes false detections preferentially at the
+monitored location, demonstrating spatial gating. These measurements do not constitute a
+quantitative three-way decomposition and include no dedicated external-noise test. The model
+deploys attention to a cued location, uses spatial validity when validity is the operative cue,
+maintains a value code from cue onset, and develops a decodable, position-specific code for the
+change when the change occurs. In a preliminary cued analogue of a paradigm used in the primate
+literature, separately trained reward-regime checkpoints reproduce the Luo--Maunsell
+sensitivity/criterion contrast. This RViT+ study extends the 2025 empirical Recurrent ViT
+\cite{morgan_albanna_herman2025_rvit}; it is also a companion to, but not a revision
+of, a separate 2026 normative account of when value-directed attention matters
+\cite{morgan_albanna_herman2026_vda}.
+\end{abstract}

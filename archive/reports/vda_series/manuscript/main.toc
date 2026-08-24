@@ -1,0 +1,44 @@
+\contentsline {section}{\numberline {1}The scientific question}{4}{section.1}%
+\contentsline {section}{\numberline {2}Source freeze and experimental universe}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Canonical source and panel inventory}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Fourteen environments and two non-interchangeable VDA families}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Task specification and recurrent computation}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}What the agent sees and must do}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Architecture as specification, not result}{9}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Historical behavior regenerated from preserved aggregates}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}What was regenerated}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Singleton behavior: an explicit undefined estimand}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Two active items}{14}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Four and nine active items}{14}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Checkpoint-recomputed first wave: VDA4 and VDA9}{16}{section.5}%
+\contentsline {subsection}{\numberline {5.1}A distinct, provenance-closed evidence class}{16}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Event-aligned attention maps}{18}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Three-panel psychometrics with finite-trial intervals}{25}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Matched-width behavioral, representational, and intervention battery}{28}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Why this battery follows the first wave}{28}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Observed behavior}{28}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Held-out readout from the recurrent state}{29}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Within-checkpoint key-logit intervention}{29}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Neuroscience correspondence without anatomical inflation}{32}{section.7}%
+\contentsline {paragraph}{Sensitivity versus criterion.}{32}{section*.3}%
+\contentsline {paragraph}{Event-aligned representation versus neural dynamics.}{32}{section*.4}%
+\contentsline {paragraph}{Model perturbation versus biological causal intervention.}{32}{section*.5}%
+\contentsline {section}{\numberline {8}Evidence-availability findings and missing controls}{32}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Historical VDA16 is blocked}{32}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Controlled fixed-grid training lies outside the completed evidence set}{33}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Why available does not mean established}{33}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Discussion}{33}{section.9}%
+\contentsline {subsection}{\numberline {9.1}What is established}{33}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}What remains unestablished}{33}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Evidence required to revise the current conclusions}{34}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Methods and reproducibility}{34}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Source and figure workflow}{34}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Coverage states}{35}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Quality control}{35}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Conclusion}{35}{section.11}%
+\contentsline {section}{\numberline {A}Fourteen-environment task atlas}{36}{appendix.A}%
+\contentsline {section}{\numberline {B}Full historical aggregate plates}{37}{appendix.B}%
+\contentsline {section}{\numberline {C}Coverage counts by source object}{45}{appendix.C}%
+\contentsline {section}{\numberline {D}Exact panel--environment disposition matrix}{47}{appendix.D}%
+\contentsline {section}{\numberline {E}Matched-width constituent values}{53}{appendix.E}%
+\contentsline {section}{\numberline {F}Artifact locations and provenance classes}{54}{appendix.F}%

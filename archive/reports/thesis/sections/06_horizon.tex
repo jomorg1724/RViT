@@ -1,0 +1,61 @@
+\chapter{Finding II --- the horizon decides the strategy}
+\label{ch:horizon}
+
+\section{The puzzle}
+The history contains a genuine paradox. The cross-talk network reproduced primate cueing
+behaviour on the \emph{long} twenty-nine-step task (hit $\approx0.80$) trained from reward
+with no pretrained VAE. The \emph{same} architecture, and the exact paper network, collapse
+on the \emph{short} seven-step task without a pretrained VAE --- even though the short task
+is, by every naive measure, easier (fewer frames, less accumulated noise, a fixed change
+time the agent could memorise). How can the easier task be the one that fails?
+
+\section{Two ways to detect a change}
+The resolution is that there are two strategies for change detection, and they have
+opposite horizon dependence.
+\begin{description}
+\item[Instantaneous detection.] Compare \emph{this} frame's orientation to the remembered
+baseline. This needs accurate per-frame orientation perception, and it detects the change
+in a single frame.
+\item[Temporal / flow detection.] Notice that \emph{something shifted} in the visual stream
+across frames, without representing what the orientation is. The per-frame signal is weak
+and noisy, so it must be integrated over many frames to become reliable; it is slow.
+\end{description}
+
+\section{The horizon selects between them}
+On the long task the change persists for up to $\sim\!18$ frames, so the flow strategy
+works: the agent accumulates a weak ``something moved'' signal until it is confident. It
+never \emph{needs} accurate perception, and consequently never learns it --- which is
+exactly why the long-trained front-end has orientation decodability $\Rsq\approx0.24$ yet
+still solves the long task. On the short task the change lasts two frames. There is no time
+to integrate, the flow strategy fails, and the only thing that works is instantaneous
+perception --- which sparse reward cannot build (Chapter~\ref{ch:perception}). The
+pretrained VAE supplies exactly the missing instantaneous perception, and the short task is
+solved.
+
+In one sentence: \textbf{the short task removes the temporal-integration escape hatch and
+forces abstract, single-frame perception.} Pixel/flow inference is slow; abstract-but-
+accurate inference is fast.
+
+\section{The behavioural fingerprint}
+The theory makes a sharp, falsifiable prediction that the data already bear out. A model
+that detects instantaneously should press the moment the change appears, so its reaction
+time should be pinned at change onset and \emph{cannot} be sped up by the cue. The
+pretrained-VAE model on the short task does exactly this: median reaction time is five
+frames (change onset), essentially flat across change magnitude and across cue validity
+(Chapter~\ref{ch:deepdive}). A flow-based model, by contrast, should have long, magnitude-
+dependent reaction times. The prediction to complete the argument is a direct comparison of
+reaction-time distributions: the from-scratch long-task model should press \emph{late} and
+the pretrained-VAE model \emph{early}, the clean signature of ``flow is slow, perception is
+fast.''
+
+\section{Consequences for the program}
+Two consequences follow. First, \textbf{the short task is the more discriminating test
+bed}: because it forecloses the flow shortcut, it forces the network to actually perceive,
+and so it exposes architectural differences that the long task hides behind temporal
+integration. This is why the cue-attention investigation of Chapter~\ref{ch:attention} is
+run on the short task. Second, \textbf{horizon is a design variable, not a nuisance}:
+choosing the seven-step task with the frozen VAE gives the cleanest, most mechanism-
+revealing setting, while the twenty-nine-step task is the right venue for studying the
+\emph{maintenance} of attention across a delay. The empirical paper will want both: the
+short task for the sensitivity/criterion story and the long task for the maintenance and
+anticipation story.

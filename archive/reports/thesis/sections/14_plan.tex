@@ -1,0 +1,78 @@
+\chapter{Research plan}
+\label{ch:plan}
+
+The plan is staged so that each stage produces a decision or a deliverable, and so that the
+cheap, decisive analyses precede the expensive retrains. It serves two outputs in parallel:
+the empirical manuscript (Paper A) and the separate architecture/dissociation paper.
+
+\section{Stage 0 --- settle the network (\emph{largely done})}
+\begin{itemize}
+\item \textbf{Done:} the matched attention family is trained on the frozen-VAE base and the
+cue-attention contrast is run on each (Chapter~\ref{ch:attention}). The decision is made ---
+\textbf{the recommended network is the \code{two-lstm} multiplicative form}, the best
+detector in the family; \code{affine} collapsed and no variant orients to the cue, so the
+cueing story is memory-borne and the manuscript's attention figure is the causal one.
+\item Run the optic-flow reaction-time analysis on existing checkpoints (no new training).
+\item Run the EMA-versus-hard-copy A/B to close the last reproduction-difference question.
+\item Test the longer-delay regime (O5) on \code{two-lstm} --- does any delay restore
+cue-orienting attention, or is the published orienting figure long-task-specific?
+\item \emph{Deliverable:} a single, named recommended network (frozen VAE $+$ two-LSTM
+multiplicative attention $+$ stable harness) --- the architecture every subsequent run uses.
+\end{itemize}
+
+\section{Stage 1 --- generalisation across the battery ($\sim$2--3 weeks)}
+\begin{itemize}
+\item Train the recommended network, unchanged, on \code{vda4} (value) and
+\code{setsize9} (set-size) first, then \code{luo\_maunsell} and \code{krauzlis}.
+\item For each, run the standard analysis suite: psychometric/chronometric fits,
+attention maps, the causal attention battery, and (for the value tasks) critic calibration.
+\item \emph{Deliverable:} the empirical manuscript's results section --- one architecture,
+one harness, reproducing primate signatures across the battery, with per-validity
+breakdowns and the corrected attention-map visualisation.
+\end{itemize}
+
+\section{Stage 2 --- the causal-prediction differentiators ($\sim$2 weeks)}
+\begin{itemize}
+\item Formalise the causal-perturbation predictions (attention clamps mapping onto SC/FEF
+microstimulation and inactivation) as the manuscript's novel contribution, alongside the
+reward-driven-learning differentiator.
+\item Run the representational decoding (change-evidence vs.\ value/context) to support the
+predictions.
+\item \emph{Deliverable:} the manuscript's discussion/predictions section and the
+``NN-steers-neuroscience'' framing carried implicitly by the predictions.
+\end{itemize}
+
+\section{Stage 3 --- the architecture / dissociation paper (parallel track)}
+\begin{itemize}
+\item Replicate the coupling-required and swapped-routing results on the short task with the
+frozen VAE; run the $\mu$/$q$ representational and causal double-dissociation.
+\item Position as a separate paper: ``coupling between policy and value is required for
+attentive behaviour to be learned,'' with the double dissociation as the headline.
+\item \emph{Deliverable:} the architecture paper draft (the existing cross-talk manuscript
+is the seed).
+\end{itemize}
+
+\section{Stage 4 --- the normative theory preprint (James first author, parallel)}
+\begin{itemize}
+\item The set-size/accidental-hit normative result (uncued-FA benefit flips with set size),
+cited by the empirical paper, on a fast venue.
+\item The model's set-size behaviour (Stage 1) provides the empirical correlate.
+\end{itemize}
+
+\section{Risks and contingencies}
+\begin{itemize}
+\item \emph{No matched variant restored cue-orienting attention on the frozen-VAE base (the
+realized case):} this is now a positive result --- on the seven-step task the cueing benefit
+is memory-borne across all six wirings --- and the manuscript features the causal attention
+result with the memory-driven account stated plainly, rather than a cue-orienting map the
+mechanism does not produce. The residual risk is O5: if a longer delay never restores
+orienting either, the published orienting figure may be specific to the long-task regime,
+which is itself a reportable finding.
+\item \emph{If the network fails to generalise to a battery task:} treat the failure as a
+diagnostic (perception, exploration, or coupling, per the lessons of
+Chapters~\ref{ch:perception}--\ref{ch:crosstalk}) rather than a reason to fork the
+architecture; the generalisation goal is the point.
+\item \emph{Compute:} runs are serialised on the available accelerator, one frozen VAE is
+reused across all tasks, and analysis is thread-capped and run only when training is idle ---
+the laptop has been crashed once by stacking compute, and that constraint is now hard.
+\end{itemize}

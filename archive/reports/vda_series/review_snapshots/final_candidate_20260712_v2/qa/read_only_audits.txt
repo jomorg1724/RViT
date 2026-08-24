@@ -1,0 +1,13 @@
+$ /Users/jonathanmorgan/AttentionManuscript/.venv/bin/python scripts/run_matched_width.py --audit
+return_code=0
+stdout:
+/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_matched_width/MANIFEST.json
+stderr:
+<empty>
+
+$ /Users/jonathanmorgan/AttentionManuscript/.venv/bin/python scripts/build_matched_width_summary.py --audit --output-root ../reports/vda_series/matched_width_20260712_production_v15
+return_code=0
+stdout:
+/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15/MANIFEST.json
+stderr:
+<empty>

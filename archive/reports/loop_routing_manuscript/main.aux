@@ -1,0 +1,127 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{plainnat}
+\citation{gold2007neural}
+\citation{platt1999neural,sugrue2004matching}
+\citation{odoherty2004dissociable,maia2009reinforcement}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{The design question.}{2}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{A lesion-style controlled comparison.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Preview of the result.}{2}{section*.3}\protected@file@percent }
+\citation{thompson2005neuronal,moore2001control,lovejoy2010inactivation,zenon2012attention}
+\citation{odoherty2004dissociable,maia2009reinforcement}
+\citation{schultz1997neural,hollerman1998dopamine,morita2014striatal}
+\@writefile{toc}{\contentsline {paragraph}{Brain-loop interpretation and novelty.}{3}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}The three loop architectures}{3}{section.2}\protected@file@percent }
+\newlabel{sec:architectures}{{2}{3}{The three loop architectures}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}The cross-attention block}{3}{subsection.2.1}\protected@file@percent }
+\newlabel{eq:arch-block}{{1}{3}{The cross-attention block}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Configuration~1 (V1): shared memory, closed loop}{3}{subsection.2.2}\protected@file@percent }
+\newlabel{eq:arch-mu}{{2}{3}{Configuration~1 (V1): shared memory, closed loop}{equation.2}{}}
+\newlabel{eq:arch-q}{{3}{3}{Configuration~1 (V1): shared memory, closed loop}{equation.3}{}}
+\citation{lovejoy2010inactivation}
+\newlabel{eq:arch-mem}{{4}{4}{Configuration~1 (V1): shared memory, closed loop}{equation.4}{}}
+\newlabel{eq:arch-heads}{{5}{4}{Configuration~1 (V1): shared memory, closed loop}{equation.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Configuration~2 (V2): independent streams, open loop}{4}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Configuration~3 (V3): swapped routing}{4}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}One property at a time}{4}{subsection.2.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The three loop architectures. \textbf  {V1 (shared memory, closed loop):} the priority stream ($\mu $; queries the image, keys/values $[\mathbf  {H}_1\parallel \mathbf  {H}_2]$, residual the raw image $\mathbf  {X}$) drives the actor and \emph  {writes} the shared deep memory $\mathbf  {H}_2$; the value stream ($q$; keys/values and residual $\mathbf  {H}_2$) drives the critic and \emph  {reads} the same $\mathbf  {H}_2$. \textbf  {V2 (independent, open loop):} the same two stream types, but each with a private memory ($\mathbf  {H}_{\mu }$, $\mathbf  {H}_{Q}$) written only by its own output; the streams share only the raw image. \textbf  {V3 (swapped routing):} identical wiring to V1 but the readout is reversed---the value stream drives the actor and the priority stream drives the critic. The three configurations differ in exactly one property each: V2 deletes the shared memory, V3 swaps the head assignment.}}{5}{figure.caption.5}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:arch}{{1}{5}{The three loop architectures. \textbf {V1 (shared memory, closed loop):} the priority stream ($\mu $; queries the image, keys/values $[\mathbf {H}_1\parallel \mathbf {H}_2]$, residual the raw image $\mathbf {X}$) drives the actor and \emph {writes} the shared deep memory $\mathbf {H}_2$; the value stream ($q$; keys/values and residual $\mathbf {H}_2$) drives the critic and \emph {reads} the same $\mathbf {H}_2$. \textbf {V2 (independent, open loop):} the same two stream types, but each with a private memory ($\mathbf {H}_{\mu }$, $\mathbf {H}_{Q}$) written only by its own output; the streams share only the raw image. \textbf {V3 (swapped routing):} identical wiring to V1 but the readout is reversed---the value stream drives the actor and the priority stream drives the critic. The three configurations differ in exactly one property each: V2 deletes the shared memory, V3 swaps the head assignment}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Task and training}{5}{section.3}\protected@file@percent }
+\newlabel{sec:task}{{3}{5}{Task and training}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}The cued change-detection environment ($T=29$)}{5}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}The shared training harness}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Behavioural outcomes of the three loop architectures on the $T=29$ cued change-detection task ($500$ fresh episodes each, sampled policy). The shared-memory closed loop (V1) is a calibrated, change-locked detector; the independent (V2) and swapped-routing (V3) configurations both collapse to never declaring a change. Each configuration differs from V1 in exactly one structural property.}}{6}{table.caption.6}\protected@file@percent }
+\newlabel{tab:loopresults}{{1}{6}{Behavioural outcomes of the three loop architectures on the $T=29$ cued change-detection task ($500$ fresh episodes each, sampled policy). The shared-memory closed loop (V1) is a calibrated, change-locked detector; the independent (V2) and swapped-routing (V3) configurations both collapse to never declaring a change. Each configuration differs from V1 in exactly one structural property}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{6}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{6}{Results}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Only the closed, grounded loop learns}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}The working loop reproduces the reliability-scaled cueing signature}{6}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Why only the closed, grounded loop learns}{7}{section.5}\protected@file@percent }
+\newlabel{sec:mechanism}{{5}{7}{Why only the closed, grounded loop learns}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{V1: credit lands where it was earned.}{7}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{V2: credit is computed on the wrong representation.}{7}{section*.8}\protected@file@percent }
+\citation{odoherty2004dissociable,maia2009reinforcement}
+\citation{odoherty2004dissociable}
+\citation{maia2009reinforcement}
+\@writefile{toc}{\contentsline {paragraph}{V3: the actor is fed a representation that cannot see the change.}{8}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Jointly necessary, individually insufficient.}{8}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}A cortico-basal-ganglia-collicular loop}{8}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Actor and critic as a striatal division of labour}{8}{subsection.6.1}\protected@file@percent }
+\citation{schultz1997neural,hollerman1998dopamine}
+\citation{morita2014striatal}
+\citation{platt1999neural,sugrue2004matching}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Dopamine as the coupling that makes V2's collapse sensible}{9}{subsection.6.2}\protected@file@percent }
+\citation{zenon2012attention,lovejoy2010inactivation}
+\citation{stine2023differential}
+\citation{bollimunta2018fefsc}
+\citation{herman2020attention}
+\citation{thompson2005neuronal}
+\citation{moore2001control,moore2004microstimulation}
+\citation{gold2007neural}
+\citation{katz2016dissociated}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}The superior colliculus as the grounded node that must command action}{10}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}The loop, stated whole}{10}{subsection.6.4}\protected@file@percent }
+\citation{zenon2012attention,lovejoy2010inactivation,bollimunta2018fefsc}
+\citation{krauzlis2018selective,katz2025optogenetic}
+\citation{thompson2005neuronal,gold2007neural,katz2016dissociated}
+\citation{platt1999neural,sugrue2004matching}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Falsifiable predictions}{11}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Behavioural level}{11}{subsection.7.1}\protected@file@percent }
+\citation{moore2001control,moore2004microstimulation,stine2023differential,herman2020attention}
+\citation{katz2025optogenetic,krauzlis2018selective}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Representational level}{12}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Causal-perturbation level}{12}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion}{12}{section.8}\protected@file@percent }
+\newlabel{sec:discussion}{{8}{12}{Discussion}{section.8}{}}
+\citation{zenon2012attention,lovejoy2010inactivation}
+\citation{bollimunta2018fefsc}
+\citation{stine2023differential}
+\citation{herman2020attention}
+\citation{thompson2005neuronal,moore2001control,moore2004microstimulation}
+\citation{gold2007neural}
+\citation{katz2016dissociated}
+\citation{odoherty2004dissociable,maia2009reinforcement}
+\citation{schultz1997neural,hollerman1998dopamine}
+\citation{morita2014striatal}
+\citation{platt1999neural,sugrue2004matching}
+\citation{krauzlis2018selective}
+\citation{maia2009reinforcement}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}A reinforcement-learning reading: credit assignment closes or opens the loop}{13}{subsection.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Mapping onto the primate attention and value systems}{13}{subsection.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Honesty about the mapping}{13}{subsection.8.3}\protected@file@percent }
+\citation{katz2025optogenetic,krauzlis2018selective}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Novelty and relation to prior models}{14}{subsection.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Limitations}{14}{subsection.8.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}The network as a generator of falsifiable predictions}{14}{subsection.8.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Methods}{15}{section.9}\protected@file@percent }
+\newlabel{sec:methods}{{9}{15}{Methods}{section.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Task}{15}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Agent}{15}{subsection.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Training}{15}{subsection.9.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Evaluation}{15}{subsection.9.4}\protected@file@percent }
+\bibdata{refs}
+\bibcite{bollimunta2018fefsc}{{1}{2018}{{Bollimunta et~al.}}{{Bollimunta, Bogadhi, and Krauzlis}}}
+\bibcite{gold2007neural}{{2}{2007}{{Gold and Shadlen}}{{}}}
+\bibcite{herman2020attention}{{3}{2020}{{Herman et~al.}}{{Herman, Arcizet, and Krauzlis}}}
+\bibcite{hollerman1998dopamine}{{4}{1998}{{Hollerman and Schultz}}{{}}}
+\bibcite{katz2016dissociated}{{5}{2016}{{Katz et~al.}}{{Katz, Yates, Pillow, and Huk}}}
+\bibcite{katz2025optogenetic}{{6}{2025}{{Katz et~al.}}{{Katz, Bohlen, Yu, Mejias-Aponte, Sommer, and Krauzlis}}}
+\bibcite{krauzlis2018selective}{{7}{2018}{{Krauzlis et~al.}}{{Krauzlis, Bogadhi, Herman, and Bollimunta}}}
+\bibcite{lovejoy2010inactivation}{{8}{2010}{{Lovejoy and Krauzlis}}{{}}}
+\bibcite{maia2009reinforcement}{{9}{2009}{{Maia}}{{}}}
+\bibcite{moore2001control}{{10}{2001}{{Moore and Fallah}}{{}}}
+\bibcite{moore2004microstimulation}{{11}{2004}{{Moore and Fallah}}{{}}}
+\bibcite{morita2014striatal}{{12}{2014}{{Morita and Kato}}{{}}}
+\bibcite{odoherty2004dissociable}{{13}{2004}{{O'Doherty et~al.}}{{O'Doherty, Dayan, Schultz, Deichmann, Friston, and Dolan}}}
+\bibcite{platt1999neural}{{14}{1999}{{Platt and Glimcher}}{{}}}
+\bibcite{schultz1997neural}{{15}{1997}{{Schultz et~al.}}{{Schultz, Dayan, and Montague}}}
+\bibcite{stine2023differential}{{16}{2023}{{Stine et~al.}}{{Stine, Trautmann, Jeurissen, and Shadlen}}}
+\bibcite{sugrue2004matching}{{17}{2004}{{Sugrue et~al.}}{{Sugrue, Corrado, and Newsome}}}
+\bibcite{thompson2005neuronal}{{18}{2005}{{Thompson et~al.}}{{Thompson, Biscoe, and Sato}}}
+\bibcite{zenon2012attention}{{19}{2012}{{Z{\'e}non and Krauzlis}}{{}}}
+\gdef \@abspage@last{17}

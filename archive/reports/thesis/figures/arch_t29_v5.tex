@@ -1,0 +1,59 @@
+% v5 — MEMORY-AS-TOKENS self-attention (T=29 family).
+% Convention: front-end at left (conv patch-embed, NOT a VAE), the attention block in the
+% middle (the distinguishing part), memory + CLS-transformer readout at right.
+% solid black = forward dataflow, dashed red = recurrent feedback from frame t-1.
+% Distinguishing wiring: ONE self-attention block whose token input is the concatenation
+% [X (100 patch tok) || H1 (100) || H2 (100)] = 300 tokens — image patches AND both memory
+% banks are all tokens together (memory-as-tokens). Residual on the patch tokens: Z=X+attn.
+% TWO stacked spatial LSTMs carry H1=LSTM1, H2=LSTM2, fed back as memory tokens next frame.
+% Readout = a 2-layer Transformer with a prepended CLS token reading the encoder output Z,
+% feeding Actor + Critic. n_heads=4, x2 encoder layers.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (conv patch-embed, T=29 family) -------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt]
+        ($(patch.north west)!.5!(patch.south west)$)--($(patch.north east)!.5!(patch.south east)$)
+        ($(patch.north west)!.5!(patch.north east)$)--($(patch.south west)!.5!(patch.south east)$);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $50{\times}50$}};
+  \node[vae,right=of patch,align=center] (conv) {conv patch-embed\\(3 conv)};
+  \node[tok,right=8mm of conv,align=center] (X) {$X$\\[-1pt]{\tiny 100 tok ($10{\times}10$)}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- token-set merge: [X || H1 || H2] = 3N tokens ----------------------------------
+  \node[op,right=10mm of X] (cat) {$\|$};
+  \node[lbl,above=0.4mm of cat,font=\tiny,align=center] {$[X\,\|\,H_1\,\|\,H_2]$\\[-1pt]{\tiny $3N{=}300$ tok}};
+  % ---- self-attention block (THE distinguishing part) --------------------------------
+  \node[attn,right=10mm of cat,minimum width=25mm,minimum height=13mm,align=center] (sa)
+        {self-attention\\{\tiny memory-as-tokens}\\[1pt]{\tiny $\times2$ layers, $4$ heads}};
+  \node[lbl,below=1.4mm of sa,align=center,font=\tiny]
+        {self-attn over $[X\,\|\,H_1\,\|\,H_2]$ ($3N$ tok)\\[1pt]
+         $Z{=}X+\mathrm{attn}$ \ {\scriptsize(residual on patch tok)}};
+  % ---- CLS-transformer readout -> heads ----------------------------------------------
+  \node[attn,right=18mm of sa,minimum width=16mm,minimum height=13mm,align=center] (dec)
+        {CLS\\Transformer\\{\tiny $\times2$ layers}};
+  \node[lbl,below=1.4mm of dec,align=center,font=\tiny] {prepend CLS,\\reads $Z$};
+  \node[head,above right=2mm and 10mm of dec,align=center] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=2mm and 10mm of dec,align=center] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- two stacked memories (carried, fed back as tokens) ----------------------------
+  % placed ABOVE the Z spine so the forward path stays clean; Z branches up into LSTM1.
+  \node[mem,above=14mm of sa,align=center] (lstm1) {spatial xLSTM$_1$};
+  \node[mem,right=9mm of lstm1,align=center] (lstm2) {spatial xLSTM$_2$};
+  \node[lbl,above=0.4mm of lstm1,font=\tiny] {$H_1$};
+  \node[lbl,above=0.4mm of lstm2,font=\tiny] {$H_2$};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(conv); \draw[flow] (conv)--(X); \draw[flow] (X)--(cat);
+  \draw[flow] (cat)--(sa);
+  \draw[flow] (sa)--(dec) node[midway,above,font=\tiny] {$Z$};        % Z -> CLS transformer
+  \draw[flow] (sa.north) -- (lstm1.south);                           % Z -> LSTM1 (branch up)
+  \draw[flow] (lstm1)--(lstm2) node[midway,above,font=\tiny] {$H_1$};% stacked
+  \draw[flow] (dec.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (dec.east)-- ++(4mm,0) |- (critic.west);
+  % ---- recurrence + feedback (H1,H2 from frame t-1 re-enter as tokens) ----------------
+  \draw[fb] (lstm1.west) .. controls +(-9mm,0) and +(0,15mm) .. (cat.north)
+        node[pos=.72,left,font=\tiny,text=Red!70] {$H_1^{\,t-1}$ as tok};
+  % H2 dips into the open gap to the lower-right of the SA block, then sweeps left below the
+  % equation label to re-enter the token set at cat.south (kept shallow to bound the height).
+  \coordinate (h2dip) at ($(sa.south)+(8mm,-9mm)$);
+  \draw[fb] (lstm2.south) .. controls +(0,-7mm) and +(8mm,6mm) .. (h2dip)
+        .. controls +(-9mm,-4mm) and +(0,-9mm) .. (cat.south)
+        node[pos=.96,below,font=\tiny,text=Red!70] {$H_2^{\,t-1}$ as tok};
+\end{tikzpicture}

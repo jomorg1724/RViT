@@ -1,0 +1,29 @@
+\begingroup\scriptsize\setlength{\tabcolsep}{4.0pt}
+\captionof{table}{\textbf{Within-checkpoint clamp constituents.} Each entry is $D_{w,x}(b)=d'_{w,x}(b)-d'_{w,x}(0)$ from 250 trials per bias, condition, and checkpoint. VDA1 invalid-location effects are undefined and therefore absent. Figure~\ref{fig:matched-width}C--D plots $W_x(b)=D_{256,x}(b)-D_{128,x}(b)$.}\label{tab:clamp-constituents}
+\begin{center}
+\begin{tabular}{@{}llll*{5}{r}@{}}
+\toprule
+Task & Routing & Condition & Width & \multicolumn{5}{c}{Assigned key-logit bias $b$} \\
+\cmidrule(lr){5-9}
+ & & & & -6 & -3 & 0 & 3 & 6 \\ 
+\midrule
+VDA1 & \texttt{affine} & valid & 128 & -1.681 & -1.124 & 0.000 & -0.474 & -0.572 \\
+VDA1 & \texttt{affine} & valid & 256 & -0.017 & -0.017 & 0.000 & -0.017 & -0.020 \\
+VDA1 & \texttt{cross-attn} & valid & 128 & -0.470 & 0.054 & 0.000 & 0.071 & 0.137 \\
+VDA1 & \texttt{cross-attn} & valid & 256 & 0.087 & 0.028 & 0.000 & -0.019 & -0.102 \\
+VDA4 & \texttt{affine} & valid & 128 & -1.384 & -0.622 & 0.000 & 0.247 & 0.092 \\
+VDA4 & \texttt{affine} & invalid & 128 & 0.375 & 0.351 & 0.000 & -0.785 & -1.484 \\
+VDA4 & \texttt{affine} & valid & 256 & -0.491 & -0.176 & 0.000 & 0.046 & -0.156 \\
+VDA4 & \texttt{affine} & invalid & 256 & 0.284 & 0.146 & 0.000 & -0.377 & -0.787 \\
+VDA4 & \texttt{cross-attn} & valid & 128 & -0.544 & -0.426 & 0.000 & -0.297 & -0.456 \\
+VDA4 & \texttt{cross-attn} & invalid & 128 & 0.172 & 0.172 & 0.000 & -0.610 & -0.750 \\
+VDA4 & \texttt{cross-attn} & valid & 256 & -0.736 & -0.577 & 0.000 & -0.009 & -0.047 \\
+VDA4 & \texttt{cross-attn} & invalid & 256 & 0.117 & 0.133 & 0.000 & -0.434 & -0.574 \\
+VDA9 & \texttt{affine} & valid & 128 & -0.978 & -0.300 & 0.000 & -0.097 & -0.199 \\
+VDA9 & \texttt{affine} & invalid & 128 & 0.420 & 0.391 & 0.000 & -0.187 & -0.462 \\
+VDA9 & \texttt{affine} & valid & 256 & -0.046 & 0.040 & 0.000 & 0.086 & 0.097 \\
+VDA9 & \texttt{affine} & invalid & 256 & 0.150 & 0.076 & 0.000 & -0.160 & -0.378 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\endgroup

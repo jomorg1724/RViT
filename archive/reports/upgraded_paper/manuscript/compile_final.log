@@ -1,0 +1,158 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size11.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/lmodern.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mathtools.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mhsetup.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.
+sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
+ing.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)
+)) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/rerunfilecheck/rerunfilechec
+k.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/uniquecounter/uniquecounte
+r.sty))) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmr.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+)) (./main.out) (./main.out)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ot1lmr.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omllmm.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omslmsy.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omxlmex.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(./sections/abstract.tex) (./sections/intro.tex [1{/usr/local/texlive/2026basic
+/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2026basic/tex
+mf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2026basic/texmf-dist/f
+onts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2026basic/texmf-dist/fonts/
+enc/dvips/lm/lm-mathsy.enc}] [2]
+
+LaTeX Warning: Citation `awh_jonides2001_overlapping_attention_wm' on page 3 un
+defined on input line 127.
+
+) (./sections/model.tex [3]
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmtt.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ts1lmr.fd) [4{/usr/local/
+texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2
+026basic/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [5] [6{/usr/local/texlive/2
+026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}])
+(./sections/results_detection.tex [7] [8] [9 <./figures/detection_psychometrics
+.png>] [10] [11 <./figures/detection_attention.png>]
+Overfull \hbox (7.314pt too wide) in paragraph at lines 274--280
+\T1/lmr/m/n/10.95 tion dis-tri-bu-tion has an en-tropy (how un-de-cided the mod
+el is be-tween \T1/lmtt/m/n/10.95 wait \T1/lmr/m/n/10.95 and \T1/lmtt/m/n/10.95
+ declare-change\T1/lmr/m/n/10.95 ),
+[12 <./figures/detection_sdt_curves.png>] [13 <./figures/detection_uncertainty.
+png>] [14 <./figures/detection_decoding.png>]) (./sections/results_value.tex
+[15 <./figures/detection_microstim.png>]
+Overfull \hbox (10.11697pt too wide) in paragraph at lines 33--37
+[]\T1/lmr/m/n/10.95 Throughout, ``the model'' de-notes the sin-gle reinforcemen
+t-trained re-cur-rent vision-transformer
+[16] [17]) (./sections/results_luomaunsell.tex
+
+LaTeX Warning: Citation `luo_maunsell2018_lpfc_criterion_sensitivity' on page 1
+8 undefined on input line 23.
+
+[18] [19]
+
+LaTeX Warning: Citation `luo_maunsell2018_lpfc_criterion_sensitivity' on page 2
+0 undefined on input line 122.
+
+[20 <./figs/luo_repro.png>]
+
+LaTeX Warning: Citation `luo_maunsell2018_lpfc_criterion_sensitivity' on page 2
+1 undefined on input line 176.
+
+) (./sections/results_setsize.tex [21 <./figs/luo_mechanism.png>])
+(./sections/results_capacity.tex) (./sections/results_rehearsal.tex [22])
+(./sections/discussion.tex [23] [24] [25]) (./sections/methods.tex [26]
+[27]
+Overfull \hbox (6.7798pt too wide) in paragraph at lines 125--129
+ []\T1/lmr/bx/n/10.95 Environment vari-ants.[] \T1/lmr/m/n/10.95 The bat-tery o
+f Sec-tions [][]4[][] and [][]5[][] re-alises es-tab-lished pri-mate paradigms
+[28] [29] [30] [31]) (./sections/appendix.tex) [32] (./main.bbl [33]) [34]
+(./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+ )
+(see the transcript file for additional information)</usr/local/texlive/2026bas
+ic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2026basic/te
+xmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2026basic/texmf-d
+ist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2026basic/texmf-dist/
+fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts
+/type1/public/lm/lmmi10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type
+1/public/lm/lmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/publ
+ic/lm/lmr10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/
+lmr12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr17.
+pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr6.pfb></u
+sr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/loca
+l/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texli
+ve/2026basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/20
+26basic/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2026bas
+ic/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2026basic/tex
+mf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2026basic/texmf-dis
+t/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2026basic/texmf-dist/font
+s/type1/public/lm/lmtt10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/typ
+e1/public/lm/lmtti10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/p
+ublic/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (34 pages, 510631 bytes).
+Transcript written on main.log.

@@ -1,0 +1,41 @@
+% AFFINE — memory derives a full d×d SCALE matrix Γ and a SHIFT β that affinely transform
+% X BEFORE self-attention.  FAILED to train (always-wait collapse).
+% Convention: front-end at left, attention in the middle (the variable part), xLSTM + heads
+% at right; solid black = forward dataflow, dashed red = recurrent feedback from frame t-1.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- affine modulation + attention block (THE distinguishing part) -----------------
+  \node[attn,right=10mm of X,minimum width=15mm,minimum height=12mm] (aff)
+        {affine mod.\\$\Gamma\!\cdot\!X{+}\beta$};
+  \node[tok,right=6mm of aff,minimum width=8mm] (Xp) {$X'$};
+  \node[attn,right=6mm of Xp,minimum width=19mm,minimum height=12mm] (sa)
+        {self-\\attention};
+  \node[lbl,below=1.6mm of aff,align=center,font=\tiny,text width=56mm]
+        {$b{=}\tanh(\mathrm{bott}(H))$,\ $\Gamma{=}I{+}\Delta\Gamma(b),\ \beta{=}\beta(b)$\\[1pt]
+         $X'{=}\Gamma X{+}\beta$,\ \ $Z{=}X+\mathrm{softmax}(QK^{\!\top}\!/\sqrt d)V$};
+  \node[lbl,below=.8mm of sa,align=center,font=\tiny,text=Red!75] {(always-wait\\collapse)};
+  % ---- memory + readout --------------------------------------------------------------
+  \node[mem,right=9mm of sa] (lstm) {spatial\\xLSTM};
+  \node[tok,right=8mm of lstm,minimum width=12mm] (H) {$H'$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X); \draw[flow] (X)--(aff);
+  \draw[flow] (aff)--(Xp);
+  \draw[flow] (Xp)--(sa) node[midway,above,font=\tiny,text=black!55] {$Q,K,V$};
+  \draw[flow] (sa)--(lstm); \draw[flow] (lstm)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  % ---- recurrence + feedback ---------------------------------------------------------
+  \draw[fb] (lstm.north) .. controls +(0,9mm) and +(0,9mm) .. (lstm.north west)
+        node[midway,above,font=\tiny,text=Red!70] {carry $H^{t}\!\to\!H^{t+1}$};
+  \draw[fb] (lstm.south) .. controls +(0,-9mm) and +(0,-9mm) .. (aff.south east)
+        node[pos=.12,below,font=\tiny,text=Red!70] {$H^{t-1}$ derives $\Gamma,\beta$};
+\end{tikzpicture}

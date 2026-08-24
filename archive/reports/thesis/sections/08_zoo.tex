@@ -1,0 +1,120 @@
+\chapter{The architecture zoo}
+\label{ch:zoo}
+
+This chapter catalogues the network variants the program has built and, where trained,
+their outcomes. The point is not encyclopaedic completeness but the \emph{pattern} of what
+makes attentive behaviour emerge versus collapse. Table~\ref{tab:zoo} is the index;
+the prose groups the variants into the families that carry the lessons.
+
+\section{Family A --- memory-as-tokens self-attention (\code{v4}, \code{v5}, \code{v5\_part2})}
+The earliest mature line treats the recurrent states as additional tokens. \code{v5} self-
+attends over the concatenation $[\,\text{patch}\parallel\Hone\parallel\Htwo\,]$ at every
+layer. It works and is highly interpretable: the encoder's first layer becomes a
+\emph{top-down, cue-driven spatial orienter} (heads spike to the cued quadrant at cue
+onset, follow the cued side, and scale with cue reliability --- the substrate of the
+validity effect), while the actor/critic decoder's final layer is a \emph{bottom-up change
+detector} that snaps onto the changed quadrant at change onset. This encoder--decoder
+dissociation (top-down cue prior vs.\ bottom-up change read-out) is a recurring motif.
+\code{v5\_part2} re-architects this as eight-head cross-attention over memory followed by
+stacked per-token LSTMs and one-dimensional-convolution heads; it works, and the load-
+bearing computation moves into the encoder's memory cross-attention (memory keys are
+causally decision-moving, image keys are inert). \code{v4} (a FiLM-encoder sibling) revealed
+a cautionary failure mode: a FiLM gain that initialises to zero with no ``$+1$'' offset
+makes the attention a structurally uniform global average-pool --- the first appearance of
+the ``identity floor matters'' lesson that returns in Chapter~\ref{ch:attention}.
+
+\section{Family B --- bottleneck residuals (\code{v8}, \code{v8\_part2}, \code{v9})}
+This line tightens how visual information reaches memory. \code{v8} routes the attention
+residual through the previous memory rather than the image, so visual content can only
+flow through attended values; it works, with very fast reaction times and an emergent
+dedicated patch-reading head. Push the bottleneck further --- memory-only keys and values
+(\code{v8\_part2}) or queries drawn from memory rather than the image (\code{v9}) --- and the
+models collapse to always-wait. The diagnosis is consistent: removing the grounded image
+fallback puts perception on a knife-edge, so the policy retreats to the safe action. This
+is the same lesson the split stream of \code{v11} was designed to fix.
+
+\section{Family C --- split priority/value pathways (\code{v11}, \code{v11\_part2--5})}
+The split-pathway family is the program's most productive line and the subject of
+Chapter~\ref{ch:crosstalk}. \code{v11} (parallel streams, heads read both transformer
+outputs) fixed the always-wait collapse by grounding the priority stream in the image.
+\code{v11\_part2} added the deep memory to the priority keys and split the readout (priority
+$\to$ actor, value $\to$ critic); it is the canonical working cross-talk model, and its
+headline is the \emph{reliability-scaled} cueing benefit that the un-split \code{v11}
+lacked. \code{v11\_part3} (swapped readout) and \code{v11\_part4} (independent, no cross-
+talk) both collapse to chance --- the necessity results of Table~\ref{tab:crosstalk}.
+\code{v11\_part5} ports the working cross-talk model to the distractor task and yields a
+clean double dissociation: biasing the priority stream swings the decision while leaving
+value flat, biasing the value stream moves value but never the decision; the distractor is
+filtered in the \emph{decision} pathway (decodable from sensory memory but cold to the
+priority map --- ``seen but not acted upon''), and value gates \emph{whether} the priority
+filter is deployed in a binary, engage/abandon fashion.
+
+\section{Family D --- codebook / vector-quantised attention (\code{v12}, \code{v12\_part2/3})}
+Motivated by an ``attention as a lookup table / superior-colliculus microstimulation''
+analogy, this line makes the attention values a learnable codebook. The hard sampled/STE
+version failed to learn (a gradient mismatch under prioritised replay re-encoding); the
+soft-attention codebook (\code{v12}) is differentiable and trains. The adaptive-codebook
+extensions add a deformation with an energetic maintenance cost (\code{v12\_part2}) and an
+EMA codebook written by a gated image-content stream (\code{v12\_part3}); the EMA-only
+variant collapses (a catch-22 in which the magnitude penalty drives the very signal the EMA
+should consolidate to zero), which is what motivated the gradient-learned-codebook fix.
+
+\section{Family E --- predictive-coding and energy modulation (\code{v13}, \code{v14}, \code{v15})}
+The most exploratory line asks whether a self-supervised recurrent dynamical system can be
+repurposed for the task by ``energy modulation'' rather than retraining. \code{v13} freezes
+a JEPA-style predictive-coding encoder and adds an energy stream that modulates its
+dynamics, training only the energy and heads. \code{v14} runs two gradient-firewalled
+modules concurrently --- a self-supervised module (JEPA latent, no pixels) and a
+reinforcement-learning module --- that share state forward but never gradients. \code{v15}
+adds a VQ-VAE-style energy term on top of a gradient-learned codebook that provably reduces
+to the working codebook when the energy is off. These are mechanism studies more than
+performance plays; on the current low-bandwidth task they are expected to track their
+working bases, with the energy/adaptation machinery reserved for higher-bandwidth tests.
+
+\begin{table}[t]
+\centering
+\caption{Index of the architecture zoo. ``Outcome'' is the trained behaviour where a run
+exists; many variants are mechanism studies built and unit-tested but reserved for a
+higher-bandwidth task. \checkmark\ = learns/works, $\times$ = collapses, $\circ$ = built,
+not yet a decisive run.}
+\label{tab:zoo}
+\scriptsize
+\begin{longtable}{p{2.3cm}p{6.8cm}p{2.0cm}}
+\toprule
+Variant & Mechanism (what is varied) & Outcome \\
+\midrule
+\endhead
+\code{v5} & memory-as-tokens self-attention, $[\text{patch}\parallel\Hone\parallel\Htwo]$ & \checkmark\ (cue-orienting) \\
+\code{v5\_part2} & 8-head cross-attn over memory $\to$ stacked LSTMs $\to$ conv heads & \checkmark\ \\
+\code{v4} & FiLM-encoder sibling; revealed zero-init gain $\Rightarrow$ uniform attn & $\circ$ (diagnostic) \\
+\code{v7} & \code{v5\_part2} arch on cued-side distractor task & $\circ$ \\
+\code{v8} & H1-residual bottleneck (visual info only via attended values) & \checkmark\ (fast RT) \\
+\code{v8\_part2} & memory-only K/V (patch = queries only) & $\times$ (always-wait) \\
+\code{v8\_part3} & predictive-comparator write gate (surprise opens LSTM2 input) & $\circ$ \\
+\code{v9} & memory-query attention (queries from $\Hone$, not image) & $\times$ (collapse) \\
+\code{v11} & parallel priority $\parallel$ value streams; heads read both $\mathbf Z$ & \checkmark\ (hit 0.63) \\
+\code{v11\_part2} & $+$\,deep memory in priority keys, split readout (the cross-talk) & \checkmark\ (hit 0.80) \\
+\code{v11\_part3} & \code{v11\_part2} with actor/critic readout swapped & $\times$ (chance) \\
+\code{v11\_part4} & independent streams, no shared memory & $\times$ (chance) \\
+\code{v11\_part5} & cross-talk on the distractor task & \checkmark\ (double dissoc.) \\
+\code{v12} & soft codebook attention, static learnable codebook & \checkmark\ (soft) \\
+\code{v12\_part2} & adaptive codebook deformation $+$ energetic cost & $\circ$ \\
+\code{v12\_part3} & EMA codebook written by a gated content stream & $\times$ (EMA-only) / $\circ$ (gated) \\
+\code{v13} & frozen predictive-coding encoder $+$ energy-modulation stream & $\circ$ \\
+\code{v14} & two gradient-firewalled modules (self-supervised $\perp$ RL) & $\circ$ \\
+\code{v15} & gradient codebook $+$ VQ-VAE energy (reduces to \code{v12}) & $\circ$ \\
+\code{setsize9} & cross-talk arch on the 9-stimulus set-size task & $\circ$ \\
+\bottomrule
+\end{longtable}
+\end{table}
+
+\section{What the zoo says in aggregate}
+Three regularities cut across the families. (1) \textbf{A grounded image pathway is
+required}: every variant that removes the bottom-up route to either memory or the decision
+collapses to always-wait. (2) \textbf{Routing, not representation, decides the phenotype}:
+identical encoders produce a working detector or a chance model depending only on which
+stream drives the policy and whether a shared substrate couples value to action. (3)
+\textbf{Interpretability is an emergent property of the right wiring}: the variants that
+learn also expose clean, manipulable attention maps (cue-orienting encoders, change-locked
+decoders), whereas the collapsed variants expose nothing. These regularities are the
+empirical backbone of the recommendation in Chapter~\ref{ch:recommendation}.

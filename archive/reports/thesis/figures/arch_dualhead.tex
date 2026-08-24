@@ -1,0 +1,48 @@
+% DUAL-HEAD — sensory head (X only) ++ feedback head (X gated by H), concatenated.
+% Convention: front-end at left, attention in the middle (the variable part), xLSTM + heads
+% at right; solid black = forward dataflow, dashed red = recurrent feedback from frame t-1.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block: TWO parallel heads ------------------------------------------
+  \node[attn,right=12mm of X,minimum width=26mm,minimum height=9mm,yshift=6mm] (hA)
+        {sensory head\\{\tiny $Q,K,V{=}W(X)$ \ (X only)}};
+  \node[attn,right=12mm of X,minimum width=26mm,minimum height=9mm,yshift=-7mm] (hB)
+        {feedback head\\{\tiny $Q,K,V{=}W_xX\!\odot\!W_hH$}};
+  \node[op,right=5mm of hA] (cat) at ($(hA.east)!0.5!(hB.east)+(8mm,0)$) {$\|$};
+  \node[op,right=6mm of cat] (wo) {$W_o$};
+  \node[op,right=6mm of wo] (plus) {$+$};
+  \node[lbl,below=4mm of hB.south west,anchor=north west,align=left,font=\tiny]
+        {A: $\mathrm{softmax}(QK^{\top})V,\ Q,K,V{=}W(X)$\\
+         B: $Q{=}W_xX\odot W_hH$ \quad $Z{=}X+W_o[\mathrm{out}_A\|\mathrm{out}_B]$};
+  % ---- memory + readout --------------------------------------------------------------
+  \node[mem,right=7mm of plus] (lstm) {spatial\\xLSTM};
+  \node[tok,right=8mm of lstm,minimum width=12mm] (H) {$H'$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X);
+  \draw[flow] (X.east) -- ++(4mm,0) |- (hA.west);
+  \draw[flow] (X.east) -- ++(4mm,0) |- (hB.west);
+  \draw[flow] (hA.east) -| (cat.north);
+  \draw[flow] (hB.east) -| (cat.south);
+  \draw[flow] (cat)--(wo); \draw[flow] (wo)--(plus);
+  \draw[flow] (plus)--(lstm); \draw[flow] (lstm)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  % residual X into the (+) adder
+  \draw[flow] (X.north) .. controls +(0,13mm) and +(0,10mm) .. (plus.north)
+        node[pos=.60,above,font=\tiny,text=black!70] {residual $X$};
+  % ---- recurrence + feedback ---------------------------------------------------------
+  \draw[fb] (lstm.north) .. controls +(0,9mm) and +(0,9mm) .. (lstm.north west)
+        node[midway,above,font=\tiny,text=Red!70] {carry $H^{t}\!\to\!H^{t+1}$};
+  % feedback ONLY into the feedback head (Head B)
+  \draw[fb] (lstm.south) .. controls +(0,-11mm) and +(0,-9mm) .. (hB.south east)
+        node[pos=.12,below,font=\tiny,text=Red!70] {$H^{t-1}$};
+\end{tikzpicture}

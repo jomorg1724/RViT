@@ -1,0 +1,64 @@
+\section{Why coupling is required}
+\label{sec:mechanism}
+
+The failure mode points directly at its cause. The independent agent does not
+produce noisy or biased decisions --- it produces \emph{no} decisions, and it does
+so from the start of training onward. That is the signature of a broken learning
+signal, not a broken representation \citep{sutton2018reinforcement,
+vanhasselt2018deep}.
+
+\subsection{Credit assignment requires a shared state}
+Under an actor--critic objective, the policy improves by consulting the critic: the
+actor is pushed toward actions the critic values highly, evaluated \emph{at the
+actor's current state}. This only works if the critic's value estimate refers to the
+same situation the actor is acting in. In the shared-memory agent that
+correspondence is enforced structurally. The actor acts from a representation built
+on $\Htwo$ (Equation~\ref{eq:mu}); the critic values a representation built on the
+\emph{same} $\Htwo$ (Equation~\ref{eq:q}); and the actor's own output is what writes
+$\Htwo$ (Equation~\ref{eq:mem}). Policy and value are anchored to one evolving
+memory, so ``pressing now looks good'' is a statement about the state the actor
+actually occupies. Credit lands where it was earned, and the actor can discover that
+declaring a change at the moment of change is rewarded.
+
+In the independent agent this correspondence is severed. The actor acts from its
+private memory $\Hmu$; the critic values its private memory $\HQ$; the two drift
+apart because each is updated only by its own pathway. The critic learns an accurate
+value of states the actor never directly experiences, and the advantage signal handed
+to the actor is computed on the wrong representation. The result is a policy-
+improvement step that is systematically misattributed. With no coherent gradient
+toward the press action, the actor falls into the basin that is safe under \emph{any}
+value estimate --- never act, never be penalised for a false alarm --- and stays
+there. The always-wait collapse is the rational endpoint of an agent that cannot tell
+when acting helps. This is a recognisable pathology in reinforcement learning: a
+representation mismatch between actor and critic, the failure mode that arises
+whenever a bootstrapped value function evaluates a different state distribution than
+the one the policy occupies \citep{vanhasselt2018deep, fujimoto2018addressing}.
+Architectural coupling is one way to guarantee, by construction, that the critic and
+actor are grounded in a common state.
+
+\subsection{The grounded pathway must drive the decision}
+The swapped-routing failure is the same lesson from the other side. There, value and
+policy \emph{are} coupled through $\Htwo$, but the actor is fed the $q$ pathway, whose
+residual is memory rather than image (Equation~\ref{eq:q}): it carries almost no live
+visual content, only a re-weighting of stored state. The decision is then made from a
+representation that cannot see the change, so however clean the credit assignment,
+there is nothing in the actor's input to assign credit \emph{to}. A working agent
+needs both a faithful value signal and a grounded decision variable; cutting either
+one returns the same degenerate policy. This asymmetry has a direct counterpart in the
+biology: the attentional signal that drives behaviour is carried by the
+image-grounded, visually responsive populations of FEF and the SC, while the
+abstract/movement and value signals modulate but do not substitute for it
+\citep{thompson2005neuronal, gregoriou2012lesions, zenon2012attention, gold2007neural}.
+
+\subsection{A shared workspace binding evaluation to decision}
+Functionally, the shared recurrent memory plays the role of a common ``workspace''
+that both the evaluative and the decision systems read from and write to: value shapes
+what is maintained, and the maintained state shapes what is decided
+\citep{baars1988cognitive, dehaene2011experimental, miller2001integrative}. The
+collapse under decoupling suggests that, in agents that must learn \emph{when} to act
+from sparse, delayed reward, keeping these systems on a shared substrate is what makes
+the reward usable. The result is therefore about the \emph{organisation} of
+computation, not its raw expressive power: the independent architecture has the
+parameters and the pathways to express the task, but the training signal it generates
+cannot drive them there. How attention is wired, not just how much machinery it has,
+decides whether the behaviour appears.

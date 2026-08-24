@@ -1,0 +1,29 @@
+% ============================================================================
+% LEGACY STANDALONE SET-SIZE SECTION — not input by main.tex. Kept consistent
+% with the current VDA battery in case it is reused.
+% ============================================================================
+\section{Attention across set size: a qualified noise-limited signature}
+\label{sec:setsize}
+
+Noise-limited accounts predict that increasing spatial uncertainty and distractor
+count can reduce detection and increase the usefulness of predictive cues
+\cite{carrasco2011_visual_attention_25y}. The current affine-feedback comparison uses
+one canonical $d_{\mathrm{mem}}=128$ checkpoint at each of VDA1, VDA2, VDA4, and
+VDA9. Each has one 20{,}000-row logged metrics phase; this documents phase completion,
+not convergence or cumulative lifetime updates. Canonical VDA2 is the
+\texttt{vda2\_2x2} run.
+
+The low-validity minus high-validity \emph{cued-threshold} improvements are
+$0.148^\circ$, $0.193^\circ$, $0.979^\circ$, and $2.207^\circ$. The final value is
+not a cued-versus-uncued spatial benefit. Clamp-induced sensitivity ranges are instead
+$1.982$, $1.647$, $1.131$, and $0.367$, while criterion ranges are $1.020$, $1.381$,
+$1.622$, and $1.048$. These outcomes have different profiles and should not be
+collapsed into a single capacity law.
+
+The comparison is also not an identical-model manipulation. VDA1/2/4 use a four-token
+$2\times2$ support with different active-cell counts; VDA9 uses a $3\times3$ grid,
+nine tokens, a larger flattened readout, and training support that includes $p=0$.
+The ordered threshold association is compatible with greater validity use under
+competition, but fixed-geometry, replicated training is required for a causal set-size
+claim. VDA16 is incomplete: preserved metrics phases stop around 622--690 logged
+iterations and checkpoints at 599, near chance. It did not exhaust a matched budget.

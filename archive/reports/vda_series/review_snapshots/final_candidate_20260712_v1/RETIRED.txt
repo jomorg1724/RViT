@@ -1,0 +1,10 @@
+RETIRED
+
+This snapshot was retired on 2026-07-12 after the Tyson-lens review returned REVISE. Its source/PDF hashes and review verdicts must not be used as approval of any later candidate.
+
+Accepted repairs were applied to the working manuscript for:
+1. plain-language audience entry in the abstract;
+2. contrast-first matched-width behavioral reporting; and
+3. explicit hierarchy in the Figure 18 caption.
+
+The Feynman task did not review this snapshot because its start hash command was denied. Hawking passed this snapshot, but that verdict became stale when the accepted repairs changed the source and PDF.

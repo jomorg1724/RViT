@@ -1,0 +1,101 @@
+\chapter{Per-model atlas: the successful \texorpdfstring{$T=29$}{T=29} long-task models}
+\label{app:atlas_t29}
+
+This appendix gives the same per-model treatment as Appendix~\ref{app:atlas}, for the six
+models that trained successfully on the \emph{long} ($T=29$, random-onset) change-detection
+task: \code{v5}, \code{v5\_part2}, \code{v8}, \code{v11}, \code{v11\_part2}, and
+\code{v11\_part5}. These predate the paper-faithful build and live in separate codebases;
+they were each driven through one uniform analysis (the shared \code{\_behav\_utils} harness,
+or \code{distractor\_dd} for \code{v11\_part5}) so the figures are directly comparable. Unlike
+the four-patch paper network, these tokenize the $50\times50$ image into a $10\times10$ grid
+($100$ tokens), so the attention maps are $10\times10$ and far richer.
+
+\paragraph{Two architectural families.} The \emph{cross-attention} models (\code{v5},
+\code{v5\_part2}, \code{v8}) place the image patches \emph{and} the memories in the key set,
+so the attention has separate \emph{image-key} and \emph{memory-key} ($H_1,H_2$) maps --- both
+are shown. The \emph{dual-stream} models (\code{v11}, \code{v11\_part2}, \code{v11\_part5})
+use the image as the \emph{query} and attend over memory only, so their maps are per-stream
+(salience$\to H_1/H_2$, top-down$\to H_2$): they show \emph{where in memory} the image query
+looks. \code{v11\_part5} was trained on a cued-\emph{side} task with distractors; for
+comparability it is evaluated here on the standard cued task with distractors switched off.
+
+\paragraph{The headline, before the details.} On the long task these models \emph{do} orient
+attention to the cue: the salience / image-key attention is biased toward the cued quadrant
+\emph{before} the change (visible in panel~D of each behaviour figure), and the reaction time
+is strongly graded with change magnitude (panel~C, $\sim$$6\to1$ frames) rather than floored.
+This is the regime contrast anticipated by the short-task study (open question O5): the long
+horizon both permits and rewards pre-orienting, where the seven-step task did not.
+
+\begin{table}[h]
+\centering
+\caption{The six successful $T=29$ models. Mean cued-hit and false-alarm are averaged over
+the validity$\times$magnitude psychometric grid (so the absolute hit is below the per-condition
+peak, which approaches $1.0$ at large $\Delta$). Snapshot iteration as analysed.}
+\label{tab:t29results}
+\small
+\begin{tabular}{llccc}
+\toprule
+Model & Family & snapshot iter & mean cued-hit & mean FA \\
+\midrule
+\code{v5}        & cross-attention (memory-as-tokens) & $1999$  & $0.750$ & $0.038$ \\
+\code{v5\_part2} & cross-attention over memory        & $4999$  & $0.714$ & $0.044$ \\
+\code{v8}        & cross-attention, $H_1$ residual    & $4999$  & $0.721$ & $0.019$ \\
+\code{v11}       & parallel dual-stream               & $8199$  & $0.671$ & $0.059$ \\
+\code{v11\_part2}& split-readout cross-talk           & $10399$ & $0.683$ & $0.025$ \\
+\code{v11\_part5}& split-readout (distractor task)    & $11799$ & $0.748$ & $0.022$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}\archlegend\end{center}
+
+% \atlast {file-stem}{Title}{note}
+\newcommand{\atlast}[3]{%
+  \section{#2}%
+  #3\par\medskip
+  \begin{figure}[h]\centering\resizebox{\textwidth}{!}{\input{figures/arch_t29_#1}}%
+    \caption{\textbf{#2} --- architecture. Conv patch-embed $\to$ $10\times10$ tokens; solid
+    arrows forward, dashed red recurrent feedback.}\end{figure}
+  \begin{figure}[h]\centering\includegraphics[width=\textwidth]{atlas_t29_#1_attention.pdf}%
+    \caption{\textbf{#2} --- attention maps at every frame ($T=29$), $100\%$ cue at $S_1$, for
+    the no-change and change-at-$S_1$ conditions (mean of $80$ trials; change at $t=15$).}\end{figure}
+  \begin{figure}[h]\centering\includegraphics[width=\textwidth]{atlas_t29_#1_behavior.pdf}%
+    \caption{\textbf{#2} --- psychometric (A,B), chronometric (C), and the cued-quadrant
+    attention timecourse (D, the readable summary of the per-frame maps).}\end{figure}
+  \clearpage}
+
+\atlast{v11_part2}{v11\_part2 — split-readout cross-talk}{%
+  The flagship long-task model and the closest to the paper's attention story. The salience
+  stream ($Q{=}X$, $K{=}V{=}[H_1\|H_2]$) feeds the actor; the top-down stream ($Q{=}X$,
+  $K{=}V{=}H_2$) feeds the critic. The cued-quadrant timecourse (panel~D) shows the salience
+  attention elevated at the cue and the top-down attention rising at the change; the
+  reaction time is strongly graded. The cued psychometric sits left of the uncued (a genuine
+  cueing benefit).}
+
+\atlast{v11}{v11 — parallel dual-stream}{%
+  Two independent streams sharing only the image: salience ($Q{=}X$, $K{=}V{=}H_1$, grounded
+  by an $X$ residual) and top-down ($Q{=}X$, $K{=}V{=}H_2$); the heads read both transformer
+  outputs. The salience stream carries the cue prior, the top-down stream the change-lock.}
+
+\atlast{v11_part5}{v11\_part5 — split-readout cross-talk (distractor-trained)}{%
+  Architecturally identical to \code{v11\_part2} but trained on the cued-\emph{side} task with
+  distractors (the uncued side changes on half the trials and must be suppressed). Evaluated
+  here on the standard cued task with distractors off, it is among the strongest performers
+  (mean cued-hit $0.75$).}
+
+\atlast{v5}{v5 — memory-as-tokens self-attention}{%
+  Each encoder layer self-attends over the concatenation $[X\|H_1\|H_2]$ ($300$ tokens). The
+  image-key map (panel rows ``image'') tiles the four Gabor quadrants as they appear, and a
+  memory hotspot tracks the change; the first encoder layer acts as a cue-driven spatial
+  orienter.}
+
+\atlast{v5_part2}{v5\_part2 — cross-attention over memory}{%
+  Cross-attention with $Q{=}X$, $K{=}V{=}[X\|H_1\|H_2]$ and two stacked LSTMs read by 1D-conv
+  heads. The load-bearing computation is in the memory cross-attention: the memory-key maps
+  carry the decision-relevant structure while the image keys provide the spatial substrate.}
+
+\atlast{v8}{v8 — cross-attention with an \texorpdfstring{$H_1$}{H1} residual}{%
+  \code{v5\_part2} with the cross-attention residual set to the previous-frame memory $H_1$
+  instead of the image, so visual information can reach the decision \emph{only} through the
+  attended values. A dedicated patch-reading head emerges and reaction times are fast; the
+  image pathway becomes co-dominant with memory.}

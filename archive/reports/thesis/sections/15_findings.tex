@@ -1,0 +1,119 @@
+\chapter{Summary of findings}
+\label{ch:findings}
+
+This chapter collects the load-bearing findings in scannable form --- the things that are
+established and should carry forward, separated from the things that are still open.
+
+\section{Established findings}
+
+\paragraph{F1. Perception is the bottleneck on the short task.} A front-end trained from
+reward alone cannot represent orientation (linear orientation decodability $\Rsq=0.24$);
+a reconstruction-pretrained VAE encoder reaches $\Rsq=0.97$, and with that single change the
+exact paper network learns the seven-step task on the first attempt. \emph{Action:} use a
+frozen pretrained VAE front-end; fix perception before comparing architectures.
+
+\paragraph{F2. One VAE serves all task variants.} The VAE is a static, per-frame encoder;
+the temporal task parameters ($\sigma$, horizon $T$) do not change its input distribution.
+\emph{Action:} pretrain one VAE and reuse it across all noise levels and horizons --- do not
+re-pretrain per task.
+
+\paragraph{F3. The horizon decides the strategy.} The long task is solvable by slow temporal
+integration (``flow''), which tolerates a weak front-end; the short task forecloses flow and
+forces instantaneous perception. This explains why the VAE is necessary on the short task
+and not the long one. \emph{Action:} use the short task as the discriminating test bed; use
+the long task to study maintenance/anticipation.
+
+\paragraph{F4. Coupling is a precondition for learning.} Severing the shared recurrent
+memory between the policy and value streams collapses an otherwise identical model from
+$0.87$ accuracy to chance; routing the memory-grounded stream (instead of the grounded
+stream) to the policy also collapses it. \emph{Action:} keep a shared substrate coupling
+value to action, and let the grounded, image-reading stream drive the policy.
+
+\paragraph{F5. Routing decides the phenotype, not representation.} Identical encoders yield a
+working detector or a chance model depending only on which stream drives the policy and
+whether a shared memory couples value to action.
+
+\paragraph{F6. A grounded image pathway is required.} Every variant that removes the
+bottom-up route to memory or to the decision collapses to always-wait. \emph{Action:} never
+fully bottleneck visual information through memory.
+
+\paragraph{F7. The working model reproduces the paper's behaviour.} On the seven-step task
+with a frozen VAE: a reliability-scaled cueing benefit ($+1.5^\circ\!\to\!+7.5^\circ$ across
+$25\%\!\to\!100\%$ validity, carried by the sensitivity threshold) and a causal
+attention-to-sensitivity link ($+8.5\%/-8.0\%$ from biasing attention toward/away from a
+change, with no induced false alarms).
+
+\paragraph{F8. The cueing effect is memory-driven, across the whole family.} In the
+multiplicative-gated model the cue and its validity are held in working memory ($100\%$
+decodable) and set the decision criterion, while the attention map stays change-locked. The
+matched family (\code{multiplicative}, \code{dualhead}, \code{two-lstm}, \code{crossattn},
+\code{dualmem}; \code{affine} collapsed) confirms this is \emph{general}: no working variant
+produces a cue-orienting index above $+0.04$, and the two richest cross-talk wirings attend
+\emph{below} uniform at the cued image location ($-0.18$), routing the cue through memory.
+\emph{Action:} read the attention maps with this dissociation in mind; do not assume cue use
+implies cue-orienting attention; feature the causal attention result, not a cue-orienting
+map, on the short task.
+
+\paragraph{F9. The harness is a stable recipe with two failure harbors.} PAC actor,
+distributional critic, prioritised episode replay, a time-lagged target, and burn-in train a
+bootstrapped recurrent actor--critic on this task. The recurring failures are two $0.5$
+collapses (always-wait and always-press-at-deadline); both are perception/exploration
+problems, not critic problems. \code{affine} (matrix scale $+$ shift) fell into the
+always-wait harbor and never recovered ($P(\text{press})\le0.004$), a reminder that not
+every modulation form trains.
+
+\paragraph{F10. Two stacked memories is the best detector, and the recommended network.}
+Across the matched family on the identical frozen-VAE base, the \code{two-lstm} variant ---
+the published multiplicative attention with a second stacked xLSTM feeding the heads --- is
+the best detector (correct $0.872$, hit $0.836$ vs.\ $0.804/0.705$ for the plain
+multiplicative form), while preserving the interpretable, change-locked, causally
+manipulable attention. \emph{Action:} carry \code{two-lstm} forward as the manuscript
+network; feature the causal attention result, not a cue-orienting map.
+
+\paragraph{F11. Perception is learnable without a pretrained VAE.} A jointly-trained V-JEPA
+temporal self-distillation auxiliary (prototype-softmax, EMA teacher, student$@t\!\to$
+teacher$@t{+}1$) learns a working front-end from raw pixels with frame-repeat ($\sim0.90$
+training rolling correct) or with an SE-ResNet convolutional encoder ($\sim0.87$ greedy
+correct, with a sharp attention-driven covert-cueing algorithm) --- no pretrained or frozen
+VAE. Negatives fence the recipe: softmax-as-memory and a plain SmoothL1 latent JEPA collapse,
+and the matrix-affine two-LSTM wiring collapses regardless of front-end. This qualifies F1 and
+the Chapter~\ref{ch:recommendation} non-negotiable (Chapter~\ref{ch:jepa}). \emph{Action:}
+keep the frozen VAE as the manuscript default; hold the JEPA route as the neurally-plausible
+alternative and a set-size/battery generalisation vehicle.
+
+\section{Open questions}
+
+\paragraph{O1. \emph{(Resolved.)} Which wiring restores cue-orienting attention?} None do, on
+the seven-step task. The matched family (\code{multiplicative}, \code{dualhead},
+\code{two-lstm}, \code{crossattn}, \code{dualmem}; \code{affine} collapsed) shows the cueing
+effect is memory-borne across all working wirings (cue-orient $\le+0.04$; \code{crossattn}
+and \code{dualmem} attend \emph{away} from the cued image patch). The remaining version of
+the question is now O5: whether a \emph{longer-delay} regime forces orienting.
+
+\paragraph{O2. Does the coupling result survive the perception fix?} The
+coupling-required result was obtained on the long task before the VAE finding; replicating
+it on the short task with the frozen VAE is pending.
+
+\paragraph{O3. Is the EMA target load-bearing?} An EMA-versus-hard-copy A/B on the
+frozen-VAE base will close the last difference between our reproduction and the lab's
+canonical working networks.
+
+\paragraph{O4. Does the chosen network generalise across the battery?} The value and
+set-size tasks are the first generalisation tests; failure on any is to be read as a
+diagnostic, not a reason to fork the architecture.
+
+\paragraph{O5. Does a longer delay restore cue-orienting attention?} The published lab
+networks (long task) displayed cue-orienting attention; our short-task family does not. This
+is plausibly a regime effect (a longer cue--target delay may make pre-orienting worth its
+cost) rather than an architecture effect. Running the recommended \code{two-lstm} network on
+a longer-delay variant tests whether the published orienting figure is reproducible at all
+in our setup, and connects directly to the optic-flow account (Chapter~\ref{ch:horizon}).
+
+\section{Reusable infrastructure}
+The program leaves a reusable substrate: a single clean \code{ChangeDetectionEnv} with a
+task registry (validity, value, set-size, distractor, reward-structure, attend/ignore); a
+shared PAC$+$QR-DQN$+$PER harness with hard-copy and EMA targets; a pretrained, frozen,
+task-invariant VAE front-end; a \code{--feedback} switch that selects among seven attention
+mechanisms on the identical base; and an analysis suite (psychometric/chronometric fits,
+attention maps, causal attention clamps, representational decoding) that runs from saved
+data without re-loading models.

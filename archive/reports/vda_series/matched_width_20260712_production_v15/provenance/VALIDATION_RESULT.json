@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "recorded_after_artifact_build": true,
+  "result": "pass",
+  "checks": {
+    "upstream_read_only_audit": "pass",
+    "summary_reconstruction": "pass",
+    "trial_contract": "pass",
+    "decoder_support_contract": "pass",
+    "checkpoint_inventory": "pass"
+  },
+  "upstream_manifest_sha256": "f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11",
+  "summary_json_sha256": "15dadb9e2e290918e3dc2bb0af92d1170871eb8fedaea04796615f3bfda4fa5c",
+  "figure_sha256": {
+    "pdf": "dafba8a4e721a02c56ef0e9703c1f555909aefbdc2fab238309b2018bc1a2628",
+    "svg": "f7622adae3a63edfe39efeeca9dd061a4cc831eda7371c8532bea7425437feb3",
+    "png": "74d1c203452553e1af0b2c628075ba3750ee6f737ac06bc260db190b87944b7b"
+  }
+}

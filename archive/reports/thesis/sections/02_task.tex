@@ -1,0 +1,81 @@
+\chapter{The task and its environments}
+\label{ch:task}
+
+\section{The canonical cued change-detection task}
+The base environment is a spatially cued orientation-change-detection task built to
+reproduce the essential structure of primate covert-attention experiments. Each trial is
+a short video of $50\times50$ grayscale frames. The canonical (paper) timeline is
+\textbf{seven frames}:
+\begin{itemize}
+\item $t=0$: black screen.
+\item $t=1$: a spatial \emph{cue} appears at one stimulus location --- top-left ($S_1$) or
+bottom-right ($S_4$). The cue is a disc whose surrounding ring is completed in proportion
+to the cue's \emph{validity} (the probability that, on a change trial, the change will
+occur at the cued location): $25\%$, $50\%$, $75\%$, or $100\%$.
+\item $t=2$: black screen (the cue is removed; its information must now be held in memory).
+\item $t=3,4$: four Gabor-like stimuli appear, one per quadrant ($S_1$ top-left, $S_2$
+bottom-left, $S_3$ top-right, $S_4$ bottom-right), at random orientations at least
+$45^\circ$ apart, with per-frame orientation ``wobble''.
+\item $t=5$: on half of trials (\emph{change trials}) one stimulus's orientation steps by
+$\Delta$ degrees; on the other half nothing changes. The change persists to $t=6$.
+\item $t=6$: final frame.
+\end{itemize}
+At every frame the agent chooses \emph{wait} or \emph{declare change}. Declaring ends the
+trial. A correct declaration at $t\geq5$ earns reward $1$; waiting out a no-change trial to
+$t=6$ also earns $1$; everything else earns $0$. The two errors are therefore misses
+(failing to declare a real change) and false alarms (declaring on a no-change trial or
+declaring prematurely).
+
+\section{Difficulty control}
+Difficulty is set by two knobs. \textbf{Orientation noise} $\sigma$ adds frame-to-frame
+jitter $\delta_{it}\sim\mathcal N(0,\sigma)$ to each stimulus orientation; $\sigma=5$ in
+the canonical task. The \textbf{change magnitude} $\Delta$ is drawn per change trial from
+$\mathcal U(-k,k)$, with $k$ starting at $65^\circ$ and shrinking by a curriculum (factor
+$0.9$ each time rolling accuracy exceeds $0.85$, floor $8^\circ$) so the task hardens as
+the agent improves. For psychometric analysis we override $\Delta$ to fixed magnitudes and
+freeze the curriculum, exactly as one would titrate difficulty in an animal.
+
+\section{Why the seven-step task is hard for reinforcement learning}
+The short horizon makes the task deceptively difficult to \emph{learn} even though it is
+easy to \emph{solve} (a scripted ``wait until the change is visible, then press'' policy
+scores $1.000$). Two degenerate strategies sit at $0.5$ accuracy and act as attractors:
+\emph{always-wait} (correct on every no-change trial, misses every change) and
+\emph{always-press-at-the-deadline} (catches every change, false-alarms every no-change).
+Because the change persists for only two frames, the reward-bearing ``correct press''
+window is narrow, so the discriminating policy is hard to discover by exploration, and the
+policy entropy collapses before discovery. This is the central learning obstacle the
+perception and architecture findings of later chapters are really about.
+
+\section{The task battery}
+The same environment generalises to the standard NHP battery by editing the reward branch
+and the cue, which is how James proposes to broaden the empirical paper's scope. The
+implemented and planned variants are:
+\begin{itemize}
+\item \textbf{\code{validity4}} --- the canonical four-stimulus, uniform-reward,
+validity-driven task above. The workhorse of this report.
+\item \textbf{\code{vda4}} --- value-cue variant: the cue colour (red/green/blue) sets the
+reward magnitude ($5/3/1$), so behaviour can be read for value direction as well as
+spatial cueing.
+\item \textbf{\code{setsize\{2,4,9\}}} --- set-size manipulation; the nine-stimulus
+($3\times3$) version with five validity levels (including an uninformative $0$) tests
+whether the cueing benefit \emph{grows} with set size, the bridge to the normative
+set-size/accidental-hit theory (Paper B).
+\item \textbf{distractor} (the \code{v7}/\code{v11\_part5} env) --- the cue selects a
+\emph{side}; the uncued side independently changes with probability $0.5$ and must be
+ignored (pressing on it is a false alarm). Tests genuine selection against a competitor.
+\item \textbf{\code{luo\_maunsell}} --- reward-structure manipulation (sensitivity vs.
+criterion sessions) after Luo \& Maunsell (2018).
+\item \textbf{\code{krauzlis}} --- attend/ignore manipulation after Krauzlis and
+colleagues, where an uncued change must be actively ignored.
+\end{itemize}
+All variants share the clean \code{ChangeDetectionEnv} interface: \code{reset} draws the
+cue, validity, and change; \code{step} exposes the two actions and the reward branch. This
+uniformity is what makes ``train one architecture across the whole battery'' a tractable
+research goal rather than a per-task engineering effort.
+
+\section{The long-horizon variant}
+A twenty-nine-step variant (\code{T}=29, change onset drawn uniformly in $[11,25]$) is used
+throughout the architecture history. It is the same task with a much longer post-change
+window, and as Chapter~\ref{ch:horizon} shows, that single difference --- the length of the
+window over which a change can be integrated --- explains most of the otherwise puzzling
+discrepancies between the two horizons.

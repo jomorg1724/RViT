@@ -1,0 +1,120 @@
+\section{Discussion}
+\label{sec:discussion}
+
+The central result is architectural: for this class of recurrent attention agent,
+coupling between the policy and value pathways is a structural prerequisite for
+learning, on par with the choice of learning signal itself. A reasonable-looking
+modular design --- two specialised recurrent streams, cleanly separated for policy
+and value --- does not merely underperform when the streams are isolated; it fails to
+acquire the task entirely. The margin between the coupled and uncoupled designs is
+among the largest one can produce by a single structural edit, and it is bounded by
+two jointly necessary conditions: the streams must share a substrate, and the
+image-grounded stream must command the decision.
+
+\subsection{A mapping onto the primate attention and value systems}
+The model's two pathways correspond, at the level of computational role, to the two
+systems introduced in Section~\ref{sec:intro}, though the correspondence is a
+functional analogy rather than an anatomical isomorphism, and we state its limits
+plainly.
+
+\paragraph{The $\mu$ pathway and the priority/commitment system.}
+The $\mu$ pathway is image-grounded, drives the decision of \emph{when} to declare a
+change, and writes the shared memory --- a profile that aligns most naturally with the
+sensory-grounded priority-and-commitment system. The closest single-area analogue is
+the superior colliculus, which is causally necessary for covert selection
+\citep{lovejoy2010inactivation, zenon2012attention, bollimunta2018fefsc}, whose
+sub-threshold stimulation enhances covert sensitivity without an eye movement
+\citep{muller2005microstimulation}, and which acts as the threshold stage that converts
+parietal evidence accumulation into a committed response
+\citep{stine2023differential}; its attentional contribution is moreover dissociable
+from cortical sensory gain \citep{zenon2012attention} and feeds a subcortical decision
+loop through the basal ganglia \citep{herman2020attention}. The frontal eye
+field supplies a second, cortical instance of the same role: it is a controller, not a
+read-out, of attention \citep{moore2003selective, armstrong2007selective,
+wardak2006contribution, gregoriou2009high}, and --- crucially for our asymmetry result
+--- its attentional signal is carried by visually responsive cells while pure
+movement cells are suppressed during covert attention
+\citep{thompson2005neuronal, gregoriou2012lesions}. The lateral intraparietal area
+shows the integrator dynamics our recurrent memory instantiates
+\citep{roitman2002response, huk2005neural}, but it straddles decision and value on a
+shared substrate \citep{platt1999neural, sugrue2004matching} and is not causally
+indispensable in isolation \citep{katz2016dissociated, jeurissen2022rhesus} ---
+itself a useful caution against equating any single model module with one brain area.
+
+\paragraph{The $q$ pathway and the value/actor--critic system.}
+The $q$ pathway estimates value and, in the model, is more naturally identified with
+the value/critic machinery of the cortico-basal-ganglia loop --- ventral striatum and
+dopamine \citep{odoherty2004dissociable, schultz1997neural, joel2002actor} --- than
+with any attention node. This is consistent with the biology, in which value signals
+for the oculomotor system live largely outside FEF/SC, in the basal ganglia and
+dopaminergic inputs \citep{hikosaka2006basal, hikosaka2014basal}.
+
+\paragraph{The coupling and the actor--critic teaching signal.}
+The requirement that the two systems be coupled echoes the way dopaminergic value
+signals are bound to cortico-striatal action learning: the actor is updated only
+through a three-factor plasticity rule gated by the critic's prediction error
+\citep{schultz1997neural, reynolds2002dopamine, kusmierz2017learning,
+morita2014striatal}, so severing the value signal from the policy synapses breaks
+learning. We are explicit that the analogy is one of \emph{computational principle},
+not of mechanism: the brain's coupling is a largely scalar, diffusely broadcast
+teaching signal flowing from critic to actor, whereas the model's coupling is a shared
+recurrent working-memory register that the actor writes and both read. The model thus
+formalises one concrete way --- a shared workspace --- to satisfy a constraint that the
+basal-ganglia circuit satisfies by other means.
+
+\subsection{Predictions for systems neuroscience}
+Because the model is interpretable and manipulable, the dissociation it embodies
+becomes a set of falsifiable predictions at three levels.
+\begin{enumerate}
+\item \emph{Representational.} Change-evidence (whether and where a change occurred)
+should be decodable preferentially from the policy ($\mu$) pathway, and value/context
+(cued location, cue reliability, reward value) from the value ($q$) pathway. The neural
+prediction is that the decision/commitment nodes (SC, FEF visual cells, LIP choice
+signals) should carry the change-evidence variable, while value circuits carry the
+value variable \citep{thompson2005neuronal, stine2023differential, platt1999neural}.
+\item \emph{Causal.} Perturbing the value pathway should spare detection while degrading
+value-based modulation, whereas perturbing the policy pathway should abolish detection
+--- a double dissociation that maps onto value-circuit manipulation versus SC/FEF
+inactivation \citep{zenon2012attention, wardak2006contribution, herman2018gain}.
+\item \emph{Behavioural-developmental (in the model).} Learning collapses when the value
+and policy systems are decoupled, predicting that interventions which functionally
+isolate value from action learning should impair the \emph{acquisition} (not merely the
+expression) of attentive behaviour, consistent with the role of dopaminergic
+cortico-striatal coupling \citep{schultz1997neural, collins2014opponent}.
+\end{enumerate}
+We note honestly that the basal-ganglia actor--critic literature motivates the
+coupling and the existence of the split, but not the \emph{asymmetry} (that the
+grounded pathway must drive the policy); that prediction rests instead on the
+evidence-accumulation literature, in which the sensory-grounded stage is the causally
+necessary one \citep{katz2016dissociated, gold2007neural}. The asymmetry is the model's
+sharpest, most specific contribution.
+
+\subsection{Relation to the broader program and to other models}
+This finding sits alongside the broader thesis that primate-like attentional behaviour
+in these models emerges only under specific, jointly necessary constraints rather than
+from any single component: goal-driven reinforcement learning and memory-based gating
+of perception are each required, and here we add a third constraint of the same
+character --- that policy and value must share a recurrent substrate. To our knowledge
+no prior model of visual attention splits a \emph{recurrent} encoder into policy and
+value streams, asks whether their coupling is required for learning, or maps the result
+onto basal-ganglia actor--critic and the priority nodes; attention-as-reinforcement-
+learning work has generally treated attention itself as the action
+\citep{mnih2014recurrent, minut2001reinforcement}, and the one machine-learning study of
+actor--critic representation sharing reports that, for \emph{feed-forward}
+representations, separation can help --- a contrast that sharpens our claim that for a
+\emph{recurrent}, image-grounded agent coupling is instead required.
+
+\subsection{Limitations}
+The model is covert-attention only and omits overt orienting and the eye-movement system
+\citep{hoffman1995visual, deubel1996saccade}; the patch-based bottleneck is adopted for
+interpretability rather than as a scalable theory of vision; the value pathway does not
+receive on-line value estimates directly but learns value-modulated behaviour from
+experience; and the neural mappings are functional analogies whose anatomical
+specificity we do not claim. Most importantly, the brain's actor--critic coupling differs
+in substrate and direction from the model's shared-memory coupling, so the biological
+results we cite are supporting analogies, not replications of the model's exact
+manipulation. What the model offers is not a literal circuit but a generative,
+manipulable hypothesis-machine: a way to ask which organisational features of a
+policy/value system are necessary for attentive behaviour, and to read off concrete,
+testable predictions for the experiments that can adjudicate them. That a reward-trained
+network, constrained to be interpretable, can play this role is itself the broader point.

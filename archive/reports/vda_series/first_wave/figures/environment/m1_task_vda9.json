@@ -1,0 +1,67 @@
+{
+  "active_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "cue_configurations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "cue_index": 0,
+  "displayed_validity": 0.25,
+  "displayed_validity_curve": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "evidence_class": "task-derived schematic",
+  "figure_id": "M1",
+  "outputs": {
+    "pdf": "m1_task_vda9.pdf",
+    "png": "m1_task_vda9.png"
+  },
+  "realized_cue_probability_curve": [
+    0.3333333333333333,
+    0.5555555555555556,
+    0.7777777777777778,
+    1.0
+  ],
+  "realized_target_distribution": [
+    0.3333333333333333,
+    0.08333333333333333,
+    0.08333333333333333,
+    0.08333333333333333,
+    0.08333333333333333,
+    0.08333333333333333,
+    0.08333333333333333,
+    0.08333333333333333,
+    0.08333333333333333
+  ],
+  "schema_version": 2,
+  "seed": 1701,
+  "task": {
+    "active_count": 9,
+    "grid": [
+      3,
+      3
+    ],
+    "image_size": 75,
+    "lineage": "historical",
+    "name": "vda9",
+    "probe_location": null,
+    "token_count": 9,
+    "validity_mode": "archived_including_cue",
+    "value_cues": true
+  },
+  "timeline_frames": 7
+}

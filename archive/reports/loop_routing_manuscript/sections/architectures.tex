@@ -1,0 +1,119 @@
+\section{The three loop architectures}
+\label{sec:architectures}
+
+The agent is a conv-free recurrent vision transformer. Each $50\times50\times3$ frame $\mathbf{O}^{(t)}$ is partitioned into a $10\times10$ grid of non-overlapping $5\times5$ patches, yielding $N=100$ tokens $\mathbf{X}^{(t)}=\{\mathbf{x}^{(t)}_i\}_{i=1}^{N}$, each embedded by a shared per-patch network into a $d=128$-dimensional vector and tagged with learned positional and temporal codes. Information passes between spatial locations only through attention. Two per-token recurrent memories are carried across frames as hidden states, one slot per patch location, $\mathbf{H}_1^{(t)},\mathbf{H}_2^{(t)}\in\mathbb{R}^{N\times d}$, advanced by independent long short-term memory (LSTM) cells. We refer to $\mathbf{H}_1$ as the sensory trace, written directly from the raw image, and to $\mathbf{H}_2$ as the deep trace, written from the decision pathway's own output. The encoder is split into two cross-attention streams that read these memories: a \emph{priority} stream ($\mu$), which is grounded in the live image and drives the \textsc{actor} (policy), and a \emph{value} stream ($q$), which is grounded in accumulated memory and drives the \textsc{critic} (valuation). In the older salience/top-down vocabulary, the priority stream is the salience pathway and the value stream the top-down pathway; we use priority and value throughout.
+
+\subsection{The cross-attention block}
+Each stream is a single-head, pre-norm cross-attention block whose \emph{queries} are the current image tokens and whose \emph{keys and values} are supplied by memory. Writing $\mathrm{Attn}(Q;K)=\mathrm{softmax}\!\big(QK^{\top}/\sqrt{d}\big)V$ with $V$ tied to $K$, a residual source $R$, and a position-wise feed-forward block $\mathrm{FFN}$,
+\begin{equation}
+\mathbf{Z}=R+\mathrm{Attn}\big(\mathbf{X};\,\mathrm{KV}\big),\qquad \mathbf{Z}\leftarrow\mathbf{Z}+\mathrm{FFN}(\mathbf{Z}).
+\label{eq:arch-block}
+\end{equation}
+The two streams differ only in their key/value bank $\mathrm{KV}$ and residual $R$.
+
+\subsection{Configuration~1 (V1): shared memory, closed loop}
+In the working configuration the two streams are coupled through a single shared deep memory $\mathbf{H}_2$:
+\begin{align}
+\text{priority }(\mu,\to\textsc{actor}):\quad \mathbf{Z}_{\mu}^{(t)} &= \mathrm{block}\big(\mathbf{X}^{(t)};\ \mathrm{KV}=[\mathbf{H}_1^{(t)}\!\parallel\!\mathbf{H}_2^{(t)}],\ R=\mathbf{X}^{(t)}\big),\label{eq:arch-mu}\\
+\text{value }(q,\to\textsc{critic}):\quad \mathbf{Z}_{q}^{(t)} &= \mathrm{block}\big(\mathbf{X}^{(t)};\ \mathrm{KV}=\mathbf{H}_2^{(t)},\ R=\mathbf{H}_2^{(t)}\big).\label{eq:arch-q}
+\end{align}
+The priority stream attends over \emph{both} memories, concatenated along the token axis with each source tagged, and carries the raw image on its residual; its decision can therefore reflect live visual evidence. The value stream attends only over the deep memory $\mathbf{H}_2$ and carries $\mathbf{H}_2$ on its residual, so the image can only \emph{re-weight} the stored state rather than inject new content---a memory-grounded bottleneck appropriate to a contextual value estimate. The memories are then advanced,
+\begin{equation}
+\mathbf{H}_1^{(t+1)}=\mathrm{LSTM}_1\!\big(\mathbf{X}^{(t)},\mathbf{H}_1^{(t)}\big),\qquad \mathbf{H}_2^{(t+1)}=\mathrm{LSTM}_2\!\big(\mathbf{Z}_{\mu}^{(t)},\mathbf{H}_2^{(t)}\big),
+\label{eq:arch-mem}
+\end{equation}
+so the sensory trace is written from the raw image and the deep trace is written from the priority/actor output $\mathbf{Z}_{\mu}$. Finally a split readout sends each stream to its own head:
+\begin{equation}
+\pi^{(t)}=\textsc{actor}\big(\mathbf{Z}_{\mu}^{(t)}\big),\qquad Q^{(t)}=\textsc{critic}\big(\mathbf{Z}_{q}^{(t)}\big).
+\label{eq:arch-heads}
+\end{equation}
+The coupling lives entirely in $\mathbf{H}_2$: the priority/actor stream \emph{writes} $\mathbf{H}_2$ (through $\mathbf{Z}_{\mu}$ in Equation~\eqref{eq:arch-mem}) and \emph{reads} it back (inside the concatenated bank of Equation~\eqref{eq:arch-mu}), while the value/critic stream \emph{reads} the same $\mathbf{H}_2$ (Equation~\eqref{eq:arch-q}). The two heads are separate but sit on one shared, jointly maintained working memory---a common workspace that the decision system writes and both systems read. This shared register is the structural variable we manipulate.
+
+\subsection{Configuration~2 (V2): independent streams, open loop}
+The second configuration keeps both stream \emph{types} but gives each its own private memory, updated only by its own output:
+\begin{align}
+\mathbf{Z}_{\mu}^{(t)} &= \mathrm{block}\big(\mathbf{X}^{(t)};\ \mathrm{KV}=\mathbf{H}_{\mu}^{(t)},\ R=\mathbf{X}^{(t)}\big), & \mathbf{H}_{\mu}^{(t+1)}&=\mathrm{LSTM}_{\mu}\big(\mathbf{Z}_{\mu}^{(t)},\mathbf{H}_{\mu}^{(t)}\big),\\
+\mathbf{Z}_{q}^{(t)} &= \mathrm{block}\big(\mathbf{X}^{(t)};\ \mathrm{KV}=\mathbf{H}_{Q}^{(t)},\ R=\mathbf{H}_{Q}^{(t)}\big), & \mathbf{H}_{Q}^{(t+1)}&=\mathrm{LSTM}_{q}\big(\mathbf{Z}_{q}^{(t)},\mathbf{H}_{Q}^{(t)}\big).
+\end{align}
+The priority module still drives the actor and the value module the critic, but the two modules never touch each other's recurrent state; the only thing they share is the raw input image. This is the minimal edit that removes the cross-talk while preserving the split, the stream types, the parameter count and the training recipe. The loop is open: nothing the actor writes is read by the critic, and nothing the critic computes flows into the actor's representation.
+
+\subsection{Configuration~3 (V3): swapped routing}
+The third configuration is architecturally identical to V1---the same shared $\mathbf{H}_2$, the same memory writes of Equation~\eqref{eq:arch-mem}, the same two streams of Equations~\eqref{eq:arch-mu}--\eqref{eq:arch-q}---and changes only the readout of Equation~\eqref{eq:arch-heads}: the value/memory stream drives the actor and the priority/image stream drives the critic,
+\begin{equation}
+\pi^{(t)}=\textsc{actor}\big(\mathbf{Z}_{q}^{(t)}\big),\qquad Q^{(t)}=\textsc{critic}\big(\mathbf{Z}_{\mu}^{(t)}\big).
+\end{equation}
+The loop remains closed; only the assignment of streams to heads is reversed. This isolates whether it matters \emph{which} stream commands the policy, holding the presence of coupling fixed.
+
+\subsection{One property at a time}
+The three configurations differ in exactly one property each, relative to the working loop. V2 removes the coupling (private memories) while preserving the split, the stream types, the routing, the parameter count and the recipe. V3 preserves the coupling and reverses only the routing. Everything else---patch front-end, two LSTM memories, single-head pre-norm blocks, both heads, the optimiser, hyperparameters and number of updates---is held identical across all three. The comparison therefore isolates the causal contribution of \emph{organisation}, in the spirit of a reversible inactivation experiment \citep{lovejoy2010inactivation}.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\footnotesize,>={Latex[length=2mm]},
+  node distance=4mm,
+  io/.style={draw,rounded corners,minimum width=8mm,minimum height=5mm,align=center,fill=black!4},
+  str/.style={draw,rounded corners,minimum width=9mm,minimum height=5.5mm,align=center,fill=teal!12},
+  mem/.style={draw,rounded corners,minimum width=8mm,minimum height=5mm,align=center,fill=blue!9},
+  sh/.style={draw,rounded corners,minimum width=9mm,minimum height=5.5mm,align=center,fill=orange!22},
+  hd/.style={draw,rounded corners,minimum width=8mm,minimum height=5mm,align=center,fill=violet!12},
+  sig/.style={->,thick},
+  wr/.style={->,semithick,red!75!black},
+  rd/.style={->,semithick,densely dotted,red!75!black},
+  teach/.style={->,semithick,densely dashdotted,green!45!black}]
+
+% ===== V1: shared memory, closed loop =====
+\begin{scope}[local bounding box=p1]
+  \node[io] (X1) at (0.9,0) {$\mathbf{X}$};
+  \node[str] (mu1) at (0,1.15) {$\mu$};
+  \node[sh]  (H1)  at (0.9,1.15) {$\mathbf{H}_2$};
+  \node[str] (q1)  at (1.8,1.15) {$q$};
+  \node[hd]  (A1)  at (0,2.35) {Actor};
+  \node[hd]  (C1)  at (1.8,2.35) {Critic};
+  \draw[sig] (X1) -- (mu1); \draw[sig] (X1) -- (q1);
+  \draw[sig] (mu1) -- (A1); \draw[sig] (q1) -- (C1);
+  \draw[wr]  (mu1) -- (H1) node[midway,above,font=\tiny]{write};
+  \draw[rd]  (H1) -- (q1);
+  \draw[teach] (C1) to[bend right=38] node[midway,above,font=\tiny]{TD} (A1);
+  \node[font=\scriptsize\bfseries] at (0.9,-0.7) {(a) V1 closed loop};
+  \node[font=\tiny] at (0.9,-1.05) {learns 0.868};
+\end{scope}
+
+% ===== V2: independent, open loop =====
+\begin{scope}[xshift=42mm,local bounding box=p2]
+  \node[io] (X2) at (0.9,0) {$\mathbf{X}$};
+  \node[str] (mu2) at (0,1.15) {$\mu$};
+  \node[mem] (Hm)  at (0,2.0) {$\mathbf{H}_\mu$};
+  \node[str] (q2)  at (1.8,1.15) {$q$};
+  \node[mem] (Hq)  at (1.8,2.0) {$\mathbf{H}_q$};
+  \node[hd]  (A2)  at (0,3.0) {Actor};
+  \node[hd]  (C2)  at (1.8,3.0) {Critic};
+  \draw[sig] (X2) -- (mu2); \draw[sig] (X2) -- (q2);
+  \draw[wr] (mu2) -- (Hm); \draw[rd] (Hm) -- (mu2);
+  \draw[wr] (q2) -- (Hq); \draw[rd] (Hq) -- (q2);
+  \draw[sig] (mu2) to[bend left=12] (A2); \draw[sig] (q2) to[bend right=12] (C2);
+  \node[red!75!black,font=\large] at (0.9,1.7) {$\times$};
+  \node[font=\scriptsize\bfseries] at (0.9,-0.7) {(b) V2 open loop};
+  \node[font=\tiny] at (0.9,-1.05) {chance 0.504};
+\end{scope}
+
+% ===== V3: swapped routing =====
+\begin{scope}[xshift=84mm,local bounding box=p3]
+  \node[io] (X3) at (0.9,0) {$\mathbf{X}$};
+  \node[str] (mu3) at (0,1.15) {$\mu$};
+  \node[sh]  (H3)  at (0.9,1.15) {$\mathbf{H}_2$};
+  \node[str] (q3)  at (1.8,1.15) {$q$};
+  \node[hd]  (A3)  at (0,2.35) {Actor};
+  \node[hd]  (C3)  at (1.8,2.35) {Critic};
+  \draw[sig] (X3) -- (mu3); \draw[sig] (X3) -- (q3);
+  \draw[wr]  (mu3) -- (H3); \draw[rd] (H3) -- (q3);
+  \draw[sig,red!75!black] (q3) to[bend right=20] (A3);
+  \draw[sig,red!75!black] (mu3) to[bend left=20] (C3);
+  \node[font=\scriptsize\bfseries] at (0.9,-0.7) {(c) V3 swapped};
+  \node[font=\tiny] at (0.9,-1.05) {chance 0.420};
+\end{scope}
+\end{tikzpicture}
+
+\medskip
+\caption{The three loop architectures. \textbf{V1 (shared memory, closed loop):} the priority stream ($\mu$; queries the image, keys/values $[\mathbf{H}_1\parallel\mathbf{H}_2]$, residual the raw image $\mathbf{X}$) drives the actor and \emph{writes} the shared deep memory $\mathbf{H}_2$; the value stream ($q$; keys/values and residual $\mathbf{H}_2$) drives the critic and \emph{reads} the same $\mathbf{H}_2$. \textbf{V2 (independent, open loop):} the same two stream types, but each with a private memory ($\mathbf{H}_{\mu}$, $\mathbf{H}_{Q}$) written only by its own output; the streams share only the raw image. \textbf{V3 (swapped routing):} identical wiring to V1 but the readout is reversed---the value stream drives the actor and the priority stream drives the critic. The three configurations differ in exactly one property each: V2 deletes the shared memory, V3 swaps the head assignment.}
+\label{fig:arch}
+\end{figure}

@@ -1,0 +1,97 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Carrasco(2011)]{carrasco2011visual}
+Marisa Carrasco.
+\newblock Visual attention: The past 25 years.
+\newblock \emph{Vision research}, 51\penalty0 (13):\penalty0 1484--1525, 2011.
+
+\bibitem[Desimone et~al.(1995)Desimone, Duncan, et~al.]{desimone1995neural}
+Robert Desimone, John Duncan, et~al.
+\newblock Neural mechanisms of selective visual attention.
+\newblock \emph{Annual review of neuroscience}, 18\penalty0 (1):\penalty0
+  193--222, 1995.
+
+\bibitem[Herman et~al.(2020)Herman, Arcizet, and Krauzlis]{herman2020attention}
+James~P Herman, Fabrice Arcizet, and Richard~J Krauzlis.
+\newblock Attention-related modulation of caudate neurons depends on superior
+  colliculus activity.
+\newblock \emph{eLife}, 9:\penalty0 e53998, sep 2020.
+\newblock ISSN 2050-084X.
+\newblock \doi{10.7554/eLife.53998}.
+\newblock URL \url{https://doi.org/10.7554/eLife.53998}.
+
+\bibitem[Krauzlis et~al.(2013)Krauzlis, Lovejoy, and
+  Z{\'e}non]{krauzlis2013superior}
+Richard~J Krauzlis, Lee~P Lovejoy, and Alexandre Z{\'e}non.
+\newblock Superior colliculus and visual spatial attention.
+\newblock \emph{Annual review of neuroscience}, 36:\penalty0 165--182, 2013.
+
+\bibitem[Krauzlis et~al.(2018)Krauzlis, Bogadhi, Herman, and
+  Bollimunta]{krauzlis2018selective}
+Richard~J Krauzlis, Amarender~R Bogadhi, James~P Herman, and Anil Bollimunta.
+\newblock Selective attention without a neocortex.
+\newblock \emph{Cortex}, 102:\penalty0 161--175, 2018.
+
+\bibitem[Luo and Maunsell(2019)]{luo2019attention}
+Thomas~Zhihao Luo and John~HR Maunsell.
+\newblock Attention can be subdivided into neurobiological components
+  corresponding to distinct behavioral effects.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 116\penalty0
+  (52):\penalty0 26187--26194, 2019.
+
+\bibitem[Maunsell(2004)]{maunsell2004neuronal}
+John~HR Maunsell.
+\newblock Neuronal representations of cognitive state: reward or attention?
+\newblock \emph{Trends in cognitive sciences}, 8\penalty0 (6):\penalty0
+  261--265, 2004.
+
+\bibitem[Posner et~al.(1980)Posner, Snyder, and Davidson]{posner1980attention}
+Michael~I Posner, Charles~R Snyder, and Brian~J Davidson.
+\newblock Attention and the detection of signals.
+\newblock \emph{Journal of experimental psychology: General}, 109\penalty0
+  (2):\penalty0 160, 1980.
+
+\bibitem[Posner et~al.(1994)Posner, Grossenbacher, and
+  Compton]{posner1994visual}
+Michael~I Posner, Peter~G Grossenbacher, and Paul~E Compton.
+\newblock Visual attention.
+\newblock \emph{The neuropsychology of high-level vision: Collected tutorial
+  essays}, pages 217--239, 1994.
+
+\bibitem[Reynolds and Heeger(2009)]{reynolds2009normalization}
+John~H Reynolds and David~J Heeger.
+\newblock The normalization model of attention.
+\newblock \emph{Neuron}, 61\penalty0 (2):\penalty0 168--185, 2009.
+
+\bibitem[Reynolds et~al.(1999)Reynolds, Chelazzi, and
+  Desimone]{reynolds1999competitive}
+John~H Reynolds, Leonardo Chelazzi, and Robert Desimone.
+\newblock Competitive mechanisms subserve attention in macaque areas v2 and v4.
+\newblock \emph{Journal of Neuroscience}, 19\penalty0 (5):\penalty0 1736--1753,
+  1999.
+
+\bibitem[Reynolds et~al.(2000)Reynolds, Pasternak, and
+  Desimone]{reynolds2000attention}
+John~H Reynolds, Tatiana Pasternak, and Robert Desimone.
+\newblock Attention increases sensitivity of v4 neurons.
+\newblock \emph{Neuron}, 26\penalty0 (3):\penalty0 703--714, 2000.
+
+\bibitem[Sprague et~al.(2018)Sprague, Itthipuripat, Vo, and
+  Serences]{sprague2018rescuing}
+Thomas~C Sprague, Sirawaj Itthipuripat, Vy~A Vo, and John~T Serences.
+\newblock Dissociable signatures of visual salience and behavioral relevance
+  across attentional priority maps in human cortex.
+\newblock \emph{Journal of Neurophysiology}, 119\penalty0 (6):\penalty0
+  2153--2165, 2018.
+
+\bibitem[Z{\'e}non and Krauzlis(2012)]{zenon2012attention}
+Alexandre Z{\'e}non and Richard~J Krauzlis.
+\newblock Attention deficits without cortical neuronal deficits.
+\newblock \emph{Nature}, 489\penalty0 (7416):\penalty0 434--437, 2012.
+
+\end{thebibliography}

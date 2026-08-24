@@ -1,0 +1,151 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bollimunta et~al.(2018)Bollimunta, Bogadhi, and
+  Krauzlis]{bollimunta2018fefsc}
+Anil Bollimunta, Amarender~R. Bogadhi, and Richard~J. Krauzlis.
+\newblock Comparing frontal eye field and superior colliculus contributions to
+  covert spatial attention.
+\newblock \emph{Nature Communications}, 9\penalty0 (1):\penalty0 3553, 2018.
+\newblock ISSN 2041-1723.
+\newblock \doi{10.1038/s41467-018-06042-2}.
+\newblock URL \url{https://doi.org/10.1038/s41467-018-06042-2}.
+
+\bibitem[Gold and Shadlen(2007)]{gold2007neural}
+Joshua~I Gold and Michael~N Shadlen.
+\newblock The neural basis of decision making.
+\newblock \emph{Annual Review of Neuroscience}, 30:\penalty0 535--574, 2007.
+\newblock \doi{10.1146/annurev.neuro.29.051605.113038}.
+
+\bibitem[Herman et~al.(2020)Herman, Arcizet, and Krauzlis]{herman2020attention}
+James~P Herman, Fabrice Arcizet, and Richard~J Krauzlis.
+\newblock Attention-related modulation of caudate neurons depends on superior
+  colliculus activity.
+\newblock \emph{eLife}, 9:\penalty0 e53998, sep 2020.
+\newblock ISSN 2050-084X.
+\newblock \doi{10.7554/eLife.53998}.
+\newblock URL \url{https://doi.org/10.7554/eLife.53998}.
+
+\bibitem[Hollerman and Schultz(1998)]{hollerman1998dopamine}
+Jeffrey~R Hollerman and Wolfram Schultz.
+\newblock Dopamine neurons report an error in the temporal prediction of reward
+  during learning.
+\newblock \emph{Nature Neuroscience}, 1\penalty0 (4):\penalty0 304--309, 1998.
+\newblock \doi{10.1038/1124}.
+
+\bibitem[Katz et~al.(2016)Katz, Yates, Pillow, and Huk]{katz2016dissociated}
+Leor~N Katz, Jacob~L Yates, Jonathan~W Pillow, and Alexander~C Huk.
+\newblock Dissociated functional significance of decision-related activity in
+  the primate dorsal stream.
+\newblock \emph{Nature}, 535\penalty0 (7611):\penalty0 285--288, 2016.
+\newblock \doi{10.1038/nature18617}.
+\newblock Inactivating sensory MT impairs discrimination; inactivating
+  accumulating LIP does not.
+
+\bibitem[Katz et~al.(2025)Katz, Bohlen, Yu, Mejias-Aponte, Sommer, and
+  Krauzlis]{katz2025optogenetic}
+Leor~N Katz, Martin~O Bohlen, Gongchen Yu, Carlos Mejias-Aponte, Marc~A Sommer,
+  and Richard~J Krauzlis.
+\newblock Optogenetic manipulation of covert attention in the nonhuman primate.
+\newblock \emph{Journal of Cognitive Neuroscience}, 37\penalty0 (2):\penalty0
+  266--285, 2025.
+
+\bibitem[Krauzlis et~al.(2018)Krauzlis, Bogadhi, Herman, and
+  Bollimunta]{krauzlis2018selective}
+Richard~J Krauzlis, Amarender~R Bogadhi, James~P Herman, and Anil Bollimunta.
+\newblock Selective attention without a neocortex.
+\newblock \emph{Cortex}, 102:\penalty0 161--175, 2018.
+
+\bibitem[Lovejoy and Krauzlis(2010)]{lovejoy2010inactivation}
+Lee~P Lovejoy and Richard~J Krauzlis.
+\newblock Inactivation of primate superior colliculus impairs covert selection
+  of signals for perceptual judgments.
+\newblock \emph{Nature Neuroscience}, 13\penalty0 (2):\penalty0 261--266, 2010.
+\newblock \doi{10.1038/nn.2470}.
+
+\bibitem[Maia(2009)]{maia2009reinforcement}
+Tiago~V Maia.
+\newblock Reinforcement learning, conditioning, and the brain: Successes and
+  challenges.
+\newblock \emph{Cognitive, Affective, \& Behavioral Neuroscience}, 9\penalty0
+  (4):\penalty0 343--364, 2009.
+\newblock \doi{10.3758/CABN.9.4.343}.
+
+\bibitem[Moore and Fallah(2001)]{moore2001control}
+Tirin Moore and Mazyar Fallah.
+\newblock Control of eye movements and spatial attention.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 98\penalty0
+  (3):\penalty0 1273--1276, 2001.
+\newblock \doi{10.1073/pnas.98.3.1273}.
+
+\bibitem[Moore and Fallah(2004)]{moore2004microstimulation}
+Tirin Moore and Mazyar Fallah.
+\newblock Microstimulation of the frontal eye field and its effects on covert
+  spatial attention.
+\newblock \emph{Journal of Neurophysiology}, 91\penalty0 (1):\penalty0
+  152--162, 2004.
+\newblock \doi{10.1152/jn.00741.2002}.
+\newblock Cited in memo as Moore \& Fallah 2003.
+
+\bibitem[Morita and Kato(2014)]{morita2014striatal}
+Kenji Morita and Ayaka Kato.
+\newblock Striatal dopamine ramping may indicate flexible reinforcement
+  learning with forgetting in the cortico-basal ganglia circuits.
+\newblock \emph{Frontiers in Neural Circuits}, 8:\penalty0 36, 2014.
+\newblock \doi{10.3389/fncir.2014.00036}.
+\newblock Three-factor corticostriatal rule; value and policy bound in one
+  closed loop.
+
+\bibitem[O'Doherty et~al.(2004)O'Doherty, Dayan, Schultz, Deichmann, Friston,
+  and Dolan]{odoherty2004dissociable}
+John O'Doherty, Peter Dayan, Johannes Schultz, Ralf Deichmann, Karl Friston,
+  and Raymond~J Dolan.
+\newblock Dissociable roles of ventral and dorsal striatum in instrumental
+  conditioning.
+\newblock \emph{Science}, 304\penalty0 (5669):\penalty0 452--454, 2004.
+\newblock \doi{10.1126/science.1094285}.
+
+\bibitem[Platt and Glimcher(1999)]{platt1999neural}
+Michael~L Platt and Paul~W Glimcher.
+\newblock Neural correlates of decision variables in parietal cortex.
+\newblock \emph{Nature}, 400\penalty0 (6741):\penalty0 233--238, 1999.
+\newblock \doi{10.1038/22268}.
+
+\bibitem[Schultz et~al.(1997)Schultz, Dayan, and Montague]{schultz1997neural}
+Wolfram Schultz, Peter Dayan, and P~Read Montague.
+\newblock A neural substrate of prediction and reward.
+\newblock \emph{Science}, 275\penalty0 (5306):\penalty0 1593--1599, 1997.
+
+\bibitem[Stine et~al.(2023)Stine, Trautmann, Jeurissen, and
+  Shadlen]{stine2023differential}
+Gabriel~M Stine, Eric~M Trautmann, Danique Jeurissen, and Michael~N Shadlen.
+\newblock A neural mechanism for terminating decisions.
+\newblock \emph{Neuron}, 111\penalty0 (16):\penalty0 2601--2613, 2023.
+\newblock \doi{10.1016/j.neuron.2023.05.028}.
+\newblock SC as the threshold converting LIP accumulation into commitment.
+
+\bibitem[Sugrue et~al.(2004)Sugrue, Corrado, and Newsome]{sugrue2004matching}
+Leo~P Sugrue, Greg~S Corrado, and William~T Newsome.
+\newblock Matching behavior and the representation of value in the parietal
+  cortex.
+\newblock \emph{Science}, 304\penalty0 (5678):\penalty0 1782--1787, 2004.
+\newblock \doi{10.1126/science.1094765}.
+
+\bibitem[Thompson et~al.(2005)Thompson, Biscoe, and Sato]{thompson2005neuronal}
+Kirk~G Thompson, Keri~L Biscoe, and Takashi~R Sato.
+\newblock Neuronal basis of covert spatial attention in the frontal eye field.
+\newblock \emph{Journal of Neuroscience}, 25\penalty0 (41):\penalty0
+  9479--9487, 2005.
+\newblock \doi{10.1523/JNEUROSCI.0741-05.2005}.
+\newblock Attention enhances visual cells; movement cells inhibited.
+
+\bibitem[Z{\'e}non and Krauzlis(2012)]{zenon2012attention}
+Alexandre Z{\'e}non and Richard~J Krauzlis.
+\newblock Attention deficits without cortical neuronal deficits.
+\newblock \emph{Nature}, 489\penalty0 (7416):\penalty0 434--437, 2012.
+
+\end{thebibliography}

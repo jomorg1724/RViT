@@ -1,0 +1,61 @@
+% =====================================================================
+% Loop-routing manuscript — only one actor/critic routing learns covert
+% attention (priority->actor, value->critic, shared memory), on T=29,
+% mapped to the cortico-basal-ganglia-collicular loop.
+% Build:  pdflatex main ; bibtex main ; pdflatex main ; pdflatex main
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{caption}
+\captionsetup{labelfont=bf,textfont=small,labelsep=period}
+\usepackage[round]{natbib}
+\bibliographystyle{plainnat}
+\usepackage[colorlinks=true,allcolors=blue!50!black]{hyperref}
+
+% --- notation shorthands: priority (mu, ->actor) / value (q, ->critic) ---
+\newcommand{\Hone}{\mathbf{H}_1}            % sensory memory
+\newcommand{\Htwo}{\mathbf{H}_2}            % deep / shared memory
+\newcommand{\Zpri}{\mathbf{Z}_{\text{pri}}} % priority-pathway output (-> actor)
+\newcommand{\Zval}{\mathbf{Z}_{\text{val}}} % value-pathway output (-> critic)
+\newcommand{\Xt}{\mathbf{X}}                % patch tokens
+\newcommand{\Hmu}{\mathbf{H}_\mu}           % private priority memory (independent variant)
+\newcommand{\HQ}{\mathbf{H}_q}              % private value memory (independent variant)
+
+\title{\bfseries A required loop: of three policy/value routings in a
+recurrent vision-transformer model of covert attention, only the grounded,
+closed cortico--striatal--collicular loop learns}
+
+\author{
+  Jonathan Morgan$^{1}$ \and Badr Albanna$^{2,3}$ \and James P.\ Herman$^{1}$ \\[4pt]
+  {\small $^{1}$Department of Ophthalmology, University of Pittsburgh, Pittsburgh, PA 15219}\\
+  {\small $^{2}$Department of Otolaryngology, University of Pittsburgh, Pittsburgh, PA 15219}\\
+  {\small $^{3}$Duolingo, AI Organization}
+}
+\date{Preprint --- draft}
+
+\begin{document}
+\maketitle
+
+\input{sections/abstract}
+\input{sections/intro}
+\input{sections/architectures}
+\input{sections/task}
+\input{sections/results}
+\input{sections/mechanism}
+\input{sections/neural_loop}
+\input{sections/predictions}
+\input{sections/discussion}
+\input{sections/methods}
+
+\bibliography{refs}
+\end{document}

@@ -1,0 +1,42 @@
+\section{Set size and the recruitment of validity-graded attention}
+\label{sec:setsize}
+
+A central prediction of any account in which attention allocates a limited resource is
+that the \emph{benefit} of knowing where to look should grow with the number of competing
+locations \citep{palmer1995psychophysics, mazyar2012does, eckstein2013visual}. With four
+locations, a perfectly valid cue removes a modest amount of spatial uncertainty; with nine,
+it removes much more, and an agent that exploits the cue should therefore recruit
+reliability-graded attention more strongly at the larger set size. We use the nine-stimulus
+variant (Section~\ref{sec:env-setsize}) to test this set-size $\times$ validity interaction
+in the coupled architecture.
+
+\paragraph{Design and prediction.}
+The nine-stimulus environment cues one of nine locations and signals its reliability through
+five proportion levels $\{0, 0.25, 0.50, 0.75, 1.00\}$, with an uninformative cue
+(proportion $0$, uniform over all nine locations) as a within-task baseline and a uniform
+reward structure that removes the value manipulation, isolating validity. The architecture is
+the coupled cross-talk model of Section~\ref{sec:configs} applied unchanged. We make two
+quantitative predictions. First, the \emph{behavioural} cueing benefit --- the advantage for a
+change at the cued location, and its growth across proportion levels --- should be
+\emph{larger} at nine stimuli than at four. Second, and more diagnostically, the
+\emph{attentional} recruitment should be more strongly graded by proportion: the attention the
+model allocates to the cued location at the moment of change should rise more steeply with cue
+reliability when there are nine competing locations than when there are four. In short, the
+prediction is that the nine-stimulus task uses proportion-graded attention \emph{more} than the
+smaller-set-size tasks.
+
+\paragraph{Status and analysis plan.}
+We report this as a designed experiment and an open quantitative prediction rather than a
+completed result: at the time of writing the nine-stimulus run has not been trained to
+convergence with a logged, analysable model, and no per-reliability attention analysis exists
+(\TODO{set-size $\times$ validity result --- to be filled when the canonical sweep completes}).
+The analysis is specified in advance. Using matched runs at set sizes $K\in\{2,4,9\}$ under one
+architecture and training recipe, we will (i) fit psychometric functions split by cue
+reliability and cued/uncued location and extract the reliability-graded validity benefit at each
+$K$; and (ii) read the cross-attention weights at the change frame, compute the attention
+allocated to the cued versus uncued locations as a function of reliability, and test whether the
+reliability slope of cued attention increases with $K$. A positive interaction --- steeper
+reliability-graded attention and a larger cueing benefit at $K=9$ --- would provide a parametric,
+within-model demonstration that the cue is recruited in proportion to the uncertainty it
+resolves, and a corresponding prediction for set-size manipulations in primate cueing
+experiments \citep{mayo2016graded, eckstein2013visual}.

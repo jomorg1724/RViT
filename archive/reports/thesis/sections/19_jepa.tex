@@ -1,0 +1,329 @@
+\chapter{Finding VI --- perception can be learned without a pretrained VAE: V-JEPA self-distillation}
+\label{ch:jepa}
+
+Chapters~\ref{ch:perception} and \ref{ch:recommendation} establish two facts that
+together harden into a recommendation: on the short seven-step task perception cannot be
+learned from reward (a from-scratch VAE collapses to always-press, orientation
+$\Rsq=0.24$ against the pretrained VAE's $0.97$), and the cure is a \emph{frozen
+pretrained VAE} front-end, declared one of two non-negotiables. This chapter is a third
+perception result that qualifies that recommendation rather than overturning it. It shows
+perception \emph{can} be learned jointly with reinforcement learning, with no pretrained or
+frozen VAE, when the network is given a self-supervised auxiliary: a V-JEPA temporal
+self-distillation loss (prototype-softmax, DINO/iBOT-style, EMA teacher, student$@t$
+predicting teacher$@t{+}1$) trained jointly with the actor--critic. Paired with either time
+to integrate (frame-repeat from raw pixels, $\sim0.90$ training rolling correct) or a
+capable convolutional front-end (an SE-ResNet, $\sim0.87$ greedy correct with a sharp,
+fully dissected covert-cueing algorithm), the auxiliary turns the perception bottleneck
+into a solvable joint problem. The chapter also reports informative negatives that fence the
+recipe: externalising a categorical softmax simplex as the working memory kills task
+learning; a plain SmoothL1 latent-regression JEPA undergoes representational collapse; and
+the matrix-affine two-LSTM feedback wiring collapses to chance under either the JEPA or a
+VAE, isolating the fault to the wiring. The cross-cutting lesson is that the perceptual
+front-end, not memory size, sets the attention strategy: a strong per-frame encoder yields a
+sharp attention-driven solution, while learning from held pixels yields a diffuse,
+recurrence-driven one. Because predicting future latents is arguably more biologically
+plausible than supervised reconstruction-pretraining, this route is also the more neurally
+defensible way to obtain a working front-end.
+
+\section{The question Chapter 5 left open}
+Chapter~\ref{ch:perception} draws a clean line between two questions that the earlier
+architecture history had conflated: \emph{can the front-end see?} and \emph{does the
+architecture work?} On the seven-step task the answer to the first was decisively negative
+when perception was asked to emerge from reward alone. A VAE front-end trained end-to-end
+from the reinforcement signal collapses to the \emph{always-press-at-the-deadline}
+degenerate policy --- hit rate $1.000$, false-alarm rate $1.000$ on no-change trials,
+overall accuracy $0.515$, reaction time pinned at frame $5$ --- and a linear probe confirms
+the cause: orientation is decodable from the from-scratch encoder at only $\Rsq=0.24$ versus
+$\Rsq=0.97$ for the pretrained VAE. Freezing a pretrained VAE rescues learning on the first
+attempt (hit $0.79$, false-alarm $0.08$). Chapter~\ref{ch:recommendation} then elevates the
+frozen pretrained VAE to one of \emph{two non-negotiables}.
+
+That recommendation is correct \emph{as a statement about supervised reconstruction-
+pretraining applied to a static, per-frame encoder}. It leaves a sharper question open: is
+the pretrained VAE necessary because perception is genuinely unlearnable jointly with the
+policy, or because reconstruction from reward is simply the wrong learning signal? This
+chapter answers that perception is learnable jointly with the policy --- provided the
+network carries a \emph{self-supervised predictive} auxiliary that does not depend on the
+reward, and provided it is paired with one of two enablers that give the recurrence enough
+perceptual purchase to use it. The result qualifies the non-negotiable: a frozen pretrained
+VAE is one way to satisfy the perception requirement, not the only way.
+
+\section{The auxiliary: V-JEPA temporal self-distillation}
+The auxiliary is a video-JEPA self-distillation loss attached to the recurrent cell and
+trained jointly with the actor--critic. A projection head reads the continuous xLSTM cell
+output and emits, for each of $4$ heads, a softmax over $256$ prototypes. A teacher network
+is an exponential moving average of the student (decay $0.996$); its outputs are centred
+(centre momentum $0.9$) and sharpened (student temperature $0.1$; teacher temperature
+warming from $0.04$ to $0.07$ over a $300$-iteration warm-up). The student's prototype
+distribution at time $t$ is trained to predict the teacher's distribution at time $t{+}1$
+--- a temporal, predict-the-next-latent target rather than a masked-spatial one. The loss
+enters total optimisation only through a coefficient (\texttt{jepa-coef} $0.5$); crucially
+it \emph{does not change the memory}, which stays a continuous xLSTM and is never itself
+softmaxed. The prototype-softmax with centring and sharpening supplies the anti-collapse
+machinery that, as Section~\ref{sec:jepa-negatives} shows, a naive latent loss lacks.
+
+The diagnostic for whether the auxiliary is doing real work is the trajectory of the JEPA
+loss. A loss that stays flat means the auxiliary never engages; a loss that drops to
+$\approx0$ means representational collapse to a constant; a loss that descends to a healthy
+non-zero plateau means structured, non-degenerate predictive learning. On the
+frozen-colour-VAE control --- the exact paper network with the auxiliary bolted on --- the
+auxiliary is a pure add-on and is not load-bearing: both feedback wirings reach $\sim0.85$
+training rolling correct (peak $\sim0.90$) whether or not the JEPA engages, and \emph{whether
+it engages at all is set by the feedback wiring}. Under cross-attention feedback the loss
+falls $\sim3.7\times$ (first-200 mean $5.35\to$ late-200 mean $1.24$); under FiLM feedback it
+sits inert ($5.32\to4.99$) --- though this FiLM run stopped early at $16{,}385$ of a
+configured $50{,}000$ iterations, so its inertness is partly confounded with training length.
+With perception already solved by the frozen VAE, the auxiliary neither helps nor hurts. Its
+value appears only where there is no frozen VAE to solve perception for it.
+
+Table~\ref{tab:jepa} summarises every variant studied in this chapter; the two routes that
+make pixel-level learning work (Sections~\ref{sec:jepa-resultA} and \ref{sec:jepa-resultB})
+and the three negatives that fence the recipe (Section~\ref{sec:jepa-negatives}) are
+developed below.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lllllrrll@{}}
+\toprule
+Model & Front-end & Feedback & JEPA flavour & Env & $d_{\text{mem}}$ & Iters & Rolling correct & Status \\
+\midrule
+paper\_jepa\_vae & frozen colour VAE & FiLM & proto-softmax & vda4 T7 & 1024 & 16385 & 0.846 (peak 0.90) & works (JEPA inert) \\
+paper\_jepa\_vae & frozen colour VAE & crossattn1 & proto-softmax & vda4 T7 & 1024 & 49999 & 0.863 (peak 0.90) & works (JEPA engaged) \\
+paper\_jepa\_fr\_novae & pixel (no VAE) & crossattn1 & proto-softmax & vda4 FR$\times$5 & 1024 & 33674 & 0.862 (final 0.895) & works \\
+paper\_jepa\_fr\_novae & pixel (no VAE) & crossattn1 & proto-softmax & vda4 FR$\times$5 & 512 & 21240 & 0.807 (final 0.765) & works \\
+paper\_jepa\_fr\_novae & pixel (no VAE) & crossattn1 & proto-softmax & vda4 FR$\times$5 & 256 & 15981 & 0.828 (final 0.848) & works \\
+paper\_jepa\_fr\_novae & pixel (no VAE) & crossattn1 & proto-softmax & vda4 FR$\times$5 & 128 & 15327 & 0.828 (final 0.820) & works \\
+paper\_jepa\_conv & SE-ResNet conv & crossattn1 & proto-softmax & vda4 T7 & 128 & 12989 & 0.870 (greedy 0.865) & works \\
+paper\_jepa\_conv & SE-ResNet conv & affine\_ew & proto-softmax & vda4 T7 & 128 & 6662 & 0.867 (greedy $\sim$0.83) & works \\
+paper\_jepa\_grid9 & SE-ResNet conv & crossattn1 & proto-softmax & vda9 3$\times$3 & 128 & $\sim$361 & 0.65 (final 0.695) & mid-training \\
+paper\_jepa\_grid9 & SE-ResNet conv & affine\_ew & proto-softmax & vda9 3$\times$3 & 128 & $\sim$353 & 0.74 (final 0.803) & mid-training \\
+paper\_jepa\_smem & pixel (no VAE) & crossattn1 & softmax-as-memory & vda4 FR$\times$5 & 1024 & 4211 & 0.003 (collapse) & failed \\
+affine2lstm\_jepa & conv 4$\times$4, no VAE & matrix-affine & SmoothL1 latent & vda T7 & H2 cell & 18749 & 0.498 (chance) & collapsed \\
+paper\_affine2lstm\_vae & conv 4$\times$4, VAE & matrix-affine & none (VAE ctrl) & vda T7 & H2 cell & 12196 & 0.496 (chance) & collapsed \\
+\bottomrule
+\end{tabular}
+\caption{V-JEPA self-distillation variants. Rolling correct is the late-window training
+rolling-correct mean unless a greedy-eval number is noted; greedy figures are held-out
+(paper\_jepa\_conv only). The grid9 rows are mid-training (a few hundred iterations) and
+report the last-200 mean (final in parentheses). No greedy-eval artifact exists for any run
+except paper\_jepa\_conv crossattn1.}
+\label{tab:jepa}
+\end{table}
+
+\section{Result A: learning from raw pixels via frame-repeat}
+\label{sec:jepa-resultA}
+The first route to a working pixel front-end gives the recurrence \emph{time to integrate}.
+The cross-attention paper network is trained from raw pixels with no pretrained or frozen
+VAE --- a standard linear patch-embed, one token per $2\times2$ cell --- with each logical
+frame repeated five times, so the seven logical steps become $35$ physical steps (cue at
+logical step $1$, change at logical step $5$, i.e.\ physical step $25$). With the V-JEPA
+auxiliary engaged, this is one of the very few configurations in the program that learns the
+change-detection task directly from pixels.
+
+At $d_{\text{mem}}=1024$ the network reaches $0.895$ final and $0.862$ late-200-mean training
+rolling correct, with the JEPA loss descending from $4.563$ to $0.458$ --- engaged, and not
+collapsed to zero. A $d_{\text{mem}}$ sweep (1024/512/256/128) confirms the auxiliary engages
+at every width (end-loss $0.458$/$0.762$/$0.526$/$0.516$) and that accuracy is
+\emph{non-monotonic} in memory size: by late-200 mean the order is $d1024\,(0.862)>d256\,
+(0.828)\approx d128\,(0.828)>d512\,(0.807)$. The widest memory is best and $512$ worst, but
+the trend is not ``bigger is better'' --- consistent with a low-bandwidth task and with the
+shorter runs ($d256$/$d128$ at $\sim15$--$16$k iterations versus $d1024$ at $\sim34$k) being
+the least converged. All figures here are \emph{training rolling-correct}; no held-out
+greedy-eval artifact exists for these runs.
+
+The contrast with Chapter~\ref{ch:perception} is the point. A from-scratch VAE collapses on
+the \emph{short, non-frame-repeated} seven-step task; the same family learns from pixels once
+the held frames give the recurrence physical integration time and the JEPA shapes the
+recurrent representation. The mechanistic signature of this route is \emph{diffuse,
+recurrence-centric attention} (Fig.~\ref{fig:jepa-fr}): the cross-attention weights are
+near-uniform across image and memory keys, with the only consistent structure a transient
+per-query cue read on the cue frame; there is no change-lock at any $d_{\text{mem}}$. Change
+detection lives in the LSTM recurrence, not in the attention weights.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.78\linewidth]{fr_attn_memory.png}
+\caption{\textbf{The frame-repeat pixel route is recurrence-centric.} Memory-key
+cross-attention across the $35$ physical frames for the no-VAE frame-repeat model. The
+allocation is near-uniform; the only structure is a transient cue-frame read. There is no
+change-lock at any memory width --- detection is carried by the recurrent cell, not the
+attention weights.}
+\label{fig:jepa-fr}
+\end{figure}
+
+\section{Result B: the convolutional front-end and its sharp covert-cueing algorithm}
+\label{sec:jepa-resultB}
+The second route gives the network a \emph{capable per-frame encoder} instead of integration
+time. A small SE-ResNet convolutional front-end ($\sim594$K parameters, trained end-to-end,
+no VAE checkpoint) processes each $25\times25\times3$ patch through a $3\times3$ stem and
+three squeeze-excite residual stages (GroupNorm, SiLU, downsample $25\to13\to7$, channels
+$32\to64\to128$), global-average-pools, and emits a $128$-d embedding; the token is
+$[\text{emb}_{128}\,\|\,\text{pos}_4\,\|\,\text{temporal}_8]=140$-d. On the plain seven-step
+task ($\text{frame\_repeat}=1$, $d_{\text{mem}}=128$) with cross-attention feedback, the JEPA
+loss descends from $\sim5.07$ (first-20 mean) to $\sim1.99$ (last-200 mean), a healthy
+non-zero plateau, and the network reaches $0.8425$ final / $0.8695$ last-200-mean training
+rolling correct. A held-out greedy evaluation at iteration $9{,}599$ (not the final iteration
+$12{,}989$) gives correct $0.865$, hit $0.76$, correct-rejection $0.96$, false-alarm
+$0.044$, reaction time $5.1\pm0.3$ --- a conservative detector and the only JEPA variant with
+a measured greedy number.
+
+Because a strong per-frame encoder solves perception without frame-repeat, the network can
+afford an \emph{attention-driven} strategy, and the full mechanism is legible.
+\textbf{Psychometric cueing} (Fig.~\ref{fig:jepa-psych}): forced detection rises with change
+magnitude and saturates by $44^\circ$; validly cued changes are detected at lower magnitude
+than invalid (P(detect) at $16^\circ$ $=0.58$ valid vs $0.43$ invalid; at $28^\circ$ $=0.99$
+vs $0.94$), a classic left-shift cueing benefit driven by the spatial cue, not the displayed
+validity ring. \textbf{Frame-gating} (Fig.~\ref{fig:jepa-framegate}): cross-attention reads
+the image essentially only on the cue frame ($t{=}1$, image-key attention near ceiling) and
+runs from memory on every Gabor/change frame (image-key $\approx0$); the current image is
+never lost because it enters the cell via the residual $X^{(t)}$. \textbf{Cue-frame read}:
+the three non-cued queries place $\sim1.00$ of their attention on the cued image patch,
+broadcasting the cue to all four tokens. \textbf{Cue-timed memory change-lock}
+(Fig.~\ref{fig:jepa-lock}): valid changes lock at $t{=}5$ (cue@S1 $+0.20$, cue@S4 $+0.24$)
+and strongly at $t{=}6$ ($+0.75$, $+0.74$); invalid changes show \emph{no} lock at $t{=}5$
+($-0.03$, $-0.02$) and lock only at $t{=}6$ ($+0.70$, $+0.69$) --- the cue buys one frame of
+attentional latency, the attentional analogue of the behavioural cueing benefit.
+\textbf{Validity/value invariance}: attention allocation is invariant to cue validity
+(proportion $0.25$--$1.0$) and cue value (colour); validity and value act downstream at the
+decision, a deployment-versus-use dissociation. \textbf{Temporal decoding}
+(Fig.~\ref{fig:jepa-decode}): a four-fold cross-validated logistic probe on $\text{vec}(H)$
+decodes cue position and value perfectly ($1.00$) from $t{=}1$, while change presence/location
+is at chance until the change, then rises to $0.88$/$0.97$ at $t{=}5$ and $0.98$/$0.99$ at
+$t{=}6$ --- change is localised in the recurrence at $t{=}5$, one frame before the
+invalid-condition attention lock at $t{=}6$, so ``recurrence computes, attention reflects.''
+\textbf{Causal memory read} (Fig.~\ref{fig:jepa-causal}): additively suppressing the cued
+memory token costs little (P(detect) at $16^\circ$ $0.57\to0.47$); suppressing all four costs
+more at high magnitude ($0.98\to0.84$ at $28^\circ$) but does not abolish detection, because
+the changed Gabor rides in on the residual $X^{(t)}$. The memory read refines the decision by
+$\sim0.1$--$0.15$; it is not the primary change-signal carrier.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.62\linewidth]{dd4_psychometric.png}
+\caption{\textbf{Psychometric cueing benefit.} P(declare change) versus change magnitude for
+validly and invalidly cued changes. Valid cueing left-shifts the curve (e.g.\ $0.58$ vs
+$0.43$ at $16^\circ$), saturating by $44^\circ$ --- the behavioural signature of covert
+spatial attention.}
+\label{fig:jepa-psych}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.72\linewidth]{dd2_framegate.png}
+\caption{\textbf{Frame-gated attention.} Summed image-key cross-attention by frame. The
+network reads the image only on the cue frame ($t{=}1$) and runs from memory thereafter; the
+live image is preserved on the residual.}
+\label{fig:jepa-framegate}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{dd2_maps_memory.png}
+\caption{\textbf{Cue-timed memory change-lock.} Memory-key attention maps across frames.
+Validly cued changes lock onto the changed location one frame earlier ($t{=}5$) than invalid
+($t{=}6$) --- the attentional analogue of the behavioural cueing benefit.}
+\label{fig:jepa-lock}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.62\linewidth]{dd5_decoding.png}
+\caption{\textbf{Temporal decoding of the recurrent state.} Cross-validated balanced accuracy
+of a logistic probe on $\text{vec}(H)$. Cue position/value are decodable from $t{=}1$; change
+presence/location become decodable at $t{=}5$, one frame before the invalid-condition
+attention lock --- recurrence computes, attention reflects.}
+\label{fig:jepa-decode}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.62\linewidth]{dd5_causal.png}
+\caption{\textbf{Causal perturbation of the memory read.} Additively suppressing memory
+tokens on validly cued trials lowers detection modestly but does not abolish it: the changed
+Gabor enters on the residual, so the memory read refines rather than carries the change
+signal.}
+\label{fig:jepa-causal}
+\end{figure}
+
+An element-wise-affine feedback variant (modulation $X'=\gamma(H)\odot X+\beta(H)$ then
+self-attention over the four image patches, no separate memory-key column) reaches comparable
+accuracy ($0.8625$ final / $0.8669$ last-200-mean rolling; greedy $\sim0.83$ at an early
+iteration $4{,}199$) but solves the task differently: its change-lock is \emph{bottom-up},
+locking onto the changed patch on the change frame for both valid ($1.00$) and invalid
+($0.92$) changes --- any large orientation step pulls attention --- which predicts a smaller
+cueing benefit. Its attention schedule is orient/release/re-acquire/lock (cued-patch attention
+$0.73$ at cue, chance $0.22$ at blank, re-acquiring to $0.80$, saturating $1.0$ at a cued
+change). It retains cue position and value at ceiling but \emph{perceives-then-discards} the
+validity ring (decoded $0.99$ at $t{=}1$, collapsing to chance by Gabor onset $t{=}3$), the
+mechanistic reason its behaviour cannot scale with validity. The two variants are opposite
+poles of the same front-end: a memory-timed cueing lock versus a bottom-up salience grab.
+
+\section{Informative negatives: what fences the recipe}
+\label{sec:jepa-negatives}
+Three negatives establish that the recipe is specific, not a generic ``add a JEPA'' fix.
+
+\textbf{Softmax-as-memory fails.} Externalising the student's per-head softmax $S$
+($4\times256=1024$-d) \emph{as} the recurrent memory --- so the same categorical simplex feeds
+the cross-attention keys/values, the actor/critic readout, and the JEPA target --- kills task
+learning on the no-VAE pixel frame-repeat task. The policy collapses: training rolling correct
+peaks early at $0.453$ then decays monotonically to $0$ (late-200 mean $0.0029$). Critically,
+the auxiliary itself trains fine (JEPA loss $4.55\to0.48$, a $\sim10\times$ drop, no collapse
+to zero), so the failure is a clean dissociation: the representation learns while the policy
+fails. A categorical probability simplex is too narrow a working-memory bottleneck; the
+continuous cell must remain the working representation.
+
+\textbf{Plain latent-regression JEPA collapses.} A simple SmoothL1 latent-regression auxiliary
+(student projects $H2_t$ to predict EMA-teacher $H2_{t{+}1}$; no prototypes, no centring, no
+sharpening) on a matrix-affine two-LSTM network exhibits the textbook latent collapse: the loss
+falls from $0.489$ to $\sim0.11$ early in training, reaches a minimum of $0.00118$, and pins
+near zero (late-2000 mean $0.0828$). With the predictor finding a near-constant target, the
+auxiliary supplies no task signal and the policy sits at chance (late-200 mean rolling correct
+$0.4975$, final $0.465$). This is the direct justification for the prototype-softmax/DINO-style
+machinery in Results~A and~B: the anti-collapse apparatus is what makes the predictive
+auxiliary useful.
+
+\textbf{The collapse is the wiring, not the stabiliser.} The same matrix-affine two-LSTM
+network collapses to always-wait chance under a \emph{VAE} as well (late-200 mean rolling
+correct $0.4963$, final $0.45$). The JEPA did not rescue a wiring that fails regardless of
+front-end stabiliser, so the fault is the matrix-affine two-LSTM feedback itself --- not
+``affine'' in general, since the element-wise affine variant of Result~B reaches $\sim0.86$.
+The negatives jointly localise the requirements: a continuous working memory, genuine
+anti-collapse machinery in the auxiliary, and a feedback wiring that learns at all.
+
+\section{Set-size-9 generalization (in progress)}
+The conv-JEPA recipe is being carried from the four-stimulus $2\times2$ grid to a harder
+nine-stimulus $3\times3$ grid (vda9: $75\times75$ image, coloured value cue, validity ring,
+cue positions top-left/bottom-right). Both feedback wirings are above chance early and still
+climbing. As of the current frontier (cross-attention at $\sim361$ iterations, element-wise
+affine at $\sim353$), training rolling correct is $0.65$ (last-200 mean; $0.695$ final) for
+cross-attention and $0.74$ (last-200 mean; $0.803$ final) for element-wise affine; the affine
+variant showed an early JEPA descent (minimum $\sim2.46$ near iteration $94$) but the loss has
+since risen back toward $\sim3.4$, so auxiliary engagement is not yet established for either
+wiring at this set size. These are early, non-converged numbers --- a flat-looking curve this
+early is not a ceiling --- so the result is reported as preliminary evidence that the no-VAE
+conv-JEPA recipe transfers to the larger set size, not as a final accuracy.
+
+\section{Cross-cutting lesson: architecture sets the attention strategy}
+The two working routes reach comparable competence by opposite mechanisms, and the difference
+is set by the \emph{perceptual front-end and the task temporal structure, not by memory size}.
+A strong per-frame convolutional encoder (Result~B) lets the network afford an attention-driven
+solution: a sharp, frame-gated algorithm that orients to the cue once, encodes it, monitors
+from memory, and re-points to a change, with a cue-timed memory lock that yields a one-frame
+attentional cueing benefit. Learning from held raw pixels (Result~A) instead yields a diffuse,
+recurrence-centric solution in which the attention weights carry little structure and detection
+lives in the LSTM. The $d_{\text{mem}}$ sweep confirms memory width is not the lever: accuracy
+is non-monotonic in it. This sharpens the Chapter~\ref{ch:attention} reading that what carries
+the computation --- attention versus recurrence --- is decided upstream of the memory.
+
+For Chapter~\ref{ch:recommendation}, the consequence is a qualification, not a reversal. The
+frozen pretrained VAE remains the simplest, most reliable, and best-characterised way to satisfy
+the perception requirement, and remains the right default for the empirical manuscript. But the
+requirement is now correctly stated as \emph{a front-end that reliably encodes the task
+variable}, which can be met either by a frozen pretrained VAE \emph{or} by a self-supervised
+predictive auxiliary (with proper anti-collapse machinery) paired with an enabler --- frame-
+repeat or a capable conv encoder. The neuro relevance reinforces why this matters:
+predict-the-future-latent self-supervision is arguably a more biologically plausible route to a
+working visual front-end than supervised reconstruction-pretraining, so the JEPA route is not
+merely an engineering alternative but the more defensible model of how a cortical front-end might
+come to see.

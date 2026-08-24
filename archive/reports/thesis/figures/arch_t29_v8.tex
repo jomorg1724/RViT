@@ -1,0 +1,69 @@
+% v8 — CROSS-ATTENTION with an H1 RESIDUAL (no unattended visual bypass).
+% Same cross-attention as v5_part2 (Q=X, K=V=[X || H1 || H2], 3N keys) EXCEPT the residual
+% added to the attended output is the PREVIOUS-FRAME memory H1, NOT the image X. Visual
+% information can therefore flow ONLY through the attended VALUES — there is no unattended
+% visual bypass (the defining feature of v8).
+% Convention: conv patch-embed front-end at left; cross-attention in the middle (variable
+% part); two stacked spatial xLSTMs + a 1D-conv readout + heads at right. Solid black =
+% forward dataflow; dashed red = recurrent feedback from frame t-1. LSTM1 carries H1
+% (supplies the RESIDUAL into (+) and the H1 half of K,V); LSTM2 carries H2 (the H2 half
+% of K,V; read by the heads through a 1D-conv).
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end: convolutional patch-embed (T=29 family) -----------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt]
+        (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $50{\times}50$}};
+  \node[vae,right=of patch,align=center] (conv) {conv patch-embed\\(3 conv)};
+  \node[tok,right=8mm of conv,align=center] (X) {$X$\\[-1pt]{\tiny 100 tok ($10{\times}10$)}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block (THE distinguishing part) -------------------------------------
+  \node[attn,right=15mm of X,minimum width=24mm,minimum height=12mm] (sa)
+        {Cross-\\attention\\{\tiny 8 heads}};
+  % (+) operator: attended values combined with the H1 residual (NOT X)
+  \node[op,right=9mm of sa] (plus) {$+$};
+  % K,V merge node: image X concatenated with memory tokens H1,H2 (3N keys)
+  \node[op,above=5mm of sa] (kv) {$\|$};
+  \node[lbl,above=0.4mm of kv,font=\tiny] {$K,V$ \,({\scriptsize $3N$})};
+  \node[lbl,below=1.4mm of sa,align=center,font=\tiny]
+        {$Q{=}X$, \ $K{=}V{=}[X\,\|\,H_1\,\|\,H_2]$\\[1pt]
+         $Z{=}H_1+\mathrm{softmax}(QK^{\!\top}/\sqrt d)V$};
+  % ---- two stacked memories + readout (single horizontal band) -----------------------
+  % LSTM1 -> H1 (residual + K,V half, fed back); LSTM2 -> H2 (K,V half; read by heads).
+  \node[mem,above right=2mm and 10mm of plus,align=center] (lstm1) {spatial\\xLSTM$_1$};
+  \node[mem,below right=2mm and 10mm of plus,align=center] (lstm2) {spatial\\xLSTM$_2$};
+  \node[tok,right=9mm of lstm2,align=center,minimum width=13mm] (conv1d)
+        {1D-conv\\readout\\{\tiny ($H_2$)}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=0mm and 7mm of conv1d,align=center] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=0mm and 7mm of conv1d,align=center] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(conv); \draw[flow] (conv)--(X);
+  \draw[flow] (X)--(sa);                                          % image -> attention (Q + into K,V)
+  \draw[flow] (sa)--(plus) node[midway,above=0.5mm,font=\tiny] {att};
+  \draw[flow] (plus.east) -- ++(4mm,0) |- (lstm1.west);          % Z -> LSTM1
+  \draw[flow] (plus.east) -- ++(4mm,0) |- (lstm2.west);          % Z -> LSTM2
+  \draw[flow] (lstm2)--(conv1d) node[midway,above,font=\tiny] {$H_2$};
+  \draw[flow] (conv1d.east)-- ++(3mm,0) |- (actor.west);
+  \draw[flow] (conv1d.east)-- ++(3mm,0) |- (critic.west);
+  % ---- Q,K,V construction ------------------------------------------------------------
+  \draw[qkv] (X.north) |- (kv.west);                             % image tokens into K,V (and Q)
+  \node[lbl,left=0.5mm of kv,font=\tiny,xshift=-1mm] {$X$};
+  % ---- recurrence + feedback (dashed red, from frame t-1) ----------------------------
+  % THE DEFINING FEATURE: H1 (not X) is the residual into (+); the only visual info reaching
+  % Z is the attended V — there is no unattended visual bypass.
+  \draw[fb] (lstm1.south west) .. controls +(-4mm,-6mm) and +(0,7mm) .. (plus.north);
+  \node[lbl,above=7mm of plus,align=center,font=\tiny,text=Red!70,xshift=-1mm]
+        {residual $=H_1$\\(no visual bypass)};
+  % H1 supplies one memory half of K,V (curves up-left from LSTM1).
+  \draw[fb] (lstm1.north) .. controls +(0,11mm) and +(0,15mm) .. (kv.north east)
+        node[pos=.62,above,font=\tiny,text=Red!70] {$H_1^{\,t-1}\!\to K,V$};
+  % H2 supplies the other memory half of K,V (curves down and around to the attention block).
+  \draw[fb] (lstm2.south) .. controls +(0,-9mm) and +(0,-9mm) .. (sa.south east)
+        node[pos=.42,below,font=\tiny,text=Red!70] {$H_2^{\,t-1}\!\to K,V$};
+  % carry the two memories across frames.
+  \draw[fb] (lstm1.east) .. controls +(6mm,0) and +(6mm,0) .. (lstm1.south east)
+        node[pos=.5,right,font=\tiny,text=Red!70] {carry $H_1$};
+  \draw[fb] (lstm2.west) .. controls +(-4mm,-6mm) and +(-4mm,6mm) .. (lstm2.north west)
+        node[pos=.5,left,font=\tiny,text=Red!70] {carry $H_2$};
+\end{tikzpicture}

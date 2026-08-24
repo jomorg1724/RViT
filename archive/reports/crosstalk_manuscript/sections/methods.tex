@@ -1,0 +1,71 @@
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Patch front-end}
+Each $50\times50\times3$ frame is partitioned into a grid of square patches. For the
+main architectural comparison the image is divided into a $10\times10$ grid of $5\times5$
+patches ($N=100$ tokens); set-size and other variants use a grid matched to the stimulus
+array (Section~\ref{sec:env}). Each patch is embedded by a shared per-patch network into a
+$d=128$-dimensional token and augmented with learned positional and temporal codes. A
+variational-autoencoder front-end \citep{kingma2014autoencoding} may optionally pre-encode
+the raw patches; in the configurations reported here a lightweight learned embedding is
+trained end-to-end with the agent. Information flows between spatial locations only through
+the attention mechanism; the recurrent memories are otherwise updated per token.
+
+\subsection{Recurrent cross-attention encoder}
+The encoder maintains two per-token recurrent memories $\Hone,\Htwo \in
+\mathbb{R}^{N\times d}$, advanced by independent LSTM cells \citep{hochreiter1997long,
+beck2024xlstm}. On each frame the two pathways of Equations~\eqref{eq:mu}--\eqref{eq:q} are
+computed as single-head, pre-norm cross-attention blocks (Equation~\ref{eq:block}) whose
+queries are the current image tokens and whose key/value bank and residual are as specified
+per configuration (Section~\ref{sec:configs}); a shared positional embedding is added to the
+memory keys, and the two memory sources entering the $\mu$ pathway's key/value bank are
+source-tagged so that attention can distinguish $\Hone$ from $\Htwo$. The memories are then
+updated by Equation~\eqref{eq:mem}. The three configurations differ only in the key/value
+bank, residual and readout routing; the parameter count is held fixed across them.
+
+\subsection{Actor--critic reinforcement learning}
+The actor and distributional critic are one-dimensional-convolutional heads over the token
+axis, reading the encoder streams as specified by Equation~\eqref{eq:heads}. The actor emits
+a wait/declare logit pair; the critic estimates a quantile distribution over returns
+\citep{dabney2018distributional, bellemare2017distributional}. Training uses an offline
+actor--critic objective: the actor loss is a maximum-a-posteriori policy-improvement term
+\citep{abdolmaleki2018maximum, springenberg2024offline} blended with a behaviour-cloning
+term, and the critic is trained with a quantile-Huber loss against a distributional Bellman
+target. A periodically hard-copied target network supplies both the critic's bootstrap target
+and the policy-improvement reference. Episodes are stored in a prioritised replay buffer
+\citep{schaul2016prioritized}, with priorities set by the per-episode quantile error, and a
+brief forced-wait warm-up trains the critic on full trajectories before the actor begins to
+act. Discounting uses $\gamma$; learning rate, replay parameters and update counts are held
+fixed across the three configurations and reported in Table~\TODO{tab:hparams}.
+
+\subsection{Task parameters}
+Stimuli are hard-windowed oriented patches whose orientations are corrupted by frame-to-frame
+Gaussian noise to control difficulty; the change magnitude $\Delta$ is drawn per change trial
+and reduced over training by a performance-gated curriculum. Half of trials are change trials.
+The cue is presented on a single early frame and removed; the change, when present, occurs at a
+jittered time and persists. Reward is delivered for hits (scaled by the cue-colour value in the
+base task; uniform in the set-size variant) and for correct rejections. Exact timing, noise and
+reward values are listed in Table~\TODO{tab:task}.
+
+\subsection{Evaluation and analysis}
+Each trained configuration is evaluated on 500 fresh episodes under a stochastic policy and
+scored by signal-detection category (hit, miss, false alarm, correct rejection), from which we
+compute accuracy, hit and false-alarm rates, sensitivity $d'$ and criterion $c$, and reaction
+time on hits \citep{green1966signal, macmillan2004detection}. The cueing analysis splits hit
+rate by cue reliability and by cued/uncued change location; psychometric functions are fit with
+a four-parameter logistic and summarised by threshold, slope, guess and lapse parameters, with
+Bayesian credible intervals \citep{wichmann2001psychometric}. The \emph{pathway-dissociation}
+analysis (Section~\ref{sec:discussion}) trains linear decoders on each stream's output at the
+change frame to predict change-evidence and value/context variables; the \emph{causal-
+perturbation} analysis clamps the attention weights of a chosen pathway at the change frame and
+measures the effect on behaviour (for the $\mu$ pathway) and on the critic's value estimate (for
+the $q$ pathway). Attention maps are read directly from the cross-attention weights, one value
+per stimulus token, and averaged across trials within condition.
+
+\subsection{Reproducibility}
+The three configurations of the central comparison correspond to internal model identifiers
+\texttt{v11\_part2} (shared memory / cross-talk), \texttt{v11\_part4} (independent), and
+\texttt{v11\_part3} (swapped routing); the distractor variant is \texttt{v11\_part5} and the
+set-size variant is \texttt{setsize9}. Code, configurations and trained checkpoints are
+available at \TODO{repository URL}.

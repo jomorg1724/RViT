@@ -1,0 +1,124 @@
+\section{The model}
+\label{sec:model}
+
+\subsection{Overview}
+The agent is a recurrent vision transformer trained by reinforcement learning to
+emit a binary decision (\emph{wait} or \emph{declare change}) on each frame of a
+spatially cued orientation-change-detection task (Section~\ref{sec:env}). Three
+components are connected in a loop (Figure~\TODO{fig:model}). (1) A patch
+front-end parses each frame into a set of spatial tokens. (2) A recurrent
+cross-attention encoder integrates the current tokens with two per-token recurrent
+memories, maintained by long short-term memory (LSTM) cells across frames
+\citep{hochreiter1997long, beck2024xlstm}. (3) An actor--critic reinforcement-
+learning module reads the encoder output to select an action and estimate value.
+The defining feature of the architecture is that the self-attention is
+\emph{recurrent}: attention at each frame is computed not only from the immediate
+image but from the contents of a capacity-limited spatial working memory, so that
+the cue, shown briefly and then removed, can be maintained and used to bias later
+processing \citep{awh2006interactions, panichello2021attvwm, knudsen2007fundamental}.
+
+The encoder is organised into two parallel pathways. The \emph{$\mu$ pathway} is
+grounded in the live image and feeds the actor (policy); the \emph{$q$ pathway} is
+grounded in accumulated memory and feeds the critic (value). The remainder of this
+section gives the precise form of the two pathways and the three structural
+configurations we compare.
+
+\subsection{Patch tokens and recurrent memories}
+Each $50\times50$ frame $\mathbf{O}^{(t)}$ is divided into a grid of non-overlapping
+patches, each embedded by a shared per-patch network and tagged with positional and
+temporal codes, yielding a set of tokens
+$\Xt^{(t)} = \{\mathbf{x}^{(t)}_i\}_{i=1}^{N}$ with $\mathbf{x}^{(t)}_i \in
+\mathbb{R}^{d}$. Two recurrent memories are carried as per-token hidden states (one
+slot per patch location), $\Hone^{(t)},\Htwo^{(t)} \in \mathbb{R}^{N\times d}$,
+updated frame to frame by independent LSTM cells. $\Hone$ is a fast sensory trace
+written from the raw image; $\Htwo$ is a deep trace written from the policy
+pathway's own output (below). The two memories play asymmetric roles --- $\Hone$
+keeps a recent record of the visual input, $\Htwo$ accumulates the task-relevant
+state on which both the decision and its valuation depend.
+
+\subsection{The two cross-attention pathways}
+Each pathway is a single-head, pre-norm cross-attention block in which the
+\emph{queries} are supplied by the current image tokens and the \emph{keys and
+values} are supplied by memory. Writing $\mathrm{Attn}(Q;K)=\mathrm{softmax}
+\!\left(QK^{\top}/\sqrt{d}\right)V$ with $V$ tied to $K$, a residual $R$, and a
+position-wise feed-forward block $\mathrm{FFN}$, a block computes
+\begin{equation}
+\mathbf{Z} \;=\; R \;+\; \mathrm{Attn}\big(\Xt;\,\mathrm{KV}\big), \qquad
+\mathbf{Z} \;\leftarrow\; \mathbf{Z} + \mathrm{FFN}(\mathbf{Z}).
+\label{eq:block}
+\end{equation}
+The two pathways differ in their key/value bank and residual:
+\begin{align}
+\text{($\mu$ pathway, $\to$ actor):}\quad
+  \Zmu^{(t)} &= \mathrm{block}\big(\Xt^{(t)};\ \mathrm{KV}=[\Hone^{(t)}\!\parallel\!\Htwo^{(t)}],\ R=\Xt^{(t)}\big),
+  \label{eq:mu}\\[2pt]
+\text{($q$ pathway, $\to$ critic):}\quad
+  \Zq^{(t)} &= \mathrm{block}\big(\Xt^{(t)};\ \mathrm{KV}=\Htwo^{(t)},\ R=\Htwo^{(t)}\big).
+  \label{eq:q}
+\end{align}
+The $\mu$ pathway queries \emph{both} memories (concatenated along the token axis,
+each source tagged), and carries the raw image on its residual: it is the
+grounded, image-reading stream, and its decision can therefore reflect live
+visual evidence. The $q$ pathway queries only the deep memory $\Htwo$ and carries
+$\Htwo$ on its residual: the image can only \emph{re-weight} the stored state, a
+memory-grounded bottleneck appropriate to a contextual value estimate. The memories
+are then advanced,
+\begin{equation}
+\Hone^{(t+1)} = \mathrm{LSTM}_1\!\big(\Xt^{(t)},\Hone^{(t)}\big), \qquad
+\Htwo^{(t+1)} = \mathrm{LSTM}_2\!\big(\Zmu^{(t)},\Htwo^{(t)}\big),
+\label{eq:mem}
+\end{equation}
+so that $\Hone$ is written from the raw image and $\Htwo$ is written from the
+\emph{policy pathway's} output $\Zmu$. Finally the heads read the two streams with a
+\emph{split readout}: the actor reads $\Zmu$ and the (distributional) critic reads
+$\Zq$,
+\begin{equation}
+\pi^{(t)} = \mathrm{Actor}(\Zmu^{(t)}), \qquad
+Q^{(t)} = \mathrm{Critic}(\Zq^{(t)}),
+\label{eq:heads}
+\end{equation}
+with the scalar value $V^{(t)}$ derived from the critic's quantile distribution
+under the current policy (Section~\ref{sec:methods}).
+
+\subsection{The locus of coupling}
+The coupling between policy and value lives in $\Htwo$. The actor's pathway
+\emph{writes} $\Htwo$, through $\Zmu$ in Equation~\eqref{eq:mem}, and \emph{reads}
+it back, inside the concatenated bank of Equation~\eqref{eq:mu}; the critic's
+pathway \emph{reads} the same $\Htwo$ in Equation~\eqref{eq:q}. The two heads are
+separated, but they sit on a shared, jointly maintained recurrent memory. This
+single shared register --- a common ``workspace'' that the evaluative and the
+decision systems both read from and the decision system writes to --- is the
+structural variable we manipulate.
+
+\subsection{Three pathway configurations}
+\label{sec:configs}
+Holding the front-end, the heads, the parameter budget and the entire training
+recipe fixed, we compare three wirings (Figure~\TODO{fig:configs}).
+
+\paragraph{Configuration~1 --- shared memory (cross-talk).}
+Exactly Equations~\eqref{eq:mu}--\eqref{eq:heads}: two pathways coupled through the
+shared $\Htwo$, with the grounded $\mu$ pathway driving the actor.
+
+\paragraph{Configuration~2 --- independent (no cross-talk).}
+The same two pathway \emph{types}, but each is given its own private memory, updated
+only by its own output:
+\begin{align}
+\Zmu^{(t)} &= \mathrm{block}\big(\Xt^{(t)};\ \mathrm{KV}=\Hmu^{(t)},\ R=\Xt^{(t)}\big), &
+\Hmu^{(t+1)} &= \mathrm{LSTM}_\mu(\Zmu^{(t)},\Hmu^{(t)}),\\
+\Zq^{(t)} &= \mathrm{block}\big(\Xt^{(t)};\ \mathrm{KV}=\HQ^{(t)},\ R=\HQ^{(t)}\big), &
+\HQ^{(t+1)} &= \mathrm{LSTM}_q(\Zq^{(t)},\HQ^{(t)}).
+\end{align}
+The modules never touch each other's state; the only thing they share is the raw
+input image. This is the minimal edit that removes the cross-talk while preserving
+the split, the pathway types, the parameter count and the training recipe.
+
+\paragraph{Configuration~3 --- swapped routing.}
+Architecturally identical to Configuration~1, but the readout is reversed: the $q$
+(memory) pathway drives the actor and the $\mu$ (image) pathway drives the critic.
+This isolates whether it matters \emph{which} pathway commands the policy,
+independent of the presence of coupling.
+
+The three configurations differ only in inter-pathway coupling and readout routing.
+The comparison therefore isolates the causal contribution of organisation, in the
+same spirit as a reversible inactivation experiment
+\citep{wardak2006contribution, lovejoy2010inactivation}.

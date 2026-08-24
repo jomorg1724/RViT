@@ -1,0 +1,29 @@
+% ============================================================================
+% STATUS SECTION — rehearsal is a hypothesis. DelayProbeEnv is implemented, but
+% no trained delay-probe checkpoint or causal delay-clamp result is reported.
+% ============================================================================
+\section{Attention-based rehearsal remains a hypothesis}
+\label{sec:rehearsal}
+
+A long-standing hypothesis holds that spatial working memory is maintained by
+covertly shifting attention toward the memorized location --- the spatial analogue
+of articulatory rehearsal --- so that the usual consequences of spatial attention
+should be measurable at the remembered location during a delay
+\cite{awh_jonides_reuterlorenz1998_rehearsal,awh_jonides2001_overlapping_attention_wm}.
+
+The present model provides observations compatible with this hypothesis but not a
+rehearsal result. It later re-acquires cue-directed attention after the blank, and
+some checkpoints show elevated cued-location activity during a blank frame. No
+cue-location decoder was fitted across the delay, so these are indirect signatures
+compatible with maintenance rather than a decoded maintained-location result. In the
+canonical affine VDA4 trace, however, the measured cued attention share falls near
+the uniform baseline during the blank ($\alpha_c\approx0.22$ versus $0.25$). Neither
+pattern by itself shows that attention is the load-bearing maintenance mechanism.
+
+A delay-probe environment has been implemented, but we found no trained probe
+checkpoint, memorized-location enhancement result, or causal delay-clamp analysis to
+report. The decisive tests remain prospective: compare probe processing at cued and
+uncued locations during the delay, then suppress cued-location attention during that
+period and test whether any probe advantage or later detection benefit is reduced.
+Until those measurements exist, attention-based rehearsal is a hypothesis rather
+than an empirical claim of this manuscript.

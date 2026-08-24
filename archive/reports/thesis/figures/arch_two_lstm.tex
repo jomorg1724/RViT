@@ -1,0 +1,41 @@
+% TWO STACKED xLSTMs (recommended network) — multiplicative attention + two serial memories.
+% Same multiplicative attention as the reference; the ONLY change is TWO stacked xLSTMs:
+% LSTM1: Z->H1 (H1 feeds the attention gate, dashed red); LSTM2: H1->H2; the heads read H2.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block (THE distinguishing part) -------------------------------------
+  \node[attn,right=11mm of X,minimum width=24mm,minimum height=12mm] (sa)
+        {Multiplicative\\self-attention};
+  \node[op,above=3.5mm of sa] (gate) {$\odot$};
+  \node[lbl,below=1.2mm of sa,align=center,font=\tiny]
+        {$Q{=}(XW_{XQ})\!\odot\!(H_1 W_{HQ})$ \ (same $K,V$)\\[1pt]
+         $Z{=}X+\mathrm{softmax}(QK^{\!\top})V$\\[1pt]
+         heads read $H_2$; attention fed by $H_1$};
+  % ---- two stacked memories + readout ------------------------------------------------
+  \node[mem,right=11mm of sa] (lstm1) {spatial\\xLSTM};
+  \node[mem,right=9mm of lstm1] (lstm2) {spatial\\xLSTM\\(2nd)};
+  \node[tok,right=8mm of lstm2,minimum width=12mm] (H) {$H'$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X); \draw[flow] (X)--(sa);
+  \draw[flow] (sa)--(lstm1) node[midway,above,font=\tiny] {$Z$};
+  \draw[flow] (lstm1)--(lstm2) node[midway,above,font=\tiny] {$H_1$};
+  \draw[flow] (lstm2)--(H) node[midway,above,font=\tiny] {$H_2$};
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  \draw[qkv] (X.north) |- (gate.west);                         % image into the gate
+  % ---- recurrence + feedback ---------------------------------------------------------
+  \draw[fb] (lstm1.north) .. controls +(0,9mm) and +(0,9mm) .. (lstm1.north west)
+        node[midway,above,font=\tiny,text=Red!70] {carry $H^{t}\!\to\!H^{t+1}$};
+  \draw[fb] (lstm2.north) .. controls +(0,9mm) and +(0,9mm) .. (lstm2.north west);
+  \draw[fb] (lstm1.south) .. controls +(0,-8mm) and +(0,-8mm) .. (gate.south east)
+        node[pos=.12,below,font=\tiny,text=Red!70] {$H_1^{t-1}$};
+\end{tikzpicture}

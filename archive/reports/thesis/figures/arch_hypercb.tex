@@ -1,0 +1,50 @@
+% HYPERCB — generated (hyper) Q/K weights + a LEARNABLE CODEBOOK supplying the values, no X-residual.
+% Front-end and heads identical to arch_multiplicative.tex; the middle shows: Q=XW_Q, K=XW_K (gen.
+% from a tanh-bottleneck of H), V=codebook (cb node), a=W_o(softmax(QK^T/sqrt d)V), Z=a+FFN(LN(a)),
+% one xLSTM Z->H1, heads read H1. Solid black = forward, dashed red = recurrent feedback (frame t-1).
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block (THE distinguishing part) -------------------------------------
+  \node[attn,right=12mm of X,minimum width=24mm,minimum height=12mm] (sa)
+        {gen.\ self-attn\\{\scriptsize $\mathrm{softmax}(QK^{\!\top}/\sqrt d)\,V$}};
+  % weight-generator bottleneck (b = tanh(bottleneck(H)) -> generates Q,K weights)
+  \node[op,above=4mm of sa] (bn) {$b$};
+  \node[lbl,above=0.3mm of bn,font=\tiny] {$\tanh(\mathrm{bottleneck})$};
+  % learnable codebook supplying the VALUES (cb style)
+  \node[cb,below=6mm of sa,minimum width=20mm] (cb) {codebook $V$\\{\tiny learnable table}};
+  % FFN box after the attention output a (residual a+FFN(LN(a)) folded into the box)
+  \node[attn,right=9mm of sa,minimum width=12mm,minimum height=12mm] (ffn) {$a+$FFN\\{\scriptsize $(\mathrm{LN})$}};
+  \node[lbl,below=1.2mm of cb,align=center,font=\tiny]
+        {$Q{=}XW_Q,\ K{=}XW_K$ (gen.),\ $V{=}\mathrm{codebook}$\\[1pt]
+         $a{=}W_o(\mathrm{softmax}(QK^{\top}/\sqrt d)\,V)$;\ $Z{=}a+\mathrm{FFN}(\mathrm{LN}(a))$};
+  % ---- memory + readout --------------------------------------------------------------
+  \node[mem,right=10mm of ffn] (lstm) {spatial\\xLSTM};
+  \node[tok,right=8mm of lstm,minimum width=12mm] (H) {$H'$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X); \draw[flow] (X)--(sa);
+  \draw[flow] (sa)--(ffn) node[midway,above,font=\tiny] {$a$};
+  \draw[flow] (ffn)--(lstm) node[midway,above,font=\tiny] {$Z$};
+  \draw[flow] (lstm)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  % X provides the generated Q/K weights; codebook provides V; no X-residual into Z
+  \draw[qkv] (X.north) |- (bn.west) node[pos=.7,above,font=\tiny] {gen.\ $W_Q,W_K$};
+  \draw[qkv] (bn) -- (sa) node[midway,right=0.5mm,font=\tiny] {$Q,K$};
+  \draw[qkv] (cb.north) -- (sa.south) node[midway,right=0.5mm,font=\tiny] {$V$};
+  % ---- recurrence + feedback ---------------------------------------------------------
+  \draw[fb] (lstm.north) .. controls +(0,9mm) and +(0,9mm) .. (lstm.north west)
+        node[midway,above,font=\tiny,text=Red!70] {carry $H^{t}\!\to\!H^{t+1}$};
+  \draw[fb] (lstm.south) .. controls +(0,-9mm) and +(0,-9mm) .. (bn.south east)
+        node[pos=.12,below,font=\tiny,text=Red!70] {$H^{t-1}$};
+  % ---- footnote: essentially untrained -----------------------------------------------
+  \node[font=\tiny,text=black!55,below=10mm of cb] {(iter 999, essentially untrained)};
+\end{tikzpicture}

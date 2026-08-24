@@ -1,0 +1,71 @@
+\chapter{Proposed experiments}
+\label{ch:experiments}
+
+The experiments fall into two tracks: the \emph{task-battery expansion} that broadens the
+empirical manuscript (per James's plan), and the \emph{architecture experiments} that close
+the open mechanistic questions. Both run on the recommended network
+(Chapter~\ref{ch:recommendation}) so that results compose.
+
+\section{Track 1 --- the task battery (empirical manuscript)}
+The goal is to show one architecture, one harness, reproducing primate signatures across
+the standard battery --- the direct answer to the first submission's ``limited in scope.''
+
+\paragraph{Visual-discrimination / value-cue (\code{vda4}).} The cue colour sets reward
+magnitude ($5/3/1$). The prediction: behaviour is graded by value as well as by spatial
+validity, and the critic's value estimates are calibrated and ordered by reward. This adds
+the value-direction axis to the spatial-cueing axis and exercises the reward-driven-learning
+differentiator.
+
+\paragraph{Set-size (\code{setsize\{2,4,9\}}).} The nine-stimulus task with five validity
+levels (including an uninformative $0$) tests whether the cueing benefit \emph{grows} with
+set size. This is the empirical bridge to the normative set-size/accidental-hit theory
+(Paper B): the prediction that the uncued-false-alarm benefit trades off at $K=2$ and flips
+positive at $K=4$ should have a behavioural correlate in the model. \textbf{Must be run on
+the canonical architecture}, not the cross-talk variant, and with the frozen VAE.
+
+\paragraph{Reward structure (Luo \& Maunsell).} Sensitivity-versus-criterion sessions after
+Luo \& Maunsell (2018), decomposing performance into $d'$ and criterion. The model should
+reproduce the dissociation between reward-driven sensitivity changes and criterion shifts.
+
+\paragraph{Attend / ignore (Krauzlis).} An uncued change that must be actively ignored. The
+distractor result from \code{v11\_part5} (the distractor is filtered in the decision pathway
+while remaining decodable from sensory memory --- ``seen but not acted upon'') is the
+prediction to replicate on the canonical network.
+
+\paragraph{Discrimination (Baruni, optional).} A discrimination variant to round out the
+battery if the reviewers want a non-detection task.
+
+\section{Track 2 --- the architecture / mechanism experiments}
+\paragraph{The cue-attention question (\emph{done}).} The matched family
+(\code{multiplicative}, \code{dualhead}, \code{two-lstm}, \code{crossattn}, \code{dualmem};
+\code{affine} collapsed) was trained on the frozen-VAE base and the cue-$100\%$ change/
+no-change attention contrast run on each (Chapter~\ref{ch:attention},
+Table~\ref{tab:familyresults}). Outcome: no wiring restores cue-orienting attention on the
+short task; \code{two-lstm} is the best detector and the recommended network. The follow-up
+(O5) is the longer-delay regime test below.
+
+\paragraph{The optic-flow reaction-time test.} Directly compare reaction-time distributions
+of the from-scratch long-task model (predicted late, integrating) against the pretrained-VAE
+short-task model (predicted early, perceiving). This is the falsifiable test of the
+horizon/strategy theory (Chapter~\ref{ch:horizon}) and needs no new training --- only
+analysis of existing checkpoints.
+
+\paragraph{Coupling on the short task.} Replicate the coupling-required result
+(Table~\ref{tab:crosstalk}) on the seven-step task with the frozen VAE, to confirm it
+survives the perception fix and is not an artefact of the long-horizon flow regime.
+
+\paragraph{EMA-versus-hard-copy A/B.} Isolate whether the target-update rule is one of the
+residual differences between our reproduction and the lab's canonical working networks.
+
+\paragraph{The representational and causal dissociations.} On a trained value-task network,
+decode change-evidence versus value/context from the two streams (representational
+dissociation), and run the $\mu$-clamp / $q$-clamp causal battery (decision collapses under
+$\mu$-clamp; value-modulation degrades but detection is spared under $q$-clamp). These are
+the paper-worthy claims of the separate architecture line.
+
+\section{Sequencing and cost}
+The analysis-only experiments (optic-flow reaction time, the matched-family attention
+contrast once checkpoints land) are cheap and come first. The battery retrains are the bulk
+of the compute and should be run one at a time on the available accelerator, reusing the
+single frozen VAE across all of them (Chapter~\ref{ch:perception}). The set-size and value
+tasks are the highest-value additions for the empirical manuscript and should lead.

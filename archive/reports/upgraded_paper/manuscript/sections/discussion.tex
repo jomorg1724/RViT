@@ -1,0 +1,246 @@
+% =====================================================================
+% discussion.tex — upgraded empirical paper.
+% THE model is affine_ew, reported throughout as "the model." No
+% architecture comparison. Numbers taken verbatim from ACT_I_VDA_RESULTS
+% and ACT_II_RESULTS (affine_ew values only). Arc: (1) directly measures
+% criterion, sensitivity, and spatial gating; (2) the attention–
+% working-memory link (read value, deploy, gate sensitivity, rehearse);
+% (3) LIP-like priority map as an honest biological analogy; (4) forward
+% pointers to the open sections; (5) honest limitations.
+% =====================================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+An affine-feedback recurrent vision-transformer architecture with a spatial
+working-memory state, trained with reinforcement plus temporal JEPA self-supervision
+(loss weight $0.5$) to detect a change among cued
+Gabor stimuli, reproduces several functional signatures of primate visual attention
+across a core checkpoint and separately trained task variants and --- through the attention-clamp battery --- takes several
+of its long-standing open questions a step past what behaviour alone can
+resolve. The model orients to a cue, relaxes near baseline during the blank and later
+re-acquires cue-directed attention, gates its own detection sensitivity, shifts
+its decision criterion, and holds a linearly decodable, position-specific memory signal
+after the change. No cue-location decoder was fitted across the delay. These are
+observed signatures of checkpoints optimized jointly by RL and a JEPA auxiliary loss
+(weight $0.5$),
+not hand-specified attention targets. We organise what follows around three claims the
+results support --- that the model directly operationalizes criterion and sensitivity
+effects plus spatial gating, that it exposes interactions between attention and working
+memory, and that the joint architecture is usefully read against a
+counterpart in the parietal priority map --- and then delimit, plainly,
+where the account is incomplete.
+
+\subsection*{Directly measured criterion, sensitivity, and spatial gating}
+
+For twenty-five years the field has carried three competing explanations
+of how attention improves perception: attention enhances the signal
+(gain), it reduces external noise and selects the target more
+efficiently, or it acts at the decision stage by shifting the observer's
+criterion and reducing spatial uncertainty
+\cite{carrasco2011_visual_attention_25y}. The three ``are not mutually exclusive;
+rather, all three are likely to contribute'' \cite{carrasco2011_visual_attention_25y}.
+The present battery does not estimate how much each contributes. Instead, it directly
+measures criterion and sensitivity under the same attention clamp and tests whether an
+injection effect is spatially gated. It contains no dedicated external-noise manipulation,
+so efficient external-noise exclusion remains compatible with the results rather than
+quantitatively isolated.
+
+The spatial-gating result is direct:
+attention added to the monitored patch raises detection, and injecting
+priority onto a patch on no-change trials conjures a false detection ---
+the false-alarm rate rises roughly fourfold, from about $0.03$ to about
+$0.12$, as injection strength grows (Section~\ref{sec:detection}). This
+is an intervention effect in the decision pathway. It is spatially gated:
+injecting priority at the monitored location evokes the false
+percept, whereas injecting at an unmonitored patch does essentially
+nothing (a flat $\sim$$0.05$--$0.10$); the model reads out the location
+it is already selecting, not priority in the abstract
+(Section~\ref{sec:detection}). A cued-versus-uncued benefit is present in
+VDA4, whereas VDA1 has no uncued active item and therefore does not define
+the same spatial contrast. Separately, the low-to-high-validity
+\emph{cued-threshold} changes are $0.148^\circ$, $0.193^\circ$,
+$0.979^\circ$, and $2.207^\circ$ across VDA1/2/4/9. The $2.207^\circ$
+endpoint is not a spatial cued-versus-uncued benefit. These associations are compatible with a noise-limited selector
+\cite{carrasco2011_visual_attention_25y, MullerFindlay1987}, but VDA9 also
+changes grid, token count, readout dimension, validity semantics, and
+training support, and they are not an external-noise test. \emph{Decision criterion}: in the canonical VDA4
+checkpoint, sweeping the nominal clamp from suppression to enhancement
+moves the sampled signal-detection criteria in the liberal direction,
+$c: 1.42 \to -0.60$ (Section~\ref{sec:detection}) --- the textbook
+attentional criterion shift \cite{MullerFindlay1987,posner1980_orienting},
+now produced by an analysis intervention rather than a payoff instruction.
+This monotonic description is local to VDA4; VDA9 reverses at the
+high-clamp end.
+
+The criterion and sensitivity endpoints are both operationalized on the
+\emph{same} clamp. The criterion moves smoothly across the VDA4 sweep;
+sensitivity is load-bearing on attention ---
+suppressing attention collapses $d'$ (to $0.63$/$1.45$ in the
+suppression regime) while natural and enhanced attention restore it (to
+$\sim$$2.0$--$2.7$) (Section~\ref{sec:detection}). These are two directly measured
+responses to the intervention, not a quantitative three-way contribution decomposition.
+They parallel the distinction the
+normalization account of gain predicts at the neural level
+\cite{reynolds_heeger2009_normalization, mcadams_maunsell1999_v4_tuning,
+treue_martinez_trujillo1999_feature_attention} and which psychophysics
+can only reach indirectly. The same contrast appears in a preliminary cued analogue of the
+Luo--Maunsell paradigm: in separately trained reward-regime checkpoints, concentrating value at one
+location moves sensitivity ($\Delta d' = 1.09$ at $\Delta = 18^{\circ}$,
+with a low false-alarm rate of $0.02$) while a global reward that spares
+no location moves the criterion instead (false-alarm rate $0.18$,
+sensitivity change of only $0.59$) (Section~\ref{sec:luomaunsell})
+\cite{luo_maunsell2018_criterion_sensitivity}. That the two levers separate under reward
+structure, and that related quantities separate under a direct attention clamp in
+the base task, is encouraging. It is not yet a faithful cue-free, shared-base
+reproduction, and the between-checkpoint comparison should not be read as a
+within-model double dissociation.
+
+One further, novel read-out sharpens the criterion story into a failure
+mode. When attention is misdirected onto an empty monitored patch while
+a real change occurs elsewhere, the model misses the change --- the
+declare rate falls from $0.68$ to $0.24$ --- and does so while becoming
+\emph{more} confident, its policy entropy dropping from $0.053$ to
+$0.035$ (Section~\ref{sec:detection}). Misallocated attention does not
+merely lower performance; it manufactures confident perceptual errors,
+because the detector reports ``no change'' precisely because it was
+pointed at the wrong place. This is a mechanistic account, in one system,
+of how an attentional misallocation --- the sort a misleading cue induces
+--- can produce not just misses but assured misses.
+
+\subsection*{One architecture links attention to working memory}
+
+The second claim is that attention and working memory interact within one recurrent
+architecture. The current observations establish coupling, not identity: the memory
+state shapes attention, attention gates sensitivity, and linear probes recover selected
+task variables from memory at sampled frames.
+
+The model \emph{reads value}: cue colour, which signals the worth of a
+correct detection, is latched into the memory state at cue onset and
+held perfectly --- decoding balanced accuracy $1.00$ from the first
+frame through to the change (Section~\ref{sec:detection}). It
+\emph{deploys spatially}: attention orients to the cued patch at cue
+onset, well above the uniform baseline, so that the memory of \emph{where}
+to look is expressed as a priority map over the visual field
+(Section~\ref{sec:detection}). It \emph{gates its own sensitivity}: as
+shown above, detection $d'$ rises and falls with the attention placed on
+the monitored location, so the deployed attention is not a spectator but
+the quantity that sets how well the change can be seen. Its blank-period state is
+compatible with a rehearsal hypothesis, but does not establish one. In the canonical
+affine VDA4 trace, cued attention falls near the uniform baseline during the blank
+($0.22$ versus $0.25$), and no delay-probe or causal delay-clamp result is reported
+(Section~\ref{sec:rehearsal}). Whether covert spatial attention is the load-bearing
+maintenance mechanism therefore remains a prospective test
+\cite{awh_vogel_oh2006,baddeley1992working}. The later cue-directed re-acquisition is
+compatible with an intervening spatial trace, but no cue-location decoder was fitted
+across the blank.
+
+What distinguishes reading value from perceiving predictiveness is
+instructive. Cue \emph{validity} --- how reliably the cue predicts the
+change location --- is linearly decodable at the cue but falls toward
+chance within the next sampled steps (Section~\ref{sec:detection}). That
+weak maintenance accompanies the nearly flat validity effect in the base
+task, but decoding alone does not prove that loss of linear recoverability
+is its unique cause. The separately trained Validity4 task shows that the
+architecture can use validity when it is the only cue on offer. There the
+checkpoint uses it gradedly: the cueing benefit grows monotonically with displayed
+validity ($0.00 \to 0.07 \to 0.08 \to 0.12$ from $25\%$ to $100\%$),
+uncued detection falls as the cue sharpens ($0.94 \to 0.86$), and
+attention on the cued patch rises with validity ($\alpha_c: 0.27 \to
+0.48$ against a uniform $0.25$) (Section~\ref{sec:value}). A Posner-style
+validity effect \cite{posner1980_orienting} is thus within the
+architecture's repertoire. Under the legacy Validity4 sampler, displayed $p=0.25$
+realizes $0.4375$ cued-change probability; archived VDA4 uses the same four-location
+rule. Target semantics therefore do not confound this pair, although the separately
+trained checkpoints and the presence versus absence of a value cue do. Their
+contrast is compatible with cue competition but does not
+establish that value monopolizes a fixed resource or causes validity to
+be discarded. In these checkpoints, value remains linearly recoverable
+from cue onset, whereas validity maintenance depends on task and
+checkpoint.
+
+\subsection*{A biological anchor: the priority map that binds position memory to detection threshold}
+
+These behaviours motivate a functional analogy to a parietal priority
+map. After the change, the model combines a position-specific event-location signal with an
+attentional modulation of detection threshold (the clamp moves $d'$ and
+$c$). The current analyses do not directly quantify a trial-level coupling
+between representational strength and threshold. They nevertheless place
+both measurable functions within one recurrent architecture, paralleling
+accounts of area LIP and allied parietal circuits in which spatial representations
+track task-relevant locations and bias visual processing there \cite{bisley_goldberg2010}.
+
+We make this correspondence as an \emph{honest analogy, not an
+isomorphism}. The model's memory is a recurrent state shaped by joint RL and JEPA optimization
+(auxiliary weight $0.5$);
+LIP is a population of parietal neurons embedded in a
+cortical--subcortical circuit, and no element of the model corresponds to
+a specific cell class, layer, or projection. What transfers is the
+proposed computation --- event-location coding and attentional threshold
+modulation within one architecture --- not anatomy or an established
+single-signal identity. A direct relationship between code strength and
+threshold remains to be tested.
+
+\subsection*{Completed battery and open tests}
+
+The affine $d_{\mathrm{mem}}=128$ VDA1/2/4/9 battery is reported in full
+in Section~\ref{sec:vda-battery}; it is not forthcoming. Each point uses
+one canonical checkpoint with one 20{,}000-row logged phase. The battery
+shows an ordered increase in low-to-high-validity cued-threshold change,
+but sustained attention, criterion range, and validity maintenance do not
+form a single monotone law. VDA16 is an interrupted run ending near chance
+at checkpoint 599, not a completed endpoint or an exhausted-budget
+failure.
+
+Two interventions remain open. Preserved $d_{\mathrm{mem}}=128$ and $256$
+checkpoints exist, but the matched held-out psychometric, decoding, and
+clamp battery has not been completed; no width or capacity law is reported
+(Section~\ref{sec:capacity}). The delay-probe environment is implemented,
+but no trained probe checkpoint, memorized-location advantage, or causal
+delay-clamp result is reported. Attention-based rehearsal therefore
+remains a hypothesis (Section~\ref{sec:rehearsal}).
+
+\subsection*{Scope and limitations}
+
+Several boundaries delimit these statements. The strongest is a training
+outcome, not an interpretive caveat: not every attentional paradigm we
+attempted was learnable by the model as posed. An attend-here/ignore-here
+filtering task did not train --- the policy collapsed into always
+withholding, never declaring a change, despite an environment whose
+reward structure is achievable in principle. This failed task is not reported as a
+quantitative Results section; its run-level trace is identified in the Appendix. The collapse is a learning failure of a
+particular curriculum, not evidence that the mechanism is absent, but it
+means we cannot report the corresponding selective-attention result, and
+we say so rather than presenting a partial run as a finding. Relatedly,
+the Validity4 checkpoint uses cue validity when validity is the operative cue,
+whereas VDA4 weakly maintains validity when a competing value cue is present
+(Sections~\ref{sec:detection} and~\ref{sec:value}). Because these are separately
+trained checkpoints, the contrast is a task association rather than a within-weight
+test of cue competition and should not be read as a general Posner effect.
+
+The set-size characterization is complete for the four included checkpoints but is
+single-checkpoint and confounded by task/model differences. The matched width analysis
+and delay-probe rehearsal result are not in hand, and nothing in the discussion should
+be read as asserting their outcomes. The Baruni relative-value test is a principled
+null rather than a positive result: the model's value sensitivity is absolute, not
+relative to context (Section~\ref{sec:value}), which is consistent with the regime the
+model occupies but is a null nonetheless \cite{baruni2015}. Finally, the model family
+is trained on a narrow family of change-detection tasks. The behaviours it reproduces
+are broad, but the reproductions are functional signatures --- psychometric,
+signal-detection, and decoding profiles --- and the biological correspondences are
+analogies at the level of computation. The contribution is that an instrumented
+jointly RL--JEPA-trained architecture (auxiliary weight $0.5$), dissected with causal clamps and linear probes, separates
+several co-present attentional signatures while exposing a working-memory state whose
+relation to rehearsal remains a prospective causal test.
+
+% FIGURE: discussion synthesis schematic — optional. One panel mapping
+% each measured effect (gain: microstim false-alarm curve; selection:
+% checkpoint-specific cued-vs-uncued thresholds; criterion & sensitivity: c(alpha)
+% and d'(alpha) clamp curves; value/validity/change decoding vs timestep;
+% rehearsal: hypothesis only -- affine VDA4 blank attention is near baseline,
+% and no trained delay-probe checkpoint, enhancement, or causal delay-clamp
+% result exists) onto the three
+% Carrasco accounts and the priority-map triple. Source npz: vda_sweep/
+% figs/{microstim_curves, sdt_curves, decode_curves, alpha1_lines}
+% (affine_ew series only).
+\label{fig:discussion-synthesis}

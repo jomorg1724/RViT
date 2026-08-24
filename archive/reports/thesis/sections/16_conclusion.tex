@@ -1,0 +1,41 @@
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+The program set out to find a single, neuro-inspired recurrent vision transformer that
+learns covert spatial attention from reward, reproduces primate signatures, and generalises
+across tasks. After roughly thirty variants and two task horizons, the picture is clearer
+than the variant count suggests, because the results collapse onto a few principles.
+
+\textbf{Perception comes first.} The most expensive lesson was the cheapest to fix: sparse
+reward cannot teach a front-end to see orientation, and a reconstruction-pretrained VAE
+solves it outright. Much of the earlier difficulty on the short task was perception failing
+in an architecture's clothes, and separating the two questions --- can it see, and is it
+wired right --- is the methodological gain that makes the rest of the comparisons clean.
+
+\textbf{The horizon is a design variable.} The same task at two lengths admits two different
+solutions, and recognising that the long task hides perception failures behind temporal
+integration explains a paradox that had stalled the program. The short task, with the cue's
+information forced through memory and the change forced through perception, is the sharper
+instrument.
+
+\textbf{Wiring decides the phenotype.} Coupling value to action through a shared memory is a
+precondition for learning, not an optimisation; a grounded image pathway is required; and
+which stream drives the policy matters as much as what the streams represent. These routing
+facts, not any single clever module, are what separate the models that learn from the models
+that collapse.
+
+\textbf{The model already reproduces the paper, and the matched family settled the
+mechanism.} With perception fixed, the network reproduces the reliability-scaled cueing
+benefit and the causal attention-to-sensitivity link. It also surfaced a genuine mechanistic
+question --- a cueing effect carried by memory rather than by attention orienting --- which
+the matched family of six wirings has now resolved: \emph{no} variant orients to the cue on
+the short task, so the effect is memory-borne in general, not a quirk of one gate. The same
+sweep named the network: the two-LSTM multiplicative form is the best detector and a
+minimal, paper-faithful choice.
+
+What remains is execution: with the attention mechanism settled and the frozen VAE and
+stable harness fixed as constants, run that one architecture across the task battery, and
+test whether a longer-delay regime ever restores the published cue-orienting figure. That is
+the path from a zoo of variants to the single, interpretable, generalising model the program
+was after --- and to an empirical manuscript whose figures, behavioural and neural, are
+produced by the same network, with a cueing mechanism reported as it actually is.

@@ -1,0 +1,74 @@
+\section{Results}
+
+\subsection{Set size turns a recoverable invalid-cue delay into a categorical attentional failure}
+
+The central result concerns where the cross-attention reader places its attention on the changed location, measured as \emph{excess change-lock}: the fraction of attention on the changed memory key in excess of the uniform baseline (a uniform reader places $1/4=0.25$ at SS4 and $1/9=0.111$ at SS9). Reporting excess-over-uniform makes the two set sizes directly comparable. Figure~\ref{fig:headline} summarises the comparison and Table~\ref{tab:lock} gives the values.
+
+At SS4 (Figure~\ref{fig:ss4maps}), a \emph{valid} cue produces a strong change-lock that is already present at f5 ($+0.20$ for a cue at S1, $+0.24$ for a cue at S4) and saturates by f6 ($+0.75$ / $+0.74$). On \emph{invalid} trials the lock is \emph{delayed by one frame} rather than lost: at f5 there is no excess attention on the uncued change ($-0.03$ / $-0.02$), but by f6 the spotlight has re-pointed to the uncued location and the lock recovers essentially in full ($+0.70$ / $+0.69$). At SS4, then, an invalid cue costs the agent a single frame of attentional reallocation.
+
+At SS9 (Figure~\ref{fig:ss9maps}) the valid-trial behaviour is, if anything, stronger: the cross-attention reader locks onto the cued change with excess $+0.69$ at f5 and $+0.86$ at f6. The invalid case, however, collapses. Attention never reaches the uncued changed location at either frame: the excess is $-0.08$ at f5 and $-0.06$ at f6, i.e. at or slightly below the uniform baseline. The one-frame-late reallocation seen at SS4 does not occur; the model commits to the cued location and is effectively blind to the uncued change. The cue-frame read itself is intact at both set sizes---non-cued queries place essentially all of their attention (${\approx}1.00$) on the cued image patch, broadcasting the cue location---so the failure is specifically a failure of top-down \emph{reallocation} away from the cued item, not a failure to register the cue. Thus increasing load from four to nine competitors converts the invalid-cue cost from a recoverable one-frame delay into a categorical attentional failure.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{changelock_comparison.png}
+\caption{Excess change-lock (attention on the changed location, over the uniform baseline) at frames f5 and f6, for valid and invalid cues, at SS4 (uniform $0.25$) and SS9 (uniform $0.111$). At SS4 the invalid lock is absent at f5 but recovers fully by f6; at SS9 the invalid lock is abolished at both frames while the valid lock strengthens.}
+\label{fig:headline}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\caption{Excess change-lock (attention on the changed location minus the uniform baseline) on the cross-attention memory keys. SS4 uniform $=0.25$; SS9 uniform $=0.111$. SS4 values are shown for the two cue placements (S1\,/\,S4); SS9 for the two cue placements (P0\,/\,P8).}
+\label{tab:lock}
+\begin{tabular}{llcc}
+\hline
+Set size & Cue & f5 & f6 \\
+\hline
+SS4 & valid   & $+0.20\,/\,+0.24$ & $+0.75\,/\,+0.74$ \\
+SS4 & invalid & $-0.03\,/\,-0.02$ & $+0.70\,/\,+0.69$ \\
+SS9 & valid   & $+0.69$ & $+0.86$ \\
+SS9 & invalid & $-0.08$ & $-0.06$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{ss4_changelock.png}
+\caption{SS4 cross-attention memory maps. Valid cues lock onto the change by f6; invalid cues lock one frame later, with the spotlight re-pointing to the uncued change.}
+\label{fig:ss4maps}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{ss9_changelock_crossattn.png}
+\caption{SS9 cross-attention memory maps. Valid cues lock strongly onto the cued change; invalid cues fail to recruit attention to the uncued change at either frame.}
+\label{fig:ss9maps}
+\end{figure}
+
+\subsection{Behaviour at SS4: an invalid cue shifts the psychometric threshold but does not abolish detection}
+
+At SS4 the agent performs the task well. Over 600 greedy episodes it achieves overall correct $0.865$, hit rate $0.762$, correct-rejection rate $0.956$, and false-alarm rate $0.044$, with a mean reaction time of $5.11$ frames; performance is graded by cue colour-value, with correct rates $[0.83, 0.90, 0.86]$ for values $[1,3,5]$. The valid-versus-invalid psychometric (Figure~\ref{fig:psy}) shows the behavioural signature of the one-frame attentional delay. Across change magnitudes $[0,4,8,16,28,44,64]$ degrees, the valid detection curve is $P(\text{detect}) = 0.05,\,0.109,\,0.166,\,0.584,\,0.988,\,1.00,\,1.00$ and the invalid curve is $0.059,\,0.063,\,0.100,\,0.425,\,0.941,\,1.00,\,0.966$. The invalid threshold is shifted rightward (detection is harder): at $16^\circ$ the valid hit rate of $0.584$ exceeds the invalid $0.425$, a $+0.16$ cueing benefit. Crucially, both curves recover to ${\approx}1.0$ by $44^\circ$, so at SS4 uncued changes \emph{are} eventually detected, merely at a higher magnitude---consistent with the attention measurement, in which the invalid lock is delayed but not lost. Reaction times remain modest ($\sim$5.0--5.3 frames) across conditions.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\linewidth]{ss4_psychometric.png}
+\caption{SS4 psychometric for valid versus invalid cues. The invalid threshold is shifted rightward (e.g. $+0.16$ at $16^\circ$) but both curves recover to ${\approx}1.0$ by $44^\circ$.}
+\label{fig:psy}
+\end{figure}
+
+The abolished invalid change-lock at SS9 (Figure~\ref{fig:ss9maps}) generates a concrete behavioural \textbf{prediction}: at high load the rightward threshold shift should not merely steepen but should fail to recover, so that uncued changes go largely undetected even at large magnitudes, producing a much larger and less recoverable invalid-cue cost than at SS4. We state this as a prediction to be confirmed at convergence; the SS9 behavioural psychometric is not yet measured.
+
+\subsection{A bottom-up reader is immune to the collapse}
+
+The catastrophic scaling of the invalid-cue cost is specific to the top-down, cue-gated cross-attention reader. The element-wise-affine variant of the same conv-JEPA at SS9, whose memory reader is bottom-up self-attention rather than cue-gated cross-attention, does \emph{not} show the collapse (Figure~\ref{fig:ss9affine}). On valid trials it locks ($+0.71$ at f5, $+0.66$ at f6), and on invalid trials it \emph{still} locks onto the uncued change ($+0.61$ at f5, $+0.59$ at f6). Because this reader is driven by stimulus salience, any sufficiently large orientation change pulls attention regardless of where the cue points, so the uncued change is caught even at SS9. The same property makes its cueing benefit weaker---it is not strongly gated by the cue. The contrast localises the load-dependent failure to the top-down channel: a bottom-up salience reader is immune to the invalid-cue collapse but forfeits the selectivity that the cue confers.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{ss9_changelock_affine.png}
+\caption{SS9 element-wise-affine (bottom-up) control. The invalid cue still locks onto the uncued change ($+0.61$\,/\,$+0.59$), unlike the cue-gated cross-attention reader.}
+\label{fig:ss9affine}
+\end{figure}
+
+\subsection{Interpretation}
+
+Together these results describe a covert-attention agent that routes detection through a cue-gated top-down channel and therefore pays an invalid-cue cost that scales with load. At low set size the spotlight re-points to the uncued change one frame late, a recoverable delay; at high set size the agent commits to the cued location and the uncued change is missed entirely. This pattern fits biased-competition and normalization accounts of attention \citep{desimone1995neural,reynolds1999competitive,reynolds2000attention,reynolds2009normalization,maunsell2004neuronal}: more competitors in the suppressive field make top-down reallocation away from the cued item progressively harder, until it fails. It also extends the classical Posner finding that the cost of a misdirected cue grows with the number of competing locations \citep{posner1980attention,posner1994visual,carrasco2011visual}, and is consistent with priority-map and commitment accounts in which a selected location is actively maintained \citep{krauzlis2013superior,krauzlis2018selective,zenon2012attention,herman2020attention,sprague2018rescuing}. The bottom-up control shows the trade-off cleanly: a salience-driven reader avoids the invalid-cue cost but forfeits the cueing benefit \citep{luo2019attention}.

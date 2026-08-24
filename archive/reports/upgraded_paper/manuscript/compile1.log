@@ -1,0 +1,1194 @@
+pdflatex: option `-halt-on-error' doesn't allow an argument
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size11.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/lmodern.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mathtools.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/mathtools/mhsetup.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.
+sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+ (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/gettitlestring/gettitlestr
+ing.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)
+)) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/rerunfilecheck/rerunfilechec
+k.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/generic/uniquecounter/uniquecounte
+r.sty))) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmr.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef)
+No file main.aux.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+)) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ot1lmr.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omllmm.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omslmsy.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/omxlmex.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(./sections/abstract.tex) (./sections/intro.tex
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 1 undefined
+ on input line 14.
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 1 undefined on input lin
+e 14.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 1 undefined
+ on input line 16.
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 1 undefined
+ on input line 21.
+
+
+LaTeX Warning: Citation `mcadams_maunsell1999_v4_tuning' on page 1 undefined on
+ input line 21.
+
+
+LaTeX Warning: Citation `treue_martinez_trujillo1999_feature_attention' on page
+ 1 undefined on input line 21.
+
+
+LaTeX Warning: Citation `sani2017_temporal_v4_gain' on page 1 undefined on inpu
+t line 21.
+
+
+LaTeX Warning: Citation `CohenMaunsell2009' on page 1 undefined on input line 2
+4.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 1 undefined on input line 2
+8.
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 1 undefined on input lin
+e 28.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 1 undefined
+ on input line 35.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 1 undefined on input line 4
+0.
+
+[1{/usr/local/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/
+usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local
+/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texl
+ive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+
+LaTeX Warning: Reference `sec:detection' on page 2 undefined on input line 86.
+
+
+LaTeX Warning: Reference `sec:detection' on page 2 undefined on input line 89.
+
+
+LaTeX Warning: Reference `sec:setsize' on page 2 undefined on input line 89.
+
+
+LaTeX Warning: Reference `sec:detection' on page 2 undefined on input line 93.
+
+
+LaTeX Warning: Reference `sec:detection' on page 2 undefined on input line 100.
+
+
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 2 unde
+fined on input line 107.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 2 undefined on input line 11
+2.
+
+
+LaTeX Warning: Reference `sec:value' on page 2 undefined on input line 116.
+
+
+LaTeX Warning: Citation `baruni2015' on page 2 undefined on input line 118.
+
+
+LaTeX Warning: Reference `sec:value' on page 2 undefined on input line 120.
+
+[2]
+
+LaTeX Warning: Citation `awh_jonides2001_overlapping_attention_wm' on page 3 un
+defined on input line 127.
+
+
+LaTeX Warning: Citation `awh1998_rehearsal' on page 3 undefined on input line 1
+27.
+
+
+LaTeX Warning: Citation `kane2001_controlled_attention' on page 3 undefined on 
+input line 127.
+
+
+LaTeX Warning: Reference `sec:detection' on page 3 undefined on input line 130.
+
+
+
+LaTeX Warning: Citation `bisley_goldberg2010' on page 3 undefined on input line
+ 132.
+
+
+LaTeX Warning: Reference `sec:capacity' on page 3 undefined on input line 135.
+
+
+LaTeX Warning: Reference `sec:rehearsal' on page 3 undefined on input line 138.
+
+
+
+LaTeX Warning: Reference `sec:model' on page 3 undefined on input line 156.
+
+
+LaTeX Warning: Reference `sec:detection' on page 3 undefined on input line 157.
+
+
+
+LaTeX Warning: Reference `sec:value' on page 3 undefined on input line 163.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 3 undefined on input line 16
+5.
+
+
+LaTeX Warning: Reference `sec:setsize' on page 3 undefined on input line 167.
+
+
+LaTeX Warning: Reference `sec:capacity' on page 3 undefined on input line 168.
+
+
+LaTeX Warning: Reference `sec:rehearsal' on page 3 undefined on input line 168.
+
+
+) (./sections/model.tex
+
+LaTeX Warning: Reference `sec:results' on page 3 undefined on input line 20.
+
+[3]
+
+LaTeX Warning: Reference `fig:model-schematic' on page 4 undefined on input lin
+e 25.
+
+
+LaTeX Warning: Reference `sec:model-frontend' on page 4 undefined on input line
+ 26.
+
+
+LaTeX Warning: Reference `sec:model-encoder' on page 4 undefined on input line 
+29.
+
+
+LaTeX Warning: Reference `sec:model-memory' on page 4 undefined on input line 3
+1.
+
+
+LaTeX Warning: Reference `sec:model-heads' on page 4 undefined on input line 33
+.
+
+
+LaTeX Warning: Reference `sec:model-jepa' on page 4 undefined on input line 36.
+
+
+
+LaTeX Warning: Reference `sec:model-training' on page 4 undefined on input line
+ 39.
+
+
+LaTeX Warning: Reference `sec:model-task' on page 4 undefined on input line 40.
+
+
+
+LaTeX Warning: Reference `sec:methods' on page 4 undefined on input line 42.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/t1lmtt.fd)
+
+LaTeX Warning: Citation `posner1980_orienting' on page 4 undefined on input lin
+e 76.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 4 undefined on input line 7
+6.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 4 undefined
+ on input line 76.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 4 undefined
+ on input line 93.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/lm/ts1lmr.fd)
+
+LaTeX Warning: Citation `failing_theeuwes2018_selection_history' on page 4 unde
+fined on input line 99.
+
+
+LaTeX Warning: Citation `hickey2010_reward_salience_acc' on page 4 undefined on
+ input line 99.
+
+[4{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/l
+ocal/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+
+LaTeX Warning: Citation `posner1980_orienting' on page 5 undefined on input lin
+e 103.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 5 undefined on input line 1
+03.
+
+
+LaTeX Warning: Reference `sec:methods' on page 5 undefined on input line 115.
+
+
+LaTeX Warning: Reference `sec:setsize' on page 5 undefined on input line 118.
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 5 undefined
+ on input line 178.
+
+
+LaTeX Warning: Citation `mcadams_maunsell1999_v4_tuning' on page 5 undefined on
+ input line 178.
+
+
+LaTeX Warning: Citation `treue_martinez_trujillo1999_feature_attention' on page
+ 5 undefined on input line 178.
+
+[5]
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 6 undefined
+ on input line 197.
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 6 undefined
+ on input line 197.
+
+
+LaTeX Warning: Reference `eq:affine-feedback' on page 6 undefined on input line
+ 198.
+
+
+LaTeX Warning: Citation `ghose_maunsell2002_task_timing' on page 6 undefined on
+ input line 202.
+
+
+LaTeX Warning: Citation `sani2017_temporal_v4_gain' on page 6 undefined on inpu
+t line 202.
+
+
+LaTeX Warning: Reference `sec:results' on page 6 undefined on input line 206.
+
+
+LaTeX Warning: Reference `eq:affine-feedback' on page 6 undefined on input line
+ 225.
+
+
+LaTeX Warning: Reference `sec:results' on page 6 undefined on input line 246.
+
+
+LaTeX Warning: Reference `sec:results' on page 6 undefined on input line 267.
+
+[6{/usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+
+LaTeX Warning: Reference `sec:methods' on page 7 undefined on input line 288.
+
+
+LaTeX Warning: Reference `sec:results' on page 7 undefined on input line 303.
+
+
+LaTeX Warning: Reference `sec:results' on page 7 undefined on input line 315.
+
+) (./sections/results_detection.tex
+
+LaTeX Warning: Reference `sec:det-psych' on page 7 undefined on input line 27.
+
+
+LaTeX Warning: Reference `sec:det-attn' on page 7 undefined on input line 28.
+
+
+LaTeX Warning: Reference `sec:det-sdt' on page 7 undefined on input line 29.
+
+
+LaTeX Warning: Reference `sec:det-uncertainty' on page 7 undefined on input lin
+e 30.
+
+
+LaTeX Warning: Reference `sec:det-decoding' on page 7 undefined on input line 3
+1.
+
+
+LaTeX Warning: Reference `sec:det-microstim' on page 7 undefined on input line 
+32.
+
+[7]
+
+LaTeX Warning: Reference `sec:det-psych' on page 8 undefined on input line 37.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 8 undefined
+ on input line 73.
+
+
+LaTeX Warning: Reference `sec:setsize' on page 8 undefined on input line 74.
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 8 undefined on input lin
+e 83.
+
+
+LaTeX Warning: Reference `sec:det-decoding' on page 8 undefined on input line 9
+5.
+
+[8]
+
+LaTeX Warning: File `figures/detection_psychometrics.png' not found on input li
+ne 105.
+
+
+! Package pdftex.def Error: File `figures/detection_psychometrics.png' not foun
+d: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.105 ...dth]{figures/detection_psychometrics.png}
+                                                  
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 9 undefined
+ on input line 161.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 9 undefined
+ on input line 161.
+
+
+LaTeX Warning: Reference `sec:det-psych' on page 9 undefined on input line 162.
+
+
+
+LaTeX Warning: Reference `sec:det-psych' on page 9 undefined on input line 172.
+
+
+
+LaTeX Warning: Reference `sec:det-decoding' on page 9 undefined on input line 1
+73.
+
+[9]
+
+LaTeX Warning: Reference `sec:det-decoding' on page 10 undefined on input line 
+183.
+
+
+LaTeX Warning: Reference `sec:value' on page 10 undefined on input line 188.
+
+
+LaTeX Warning: File `figures/detection_attention.png' not found on input line 1
+96.
+
+
+! Package pdftex.def Error: File `figures/detection_attention.png' not found: u
+sing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.196 ...newidth]{figures/detection_attention.png}
+                                                  
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 10 undefine
+d on input line 227.
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 10 undefine
+d on input line 238.
+
+
+LaTeX Warning: Citation `mcadams_maunsell1999_v4_tuning' on page 10 undefined o
+n input line 238.
+
+
+LaTeX Warning: Citation `treue_martinez_trujillo1999_feature_attention' on page
+ 10 undefined on input line 239.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 10 undefine
+d on input line 246.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 10 undefined on input line 2
+52.
+
+[10]
+
+LaTeX Warning: File `figures/detection_sdt_curves.png' not found on input line 
+258.
+
+
+! Package pdftex.def Error: File `figures/detection_sdt_curves.png' not found: 
+using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.258 ...ewidth]{figures/detection_sdt_curves.png}
+                                                  
+
+Overfull \hbox (7.314pt too wide) in paragraph at lines 274--280
+\T1/lmr/m/n/10.95 tion dis-tri-bu-tion has an en-tropy (how un-de-cided the mod
+el is be-tween \T1/lmtt/m/n/10.95 wait \T1/lmr/m/n/10.95 and \T1/lmtt/m/n/10.95
+ declare-change\T1/lmr/m/n/10.95 ),
+
+LaTeX Warning: File `figures/detection_uncertainty.png' not found on input line
+ 310.
+
+
+! Package pdftex.def Error: File `figures/detection_uncertainty.png' not found:
+ using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.310 ...width]{figures/detection_uncertainty.png}
+                                                  
+
+LaTeX Warning: Reference `sec:value' on page 11 undefined on input line 337.
+
+
+LaTeX Warning: Reference `sec:det-attn' on page 11 undefined on input line 338.
+
+
+
+LaTeX Warning: Reference `sec:det-psych' on page 11 undefined on input line 347
+.
+
+
+LaTeX Warning: Reference `sec:det-attn' on page 11 undefined on input line 348.
+
+
+[11]
+
+LaTeX Warning: Citation `RuffCohen2016' on page 12 undefined on input line 363.
+
+
+
+LaTeX Warning: Citation `Srinath2021' on page 12 undefined on input line 363.
+
+
+LaTeX Warning: File `figures/detection_decoding.png' not found on input line 37
+2.
+
+
+! Package pdftex.def Error: File `figures/detection_decoding.png' not found: us
+ing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.372 ...inewidth]{figures/detection_decoding.png}
+                                                  
+
+LaTeX Warning: Reference `sec:det-sdt' on page 12 undefined on input line 389.
+
+
+LaTeX Warning: Reference `sec:det-sdt' on page 12 undefined on input line 403.
+
+
+LaTeX Warning: Citation `RuffCohen2016' on page 12 undefined on input line 416.
+
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 12 undefined on input line 4
+17.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 12 und
+efined on input line 419.
+
+
+LaTeX Warning: File `figures/detection_microstim.png' not found on input line 4
+26.
+
+
+! Package pdftex.def Error: File `figures/detection_microstim.png' not found: u
+sing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.426 ...newidth]{figures/detection_microstim.png}
+                                                  
+
+LaTeX Warning: Reference `sec:det-psych' on page 12 undefined on input line 442
+.
+
+
+LaTeX Warning: Reference `sec:det-attn' on page 12 undefined on input line 445.
+
+
+
+LaTeX Warning: Reference `sec:det-sdt' on page 12 undefined on input line 449.
+
+
+LaTeX Warning: Reference `sec:det-uncertainty' on page 12 undefined on input li
+ne 452.
+
+
+LaTeX Warning: Reference `sec:det-decoding' on page 12 undefined on input line 
+456.
+
+
+LaTeX Warning: Reference `sec:det-microstim' on page 12 undefined on input line
+ 458.
+
+
+LaTeX Warning: Reference `sec:value' on page 12 undefined on input line 460.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 12 undefined on input line 4
+61.
+
+) (./sections/results_value.tex [12]
+
+LaTeX Warning: Reference `sec:detection' on page 13 undefined on input line 13.
+
+
+
+LaTeX Warning: Reference `sec:detection' on page 13 undefined on input line 18.
+
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 13 undefined on input li
+ne 26.
+
+
+LaTeX Warning: Reference `sec:detection' on page 13 undefined on input line 34.
+
+
+
+Overfull \hbox (10.11697pt too wide) in paragraph at lines 33--37
+[]\T1/lmr/m/n/10.95 Throughout, ``the model'' de-notes the sin-gle reinforcemen
+t-trained re-cur-rent vision-transformer
+
+LaTeX Warning: Reference `sec:detection' on page 13 undefined on input line 52.
+
+
+[13]
+
+LaTeX Warning: Citation `posner1980_orienting' on page 14 undefined on input li
+ne 65.
+
+
+LaTeX Warning: Reference `sec:detection' on page 14 undefined on input line 68.
+
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 14 undefined on input li
+ne 80.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 14 undefined on input line 
+80.
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 14 undefine
+d on input line 84.
+
+
+LaTeX Warning: Citation `mcadams_maunsell1999_v4_tuning' on page 14 undefined o
+n input line 96.
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 14 undefine
+d on input line 96.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 14 undefine
+d on input line 96.
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 14 undefined on input li
+ne 102.
+
+
+LaTeX Warning: Reference `sec:detection' on page 14 undefined on input line 116
+.
+
+
+LaTeX Warning: Reference `sec:detection' on page 14 undefined on input line 123
+.
+
+
+LaTeX Warning: Reference `sec:value-validity4' on page 14 undefined on input li
+ne 128.
+
+
+LaTeX Warning: Citation `failing_theeuwes2018_selection_history' on page 14 und
+efined on input line 135.
+
+
+LaTeX Warning: Citation `hickey2010_reward_salience_acc' on page 14 undefined o
+n input line 135.
+
+
+LaTeX Warning: Citation `wang_theeuwes2018_statistical_learning_distractor_supp
+ression' on page 14 undefined on input line 135.
+
+[14]
+
+LaTeX Warning: Citation `failing_theeuwes2018_selection_history' on page 15 und
+efined on input line 169.
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 15 undefined on input li
+ne 183.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 15 undefined on input line 
+183.
+
+
+LaTeX Warning: Reference `sec:detection' on page 15 undefined on input line 186
+.
+
+
+LaTeX Warning: Citation `failing_theeuwes2018_selection_history' on page 15 und
+efined on input line 188.
+
+
+LaTeX Warning: Citation `hickey2010_reward_salience_acc' on page 15 undefined o
+n input line 188.
+
+) (./sections/results_luomaunsell.tex
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 15 undefined on input line 
+15.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 15 undefine
+d on input line 15.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 15 und
+efined on input line 23.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_lpfc_criterion_sensitivity' on page 1
+5 undefined on input line 23.
+
+[15]
+
+LaTeX Warning: Reference `sec:detection' on page 16 undefined on input line 29.
+
+
+[16]
+
+! LaTeX Error: File `figs/luo_repro' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80 ...phics[width=0.9\linewidth]{figs/luo_repro}
+                                                  
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 17 und
+efined on input line 96.
+
+
+LaTeX Warning: Reference `sec:detection' on page 17 undefined on input line 97.
+
+
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 17 und
+efined on input line 122.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_lpfc_criterion_sensitivity' on page 1
+7 undefined on input line 122.
+
+
+LaTeX Warning: Reference `sec:detection' on page 17 undefined on input line 124
+.
+
+
+LaTeX Warning: Citation `mcadams_maunsell1999_v4_tuning' on page 17 undefined o
+n input line 131.
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 17 undefine
+d on input line 131.
+
+
+LaTeX Warning: Citation `sani2017_temporal_v4_gain' on page 17 undefined on inp
+ut line 131.
+
+
+LaTeX Warning: Reference `sec:detection' on page 17 undefined on input line 144
+.
+
+
+! LaTeX Error: File `figs/luo_mechanism' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.152 ...width=0.72\linewidth]{figs/luo_mechanism}
+                                                  
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 17 und
+efined on input line 176.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_lpfc_criterion_sensitivity' on page 1
+7 undefined on input line 176.
+
+
+LaTeX Warning: Citation `CohenMaunsell2009' on page 17 undefined on input line 
+176.
+
+
+LaTeX Warning: Citation `ghose_maunsell2002_task_timing' on page 17 undefined o
+n input line 190.
+
+
+LaTeX Warning: Citation `treue_martinez_trujillo1999_feature_attention' on page
+ 17 undefined on input line 191.
+
+) (./sections/results_setsize.tex [17]
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 18 undefine
+d on input line 11.
+
+
+LaTeX Warning: Reference `sec:detection' on page 18 undefined on input line 17.
+
+
+
+LaTeX Warning: Reference `sec:detection' on page 18 undefined on input line 30.
+
+
+) (./sections/results_capacity.tex
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 18 undefine
+d on input line 10.
+
+[18]
+
+LaTeX Warning: Reference `sec:detection' on page 19 undefined on input line 27.
+
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 19 undefined on input line 2
+7.
+
+) (./sections/results_rehearsal.tex
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 19 undefine
+d on input line 13.
+
+
+LaTeX Warning: Reference `sec:detection' on page 19 undefined on input line 16.
+
+
+) (./sections/discussion.tex
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 19 undefine
+d on input line 40.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 19 undefine
+d on input line 43.
+
+[19]
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 53.
+
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 60.
+
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 64.
+
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 20 undefine
+d on input line 66.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 20 undefined on input line 
+66.
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 69.
+
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 20 undefined on input line 
+71.
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 20 undefined on input li
+ne 71.
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 80.
+
+
+
+LaTeX Warning: Citation `reynolds_heeger2009_normalization' on page 20 undefine
+d on input line 85.
+
+
+LaTeX Warning: Citation `mcadams_maunsell1999_v4_tuning' on page 20 undefined o
+n input line 85.
+
+
+LaTeX Warning: Citation `treue_martinez_trujillo1999_feature_attention' on page
+ 20 undefined on input line 85.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 20 undefined on input line 9
+2.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 20 und
+efined on input line 93.
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 105
+.
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 121
+.
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 125
+.
+
+
+LaTeX Warning: Reference `sec:detection' on page 20 undefined on input line 131
+.
+
+
+LaTeX Warning: Reference `sec:rehearsal' on page 20 undefined on input line 131
+.
+
+
+LaTeX Warning: Citation `awh_vogel_oh2006' on page 20 undefined on input line 1
+38.
+
+
+LaTeX Warning: Citation `baddeley1992working' on page 20 undefined on input lin
+e 138.
+
+[20]
+
+LaTeX Warning: Reference `sec:detection' on page 21 undefined on input line 147
+.
+
+
+LaTeX Warning: Reference `sec:value' on page 21 undefined on input line 159.
+
+
+LaTeX Warning: Citation `posner1980_orienting' on page 21 undefined on input li
+ne 160.
+
+
+LaTeX Warning: Citation `bisley_goldberg2010' on page 21 undefined on input lin
+e 178.
+
+[21]
+
+LaTeX Warning: Reference `sec:setsize' on page 22 undefined on input line 215.
+
+
+LaTeX Warning: Reference `sec:capacity' on page 22 undefined on input line 221.
+
+
+
+LaTeX Warning: Reference `sec:rehearsal' on page 22 undefined on input line 227
+.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 22 undefined on input line 2
+40.
+
+
+LaTeX Warning: Reference `sec:detection' on page 22 undefined on input line 245
+.
+
+
+LaTeX Warning: Reference `sec:value' on page 22 undefined on input line 246.
+
+
+LaTeX Warning: Reference `sec:value' on page 22 undefined on input line 258.
+
+
+LaTeX Warning: Citation `baruni2015' on page 22 undefined on input line 259.
+
+) (./sections/methods.tex
+
+LaTeX Warning: Reference `sec:model' on page 22 undefined on input line 19.
+
+
+LaTeX Warning: Reference `sec:detection' on page 22 undefined on input line 24.
+
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 22 undefined on input line 2
+4.
+
+
+LaTeX Warning: Reference `eq:affine-feedback' on page 22 undefined on input lin
+e 26.
+
+[22]
+
+LaTeX Warning: Citation `posner1980_orienting' on page 23 undefined on input li
+ne 39.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 23 undefined on input line 
+39.
+
+
+LaTeX Warning: Citation `carrasco2011_visual_attention_25y' on page 23 undefine
+d on input line 39.
+
+
+LaTeX Warning: Reference `sec:setsize' on page 23 undefined on input line 43.
+
+
+LaTeX Warning: Reference `fig:methods-timeline' on page 23 undefined on input l
+ine 50.
+
+
+LaTeX Warning: Reference `sec:methods-curriculum' on page 23 undefined on input
+ line 83.
+
+[23]
+
+LaTeX Warning: Reference `sec:value' on page 24 undefined on input line 125.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 24 undefined on input line 1
+25.
+
+
+LaTeX Warning: Reference `sec:detection' on page 24 undefined on input line 132
+.
+
+
+LaTeX Warning: Reference `sec:value' on page 24 undefined on input line 136.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 24 und
+efined on input line 146.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 24 undefined on input line 1
+47.
+
+
+LaTeX Warning: Reference `sec:value' on page 24 undefined on input line 150.
+
+
+LaTeX Warning: Citation `awh_jonides_reuterlorenz1998_rehearsal' on page 24 und
+efined on input line 155.
+
+
+LaTeX Warning: Reference `sec:rehearsal' on page 24 undefined on input line 156
+.
+
+[24]
+
+LaTeX Warning: Reference `sec:model' on page 25 undefined on input line 192.
+
+
+LaTeX Warning: Reference `eq:affine-feedback' on page 25 undefined on input lin
+e 224.
+
+
+LaTeX Warning: Reference `eq:self-attention' on page 25 undefined on input line
+ 230.
+
+
+LaTeX Warning: Reference `sec:methods-clamp' on page 25 undefined on input line
+ 237.
+
+
+LaTeX Warning: Reference `eq:affine-feedback' on page 25 undefined on input lin
+e 258.
+
+[25]
+
+LaTeX Warning: Reference `sec:capacity' on page 26 undefined on input line 289.
+
+
+[26]
+
+LaTeX Warning: Reference `sec:methods-sdt' on page 27 undefined on input line 3
+92.
+
+
+LaTeX Warning: Reference `sec:det-sdt' on page 27 undefined on input line 393.
+
+
+LaTeX Warning: Citation `MullerFindlay1987' on page 27 undefined on input line 
+399.
+
+
+LaTeX Warning: Reference `sec:det-microstim' on page 27 undefined on input line
+ 403.
+
+[27]
+
+LaTeX Warning: Reference `sec:methods-clamp' on page 28 undefined on input line
+ 422.
+
+
+LaTeX Warning: Reference `sec:det-sdt' on page 28 undefined on input line 425.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 28 undefined on input line 4
+26.
+
+
+LaTeX Warning: Citation `luo_maunsell2018_criterion_sensitivity' on page 28 und
+efined on input line 429.
+
+
+LaTeX Warning: Reference `sec:det-uncertainty' on page 28 undefined on input li
+ne 432.
+
+
+LaTeX Warning: Reference `sec:det-decoding' on page 28 undefined on input line 
+448.
+
+) (./sections/appendix.tex
+
+LaTeX Warning: Reference `sec:detection' on page 28 undefined on input line 5.
+
+
+LaTeX Warning: Reference `sec:value' on page 28 undefined on input line 11.
+
+
+LaTeX Warning: Reference `sec:luomaunsell' on page 28 undefined on input line 1
+2.
+
+
+LaTeX Warning: Reference `sec:setsize' on page 28 undefined on input line 16.
+
+
+LaTeX Warning: Reference `sec:capacity' on page 28 undefined on input line 16.
+
+
+LaTeX Warning: Reference `sec:rehearsal' on page 28 undefined on input line 17.
+
+
+) [28]
+No file main.bbl.
+[29] [30] [31] [32] [33] [34] [35] [36] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)</usr/local/texlive/2026bas
+ic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2026basic/te
+xmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2026basic/texmf-d
+ist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2026basic/texmf-dist/fo
+nts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/
+type1/public/lm/lmex10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1
+/public/lm/lmmi10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/publ
+ic/lm/lmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/
+lmr10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr12.
+pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr17.pfb></
+usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/loc
+al/texlive/2026basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texl
+ive/2026basic/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/202
+6basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2026basi
+c/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2026basic/tex
+mf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2026basic/texmf-dis
+t/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2026basic/texmf-dist/font
+s/type1/public/lm/lmsy8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type
+1/public/lm/lmtt10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/pub
+lic/lm/lmtti10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/
+amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (36 pages, 475917 bytes).
+Transcript written on main.log.

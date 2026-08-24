@@ -1,0 +1,979 @@
+{
+  "schema_version": 4,
+  "scope": "first-wave VDA4/VDA9 corrections",
+  "environment_geometry": {
+    "vda4": "2x2 fully occupied",
+    "vda9": "3x3 fully occupied"
+  },
+  "attention_condition": "red cue at fixed S1; no-change trials only; rows=displayed cue proportions; columns=logical timesteps; query patches averaged",
+  "cross_attention_arrays": [
+    "image keys",
+    "recurrent-memory keys"
+  ],
+  "psychometric_panels": [
+    "all cue proportions with valid change at S1",
+    "all cue proportions with invalid change at bottom-right",
+    "100% displayed validity with forced valid and forced invalid changes"
+  ],
+  "requested_attention_trials": 96,
+  "requested_psychometric_trials_per_point": 300,
+  "realized_attention_trials": [
+    96
+  ],
+  "realized_psychometric_trials_per_point": [
+    300
+  ],
+  "runtime_versions": {
+    "gymnasium": "1.3.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6",
+    "pillow": "12.2.0",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.13",
+    "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+    "scipy": "1.17.1",
+    "torch": "2.12.0"
+  },
+  "producer": {
+    "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/vda_series/first_wave_figures.py",
+    "sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+    "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/first_wave_figures.py",
+    "snapshot_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac"
+  },
+  "build_script": {
+    "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/scripts/build_first_wave_figures.py",
+    "sha256": "3700fa5d8238144fd2353065b32dd67cf54c10779396d3d201d0154a7f90921c",
+    "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/build_first_wave_figures.py",
+    "snapshot_sha256": "3700fa5d8238144fd2353065b32dd67cf54c10779396d3d201d0154a7f90921c"
+  },
+  "producer_dependencies": [
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/vda_sweep/vda_core.py",
+      "sha256": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/vda_sweep/vda_core.py",
+      "snapshot_sha256": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/model.py",
+      "sha256": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/model.py",
+      "snapshot_sha256": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/conv_frontend.py",
+      "sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/conv_frontend.py",
+      "snapshot_sha256": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/vae_frontend.py",
+      "sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/vae_frontend.py",
+      "snapshot_sha256": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/paper_encoder.py",
+      "sha256": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/paper_encoder.py",
+      "snapshot_sha256": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/paper_heads.py",
+      "sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/paper_heads.py",
+      "snapshot_sha256": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/envs/__init__.py",
+      "sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/envs/__init__.py",
+      "snapshot_sha256": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/envs/base.py",
+      "sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/envs/base.py",
+      "snapshot_sha256": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/envs/tasks.py",
+      "sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/envs/tasks.py",
+      "snapshot_sha256": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/envs/luo2015.py",
+      "sha256": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/envs/luo2015.py",
+      "snapshot_sha256": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/vda_series/__init__.py",
+      "sha256": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/vda_series/__init__.py",
+      "snapshot_sha256": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/vda_series/task_figures.py",
+      "sha256": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/vda_series/task_figures.py",
+      "snapshot_sha256": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/vda_series/architecture_figures.py",
+      "sha256": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/vda_series/architecture_figures.py",
+      "snapshot_sha256": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67"
+    },
+    {
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_source_20260712/vda_series/behavior_figures.py",
+      "sha256": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+      "snapshot": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/provenance/dependencies/vda_series/behavior_figures.py",
+      "snapshot_sha256": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec"
+    }
+  ],
+  "validated_caches": [
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda4_affine_ew.npz",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "2341026363e6e1d2115a34a8ad9a91a73e385aab4a223aace763529e4047e085",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "seed_policy": "common random numbers matched across displayed cue proportions on no-change trials",
+      "cache_sha256": "564de2f9d306cce9fed9f99ac5f95dfa521aa3d326e77a83d2a43cd38525279a"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda4_affine_ew.npz",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "2341026363e6e1d2115a34a8ad9a91a73e385aab4a223aace763529e4047e085",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "985da844b77901a48f95f93217362d1594c2fe4781b78da2e0049b327a21a59c"
+    },
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda4_crossattn1.npz",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "1a2fa8ae2a57982b6c91dc75079d8293781ce843271b92fe3cfbe5fc16137155",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "seed_policy": "common random numbers matched across displayed cue proportions on no-change trials",
+      "cache_sha256": "f1fe9c1c9d3ef29558f398a52826f94b7139df7ebe81743e0efbc72e82b8c49e"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda4_crossattn1.npz",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda4_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "1a2fa8ae2a57982b6c91dc75079d8293781ce843271b92fe3cfbe5fc16137155",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        2,
+        2
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "f7ba59ed156b087d0a1f4a4cb897715a166b66447d6d374806c26f79536c1dd7"
+    },
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda9_affine_ew.npz",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "22f028f6232d9c3ea040019aff357645ddcaa69e4a09c2f8ceff224ea568d8d7",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "seed_policy": "common random numbers matched across displayed cue proportions on no-change trials",
+      "cache_sha256": "eca9dba28996e29597d85e25d0dfacba6df64946aa837230073cd4beca18e5e1"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda9_affine_ew.npz",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_affine_ew_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "22f028f6232d9c3ea040019aff357645ddcaa69e4a09c2f8ceff224ea568d8d7",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "db078c99ae18eec12d11f2deea03c59322ef52d05ede75d97c838633325bd41c"
+    },
+    {
+      "stage": "attention",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda9_crossattn1.npz",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "6c0587201cd2bf99b43e02278d4c65b03ab79d9b1f811406fc4962d962714946",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials": 96,
+      "seed": 1701,
+      "seed_policy": "common random numbers matched across displayed cue proportions on no-change trials",
+      "cache_sha256": "46c07c63f570b63316825dc67917adfeb6bbd25b1681bc17575feb97f174f0f5"
+    },
+    {
+      "stage": "psychometric",
+      "cache_path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda9_crossattn1.npz",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "checkpoint_iteration": 19999,
+      "checkpoint_path": "/Users/jonathanmorgan/AttentionManuscript/battery_sweep_results/pod2/ckpt2/vda9_crossattn1_d128/rvit_plus_rl_latest.pt",
+      "checkpoint_sha256": "6c0587201cd2bf99b43e02278d4c65b03ab79d9b1f811406fc4962d962714946",
+      "producer_sha256": "80e163af0ff37605c722d5d4a377e297323572d3f4dbe9a955b382a599d8e6ac",
+      "dependency_hashes": {
+        "conv_frontend.py": "bd1be7dfdf5c13d438a0fe9873f9038652e9125127e3274e03329db29570f02a",
+        "envs/__init__.py": "0a033145fee0c6e3a5a5f6a8081953b3c7a8487c33b23b14ab880b4ef3dfd8c4",
+        "envs/base.py": "a02490af2ca07fd961fe4d219aff038814dd6272d30199a3b127cc4b49f44ba7",
+        "envs/luo2015.py": "2d1bd422a7877d335065a26dab658bc4aa201a84dcf79b235d722e7b25709ada",
+        "envs/tasks.py": "5051877283357ef819db2c0d6714e915a4611d0adfa02a914bb0bb9d281ff84e",
+        "model.py": "87b795550d7e5604b08868b8ae70d6e6fdd282d77712a0286e37ab671004b308",
+        "paper_encoder.py": "f523b3b124e45cf3886f5c23c16be7b1314fc70975262c68ccd339f36d1cdb62",
+        "paper_heads.py": "6c5e3e040e75c7bcfdc22858f5bc957909b96cd2e9bc84688f5056f1d9682869",
+        "vae_frontend.py": "fa8e2918b3460414586efdb9ba0ddc80d28a1b51aed1f8c98410582626adf45e",
+        "vda_series/__init__.py": "7d248955c6014f5d19125156ff277ff9cd4df66949a27ed09f7dfbd2ae6fa5f2",
+        "vda_series/architecture_figures.py": "5d43ece28449cc1bd9644ed7063ecacefbd1cce22942b87283ef56b5f58f9c67",
+        "vda_series/behavior_figures.py": "1a73c31d1359aff75261fd96f55f786fac9b6a9f419f19048863b2af71271aec",
+        "vda_series/task_figures.py": "3e6bd814de0da98d3098f78c2f0c4c6d71893ec35acbff725be448865b87bf37",
+        "vda_sweep/vda_core.py": "7f41d3674841421573fce1e7f00cbbac94a5ff8673351c1397c8e3a227b80773"
+      },
+      "runtime_versions": {
+        "gymnasium": "1.3.0",
+        "matplotlib": "3.10.9",
+        "numpy": "2.4.6",
+        "pillow": "12.2.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "python_executable": "/Users/jonathanmorgan/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+        "scipy": "1.17.1",
+        "torch": "2.12.0"
+      },
+      "device": "cpu",
+      "grid": [
+        3,
+        3
+      ],
+      "trials_per_point": 300,
+      "seed": 2801,
+      "seed_policy": "common random numbers matched across displayed cue proportions and valid/invalid locations at each magnitude",
+      "cache_sha256": "9d1addff6feb082e81a3a910b34adf2fa640c314b1776abf273b9ecd29a1910f"
+    }
+  ],
+  "artifacts": [
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda4.pdf",
+      "sha256": "ab172303af5de2c76094cb6244a30070beb09b7288966146d760cce106a296a9"
+    },
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda4.svg",
+      "sha256": "7f117dc2ca6b2651b8fbf34a3cc78120d94b725c96b6165e2ef05276373198ff"
+    },
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda4.png",
+      "sha256": "5f73ee4079a8f8ada442bafcc915247e597820abe70d53dfc808883f92a16bba"
+    },
+    {
+      "stage": "environment",
+      "task": "vda4",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda4.json",
+      "sha256": "e052c27127c90116e975890419c83303dcd205d9bcc44b4950902200f518dc88"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda4_affine_ew.npz",
+      "sha256": "564de2f9d306cce9fed9f99ac5f95dfa521aa3d326e77a83d2a43cd38525279a"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_affine_ew.pdf",
+      "sha256": "cb442c13c19b1d2845cedbdb978028d1f11851f35e20dafc09ddcaf90ee8a713"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_affine_ew.svg",
+      "sha256": "0034f52b213dbf4bada0caf0b66451376498c08c2193b86223045e3cc4862a3b"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_affine_ew.png",
+      "sha256": "55b9d6bb64888b98fbec1c51cbb9b36e01040999b59589d45b95b7f6941c0186"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_affine_ew.json",
+      "sha256": "fe746508be6aff23cf79af5699001d82c499a76080dc36f518ec6e952731e324"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda4_affine_ew.npz",
+      "sha256": "985da844b77901a48f95f93217362d1594c2fe4781b78da2e0049b327a21a59c"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.pdf",
+      "sha256": "b012f082af854923a283565cc712c6acd1c385017ba5fdcf4a9ea805e8b9021e"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.svg",
+      "sha256": "96496a6ae33b96ef2234b366daf0b73acc173fbd55c8783962d778a92dbb091f"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.png",
+      "sha256": "cb9cbc7ca450216257d875eb5addd248c218a339a53b3b942f27edf39815f107"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_affine_ew.json",
+      "sha256": "fe45668acdd5e11bff8bba7c5b3b36a307b33237ccde7156a81037ebd99ea42b"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda4_crossattn1.npz",
+      "sha256": "f1fe9c1c9d3ef29558f398a52826f94b7139df7ebe81743e0efbc72e82b8c49e"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1.pdf",
+      "sha256": "a879eaadc434653e241652f5e214949397bbe8a7b33b0c0dfd4a4362cab72cfe"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1.svg",
+      "sha256": "23c42f9e368b18fd91ddb6bea17758187d3fb8f65f8903e5797d1b381d37e53c"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1.png",
+      "sha256": "64b13af897413bba8a06c2daeac4620422ce1580eae1a8d67d93985bffe093c3"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1.json",
+      "sha256": "1a5e252dd3c461674d6ba72e52b0f2e97e150b6cb279ce66c04200a4e740eee3"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "image_keys_pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1_image_keys.pdf",
+      "sha256": "cca83d3d270847d0cfa1f6264fd01f8aab1de141b3fb710aad7608ab5ba7b0e6"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "image_keys_svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1_image_keys.svg",
+      "sha256": "c5c3eefaf0d96edc91145053b94e2a8802a7255c1bb38512cc9fca0d3ec9b472"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "image_keys_png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1_image_keys.png",
+      "sha256": "1ea2b5154f5281a34789a4b59bcc0ec76a84d19b8407ea3ffd4cffc05c2ba419"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "recurrent_memory_keys_pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1_recurrent_memory_keys.pdf",
+      "sha256": "bc722a8693fb37cb24a1be97926c4a9774d88ea6758590651f1dbb2f1ce9e635"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "recurrent_memory_keys_svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1_recurrent_memory_keys.svg",
+      "sha256": "73be6ac13bcdb41865bce6d60f25fe21e9c05e4a780cb6fe95a76eff1fcc9a2d"
+    },
+    {
+      "stage": "attention",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "recurrent_memory_keys_png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda4_crossattn1_recurrent_memory_keys.png",
+      "sha256": "c85079cd2f8e787aa78c6d5eeacab141918edcd46293ef1c3445b383e5c2578d"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda4_crossattn1.npz",
+      "sha256": "f7ba59ed156b087d0a1f4a4cb897715a166b66447d6d374806c26f79536c1dd7"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.pdf",
+      "sha256": "958e1787ecfcf6ce0ff1e3c889fd362c00e90b2ff2b4c25578ae4d9390205c92"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.svg",
+      "sha256": "81893bd5f4921d4bb432943329bdd193d176b3b5da15e325e2a7c513c0b1e718"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.png",
+      "sha256": "381e10ac16b1aabd096a9c336f7eddfa74f89193f4bb6e9fd9ac4b954d954dd6"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda4",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda4_crossattn1.json",
+      "sha256": "98d644649806f171618645eb911c1051aa8d2908856ec2214f64088b79cb9d8a"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda9.pdf",
+      "sha256": "1d3eef3f43eb2341fc5d1ea9924da5b791d614173c7a38f6103772d1a9a0ba96"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda9.svg",
+      "sha256": "9ee0d4d215ba7d3657a8f9730ca49f5ed94d33e73395b2cd043d9fc63ebca80e"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda9.png",
+      "sha256": "e7e83fd471bd9282160d646357e606c28c4eed738098864fe476d1cdee325bf0"
+    },
+    {
+      "stage": "environment",
+      "task": "vda9",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/environment/first_wave_environment_vda9.json",
+      "sha256": "1073824105ec8086069f2e094b6bab5dfb160af8a06b297acefbc992fed4c5b3"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda9_affine_ew.npz",
+      "sha256": "eca9dba28996e29597d85e25d0dfacba6df64946aa837230073cd4beca18e5e1"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_affine_ew.pdf",
+      "sha256": "038d187460ef89e04e9bd30639d3f2de051ff56122eb8fc2f8239d8f9b61bade"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_affine_ew.svg",
+      "sha256": "ddd8b740e01133aebeb69d5cf47e4b1a4e1e2586a6bbba68ec254b60ae8babbb"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_affine_ew.png",
+      "sha256": "8472766ca0b5a7f0cd240a1247f748b30cdeca634ef3763e1250ed4d3d67d45f"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_affine_ew.json",
+      "sha256": "583ddd7123c5a78cc50319cea2ddfb437d0abb377c253f97ab179d78ce81fdec"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda9_affine_ew.npz",
+      "sha256": "db078c99ae18eec12d11f2deea03c59322ef52d05ede75d97c838633325bd41c"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.pdf",
+      "sha256": "403847b9434dfa8418c45c05b607441de1a83df710ed726274c9ec1fbc102132"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.svg",
+      "sha256": "dc095371c7743dfd96146b40a36627140775979169a68a89ef28f1ec13f71acc"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.png",
+      "sha256": "a6551f4b50e538a8e996978eecc98119d7cbf2b9d85a0b1b2ac70124dc20a9c4"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "affine_ew",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_affine_ew.json",
+      "sha256": "2987f26d7e15ea92e2a7eb009240b379bdd25067bc35b92919a409b5cb24199c"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/attention_vda9_crossattn1.npz",
+      "sha256": "46c07c63f570b63316825dc67917adfeb6bbd25b1681bc17575feb97f174f0f5"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1.pdf",
+      "sha256": "7ce8c6854cde564e85295c0e2f6bd1492390bc1ba741004f6a0efafb4ec8c069"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1.svg",
+      "sha256": "5a2febfc2de589acbb387170c4cac8739740c76dbcea444c034995312c9972e5"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1.png",
+      "sha256": "55567a270772192de33f5b02651d64218a9bb41efa097705c453d6fb68eb1868"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1.json",
+      "sha256": "152a9fabd80b1c18d8d75875704d6a68d774bf8f6a96e5b75e6cb7572942ef33"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "image_keys_pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1_image_keys.pdf",
+      "sha256": "726c0fc3a2f94e0c2329858a539fb2232e5789b9a943ccad3492ab632e4cb756"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "image_keys_svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1_image_keys.svg",
+      "sha256": "1841dcfeb984cf8eb7a9e61150a39df749f2dc6de8cdbcd8c2787e8327933436"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "image_keys_png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1_image_keys.png",
+      "sha256": "e2b0779ac453c72e107bfb60450f7ccba9c6a27e79b088734deb2c6120a75dfb"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "recurrent_memory_keys_pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1_recurrent_memory_keys.pdf",
+      "sha256": "3ace2e3998ce3a17fff3f3cf750957fc27695e2f28dcb5aad3e8d953fd255fe1"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "recurrent_memory_keys_svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1_recurrent_memory_keys.svg",
+      "sha256": "ba813e16c0c73a41d472784513b3fa16aa1289d2597883b9b1bedf565e46746e"
+    },
+    {
+      "stage": "attention",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "recurrent_memory_keys_png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/attention/first_wave_attention_vda9_crossattn1_recurrent_memory_keys.png",
+      "sha256": "6bc00ec47d210a5de05af6a7730f3f91ecd3f8d2e29d2c416457ab41ed32bab8"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "cache",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/data/psychometric_vda9_crossattn1.npz",
+      "sha256": "9d1addff6feb082e81a3a910b34adf2fa640c314b1776abf273b9ecd29a1910f"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "pdf",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.pdf",
+      "sha256": "15bcb9f90ee229c846726b477ba9c8ee04f7b60d068ba5b4ca5d0fe792f8db67"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "svg",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.svg",
+      "sha256": "d2dcaffbfd80c6e745106034bb5b16ff0bef938b3aa163b41fda4cfd3a175095"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "png",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.png",
+      "sha256": "cc4e15f0c0634265def62310d87f91c66c6bed520b55d98ff09a81a31aabc129"
+    },
+    {
+      "stage": "psychometric",
+      "task": "vda9",
+      "feedback": "crossattn1",
+      "kind": "metadata",
+      "path": "/Users/jonathanmorgan/AttentionManuscriptArtifacts/vda_first_wave_attention_isolated_production_20260712/figures/psychometrics/first_wave_psychometric_vda9_crossattn1.json",
+      "sha256": "7f584a9d83f6c3f44172d198dd3dcc67e393d4e910b74644be2fad51ebc08969"
+    }
+  ]
+}

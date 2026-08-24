@@ -1,0 +1,486 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{plainnat}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:intro}{{1}{4}{Introduction}{chapter.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}The program and its goal}{4}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}The model in one paragraph}{4}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Scope of the evidence}{4}{section.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}Contributions and structure}{5}{section.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}A note on terminology}{5}{section.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}The task and its environments}{6}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:task}{{2}{6}{The task and its environments}{chapter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}The canonical cued change-detection task}{6}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Difficulty control}{6}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Why the seven-step task is hard for reinforcement learning}{7}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}The task battery}{7}{section.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}The long-horizon variant}{7}{section.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}The model architecture}{8}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:model}{{3}{8}{The model architecture}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Patch front-end}{8}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Recurrent multiplicative self-attention}{8}{section.3.2}\protected@file@percent }
+\newlabel{eq:mult}{{3.1}{8}{Recurrent multiplicative self-attention}{equation.3.1}{}}
+\newlabel{eq:z}{{3.2}{8}{Recurrent multiplicative self-attention}{equation.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Spatial recurrent memory}{8}{section.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Components of the canonical recurrent vision transformer and the axes along which the architecture zoo varies them.}}{9}{table.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:components}{{3.1}{9}{Components of the canonical recurrent vision transformer and the axes along which the architecture zoo varies them}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Actor--critic readout}{9}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}The reinforcement-learning harness}{10}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:harness}{{4}{10}{The reinforcement-learning harness}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Actor: PAC (maximum-a-posteriori policy optimisation $+$ behaviour cloning)}{10}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Critic: distributional quantile regression}{10}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Prioritised episode replay}{10}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Target network: hard-copy versus EMA}{11}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Burn-in}{11}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}What the harness taught us}{11}{section.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Finding I --- perception is the bottleneck}{12}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:perception}{{5}{12}{Finding I --- perception is the bottleneck}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}The collapse}{12}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}The diagnosis}{12}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}The rescue}{12}{section.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Orientation decodability ($R^{2}$ of a linear decoder on the front-end's $\mathbf  {o}_{\text  {flat,2}}$ features) for the front-end trained from reward versus pretrained on reconstruction. Reward alone cannot teach orientation perception; reconstruction can.}}{13}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:vaer2}{{5.1}{13}{Orientation decodability ($\Rsq $ of a linear decoder on the front-end's $\oflat $ features) for the front-end trained from reward versus pretrained on reconstruction. Reward alone cannot teach orientation perception; reconstruction can}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}The VAE is a static, task-parameter-invariant front-end}{13}{section.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Why this matters for the architecture choice}{13}{section.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Finding II --- the horizon decides the strategy}{14}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:horizon}{{6}{14}{Finding II --- the horizon decides the strategy}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}The puzzle}{14}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Two ways to detect a change}{14}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}The horizon selects between them}{14}{section.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}The behavioural fingerprint}{15}{section.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}Consequences for the program}{15}{section.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Finding III --- coupling is a precondition for learning}{16}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:crosstalk}{{7}{16}{Finding III --- coupling is a precondition for learning}{chapter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}The split-pathway design}{16}{section.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}The three-way comparison}{16}{section.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}The result}{16}{section.7.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Coupling between the policy and value pathways is necessary for learning. Same front-end, heads, parameter count and training recipe; only the inter-pathway wiring differs. Numbers from the trained checkpoints on the long task.}}{17}{table.caption.4}\protected@file@percent }
+\newlabel{tab:crosstalk}{{7.1}{17}{Coupling between the policy and value pathways is necessary for learning. Same front-end, heads, parameter count and training recipe; only the inter-pathway wiring differs. Numbers from the trained checkpoints on the long task}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Interpretation and its limits}{17}{section.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.5}Standing caveat}{17}{section.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}The architecture zoo}{18}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:zoo}{{8}{18}{The architecture zoo}{chapter.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Family A --- memory-as-tokens self-attention (\texttt  {v4}, \texttt  {v5}, \texttt  {v5\_part2})}{18}{section.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Family B --- bottleneck residuals (\texttt  {v8}, \texttt  {v8\_part2}, \texttt  {v9})}{18}{section.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}Family C --- split priority/value pathways (\texttt  {v11}, \texttt  {v11\_part2--5})}{18}{section.8.3}\protected@file@percent }
+\gdef \LT@i {\LT@entry 
+    {1}{77.44142pt}\LT@entry 
+    {1}{205.47882pt}\LT@entry 
+    {1}{68.9055pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.4}Family D --- codebook / vector-quantised attention (\texttt  {v12}, \texttt  {v12\_part2/3})}{19}{section.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.5}Family E --- predictive-coding and energy modulation (\texttt  {v13}, \texttt  {v14}, \texttt  {v15})}{19}{section.8.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.6}What the zoo says in aggregate}{19}{section.8.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Index of the architecture zoo. ``Outcome'' is the trained behaviour where a run exists; many variants are mechanism studies built and unit-tested but reserved for a higher-bandwidth task. \text  {$\mathsurround \z@ \mathchar "458$}\ = learns/works, $\times $ = collapses, $\circ $ = built, not yet a decisive run.}}{20}{table.caption.5}\protected@file@percent }
+\newlabel{tab:zoo}{{8.1}{20}{Index of the architecture zoo. ``Outcome'' is the trained behaviour where a run exists; many variants are mechanism studies built and unit-tested but reserved for a higher-bandwidth task. \checkmark \ = learns/works, $\times $ = collapses, $\circ $ = built, not yet a decisive run}{table.caption.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Finding IV --- the working model reproduces the paper}{21}{chapter.9}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:deepdive}{{9}{21}{Finding IV --- the working model reproduces the paper}{chapter.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Baseline behaviour}{21}{section.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}Psychometrics: the reliability-scaled cueing benefit}{21}{section.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}Chronometrics: the reaction-time story}{21}{section.9.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9.1}{\ignorespaces Psychometric thresholds (four-parameter logistic position, degrees) for cued versus uncued changes by cue validity, and the resulting cueing benefit. The benefit scales with validity --- the paper's central behavioural result.}}{22}{table.caption.6}\protected@file@percent }
+\newlabel{tab:thr}{{9.1}{22}{Psychometric thresholds (four-parameter logistic position, degrees) for cued versus uncued changes by cue validity, and the resulting cueing benefit. The benefit scales with validity --- the paper's central behavioural result}{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9.1}{\ignorespaces Left: psychometric detection-rate curves by cue validity (cued changes) and the cued-versus-uncued comparison at low and high validity. Right: the cueing benefit (uncued$-$cued threshold) scales monotonically with validity.}}{22}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:psy}{{9.1}{22}{Left: psychometric detection-rate curves by cue validity (cued changes) and the cued-versus-uncued comparison at low and high validity. Right: the cueing benefit (uncued$-$cued threshold) scales monotonically with validity}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.4}Causal attention manipulation}{22}{section.9.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.5}Scorecard}{22}{section.9.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9.2}{\ignorespaces Left: reaction time versus change magnitude by cue validity --- pinned near five frames, a weak difficulty effect, no validity benefit. Right: the causal attention manipulation --- biasing attention toward the changed location improves detection, biasing it toward a distractor impairs it, without inducing false alarms.}}{23}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:chrono}{{9.2}{23}{Left: reaction time versus change magnitude by cue validity --- pinned near five frames, a weak difficulty effect, no validity benefit. Right: the causal attention manipulation --- biasing attention toward the changed location improves detection, biasing it toward a distractor impairs it, without inducing false alarms}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Finding V --- attention versus memory, and the cue-attention question}{24}{chapter.10}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:attention}{{10}{24}{Finding V --- attention versus memory, and the cue-attention question}{chapter.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}The cue modulates behaviour}{24}{section.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}The attention is change-locked, not cue-locked}{24}{section.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.3}Where the cue actually lives}{24}{section.10.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10.1}{\ignorespaces Per-frame attention (top: input frames; bottom: $2\times 2$ attention map, S1 = top-left) for a $100\%$ cue at $S_1$ with a $25^\circ $ change at $S_1$. The cue (frame 1) draws no attention; the attention concentrates on $S_1$ only at the change (frame 5).}}{25}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:attn_change}{{10.1}{25}{Per-frame attention (top: input frames; bottom: $2\times 2$ attention map, S1 = top-left) for a $100\%$ cue at $S_1$ with a $25^\circ $ change at $S_1$. The cue (frame 1) draws no attention; the attention concentrates on $S_1$ only at the change (frame 5)}{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10.2}{\ignorespaces No-change control, $500$ trials, $100\%$ cue at $S_1$. With nothing to lock onto the attention stays uniform across every frame --- the cue alone never moves it.}}{25}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:attn_nochange}{{10.2}{25}{No-change control, $500$ trials, $100\%$ cue at $S_1$. With nothing to lock onto the attention stays uniform across every frame --- the cue alone never moves it}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.4}The mechanism}{25}{section.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.5}The open question}{25}{section.10.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10.1}{\ignorespaces The matched family of attention/memory wirings under training to resolve the cue-attention question. All share the frozen-VAE front-end, the PAC$+$QR-DQN$+$PER harness, and the $4096$-d readout.}}{26}{table.caption.11}\protected@file@percent }
+\newlabel{tab:family}{{10.1}{26}{The matched family of attention/memory wirings under training to resolve the cue-attention question. All share the frozen-VAE front-end, the PAC$+$QR-DQN$+$PER harness, and the $4096$-d readout}{table.caption.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10.2}{\ignorespaces Matched-family results. Behaviour is greedy on \texttt  {validity4} ($T=7$); cue-orient $>0$ means the attention is biased toward the cued location \emph  {before} the change (cue-driven). The headline: no variant produces a large positive cue-orient, while two of them (\texttt  {crossattn}, \texttt  {dualmem}) attend markedly \emph  {away} from the cued image patch --- the cueing effect is carried by memory across the whole family.}}{26}{table.caption.12}\protected@file@percent }
+\newlabel{tab:familyresults}{{10.2}{26}{Matched-family results. Behaviour is greedy on \code {validity4} ($T=7$); cue-orient $>0$ means the attention is biased toward the cued location \emph {before} the change (cue-driven). The headline: no variant produces a large positive cue-orient, while two of them (\code {crossattn}, \code {dualmem}) attend markedly \emph {away} from the cued image patch --- the cueing effect is carried by memory across the whole family}{table.caption.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.6}The matched family under test}{26}{section.10.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.7}Results: the family resolves the question}{26}{section.10.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10.3}{\ignorespaces \emph  {Left:} attention to the cued patch across the seven frames, no-change, $100\%$ cue, for every working variant. All hover near or below uniform ($0.25$) through the cue and delay; none lifts the cued location before the change. \emph  {Right:} the cue-orienting index ($t_{3,4}$, solid) and the change-locked spike ($t_5$, hatched). The models that read a direct image$\to $attention path (\texttt  {multiplicative}, \texttt  {two-lstm}) show a clear change-lock and no orienting; \texttt  {crossattn} and \texttt  {dualmem} sit well below uniform on the cued image patch --- they route the cued location through memory rather than attending it.}}{27}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:varattn}{{10.3}{27}{\emph {Left:} attention to the cued patch across the seven frames, no-change, $100\%$ cue, for every working variant. All hover near or below uniform ($0.25$) through the cue and delay; none lifts the cued location before the change. \emph {Right:} the cue-orienting index ($t_{3,4}$, solid) and the change-locked spike ($t_5$, hatched). The models that read a direct image$\to $attention path (\code {multiplicative}, \code {two-lstm}) show a clear change-lock and no orienting; \code {crossattn} and \code {dualmem} sit well below uniform on the cued image patch --- they route the cued location through memory rather than attending it}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {paragraph}{A correction.}{27}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.8}Why this matters}{27}{section.10.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10.4}{\ignorespaces Behaviour on \texttt  {validity4}. Five of six variants learn the task; \texttt  {affine} collapses to always-wait (hit $=0$, no false alarms, $P(\text  {press})\le 0.004$ even on a clear $60^\circ $ change). \texttt  {two-lstm} is the best detector.}}{28}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:varbeh}{{10.4}{28}{Behaviour on \code {validity4}. Five of six variants learn the task; \code {affine} collapses to always-wait (hit $=0$, no false alarms, $P(\text {press})\le 0.004$ even on a clear $60^\circ $ change). \code {two-lstm} is the best detector}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}Finding VI --- perception can be learned without a pretrained VAE: V-JEPA self-distillation}{29}{chapter.11}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:jepa}{{11}{29}{Finding VI --- perception can be learned without a pretrained VAE: V-JEPA self-distillation}{chapter.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}The question Chapter 5 left open}{29}{section.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}The auxiliary: V-JEPA temporal self-distillation}{30}{section.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}Result A: learning from raw pixels via frame-repeat}{30}{section.11.3}\protected@file@percent }
+\newlabel{sec:jepa-resultA}{{11.3}{30}{Result A: learning from raw pixels via frame-repeat}{section.11.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11.1}{\ignorespaces V-JEPA self-distillation variants. Rolling correct is the late-window training rolling-correct mean unless a greedy-eval number is noted; greedy figures are held-out (paper\_jepa\_conv only). The grid9 rows are mid-training (a few hundred iterations) and report the last-200 mean (final in parentheses). No greedy-eval artifact exists for any run except paper\_jepa\_conv crossattn1.}}{31}{table.caption.16}\protected@file@percent }
+\newlabel{tab:jepa}{{11.1}{31}{V-JEPA self-distillation variants. Rolling correct is the late-window training rolling-correct mean unless a greedy-eval number is noted; greedy figures are held-out (paper\_jepa\_conv only). The grid9 rows are mid-training (a few hundred iterations) and report the last-200 mean (final in parentheses). No greedy-eval artifact exists for any run except paper\_jepa\_conv crossattn1}{table.caption.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.4}Result B: the convolutional front-end and its sharp covert-cueing algorithm}{31}{section.11.4}\protected@file@percent }
+\newlabel{sec:jepa-resultB}{{11.4}{31}{Result B: the convolutional front-end and its sharp covert-cueing algorithm}{section.11.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.1}{\ignorespaces \textbf  {The frame-repeat pixel route is recurrence-centric.} Memory-key cross-attention across the $35$ physical frames for the no-VAE frame-repeat model. The allocation is near-uniform; the only structure is a transient cue-frame read. There is no change-lock at any memory width --- detection is carried by the recurrent cell, not the attention weights.}}{32}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:jepa-fr}{{11.1}{32}{\textbf {The frame-repeat pixel route is recurrence-centric.} Memory-key cross-attention across the $35$ physical frames for the no-VAE frame-repeat model. The allocation is near-uniform; the only structure is a transient cue-frame read. There is no change-lock at any memory width --- detection is carried by the recurrent cell, not the attention weights}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.2}{\ignorespaces \textbf  {Psychometric cueing benefit.} P(declare change) versus change magnitude for validly and invalidly cued changes. Valid cueing left-shifts the curve (e.g.\ $0.58$ vs $0.43$ at $16^\circ $), saturating by $44^\circ $ --- the behavioural signature of covert spatial attention.}}{33}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:jepa-psych}{{11.2}{33}{\textbf {Psychometric cueing benefit.} P(declare change) versus change magnitude for validly and invalidly cued changes. Valid cueing left-shifts the curve (e.g.\ $0.58$ vs $0.43$ at $16^\circ $), saturating by $44^\circ $ --- the behavioural signature of covert spatial attention}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.3}{\ignorespaces \textbf  {Frame-gated attention.} Summed image-key cross-attention by frame. The network reads the image only on the cue frame ($t{=}1$) and runs from memory thereafter; the live image is preserved on the residual.}}{33}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:jepa-framegate}{{11.3}{33}{\textbf {Frame-gated attention.} Summed image-key cross-attention by frame. The network reads the image only on the cue frame ($t{=}1$) and runs from memory thereafter; the live image is preserved on the residual}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.5}Informative negatives: what fences the recipe}{33}{section.11.5}\protected@file@percent }
+\newlabel{sec:jepa-negatives}{{11.5}{33}{Informative negatives: what fences the recipe}{section.11.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.4}{\ignorespaces \textbf  {Cue-timed memory change-lock.} Memory-key attention maps across frames. Validly cued changes lock onto the changed location one frame earlier ($t{=}5$) than invalid ($t{=}6$) --- the attentional analogue of the behavioural cueing benefit.}}{34}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:jepa-lock}{{11.4}{34}{\textbf {Cue-timed memory change-lock.} Memory-key attention maps across frames. Validly cued changes lock onto the changed location one frame earlier ($t{=}5$) than invalid ($t{=}6$) --- the attentional analogue of the behavioural cueing benefit}{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.6}Set-size-9 generalization (in progress)}{34}{section.11.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11.5}{\ignorespaces \textbf  {Temporal decoding of the recurrent state.} Cross-validated balanced accuracy of a logistic probe on $\text  {vec}(H)$. Cue position/value are decodable from $t{=}1$; change presence/location become decodable at $t{=}5$, one frame before the invalid-condition attention lock --- recurrence computes, attention reflects.}}{35}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:jepa-decode}{{11.5}{35}{\textbf {Temporal decoding of the recurrent state.} Cross-validated balanced accuracy of a logistic probe on $\text {vec}(H)$. Cue position/value are decodable from $t{=}1$; change presence/location become decodable at $t{=}5$, one frame before the invalid-condition attention lock --- recurrence computes, attention reflects}{figure.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.6}{\ignorespaces \textbf  {Causal perturbation of the memory read.} Additively suppressing memory tokens on validly cued trials lowers detection modestly but does not abolish it: the changed Gabor enters on the residual, so the memory read refines rather than carries the change signal.}}{35}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:jepa-causal}{{11.6}{35}{\textbf {Causal perturbation of the memory read.} Additively suppressing memory tokens on validly cued trials lowers detection modestly but does not abolish it: the changed Gabor enters on the residual, so the memory read refines rather than carries the change signal}{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.7}Cross-cutting lesson: architecture sets the attention strategy}{35}{section.11.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}Reinforcement-learning harness variations}{37}{chapter.12}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:harnessvar}{{12}{37}{Reinforcement-learning harness variations}{chapter.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.1}Discount and horizon}{37}{section.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.2}Critic particles}{37}{section.12.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.3}Target network: EMA versus hard copy}{37}{section.12.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.4}Exploration and the two collapses}{37}{section.12.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.5}A resume footgun, fixed}{38}{section.12.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {13}Where this leaves us: an architecture recommendation}{39}{chapter.13}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:recommendation}{{13}{39}{Where this leaves us: an architecture recommendation}{chapter.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.1}Decision criteria}{39}{section.13.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13.2}Two non-negotiables}{39}{section.13.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13.3}The attention-mechanism choice (now decided)}{40}{section.13.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13.4}Recommendation}{40}{section.13.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13.5}What must be resolved before this is final}{41}{section.13.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {14}Proposed experiments}{42}{chapter.14}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:experiments}{{14}{42}{Proposed experiments}{chapter.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {14.1}Track 1 --- the task battery (empirical manuscript)}{42}{section.14.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Visual-discrimination / value-cue (\texttt  {vda4}).}{42}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Set-size (\texttt  {setsize\{2,4,9\}}).}{42}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reward structure (Luo \& Maunsell).}{42}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Attend / ignore (Krauzlis).}{42}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Discrimination (Baruni, optional).}{42}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14.2}Track 2 --- the architecture / mechanism experiments}{42}{section.14.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The cue-attention question (\emph  {done}).}{42}{section*.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The optic-flow reaction-time test.}{43}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Coupling on the short task.}{43}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{EMA-versus-hard-copy A/B.}{43}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The representational and causal dissociations.}{43}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14.3}Sequencing and cost}{43}{section.14.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {15}Research plan}{44}{chapter.15}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:plan}{{15}{44}{Research plan}{chapter.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {15.1}Stage 0 --- settle the network (\emph  {largely done})}{44}{section.15.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15.2}Stage 1 --- generalisation across the battery ($\sim $2--3 weeks)}{44}{section.15.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15.3}Stage 2 --- the causal-prediction differentiators ($\sim $2 weeks)}{44}{section.15.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15.4}Stage 3 --- the architecture / dissociation paper (parallel track)}{45}{section.15.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15.5}Stage 4 --- the normative theory preprint (James first author, parallel)}{45}{section.15.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15.6}Risks and contingencies}{45}{section.15.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {16}Summary of findings}{46}{chapter.16}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:findings}{{16}{46}{Summary of findings}{chapter.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {16.1}Established findings}{46}{section.16.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F1. Perception is the bottleneck on the short task.}{46}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F2. One VAE serves all task variants.}{46}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F3. The horizon decides the strategy.}{46}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F4. Coupling is a precondition for learning.}{46}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F5. Routing decides the phenotype, not representation.}{46}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F6. A grounded image pathway is required.}{46}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F7. The working model reproduces the paper's behaviour.}{47}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F8. The cueing effect is memory-driven, across the whole family.}{47}{section*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F9. The harness is a stable recipe with two failure harbors.}{47}{section*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F10. Two stacked memories is the best detector, and the recommended network.}{47}{section*.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{F11. Perception is learnable without a pretrained VAE.}{47}{section*.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {16.2}Open questions}{47}{section.16.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{O1. \emph  {(Resolved.)} Which wiring restores cue-orienting attention?}{47}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{O2. Does the coupling result survive the perception fix?}{47}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{O3. Is the EMA target load-bearing?}{48}{section*.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{O4. Does the chosen network generalise across the battery?}{48}{section*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{O5. Does a longer delay restore cue-orienting attention?}{48}{section*.48}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {16.3}Reusable infrastructure}{48}{section.16.3}\protected@file@percent }
+\citation{*}
+\bibdata{refs}
+\@writefile{toc}{\contentsline {chapter}{\numberline {17}Conclusion}{49}{chapter.17}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ch:conclusion}{{17}{49}{Conclusion}{chapter.17}{}}
+\bibcite{abdolmaleki2018maximum}{{1}{2018}{{Abdolmaleki et~al.}}{{Abdolmaleki, Springenberg, Tassa, Munos, Heess, and Riedmiller}}}
+\bibcite{anderson2016attention}{{2}{2016}{{Anderson}}{{}}}
+\bibcite{anderson2016role}{{3}{2016}{{Anderson et~al.}}{{Anderson, Kuwabara, Wong, Gean, Rahmim, Bra{\v {s}}i{\'c}, George, Frolov, Courtney, and Yantis}}}
+\bibcite{armstrong2007selective}{{4}{2007}{{Armstrong and Moore}}{{}}}
+\bibcite{awh2006interactions}{{5}{2006}{{Awh et~al.}}{{Awh, Vogel, and Oh}}}
+\bibcite{baars1988cognitive}{{6}{1988}{{Baars}}{{}}}
+\bibcite{baddeley1992working}{{7}{1992}{{Baddeley}}{{}}}
+\bibcite{barak2017recurrent}{{8}{2017}{{Barak}}{{}}}
+\bibcite{baruni2015reward}{{9}{2015}{{Baruni et~al.}}{{Baruni, Lau, and Salzman}}}
+\bibcite{beck2009top}{{10}{2009}{{Beck and Kastner}}{{}}}
+\bibcite{beck2024xlstm}{{11}{2024}{{Beck et~al.}}{{Beck, P{\"o}ppel, Spanring, Auer, Prudnikova, Kopp, Klambauer, Brandstetter, and Hochreiter}}}
+\bibcite{bellemare2017distributional}{{12}{2017}{{Bellemare et~al.}}{{Bellemare, Dabney, and Munos}}}
+\bibcite{bisley2010lip}{{13}{2010}{{Bisley and Goldberg}}{{}}}
+\bibcite{bisley2019neural}{{14}{2019}{{Bisley and Mirpour}}{{}}}
+\bibcite{bollimunta2018fefsc}{{15}{2018}{{Bollimunta et~al.}}{{Bollimunta, Bogadhi, and Krauzlis}}}
+\bibcite{botvinick2020deep}{{16}{2020}{{Botvinick et~al.}}{{Botvinick, Wang, Dabney, Miller, and Kurth-Nelson}}}
+\bibcite{bruce1985primate}{{17}{1985}{{Bruce and Goldberg}}{{}}}
+\bibcite{cameron2002sens}{{18}{2002}{{Cameron et~al.}}{{Cameron, Tai, and Carrasco}}}
+\bibcite{caron2021emerging}{{19}{2021}{{Caron et~al.}}{{Caron, Touvron, Misra, J{\'e}gou, Mairal, Bojanowski, and Joulin}}}
+\bibcite{carrasco2011visual}{{20}{2011}{{Carrasco}}{{}}}
+\bibcite{cavanaugh2006subcortical}{{21}{2006}{{Cavanaugh et~al.}}{{Cavanaugh, Alvarez, and Wurtz}}}
+\bibcite{chelazzi2013reward}{{22}{2013}{{Chelazzi et~al.}}{{Chelazzi, Perlato, Santandrea, and Libera}}}
+\bibcite{chelazzi2014altering}{{23}{2014}{{Chelazzi et~al.}}{{Chelazzi, E{\v {s}}to{\v {c}}inov{\'a}, Calletti, Gerfo, Sani, Della~Libera, and Santandrea}}}
+\bibcite{chun2011taxonomy}{{24}{2011}{{Chun et~al.}}{{Chun, Golomb, and Turk-Browne}}}
+\bibcite{cohen2009attention}{{25}{2009}{{Cohen and Maunsell}}{{}}}
+\bibcite{colas2017distributed}{{26}{2017}{{Colas et~al.}}{{Colas, Pauli, Larsen, Tyszka, and O'Doherty}}}
+\bibcite{collins2014opponent}{{27}{2014}{{Collins and Frank}}{{}}}
+\bibcite{cosman2018prefrontal}{{28}{2018}{{Cosman et~al.}}{{Cosman, Lowe, Zinke, Woodman, and Schall}}}
+\bibcite{dabney2018distributional}{{29}{2018}{{Dabney et~al.}}{{Dabney, Rowland, Bellemare, and Munos}}}
+\bibcite{dabney2020distributional}{{30}{2020}{{Dabney et~al.}}{{Dabney, Kurth-Nelson, Uchida, Starkweather, Hassabis, Munos, and Botvinick}}}
+\bibcite{dayan2008decision}{{31}{2008}{{Dayan and Daw}}{{}}}
+\bibcite{dehaene2011experimental}{{32}{2011}{{Dehaene and Changeux}}{{}}}
+\bibcite{desimone1998visual}{{33}{1998}{{Desimone}}{{}}}
+\bibcite{desimone1995neural}{{34}{1995}{{Desimone et~al.}}{{Desimone, Duncan, et~al.}}}
+\bibcite{deubel1996saccade}{{35}{1996}{{Deubel and Schneider}}{{}}}
+\bibcite{ding2011neural}{{36}{2012}{{Ding and Gold}}{{}}}
+\bibcite{dosovitskiy2020image}{{37}{2020}{{Dosovitskiy et~al.}}{{Dosovitskiy, Beyer, Kolesnikov, Weissenborn, Zhai, Unterthiner, Dehghani, Minderer, Heigold, Gelly, et~al.}}}
+\bibcite{downing2000interactions}{{38}{2000}{{Downing}}{{}}}
+\bibcite{driscoll2024flexible}{{39}{2024}{{Driscoll et~al.}}{{Driscoll, Shenoy, and Sussillo}}}
+\bibcite{eckstein2013visual}{{40}{2011}{{Eckstein}}{{}}}
+\bibcite{failing2018selection}{{41}{2018}{{Failing and Theeuwes}}{{}}}
+\bibcite{fecteau2006salience}{{42}{2006}{{Fecteau and Munoz}}{{}}}
+\bibcite{feldman2010attention}{{43}{2010}{{Feldman and Friston}}{{}}}
+\bibcite{fries2001modulation}{{44}{2001}{{Fries et~al.}}{{Fries, Reynolds, Rorie, and Desimone}}}
+\bibcite{fujimoto2018addressing}{{45}{2018}{{Fujimoto et~al.}}{{Fujimoto, van Hoof, and Meger}}}
+\bibcite{gattass2014effect}{{46}{2014}{{Gattass and Desimone}}{{}}}
+\bibcite{gazzaley2012top}{{47}{2012}{{Gazzaley and Nobre}}{{}}}
+\bibcite{gershman2020neurobiology}{{48}{2020}{{Gershman and {\"O}lveczky}}{{}}}
+\bibcite{gerstner2018eligibility}{{49}{2018}{{Gerstner et~al.}}{{Gerstner, Lehmann, Liakoni, Corneil, and Brea}}}
+\bibcite{ghose2002attentional}{{50}{2002}{{Ghose and Maunsell}}{{}}}
+\bibcite{glimcher2011understanding}{{51}{2011}{{Glimcher}}{{}}}
+\bibcite{gold2007neural}{{52}{2007}{{Gold and Shadlen}}{{}}}
+\bibcite{gottlieb2010infospace}{{53}{2010}{{Gottlieb and Balan}}{{}}}
+\bibcite{gottlieb2014attention}{{54}{2014}{{Gottlieb et~al.}}{{Gottlieb, Hayhoe, Hikosaka, and Rangel}}}
+\bibcite{green1966signal}{{55}{1966}{{Green and Swets}}{{}}}
+\bibcite{gregoriou2009high}{{56}{2009}{{Gregoriou et~al.}}{{Gregoriou, Gotts, Zhou, and Desimone}}}
+\bibcite{gregoriou2012lesions}{{57}{2012}{{Gregoriou et~al.}}{{Gregoriou, Gotts, and Desimone}}}
+\bibcite{gregoriou2014lesions}{{58}{2014}{{Gregoriou et~al.}}{{Gregoriou, Rossi, Ungerleider, and Desimone}}}
+\bibcite{hanks2011elapsed}{{59}{2011}{{Hanks et~al.}}{{Hanks, Mazurek, Kiani, Hopp, and Shadlen}}}
+\bibcite{hassanin2024visattmod}{{60}{2024{a}}{{Hassanin et~al.}}{{Hassanin, Anwar, Radwan, Khan, and Mian}}}
+\bibcite{hassanin2024visual}{{61}{2024{b}}{{Hassanin et~al.}}{{Hassanin, Anwar, Radwan, Khan, and Mian}}}
+\bibcite{hawkins1990visual}{{62}{1990}{{Hawkins et~al.}}{{Hawkins, Hillyard, Luck, Mouloua, Downing, and Woodward}}}
+\bibcite{herman2017color}{{63}{2017{a}}{{Herman and Krauzlis}}{{}}}
+\bibcite{herman2017colorchange}{{64}{2017{b}}{{Herman and Krauzlis}}{{}}}
+\bibcite{herman2018gain}{{65}{2018{a}}{{Herman et~al.}}{{Herman, Katz, and Krauzlis}}}
+\bibcite{herman2018midbrain}{{66}{2018{b}}{{Herman et~al.}}{{Herman, Katz, and Krauzlis}}}
+\bibcite{herman2020attention}{{67}{2020}{{Herman et~al.}}{{Herman, Arcizet, and Krauzlis}}}
+\bibcite{hickey2010reward}{{68}{2010}{{Hickey et~al.}}{{Hickey, Chelazzi, and Theeuwes}}}
+\bibcite{hikosaka2006basal}{{69}{2006}{{Hikosaka et~al.}}{{Hikosaka, Nakamura, and Nakahara}}}
+\bibcite{hikosaka2014basal}{{70}{2014}{{Hikosaka et~al.}}{{Hikosaka, Kim, Yasuda, and Yamamoto}}}
+\bibcite{hochreiter1997long}{{71}{1997}{{Hochreiter and Schmidhuber}}{{}}}
+\bibcite{hoffman1995visual}{{72}{1995}{{Hoffman and Subramaniam}}{{}}}
+\bibcite{hollerman1998dopamine}{{73}{1998}{{Hollerman and Schultz}}{{}}}
+\bibcite{houk1995model}{{74}{1995}{{Houk et~al.}}{{Houk, Adams, and Barto}}}
+\bibcite{huk2005neural}{{75}{2005}{{Huk and Shadlen}}{{}}}
+\bibcite{itti2001computational}{{76}{2001}{{Itti and Koch}}{{}}}
+\bibcite{jeurissen2022rhesus}{{77}{2022}{{Jeurissen et~al.}}{{Jeurissen, Shushruth, El-Shamayleh, Horwitz, and Shadlen}}}
+\bibcite{joel2002actor}{{78}{2002}{{Joel et~al.}}{{Joel, Niv, and Ruppin}}}
+\bibcite{katz2016dissociated}{{79}{2016}{{Katz et~al.}}{{Katz, Yates, Pillow, and Huk}}}
+\bibcite{katz2025optogenetic}{{80}{2025}{{Katz et~al.}}{{Katz, Bohlen, Yu, Mejias-Aponte, Sommer, and Krauzlis}}}
+\bibcite{khan2022transformers}{{81}{2022}{{Khan et~al.}}{{Khan, Naseer, Hayat, Zamir, Khan, and Shah}}}
+\bibcite{kietzmann2019recurrence}{{82}{2019}{{Kietzmann et~al.}}{{Kietzmann, Spoerer, S{\"o}rensen, Cichy, Hauk, and Kriegeskorte}}}
+\bibcite{kingma2014autoencoding}{{83}{2014}{{Kingma and Welling}}{{}}}
+\bibcite{kiyonaga2013working}{{84}{2013}{{Kiyonaga and Egner}}{{}}}
+\bibcite{klink2014priority}{{85}{2014}{{Klink et~al.}}{{Klink, Jentgens, and Lorteije}}}
+\bibcite{knudsen2007fundamental}{{86}{2007}{{Knudsen}}{{}}}
+\bibcite{koch1985shifts}{{87}{1985}{{Koch and Ullman}}{{}}}
+\bibcite{krauzlis2013superior}{{88}{2013}{{Krauzlis et~al.}}{{Krauzlis, Lovejoy, and Z{\'e}non}}}
+\bibcite{krauzlis2018selective}{{89}{2018}{{Krauzlis et~al.}}{{Krauzlis, Bogadhi, Herman, and Bollimunta}}}
+\bibcite{kusmierz2017learning}{{90}{2017}{{Ku{\'s}mierz et~al.}}{{Ku{\'s}mierz, Isomura, and Toyoizumi}}}
+\bibcite{lambert1992spatial}{{91}{1992}{{Lambert and Corban}}{{}}}
+\bibcite{leonard2021consensus}{{92}{2021}{{Leonard}}{{}}}
+\bibcite{leong2017dynamic}{{93}{2017}{{Leong et~al.}}{{Leong, Radulescu, Daniel, DeWoskin, and Niv}}}
+\bibcite{lindsay2020attention}{{94}{2020}{{Lindsay}}{{}}}
+\bibcite{lovejoy2010inactivation}{{95}{2010}{{Lovejoy and Krauzlis}}{{}}}
+\bibcite{lovejoy2017changes}{{96}{2017}{{Lovejoy and Krauzlis}}{{}}}
+\bibcite{lu1998sens}{{97}{1998}{{Lu and Dosher}}{{}}}
+\bibcite{luck1997capacity}{{98}{1997}{{Luck and Vogel}}{{}}}
+\bibcite{luo2019attention}{{99}{2019}{{Luo and Maunsell}}{{}}}
+\bibcite{macmillan2004detection}{{100}{2004}{{Macmillan and Creelman}}{{}}}
+\bibcite{maia2009reinforcement}{{101}{2009}{{Maia}}{{}}}
+\bibcite{mante2013context}{{102}{2013}{{Mante et~al.}}{{Mante, Sussillo, Shenoy, and Newsome}}}
+\bibcite{masse2019circuit}{{103}{2019}{{Masse et~al.}}{{Masse, Yang, Song, Wang, and Freedman}}}
+\bibcite{maunsell2004neuronal}{{104}{2004}{{Maunsell}}{{}}}
+\bibcite{mayo2016graded}{{105}{2016}{{Mayo and Maunsell}}{{}}}
+\bibcite{mazyar2012does}{{106}{2012}{{Mazyar et~al.}}{{Mazyar, van~den Berg, and Ma}}}
+\bibcite{mcadams1999effects}{{107}{1999}{{McAdams and Maunsell}}{{}}}
+\bibcite{mehrani2023self}{{108}{2023}{{Mehrani and Tsotsos}}{{}}}
+\bibcite{melloni2012interaction}{{109}{2012}{{Melloni et~al.}}{{Melloni, van Leeuwen, Alink, and M{\"u}ller}}}
+\bibcite{miconi2016feedback}{{110}{2016}{{Miconi and VanRullen}}{{}}}
+\bibcite{miller2001integrative}{{111}{2001}{{Miller and Cohen}}{{}}}
+\bibcite{minut2001reinforcement}{{112}{2001}{{Minut and Mahadevan}}{{}}}
+\bibcite{mirza2018human}{{113}{2018}{{Mirza et~al.}}{{Mirza, Adams, Mathys, and Friston}}}
+\bibcite{mnih2014recurrent}{{114}{2014}{{Mnih et~al.}}{{Mnih, Heess, Graves, and Kavukcuoglu}}}
+\bibcite{monosov2011fef}{{115}{2011}{{Monosov et~al.}}{{Monosov, Sheinberg, and Thompson}}}
+\bibcite{montague1996framework}{{116}{1996}{{Montague et~al.}}{{Montague, Dayan, and Sejnowski}}}
+\bibcite{moore2003selective}{{117}{2003}{{Moore and Armstrong}}{{}}}
+\bibcite{moore2001control}{{118}{2001}{{Moore and Fallah}}{{}}}
+\bibcite{moore2004microstimulation}{{119}{2004}{{Moore and Fallah}}{{}}}
+\bibcite{morita2014striatal}{{120}{2014}{{Morita and Kato}}{{}}}
+\bibcite{muller1987sensitivity}{{121}{1987{a}}{{M{\"u}ller and Findlay}}{{}}}
+\bibcite{muller1987spatial}{{122}{1987{b}}{{M{\"u}ller and Findlay}}{{}}}
+\bibcite{muller2005microstimulation}{{123}{2005}{{M{\"u}ller et~al.}}{{M{\"u}ller, Philiastides, and Newsome}}}
+\bibcite{ni2012tuned}{{124}{2012}{{Ni et~al.}}{{Ni, Ray, and Maunsell}}}
+\bibcite{niv2009reinforcement}{{125}{2009}{{Niv}}{{}}}
+\bibcite{nobre2018anticipated}{{126}{2018}{{Nobre and van Ede}}{{}}}
+\bibcite{odoherty2004dissociable}{{127}{2004}{{O'Doherty et~al.}}{{O'Doherty, Dayan, Schultz, Deichmann, Friston, and Dolan}}}
+\bibcite{palmer1995psychophysics}{{128}{1995}{{Palmer}}{{}}}
+\bibcite{panichello2021attvwm}{{129}{2021}{{Panichello and Buschman}}{{}}}
+\bibcite{parr2017working}{{130}{2017}{{Parr and Friston}}{{}}}
+\bibcite{peng2023rwkv}{{131}{2023}{{Peng et~al.}}{{Peng, Alcaide, Anthony, Albalak, Arcadinho, Biderman, Cao, Cheng, Chung, Grella, GV, He, Hou, Lin, Kazienko, Kocon, Kong, Koptyra, Lau, Mantri, Mom, Saito, Song, Tang, Wang, Wind, Wozniak, Zhang, Zhang, Zhao, Zhou, Zhou, Zhu, and Zhu}}}
+\bibcite{platt1999neural}{{132}{1999}{{Platt and Glimcher}}{{}}}
+\bibcite{posner1980attention}{{133}{1980}{{Posner et~al.}}{{Posner, Snyder, and Davidson}}}
+\bibcite{posner1994visual}{{134}{1994}{{Posner et~al.}}{{Posner, Grossenbacher, and Compton}}}
+\bibcite{ptak2012frontoparietal}{{135}{2012}{{Ptak}}{{}}}
+\bibcite{reynolds2009normalization}{{136}{2009}{{Reynolds and Heeger}}{{}}}
+\bibcite{reynolds1999competitive}{{137}{1999}{{Reynolds et~al.}}{{Reynolds, Chelazzi, and Desimone}}}
+\bibcite{reynolds2000attention}{{138}{2000}{{Reynolds et~al.}}{{Reynolds, Pasternak, and Desimone}}}
+\bibcite{reynolds2002dopamine}{{139}{2002}{{Reynolds and Wickens}}{{}}}
+\bibcite{roitman2002response}{{140}{2002}{{Roitman and Shadlen}}{{}}}
+\bibcite{rorie2010integration}{{141}{2010}{{Rorie et~al.}}{{Rorie, Gao, McClelland, and Newsome}}}
+\bibcite{rothenhoefer2017effects}{{142}{2017}{{Rothenhoefer et~al.}}{{Rothenhoefer, Costa, Bartolo, Vicario-Feliciano, Murray, and Averbeck}}}
+\bibcite{ruff2017normalization}{{143}{2017}{{Ruff and Cohen}}{{}}}
+\bibcite{rust2022priority}{{144}{2022}{{Rust and Cohen}}{{}}}
+\bibcite{ilaria2017v4gain}{{145}{2017}{{Sani et~al.}}{{Sani, Santandrea, Morrone, and Chelazzi}}}
+\bibcite{schaul2016prioritized}{{146}{2016}{{Schaul et~al.}}{{Schaul, Quan, Antonoglou, and Silver}}}
+\bibcite{schultz1997neural}{{147}{1997}{{Schultz et~al.}}{{Schultz, Dayan, and Montague}}}
+\bibcite{sepulveda2020visual}{{148}{2020}{{Sepulveda et~al.}}{{Sepulveda, Usher, Davies, Benson, Ortoleva, and De~Martino}}}
+\bibcite{solomon2004sens}{{149}{2004}{{Solomon}}{{}}}
+\bibcite{song2016training}{{150}{2016}{{Song et~al.}}{{Song, Yang, and Wang}}}
+\bibcite{sprague2018rescuing}{{151}{2018}{{Sprague et~al.}}{{Sprague, Itthipuripat, Vo, and Serences}}}
+\bibcite{springenberg2024offline}{{152}{2024}{{Springenberg et~al.}}{{Springenberg, Abdolmaleki, Zhang, Groth, Bloesch, Lampe, Brakel, Bechtle, Kapturowski, Hafner, et~al.}}}
+\bibcite{sridharan2017does}{{153}{2017}{{Sridharan et~al.}}{{Sridharan, Steinmetz, Moore, and Knudsen}}}
+\bibcite{srinath2021attention}{{154}{2021}{{Srinath et~al.}}{{Srinath, Ruff, and Cohen}}}
+\bibcite{stanisor2013neural}{{155}{2013}{{St{\u a}ni{\c s}or et~al.}}{{St{\u a}ni{\c s}or, van~der Togt, Pennartz, and Roelfsema}}}
+\bibcite{starkweather2021dopamine}{{156}{2021}{{Starkweather and Uchida}}{{}}}
+\bibcite{stine2023differential}{{157}{2023}{{Stine et~al.}}{{Stine, Trautmann, Jeurissen, and Shadlen}}}
+\bibcite{stanisor2013rwdattn}{{158}{2013}{{Stănişor et~al.}}{{Stănişor, Togt, Pennartz, and Roelfsema}}}
+\bibcite{sugrue2004matching}{{159}{2004}{{Sugrue et~al.}}{{Sugrue, Corrado, and Newsome}}}
+\bibcite{sussillo2014neural}{{160}{2014}{{Sussillo}}{{}}}
+\bibcite{sussillo2013opening}{{161}{2013}{{Sussillo and Barak}}{{}}}
+\bibcite{sutton2018reinforcement}{{162}{2018}{{Sutton}}{{}}}
+\bibcite{theeuwes2019goal}{{163}{2019}{{Theeuwes}}{{}}}
+\bibcite{thompson1996fef}{{164}{1996}{{Thompson et~al.}}{{Thompson, Hanes, Bichot, and Schall}}}
+\bibcite{thompson2005frontal}{{165}{2005{a}}{{Thompson et~al.}}{{Thompson, Bichot, and Sato}}}
+\bibcite{thompson2005neuronal}{{166}{2005{b}}{{Thompson et~al.}}{{Thompson, Biscoe, and Sato}}}
+\bibcite{treisman1980feature}{{167}{1980}{{Treisman and Gelade}}{{}}}
+\bibcite{treue1999reshaping}{{168}{1999}{{Treue and Trujillo}}{{}}}
+\bibcite{tsotsos1995modeling}{{169}{1995}{{Tsotsos et~al.}}{{Tsotsos, Culhane, Wai, Lai, Davis, and Nuflo}}}
+\bibcite{vanhasselt2018deep}{{170}{2018}{{van Hasselt et~al.}}{{van Hasselt, Doron, Strub, Hessel, Sonnerat, and Modayil}}}
+\bibcite{vaswani2017attention}{{171}{2017}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin}}}
+\bibcite{veale2017how}{{172}{2017}{{Veale et~al.}}{{Veale, Hafed, and Yoshida}}}
+\bibcite{wang2015v1att}{{173}{2015}{{Wang et~al.}}{{Wang, Chen, Yan, Zhaoping, and Li}}}
+\bibcite{wang2022neuronal}{{174}{2022}{{Wang et~al.}}{{Wang, Herman, and Krauzlis}}}
+\bibcite{wardak2006contribution}{{175}{2006}{{Wardak et~al.}}{{Wardak, Ibos, Duhamel, and Olivier}}}
+\bibcite{wichmann2001psychometric}{{176}{2001}{{Wichmann and Hill}}{{}}}
+\bibcite{wolfe2021guided}{{177}{2021}{{Wolfe}}{{}}}
+\bibcite{yamamoto2024emergence}{{178}{2024}{{Yamamoto et~al.}}{{Yamamoto, Akahoshi, and Kitazawa}}}
+\bibcite{Yang2022}{{179}{2022}{{Yang et~al.}}{{Yang, Dong, Liu, Zhang, Shen, and Yu}}}
+\bibcite{zenon2012attention}{{180}{2012}{{Z{\'e}non and Krauzlis}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Per-model atlas: architecture, attention, and behaviour}{62}{appendix.A}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{app:atlas}{{A}{62}{Per-model atlas: architecture, attention, and behaviour}{appendix.A}{}}
+\@writefile{toc}{\contentsline {paragraph}{How to read the attention maps.}{62}{section*.50}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{How to read the behaviour.}{62}{section*.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}Two stacked xLSTMs (recommended network)}{62}{section.A.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces \textbf  {Two stacked xLSTMs (recommended network)} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{63}{figure.caption.52}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.2}{\ignorespaces \textbf  {Two stacked xLSTMs (recommended network)} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{63}{figure.caption.53}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.3}{\ignorespaces \textbf  {Two stacked xLSTMs (recommended network)} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{63}{figure.caption.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.2}Multiplicative (paper-faithful reference)}{64}{section.A.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.4}{\ignorespaces \textbf  {Multiplicative (paper-faithful reference)} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{64}{figure.caption.55}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.5}{\ignorespaces \textbf  {Multiplicative (paper-faithful reference)} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{64}{figure.caption.56}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.6}{\ignorespaces \textbf  {Multiplicative (paper-faithful reference)} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{65}{figure.caption.57}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.3}Cross-attention (image $+$ memory keys)}{66}{section.A.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.7}{\ignorespaces \textbf  {Cross-attention (image $+$ memory keys)} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{66}{figure.caption.58}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.8}{\ignorespaces \textbf  {Cross-attention (image $+$ memory keys)} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{67}{figure.caption.59}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.9}{\ignorespaces \textbf  {Cross-attention (image $+$ memory keys)} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{67}{figure.caption.60}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.4}Dual-memory (the memories query)}{68}{section.A.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.10}{\ignorespaces \textbf  {Dual-memory (the memories query)} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{68}{figure.caption.61}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.11}{\ignorespaces \textbf  {Dual-memory (the memories query)} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{69}{figure.caption.62}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.12}{\ignorespaces \textbf  {Dual-memory (the memories query)} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{70}{figure.caption.63}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.5}Dual-head (sensory $+$ feedback)}{71}{section.A.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.13}{\ignorespaces \textbf  {Dual-head (sensory $+$ feedback)} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{71}{figure.caption.64}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.14}{\ignorespaces \textbf  {Dual-head (sensory $+$ feedback)} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{71}{figure.caption.65}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.15}{\ignorespaces \textbf  {Dual-head (sensory $+$ feedback)} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{72}{figure.caption.66}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.6}Affine (matrix scale $+$ shift) modulation --- failed}{73}{section.A.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.16}{\ignorespaces \textbf  {Affine (matrix scale $+$ shift) modulation --- failed} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{73}{figure.caption.67}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.17}{\ignorespaces \textbf  {Affine (matrix scale $+$ shift) modulation --- failed} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{73}{figure.caption.68}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.18}{\ignorespaces \textbf  {Affine (matrix scale $+$ shift) modulation --- failed} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{74}{figure.caption.69}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.7}Fast-weight (hypernetwork) attention --- degenerate}{75}{section.A.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.19}{\ignorespaces \textbf  {Fast-weight (hypernetwork) attention --- degenerate} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{75}{figure.caption.70}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.20}{\ignorespaces \textbf  {Fast-weight (hypernetwork) attention --- degenerate} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{75}{figure.caption.71}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.21}{\ignorespaces \textbf  {Fast-weight (hypernetwork) attention --- degenerate} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{76}{figure.caption.72}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.8}Fast-weight $+$ codebook --- essentially untrained}{77}{section.A.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.22}{\ignorespaces \textbf  {Fast-weight $+$ codebook --- essentially untrained} --- architecture. Solid arrows: forward dataflow; dashed red: recurrent feedback from the previous frame.}}{77}{figure.caption.73}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.23}{\ignorespaces \textbf  {Fast-weight $+$ codebook --- essentially untrained} --- attention maps at every frame, $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $150$ trials).}}{77}{figure.caption.74}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {A.24}{\ignorespaces \textbf  {Fast-weight $+$ codebook --- essentially untrained} --- psychometric (A, B) and chronometric (C) functions on the seven-step \texttt  {validity4} task.}}{78}{figure.caption.75}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Per-model atlas: the successful $T=29$ long-task models}{79}{appendix.B}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{app:atlas_t29}{{B}{79}{Per-model atlas: the successful \texorpdfstring {$T=29$}{T=29} long-task models}{appendix.B}{}}
+\@writefile{toc}{\contentsline {paragraph}{Two architectural families.}{79}{section*.76}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The headline, before the details.}{79}{section*.77}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {B.1}{\ignorespaces The six successful $T=29$ models. Mean cued-hit and false-alarm are averaged over the validity$\times $magnitude psychometric grid (so the absolute hit is below the per-condition peak, which approaches $1.0$ at large $\Delta $). Snapshot iteration as analysed.}}{79}{table.caption.78}\protected@file@percent }
+\newlabel{tab:t29results}{{B.1}{79}{The six successful $T=29$ models. Mean cued-hit and false-alarm are averaged over the validity$\times $magnitude psychometric grid (so the absolute hit is below the per-condition peak, which approaches $1.0$ at large $\Delta $). Snapshot iteration as analysed}{table.caption.78}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.1}v11\_part2 — split-readout cross-talk}{80}{section.B.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces \textbf  {v11\_part2 — split-readout cross-talk} --- architecture. Conv patch-embed $\to $ $10\times 10$ tokens; solid arrows forward, dashed red recurrent feedback.}}{80}{figure.caption.79}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.2}{\ignorespaces \textbf  {v11\_part2 — split-readout cross-talk} --- attention maps at every frame ($T=29$), $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $80$ trials; change at $t=15$).}}{80}{figure.caption.80}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.3}{\ignorespaces \textbf  {v11\_part2 — split-readout cross-talk} --- psychometric (A,B), chronometric (C), and the cued-quadrant attention timecourse (D, the readable summary of the per-frame maps).}}{81}{figure.caption.81}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.2}v11 — parallel dual-stream}{82}{section.B.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.4}{\ignorespaces \textbf  {v11 — parallel dual-stream} --- architecture. Conv patch-embed $\to $ $10\times 10$ tokens; solid arrows forward, dashed red recurrent feedback.}}{82}{figure.caption.82}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.5}{\ignorespaces \textbf  {v11 — parallel dual-stream} --- attention maps at every frame ($T=29$), $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $80$ trials; change at $t=15$).}}{82}{figure.caption.83}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.6}{\ignorespaces \textbf  {v11 — parallel dual-stream} --- psychometric (A,B), chronometric (C), and the cued-quadrant attention timecourse (D, the readable summary of the per-frame maps).}}{83}{figure.caption.84}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.3}v11\_part5 — split-readout cross-talk (distractor-trained)}{84}{section.B.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.7}{\ignorespaces \textbf  {v11\_part5 — split-readout cross-talk (distractor-trained)} --- architecture. Conv patch-embed $\to $ $10\times 10$ tokens; solid arrows forward, dashed red recurrent feedback.}}{84}{figure.caption.85}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.8}{\ignorespaces \textbf  {v11\_part5 — split-readout cross-talk (distractor-trained)} --- attention maps at every frame ($T=29$), $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $80$ trials; change at $t=15$).}}{84}{figure.caption.86}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.9}{\ignorespaces \textbf  {v11\_part5 — split-readout cross-talk (distractor-trained)} --- psychometric (A,B), chronometric (C), and the cued-quadrant attention timecourse (D, the readable summary of the per-frame maps).}}{85}{figure.caption.87}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.4}v5 — memory-as-tokens self-attention}{86}{section.B.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.10}{\ignorespaces \textbf  {v5 — memory-as-tokens self-attention} --- architecture. Conv patch-embed $\to $ $10\times 10$ tokens; solid arrows forward, dashed red recurrent feedback.}}{86}{figure.caption.88}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.11}{\ignorespaces \textbf  {v5 — memory-as-tokens self-attention} --- attention maps at every frame ($T=29$), $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $80$ trials; change at $t=15$).}}{86}{figure.caption.89}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.12}{\ignorespaces \textbf  {v5 — memory-as-tokens self-attention} --- psychometric (A,B), chronometric (C), and the cued-quadrant attention timecourse (D, the readable summary of the per-frame maps).}}{87}{figure.caption.90}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.5}v5\_part2 — cross-attention over memory}{88}{section.B.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.13}{\ignorespaces \textbf  {v5\_part2 — cross-attention over memory} --- architecture. Conv patch-embed $\to $ $10\times 10$ tokens; solid arrows forward, dashed red recurrent feedback.}}{88}{figure.caption.91}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.14}{\ignorespaces \textbf  {v5\_part2 — cross-attention over memory} --- attention maps at every frame ($T=29$), $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $80$ trials; change at $t=15$).}}{88}{figure.caption.92}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.15}{\ignorespaces \textbf  {v5\_part2 — cross-attention over memory} --- psychometric (A,B), chronometric (C), and the cued-quadrant attention timecourse (D, the readable summary of the per-frame maps).}}{89}{figure.caption.93}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.6}v8 — cross-attention with an $H_1$ residual}{90}{section.B.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.16}{\ignorespaces \textbf  {v8 — cross-attention with an $H_1$ residual} --- architecture. Conv patch-embed $\to $ $10\times 10$ tokens; solid arrows forward, dashed red recurrent feedback.}}{90}{figure.caption.94}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.17}{\ignorespaces \textbf  {v8 — cross-attention with an $H_1$ residual} --- attention maps at every frame ($T=29$), $100\%$ cue at $S_1$, for the no-change and change-at-$S_1$ conditions (mean of $80$ trials; change at $t=15$).}}{90}{figure.caption.95}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {B.18}{\ignorespaces \textbf  {v8 — cross-attention with an $H_1$ residual} --- psychometric (A,B), chronometric (C), and the cued-quadrant attention timecourse (D, the readable summary of the per-frame maps).}}{91}{figure.caption.96}\protected@file@percent }
+\gdef \@abspage@last{93}

@@ -1,0 +1,81 @@
+% ============================================================================
+% Upgraded empirical paper — "signatures of primate visual attention"
+% This is the empirical RViT+ extension of the 2025 Morgan--Albanna--Herman
+% Recurrent ViT paper (arXiv:2502.10955), not a revision of the separate 2026
+% normative VDA manuscript, "When does value-directed attention matter?" The
+% Critique/Rebuild/Reconstruction trees belong to that normative lineage.
+% Skeleton \input{}s the section files.
+% NOTE: the affine_ew model is THE model of this paper (closest to MAH's
+% single-model treatment). No architecture comparison.
+% ============================================================================
+\documentclass[11pt]{article}
+
+% --- packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=blue!50!black]{hyperref}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\_\do\:\do\-}
+\makeatother
+% cleveref not assumed; use plain \ref{...} (e.g. "Section~\ref{sec:model}").
+
+% --- theorem environments ---
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% --- notation (shared with MAH) ---
+\newcommand{\Phinorm}{\Phi}
+\newcommand{\HR}{\mathrm{HR}}
+\newcommand{\FAR}{\mathrm{FAR}}
+\newcommand{\dprime}{d'}
+\newcommand{\Nloc}{N}
+\newcommand{\val}{v}
+\newcommand{\valid}{V}
+\newcommand{\alphacued}{\alpha_c}
+\newcommand{\alphauncued}{\alpha_u}
+\newcommand{\VDA}{\mathrm{VDA}}
+\newcommand{\CR}{\mathrm{CR}}
+
+% --- metadata ---
+\title{A recurrent vision transformer trained with reinforcement and temporal self-supervision\\
+       exhibits the signatures of primate visual attention}
+\author{Morgan, Albanna \& Herman\\[2pt]\normalsize [Affiliations]}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{sections/abstract.tex}
+\input{sections/intro.tex}
+\input{sections/model.tex}
+
+% ===== RESULTS — grouped by what each experiment investigates =====
+\input{sections/results_luomaunsell.tex}  % LEAD RESULT — Luo & Maunsell criterion/sensitivity dissociation
+\input{sections/results_detection.tex}   % core cued-detection env (vda4): full battery
+\input{sections/results_value.tex}        % value-directed attention: Validity4, Baruni
+\input{sections/results_vda_battery.tex}  % VDA set-size battery (vda1/2/4/9) + validity/SDT/decode scaling
+\input{sections/results_capacity.tex}     % checkpoints exist; matched analysis pending
+\input{sections/results_rehearsal.tex}    % hypothesis/status; no delay-probe result
+
+\input{sections/discussion.tex}
+\input{sections/methods.tex}
+\input{sections/appendix.tex}
+
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+\end{document}

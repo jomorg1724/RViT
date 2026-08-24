@@ -1,0 +1,52 @@
+% DUAL-MEMORY (the memories query) — atlas variant.
+% Convention: front-end at left, attention in the middle (the variable part), xLSTM + heads
+% at right; solid black = forward dataflow, dashed red = recurrent feedback from frame t-1.
+% Distinguishing feature: BOTH memories H1,H2 build the queries (2N); image+both memories
+% build K=V (3N); the residual+attention output SPLITS into Z1,Z2 that update H1,H2 separately;
+% the HEADS read H2 only. Both memories are fed back (dashed red).
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block (THE distinguishing part) -------------------------------------
+  \node[attn,right=13mm of X,minimum width=26mm,minimum height=13mm] (sa)
+        {Cross-attention\\{\tiny $Q$ from memories}};
+  % the two memory operands that build Q (and also feed K/V) sit above the block
+  \node[op,above=4mm of sa] (qmix) {$Q$};
+  \node[lbl,below=1.4mm of sa,align=center,font=\tiny]
+        {$Q{=}W_q[H_1\|H_2]$, \ $K{=}V{=}[X\|H_1\|H_2]$\\[1pt]
+         $Z{=}\mathrm{res}+\mathrm{softmax}(QK^{\!\top}/\sqrt d)V \to Z_1,Z_2$};
+  % ---- split node: Z -> Z1,Z2 --------------------------------------------------------
+  \node[op,right=10mm of sa] (split) {split};
+  % ---- two memories (stacked) + readout ----------------------------------------------
+  \node[mem,above right=2mm and 9mm of split] (lstm1) {xLSTM$_1$\\{\tiny $H_1$}};
+  \node[mem,below right=2mm and 9mm of split] (lstm2) {xLSTM$_2$\\{\tiny $H_2$}};
+  \node[tok,right=9mm of lstm2,minimum width=12mm] (H) {$H'_2$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads (read H2 only) ----------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X); \draw[flow] (X)--(sa);
+  \draw[flow] (sa)--(split);
+  \draw[flow] (split.north) |- (lstm1.west) node[pos=.62,above,font=\tiny] {$Z_1$};
+  \draw[flow] (split.south) |- (lstm2.west) node[pos=.62,below,font=\tiny] {$Z_2$};
+  \draw[flow] (lstm2)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  % ---- Q/K/V construction ------------------------------------------------------------
+  \draw[qkv] (X.north) |- (qmix.west) node[pos=.85,above,font=\tiny] {$X$};   % image into K,V
+  % ---- recurrence + feedback (both memories) -----------------------------------------
+  % each memory carries its own state forward (small self-loop, top-right)
+  \draw[fb] (lstm1.north east) .. controls +(0,6mm) and +(0,6mm) .. (lstm1.north)
+        node[midway,above,font=\tiny,text=Red!70] {carry};
+  \draw[fb] (lstm2.north east) .. controls +(0,6mm) and +(0,6mm) .. (lstm2.north);
+  % both H1,H2 feed back to build Q (and K,V) at frame t
+  \draw[fb] (lstm1.west) .. controls +(-10mm,10mm) and +(0,13mm) .. (qmix.north)
+        node[pos=.62,above,font=\tiny,text=Red!70] {$H_1^{t-1}$};
+  \draw[fb] (lstm2.south) .. controls +(0,-13mm) and +(0,-13mm) .. (sa.south east)
+        node[pos=.12,below,font=\tiny,text=Red!70] {$H_2^{t-1}$};
+\end{tikzpicture}

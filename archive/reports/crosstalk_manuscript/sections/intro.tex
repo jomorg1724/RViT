@@ -1,0 +1,135 @@
+\section{Introduction}
+\label{sec:intro}
+
+Visual attention is the set of mechanisms by which a behaving animal commits its
+limited processing resources to the small fraction of the visual scene that is
+momentarily most relevant to its goals \citep{carrasco2011visual,
+desimone1995neural, reynolds2009normalization, rust2022priority}. Decades of
+psychophysics and neurophysiology have established a robust catalogue of its
+behavioural and neural signatures: faster and more accurate responses to attended
+stimuli \citep{posner1980attention, carrasco2011visual, hawkins1990visual}, the
+graded dependence of those benefits on the reliability and value of predictive
+cues \citep{mayo2016graded, eckstein2013visual}, and the modulation of single-unit
+responses and inter-areal synchrony throughout the visual hierarchy
+\citep{reynolds2000attention, treue1999reshaping, fries2001modulation,
+gregoriou2009high}. Yet a unified computational account of \emph{why} attention is
+organised the way it is --- of which structural features of the underlying
+circuitry are necessary for attentive behaviour to arise --- remains incomplete
+\citep{mehrani2023self, hassanin2024visual, lindsay2020attention}.
+
+\paragraph{Attention as two coupled computations.}
+A useful way to frame the problem is to recognise that an attending animal must
+perform two logically distinct computations concurrently. It must form a
+\emph{policy} --- a moment-by-moment decision about what to do, such as whether to
+report that a behaviourally relevant event has occurred --- and it must form a
+\emph{value estimate} --- a prediction of how good its current situation is, which
+under any reward-driven account is precisely the quantity that supplies the
+teaching signal for the policy \citep{sutton2018reinforcement, dayan2008decision,
+niv2009reinforcement}. The two computations draw on overlapping but distinguishable
+information. \emph{When and where to act} is driven by bottom-up, image-grounded
+evidence accumulated toward a commitment threshold
+\citep{gold2007neural, roitman2002response, ding2011neural}; \emph{how valuable the
+moment is} depends on accumulated context --- which location was cued, how reliable
+the cue is, how much reward is at stake, how much time has elapsed
+\citep{platt1999neural, sugrue2004matching, stanisor2013neural}. This division maps
+onto a deep distinction in the biology, between a sensory-grounded priority and
+commitment system and a value/prediction-error system, that we take as the central
+motivation for the present work.
+
+\paragraph{The priority/commitment system.}
+A network of topographically organised areas --- the lateral intraparietal area
+(LIP), the frontal eye field (FEF), and the superior colliculus (SC) --- maintains
+a ``priority map'' that combines bottom-up conspicuity with top-down task relevance
+and is read out to guide both overt orienting and covert attention
+\citep{bisley2010lip, fecteau2006salience, thompson2005neuronal,
+veale2017how}. The activity of these areas carries the signature of an evidence
+integrator: LIP firing ramps as the running time-integral of momentary sensory
+evidence toward a decision bound \citep{roitman2002response, huk2005neural}, and
+FEF and SC convert that accumulation into a committed response
+\citep{ding2011neural, stine2023differential}. Causal manipulations place these
+areas upstream of attentive behaviour rather than merely correlated with it:
+sub-threshold microstimulation of FEF or SC \emph{enhances} covert perceptual
+sensitivity at the corresponding location without an eye movement
+\citep{moore2001control, moore2003selective, cavanaugh2006subcortical,
+muller2005microstimulation}, while their inactivation \emph{impairs} covert
+selection \citep{wardak2006contribution, lovejoy2010inactivation,
+zenon2012attention, bollimunta2018fefsc}. Critically, the contribution of the
+image-grounded signal is dissociable from the value it carries: in FEF the
+attentional effect is borne by visually responsive cells, with pure
+movement-related cells suppressed during covert attention
+\citep{thompson2005neuronal, gregoriou2012lesions}, and in SC the deficit produced
+by inactivation survives intact cortical sensory gain \citep{zenon2012attention}.
+
+\paragraph{The value/actor--critic system.}
+Running in parallel, the cortico-basal-ganglia loop implements a reinforcement-
+learning actor--critic: action selection is associated with dorsal striatum (the
+``actor''), while value prediction and the reward-prediction-error teaching signal
+are associated with ventral striatum and midbrain dopamine (the ``critic'')
+\citep{houk1995model, joel2002actor, odoherty2004dissociable, maia2009reinforcement,
+collins2014opponent}. The cornerstone of this account is the close correspondence
+between phasic dopamine firing and the temporal-difference reward-prediction error
+\citep{schultz1997neural, hollerman1998dopamine, montague1996framework}, together
+with the dopamine dependence of cortico-striatal plasticity
+\citep{reynolds2002dopamine, morita2014striatal}. The two systems are not
+independent: the actor learns \emph{only} through a three-factor plasticity rule in
+which the critic's dopaminergic error is the gating third factor
+\citep{kusmierz2017learning, gerstner2018eligibility}, so the value system and the
+action system are bound into a single closed learning loop. This furnishes a strong
+prior expectation --- that policy and value computations cannot be severed without
+breaking learning --- that our model makes precise and tests.
+
+\paragraph{Existing computational models leave the organisational question open.}
+Models of visual attention have captured many of its features one or a few at a
+time --- normalisation-based gain control \citep{reynolds2009normalization},
+bottom-up saliency maps \citep{itti2001computational, koch1985shifts}, hierarchical
+selection \citep{tsotsos1995modeling}, guided visual search
+\citep{wolfe2021guided}, and predictive/active-inference accounts
+\citep{feldman2010attention, parr2017working, mirza2018human}. Few learn their
+attentional strategy from reward as animals do
+\citep{chelazzi2013reward, anderson2016attention, failing2018selection,
+mnih2014recurrent}, and fewer still expose an interpretable, causally manipulable
+internal attention signal. Contemporary transformers, whose self-attention
+mechanism superficially resembles biological selection
+\citep{vaswani2017attention, dosovitskiy2020image, khan2022transformers}, in
+practice emphasise low-level grouping rather than task-dependent, goal-driven
+selection \citep{mehrani2023self}, and lack the recurrent internal state and
+capacity limits that are central to biological attention and working memory
+\citep{luck1997capacity, awh2006interactions, panichello2021attvwm}. Recurrent
+neural networks supply the requisite dynamics \citep{hochreiter1997long,
+beck2024xlstm, sussillo2014neural, mante2013context} but are not, by default,
+interpretable as attention maps. None of these traditions has asked the specific
+question we pose here: holding the learning signal and the components fixed, does
+the \emph{wiring} between the policy and value computations determine whether
+attentive behaviour is acquired?
+
+\paragraph{This work.}
+We developed a recurrent vision transformer that integrates spatial working memory
+with self-attention into a ``recurrent self-attention'' mechanism and is trained
+end-to-end by reinforcement learning on sparse, animal-like reward
+\citep{springenberg2024offline, bellemare2017distributional}. Building on a
+single-stream version of this model that already reproduces hallmark behavioural
+and causal signatures of primate covert attention, we partition the agent into two
+specialised recurrent cross-attention pathways: a \emph{$\mu$ pathway} that queries
+the live image and drives the actor (the decision of when to declare a change), and
+a \emph{$q$ pathway} that reads accumulated memory and drives the distributional
+critic (the value estimate). We then manipulate a single structural variable ---
+inter-pathway coupling --- in the spirit of a lesion experiment, comparing (i) a
+\emph{shared-memory} design in which the pathways cross-talk through a common
+recurrent state, (ii) an \emph{independent} design in which each pathway is given a
+private memory it never shares, and (iii) a \emph{swapped-routing} design that keeps
+the coupling but lets the memory pathway command the policy. We report four central
+findings. First, coupling is required: only the shared-memory design learns the task,
+and the independent design fails to acquire it at all. Second, the requirement is
+asymmetric: the image-grounded pathway must drive the policy; routing the decision
+through the memory pathway collapses the agent identically. Third, the coupled
+architecture is general --- it scales to a nine-stimulus set-size manipulation and to
+an environment with competing distractors, reproducing the attentional signatures in
+each. Fourth, the trained model yields concrete, falsifiable predictions for systems
+neuroscience: a representational dissociation (change-evidence should be decodable
+from the policy pathway, value/context from the value pathway) and a causal
+dissociation (perturbing the value pathway should spare detection while degrading
+value-based modulation, whereas perturbing the policy pathway should abolish
+detection). We use the deliberately interpretable, manipulable structure of the
+model not as an end in itself but as a tool: a generative source of mechanistic
+hypotheses that the experimental study of LIP, FEF, SC and the basal ganglia can
+test.

@@ -1,0 +1,65 @@
+% v11_part2 — SPLIT-READOUT cross-talk dual-stream (single head).
+% SALIENCE: Q=X, K=V=[H1||H2] (2N keys), residual=X -> Z_sal -> ACTOR ONLY; H2=LSTM2(Z_sal).
+% TOP-DOWN: Q=X, K=V=H2 (N keys), residual=H2 -> Z_td -> CRITIC ONLY.
+% Memories: H1=LSTM1(X), H2=LSTM2(Z_sal); both re-enter attention as dashed-red feedback.
+% Convention: front-end left, the two attention streams in the middle (the variable part),
+% memories + split heads at right; solid black = forward, dashed red = recurrent feedback (t-1).
+\begin{tikzpicture}[node distance=6mm and 7mm]
+  % ---- front-end (T=29 conv patch-embed) ---------------------------------------------
+  \node[vae,minimum size=8mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt]
+        (patch.north)--(patch.south) (patch.west)--(patch.east)
+        ($(patch.north)!.33!(patch.east)$)--($(patch.south)!.33!(patch.west)$)
+        ($(patch.north)!.66!(patch.east)$)--($(patch.south)!.66!(patch.west)$);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $50{\times}50$}};
+  \node[vae,right=6mm of patch,align=center,minimum width=14mm] (conv) {conv\\patch-embed\\{\tiny(3 conv)}};
+  \node[tok,right=6mm of conv,align=center] (X) {$X$\\[-1pt]{\tiny 100 tok}\\[-2pt]{\tiny ($10{\times}10$)}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temp.};
+
+  % ---- TWO attention streams (the distinguishing part) -------------------------------
+  % salience stream (upper) -> actor ; top-down stream (lower) -> critic
+  \node[attn,above right=3mm and 8mm of X,minimum width=25mm,minimum height=11mm,font=\scriptsize] (sal)
+        {\textbf{salience} (1 head)\\[1pt]{\tiny $Q{=}X,\ K{=}V{=}[H_1\|H_2]$}\\[-1pt]{\tiny residual $=X$}};
+  \node[attn,below right=3mm and 8mm of X,minimum width=25mm,minimum height=11mm,font=\scriptsize] (td)
+        {\textbf{top-down} (1 head)\\[1pt]{\tiny $Q{=}X,\ K{=}V{=}H_2$}\\[-1pt]{\tiny residual $=H_2$}};
+
+  % ---- memories (H1=LSTM1(X), H2=LSTM2(Z_sal)) — stacked column ----------------------
+  \node[mem,right=8mm of sal,align=center,yshift=3mm,minimum width=13mm] (lstm1) {spatial\\xLSTM$_1$};
+  \node[mem,below=5mm of lstm1,align=center,minimum width=13mm] (lstm2) {spatial\\xLSTM$_2$};
+
+  % ---- split readout: actor<-Z_sal, critic<-Z_td (THE defining feature) --------------
+  \node[head,right=11mm of lstm1,align=center,yshift=1mm] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,right=11mm of td,align=center] (critic){Critic\\{\tiny QR, 5 quant.}};
+
+  % the defining split-readout equation (bottom, left-aligned)
+  \node[lbl,below=4mm of td.south west,anchor=north west,align=left,font=\tiny]
+        {\textbf{SPLIT readout:}\ \ sal $Q{=}X,KV{=}[H_1\|H_2]\to$ \textbf{actor}\\
+         \phantom{\textbf{SPLIT readout:}\ \ }td $\;\,Q{=}X,KV{=}H_2\to$ \textbf{critic}};
+
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(conv); \draw[flow] (conv)--(X);
+  \draw[flow] (X.east) -- ++(2.5mm,0) |- (sal.west);
+  \draw[flow] (X.east) -- ++(2.5mm,0) |- (td.west);
+  % salience output Z_sal -> Actor (the split) AND -> LSTM2
+  \draw[flow] (sal.east) -- ++(2.5mm,0) coordinate(zsal)
+        node[pos=1,above=.3mm,font=\tiny] {$Z_{\mathrm{sal}}$};
+  \draw[flow] (zsal) |- (actor.west);
+  \draw[flow] (zsal) |- (lstm2.west);
+  % top-down output Z_td -> Critic ONLY
+  \draw[flow] (td.east) -- node[pos=.5,above,font=\tiny] {$Z_{\mathrm{td}}$} (critic.west);
+  % image X feeds LSTM1 (H1=LSTM1(X))
+  \draw[flow] (X.north) .. controls +(0,11mm) and +(-5mm,3mm) .. (lstm1.north west)
+        node[pos=.86,above,font=\tiny,text=black!70] {$X$};
+
+  % ---- recurrence + dashed-red feedback into the attention streams -------------------
+  \draw[fb] (lstm1.north) .. controls +(0,5mm) and +(0,5mm) .. (lstm1.north east)
+        node[midway,above,font=\tiny,text=Red!70] {$H^{t}\!\to\!H^{t+1}$};
+  \draw[fb] (lstm2.north east) .. controls +(4mm,3mm) and +(4mm,-3mm) .. (lstm2.south east);
+  % H1 -> salience K/V
+  \draw[fb] (lstm1.south west) .. controls +(-3mm,-2mm) and +(4mm,4mm) .. (sal.north east)
+        node[pos=.9,above,font=\tiny,text=Red!70] {$H_1^{t-1}$};
+  % H2 -> salience K/V  AND  top-down K/V
+  \draw[fb] (lstm2.south) .. controls +(0,-6mm) and +(0,6mm) .. (sal.south east)
+        node[pos=.5,left,font=\tiny,text=Red!70] {$H_2^{t-1}$};
+  \draw[fb] (lstm2.west) .. controls +(-9mm,-13mm) and +(7mm,-2mm) .. (td.south east);
+\end{tikzpicture}

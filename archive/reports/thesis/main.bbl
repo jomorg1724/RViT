@@ -1,0 +1,1268 @@
+\begin{thebibliography}{180}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abdolmaleki et~al.(2018)Abdolmaleki, Springenberg, Tassa, Munos,
+  Heess, and Riedmiller]{abdolmaleki2018maximum}
+Abbas Abdolmaleki, Jost~Tobias Springenberg, Yuval Tassa, R{\'e}mi Munos,
+  Nicolas Heess, and Martin Riedmiller.
+\newblock Maximum a posteriori policy optimisation.
+\newblock In \emph{ICLR}, 2018.
+
+\bibitem[Anderson(2016)]{anderson2016attention}
+Brian~A Anderson.
+\newblock The attention habit: How reward learning shapes attentional
+  selection.
+\newblock \emph{Annals of the new York Academy of Sciences}, 1369\penalty0
+  (1):\penalty0 24--39, 2016.
+
+\bibitem[Anderson et~al.(2016)Anderson, Kuwabara, Wong, Gean, Rahmim,
+  Bra{\v{s}}i{\'c}, George, Frolov, Courtney, and Yantis]{anderson2016role}
+Brian~A Anderson, Hiroto Kuwabara, Dean~F Wong, Emily~G Gean, Arman Rahmim,
+  James~R Bra{\v{s}}i{\'c}, Noble George, Boris Frolov, Susan~M Courtney, and
+  Steven Yantis.
+\newblock The role of dopamine in value-based attentional orienting.
+\newblock \emph{Current Biology}, 26\penalty0 (4):\penalty0 550--555, 2016.
+
+\bibitem[Armstrong and Moore(2007)]{armstrong2007selective}
+Katherine~M Armstrong and Tirin Moore.
+\newblock Selective gain modulation of extrastriate area v4 by frontal eye
+  field stimulation.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 104\penalty0
+  (22):\penalty0 9499--9504, 2007.
+\newblock \doi{10.1073/pnas.0701104104}.
+
+\bibitem[Awh et~al.(2006)Awh, Vogel, and Oh]{awh2006interactions}
+Edward Awh, Edward~K Vogel, and S-H Oh.
+\newblock Interactions between attention and working memory.
+\newblock \emph{Neuroscience}, 139\penalty0 (1):\penalty0 201--208, 2006.
+
+\bibitem[Baars(1988)]{baars1988cognitive}
+Bernard~J Baars.
+\newblock \emph{A Cognitive Theory of Consciousness}.
+\newblock Cambridge University Press, 1988.
+
+\bibitem[Baddeley(1992)]{baddeley1992working}
+Alan Baddeley.
+\newblock Working memory.
+\newblock \emph{Science}, 255\penalty0 (5044):\penalty0 556--559, 1992.
+
+\bibitem[Barak(2017)]{barak2017recurrent}
+Omri Barak.
+\newblock Recurrent neural networks as versatile tools of neuroscience
+  research.
+\newblock \emph{Current opinion in neurobiology}, 46:\penalty0 1--6, 2017.
+
+\bibitem[Baruni et~al.(2015)Baruni, Lau, and Salzman]{baruni2015reward}
+Jalal~K Baruni, Brian Lau, and C~Daniel Salzman.
+\newblock Reward expectation differentially modulates attentional behavior and
+  activity in visual area v4.
+\newblock \emph{Nature neuroscience}, 18\penalty0 (11):\penalty0 1656--1663,
+  2015.
+
+\bibitem[Beck and Kastner(2009)]{beck2009top}
+Diane~M Beck and Sabine Kastner.
+\newblock Top-down and bottom-up mechanisms in biasing competition in the human
+  brain.
+\newblock \emph{Vision research}, 49\penalty0 (10):\penalty0 1154--1165, 2009.
+
+\bibitem[Beck et~al.(2024)Beck, P{\"o}ppel, Spanring, Auer, Prudnikova, Kopp,
+  Klambauer, Brandstetter, and Hochreiter]{beck2024xlstm}
+Maximilian Beck, Korbinian P{\"o}ppel, Markus Spanring, Andreas Auer,
+  Oleksandra Prudnikova, Michael Kopp, G{\"u}nter Klambauer, Johannes
+  Brandstetter, and Sepp Hochreiter.
+\newblock xlstm: Extended long short-term memory.
+\newblock \emph{arXiv preprint arXiv:2405.04517}, 2024.
+
+\bibitem[Bellemare et~al.(2017)Bellemare, Dabney, and
+  Munos]{bellemare2017distributional}
+Marc~G Bellemare, Will Dabney, and R{\'e}mi Munos.
+\newblock A distributional perspective on reinforcement learning.
+\newblock In \emph{ICML}, 2017.
+
+\bibitem[Bisley and Goldberg(2010)]{bisley2010lip}
+James~W Bisley and Michael~E Goldberg.
+\newblock {Attention, Intention, and Priority in the Parietal Lobe}.
+\newblock \emph{Annual review of neuroscience}, 33\penalty0 (1):\penalty0 1 --
+  21, 2010.
+\newblock \doi{10.1146/annurev-neuro-060909-152823}.
+
+\bibitem[Bisley and Mirpour(2019)]{bisley2019neural}
+James~W Bisley and Koorosh Mirpour.
+\newblock The neural instantiation of a priority map.
+\newblock \emph{Current opinion in psychology}, 29:\penalty0 108--112, 2019.
+
+\bibitem[Bollimunta et~al.(2018)Bollimunta, Bogadhi, and
+  Krauzlis]{bollimunta2018fefsc}
+Anil Bollimunta, Amarender~R. Bogadhi, and Richard~J. Krauzlis.
+\newblock Comparing frontal eye field and superior colliculus contributions to
+  covert spatial attention.
+\newblock \emph{Nature Communications}, 9\penalty0 (1):\penalty0 3553, 2018.
+\newblock ISSN 2041-1723.
+\newblock \doi{10.1038/s41467-018-06042-2}.
+\newblock URL \url{https://doi.org/10.1038/s41467-018-06042-2}.
+
+\bibitem[Botvinick et~al.(2020)Botvinick, Wang, Dabney, Miller, and
+  Kurth-Nelson]{botvinick2020deep}
+Matthew Botvinick, Jane~X Wang, Will Dabney, Kevin~J Miller, and Zeb
+  Kurth-Nelson.
+\newblock Deep reinforcement learning and its neuroscientific implications.
+\newblock \emph{Neuron}, 107\penalty0 (4):\penalty0 603--616, 2020.
+
+\bibitem[Bruce and Goldberg(1985)]{bruce1985primate}
+Charles~J Bruce and Michael~E Goldberg.
+\newblock Primate frontal eye fields. i. single neurons discharging before
+  saccades.
+\newblock \emph{Journal of Neurophysiology}, 53\penalty0 (3):\penalty0
+  603--635, 1985.
+\newblock \doi{10.1152/jn.1985.53.3.603}.
+
+\bibitem[Cameron et~al.(2002)Cameron, Tai, and Carrasco]{cameron2002sens}
+E.Leslie Cameron, Joanna~C Tai, and Marisa Carrasco.
+\newblock Covert attention affects the psychometric function of contrast
+  sensitivity.
+\newblock \emph{Vision Research}, 42\penalty0 (8):\penalty0 949--967, 2002.
+\newblock ISSN 0042-6989.
+\newblock \doi{https://doi.org/10.1016/S0042-6989(02)00039-1}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0042698902000391}.
+
+\bibitem[Caron et~al.(2021)Caron, Touvron, Misra, J{\'e}gou, Mairal,
+  Bojanowski, and Joulin]{caron2021emerging}
+Mathilde Caron, Hugo Touvron, Ishan Misra, Herv{\'e} J{\'e}gou, Julien Mairal,
+  Piotr Bojanowski, and Armand Joulin.
+\newblock Emerging properties in self-supervised vision transformers.
+\newblock In \emph{Proceedings of the IEEE/CVF international conference on
+  computer vision}, pages 9650--9660, 2021.
+
+\bibitem[Carrasco(2011)]{carrasco2011visual}
+Marisa Carrasco.
+\newblock Visual attention: The past 25 years.
+\newblock \emph{Vision research}, 51\penalty0 (13):\penalty0 1484--1525, 2011.
+
+\bibitem[Cavanaugh et~al.(2006)Cavanaugh, Alvarez, and
+  Wurtz]{cavanaugh2006subcortical}
+James Cavanaugh, Bruno~D Alvarez, and Robert~H Wurtz.
+\newblock Enhanced performance with brain stimulation: attentional shift or
+  visual cue?
+\newblock \emph{Journal of Neuroscience}, 26\penalty0 (44):\penalty0
+  11347--11358, 2006.
+
+\bibitem[Chelazzi et~al.(2013)Chelazzi, Perlato, Santandrea, and
+  Libera]{chelazzi2013reward}
+Leonardo Chelazzi, Andrea Perlato, Elisa Santandrea, and Chiara~Della Libera.
+\newblock {Rewards teach visual selective attention}.
+\newblock \emph{Vision Research}, 85:\penalty0 58--72, 2013.
+\newblock ISSN 0042-6989.
+\newblock \doi{10.1016/j.visres.2012.12.005}.
+
+\bibitem[Chelazzi et~al.(2014)Chelazzi, E{\v{s}}to{\v{c}}inov{\'a}, Calletti,
+  Gerfo, Sani, Della~Libera, and Santandrea]{chelazzi2014altering}
+Leonardo Chelazzi, Jana E{\v{s}}to{\v{c}}inov{\'a}, Riccardo Calletti,
+  Emanuele~Lo Gerfo, Ilaria Sani, Chiara Della~Libera, and Elisa Santandrea.
+\newblock Altering spatial priority maps via reward-based learning.
+\newblock \emph{Journal of Neuroscience}, 34\penalty0 (25):\penalty0
+  8594--8604, 2014.
+
+\bibitem[Chun et~al.(2011)Chun, Golomb, and Turk-Browne]{chun2011taxonomy}
+Marvin~M Chun, Julie~D Golomb, and Nicholas~B Turk-Browne.
+\newblock A taxonomy of external and internal attention.
+\newblock \emph{Annual review of psychology}, 62\penalty0 (1):\penalty0
+  73--101, 2011.
+
+\bibitem[Cohen and Maunsell(2009)]{cohen2009attention}
+Marlene~R Cohen and John~HR Maunsell.
+\newblock Attention improves performance primarily by reducing interneuronal
+  correlations.
+\newblock \emph{Nature neuroscience}, 12\penalty0 (12):\penalty0 1594--1600,
+  2009.
+
+\bibitem[Colas et~al.(2017)Colas, Pauli, Larsen, Tyszka, and
+  O'Doherty]{colas2017distributed}
+Jaron~T Colas, Wolfgang~M Pauli, Tobias Larsen, J~Michael Tyszka, and John~P
+  O'Doherty.
+\newblock Distributed coding of duration in rodent prefrontal cortex during
+  time reproduction.
+\newblock \emph{PLoS Computational Biology}, 13\penalty0 (10):\penalty0
+  e1005810, 2017.
+\newblock \doi{10.1371/journal.pcbi.1005810}.
+\newblock Action-value prediction errors found throughout striatum,
+  complicating a clean actor/critic split.
+
+\bibitem[Collins and Frank(2014)]{collins2014opponent}
+Anne G~E Collins and Michael~J Frank.
+\newblock Opponent actor learning (opal): Modeling interactive effects of
+  striatal dopamine on reinforcement learning and choice incentive.
+\newblock \emph{Psychological Review}, 121\penalty0 (3):\penalty0 337--366,
+  2014.
+\newblock \doi{10.1037/a0037015}.
+
+\bibitem[Cosman et~al.(2018)Cosman, Lowe, Zinke, Woodman, and
+  Schall]{cosman2018prefrontal}
+Joshua~D Cosman, Kaleb~A Lowe, Wolfgang Zinke, Geoffrey~F Woodman, and
+  Jeffrey~D Schall.
+\newblock Prefrontal control of visual distraction.
+\newblock \emph{Current Biology}, 28\penalty0 (3):\penalty0 414--420, 2018.
+
+\bibitem[Dabney et~al.(2018)Dabney, Rowland, Bellemare, and
+  Munos]{dabney2018distributional}
+Will Dabney, Mark Rowland, Marc~G Bellemare, and R{\'e}mi Munos.
+\newblock Distributional reinforcement learning with quantile regression.
+\newblock In \emph{AAAI}, 2018.
+
+\bibitem[Dabney et~al.(2020)Dabney, Kurth-Nelson, Uchida, Starkweather,
+  Hassabis, Munos, and Botvinick]{dabney2020distributional}
+Will Dabney, Zeb Kurth-Nelson, Naoshige Uchida, Clara~Kwon Starkweather, Demis
+  Hassabis, R{\'e}mi Munos, and Matthew Botvinick.
+\newblock A distributional code for value in dopamine-based reinforcement
+  learning.
+\newblock \emph{Nature}, 577\penalty0 (7792):\penalty0 671--675, 2020.
+
+\bibitem[Dayan and Daw(2008)]{dayan2008decision}
+Peter Dayan and Nathaniel~D Daw.
+\newblock Decision theory, reinforcement learning, and the brain.
+\newblock \emph{Cognitive, Affective, \& Behavioral Neuroscience}, 8\penalty0
+  (4):\penalty0 429--453, 2008.
+
+\bibitem[Dehaene and Changeux(2011)]{dehaene2011experimental}
+Stanislas Dehaene and Jean-Pierre Changeux.
+\newblock Experimental and theoretical approaches to conscious processing.
+\newblock \emph{Neuron}, 70\penalty0 (2):\penalty0 200--227, 2011.
+
+\bibitem[Desimone(1998)]{desimone1998visual}
+Robert Desimone.
+\newblock Visual attention mediated by biased competition in extrastriate
+  visual cortex.
+\newblock \emph{Philosophical Transactions of the Royal Society of London.
+  Series B: Biological Sciences}, 353\penalty0 (1373):\penalty0 1245--1255,
+  1998.
+
+\bibitem[Desimone et~al.(1995)Desimone, Duncan, et~al.]{desimone1995neural}
+Robert Desimone, John Duncan, et~al.
+\newblock Neural mechanisms of selective visual attention.
+\newblock \emph{Annual review of neuroscience}, 18\penalty0 (1):\penalty0
+  193--222, 1995.
+
+\bibitem[Deubel and Schneider(1996)]{deubel1996saccade}
+Heiner Deubel and Werner~X Schneider.
+\newblock Saccade target selection and object recognition: Evidence for a
+  common attentional mechanism.
+\newblock \emph{Vision Research}, 36\penalty0 (12):\penalty0 1827--1837, 1996.
+
+\bibitem[Ding and Gold(2012)]{ding2011neural}
+Long Ding and Joshua~I Gold.
+\newblock Neural correlates of perceptual decision making before, during, and
+  after decision commitment in monkey frontal eye field.
+\newblock \emph{Cerebral Cortex}, 22\penalty0 (5):\penalty0 1052--1067, 2012.
+\newblock \doi{10.1093/cercor/bhr178}.
+\newblock Often cited as Ding \& Gold 2011.
+
+\bibitem[Dosovitskiy et~al.(2020)Dosovitskiy, Beyer, Kolesnikov, Weissenborn,
+  Zhai, Unterthiner, Dehghani, Minderer, Heigold, Gelly,
+  et~al.]{dosovitskiy2020image}
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn,
+  Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg
+  Heigold, Sylvain Gelly, et~al.
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+\newblock \emph{arXiv preprint arXiv:2010.11929}, 2020.
+
+\bibitem[Downing(2000)]{downing2000interactions}
+Paul~E Downing.
+\newblock Interactions between visual working memory and selective attention.
+\newblock \emph{Psychological science}, 11\penalty0 (6):\penalty0 467--473,
+  2000.
+
+\bibitem[Driscoll et~al.(2024)Driscoll, Shenoy, and
+  Sussillo]{driscoll2024flexible}
+Laura~N Driscoll, Krishna Shenoy, and David Sussillo.
+\newblock Flexible multitask computation in recurrent networks utilizes shared
+  dynamical motifs.
+\newblock \emph{Nature Neuroscience}, 27\penalty0 (7):\penalty0 1349--1363,
+  2024.
+
+\bibitem[Eckstein(2011)]{eckstein2013visual}
+Miguel~P Eckstein.
+\newblock Visual search: A retrospective.
+\newblock \emph{Journal of Vision}, 11\penalty0 (5):\penalty0 14, 2011.
+
+\bibitem[Failing and Theeuwes(2018)]{failing2018selection}
+Michel Failing and Jan Theeuwes.
+\newblock Selection history: How reward modulates selectivity of visual
+  attention.
+\newblock \emph{Psychonomic bulletin \& review}, 25\penalty0 (2):\penalty0
+  514--538, 2018.
+
+\bibitem[Fecteau and Munoz(2006)]{fecteau2006salience}
+Jillian~H Fecteau and Douglas~P Munoz.
+\newblock Salience, relevance, and firing: a priority map for target selection.
+\newblock \emph{Trends in cognitive sciences}, 10\penalty0 (8):\penalty0
+  382--390, 2006.
+
+\bibitem[Feldman and Friston(2010)]{feldman2010attention}
+Harriet Feldman and Karl~J Friston.
+\newblock Attention, uncertainty, and free-energy.
+\newblock \emph{Frontiers in Human Neuroscience}, 4:\penalty0 215, 2010.
+
+\bibitem[Fries et~al.(2001)Fries, Reynolds, Rorie, and
+  Desimone]{fries2001modulation}
+Pascal Fries, John~H Reynolds, Alan~E Rorie, and Robert Desimone.
+\newblock Modulation of oscillatory neuronal synchronization by selective
+  visual attention.
+\newblock \emph{Science}, 291\penalty0 (5508):\penalty0 1560--1563, 2001.
+
+\bibitem[Fujimoto et~al.(2018)Fujimoto, van Hoof, and
+  Meger]{fujimoto2018addressing}
+Scott Fujimoto, Herke van Hoof, and David Meger.
+\newblock Addressing function approximation error in actor-critic methods.
+\newblock In \emph{ICML}, 2018.
+
+\bibitem[Gattass and Desimone(2014)]{gattass2014effect}
+Ricardo Gattass and Robert Desimone.
+\newblock Effect of microstimulation of the superior colliculus on visual space
+  attention.
+\newblock \emph{Journal of cognitive neuroscience}, 26\penalty0 (6):\penalty0
+  1208--1219, 2014.
+
+\bibitem[Gazzaley and Nobre(2012)]{gazzaley2012top}
+Adam Gazzaley and Anna~C Nobre.
+\newblock Top-down modulation: bridging selective attention and working memory.
+\newblock \emph{Trends in cognitive sciences}, 16\penalty0 (2):\penalty0
+  129--135, 2012.
+
+\bibitem[Gershman and {\"O}lveczky(2020)]{gershman2020neurobiology}
+Samuel~J Gershman and Bence~P {\"O}lveczky.
+\newblock The neurobiology of deep reinforcement learning.
+\newblock \emph{Current Biology}, 30\penalty0 (11):\penalty0 R629--R632, 2020.
+
+\bibitem[Gerstner et~al.(2018)Gerstner, Lehmann, Liakoni, Corneil, and
+  Brea]{gerstner2018eligibility}
+Wulfram Gerstner, Marco Lehmann, Vasiliki Liakoni, Dane Corneil, and Johanni
+  Brea.
+\newblock Eligibility traces and plasticity on behavioral time scales.
+\newblock \emph{Frontiers in Neural Circuits}, 12:\penalty0 53, 2018.
+
+\bibitem[Ghose and Maunsell(2002)]{ghose2002attentional}
+Geoffrey~M Ghose and John~HR Maunsell.
+\newblock Attentional modulation in visual cortex depends on task timing.
+\newblock \emph{Nature}, 419\penalty0 (6907):\penalty0 616--620, 2002.
+
+\bibitem[Glimcher(2011)]{glimcher2011understanding}
+Paul~W Glimcher.
+\newblock Understanding dopamine and reinforcement learning: the dopamine
+  reward prediction error hypothesis.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 108\penalty0
+  (supplement\_3):\penalty0 15647--15654, 2011.
+
+\bibitem[Gold and Shadlen(2007)]{gold2007neural}
+Joshua~I Gold and Michael~N Shadlen.
+\newblock The neural basis of decision making.
+\newblock \emph{Annual Review of Neuroscience}, 30:\penalty0 535--574, 2007.
+\newblock \doi{10.1146/annurev.neuro.29.051605.113038}.
+
+\bibitem[Gottlieb and Balan(2010)]{gottlieb2010infospace}
+Jacqueline Gottlieb and Puiu Balan.
+\newblock {Attention as a decision in information space}.
+\newblock \emph{Trends in Cognitive Sciences}, 14\penalty0 (6):\penalty0
+  240--248, 2010.
+\newblock ISSN 1364-6613.
+\newblock \doi{10.1016/j.tics.2010.03.001}.
+
+\bibitem[Gottlieb et~al.(2014)Gottlieb, Hayhoe, Hikosaka, and
+  Rangel]{gottlieb2014attention}
+Jacqueline Gottlieb, Mary Hayhoe, Okihide Hikosaka, and Antonio Rangel.
+\newblock Attention, reward, and information seeking.
+\newblock \emph{Journal of Neuroscience}, 34\penalty0 (46):\penalty0
+  15497--15504, 2014.
+
+\bibitem[Green and Swets(1966)]{green1966signal}
+David~M Green and John~A Swets.
+\newblock \emph{Signal Detection Theory and Psychophysics}.
+\newblock Wiley, 1966.
+
+\bibitem[Gregoriou et~al.(2009)Gregoriou, Gotts, Zhou, and
+  Desimone]{gregoriou2009high}
+Georgia~G Gregoriou, Stephen~J Gotts, Huihui Zhou, and Robert Desimone.
+\newblock High-frequency, long-range coupling between prefrontal and visual
+  cortex during attention.
+\newblock \emph{Science}, 324\penalty0 (5931):\penalty0 1207--1210, 2009.
+\newblock \doi{10.1126/science.1171402}.
+
+\bibitem[Gregoriou et~al.(2012)Gregoriou, Gotts, and
+  Desimone]{gregoriou2012lesions}
+Georgia~G Gregoriou, Stephen~J Gotts, and Robert Desimone.
+\newblock Cell-type-specific synchronization of neural activity in the frontal
+  eye field with area v4 during attention.
+\newblock \emph{Neuron}, 73\penalty0 (3):\penalty0 581--594, 2012.
+
+\bibitem[Gregoriou et~al.(2014)Gregoriou, Rossi, Ungerleider, and
+  Desimone]{gregoriou2014lesions}
+Georgia~G Gregoriou, Andrew~F Rossi, Leslie~G Ungerleider, and Robert Desimone.
+\newblock Lesions of prefrontal cortex reduce attentional modulation of
+  neuronal responses and synchrony in v4.
+\newblock \emph{Nature Neuroscience}, 17\penalty0 (7):\penalty0 1003--1011,
+  2014.
+\newblock \doi{10.1038/nn.3742}.
+
+\bibitem[Hanks et~al.(2011)Hanks, Mazurek, Kiani, Hopp, and
+  Shadlen]{hanks2011elapsed}
+Timothy~D Hanks, Mark~E Mazurek, Roozbeh Kiani, Elisabeth Hopp, and Michael~N
+  Shadlen.
+\newblock Elapsed decision time affects the weighting of prior probability in a
+  perceptual decision task.
+\newblock \emph{Journal of Neuroscience}, 31\penalty0 (17):\penalty0
+  6339--6352, 2011.
+\newblock \doi{10.1523/JNEUROSCI.5613-10.2011}.
+
+\bibitem[Hassanin et~al.(2024{\natexlab{a}})Hassanin, Anwar, Radwan, Khan, and
+  Mian]{hassanin2024visattmod}
+Mohammed Hassanin, Saeed Anwar, Ibrahim Radwan, Fahad~Shahbaz Khan, and Ajmal
+  Mian.
+\newblock {Visual attention methods in deep learning: An in-depth survey}.
+\newblock \emph{Information Fusion}, 108:\penalty0 102417, 2024{\natexlab{a}}.
+\newblock ISSN 1566-2535.
+\newblock \doi{10.1016/j.inffus.2024.102417}.
+
+\bibitem[Hassanin et~al.(2024{\natexlab{b}})Hassanin, Anwar, Radwan, Khan, and
+  Mian]{hassanin2024visual}
+Mohammed Hassanin, Saeed Anwar, Ibrahim Radwan, Fahad~Shahbaz Khan, and Ajmal
+  Mian.
+\newblock Visual attention methods in deep learning: An in-depth survey.
+\newblock \emph{Information Fusion}, 108:\penalty0 102417, 2024{\natexlab{b}}.
+
+\bibitem[Hawkins et~al.(1990)Hawkins, Hillyard, Luck, Mouloua, Downing, and
+  Woodward]{hawkins1990visual}
+Harold~L Hawkins, Steven~A Hillyard, Steven~J Luck, Mustapha Mouloua, Cathryn~J
+  Downing, and Donald~P Woodward.
+\newblock Visual attention modulates signal detectability.
+\newblock \emph{Journal of Experimental Psychology: Human Perception and
+  Performance}, 16\penalty0 (4):\penalty0 802, 1990.
+
+\bibitem[Herman and Krauzlis(2017{\natexlab{a}})]{herman2017color}
+James~P Herman and Richard~J Krauzlis.
+\newblock Attention-related modulation of activity in the superior colliculus
+  during a color change-detection task.
+\newblock \emph{Journal of Neurophysiology}, 2017{\natexlab{a}}.
+
+\bibitem[Herman and Krauzlis(2017{\natexlab{b}})]{herman2017colorchange}
+James~P. Herman and Richard~J. Krauzlis.
+\newblock {Color-Change Detection Activity in the Primate Superior Colliculus}.
+\newblock \emph{eNeuro}, 4\penalty0 (2):\penalty0 ENEURO.0046--17.2017, 3
+  2017{\natexlab{b}}.
+\newblock ISSN 2373-2822.
+\newblock \doi{10.1523/eneuro.0046-17.2017}.
+
+\bibitem[Herman et~al.(2018{\natexlab{a}})Herman, Katz, and
+  Krauzlis]{herman2018gain}
+James~P Herman, Leor~N Katz, and Richard~J Krauzlis.
+\newblock Gain control in the primate superior colliculus during covert spatial
+  attention.
+\newblock \emph{PLoS Computational Biology}, 14\penalty0 (11):\penalty0
+  e1006681, 2018{\natexlab{a}}.
+
+\bibitem[Herman et~al.(2018{\natexlab{b}})Herman, Katz, and
+  Krauzlis]{herman2018midbrain}
+James~P Herman, Leor~N Katz, and Richard~J Krauzlis.
+\newblock Midbrain activity can explain perceptual decisions during an
+  attention task.
+\newblock \emph{Nature neuroscience}, 21\penalty0 (12):\penalty0 1651--1655,
+  2018{\natexlab{b}}.
+
+\bibitem[Herman et~al.(2020)Herman, Arcizet, and Krauzlis]{herman2020attention}
+James~P Herman, Fabrice Arcizet, and Richard~J Krauzlis.
+\newblock Attention-related modulation of caudate neurons depends on superior
+  colliculus activity.
+\newblock \emph{eLife}, 9:\penalty0 e53998, sep 2020.
+\newblock ISSN 2050-084X.
+\newblock \doi{10.7554/eLife.53998}.
+\newblock URL \url{https://doi.org/10.7554/eLife.53998}.
+
+\bibitem[Hickey et~al.(2010)Hickey, Chelazzi, and Theeuwes]{hickey2010reward}
+Clayton Hickey, Leonardo Chelazzi, and Jan Theeuwes.
+\newblock Reward changes salience in human vision via the anterior cingulate.
+\newblock \emph{Journal of Neuroscience}, 30\penalty0 (33):\penalty0
+  11096--11103, 2010.
+
+\bibitem[Hikosaka et~al.(2006)Hikosaka, Nakamura, and
+  Nakahara]{hikosaka2006basal}
+Okihide Hikosaka, Kae Nakamura, and Hiroyuki Nakahara.
+\newblock Basal ganglia orient eyes to reward.
+\newblock \emph{Journal of neurophysiology}, 95\penalty0 (2):\penalty0
+  567--584, 2006.
+
+\bibitem[Hikosaka et~al.(2014)Hikosaka, Kim, Yasuda, and
+  Yamamoto]{hikosaka2014basal}
+Okihide Hikosaka, Hyoung~F Kim, Masaharu Yasuda, and Shinya Yamamoto.
+\newblock Basal ganglia circuits for reward value-guided behavior.
+\newblock \emph{Annual Review of Neuroscience}, 37:\penalty0 289--306, 2014.
+
+\bibitem[Hochreiter and Schmidhuber(1997)]{hochreiter1997long}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock \emph{Neural computation}, 9\penalty0 (8):\penalty0 1735--1780, 1997.
+
+\bibitem[Hoffman and Subramaniam(1995)]{hoffman1995visual}
+James~E Hoffman and Baskaran Subramaniam.
+\newblock Visual attention and eye movements.
+\newblock \emph{Perception \& Psychophysics}, 57\penalty0 (6):\penalty0
+  787--795, 1995.
+
+\bibitem[Hollerman and Schultz(1998)]{hollerman1998dopamine}
+Jeffrey~R Hollerman and Wolfram Schultz.
+\newblock Dopamine neurons report an error in the temporal prediction of reward
+  during learning.
+\newblock \emph{Nature Neuroscience}, 1\penalty0 (4):\penalty0 304--309, 1998.
+\newblock \doi{10.1038/1124}.
+
+\bibitem[Houk et~al.(1995)Houk, Adams, and Barto]{houk1995model}
+James~C Houk, James~L Adams, and Andrew~G Barto.
+\newblock A model of how the basal ganglia generate and use neural signals that
+  predict reinforcement.
+\newblock In James~C Houk, Joel~L Davis, and David~G Beiser, editors,
+  \emph{Models of Information Processing in the Basal Ganglia}, pages 249--270.
+  MIT Press, 1995.
+
+\bibitem[Huk and Shadlen(2005)]{huk2005neural}
+Alexander~C Huk and Michael~N Shadlen.
+\newblock Neural activity in macaque parietal cortex reflects temporal
+  integration of visual motion signals during perceptual decision making.
+\newblock \emph{Journal of Neuroscience}, 25\penalty0 (45):\penalty0
+  10420--10436, 2005.
+\newblock \doi{10.1523/JNEUROSCI.4684-04.2005}.
+
+\bibitem[Itti and Koch(2001)]{itti2001computational}
+Laurent Itti and Christof Koch.
+\newblock Computational modelling of visual attention.
+\newblock \emph{Nature Reviews Neuroscience}, 2\penalty0 (3):\penalty0
+  194--203, 2001.
+
+\bibitem[Jeurissen et~al.(2022)Jeurissen, Shushruth, El-Shamayleh, Horwitz, and
+  Shadlen]{jeurissen2022rhesus}
+Danique Jeurissen, S~Shushruth, Yasmine El-Shamayleh, Gregory~D Horwitz, and
+  Michael~N Shadlen.
+\newblock Disruption of posterior parietal cortex during a perceptual decision.
+\newblock \emph{Neuron}, 2022.
+\newblock LIP accumulation correlated-but-not-indispensable; verify
+  volume/pages before submission.
+
+\bibitem[Joel et~al.(2002)Joel, Niv, and Ruppin]{joel2002actor}
+Daphna Joel, Yael Niv, and Eytan Ruppin.
+\newblock Actor--critic models of the basal ganglia: New anatomical and
+  computational perspectives.
+\newblock \emph{Neural Networks}, 15\penalty0 (4-6):\penalty0 535--547, 2002.
+\newblock \doi{10.1016/S0893-6080(02)00047-3}.
+
+\bibitem[Katz et~al.(2016)Katz, Yates, Pillow, and Huk]{katz2016dissociated}
+Leor~N Katz, Jacob~L Yates, Jonathan~W Pillow, and Alexander~C Huk.
+\newblock Dissociated functional significance of decision-related activity in
+  the primate dorsal stream.
+\newblock \emph{Nature}, 535\penalty0 (7611):\penalty0 285--288, 2016.
+\newblock \doi{10.1038/nature18617}.
+\newblock Inactivating sensory MT impairs discrimination; inactivating
+  accumulating LIP does not.
+
+\bibitem[Katz et~al.(2025)Katz, Bohlen, Yu, Mejias-Aponte, Sommer, and
+  Krauzlis]{katz2025optogenetic}
+Leor~N Katz, Martin~O Bohlen, Gongchen Yu, Carlos Mejias-Aponte, Marc~A Sommer,
+  and Richard~J Krauzlis.
+\newblock Optogenetic manipulation of covert attention in the nonhuman primate.
+\newblock \emph{Journal of Cognitive Neuroscience}, 37\penalty0 (2):\penalty0
+  266--285, 2025.
+
+\bibitem[Khan et~al.(2022)Khan, Naseer, Hayat, Zamir, Khan, and
+  Shah]{khan2022transformers}
+Salman Khan, Muzammal Naseer, Munawar Hayat, Syed~Waqas Zamir, Fahad~Shahbaz
+  Khan, and Mubarak Shah.
+\newblock Transformers in vision: A survey.
+\newblock \emph{ACM computing surveys (CSUR)}, 54\penalty0 (10s):\penalty0
+  1--41, 2022.
+
+\bibitem[Kietzmann et~al.(2019)Kietzmann, Spoerer, S{\"o}rensen, Cichy, Hauk,
+  and Kriegeskorte]{kietzmann2019recurrence}
+Tim~C Kietzmann, Courtney~J Spoerer, Lynn~KA S{\"o}rensen, Radoslaw~M Cichy,
+  Olaf Hauk, and Nikolaus Kriegeskorte.
+\newblock Recurrence is required to capture the representational dynamics of
+  the human visual system.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 116\penalty0
+  (43):\penalty0 21854--21863, 2019.
+
+\bibitem[Kingma and Welling(2014)]{kingma2014autoencoding}
+Diederik~P Kingma and Max Welling.
+\newblock Auto-encoding variational {Bayes}.
+\newblock In \emph{ICLR}, 2014.
+
+\bibitem[Kiyonaga and Egner(2013)]{kiyonaga2013working}
+Anastasia Kiyonaga and Tobias Egner.
+\newblock Working memory as internal attention: Toward an integrative account
+  of internal and external selection processes.
+\newblock \emph{Psychonomic bulletin \& review}, 20:\penalty0 228--242, 2013.
+
+\bibitem[Klink et~al.(2014)Klink, Jentgens, and Lorteije]{klink2014priority}
+P~Christiaan Klink, Pia Jentgens, and Jeannette~AM Lorteije.
+\newblock Priority maps explain the roles of value, attention, and salience in
+  goal-oriented behavior.
+\newblock \emph{Journal of Neuroscience}, 34\penalty0 (42):\penalty0
+  13867--13869, 2014.
+
+\bibitem[Knudsen(2007)]{knudsen2007fundamental}
+Eric~I Knudsen.
+\newblock Fundamental components of attention.
+\newblock \emph{Annual Review of Neuroscience}, 30:\penalty0 57--78, 2007.
+
+\bibitem[Koch and Ullman(1985)]{koch1985shifts}
+Christof Koch and Shimon Ullman.
+\newblock Shifts in selective visual attention: towards the underlying neural
+  circuitry.
+\newblock \emph{Human Neurobiology}, 4\penalty0 (4):\penalty0 219--227, 1985.
+
+\bibitem[Krauzlis et~al.(2013)Krauzlis, Lovejoy, and
+  Z{\'e}non]{krauzlis2013superior}
+Richard~J Krauzlis, Lee~P Lovejoy, and Alexandre Z{\'e}non.
+\newblock Superior colliculus and visual spatial attention.
+\newblock \emph{Annual review of neuroscience}, 36:\penalty0 165--182, 2013.
+
+\bibitem[Krauzlis et~al.(2018)Krauzlis, Bogadhi, Herman, and
+  Bollimunta]{krauzlis2018selective}
+Richard~J Krauzlis, Amarender~R Bogadhi, James~P Herman, and Anil Bollimunta.
+\newblock Selective attention without a neocortex.
+\newblock \emph{Cortex}, 102:\penalty0 161--175, 2018.
+
+\bibitem[Ku{\'s}mierz et~al.(2017)Ku{\'s}mierz, Isomura, and
+  Toyoizumi]{kusmierz2017learning}
+{\L}ukasz Ku{\'s}mierz, Takuya Isomura, and Taro Toyoizumi.
+\newblock Learning with three factors: modulating hebbian plasticity with
+  errors.
+\newblock \emph{Current Opinion in Neurobiology}, 46:\penalty0 170--177, 2017.
+
+\bibitem[Lambert and Corban(1992)]{lambert1992spatial}
+Anthony~J Lambert and Rodney Corban.
+\newblock Spatial attention and expectancy for colour, category and location:
+  Further evidence against the spotlight model.
+\newblock \emph{Acta psychologica}, 81\penalty0 (1):\penalty0 39--51, 1992.
+
+\bibitem[Leonard(2021)]{leonard2021consensus}
+Carly~J Leonard.
+\newblock Consensus emerges and biased competition wins: A commentary on luck
+  et al.(2021).
+\newblock \emph{Visual Cognition}, 29\penalty0 (9):\penalty0 560--562, 2021.
+
+\bibitem[Leong et~al.(2017)Leong, Radulescu, Daniel, DeWoskin, and
+  Niv]{leong2017dynamic}
+Yuan~Chang Leong, Angela Radulescu, Reka Daniel, Vivian DeWoskin, and Yael Niv.
+\newblock Dynamic interaction between reinforcement learning and attention in
+  multidimensional environments.
+\newblock \emph{Neuron}, 93\penalty0 (2):\penalty0 451--463, 2017.
+
+\bibitem[Lindsay(2020)]{lindsay2020attention}
+Grace~W Lindsay.
+\newblock Attention in psychology, neuroscience, and machine learning.
+\newblock \emph{Frontiers in Computational Neuroscience}, 14:\penalty0 29,
+  2020.
+
+\bibitem[Lovejoy and Krauzlis(2010)]{lovejoy2010inactivation}
+Lee~P Lovejoy and Richard~J Krauzlis.
+\newblock Inactivation of primate superior colliculus impairs covert selection
+  of signals for perceptual judgments.
+\newblock \emph{Nature Neuroscience}, 13\penalty0 (2):\penalty0 261--266, 2010.
+\newblock \doi{10.1038/nn.2470}.
+
+\bibitem[Lovejoy and Krauzlis(2017)]{lovejoy2017changes}
+Lee~P Lovejoy and Richard~J Krauzlis.
+\newblock Changes in perceptual sensitivity related to spatial cues depends on
+  subcortical activity.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 114\penalty0
+  (23):\penalty0 6122--6126, 2017.
+
+\bibitem[Lu and Dosher(1998)]{lu1998sens}
+Z~L Lu and B~Dosher.
+\newblock {External noise distinguishes attention mechanisms.}
+\newblock \emph{Vision research}, 38\penalty0 (9):\penalty0 1183 -- 1198, 05
+  1998.
+
+\bibitem[Luck and Vogel(1997)]{luck1997capacity}
+Steven~J Luck and Edward~K Vogel.
+\newblock The capacity of visual working memory for features and conjunctions.
+\newblock \emph{Nature}, 390\penalty0 (6657):\penalty0 279--281, 1997.
+
+\bibitem[Luo and Maunsell(2019)]{luo2019attention}
+Thomas~Zhihao Luo and John~HR Maunsell.
+\newblock Attention can be subdivided into neurobiological components
+  corresponding to distinct behavioral effects.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 116\penalty0
+  (52):\penalty0 26187--26194, 2019.
+
+\bibitem[Macmillan and Creelman(2004)]{macmillan2004detection}
+Neil~A Macmillan and C~Douglas Creelman.
+\newblock \emph{Detection Theory: A User's Guide}.
+\newblock Lawrence Erlbaum, 2nd edition, 2004.
+
+\bibitem[Maia(2009)]{maia2009reinforcement}
+Tiago~V Maia.
+\newblock Reinforcement learning, conditioning, and the brain: Successes and
+  challenges.
+\newblock \emph{Cognitive, Affective, \& Behavioral Neuroscience}, 9\penalty0
+  (4):\penalty0 343--364, 2009.
+\newblock \doi{10.3758/CABN.9.4.343}.
+
+\bibitem[Mante et~al.(2013)Mante, Sussillo, Shenoy, and
+  Newsome]{mante2013context}
+Valerio Mante, David Sussillo, Krishna~V Shenoy, and William~T Newsome.
+\newblock Context-dependent computation by recurrent dynamics in prefrontal
+  cortex.
+\newblock \emph{nature}, 503\penalty0 (7474):\penalty0 78--84, 2013.
+
+\bibitem[Masse et~al.(2019)Masse, Yang, Song, Wang, and
+  Freedman]{masse2019circuit}
+Nicolas~Y Masse, Guangyu~R Yang, H~Francis Song, Xiao-Jing Wang, and David~J
+  Freedman.
+\newblock Circuit mechanisms for the maintenance and manipulation of
+  information in working memory.
+\newblock \emph{Nature neuroscience}, 22\penalty0 (7):\penalty0 1159--1167,
+  2019.
+
+\bibitem[Maunsell(2004)]{maunsell2004neuronal}
+John~HR Maunsell.
+\newblock Neuronal representations of cognitive state: reward or attention?
+\newblock \emph{Trends in cognitive sciences}, 8\penalty0 (6):\penalty0
+  261--265, 2004.
+
+\bibitem[Mayo and Maunsell(2016)]{mayo2016graded}
+J~Patrick Mayo and John~HR Maunsell.
+\newblock Graded neuronal modulations related to visual spatial attention.
+\newblock \emph{Journal of Neuroscience}, 36\penalty0 (19):\penalty0
+  5353--5361, 2016.
+
+\bibitem[Mazyar et~al.(2012)Mazyar, van~den Berg, and Ma]{mazyar2012does}
+Hadi Mazyar, Ronald van~den Berg, and Wei~Ji Ma.
+\newblock Does precision decrease with set size?
+\newblock \emph{Journal of Vision}, 12\penalty0 (6):\penalty0 10, 2012.
+
+\bibitem[McAdams and Maunsell(1999)]{mcadams1999effects}
+Carrie~J McAdams and John~HR Maunsell.
+\newblock Effects of attention on the reliability of individual neurons in
+  monkey visual cortex.
+\newblock \emph{Neuron}, 23\penalty0 (4):\penalty0 765--773, 1999.
+
+\bibitem[Mehrani and Tsotsos(2023)]{mehrani2023self}
+Paria Mehrani and John~K Tsotsos.
+\newblock Self-attention in vision transformers performs perceptual grouping,
+  not attention.
+\newblock \emph{arXiv preprint arXiv:2303.01542}, 2023.
+
+\bibitem[Melloni et~al.(2012)Melloni, van Leeuwen, Alink, and
+  M{\"u}ller]{melloni2012interaction}
+Lucia Melloni, Sara van Leeuwen, Arjen Alink, and Notger~G M{\"u}ller.
+\newblock Interaction between bottom-up saliency and top-down control: how
+  saliency maps are created in the human brain.
+\newblock \emph{Cerebral cortex}, 22\penalty0 (12):\penalty0 2943--2952, 2012.
+
+\bibitem[Miconi and VanRullen(2016)]{miconi2016feedback}
+Thomas Miconi and Rufin VanRullen.
+\newblock A feedback model of attention explains the diverse effects of
+  attention on neural firing rates and receptive field structure.
+\newblock \emph{PLoS computational biology}, 12\penalty0 (2):\penalty0
+  e1004770, 2016.
+
+\bibitem[Miller and Cohen(2001)]{miller2001integrative}
+Earl~K Miller and Jonathan~D Cohen.
+\newblock An integrative theory of prefrontal cortex function.
+\newblock \emph{Annual Review of Neuroscience}, 24:\penalty0 167--202, 2001.
+
+\bibitem[Minut and Mahadevan(2001)]{minut2001reinforcement}
+Silviu Minut and Sridhar Mahadevan.
+\newblock A reinforcement learning model of selective visual attention.
+\newblock In \emph{International Conference on Autonomous Agents}, 2001.
+
+\bibitem[Mirza et~al.(2018)Mirza, Adams, Mathys, and Friston]{mirza2018human}
+M~Berk Mirza, Rick~A Adams, Christoph Mathys, and Karl~J Friston.
+\newblock Human visual exploration reduces uncertainty about the sensed world.
+\newblock \emph{PLoS One}, 13\penalty0 (1):\penalty0 e0190429, 2018.
+
+\bibitem[Mnih et~al.(2014)Mnih, Heess, Graves, and
+  Kavukcuoglu]{mnih2014recurrent}
+Volodymyr Mnih, Nicolas Heess, Alex Graves, and Koray Kavukcuoglu.
+\newblock Recurrent models of visual attention.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2014.
+
+\bibitem[Monosov et~al.(2011)Monosov, Sheinberg, and Thompson]{monosov2011fef}
+Ilya~E. Monosov, David~L. Sheinberg, and Kirk~G. Thompson.
+\newblock The effects of prefrontal cortex inactivation on object responses of
+  single neurons in the inferotemporal cortex during visual search.
+\newblock \emph{Journal of Neuroscience}, 31\penalty0 (44):\penalty0
+  15956--15961, 2011.
+\newblock ISSN 0270-6474.
+\newblock \doi{10.1523/JNEUROSCI.2995-11.2011}.
+
+\bibitem[Montague et~al.(1996)Montague, Dayan, and
+  Sejnowski]{montague1996framework}
+P~Read Montague, Peter Dayan, and Terrence~J Sejnowski.
+\newblock A framework for mesencephalic dopamine systems based on predictive
+  hebbian learning.
+\newblock \emph{Journal of neuroscience}, 16\penalty0 (5):\penalty0 1936--1947,
+  1996.
+
+\bibitem[Moore and Armstrong(2003)]{moore2003selective}
+Tirin Moore and Katherine~M Armstrong.
+\newblock Selective gating of visual signals by microstimulation of frontal
+  cortex.
+\newblock \emph{Nature}, 421\penalty0 (6921):\penalty0 370--373, 2003.
+
+\bibitem[Moore and Fallah(2001)]{moore2001control}
+Tirin Moore and Mazyar Fallah.
+\newblock Control of eye movements and spatial attention.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 98\penalty0
+  (3):\penalty0 1273--1276, 2001.
+\newblock \doi{10.1073/pnas.98.3.1273}.
+
+\bibitem[Moore and Fallah(2004)]{moore2004microstimulation}
+Tirin Moore and Mazyar Fallah.
+\newblock Microstimulation of the frontal eye field and its effects on covert
+  spatial attention.
+\newblock \emph{Journal of Neurophysiology}, 91\penalty0 (1):\penalty0
+  152--162, 2004.
+\newblock \doi{10.1152/jn.00741.2002}.
+\newblock Cited in memo as Moore \& Fallah 2003.
+
+\bibitem[Morita and Kato(2014)]{morita2014striatal}
+Kenji Morita and Ayaka Kato.
+\newblock Striatal dopamine ramping may indicate flexible reinforcement
+  learning with forgetting in the cortico-basal ganglia circuits.
+\newblock \emph{Frontiers in Neural Circuits}, 8:\penalty0 36, 2014.
+\newblock \doi{10.3389/fncir.2014.00036}.
+\newblock Three-factor corticostriatal rule; value and policy bound in one
+  closed loop.
+
+\bibitem[M{\"u}ller and Findlay(1987{\natexlab{a}})]{muller1987sensitivity}
+Hermann~J M{\"u}ller and John~M Findlay.
+\newblock Sensitivity and criterion effects in the spatial cuing of visual
+  attention.
+\newblock \emph{Perception \& Psychophysics}, 42\penalty0 (4):\penalty0
+  383--399, 1987{\natexlab{a}}.
+
+\bibitem[M{\"u}ller and Findlay(1987{\natexlab{b}})]{muller1987spatial}
+Hermann~J M{\"u}ller and John~M Findlay.
+\newblock Sensitivity and criterion effects in the spatial cuing of visual
+  attention.
+\newblock \emph{Perception \& Psychophysics}, 42\penalty0 (4):\penalty0
+  383--399, 1987{\natexlab{b}}.
+
+\bibitem[M{\"u}ller et~al.(2005)M{\"u}ller, Philiastides, and
+  Newsome]{muller2005microstimulation}
+James~R M{\"u}ller, Marios~G Philiastides, and William~T Newsome.
+\newblock Microstimulation of the superior colliculus focuses attention without
+  moving the eyes.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 102\penalty0
+  (3):\penalty0 524--529, 2005.
+\newblock \doi{10.1073/pnas.0408311101}.
+\newblock Subthreshold SC microstimulation enhances covert attention.
+
+\bibitem[Ni et~al.(2012)Ni, Ray, and Maunsell]{ni2012tuned}
+Amy~M Ni, Supratim Ray, and John~HR Maunsell.
+\newblock Tuned normalization explains the size of attention modulations.
+\newblock \emph{Neuron}, 73\penalty0 (4):\penalty0 803--813, 2012.
+
+\bibitem[Niv(2009)]{niv2009reinforcement}
+Yael Niv.
+\newblock Reinforcement learning in the brain.
+\newblock \emph{Journal of Mathematical Psychology}, 53\penalty0 (3):\penalty0
+  139--154, 2009.
+
+\bibitem[Nobre and van Ede(2018)]{nobre2018anticipated}
+Anna~C Nobre and Freek van Ede.
+\newblock Anticipated moments: temporal structure in attention.
+\newblock \emph{Nature Reviews Neuroscience}, 19\penalty0 (1):\penalty0 34--48,
+  2018.
+
+\bibitem[O'Doherty et~al.(2004)O'Doherty, Dayan, Schultz, Deichmann, Friston,
+  and Dolan]{odoherty2004dissociable}
+John O'Doherty, Peter Dayan, Johannes Schultz, Ralf Deichmann, Karl Friston,
+  and Raymond~J Dolan.
+\newblock Dissociable roles of ventral and dorsal striatum in instrumental
+  conditioning.
+\newblock \emph{Science}, 304\penalty0 (5669):\penalty0 452--454, 2004.
+\newblock \doi{10.1126/science.1094285}.
+
+\bibitem[Palmer(1995)]{palmer1995psychophysics}
+John Palmer.
+\newblock Attention in visual search: Distinguishing four causes of a set-size
+  effect.
+\newblock \emph{Current Directions in Psychological Science}, 4\penalty0
+  (4):\penalty0 118--123, 1995.
+
+\bibitem[Panichello and Buschman(2021)]{panichello2021attvwm}
+Matthew~F. Panichello and Timothy~J. Buschman.
+\newblock {Shared mechanisms underlie the control of working memory and
+  attention}.
+\newblock \emph{Nature}, 592\penalty0 (7855):\penalty0 601--605, 2021.
+\newblock ISSN 0028-0836.
+\newblock \doi{10.1038/s41586-021-03390-w}.
+
+\bibitem[Parr and Friston(2017)]{parr2017working}
+Thomas Parr and Karl~J Friston.
+\newblock Working memory, attention, and salience in active inference.
+\newblock \emph{Scientific Reports}, 7\penalty0 (1):\penalty0 14678, 2017.
+
+\bibitem[Peng et~al.(2023)Peng, Alcaide, Anthony, Albalak, Arcadinho, Biderman,
+  Cao, Cheng, Chung, Grella, GV, He, Hou, Lin, Kazienko, Kocon, Kong, Koptyra,
+  Lau, Mantri, Mom, Saito, Song, Tang, Wang, Wind, Wozniak, Zhang, Zhang, Zhao,
+  Zhou, Zhou, Zhu, and Zhu]{peng2023rwkv}
+Bo~Peng, Eric Alcaide, Quentin Anthony, Alon Albalak, Samuel Arcadinho, Stella
+  Biderman, Huanqi Cao, Xin Cheng, Michael Chung, Matteo Grella, Kranthi~Kiran
+  GV, Xuzheng He, Haowen Hou, Jiaju Lin, Przemyslaw Kazienko, Jan Kocon,
+  Jiaming Kong, Bartlomiej Koptyra, Hayden Lau, Krishna Sri~Ipsit Mantri,
+  Ferdinand Mom, Atsushi Saito, Guangyu Song, Xiangru Tang, Bolun Wang,
+  Johan~S. Wind, Stanislaw Wozniak, Ruichong Zhang, Zhenyuan Zhang, Qihang
+  Zhao, Peng Zhou, Qinghua Zhou, Jian Zhu, and Rui-Jie Zhu.
+\newblock Rwkv: Reinventing rnns for the transformer era, 2023.
+\newblock URL \url{https://arxiv.org/abs/2305.13048}.
+
+\bibitem[Platt and Glimcher(1999)]{platt1999neural}
+Michael~L Platt and Paul~W Glimcher.
+\newblock Neural correlates of decision variables in parietal cortex.
+\newblock \emph{Nature}, 400\penalty0 (6741):\penalty0 233--238, 1999.
+\newblock \doi{10.1038/22268}.
+
+\bibitem[Posner et~al.(1980)Posner, Snyder, and Davidson]{posner1980attention}
+Michael~I Posner, Charles~R Snyder, and Brian~J Davidson.
+\newblock Attention and the detection of signals.
+\newblock \emph{Journal of experimental psychology: General}, 109\penalty0
+  (2):\penalty0 160, 1980.
+
+\bibitem[Posner et~al.(1994)Posner, Grossenbacher, and
+  Compton]{posner1994visual}
+Michael~I Posner, Peter~G Grossenbacher, and Paul~E Compton.
+\newblock Visual attention.
+\newblock \emph{The neuropsychology of high-level vision: Collected tutorial
+  essays}, pages 217--239, 1994.
+
+\bibitem[Ptak(2012)]{ptak2012frontoparietal}
+Radek Ptak.
+\newblock The frontoparietal attention network of the human brain: action,
+  saliency, and a priority map of the environment.
+\newblock \emph{The Neuroscientist}, 18\penalty0 (5):\penalty0 502--515, 2012.
+
+\bibitem[Reynolds and Heeger(2009)]{reynolds2009normalization}
+John~H Reynolds and David~J Heeger.
+\newblock The normalization model of attention.
+\newblock \emph{Neuron}, 61\penalty0 (2):\penalty0 168--185, 2009.
+
+\bibitem[Reynolds et~al.(1999)Reynolds, Chelazzi, and
+  Desimone]{reynolds1999competitive}
+John~H Reynolds, Leonardo Chelazzi, and Robert Desimone.
+\newblock Competitive mechanisms subserve attention in macaque areas v2 and v4.
+\newblock \emph{Journal of Neuroscience}, 19\penalty0 (5):\penalty0 1736--1753,
+  1999.
+
+\bibitem[Reynolds et~al.(2000)Reynolds, Pasternak, and
+  Desimone]{reynolds2000attention}
+John~H Reynolds, Tatiana Pasternak, and Robert Desimone.
+\newblock Attention increases sensitivity of v4 neurons.
+\newblock \emph{Neuron}, 26\penalty0 (3):\penalty0 703--714, 2000.
+
+\bibitem[Reynolds and Wickens(2002)]{reynolds2002dopamine}
+John~NJ Reynolds and Jeffery~R Wickens.
+\newblock Dopamine-dependent plasticity of corticostriatal synapses.
+\newblock \emph{Neural Networks}, 15\penalty0 (4-6):\penalty0 507--521, 2002.
+
+\bibitem[Roitman and Shadlen(2002)]{roitman2002response}
+Jamie~D Roitman and Michael~N Shadlen.
+\newblock Response of neurons in the lateral intraparietal area during a
+  combined visual discrimination reaction time task.
+\newblock \emph{Journal of Neuroscience}, 22\penalty0 (21):\penalty0
+  9475--9489, 2002.
+\newblock \doi{10.1523/JNEUROSCI.22-21-09475.2002}.
+
+\bibitem[Rorie et~al.(2010)Rorie, Gao, McClelland, and
+  Newsome]{rorie2010integration}
+Alan~E Rorie, Juan Gao, James~L McClelland, and William~T Newsome.
+\newblock Integration of sensory and reward information during perceptual
+  decision-making in lateral intraparietal cortex (lip) of the macaque monkey.
+\newblock \emph{PLoS ONE}, 5\penalty0 (2):\penalty0 e9308, 2010.
+\newblock \doi{10.1371/journal.pone.0009308}.
+
+\bibitem[Rothenhoefer et~al.(2017)Rothenhoefer, Costa, Bartolo,
+  Vicario-Feliciano, Murray, and Averbeck]{rothenhoefer2017effects}
+Kathryn~M Rothenhoefer, Vincent~D Costa, Ramon Bartolo, Raquel
+  Vicario-Feliciano, Elisabeth~A Murray, and Bruno~B Averbeck.
+\newblock Effects of ventral striatum lesions on stimulus-based versus
+  action-based reinforcement learning.
+\newblock \emph{Journal of Neuroscience}, 37\penalty0 (29):\penalty0
+  6902--6914, 2017.
+\newblock \doi{10.1523/JNEUROSCI.0631-17.2017}.
+\newblock Primate VS lesions impair learning stimulus value, spare action
+  value.
+
+\bibitem[Ruff and Cohen(2017)]{ruff2017normalization}
+Douglas~A Ruff and Marlene~R Cohen.
+\newblock A normalization model suggests that attention changes the weighting
+  of inputs between visual areas.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 114\penalty0
+  (20):\penalty0 E4085--E4094, 2017.
+
+\bibitem[Rust and Cohen(2022)]{rust2022priority}
+Nicole~C Rust and Marlene~R Cohen.
+\newblock Priority coding in the visual system.
+\newblock \emph{Nature Reviews Neuroscience}, 23\penalty0 (6):\penalty0
+  376--388, 2022.
+
+\bibitem[Sani et~al.(2017)Sani, Santandrea, Morrone, and
+  Chelazzi]{ilaria2017v4gain}
+Ilaria Sani, Elisa Santandrea, Maria~Concetta Morrone, and Leonardo Chelazzi.
+\newblock Temporally evolving gain mechanisms of attention in macaque area v4.
+\newblock \emph{Journal of Neurophysiology}, 118\penalty0 (2):\penalty0
+  964--985, 2017.
+\newblock \doi{10.1152/jn.00522.2016}.
+\newblock PMID: 28468996.
+
+\bibitem[Schaul et~al.(2016)Schaul, Quan, Antonoglou, and
+  Silver]{schaul2016prioritized}
+Tom Schaul, John Quan, Ioannis Antonoglou, and David Silver.
+\newblock Prioritized experience replay.
+\newblock In \emph{ICLR}, 2016.
+
+\bibitem[Schultz et~al.(1997)Schultz, Dayan, and Montague]{schultz1997neural}
+Wolfram Schultz, Peter Dayan, and P~Read Montague.
+\newblock A neural substrate of prediction and reward.
+\newblock \emph{Science}, 275\penalty0 (5306):\penalty0 1593--1599, 1997.
+
+\bibitem[Sepulveda et~al.(2020)Sepulveda, Usher, Davies, Benson, Ortoleva, and
+  De~Martino]{sepulveda2020visual}
+Pradyumna Sepulveda, Marius Usher, Ned Davies, Amy~A Benson, Pietro Ortoleva,
+  and Benedetto De~Martino.
+\newblock Visual attention modulates the integration of goal-relevant evidence
+  and not value.
+\newblock \emph{Elife}, 9:\penalty0 e60705, 2020.
+
+\bibitem[Solomon(2004)]{solomon2004sens}
+Joshua~A. Solomon.
+\newblock {The effect of spatial cues on visual sensitivity}.
+\newblock \emph{Vision Research}, 44\penalty0 (12):\penalty0 1209--1216, 2004.
+\newblock ISSN 0042-6989.
+\newblock \doi{10.1016/j.visres.2003.12.003}.
+
+\bibitem[Song et~al.(2016)Song, Yang, and Wang]{song2016training}
+H~Francis Song, Guangyu~R Yang, and Xiao-Jing Wang.
+\newblock Training excitatory-inhibitory recurrent neural networks for
+  cognitive tasks: a simple and flexible framework.
+\newblock \emph{PLoS computational biology}, 12\penalty0 (2):\penalty0
+  e1004792, 2016.
+
+\bibitem[Sprague et~al.(2018)Sprague, Itthipuripat, Vo, and
+  Serences]{sprague2018rescuing}
+Thomas~C Sprague, Sirawaj Itthipuripat, Vy~A Vo, and John~T Serences.
+\newblock Dissociable signatures of visual salience and behavioral relevance
+  across attentional priority maps in human cortex.
+\newblock \emph{Journal of Neurophysiology}, 119\penalty0 (6):\penalty0
+  2153--2165, 2018.
+
+\bibitem[Springenberg et~al.(2024)Springenberg, Abdolmaleki, Zhang, Groth,
+  Bloesch, Lampe, Brakel, Bechtle, Kapturowski, Hafner,
+  et~al.]{springenberg2024offline}
+Jost~Tobias Springenberg, Abbas Abdolmaleki, Jingwei Zhang, Oliver Groth,
+  Michael Bloesch, Thomas Lampe, Philemon Brakel, Sarah Bechtle, Steven
+  Kapturowski, Roland Hafner, et~al.
+\newblock Offline actor-critic reinforcement learning scales to large models.
+\newblock \emph{arXiv preprint arXiv:2402.05546}, 2024.
+
+\bibitem[Sridharan et~al.(2017)Sridharan, Steinmetz, Moore, and
+  Knudsen]{sridharan2017does}
+Devarajan Sridharan, Nicholas~A Steinmetz, Tirin Moore, and Eric~I Knudsen.
+\newblock Does the superior colliculus control perceptual sensitivity or choice
+  bias during attention? evidence from a multialternative decision framework.
+\newblock \emph{Journal of Neuroscience}, 37\penalty0 (3):\penalty0 480--511,
+  2017.
+
+\bibitem[Srinath et~al.(2021)Srinath, Ruff, and Cohen]{srinath2021attention}
+Ramanujan Srinath, Douglas~A Ruff, and Marlene~R Cohen.
+\newblock Attention improves information flow between neuronal populations
+  without changing the communication subspace.
+\newblock \emph{Current Biology}, 31\penalty0 (23):\penalty0 5179--5194, 2021.
+
+\bibitem[St{\u a}ni{\c s}or et~al.(2013)St{\u a}ni{\c s}or, van~der Togt,
+  Pennartz, and Roelfsema]{stanisor2013neural}
+Liviu St{\u a}ni{\c s}or, Chris van~der Togt, Cyriel~MA Pennartz, and Pieter~R
+  Roelfsema.
+\newblock A unified selection signal for attention and reward in primary visual
+  cortex.
+\newblock \emph{PNAS}, 110\penalty0 (22):\penalty0 9136--9141, 2013.
+
+\bibitem[Starkweather and Uchida(2021)]{starkweather2021dopamine}
+Clara~Kwon Starkweather and Naoshige Uchida.
+\newblock Dopamine signals as temporal difference errors: recent advances.
+\newblock \emph{Current Opinion in Neurobiology}, 67:\penalty0 95--105, 2021.
+
+\bibitem[Stine et~al.(2023)Stine, Trautmann, Jeurissen, and
+  Shadlen]{stine2023differential}
+Gabriel~M Stine, Eric~M Trautmann, Danique Jeurissen, and Michael~N Shadlen.
+\newblock A neural mechanism for terminating decisions.
+\newblock \emph{Neuron}, 111\penalty0 (16):\penalty0 2601--2613, 2023.
+\newblock \doi{10.1016/j.neuron.2023.05.028}.
+\newblock SC as the threshold converting LIP accumulation into commitment.
+
+\bibitem[Stănişor et~al.(2013)Stănişor, Togt, Pennartz, and
+  Roelfsema]{stanisor2013rwdattn}
+Liviu Stănişor, Chris van~der Togt, Cyriel M.~A. Pennartz, and Pieter~R.
+  Roelfsema.
+\newblock {A unified selection signal for attention and reward in primary
+  visual cortex}.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 110\penalty0
+  (22):\penalty0 9136--9141, 2013.
+\newblock ISSN 0027-8424.
+\newblock \doi{10.1073/pnas.1300117110}.
+
+\bibitem[Sugrue et~al.(2004)Sugrue, Corrado, and Newsome]{sugrue2004matching}
+Leo~P Sugrue, Greg~S Corrado, and William~T Newsome.
+\newblock Matching behavior and the representation of value in the parietal
+  cortex.
+\newblock \emph{Science}, 304\penalty0 (5678):\penalty0 1782--1787, 2004.
+\newblock \doi{10.1126/science.1094765}.
+
+\bibitem[Sussillo(2014)]{sussillo2014neural}
+David Sussillo.
+\newblock Neural circuits as computational dynamical systems.
+\newblock \emph{Current Opinion in Neurobiology}, 25:\penalty0 156--163, 2014.
+
+\bibitem[Sussillo and Barak(2013)]{sussillo2013opening}
+David Sussillo and Omri Barak.
+\newblock Opening the black box: low-dimensional dynamics in high-dimensional
+  recurrent neural networks.
+\newblock \emph{Neural computation}, 25\penalty0 (3):\penalty0 626--649, 2013.
+
+\bibitem[Sutton(2018)]{sutton2018reinforcement}
+Richard~S Sutton.
+\newblock Reinforcement learning: An introduction.
+\newblock \emph{A Bradford Book}, 2018.
+
+\bibitem[Theeuwes(2019)]{theeuwes2019goal}
+Jan Theeuwes.
+\newblock Goal-driven, stimulus-driven, and history-driven selection.
+\newblock \emph{Current opinion in psychology}, 29:\penalty0 97--101, 2019.
+
+\bibitem[Thompson et~al.(1996)Thompson, Hanes, Bichot, and
+  Schall]{thompson1996fef}
+K.~G. Thompson, D.~P. Hanes, N.~P. Bichot, and J.~D. Schall.
+\newblock {Perceptual and motor processing stages identified in the activity of
+  macaque frontal eye field neurons during visual search}.
+\newblock \emph{Journal of Neurophysiology}, 76\penalty0 (6):\penalty0
+  4040--4055, 1996.
+\newblock ISSN 0022-3077.
+\newblock \doi{10.1152/jn.1996.76.6.4040}.
+
+\bibitem[Thompson et~al.(2005{\natexlab{a}})Thompson, Bichot, and
+  Sato]{thompson2005frontal}
+Kirk~G Thompson, Narcisse~P Bichot, and Takashi~R Sato.
+\newblock Frontal eye field activity before visual search errors reveals the
+  integration of bottom-up and top-down salience.
+\newblock \emph{Journal of neurophysiology}, 93\penalty0 (1):\penalty0
+  337--351, 2005{\natexlab{a}}.
+
+\bibitem[Thompson et~al.(2005{\natexlab{b}})Thompson, Biscoe, and
+  Sato]{thompson2005neuronal}
+Kirk~G Thompson, Keri~L Biscoe, and Takashi~R Sato.
+\newblock Neuronal basis of covert spatial attention in the frontal eye field.
+\newblock \emph{Journal of Neuroscience}, 25\penalty0 (41):\penalty0
+  9479--9487, 2005{\natexlab{b}}.
+\newblock \doi{10.1523/JNEUROSCI.0741-05.2005}.
+\newblock Attention enhances visual cells; movement cells inhibited.
+
+\bibitem[Treisman and Gelade(1980)]{treisman1980feature}
+Anne~M Treisman and Garry Gelade.
+\newblock A feature-integration theory of attention.
+\newblock \emph{Cognitive psychology}, 12\penalty0 (1):\penalty0 97--136, 1980.
+
+\bibitem[Treue and Trujillo(1999)]{treue1999reshaping}
+Stefan Treue and Julio C~Martinez Trujillo.
+\newblock Reshaping neuronal representations of visual scenes through
+  attention.
+\newblock \emph{Current Psychology of Cognition}, 18\penalty0 (6):\penalty0
+  951--972, 1999.
+\newblock \doi{10.4324/9780203782880-11}.
+
+\bibitem[Tsotsos et~al.(1995)Tsotsos, Culhane, Wai, Lai, Davis, and
+  Nuflo]{tsotsos1995modeling}
+John~K Tsotsos, Scan~M Culhane, Winky Yan~Kei Wai, Yuzhong Lai, Neal Davis, and
+  Fernando Nuflo.
+\newblock Modeling visual attention via selective tuning.
+\newblock \emph{Artificial Intelligence}, 78\penalty0 (1-2):\penalty0 507--545,
+  1995.
+
+\bibitem[van Hasselt et~al.(2018)van Hasselt, Doron, Strub, Hessel, Sonnerat,
+  and Modayil]{vanhasselt2018deep}
+Hado van Hasselt, Yotam Doron, Florian Strub, Matteo Hessel, Nicolas Sonnerat,
+  and Joseph Modayil.
+\newblock Deep reinforcement learning and the deadly triad.
+\newblock \emph{arXiv:1812.02648}, 2018.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock \emph{Advances in neural information processing systems}, 30, 2017.
+
+\bibitem[Veale et~al.(2017)Veale, Hafed, and Yoshida]{veale2017how}
+Richard Veale, Ziad~M Hafed, and Masatoshi Yoshida.
+\newblock How is visual salience computed in the brain? insights from
+  behaviour, neurobiology and modelling.
+\newblock \emph{Philosophical Transactions of the Royal Society B},
+  372\penalty0 (1714):\penalty0 20160113, 2017.
+
+\bibitem[Wang et~al.(2015)Wang, Chen, Yan, Zhaoping, and Li]{wang2015v1att}
+Feng Wang, Minggui Chen, Yin Yan, Li~Zhaoping, and Wu~Li.
+\newblock Modulation of neuronal responses by exogenous attention in macaque
+  primary visual cortex.
+\newblock \emph{Journal of Neuroscience}, 35\penalty0 (39):\penalty0
+  13419--13429, 2015.
+\newblock ISSN 0270-6474.
+\newblock \doi{10.1523/JNEUROSCI.0527-15.2015}.
+
+\bibitem[Wang et~al.(2022)Wang, Herman, and Krauzlis]{wang2022neuronal}
+Lupeng Wang, James~P Herman, and Richard~J Krauzlis.
+\newblock Neuronal modulation in the mouse superior colliculus during covert
+  visual selective attention.
+\newblock \emph{Scientific Reports}, 12\penalty0 (1):\penalty0 2482, 2022.
+
+\bibitem[Wardak et~al.(2006)Wardak, Ibos, Duhamel, and
+  Olivier]{wardak2006contribution}
+Claire Wardak, Guilhem Ibos, Jean-Ren{\'e} Duhamel, and Etienne Olivier.
+\newblock Contribution of the monkey frontal eye field to covert visual
+  attention.
+\newblock \emph{Journal of Neuroscience}, 26\penalty0 (16):\penalty0
+  4228--4235, 2006.
+\newblock \doi{10.1523/JNEUROSCI.3336-05.2006}.
+
+\bibitem[Wichmann and Hill(2001)]{wichmann2001psychometric}
+Felix~A Wichmann and N~Jeremy Hill.
+\newblock The psychometric function: I. fitting, sampling, and goodness of fit.
+\newblock \emph{Perception \& Psychophysics}, 63\penalty0 (8):\penalty0
+  1293--1313, 2001.
+
+\bibitem[Wolfe(2021)]{wolfe2021guided}
+Jeremy~M Wolfe.
+\newblock Guided search 6.0: An updated model of visual search.
+\newblock \emph{Psychonomic Bulletin \& Review}, 28\penalty0 (4):\penalty0
+  1060--1092, 2021.
+
+\bibitem[Yamamoto et~al.(2024)Yamamoto, Akahoshi, and
+  Kitazawa]{yamamoto2024emergence}
+Takuto Yamamoto, Hirosato Akahoshi, and Shigeru Kitazawa.
+\newblock Emergence of human-like attention in self-supervised vision
+  transformers: an eye-tracking study.
+\newblock \emph{arXiv preprint arXiv:2410.22768}, 2024.
+
+\bibitem[Yang et~al.(2022)Yang, Dong, Liu, Zhang, Shen, and Yu]{Yang2022}
+Jiewen Yang, Xingbo Dong, Liujun Liu, Chao Zhang, Jiajun Shen, and Dahai Yu.
+\newblock Recurring the transformer for video action recognition.
+\newblock In \emph{2022 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 14043--14053, 2022.
+\newblock \doi{10.1109/CVPR52688.2022.01367}.
+
+\bibitem[Z{\'e}non and Krauzlis(2012)]{zenon2012attention}
+Alexandre Z{\'e}non and Richard~J Krauzlis.
+\newblock Attention deficits without cortical neuronal deficits.
+\newblock \emph{Nature}, 489\penalty0 (7416):\penalty0 434--437, 2012.
+
+\end{thebibliography}

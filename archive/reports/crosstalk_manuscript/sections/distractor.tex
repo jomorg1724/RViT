@@ -1,0 +1,88 @@
+\section{Selective attention under competing distractors}
+\label{sec:distractor}
+
+The base task contains no competing events. To ask how the coupled architecture
+behaves when it must \emph{select} a target against a salient irrelevant event ---
+the defining demand of natural selective attention
+\citep{desimone1995neural, sprague2018rescuing, cosman2018prefrontal} --- we trained
+the same shared-memory cross-talk model (internal identifier \texttt{v11\_part5},
+$1{,}015{,}656$ parameters) on the distractor variant of
+Section~\ref{sec:env-distractor}, in which the uncued side may undergo its own
+task-irrelevant change that the agent must ignore. The analysis reveals two
+selectivities riding on the single shared memory --- one for the \emph{decision},
+one for \emph{valuation} --- and yields the clearest illustration in this work of the
+$\mu$/$q$ dissociation.
+
+\subsection{A value gate over a near-perfect detector}
+Aggregate performance understates the agent (accuracy $\approx 0.60$, hit
+$\approx 0.54$; Figure~\TODO{fig:dist-behavior}) because the aggregate averages over a
+deliberate refusal to engage on low-value trials. Split by cue colour --- which sets
+reward magnitude --- the picture is sharp: on high-value trials the agent is a
+near-perfect detector (hit $\approx 0.83$, false-alarm rate $<0.01$,
+$d'\approx 3.4$--$3.9$), whereas on the lowest-value trials it \emph{abandons the
+task entirely}, declaring almost never (hit $\approx 0.00$) and bailing at cue onset.
+The collapse is therefore not a perceptual failure but a value-driven
+\emph{engagement} decision: when the reward on offer is too small, the agent declines
+to work for it. Tellingly, the same architecture trained on the distractor-\emph{free}
+task does \emph{not} abandon low-value trials --- the bail is specific to the
+cost/benefit of selecting under competition. This is the model's analogue of
+value-dependent task engagement, the kind of cost-of-control computation attributed
+to anterior cingulate and ventral striatal circuits
+\citep{maunsell2004neuronal, stanisor2013neural}.
+
+\subsection{Two selectivities for one decision: a causal dissociation}
+Clamping the attention of one pathway at the change frame and reading off behaviour
+and value separately produces a double dissociation
+(Figure~\TODO{fig:dist-causal}). Biasing the \emph{$\mu$ (policy) pathway} toward the
+cued location swings the decision across its full range (hit rate $0.01 \to 1.00$)
+while leaving the critic's value estimate essentially unchanged; biasing the \emph{$q$
+(value) pathway} moves the value estimate but never the decision. The two pathways
+share only the deep memory $\Htwo$, yet one commands the decision and the other the
+valuation --- a within-model demonstration that the split readout carries genuine
+functional content, not nominal labels.
+
+\subsection{The distractor is filtered in the decision pathway, not globally}
+Where is the irrelevant event suppressed? Not at the input: the distractor's location
+is highly decodable from the fast sensory memory $\Hone$ (decoding accuracy
+$\approx 0.94$), so the agent plainly \emph{sees} it. It is suppressed specifically in
+the \emph{$\mu$ (decision) pathway}, whose attention to the distractor is near zero
+(priority weight $\approx 0.004$ versus $\approx 0.26$ for the cued primary), while the
+$q$ (value) pathway continues to read it. The suppression is causal: forcing the $\mu$
+pathway's attention onto the distractor converts the agent from a competent detector
+into one that false-alarms to the distractor (hit $1.00 \to 0.01$, false-alarm
+$0.00 \to 0.99$; $d'$ inverts from $+5.5$ to $-4.9$). The distractor is thus
+``seen but not acted upon'': filtered in the pathway that issues the response rather
+than removed from the representation. This is a precise model counterpart of the
+superior-colliculus ``dual effect'' --- unilateral SC inactivation simultaneously
+impairs responding to relevant events and \emph{releases} responding to competing
+ones --- in which the colliculus governs which signals inform the decision rather than
+which are sensed \citep{lovejoy2010inactivation, zenon2012attention, herman2020attention}.
+
+\subsection{Value reaches into the decision filter, but as an engage/abandon switch}
+Finally, value does not merely set a post-perceptual response criterion: it reshapes
+the decision filter itself. On high-value trials the $\mu$ pathway's allocation is
+sharp and the distractor strongly suppressed; on low-value trials the allocation is
+diffuse and leaky (cued/distractor weights $\approx 0.26/0.004$ for high value versus
+$\approx 0.03/0.11$ for low value). Crucially, this modulation is \emph{binary} rather
+than graded over reward magnitude --- the two engaged value levels behave alike, and
+the difference is whether the agent engages at all. Value, in this model, gates
+\emph{whether} the priority filter is deployed, not how finely it is set, correcting a
+naive reading in which reward would simply scale a continuous criterion. The critic's
+value estimates are themselves well calibrated and ordered by reward
+(calibration slope $\approx 1.0$), consistent with a value system that prices the trial
+and a decision system that, gated by that price, either deploys selective attention or
+declines to.
+
+\subsection{Summary and predictions}
+The distractor variant shows the coupled architecture doing genuine selection: a
+near-perfect detector whose decisions are commanded by an image-grounded $\mu$ pathway
+that suppresses competitors at the level of action, gated by a $q$ value pathway that
+prices the trial and decides whether to engage. The mechanism makes two further
+predictions for the brain. First, a competing distractor should be \emph{more}
+decodable from value/valuation populations than from the choice-driving populations
+that suppress it --- the inverse of the usual assumption that suppression is global.
+Second, because suppression lives in the decision pathway, perturbing the priority
+node (SC/FEF) should release distractor responding while sparing the distractor's
+sensory representation, whereas perturbing the value circuit should alter engagement
+and value-modulated filtering without abolishing detection
+\citep{zenon2012attention, herman2018gain, gregoriou2012lesions}.

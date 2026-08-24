@@ -1,0 +1,48 @@
+\chapter{Reinforcement-learning harness variations}
+\label{ch:harnessvar}
+
+The harness is held constant across architectures, but several of its knobs are
+themselves objects of study, because the deceptive $0.5$ floor of the seven-step task makes
+the optimisation as much a part of the result as the network.
+
+\section{Discount and horizon}
+The discount $\gamma$ is matched to the horizon: $\gamma=0.95$ for the seven-step task and
+$\gamma=0.98$ for the twenty-nine-step task, where credit must travel further from the
+change to the cue. These are not finely tuned; the qualitative behaviour is robust across a
+band, but a higher $\gamma$ on the longer task does help the cue's effect survive the delay.
+
+\section{Critic particles}
+The number of distributional ``particles'' (quantiles, or categorical atoms in the paper's
+form) was varied from the published $15$ down to $5$. Fewer particles is a coarser value
+distribution; on this low-bandwidth task the value differences the critic must resolve are
+small (the gap between ``press now'' and ``wait'' near threshold), so particle count is a
+genuine knob rather than a free choice. We default to $5$ for the short task and have run
+$15$ on the long task; a systematic sweep is an open item.
+
+\section{Target network: EMA versus hard copy}
+The original working checkpoints used a periodic hard-copy target. The reproduction adds an
+exponential-moving-average target ($d=0.995$). Whether the EMA helps, hurts, or is neutral
+on this task is genuinely open: the working multiplicative$+$VAE model used EMA, but so
+would a hard-copy version, and we have not isolated the difference. Because the lab's
+canonical working models used the hard-copy target, an EMA-versus-hard-copy A/B on the
+frozen-VAE base is on the near-term list --- it is a candidate, alongside the attention form
+and head count, for any residual difference between our reproduction and the lab's other
+networks.
+
+\section{Exploration and the two collapses}
+The recurring optimisation failure is collapse to a $0.5$ optimum, in one of two faces:
+always-wait (never press) or always-press-at-the-deadline (press every trial at the change
+frame). Both have policy entropy at zero and zero policy gradient --- the actor is frozen,
+even while the critic keeps learning the $0.5$ value perfectly. The levers that matter are
+maintaining exploration (entropy floor or coefficient, the burn-in length, the initial
+action bias) and, decisively, fixing perception (Chapter~\ref{ch:perception}): once the
+front-end can see the change, the discriminating policy is reachable and the collapse is
+escaped. The lesson for the harness is that an apparently dead run is usually a perception
+or exploration problem, not a critic problem.
+
+\section{A resume footgun, fixed}
+A practical note that cost real training time: the trainer's \code{resume} mode silently
+no-ops if no explicit checkpoint path is set, starting fresh and discarding progress. This
+was hardened in both trainers to auto-discover the latest checkpoint in the run directory
+and to error loudly when \code{resume} finds nothing, rather than silently restarting.
+Checkpoints live outside the synced repository to avoid mid-run corruption.

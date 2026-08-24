@@ -1,0 +1,37 @@
+{
+  "source_id": "mah-2025-arxiv-2502.10955v1",
+  "retrieved_at_utc": "2026-07-11T18:36:40Z",
+  "canonical_url": "https://arxiv.org/abs/2502.10955v1",
+  "paper": {
+    "title": "A recurrent vision transformer shows signatures of primate visual attention",
+    "authors": [
+      "Morgan, Jonathan",
+      "Albanna, Bassem F.",
+      "Herman, James P."
+    ],
+    "version": "v1",
+    "pdf_path": "2502.10955v1.pdf",
+    "pdf_sha256": "946e1033a7f15d03ad36a6768cae559b2272b25fff7c4d7a82e0bee0b6724da9",
+    "pdf_bytes": 14333588,
+    "pdf_pages": 23,
+    "pdf_page_size_points": [612, 792]
+  },
+  "source_archive": {
+    "path": "2502.10955v1-source.tar",
+    "sha256": "f8902425878fae7c16a0b9dde051887dfb4a55f5fdc987535baf7d011a13d5f5",
+    "extracted_path": "source_v1",
+    "main_tex": "source_v1/main.tex",
+    "supplement_tex": "source_v1/supplement/supplement.tex"
+  },
+  "active_image_objects": {
+    "main": 5,
+    "supplement": 17,
+    "total": 22,
+    "commented_placeholders_excluded": 3
+  },
+  "notes": [
+    "The supplement is bundled in the 23-page arXiv PDF and is also present in the source archive.",
+    "The active-figure count is based on uncommented includegraphics commands in main.tex and supplement/supplement.tex.",
+    "The source archive and PDF are preserved inputs; VDA reproduction scripts must not alter them."
+  ]
+}

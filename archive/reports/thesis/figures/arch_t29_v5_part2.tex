@@ -1,0 +1,52 @@
+% v5_part2 — CROSS-ATTENTION over memory tokens (T=29 family).
+% Convention: front-end at left, attention in the middle (the variable part), xLSTMs + heads
+% at right; solid black = forward dataflow, dashed red = recurrent feedback from frame t-1.
+% Distinguishing wiring: Q from the IMAGE X only (100 patch tokens); K,V from the CONCATENATION
+% of X with BOTH memory streams H1 and H2 (3N = 300 keys); residual on X. TWO STACKED spatial
+% LSTMs carry H1 and H2 — both are fed back as memory tokens (dashed red). The heads are 1D-conv
+% over the token axis reading H2 (the top LSTM) -> Actor + Critic.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end: convolutional patch-embed (T=29 family) -----------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt]
+        ($(patch.north west)!.33!(patch.north east)$)--($(patch.south west)!.33!(patch.south east)$)
+        ($(patch.north west)!.66!(patch.north east)$)--($(patch.south west)!.66!(patch.south east)$)
+        ($(patch.north west)!.33!(patch.south west)$)--($(patch.north east)!.33!(patch.south east)$)
+        ($(patch.north west)!.66!(patch.south west)$)--($(patch.north east)!.66!(patch.south east)$);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $50{\times}50$ img}};
+  \node[vae,right=of patch,align=center] (conv) {conv patch-embed\\(3 conv)};
+  \node[tok,right=8mm of conv,align=center] (X) {$X$\\[-1pt]{\tiny 100 tok (10$\times$10)}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block (THE distinguishing part) -------------------------------------
+  \node[attn,right=14mm of X,minimum width=24mm,minimum height=12mm] (sa)
+        {Cross-\\attention\\{\tiny 8 heads}};
+  % K,V merge node: image tokens X concatenated with BOTH memory streams H1,H2 (3N keys)
+  \node[op,above=5mm of sa] (kv) {$\|$};
+  \node[lbl,above=0.4mm of kv,font=\tiny] {$K,V$ \,({\scriptsize $3N{=}300$})};
+  \node[lbl,below=1.4mm of sa,align=center,font=\tiny]
+        {$Q{=}X$, \ $K{=}V{=}[X\,\|\,H_1\,\|\,H_2]$\\[1pt]
+         $Z{=}X+\mathrm{softmax}(QK^{\!\top}/\sqrt d)V$};
+  % ---- two stacked memories (both fed back) ------------------------------------------
+  \node[mem,above right=3mm and 13mm of sa,align=center] (lstm1) {spatial\\xLSTM$_1$};
+  \node[mem,below right=3mm and 13mm of sa,align=center] (lstm2) {spatial\\xLSTM$_2$};
+  \node[tok,right=9mm of lstm2,minimum width=11mm,align=center] (H) {$H_2$\\[-1pt]{\tiny 100 tok}};
+  % ---- heads: 1D-conv over the token axis reading H2 ---------------------------------
+  \node[head,above right=1mm and 11mm of H,align=center] (actor) {1D-conv\\Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 11mm of H,align=center] (critic){1D-conv\\Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(conv); \draw[flow] (conv)--(X);
+  \draw[flow] (X)--(sa) node[midway,above,font=\tiny] {$Q$};       % image -> attention (queries + residual)
+  \draw[flow] (sa.east) -- ++(6mm,0) |- (lstm1.west) node[pos=.32,above,font=\tiny] {$Z$}; % Z -> LSTM1
+  \draw[flow] (lstm1) -- (lstm2) node[midway,right,font=\tiny] {$H_1$};  % H1 -> LSTM2 (stacked)
+  \draw[flow] (lstm2)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  % ---- Q,K,V construction ------------------------------------------------------------
+  \draw[qkv] (X.north) |- (kv.west);                              % image tokens X into K,V
+  \node[lbl,left=0.5mm of kv,font=\tiny,xshift=-1mm] {$X$};
+  % ---- recurrence + feedback (BOTH memory streams re-enter K,V) -----------------------
+  \draw[fb] (lstm1.north) .. controls +(0,12mm) and +(0,14mm) .. (kv.north east)
+        node[pos=.62,above,font=\tiny,text=Red!70] {$H_1^{\,t-1}$};
+  \draw[fb] (lstm2.south) .. controls +(0,-13mm) and +(0,-26mm) .. (kv.south)
+        node[pos=.10,below,font=\tiny,text=Red!70] {$H_2^{\,t-1}$};
+\end{tikzpicture}

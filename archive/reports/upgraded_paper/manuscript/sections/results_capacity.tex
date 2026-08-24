@@ -1,0 +1,28 @@
+% ============================================================================
+% STATUS SECTION — d_mem=128 and d_mem=256 checkpoints are preserved, but a
+% matched held-out behavioural/mechanistic comparison has not yet been run.
+% ============================================================================
+\section{Working-memory width and controlled detection}
+\label{sec:capacity}
+
+In humans, working-memory capacity predicts the ability to exert controlled
+attention --- to suppress a pre-potent orienting response and deploy attention where
+the task requires \cite{kane2001_controlled_attention}. The model offers a related,
+but not identical, intervention: changing the width of its spatial recurrent state
+($d_{\mathrm{mem}}$). Width is an architectural parameter, not a direct measurement
+of human working-memory span, so any capacity interpretation must be earned by a
+matched behavioral analysis.
+
+Preserved $d_{\mathrm{mem}}=128$ and $256$ checkpoints now exist for VDA1, VDA2,
+VDA4, and VDA9. Their existence corrects the earlier status that the larger-width
+run was unavailable. Training summaries do not show a simple monotone width benefit:
+affine-feedback checkpoints learn at both widths, while the $d_{\mathrm{mem}}=256$
+VDA9 cross-attention run is unstable late in training. Training accuracy alone does
+not establish a controlled-attention effect.
+
+\paragraph{Status and planned comparison.} A matched held-out battery comparing
+$d_{\mathrm{mem}}=128$ with $256$ --- psychometrics, invalid-cue behavior, temporal
+decoding, and the causal attention clamp, with checkpoint identities fixed --- has
+not yet been completed. We therefore report no capacity law and no direction of a
+width effect. The preserved checkpoints make that analysis possible; until it is
+run, memory width remains an intervention whose behavioral meaning is unresolved.

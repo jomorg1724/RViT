@@ -1,0 +1,41 @@
+\begin{abstract}
+\noindent
+Selective visual attention requires an animal to do two different things at
+once: decide, moment by moment, \emph{what to do} on the basis of incoming
+sensory evidence, and estimate \emph{how valuable} the current situation is, the
+quantity that supplies the learning signal for the first computation. In the
+primate brain these functions are carried by anatomically distinct but tightly
+interacting circuits --- a sensory-grounded priority and commitment system in
+parietal, frontal and midbrain nodes (LIP, FEF, superior colliculus) and a
+value/prediction-error system in the cortico-basal-ganglia loop. Here we ask
+whether the \emph{organisation} of these two computations, not merely their
+presence, is a determinant of whether attention-like behaviour can be learned at
+all. We study a recurrent vision-transformer agent trained purely from sparse
+reward to perform a spatially cued orientation-change-detection task modelled on
+primate covert-attention paradigms. We split the agent into two recurrent
+cross-attention pathways --- a \emph{$\mu$ pathway} that reads the live image and
+drives the policy (when to declare a change) and a \emph{$q$ pathway} that reads
+accumulated memory and drives the value estimate --- and we vary a single
+structural property: whether the pathways \emph{cross-talk} through a shared
+recurrent memory or run as isolated modules. The result is categorical. With
+cross-talk the agent becomes a calibrated psychophysical detector that reproduces
+the hallmark reliability-scaled cueing signature of primate spatial attention
+(\TODO{acc / hit / FA / RT placeholders}). Severing the coupling --- giving each
+pathway a private memory --- abolishes learning entirely: the agent never
+declares a change (\TODO{hit$=$0}). A second control that retains the coupling but
+routes the memory pathway to the policy collapses identically, establishing two
+jointly necessary conditions: the pathways must share a substrate, and the
+image-grounded pathway must command the decision. We trace the failure to credit
+assignment --- a critic that evaluates a different state than the actor occupies
+cannot teach it --- the same principle that binds dopaminergic value signals to
+cortico-striatal action learning. We further show the architecture generalises to
+larger stimulus arrays (a nine-stimulus set-size manipulation; \TODO{set-size
+$\times$ validity result}) and to environments with competing distractors
+(\TODO{distractor result}), and we use the trained model to generate falsifiable
+predictions --- a representational and causal dissociation between the policy and
+value pathways --- about what should be decodable from, and disrupted by
+perturbing, the corresponding neural circuits. The work illustrates how a
+reward-trained neural network, constrained to be interpretable and manipulable,
+can serve as a generative source of mechanistic hypotheses for systems
+neuroscience.
+\end{abstract}

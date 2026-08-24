@@ -1,0 +1,78 @@
+\chapter{Finding I --- perception is the bottleneck}
+\label{ch:perception}
+
+The single most consequential result of the reproduction is that, on the seven-step task,
+the obstacle to learning is not the reinforcement-learning objective, the attention
+mechanism, or the memory --- it is \emph{perception}. A front-end trained from reward alone
+never learns to represent orientation, and the agent therefore cannot see the change it is
+asked to report.
+
+\section{The collapse}
+The exact published network, trained end-to-end for the full $150{,}000$ episodes with the
+VAE encoder learned from reward, does not reproduce the task. It converges to
+\emph{always-press-at-the-deadline}: it presses at frame $5$ (the first frame a change
+could appear) on every trial, scoring hit rate $1.000$ on change trials and false-alarm
+rate $1.000$ on no-change trials, for an overall accuracy of $0.515$ and a reaction time
+pinned at exactly five frames. It has learned the \emph{timing} of the change window but
+not the \emph{discrimination} of change from no-change.
+
+\section{The diagnosis}
+Why can it not discriminate? Because to detect an orientation change one must represent
+orientation, and the from-scratch front-end does not. We probed this directly: render
+single Gabor patches at known orientations, encode them through the trained front-end's
+$\oflat$ layer, and fit a linear decoder for the (circular) orientation. The result is
+decisive (Fig.~\ref{fig:vaer2}):
+\[
+\Rsq_{\text{from-scratch}}=0.24,\qquad \Rsq_{\text{pretrained}}=0.97.
+\]
+The reward-trained front-end's features barely encode orientation; a reconstruction-
+pretrained VAE's features encode it almost perfectly. Sparse reward (on the order of one
+bit per episode) simply cannot teach fine orientation perception, which is exactly why the
+paper pretrains the VAE as a feed-forward preprocessing step --- a step our first
+reproduction had omitted.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.52\linewidth]{fig_vae_r2.pdf}
+\caption{Orientation decodability ($\Rsq$ of a linear decoder on the front-end's
+$\oflat$ features) for the front-end trained from reward versus pretrained on
+reconstruction. Reward alone cannot teach orientation perception; reconstruction can.}
+\label{fig:vaer2}
+\end{figure}
+
+\section{The rescue}
+Pretraining the VAE is cheap and decisive. We sample $\sim\!42{,}000$ grayscale
+$25\times25$ patches from the environment (blanks, cues, Gabors), train the paper's exact
+VAE (convolutional encoder $\to\oflat\to$ latent, transposed-convolution decoder,
+reconstruction $+$ small KL) for $\sim\!12$ epochs to a reconstruction loss of $0.0025$,
+and freeze the encoder into the front-end. With this single change --- \emph{nothing else
+in the network or harness altered} --- the exact paper network \textbf{learns the task on
+the first attempt} and climbs above the $0.5$ floor quickly, reaching hit rate $0.79$ with
+a false-alarm rate of $0.08$ and a median reaction time of five frames (it presses the
+instant it perceives the change).
+
+\section{The VAE is a static, task-parameter-invariant front-end}
+A subtle but useful corollary: the VAE is a \emph{per-frame, static} encoder. It
+reconstructs one patch at a time and has no notion of motion or time. Task temporal
+parameters --- the orientation-noise $\sigma$ and the horizon $T$ --- do not change what the
+VAE sees, because the displayed orientations span the full range regardless of $\sigma$.
+A single pretrained VAE therefore serves all noise levels and both horizons; there is no
+need to re-pretrain per task variant. This both simplifies the pipeline and sharpens the
+interpretation of the next chapter: when the long task succeeds without the pretrained VAE,
+it is not because the perception problem went away, but because the long horizon admits a
+different solution to it.
+
+\section{Why this matters for the architecture choice}
+This finding cleanly separates two questions that the earlier history had conflated.
+``Does the architecture work?'' and ``Can the front-end see?'' are different. Many of the
+collapses catalogued in Chapter~\ref{ch:zoo} on the seven-step task are, in retrospect,
+perception failures wearing an architecture's clothes. The methodological upgrade is to
+\emph{fix perception first} (frozen pretrained VAE) and only then compare attention/memory
+wirings --- which is precisely the controlled setting of Chapters~\ref{ch:deepdive} and
+\ref{ch:attention}.
+
+A third perception result (Chapter~\ref{ch:jepa}) qualifies this: perception need not be
+solved \emph{before} the architecture if the network carries a self-supervised predictive
+auxiliary --- a V-JEPA temporal self-distillation loss --- trained jointly with the policy,
+which learns a working front-end from raw pixels or a convolutional encoder with no
+pretrained VAE.

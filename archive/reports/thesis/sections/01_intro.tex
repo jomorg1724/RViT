@@ -1,0 +1,81 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+\section{The program and its goal}
+The long-run objective of this program is a single neural-network architecture that (i)
+learns covert visual attention end-to-end from sparse, animal-like reward, (ii)
+reproduces the behavioural and neural signatures of primate spatial attention, and (iii)
+\emph{generalises} across the standard battery of non-human-primate (NHP) attention tasks
+rather than being tuned to one. We are not merely fitting a curve; we are searching for
+the most neuro-inspired wiring that makes attentive behaviour \emph{emerge} from the
+combination of a learnable priority computation, a capacity-limited working memory, and a
+reward signal --- and that, having emerged, exposes an interpretable and causally
+manipulable internal attention signal.
+
+The published manuscript this program supports, \emph{``A recurrent vision transformer
+shows signatures of primate visual attention''} (Morgan, Albanna \& Herman), establishes
+the empirical claim on the canonical four-stimulus, validity-driven, uniform-reward task.
+This report is the architecture study that sits behind that manuscript: it records what
+we tried, what worked, what failed, and --- most importantly --- \emph{why}, so that the
+choice of network to carry forward is grounded in evidence rather than habit.
+
+\section{The model in one paragraph}
+The recurrent vision transformer parses each video frame into a small set of spatial
+patch tokens, runs a \emph{recurrent} self-attention block in which the attention is
+computed jointly from the current image and the contents of a per-patch working memory,
+writes that memory with a spatial long short-term memory (LSTM) cell, and reads the
+memory with a distributional actor--critic head trained by reinforcement learning. The
+defining property is the recurrence of attention: because the attention at frame $t$
+depends on memory accumulated from previous frames, a cue shown briefly and then removed
+can be maintained and used to bias later processing. Every architectural decision in this
+report is, at bottom, a decision about \emph{how} the image and the memory combine to form
+attention, and \emph{which} internal state the decision is read from.
+
+\section{Scope of the evidence}
+The findings synthesised here rest on roughly thirty network variants trained on two task
+horizons, plus a clean-room reproduction of the exact published network. The variants
+span memory-as-tokens self-attention, cross-attention over memory, multiplicative
+(FiLM-style) gain modulation, vector-quantised codebook attention, predictive-coding and
+energy-modulation front-ends, split actor/critic pathways with and without cross-talk,
+fast-weight (hypernetwork) attention, and several novel dual-memory wirings. Two
+front-ends (raw-pixel and a reconstruction-pretrained VAE) and two reinforcement-learning
+horizons (a seven-step fixed-onset task and a twenty-nine-step random-onset task) complete
+the design space. The reinforcement-learning machinery --- prioritised episode replay, a
+maximum-a-posteriori-policy-optimisation actor loss, and a distributional quantile critic
+--- is held essentially constant so that architectural comparisons are clean.
+
+\section{Contributions and structure}
+The contributions, each developed in its own chapter, are:
+\begin{enumerate}
+\item \textbf{Perception is the bottleneck on the short task} (Chapter~\ref{ch:perception}).
+A reconstruction-pretrained VAE front-end is necessary and nearly sufficient to make the
+exact paper network learn the seven-step task; a front-end trained from reward alone never
+learns to represent orientation and the agent collapses to pressing at the deadline.
+\item \textbf{The horizon decides which strategy is viable} (Chapter~\ref{ch:horizon}).
+The long task tolerates a weak front-end because the change can be integrated over many
+frames; the short task does not, which is why the VAE matters on one and not the other.
+\item \textbf{Coupling is a precondition for learning} (Chapter~\ref{ch:crosstalk}).
+Severing the shared memory between the policy and value streams collapses an otherwise
+identical model to chance --- shared memory is load-bearing, not cosmetic.
+\item \textbf{The working network reproduces the paper's behaviour}
+(Chapter~\ref{ch:deepdive}): the reliability-scaled psychometric cueing benefit and the
+causal attention-to-sensitivity link both replicate cleanly.
+\item \textbf{Cueing can be carried by memory rather than attention}
+(Chapter~\ref{ch:attention}): a mechanistic dissociation that reframes how we read the
+attention maps and motivates a family of follow-up wirings.
+\end{enumerate}
+The remaining chapters catalogue the full architecture zoo
+(Chapter~\ref{ch:zoo}), survey the reinforcement-learning harness and its variations
+(Chapters~\ref{ch:harness} and \ref{ch:harnessvar}), and close with an architecture
+recommendation (Chapter~\ref{ch:recommendation}), a proposed task battery
+(Chapter~\ref{ch:experiments}), a research plan (Chapter~\ref{ch:plan}), and a one-page
+summary of the actionable findings (Chapter~\ref{ch:findings}).
+
+\section{A note on terminology}
+Throughout, we call the two recurrent streams of the split-pathway models the
+\emph{priority} ($\mu$) pathway, which feeds the actor and the decision of \emph{when} to
+declare a change, and the \emph{value} ($q$) pathway, which feeds the critic. We avoid the
+labels ``salience'' and ``top-down'' because the priority/commitment areas of the brain
+(LIP, FEF, SC) are each a single priority map rather than an actor/critic pair; the
+$\mu$/$q$ split is a computational decomposition, and we are careful in
+Chapter~\ref{ch:recommendation} about the limits of mapping it onto anatomy.

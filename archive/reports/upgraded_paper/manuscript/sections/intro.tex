@@ -1,0 +1,167 @@
+% intro.tex — Introduction.
+% Empirical RViT+ extension of Morgan, Albanna & Herman (2025), and companion
+% to the separate 2026 normative VDA manuscript. THE model is affine_ew.
+
+\section{Introduction}
+\label{sec:intro}
+
+For a quarter of a century, a single question has organised the study of
+visual attention: \emph{how} does attention improve perception? Attending a
+location makes an observer faster and more accurate at the events that occur
+there, and the size of that benefit has been mapped in exhaustive
+psychophysical and physiological detail \cite{carrasco2011_visual_attention_25y,
+posner1980_orienting}. What the benefit \emph{is}---the computation that turns a
+spatial cue into better vision---has proven far harder to pin down. Reviewing
+the field, Carrasco \cite{carrasco2011_visual_attention_25y} frames three
+standing accounts. On the first, attention \emph{enhances the signal}: it
+multiplies the gain of the neurons that encode the attended stimulus, sharpening
+their response the way a contrast increase would
+\cite{reynolds_heeger2009_normalization, mcadams_maunsell1999_v4_tuning,
+treue_martinez_trujillo1999_feature_attention, sani2017_temporal_v4_gain}. On
+the second, attention improves sensitivity by \emph{reducing external noise}, or
+equivalently by selecting the relevant input more efficiently and excluding
+distractors and competing locations \cite{CohenMaunsell2009}. On the third, the
+gain in performance is not perceptual at all but sits at the \emph{decision
+stage}---a shift in the observer's response criterion, or a reduction in spatial
+uncertainty about where the relevant event will occur \cite{MullerFindlay1987,
+posner1980_orienting}.
+
+These are not idle alternatives. They make different predictions about which
+neurons should change, about how the psychometric and the criterion should move,
+and about where in the processing stream an intervention should have its effect.
+Yet Carrasco's own resolution is appropriately plural: the three accounts,
+she writes, ``are not mutually exclusive; rather, all three are likely to
+contribute'' \cite{carrasco2011_visual_attention_25y}. Behaviour is a summary of a
+system with many internal stages, and a change in hit rate can be consistent with
+a gain change, a noise change, or a criterion change. Signal-detection analysis can,
+with care, separate a sensitivity ($\dprime$) effect from a criterion ($c$) effect
+\cite{MullerFindlay1987}; dedicated external-noise paradigms are needed to adjudicate
+signal enhancement against external-noise reduction. An instrumented model adds a
+different form of access: its internal representation can be read out and its
+attention can be injected or suppressed at a chosen location. That access supports
+direct tests of criterion, sensitivity, and spatial gating, but it does not by itself
+turn those measurements into a quantitative decomposition of all three accounts.
+
+A computational model in which attention is learned rather than prescribed offers
+that access. Its internal states can be decoded and its attention machinery clamped
+or injected. The resulting tests can establish whether a manipulation moves
+criterion and sensitivity and whether its behavioural effect is spatially gated.
+They cannot estimate a three-way contribution fraction without an explicit
+generative decomposition and a dedicated external-noise manipulation, neither of
+which is part of the present battery.
+
+Here we apply those direct tests. We study a single recurrent vision transformer
+equipped with a spatial working-memory state, trained by reinforcement learning
+together with a temporal joint-embedding predictive (JEPA) auxiliary objective
+(loss weight $0.5$) to
+perform a cued change-detection task: a spatial cue
+indicates where a change is likely, a brief blank delay follows, an array of
+oriented Gabor stimuli appears, and the model is rewarded for reporting a change
+in one of them and for withholding on unchanged displays. The model is never
+told to attend, never given a hand-specified saliency map, and never trained on
+neural or behavioural targets. The JEPA head has no direct forward input to the
+decision, but its weighted loss backpropagates through and shapes the recurrent
+representation. Under this joint objective the model develops a graded internal
+attention map over the stimulus array---a priority map. It orients at the cue,
+relaxes near baseline during the blank, and later re-acquires the cued location;
+that sequence is compatible with an intervening memory trace, but no cue-location
+decoder across the delay is reported. We then apply to this model the apparatus that
+the biological literature can only partially bring to bear: signal-detection
+read-outs of sensitivity and criterion, graded clamping of the attention map
+onto or off any location, causal microstimulation that injects attention where
+none was deployed, and time-resolved decoding of task variables from the memory
+state. The core causal battery is performed on one canonical affine-feedback $d_{\mathrm{mem}}=128$
+checkpoint. Set-size and paradigm comparisons use separately trained checkpoints of the
+same architecture; we identify those comparisons explicitly rather than treating them as
+repeated measurements of one set of weights.
+
+The central result is that this one model makes criterion, sensitivity, and spatial
+gating measurable under direct manipulation. Injecting attention onto an unchanged
+location on catch trials evokes false detections preferentially at the monitored
+location, a spatially gated effect
+(Section~\ref{sec:detection}). Attention is also associated with efficient selection:
+a cued-versus-uncued benefit is present in the four-stimulus checkpoint, while the
+single-stimulus task has no comparable uncued active item
+(Sections~\ref{sec:detection}, \ref{sec:vda-battery}). This is compatible with a
+noise-limited detector but is not a pure set-size intervention or an external-noise test. Attention also moves
+the decision stage: in the canonical VDA4 sweep, moving the nominal clamp from
+suppress to enhance shifts the sampled response criteria toward liberal responding,
+the textbook attentional criterion effect; the VDA9 curve is not uniformly monotone
+(Section~\ref{sec:detection}). Clamping attention while reading out
+signal-detection quantities directly operationalizes both the criterion and
+sensitivity responses; and a
+misdirection probe reveals a failure mode invisible to behaviour alone, in which
+aiming the model's attention at the wrong location makes it \emph{miss} a real
+change while becoming \emph{more} confident that nothing happened
+(Section~\ref{sec:detection}). This is a model-level account of how attentional
+misallocation manufactures confident perceptual errors, and it is the kind of
+mechanistic claim that a scalar behavioural benefit can never license.
+
+The same affine-feedback architecture and clamp analysis are then applied to separately
+trained paradigm checkpoints. In a preliminary, cued Luo--Maunsell-style design
+that separates a reward regime rewarding sensitivity from one rewarding a
+criterion shift \cite{luo_maunsell2018_criterion_sensitivity}, the reward-regime comparison shows the expected contrast---the sensitivity regime moves $\dprime$ while the criterion
+regime moves bias---and the follow-up localises the criterion effect to the
+decision stage, a shift in the actor's declare-bias, while the sensitivity
+effect is carried by attentional gain
+(Section~\ref{sec:luomaunsell}). In a separately trained checkpoint where the cue carries spatial validity rather
+than value, the architecture \emph{uses} that validity gradedly, in the Posner manner:
+its cueing benefit grows with cue reliability and it diverts resources away from
+the uncued location as the cue becomes more predictive
+(Section~\ref{sec:value}). And where the primate literature reports that value
+sensitivity is absolute rather than relative to context
+\cite{baruni2015}, the model agrees, yielding a principled null
+that matches the regime the companion normative analysis predicts
+(Section~\ref{sec:value}).
+
+Beyond the mechanisms of the detection benefit itself, the model's
+working memory lets us engage a second, tightly related literature: the claim
+that spatial attention and spatial working memory interact, with attention
+serving as the rehearsal mechanism that maintains a remembered location across a
+delay \cite{awh_jonides2001_overlapping_attention_wm, awh1998_rehearsal,
+kane2001_controlled_attention}. In the model, value is latched at the cue and held across the delay, while change
+presence and location become decodable at the observed change frame
+(Section~\ref{sec:detection})---a candidate functional analogue of an event-location
+signal in posterior parietal cortex
+\cite{bisley_goldberg2010}. Because the memory has an
+explicit capacity---the width of its state---we can ask whether capacity governs
+controlled, cue-appropriate detection the way working-memory span predicts
+controlled attention in humans (Section~\ref{sec:capacity}), and because cued-location activity during the blank is compatible with maintenance, we can ask
+whether it is load-bearing rehearsal by probing and lesioning it during the delay
+(Section~\ref{sec:rehearsal}). No delay-probe or causal delay-clamp result is reported
+here; rehearsal remains a hypothesis.
+
+This paper extends the 2025 empirical Recurrent ViT of Morgan, Albanna, and Herman
+\cite{morgan_albanna_herman2025_rvit}. It is also the empirical companion to a
+\emph{separate} 2026 normative signal-detection treatment
+\cite{morgan_albanna_herman2026_vda}, rather than a revision of that paper. Where the
+normative companion asks, from first principles, \emph{when} value-directed
+re-allocation of attention should gain over an observer that has already
+optimised its decision criteria, the present paper asks what a system that
+learns the task \emph{de novo} actually does, and whether it recapitulates the
+signatures the biological literature has catalogued. The two meet at a shared conceptual question: a cued detection task in which
+criterion adjustment and attentional re-allocation can provide distinct routes to
+reward, and in which telling them apart requires more than the behaviour they jointly
+produce. The normative account states conditions under which the distinction should
+matter; the empirical checkpoints studied here make both routes measurable. Agreement
+between the papers is a consistency relation, not a claim that the empirical network
+implements the normative derivation exactly.
+
+The remainder of the paper is organised by the question each group of
+experiments investigates. Section~\ref{sec:model} describes the model and the
+cued change-detection environment. Section~\ref{sec:detection} presents the core
+detection results---the psychometric and reaction-time signatures, the learned
+priority map and its time course, the signal-detection dissociation of criterion
+from sensitivity, the misdirection failure mode, the time-resolved decoding of
+task variables from memory, and the causal microstimulation of the priority
+map---establishing directly measured criterion and sensitivity effects plus spatial
+gating, while leaving external-noise reduction untested. Section~\ref{sec:value} takes up value and validity: how the
+model uses a purely spatial validity cue, and why it treats value as absolute
+rather than relative. Section~\ref{sec:luomaunsell} reproduces the
+sensitivity/criterion double dissociation in a canonical primate design and
+localises each effect to its processing stage. Sections~\ref{sec:vda-battery},
+\ref{sec:capacity}, and~\ref{sec:rehearsal} then use the model's working memory
+to engage the noise-limited set-size account, the working-memory-capacity view
+of controlled attention, and the attention-as-rehearsal hypothesis in turn. The
+Discussion returns to Carrasco's framework and distinguishes what the present
+battery operationalizes from what still requires a dedicated external-noise design.

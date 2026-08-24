@@ -1,0 +1,86 @@
+% v11 — PARALLEL DUAL-STREAM (salience || top-down), NO readout cross-talk.
+% Two parallel attention streams over the SAME image tokens X:
+%   SALIENCE : Q=X, K=V=H1, residual=X            -> Z_sal  (grounded image stream)
+%   TOP-DOWN : Q=X, K=V=H2, residual=H2           -> Z_td
+% Memories : H1 = LSTM1(X) ; H2 = LSTM2(Z_sal).
+% Heads read the CONCATENATION [Z_sal || Z_td] -> Actor + Critic. n_heads=8.
+% Conv patch-embed front-end (T=29 family); dashed-red = recurrent feedback (frame t-1).
+\begin{tikzpicture}[node distance=6mm and 9mm]
+  % ---- front-end (conv patch-embed, T=29 family) -------------------------------------
+  \node[vae,minimum size=8mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt]
+       (patch.north)--(patch.south) (patch.west)--(patch.east)
+       ($(patch.west)!.5!(patch.north west)$)--($(patch.east)!.5!(patch.north east)$)
+       ($(patch.west)!.5!(patch.south west)$)--($(patch.east)!.5!(patch.south east)$)
+       ($(patch.north)!.5!(patch.north west)$)--($(patch.south)!.5!(patch.south west)$)
+       ($(patch.north)!.5!(patch.north east)$)--($(patch.south)!.5!(patch.south east)$);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $50{\times}50$}};
+  \node[vae,right=8mm of patch] (vae) {conv patch-embed\\(3 conv)};
+  \node[tok,right=7mm of vae] (X) {$X$\\[-1pt]{\tiny 100 tok ($10{\times}10$)}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+
+  % ---- TWO parallel attention streams (middle band) ----------------------------------
+  % SALIENCE (upper): Q=X, K=V=H1, residual X  ->  Z_sal
+  \node[attn,right=15mm of X,minimum width=28mm,minimum height=8.5mm,yshift=6mm] (sal)
+        {salience attn\\{\tiny $Q{=}X,\ K{=}V{=}H_1$ \ (8 heads)}};
+  \node[op,right=4mm of sal] (psal) {$+$};
+  % TOP-DOWN (lower): Q=X, K=V=H2, residual H2  ->  Z_td
+  \node[attn,right=15mm of X,minimum width=28mm,minimum height=8.5mm,yshift=-6mm] (td)
+        {top-down attn\\{\tiny $Q{=}X,\ K{=}V{=}H_2$ \ (8 heads)}};  % residual = H2
+  \node[op,right=4mm of td] (ptd) {$+$};
+
+  % ---- two memories (dedicated rows: H2 above, H1 below) -----------------------------
+  % H2 = LSTM2(Z_sal) -> feeds the TOP-DOWN stream K/V (top row)
+  \node[mem,above=4mm of sal,minimum height=7mm] (lstm2) {spatial xLSTM$_2$ \ {\tiny $H_2{=}\mathrm{LSTM}_2(Z_{sal})$}};
+  % H1 = LSTM1(X)  -> feeds the SALIENCE stream K/V (bottom row)
+  \node[mem,below=4mm of td,minimum height=7mm] (lstm1) {spatial xLSTM$_1$ \ {\tiny $H_1{=}\mathrm{LSTM}_1(X)$}};
+
+  % ---- concatenation + readout -------------------------------------------------------
+  \node[op] (cat) at ($(psal)!0.5!(ptd)+(22mm,0)$) {$\|$};
+  \node[tok,right=6mm of cat,minimum width=13mm] (H) {$[Z_{sal}\,\|\,Z_{td}]$};
+  \node[head,above right=2mm and 7mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=2mm and 7mm of H] (critic){Critic\\{\tiny QR, 5 q.}};
+
+  % equation label, compact, to the right of the bottom memory (empty space)
+  \node[lbl,right=5mm of lstm1.east,align=left,font=\tiny,anchor=west] (eq)
+        {sal: $Q{=}X,\,KV{=}H_1$; \ td: $Q{=}X,\,KV{=}H_2$\\[1pt]
+         heads read $[Z_{sal}\,\|\,Z_{td}]$};
+
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X);
+  % X is the QUERY source for BOTH streams (and the salience residual)
+  \draw[flow] (X.east) -- ++(4mm,0) |- (sal.west);
+  \draw[flow] (X.east) -- ++(4mm,0) |- (td.west);
+  % salience residual X into its (+)
+  \draw[flow] (X.north) .. controls +(0,12mm) and +(0,5mm) .. (psal.north)
+        node[pos=.58,above,font=\tiny,text=black!70] {residual $X$};
+  \draw[flow] (sal)--(psal);
+  % top-down residual H2 into its (+)
+  \draw[flow] (td)--(ptd);
+
+  % X -> LSTM1   (down the left of the bottom band)
+  \draw[flow] (X.south) .. controls +(0,-13mm) and +(180:6mm) .. (lstm1.west)
+        node[pos=.92,below,font=\tiny] {$X$};
+  % salience output Z_sal -> LSTM2  (up the right of the top band)
+  \draw[flow] (psal.north) .. controls +(0,6mm) and +(0,-6mm) .. (lstm2.east)
+        node[pos=.55,right,font=\tiny] {$Z_{sal}$};
+
+  % outputs to the concatenation
+  \draw[flow] (psal.east) -| (cat.north) node[pos=.28,above,font=\tiny] {$Z_{sal}$};
+  \draw[flow] (ptd.east) -| (cat.south) node[pos=.28,below,font=\tiny] {$Z_{td}$};
+  \draw[flow] (cat)--(H);
+  \draw[flow] (H.east)-- ++(3mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(3mm,0) |- (critic.west);
+
+  % ---- recurrence + feedback (dashed red, frame t-1) ---------------------------------
+  \draw[fb] (lstm2.north east) .. controls +(0,3.5mm) and +(0,3.5mm) .. (lstm2.north west)
+        node[midway,above,font=\tiny,text=Red!70,inner sep=1pt] {carry};
+  \draw[fb] (lstm1.south east) .. controls +(0,-3.5mm) and +(0,-3.5mm) .. (lstm1.south west)
+        node[midway,below,font=\tiny,text=Red!70,inner sep=1pt] {carry};
+  % H1 (bottom memory) feeds the SALIENCE stream's K/V
+  \draw[fb] (lstm1.east) .. controls +(8mm,0) and +(0,-7mm) .. (sal.south east)
+        node[pos=.80,right,font=\tiny,text=Red!70] {$H_1^{t-1}$};
+  % H2 (top memory) feeds the TOP-DOWN stream's K/V (and its residual source)
+  \draw[fb] (lstm2.west) .. controls +(-8mm,0) and +(0,7mm) .. (td.north west)
+        node[pos=.80,left,font=\tiny,text=Red!70] {$H_2^{t-1}$};
+\end{tikzpicture}

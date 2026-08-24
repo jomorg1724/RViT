@@ -1,0 +1,192 @@
+\chapter{Finding V --- attention versus memory, and the cue-attention question}
+\label{ch:attention}
+
+The deep dive raised a mechanistic question that is, at the time of writing, the program's
+live frontier: in the canonical multiplicatively-gated model, the cueing \emph{behaviour}
+is real and graded, yet the per-frame attention map does not orient to the cue. This
+chapter sets out the dissociation, the mechanism behind it, and the matched family of
+architectures we are training to resolve it.
+
+\section{The cue modulates behaviour}
+First, to be unambiguous: the cue strongly modulates the model's behaviour. The detection
+threshold for a cued change is up to $7.5^\circ$ lower than for an uncued change, and the
+benefit scales with validity (Chapter~\ref{ch:deepdive}). The model reads the cue, holds
+it, and uses it. The question is not \emph{whether} the cue is used but \emph{through what
+internal variable}.
+
+\section{The attention is change-locked, not cue-locked}
+We measured the four-patch attention map at every frame for a $100\%$ cue at $S_1$ with a
+$25^\circ$ change at $S_1$ (Fig.~\ref{fig:attn_change}). The attention is uniform
+($\approx0.25$ per patch) through the cue frame and the entire delay, and it sharpens onto
+$S_1$ only at frame $5$ --- the moment the change appears. The full $4\times4$ query-key
+matrix at the cue frame is essentially uniform, so this is not an artefact of how the map
+is summarised: there is no cue-driven structure to summarise. A no-change control confirms
+the reading (Fig.~\ref{fig:attn_nochange}): with the same $100\%$ cue but no change, the
+attention stays flat across all seven frames (maximum deviation from uniform $0.039$). The
+attention fires at a location when, and only when, that location \emph{changes}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{fig_attention_maps_S1.pdf}
+\caption{Per-frame attention (top: input frames; bottom: $2\times2$ attention map, S1 =
+top-left) for a $100\%$ cue at $S_1$ with a $25^\circ$ change at $S_1$. The cue (frame 1)
+draws no attention; the attention concentrates on $S_1$ only at the change (frame 5).}
+\label{fig:attn_change}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{fig_attention_maps_S1_nochange.png}
+\caption{No-change control, $500$ trials, $100\%$ cue at $S_1$. With nothing to lock onto
+the attention stays uniform across every frame --- the cue alone never moves it.}
+\label{fig:attn_nochange}
+\end{figure}
+
+\section{Where the cue actually lives}
+If not in the attention, where? In the recurrent memory. Decoding from the flattened memory
+$\mathbf H$ at the pre-change frame, both the cued \emph{location} ($S_1$ vs.\ $S_4$) and
+the \emph{validity} ($25/50/75/100\%$) are recovered at $100\%$ accuracy (chance $50\%$ and
+$25\%$). The cue and its reliability are perfectly maintained in working memory, where they
+set the decision threshold; the attention, meanwhile, is a bottom-up change detector. This
+is a clean dissociation: \textbf{cue $\to$ behaviour: yes; cue $\to$ attention map: no}.
+
+\section{The mechanism}
+The dissociation has a transparent cause in the multiplicative form
+(Eq.~\ref{eq:mult}). Because $\mathbf Q=(\X\mathbf W_{XQ})\odot(\Hone\mathbf W_{HQ})$, the
+query magnitude is gated by the memory projection. At the cue frame the memory has not yet
+built up, the gate $\lvert\Hone\mathbf W_{HQ}\rvert$ is near zero ($\approx0.02$), and the
+queries and keys collapse toward zero, so the attention is uniform. The model is then
+\emph{free} to keep that gate small, because the cue reaches memory through the image
+residual $\X$ in $\mathbf Z=\X+\mathbf V_{\text{filt}}$ and the LSTM, without the attention
+ever needing to orient. The multiplicative form, in short, \emph{admits} a memory-only
+solution, and on the seven-step task with a frozen VAE and a memory readout, the harness
+finds it.
+
+\section{The open question}
+This is where honesty is required. The lab's other models --- multi-head, cross-attention
+variants in the spirit of \code{v5} and \code{v11} --- reliably \emph{do} orient attention
+to the cue, across many trained networks. So orienting is clearly achievable with these
+mechanisms; the multiplicative-gated reproduction is the outlier. The cause is therefore
+\emph{some feature of our specific reproduction} --- the gate form, the head count, the
+memory readout, the harness, the frozen front-end --- not a property of memory-gated
+attention in general. We do not yet know which feature, and we are not guessing: we are
+testing it directly with a matched family of architectures.
+
+\section{The matched family under test}
+Each variant changes exactly one thing about the attention/memory wiring on the identical
+base (frozen VAE, harness, readout dimension), so any difference in whether attention
+orients to the cue is attributable to that change. Table~\ref{tab:family} lists them.
+
+\begin{table}[t]
+\centering
+\caption{The matched family of attention/memory wirings under training to resolve the
+cue-attention question. All share the frozen-VAE front-end, the PAC$+$QR-DQN$+$PER harness,
+and the $4096$-d readout.}
+\label{tab:family}
+\small
+\begin{tabular}{p{2.2cm}p{7.2cm}p{2.0cm}}
+\toprule
+Variant & What it changes about the feedback / memory & Status \\
+\midrule
+multiplicative & canonical $\mathbf Q=(\X\mathbf W)\odot(\Hone\mathbf W)$ (the reproduction) & works; change-locked \\
+affine & memory derives a scale-\emph{matrix} $+$ shift: $\X'=\Gamma(\Hone)\X+\beta(\Hone)$ & \textbf{failed (always-wait)} \\
+dualhead & a memory-free sensory head $\parallel$ the multiplicative feedback head & works; weak orient \\
+two-lstm & split memory: $\Hone$ feeds attention, $\Htwo$($\Hone$) feeds heads & \textbf{best detector} \\
+crossattn & additive cross-talk: $\mathbf K,\mathbf V=[\X\parallel\Hone]$, two LSTMs from $\mathbf Z$ & works; memory-routed \\
+dualmem & memories \emph{query}: $\mathbf Q([\Hone\parallel\Htwo])$, $\mathbf K,\mathbf V=[\X\parallel\Hone\parallel\Htwo]$ & works; memory-routed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Results: the family resolves the question}
+All six variants are now trained to $\sim$$18{,}750$ iterations on the identical frozen-VAE
+base, and each was evaluated greedily for behaviour ($250$ episodes on \code{validity4}) and
+for cue-orienting with the same $100\%$-cue protocol used above: a fully reliable cue, the
+attention to the \emph{cued} patch recorded across all seven frames, in a no-change
+condition (so any pre-change bias toward the cued location is cue-driven, not change-driven)
+and a change condition (so the change-locked component is visible). The
+\emph{cue-orienting index} is the cued-patch attention at the pre-change stimulus frames
+($t_{3,4}$) minus uniform; the \emph{change-locked spike} is the cued-patch attention jump
+at the change frame ($t_5$). Table~\ref{tab:familyresults} reports both alongside behaviour;
+Figures~\ref{fig:varattn} and~\ref{fig:varbeh} plot them.
+
+\begin{table}[t]
+\centering
+\caption{Matched-family results. Behaviour is greedy on \code{validity4} ($T=7$);
+cue-orient $>0$ means the attention is biased toward the cued location \emph{before} the
+change (cue-driven). The headline: no variant produces a large positive cue-orient, while
+two of them (\code{crossattn}, \code{dualmem}) attend markedly \emph{away} from the cued
+image patch --- the cueing effect is carried by memory across the whole family.}
+\label{tab:familyresults}
+\small
+\begin{tabular}{lccccrr}
+\toprule
+Variant & correct & hit & FA & median RT & cue-orient & chg-spike \\
+\midrule
+multiplicative & $0.804$ & $0.705$ & $0.091$ & $5.0$ & $-0.011$ & $+0.143$ \\
+affine         & $0.504$ & $0.000$ & $0.000$ & ---   & $+0.014$ & $-0.001$ \\
+dualhead       & $0.820$ & $0.708$ & $0.088$ & $5.0$ & $+0.038$ & $-0.002$ \\
+two-lstm       & $\mathbf{0.872}$ & $\mathbf{0.836}$ & $0.094$ & $5.0$ & $+0.008$ & $+0.216$ \\
+crossattn      & $0.840$ & $0.760$ & $0.080$ & $5.0$ & $-0.179$ & $-0.011$ \\
+dualmem        & $0.828$ & $0.750$ & $0.079$ & $5.0$ & $-0.174$ & $+0.002$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.99\linewidth]{fig_variants_attention.pdf}
+\caption{\emph{Left:} attention to the cued patch across the seven frames, no-change,
+$100\%$ cue, for every working variant. All hover near or below uniform ($0.25$) through the
+cue and delay; none lifts the cued location before the change. \emph{Right:} the
+cue-orienting index ($t_{3,4}$, solid) and the change-locked spike ($t_5$, hatched). The
+models that read a direct image$\to$attention path (\code{multiplicative}, \code{two-lstm})
+show a clear change-lock and no orienting; \code{crossattn} and \code{dualmem} sit well
+below uniform on the cued image patch --- they route the cued location through memory rather
+than attending it.}
+\label{fig:varattn}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.62\linewidth]{fig_variants_behavior.pdf}
+\caption{Behaviour on \code{validity4}. Five of six variants learn the task; \code{affine}
+collapses to always-wait (hit $=0$, no false alarms, $P(\text{press})\le0.004$ even on a
+clear $60^\circ$ change). \code{two-lstm} is the best detector.}
+\label{fig:varbeh}
+\end{figure}
+
+The matched family answers the question, and not in the direction the single early data
+point suggested. \textbf{No variant restores strong cue-orienting attention on this task.}
+The largest positive cue-orienting index is \code{dualhead}'s sensory head at $+0.038$ ---
+real but small, and too weak to carry an attention-allocation figure. The
+\code{multiplicative} and \code{two-lstm} models are change-locked exactly as the deep dive
+described (spike $+0.143$, $+0.216$; orient $\approx0$). And the two richest cross-talk
+wirings, \code{crossattn} and \code{dualmem}, attend \emph{below} uniform at the cued image
+location ($-0.179$, $-0.174$): given the choice between image keys and memory keys, they
+spend their attention on memory, leaving the bottom-up image patch under-weighted. The
+dissociation of Chapter~\ref{ch:attention} is therefore not a quirk of the multiplicative
+gate; it is \emph{general} across six attention/memory wirings on this perception front-end
+and this task. Reward, on the seven-step task, does not make attention orient to the cue ---
+it makes \emph{memory} hold the cue.
+
+\paragraph{A correction.} An earlier reading of a single partially-trained \code{affine}
+checkpoint suggested it ``already attends the cue.'' That was premature: fully evaluated,
+\code{affine} never presses (Fig.~\ref{fig:varbeh}), so its attention is not behaviourally
+meaningful, and the apparent cue structure does not survive into a model that performs the
+task. The lesson --- verify behaviour before reading an attention map --- is the same one
+the dissociation itself teaches.
+
+\section{Why this matters}
+For the empirical manuscript, the behavioural reproduction (Chapter~\ref{ch:deepdive})
+stands regardless. But the result reshapes the attention-map story in two useful ways.
+First, it converts the open question into a \emph{finding}: across this family, the cueing
+effect is memory-borne, and the attention map is a bottom-up change detector --- a
+defensible, falsifiable claim now backed by six wirings rather than one. Second, it picks
+the network: \code{two-lstm} is both the best detector and a minimal, paper-faithful change
+to the published multiplicative attention (a second stacked memory), so it is the natural
+network to carry forward, with the memory-driven account of cueing stated plainly rather
+than hidden behind an attention figure that the mechanism does not support. If a future
+task with a longer delay or a harder cue \emph{forces} pre-orienting, this same family is
+the instrument to re-run; on the seven-step task, the honest figure is the change-locked
+one.

@@ -1,0 +1,851 @@
+                                HHS Public Access
+                                Author manuscript
+                                Neuron. Author manuscript; available in PMC 2016 June 03.
+
+
+
+
+Author Manuscript
+                    Published in final edited form as:
+                     Neuron. 2015 June 3; 86(5): 1182–1188. doi:10.1016/j.neuron.2015.05.007.
+
+
+
+                    Neuronal modulations in visual cortex are associated with only
+                    one of multiple components of attention
+                    Thomas Zhihao Luo1,2,* and John H. R. Maunsell1
+                    1Department of Neurobiology, The University of Chicago, Chicago, IL, 60637
+
+                    2Program in Neuroscience, Harvard Medical School, Boston, MA, 02115
+
+
+
+
+Author Manuscript
+                    Abstract
+                         Neuronal signals related to visual attention are found in widespread brain regions, and these
+                         signals are generally assumed to participate in a common mechanism of attention. However, the
+                         behavioral effects of attention in detection can be separated into two distinct components: spatially
+                         selective shifts in either the criterion or sensitivity of the subject. Here we show that a paradigm
+                         used by many single-neuron studies of attention conflates behavioral changes in the subject’s
+                         criterion and sensitivity. Then, using a task designed to dissociate these two components, we
+                         found that multiple aspects of attention-related neuronal modulations in area V4 of monkey visual
+                         cortex corresponded to behavioral shifts in sensitivity but not criterion. This result suggests that
+                         separate components of attention are associated with signals in different brain regions, and that
+                         attention is not a unitary process in the brain but instead consists of distinct neurobiological
+                         mechanisms.
+
+
+
+
+Author Manuscript
+                    INTRODUCTION
+                                      Attending to a location in a visual scene enhances behavioral performance there even when
+                                      gaze is directed elsewhere (Posner et al., 1980; Carrasco, 2011). At the attended location,
+                                      subjects detect target stimuli more readily and respond with shorter delays. These
+                                      improvements in detection could depend on either of two components: a more lenient
+                                      criterion for detecting targets, or higher sensitivity at discriminating targets from nontargets.
+                                      Lowering the criterion for the visual location where a target is expected results in more
+                                      targets being detected at that location. Enhancing the sensitivity of discrimination between
+                                      targets and nontargets at a location also increases the frequency of target detection at that
+                                      location.
+
+
+
+
+Author Manuscript
+                    © 2015 Published by Elsevier Inc.
+                    *
+                    Correspondence: tzluo@uchicago.edu.
+                    AUTHOR CONTRIBUTIONS
+                    T.Z.L. and J.H.R.M. designed the experiments, performed the surgeries, and wrote the paper.
+                    T.Z.L. performed the experiments and analyzed the data.
+                    Publisher's Disclaimer: This is a PDF file of an unedited manuscript that has been accepted for publication. As a service to our
+                    customers we are providing this early version of the manuscript. The manuscript will undergo copyediting, typesetting, and review of
+                    the resulting proof before it is published in its final citable form. Please note that during the production process errors may be
+                    discovered which could affect the content, and all legal disclaimers that apply to the journal pertain.
+                    Luo and Maunsell                                                                                             Page 2
+
+
+                                       Many psychophysical studies have used signal detection theory (Green and Swets, 1966), a
+
+
+
+
+Author Manuscript
+                                       statistical model of perceptual decisions, to measure how a subject’s criterion and sensitivity
+                                       differ between the attended and unattended locations (Bashinski and Bacharach, 1980;
+                                       Müller and Findlay, 1987; Downing, 1988; Hawkins et al., 1990; Müller and Humphreys,
+                                       1991; Kinchla, 1992; Wyart et al. 2012). These studies found that subjects can shift either
+                                       their criterion or sensitivity at the attended location relative to the unattended location.
+                                       When it is adaptive to do so, subjects often modulate both to improve their performance.
+                                       Thus, spatially selective changes in both criterion and sensitivity contribute to the behavioral
+                                       enhancement in detection associated with attention. Moreover, like sensitivity shifts,
+                                       criterion changes could also depend on perceptual mechanisms (White et al., 2012; Ferrera
+                                       et al., 2009). Thus, here we refer to spatially specific shifts in criterion and sensitivity as
+                                       components of attention.
+
+                                       Neuronal signals related to visual attention have been found in many brain regions,
+
+
+
+
+Author Manuscript
+                                       including the cerebral cortex, thalamus, and brainstem (Desimone and Duncan, 1995). These
+                                       widespread signals are generally thought to participate in a unitary mechanism of attention.
+                                       However, attention is associated with distinguishable perceptual and behavioral phenomena
+                                       (Carrasco, 2011), and it has not been investigated whether the attention-related signals in
+                                       any of these brain structures reflect the same or distinct components of attention. In
+                                       particular, it is unknown how behavioral changes in criterion and sensitivity are related to
+                                       neuronal signals associated with attention.
+
+                                       Many single-neuron studies of attention use a paradigm introduced by Posner and colleagues
+                                       (Posner et al., 1980). Variants of this paradigm have been used to investigate attention in
+                                       visual cortex (Reynolds et al., 2000; Cohen and Maunsell, 2009), parietal cortex (Herrington
+                                       and Assad, 2001), prefrontal cortex (Armstrong et al., 2009), superior colliculus (Robinson
+
+
+
+
+Author Manuscript
+                                       and Kertzman, 1995), and thalamus (Petersen et al., 1987), as well as the relationship
+                                       between the attention-related signals in different structures (Gregoriou et al., 2009; Zénon
+                                       and Krauzlis, 2012). In this paradigm, the subject has to detect a target that appears at one of
+                                       two locations (Figure 1A). More attention is directed to the location where the target appears
+                                       more frequently or is rewarded more highly. Appropriate allocation of attention is often
+                                       ascertained by a higher target detection rate (hit rate) at the attended location (Figure 1B).
+                                       However, any improvements in hit rate could depend on a change in only criterion, only
+                                       sensitivity, or both. This ambiguity is apparent when behavior is analyzed using signal
+                                       detection theory (Figure 1C–D; criterion and sensitivity are indexed as criterion location (c)
+                                       and d′, respectively). Because of the ambiguity in the behavior, the neuronal modulations
+                                       attributed to attention in these studies could reflect shifts in the subject’s criterion or
+                                       sensitivity. Thus, it is uncertain whether the neuronal signals associated with attention in any
+
+
+
+
+Author Manuscript
+                                       brain area correspond to changes in one or both components of attention.
+
+                                       The presence of attention-related signals in widespread brain structures and the
+                                       heterogeneity of the behavioral changes associated with attention suggest that each of these
+                                       brain structures mediates a distinct component of attention. Investigating this possibility
+                                       would provide insight into whether attention is a monolithic brain process or depends on
+                                       distinguishable neurobiological mechanisms. Here we examine whether the neuronal
+                                       mechanisms of attention in visual cortex are associated with behavioral changes in criterion
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                              Page 3
+
+
+                                       or sensitivity. We focused on area V4, a region with reliable attention-related signals (e.g.
+
+
+
+
+Author Manuscript
+                                       Cohen and Maunsell, 2009), as well as modulation by visual target selection (Chelazzi et al.,
+                                       2001) and contextual modulation unrelated to the neuron’s sensory selectivity (Ferrera et al.,
+                                       1994). The extrasensory signals in V4 suggest that the previously observed attention-related
+                                       modulation may be related to behavioral shifts in either criterion or sensitivity, or both.
+
+
+                       RESULTS
+                                       In a preliminary experiment, we examined how two monkeys (F and L) changed their
+                                       criterion and sensitivity in a task of the sort commonly used in neurophysiological studies of
+                                       attention (“standard attention task”; Figure 1A). Both monkeys performed with a lower
+                                       criterion and higher sensitivity at the attended location relative to the unattended location
+                                       (Figure 1E). Criterion and sensitivity both changed regardless of whether attention was
+                                       directed using higher target probability, larger reward size, or both (Figure S1). Criterion
+
+
+
+
+Author Manuscript
+                                       changes accounted for most of the behavioral improvement (Figure S2). These results
+                                       indicate that although attention-related modulations in neuronal activity in visual cortex are
+                                       frequently described as related to behavioral changes in sensitivity (e.g. Reynolds et al.,
+                                       2000; Cohen and Maunsell, 2009), the omission to examine for shifts in criterion or
+                                       sensitivity means that the neuronal modulations might have reflected either. This uncertainty
+                                       exists not only for tasks like the one used here, where targets occur at the unattended
+                                       location (e.g. Cohen and Maunsell, 2009), but also for tasks where animals are trained never
+                                       to respond to targets at the unattended location (e.g., Reynolds et al., 2000; Zénon and
+                                       Krauzlis, 2012).
+
+                                       To more accurately characterize the neuronal signals associated with attention, we designed
+                                       a task to dissociate changes in criterion and sensitivity (“dissociation task”; Figure 2A). In
+
+
+
+
+Author Manuscript
+                                       each trial, two stimuli (“samples”) appeared concurrently for a brief time. After a short
+                                       delay, a single stimulus (“test”) appeared at one of the two sample locations, selected at
+                                       random. The monkey had to saccade to the test if it differed in orientation from the sample
+                                       at the same location. If not, the monkey had to wait and saccade to a second test stimulus
+                                       that always differed from the sample. The response to the first test stimulus in each trial was
+                                       categorized as a hit, miss, false alarm, or correct rejection, and these responses were used to
+                                       compute c and d′.
+
+                                       As in other neurophysiological experiments, we controlled attention by manipulating reward
+                                       contingencies, but here with additional refinements to control the subject’s criterion and
+                                       sensitivity (Figure 2B; Figure S3A; Experimental Procedures). The relative reward between
+                                       hits and correct rejections was manipulated independently at each stimulus location to
+                                       control criterion for that location. The relative overall reward between the two locations was
+
+
+
+
+Author Manuscript
+                                       used to control the difference in sensitivity between locations. These reward parameters
+                                       were varied between two task conditions of each daily session to isolate a change in either
+                                       criterion (in “criterion sessions”) or sensitivity (in “sensitivity sessions”) (Figure 2C). These
+                                       isolated behavioral changes were spatially selective and unrelated to the global changes due
+                                       to arousal.
+
+
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                              Page 4
+
+
+                                       We trained the same two monkeys on this task and achieved precise behavioral dissociation
+
+
+
+
+Author Manuscript
+                                       in more than 90% of sessions (Figure 2D–E, Figure S3B–C). To our knowledge, this is the
+                                       first demonstration of consistent, precise separation of spatially specific changes in criterion
+                                       and sensitivity. We then implanted an array of microelectrodes in each animal’s area V4 and
+                                       measured how neuronal responses are modulated as the animal shifted either its criterion or
+                                       sensitivity.
+
+                                       Because criterion changes accounted for most of the behavioral improvements in the
+                                       standard attention task (Figure S2), we expected attention-related modulations in V4 to be
+                                       primarily associated with shifts in criterion. But when we isolated changes in criterion and
+                                       sensitivity, we found that attention-related changes corresponded to changes in sensitivity
+                                       and not criterion (Figure 3; Figure S4). In sensitivity sessions, neuronal responses were
+                                       stronger in the high d′ condition than in the low d′ condition, but in criterion sessions,
+                                       responses were similar between low c and high c conditions despite large behavioral changes
+
+
+
+
+Author Manuscript
+                                       in criterion. To quantify the difference in neuronal responses between the two task
+                                       conditions of each session, we calculated a modulation index using responses to the sample
+                                       stimulus (firing rates 60 ms to 260 ms after sample onset; Supplemental Experimental
+                                       Procedures). Modulation indices differed significantly from zero in sensitivity sessions but
+                                       not in criterion sessions, and modulation indices from sensitivity sessions were significantly
+                                       larger than indices from criterion sessions (Table 1).
+
+                                       We also analyzed the firing rates during the delay period between the sample and the first
+                                       test stimulus (60 ms to 260 ms after sample offset). Similar to responses to the sample
+                                       stimulus, firing rates during the delay were stronger in conditions of higher d′, and there was
+                                       no detectable modulation by criterion changes (Table 1). We also found that the modulation
+                                       by sensitivity was stronger during the delay than during the sample stimulus period (91%
+
+
+
+
+Author Manuscript
+                                       and 290% larger and p < 10−6 and p < 10−10, t-test, for monkeys F and L, respectively).
+                                       Despite the stronger firing rate modulation associated with sensitivity changes during the
+                                       delay epoch, there was no detectable modulation associated with criterion changes.
+
+                                       We next examined two other neuronal correlates of attention in visual cortex. Attention is
+                                       associated with a modest decrease in the trial-to-trial variability in the responses of
+                                       individual neurons, measured as the Fano factor (Mitchell et al., 2007), and a large reduction
+                                       in the correlated variability in pairs of neurons, measured as noise correlation (Cohen and
+                                       Maunsell, 2009; Mitchell et al., 2009). Fano factor and noise correlation were calculated
+                                       using the sample period. Reduction in both Fano factor and noise correlation both
+                                       corresponded to enhancement in sensitivity but not shifts in criterion (Figure 3B and Table
+                                       1). Taken together with the observations on firing rates, these results indicate that multiple
+
+
+
+
+Author Manuscript
+                                       aspects of attention-related modulation of V4 neuronal activity all correspond to shifts in
+                                       sensitivity but not criterion.
+
+
+                       DISCUSSION
+                                       Accurate detection of a signal requires proper spatial distribution of criterion and sensitivity.
+                                       For example, a radar operator needs to adjust his or her criterion for where a signal is
+                                       expected and where a successful detection is more important than a correct rejection.
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                                Page 5
+
+
+                                       Sensitivity needs to be focused to where successful detections and rejections have the
+
+
+
+
+Author Manuscript
+                                       greatest overall importance. Failure to optimize either criterion or sensitivity undermines
+                                       performance.
+
+                                       Here we show that these two distinct components of attention are conflated in a paradigm
+                                       used by many single-neuron studies of attention. Using a task designed to dissociate these
+                                       two components, we found that the neuronal mechanisms of attention in area V4 of visual
+                                       cortex corresponded to shifts in sensitivity but not criterion. This result shows that spatially
+                                       selective criterion changes must be mediated by brain structures separate from V4, and
+                                       perhaps outside of visual cortex. Furthermore, this result indicates that separate brain
+                                       regions support distinct components of attention, and suggests that attention depends on
+                                       multiple neurobiological mechanisms.
+
+                       Task Difficulty
+
+
+
+
+Author Manuscript
+                                       Because the magnitude of attention-related modulation of firing rates in V4 is larger for
+                                       tasks of greater difficulty (Boudreau et al., 2006), the modulations related to sensitivity
+                                       shifts would likely be larger in a more difficult task. A more challenging task might also
+                                       reveal modulation associated with criterion changes, which we did not detect here. But even
+                                       if criterion-related modulation were found in a more difficult task, it is likely to be much
+                                       smaller than the sensitivity-related modulation in the same task, and hence, V4 modulations
+                                       would still be dominated by behavioral changes in sensitivity and not criterion. In the task
+                                       used here, the firing rate modulation related to criterion changes was ten-fold smaller than
+                                       the modulation related to sensitivity changes (Table 1). Even if V4 modulation related to
+                                       criterion shifts were revealed in a more difficult task, it is unlikely that V4 contributes
+                                       substantially to the animal’s changes in criterion.
+
+
+
+
+Author Manuscript
+                       Neural mechanisms of criterion and sensitivity
+                                       While criterion is generally formulated as a post-perceptual process in signal detection
+                                       theory (Green and Swets, 1966; Macmillan and Creelman, 2004), a subject’s criterion can
+                                       depend on perceptual as well as decisional and motor processes. For example, neuronal
+                                       signals related to whether a visual stimulus is a target or nontarget are observed in V4 and
+                                       other areas of the ventral visual pathway (Chelazzi et al., 2001; Pagan et al., 2013). A simple
+                                       perceptual mechanism of criterion shifts could be to selectively control the gain of these
+                                       signals for different spatial locations. However, the results here suggest that such signals in
+                                       V4 are unlikely to support behavioral shifts in criterion.
+
+                                       Spatial shifts of sensitivity are likely to be mediated by sensory regions of cerebral cortex,
+                                       but the structures mediating criterion changes are less clear. It is possible that criterion shifts
+
+
+
+
+Author Manuscript
+                                       are associated with subcortical structures, such as superior colliculus. If so, this dichotomy
+                                       would explain a puzzling result from pharmacological inhibition of superior colliculus
+                                       (Zénon and Krauzlis, 2013). During collicular inactivation, monkeys showed behavioral
+                                       deficits in attention, but neuronal modulations related to attention were intact in visual
+                                       cortex. This result was unexpected because the behavioral deficits from collicular
+                                       inactivation were thought to arise from perturbation of cortical modulations. But this result
+                                       would be expected if cortex and colliculus contribute to distinct components of attention. In
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                             Page 6
+
+
+                                       that case, the behavioral impairment due to collicular inhibition could be explained by a
+
+
+
+
+Author Manuscript
+                                       perturbation of the animal’s criterion. A different study has shown that inactivation of
+                                       colliculus within a given attention condition changed monkeys’ criterion but not sensitivity
+                                       (McPeek and Keller, 2004). These observations make it possible that shifts in criterion are
+                                       associated with neuronal modulations in the colliculus.
+
+                       Attention as an aggregate process
+                                       Attention is associated with a broad range of perceptual and behavioral phenomena. These
+                                       include increased perceived contrast and spatial resolution, even when these effects are
+                                       irrelevant or impair behavioral performance (Carrasco et al., 2004; Yeshurun and Carrasco,
+                                       1998). Psychophysical studies show that sensitivity enhancement can be separated further
+                                       into multiple component mechanisms (Lu and Dosher, 2000). In many studies, visual
+                                       attention is defined not as the orienting of resources as here (Posner et al., 1980), but as the
+
+
+
+
+Author Manuscript
+                                       detection process itself (Juan et al., 2004; Buschman and Miller, 2007). In addition, attention
+                                       is tightly entwined with saccade target selection, and covert attention and saccade selection
+                                       may be mediated by highly overlapping circuits (Rizzolatti, 1983). Thus, criterion and
+                                       sensitivity shifts are only a subset of the many mechanisms of selective processing
+                                       associated with the term attention. Given its heterogeneity, future investigations into
+                                       attention would be most fruitful when focusing the specific mechanism of selective
+                                       processing rather than relying solely on the umbrella term attention.
+
+                                       An alternative view would be to limit the term attention to sensitivity changes and exclude
+                                       criterion shifts and other processes. While that approach could be taken, it would exclude
+                                       many phenomena commonly attributed to attention, including not only selection of external
+                                       stimuli but also selection of internal representations in memory, task rules, and motor
+                                       responses (Chun et al., 2011). Moreover, the current definitions of attention, which ascribe
+
+
+
+
+Author Manuscript
+                                       selective processing as a central property, can aptly describe mechanisms other than
+                                       behavioral sensitivity (Carrasco, 2011). In particular, spatially specific shifts in criterion,
+                                       which selectively improve performance at a visual location, are entirely consistent with
+                                       these definitions.
+
+                                       Finally, it is likely that complex brain processes such as attention all consist of disparate
+                                       neurobiological mechanisms. Memory, another complex process, is composed of different
+                                       subprocesses that depend on separate brain structures (Squire, 2004). Other cognitive
+                                       functions such as decision-making may also comprise distinct mechanisms. Experiments
+                                       that can dissociate the components of such processes are likely to be needed for elaborating
+                                       the circuits that mediate higher behaviors.
+
+
+
+
+Author Manuscript
+                       EXPERIMENTAL PROCEDURES
+                       Criterion and Sensitivity
+                                       Criterion and sensitivity were measured using signal detection theory (Green and Swets,
+                                       1966; Macmillan and Creelman, 2004). Criterion was indexed as criterion location (c),
+
+
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                               Page 7
+
+
+
+
+Author Manuscript
+                                       In this equation, Φ−1 is the inverse normal cumulative distribution function. When c = 0, the
+                                       subject shows no bias towards reporting either targets or nontargets. In the signal detection
+                                       model (Figure 1C), this is the x value where the two Gaussian distributions intersect. When
+                                       c < 0, the subject exhibits a bias towards reporting targets, and when c > 0, a bias towards
+                                       nontargets.
+
+                                       Sensitivity was indexed as d′,
+
+
+
+
+Author Manuscript
+                                       In the signal detection model, d′ is the horizontal offset between the two Gaussian
+                                       distributions. A larger d′ indicates better sensitivity. The index d′ characteristically ranges
+                                       from zero to infinity, though negative d′ values can result from sampling errors.
+
+                                       The results here generalize for other indices in signal detection theory, such the likelihood
+                                       ratio (β) and area under the ROC. The indices used here have the advantages that c is well-
+                                       defined for d′ = 0, and that c and d′ have the same units to simplify comparison.
+
+                       Behavioral Tasks and Neuronal Recording
+                                       Two rhesus monkeys F and L (Macaca mulatta, adult males, 9 and 10 kg) were first trained
+                                       to perform a “standard attention task,” and then for the main experiment, a “dissociation
+
+
+
+
+Author Manuscript
+                                       task”. The standard attention task is described in the Supplemental Experimental Procedures,
+                                       and the dissociation task is described below. Before training, each animal was implanted
+                                       with a head post. Eye movements were tracked using a video system (EyeLink 1000, 500
+                                       Hz). After training in the dissociation task, we implanted a 10 × 10 array of microelectrodes
+                                       (Blackrock Microsystems) in area V4 to record simultaneously from dozens of neurons in
+                                       each daily session (median 66 units: 4 single units, 62 multiunits). Neurophysiological
+                                       recording and analyses are described in the Supplemental Experimental Procedures.
+
+                                       All procedures were approved by the Institutional Animal Care and Use Committee of
+                                       Harvard Medical School and complied with the US Public Health Policy on the humane use
+                                       and care of laboratory animals.
+
+
+
+
+Author Manuscript
+                       Dissociation Task
+                                       The monkey began each trial by fixating for 400–600 ms within a 1.5° window on a video
+                                       display (57 cm away, 100 Hz frame rate). Two sample stimuli (full contrast Gabors)
+                                       appeared on opposite sides of the fixation point for 200 ms. After a delay of 200–300 ms, a
+                                       single test stimulus appeared at one of the two sample locations for 200 ms. The monkey
+                                       had to decide whether the test had a different orientation from the sample that had appeared
+                                       at the same location. The location of the test was randomly selected, and the probability that
+
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                              Page 8
+
+
+                                       the test was different was 0.5. If the test differed from the sample, the monkey had to
+
+
+
+
+Author Manuscript
+                                       saccade to it within 100–500 ms to receive a juice reward. If the test were the same as the
+                                       sample, the monkey had to wait to saccade to a second test stimulus that appeared at the
+                                       same location as the first test stimulus. The second test always differed from the sample, and
+                                       it was used to ensure that the monkey was engaged during correct rejection trials. The
+                                       monkey rarely failed to respond to the second test stimulus (< 1%), and these failures were
+                                       not included in analyses.
+
+                                       Each trial was categorized as a hit, miss, false alarm, or correct rejection based on the
+                                       response to the first test stimulus. A target trial was a hit if the monkey responded to the
+                                       changed test stimulus and a miss otherwise. A nontarget trial was a false alarm if the
+                                       monkey incorrectly responded to the unchanged first test stimulus, and it was a correct
+                                       rejection if the monkey waited to respond to the changed second test stimulus.
+
+
+
+
+Author Manuscript
+                       Session Types
+                                       Each daily recording session was either a “sensitivity session” or a “criterion session.” In a
+                                       sensitivity session, we maximized the behavioral difference in d′ while minimizing the
+                                       difference in c. On other days, in criterion sessions, we maximized the behavioral difference
+                                       in c while minimizing the difference in d′.
+
+                                       Each daily session had two different task conditions. In a sensitivity session, throughout one
+                                       task condition, the animal performed at high d′ for one stimulus location and at low d′ for
+                                       the other location. In the other task condition, performance was reversed for the two
+                                       locations. For both conditions, criterion was controlled to be unbiased (c = 0 or,
+                                       equivalently, β = 1).
+
+
+
+
+Author Manuscript
+                                       On a separate day, in a criterion session, the animal performed at low c for one location and
+                                       high c for other location and switched performance for the two locations between task
+                                       conditions. Sensitivity was similar across task conditions for each location.
+
+                                       The animal alternated between two task conditions in blocks of 240–360 trials. Each task
+                                       condition was termed high d′, low d′, low c, or high c according to the animal’s performance
+                                       at the stimulus location represented by the recorded neurons.
+
+                       Reward Manipulations
+                                       To control criterion and sensitivity, we adjusted reward sizes for hits and correct rejections
+                                       for each stimulus location (average reward ~150 μL). At each location, criterion was
+                                       controlled primarily by the ratio of the reward given for hits and correct rejections (H:CR
+
+
+
+
+Author Manuscript
+                                       reward ratio) at that location. The difference in sensitivity between the two locations was
+                                       controlled primarily by the relative difference in the overall reward size (across H and CR)
+                                       between locations.
+
+                                       In criterion sessions, the H:CR reward ratio was > 1 at the low c location (on average 1.5)
+                                       and < 1 at the high c location (on average 0.5). The overall reward at each location (across H
+                                       and CR) was adjusted to maintain similar d′ across task conditions. The overall reward at the
+                                       low c location averaged 90% of the overall reward at the high c location.
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                                             Page 9
+
+
+                                       In sensitivity sessions, reward at the high d′ location was set to be 2 to 6 times larger than
+
+
+
+
+Author Manuscript
+                                       the reward at the low d′ location (on average 5 times larger). The H:CR reward ratio was
+                                       adjusted independently for each location to control criterion to be unbiased at that location.
+                                       The H:CR reward ratio averaged 0.7 at the high d′ location and 1.1 at the low d′ location.
+
+                                       To achieve clear behavioral dissociation within each session, reward values were titrated
+                                       throughout the session, and priming trials, which were excluded from analysis, were used at
+                                       the beginning of each block to stabilize behavior. See Supplemental Experimental
+                                       Procedures.
+
+
+                       Supplementary Material
+                                       Refer to Web version on PubMed Central for supplementary material.
+
+
+
+
+Author Manuscript
+                       Acknowledgments
+                                       We thank Mark H. Histed, Gabriel Kreiman, J. Patrick Mayo, Bram-Ernst Verhoef, and Jeremy M. Wolfe for
+                                       discussions and comments, and Steven J. Sleboda for technical assistance. This work was supported by grants from
+                                       the US National Institute of Health (R01EY005911, R01EY021550, and F31MH103895).
+
+
+                       References
+                                       Armstrong KM, Chang MH, Moore T. Selection and maintenance of spatial information by frontal eye
+                                         field neurons. J Neurosci. 2009; 29:15621–15629. [PubMed: 20016076]
+                                       Bashinski HS, Bacharach VR. Enhancement of perceptual sensitivity as the result of selectively
+                                         attending to spatial locations. Percept and Psychophys. 1980; 28:241–248.
+                                       Boudreau CE, Williford TH, Maunsell JHR. Effects of task difficulty and target likelihood in area V4
+                                         of macaque monkeys. J Neurophysiol. 2006; 96:2377–2387. [PubMed: 16855106]
+                                       Buschman TJ, Miller EK. Top-down versus bottom-up control of attention in the prefrontal and
+
+
+
+
+Author Manuscript
+                                         posterior parietal cortices. Science. 2007; 315:1860–1862. [PubMed: 17395832]
+                                       Carrasco M. Visual attention: The past 25 years. Vision Research. 2011; 51:1484–1525. [PubMed:
+                                         21549742]
+                                       Carrasco M, Ling S, Read S. Attention alters appearance. Nat Neurosci. 2004; 7:308–313. [PubMed:
+                                         14966522]
+                                       Chelazzi L, Miller EK, Duncan J, Desimone R. Responses of neurons in macaque area V4 during
+                                         memory-guided visual search. Cereb Cortex. 2001; 11:761–772. [PubMed: 11459766]
+                                       Chun MM, Golomb JD, Turk-Browne NB. A taxonomy of external and internal attention. Annu Rev
+                                         Psychol. 2011; 62:73–101. [PubMed: 19575619]
+                                       Cohen MR, Maunsell JHR. Attention improves performance primarily by reducing interneuronal
+                                         correlations. Nat Neurosci. 2009; 12:1594–1600. [PubMed: 19915566]
+                                       Desimone R, Duncan J. Neural mechanisms of selective visual attention. Annu Rev Neurosci. 1995;
+                                           18:193–222. [PubMed: 7605061]
+                                       Downing CJ. Expectancy and visual-spatial attention: effects on perceptual quality. J Exp Psychol
+
+
+
+
+Author Manuscript
+                                           Hum Percept Perform. 1988; 14:188–202. [PubMed: 2967876]
+                                       Ferrera VP, Rudolph KK, Maunsell JHR. Responses of neurons in the parietal and temporal visual
+                                           pathways during a motion task. J Neurosci. 1994; 14:6171–6186. [PubMed: 7931571]
+                                       Ferrera VP, Yanike M, Cassanello C. Frontal eye field neurons signal changes in decision criteria. Nat
+                                           Neurosci. 2009; 12:1458–1462. [PubMed: 19855389]
+                                       Green, DM.; Swets, JA. Signal Detection Theory and Psychophysics. New York: Wiley; 1966.
+                                       Gregoriou GG, Gotts SJ, Zhou H, Desimone R. High-frequency, long-range coupling between
+                                           prefrontal and visual cortex during attention. Science. 2009; 324:1207–1210. [PubMed: 19478185]
+
+
+
+                                                Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                                     Page 10
+
+
+                                       Hawkins HL, Hillyard SA, Luck SJ, Mouloua M, Downing CJ, Woodward DP. Visual attention
+                                           modulates signal detectability. J Exp Psychol Hum Percept Perform. 1990; 16:802–811. [PubMed:
+
+
+
+
+Author Manuscript
+                                           2148593]
+                                       Herrington TM, Assad JA. Temporal sequence of attentional modulation in the lateral intraparietal
+                                           area and middle temporal area during rapid covert shifts of attention. J Neurosci. 2010; 30:3287–
+                                           3296. [PubMed: 20203188]
+                                       Juan CH, Shorter-Jacobi SM, Schall JD. Dissociation of spatial attention and saccade preparation. Proc
+                                           Natl Acad Sci USA. 2004; 101:15541–15544. [PubMed: 15489272]
+                                       Kinchla RA. Attention. Annu Rev Psychol. 1992; 43:711–742. [PubMed: 1539951]
+                                       Lu ZL, Dosher BAB. Spatial attention: different mechanisms for central and peripheral temporal
+                                           precues? J Exp Psychol Hum Percept Perform. 2000; 26:1534–1548. [PubMed: 11039483]
+                                       Macmillan, NA.; Creelman, CD. Detection Theory: A User’s Guide. Mahwah, NJ: Lawrence Erlbaum
+                                           Associates; 2004.
+                                       McPeek RM, Keller EL. Deficits in saccade target selection after inactivation of superior colliculus.
+                                           Nat Neurosci. 2004; 7:757–763. [PubMed: 15195099]
+                                       Mitchell JF, Sundberg KA, Reynolds JH. Differential attention-dependent response modulation across
+
+
+
+
+Author Manuscript
+                                           cell classes in macaque visual area V4. Neuron. 2007; 55:131–141. [PubMed: 17610822]
+                                       Mitchell JF, Sundberg KA, Reynolds JH. Spatial attention decorrelates intrinsic activity fluctuations in
+                                           macaque area V4. Neuron. 2009; 63:879–888. [PubMed: 19778515]
+                                       Müller HJ, Findlay JM. Sensitivity and criterion effects in the spatial cuing of visual attention. Percept
+                                           and Psychophys. 1987; 42:383–399.
+                                       Müller HJ, Humphreys GW. Luminance-increment detection: capacity-limited or not? J Exp Psychol
+                                           Hum Percept Perform. 1991; 17:107–124. [PubMed: 1826306]
+                                       Pagan M, Urban LS, Wohl MP, Rust NC. Signals in inferotemporal and perirhinal cortex suggest an
+                                           untangling of visual target information. Nat Neurosci. 2013; 16:1132–1139. [PubMed: 23792943]
+                                       Petersen SE, Robinson DL, Keys W. Pulvinar nuclei of the behaving rhesus monkey: visual responses
+                                           and their modulation. J Neurophysiol. 1985; 54:867–886. [PubMed: 4067625]
+                                       Posner MI, Snyder CR, Davidson BJ. Attention and the detection of signals. J Exp Psychol Gen. 1980;
+                                           109:160–174.
+                                       Reynolds JH, Pasternak T, Desimone R. Attention increases sensitivity of V4 neurons. Neuron. 2000;
+
+
+
+
+Author Manuscript
+                                           26:703–714. [PubMed: 10896165]
+                                       Rizzolatti, G. Mechanisms of selective attention in mammals. In: Ewert, JP.; Capranica, RR.; Ingle,
+                                           DJ., editors. Advances in Vertebrate Neuroethology. London: Plenum Press; 1983. p. 261-297.
+                                       Robinson DL, Kertzman C. Covert orienting of attention in macaques. III Contributions of the superior
+                                           colliculus. J Neurophysiol. 1995; 74:713–721. [PubMed: 7472376]
+                                       Squire LR. Memory systems of the brain: A brief history and current perspective. Neurobiology of
+                                           Learning and Memory. 2004; 82:171–177. [PubMed: 15464402]
+                                       White CN, Mumford JA, Poldrack RA. Perceptual criteria in the human brain. J Neurosci. 2012;
+                                           32:16716–16724. [PubMed: 23175825]
+                                       Wyart V, Nobre AC, Summerfield C. Dissociable prior influences of signal probability and relevance
+                                           on visual contrast sensitivity. Proc Natl Acad Sci USA. 2012; 109:3593–3598. [PubMed:
+                                           22331901]
+                                       Yeshurun Y, Carrasco M. Attention improves or impairs visual performance by enhancing spatial
+                                           resolution. Nature. 1998; 396:72–75. [PubMed: 9817201]
+
+
+
+
+Author Manuscript
+                                       Zénon A, Krauzlis RJ. Attention deficits without cortical neuronal deficits. Nature. 2012; 489:434–
+                                           437. [PubMed: 22972195]
+
+
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                             Page 11
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+                                       Figure 1. Behavioral Improvement in a Typical Attention Task Conflates Changes in Criterion
+                                       and Sensitivity
+                                       (A) Standard attention task. The subject has to detect a target (orientation change) that
+                                       occurred at either of two stimulus locations. In alternating blocks of trials, the subject
+                                       directed more attention to one of two locations. (B) Monkeys detected targets more
+                                       frequently at the high attention location. (C) In the signal detection model, each stimulus
+                                       evokes a noisy internal signal. If the signal is stronger than the criterion (c), the stimulus is
+                                       reported as a target. The distributions of signals evoked by the target and by the nontarget
+                                       overlap, and the separation between these two distributions is indexed as sensitivity (d′). The
+                                       response to each stimulus is categorized as a hit, miss, false alarm, or correct rejection, and
+                                       these responses are used to calculate c and d′. (D) Any improvement in hit rate could be due
+
+
+
+
+Author Manuscript
+                                       to changes in only criterion (Δc), only sensitivity (Δd′), or both (Δc and Δd′). (E) Monkeys
+                                       changed both criterion and sensitivity between attention conditions. (B, E) Monkey F, n = 65
+                                       sessions; monkey L, n = 50.
+
+
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                               Page 12
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+                                       Figure 2. Dissociation task
+                                       (A) Monkeys detected a target (orientation change) that occurred on either the first or the
+                                       second test stimulus. Behavioral responses to the first test stimulus were categorized as hits
+                                       (H), misses (M), correct rejections (CR), or false alarms (FA). (B) Reward manipulations to
+                                       isolate spatially selective changes in criterion (c) and sensitivity (d′). (C) A criterion session
+                                       of monkey F and a sensitivity session of monkey L. (D) All sessions. Each circle is the
+                                       behavior in one task condition from one daily session, and a solid line connects the two
+
+
+
+
+Author Manuscript
+                                       conditions of each session. Dashed lines are isocriterion and isosensitivity lines. (E)
+                                       Differences in criterion and sensitivity between the two task conditions of each session.
+                                       Same data as panel D. (C–E) Error bars represent 95% confidence intervals. (D–E) Monkey
+                                       F: 22 criterion and 22 sensitivity sessions. Monkey L: 10 criterion and 25 sensitivity
+                                       sessions.
+
+
+
+
+Author Manuscript
+
+
+
+
+                                               Neuron. Author manuscript; available in PMC 2016 June 03.
+                    Luo and Maunsell                                                                                          Page 13
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+                                       Figure 3. Neuronal Modulations in V4 Correspond to Changes in Sensitivity but not Criterion
+                                       Data are from the same sessions in Figure 3D–E and Table 1. (A) Peristimulus histograms
+                                       showing the population response to the sample stimuli. Histograms used 1-ms bins and were
+                                       smoothed with a Gaussian filter (σ = 5 ms). Responses were modulated by changes in
+                                       sensitivity but not in criterion. (B) Noise correlations between pairs of simultaneously
+                                       recorded neurons binned by the geometric mean of their evoked responses. Noise
+                                       correlations were reduced when behavioral sensitivity increased, but were unaffected by
+                                       shifts in criterion. The y-axis scaling differs for monkeys F and L.
+
+
+
+
+Author Manuscript
+
+
+
+
+                                              Neuron. Author manuscript; available in PMC 2016 June 03.
+                                                            Author Manuscript                                  Author Manuscript                                        Author Manuscript                                        Author Manuscript
+
+                                                                                                                                                                      Table 1
+
+                                                                  Modulation Indices of Attention-Related Neuronal Changes.
+
+                                                                                                              Criterion sessions (Δc)                       Sensitivity sessions (Δd′)            Criterion sessions vs. sensitivity sessions
+
+                                                                   Modulation Index                 Monkey F (n = 22)       Monkey L (n = 10)      Monkey F (n = 22)      Monkey L (n = 25)           Monkey F               Monkey L                                                Luo and Maunsell
+                                                                                                       0.006 ± 0.005           0.002 ± 0.007          0.060 ± 0.004          0.028 ± 0.003
+                                                                   Firing rate (Sample stimulus)                                                                                                       p < 10−8                p < 10−3
+                                                                                                          p < 0.31                p < 0.78              p < 10−11               p < 10−8
+                                                                                                       0.009 ± 0.005           0.004 ± 0.012          0.109 ± 0.006          0.078 ± 0.005
+                                                                   Firing rate (Delay period)                                                                                                          p < 10−14               p < 10−7
+                                                                                                          p < 0.09                p < 0.75              p < 10−13              p < 10−13
+                                                                                                       0.040 ± 0.026           0.057 ± 0.056         −0.295 ± 0.020          −0.198 ± 0.030
+                                                                   Noise correlation                                                                                                                   p < 10−12               p < 10−3
+                                                                                                          p < 0.13                p < 0.34              p < 10−11               p < 10−6
+                                                                                                       0.002 ± 0.004           0.007 ± 0.014         −0.043 ± 0.010          −0.019 ± 0.004
+                                                                   Fano factor                                                                                                                         p < 10−3                p < 0.02
+                                                                                                          p < 0.68                p < 0.62              p < 10−3                p < 10−4
+
+                                                                  Each of the four columns to the left reports the mean ± SEM aross sessions and the probability that the indices have a mean 0 (t-test). The remaining two columns indicate the probability that the modulation
+                                                                  indices from the two types of sessions have the same mean (paired t-test). A single modulation index was computed for each session. A positive index for a sensitivity session indicates a higher measure
+                                                                  (e.g. firing rates) in the high d′ task condition, and a positive index for a criterion session reflects a higher measure in the low c condition. Indices were computed using both correct and error trials, but
+                                                                  results are highly similar if only correct trials were used.
+
+
+
+
+Neuron. Author manuscript; available in PMC 2016 June 03.
+
+
+
+
+                                                                                                                                                                                                                                                                                     Page 14
+

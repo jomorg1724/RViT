@@ -1,0 +1,108 @@
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{longtable}{@{}p{1.8cm}p{3.9cm}p{2.2cm}p{2.2cm}p{2.0cm}p{2.3cm}p{2.35cm}p{2.5cm}@{}}
+\caption{Exact source-panel disposition by environment. The table is generated directly from \texttt{PANEL\_COVERAGE.csv}; comma-separated abbreviations name every environment assigned to each state.}\label{tab:panel-matrix}\\
+\toprule
+Panel & Purpose & C/P & Available & Training & Blocked & Undefined & Inapplicable \\
+\midrule
+\endfirsthead
+\multicolumn{8}{c}{\tablename\ \thetable\ (continued)}\\
+\toprule
+Panel & Purpose & C/P & Available & Training & Blocked & Undefined & Inapplicable \\
+\midrule
+\endhead
+\midrule \multicolumn{8}{r}{Continued on next page}\\ \endfoot
+\bottomrule \endlastfoot
+M1a & trial sequence & C: Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash \\
+M1b & cue/value configurations & C: Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash \\
+M1c & cued versus opposing change examples & C: Val4, H2, H4, H9, H16, Excl, PC, PU, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & H1, F1 & \textemdash \\
+\addlinespace[2pt]
+M2a & patching and visual features & C: Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash \\
+M2b & routing/allocation mechanism & C: Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash \\
+M2c & recurrent memory update & C: Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash \\
+M2d & actor/critic temporal loop & C: Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash \\
+\addlinespace[2pt]
+M3A & response rate by cue validity & C: H1, H2, H4, H9 & \textemdash & F16 & H16, F1, F2, F4, F9 & \textemdash & Val4, Excl, PC, PU \\
+M3D & conditional logical response frame by displayed validity & C: H1, H2, H4, H9 & \textemdash & F16 & H16, F1, F2, F4, F9 & \textemdash & Val4, Excl, PC, PU \\
+M3B & change-response probability: cued versus archived uncued, low displayed validity & C: H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+M3C & change-response probability: cued versus archived uncued, high displayed validity & C: H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+M3E & conditional logical response frame: cued versus archived uncued, low displayed validity & C: H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+M3F & conditional logical response frame: cued versus archived uncued, high displayed validity & C: H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+\addlinespace[2pt]
+M4A & allocation maps by cue validity and time & P: H1, H2, H4, H9 & \textemdash & F16 & H16, F1, F2, F4, F9 & \textemdash & Val4, Excl, PC, PU \\
+M4B & S1 allocation at change time for S1 changes & C: H4, H9; P: H1, H2, Excl & Val4 & F16 & H16, F1, F2, F4, F9 & \textemdash & PC, PU \\
+M4C & S1 allocation when another location changes & P: H2, H4, H9 & Val4 & F16 & H16, F2, F4, F9 & H1, Excl, F1 & PC, PU \\
+M4D & S1/S4 allocation over trial time & P: H2, H4, H9, Excl & Val4 & F16 & H16, F2, F4, F9 & H1, F1 & PC, PU \\
+\addlinespace[2pt]
+M5A & response rate: natural/target intervention & P: H1, H2, H4, H9 & \textemdash & F16 & H16, F1, F2, F4, F9 & \textemdash & Val4, Excl, PC, PU \\
+M5B & response rate: matched-location intervention contrast & P: H1, H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & F1 & Val4, Excl, PC, PU \\
+M5C & response rate: competing-location intervention contrast & P: H1, H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & F1 & Val4, Excl, PC, PU \\
+M5D & reaction time: natural/target intervention & P: H1, H2, H4, H9 & \textemdash & F16 & H16, F1, F2, F4, F9 & \textemdash & Val4, Excl, PC, PU \\
+M5E & reaction time: matched-location intervention contrast & P: H1, H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & F1 & Val4, Excl, PC, PU \\
+M5F & reaction time: competing-location intervention contrast & P: H1, H2, H4, H9 & \textemdash & F16 & H16, F2, F4, F9 & F1 & Val4, Excl, PC, PU \\
+\addlinespace[2pt]
+S1 & high-level recurrent circuit & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S2 & patch-wise recurrent memory & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S3 & immediate-input allocation before memory & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S4 & memory feedback into allocation & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 & \textemdash & \textemdash & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S5a & memory-token architecture & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S5b-e & memory-token behavior/allocation battery & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+\addlinespace[2pt]
+S6a & additive Q/K/V architecture & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S6b-e & additive Q/K/V behavior/allocation battery & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+\addlinespace[2pt]
+S7a & multiplicative Q/K/V architecture & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S7b-e & multiplicative Q/K/V behavior/allocation battery & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+\addlinespace[2pt]
+S8-all & all-slot change-location decoding, natural/max allocation, t5/t6 & P: H4, H9 & Val4, PC, PU & F16 & H2, H16, F2, F4, F9 & H1, Excl, F1 & \textemdash \\
+\addlinespace[2pt]
+S9-all & all-slot location decoding across four allocation conditions & P: H4, H9 & \textemdash & F16 & Val4, H2, H16, PC, PU, F2, F4, F9 & H1, Excl, F1 & \textemdash \\
+\addlinespace[2pt]
+S10-all & single-slot binary change decoding across allocation conditions & P: H4, H9 & Val4, H1, Excl, PC, PU & F16 & H2, H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S11-location & actor-layer change-location decoding & P: H4, H9 & Val4, PC, PU & F16 & H2, H16, F2, F4, F9 & H1, Excl, F1 & \textemdash \\
+S11-binary & actor-layer binary change decoding & P: H4, H9 & Val4, H1, Excl, PC, PU & F16 & H2, H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S12-all & graded actor-layer binary decoding under S1 inhibition & P: H4, H9 & Val4, H1, Excl, PC, PU & F16 & H2, H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S13-all & all-trial Wait/Declare logit scatter and density & P: H9 & Val4, H1, H2, H4, Excl, PC, PU & F16 & H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+S13-S1 & Wait/Declare logit scatter and density for S1 changes & P: H9 & Val4, H1, H2, H4, Excl, PC, PU & F16 & H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+S13-S2 & Wait/Declare logit scatter and density for S2 changes & P: H9 & Val4, H2, H4, PC, PU & F16 & H16, F2, F4, F9 & H1, Excl, F1 & \textemdash \\
+S13-S3 & Wait/Declare logit scatter and density for S3 changes & P: H9 & Val4, H4, PC, PU & F16 & H16, F4, F9 & H1, H2, Excl, F1, F2 & \textemdash \\
+S13-S4 & Wait/Declare logit scatter and density for S4 changes & P: H9 & Val4, H4, PC, PU & F16 & H16, F4, F9 & H1, H2, Excl, F1, F2 & \textemdash \\
+\addlinespace[2pt]
+S14-natural & natural S1-change logit scatter/density & P: H9 & Val4, H1, H4, Excl, PC, PU & F16 & H2, H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+S14-max & maximal S1 allocation logit scatter/density & P: H9 & Val4, H1, H4, Excl, PC, PU & F16 & H2, H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+S14-zero & zero S1 allocation logit scatter/density & P: H9 & Val4, H1, H4, Excl, PC, PU & F16 & H2, H16, F1, F2, F4, F9 & \textemdash & \textemdash \\
+\addlinespace[2pt]
+S15A & TD error by cue/change location & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15B & TD error with target allocation clamp, low cue & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15C & TD error with target allocation clamp, high cue & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15D & TD error by allocation dose and location & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15E & TD error under competing-location clamp, low cue & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15F & TD error under competing-location clamp, high cue & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15G & value by change magnitude with target clamp & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15H & value by opposing-location allocation dose & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S15I & hit rate by opposing-location allocation dose & P: H9 & H2, H4 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+\addlinespace[2pt]
+S16A & criterion vs allocation at change & P: H4, H9 & H2 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S16B & criterion vs cue-time allocation with change-time control & P: H4, H9 & H2 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S16C & criterion vs cue-time allocation & P: H4, H9 & H2 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S16D & sensitivity vs allocation at change & P: H4, H9 & H2 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S16E & sensitivity vs cue-time allocation with change-time control & P: H4, H9 & H2 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+S16F & sensitivity vs cue-time allocation & P: H4, H9 & H2 & F16 & H16, F2, F4, F9 & H1, F1 & Val4, Excl, PC, PU \\
+\addlinespace[2pt]
+S17-action-behavior & three behavioral rows: supervised actions & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S17-belief-behavior & three behavioral rows: supervised beliefs & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S17-rl-behavior & three behavioral rows: reinforcement learning & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S17-action-allocation & allocation row: supervised actions & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S17-belief-allocation & allocation row: supervised beliefs & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+S17-rl-allocation & allocation row: reinforcement learning & \textemdash & \textemdash & \textemdash & \textemdash & \textemdash & Val4, H1, H2, H4, H9, H16, Excl, PC, PU, F1, F2, F4, F9, F16 \\
+\end{longtable}
+\endgroup

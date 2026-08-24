@@ -1,0 +1,510 @@
+Luo–Maunsell environment audit                                                                           18 July 2026
+
+
+
+              Luo & Maunsell reward-dissociation experiment
+              Primary-paper veriﬁcation, repository audit, and corrected environment report
+                                     18 July 2026     ·   AttentionManuscript / RViT+ battery
+
+
+Determination. The author is Tianming Z. Luo, not “Lou.” The task is the one the question anticipated:
+location-speciﬁc hit and correct-rejection rewards were manipulated to separate changes in signal-detection
+sensitivity (d′ ) from shifts in decision criterion (c). The direct protocol for envs/luo2015.py is Luo & Maunsell
+(2015), recorded in visual area V4. Luo & Maunsell (2018) is a related lateral-prefrontal-cortex extension, not a
+replacement protocol.
+
+
+1     Bottom line
+• The repository previously contained four completed 20,000-iteration luo_maunsell_* ﬁnal checkpoints (sensitiv-
+  ity/criterion × aﬃne/cross-attention) and four rolling latest checkpoint ﬁles. All eight obsolete weight ﬁles were
+  deleted on 18 July 2026. Their metrics.csv logs remain only as historical records of the preliminary, cued task;
+  they are not corrected Luo–Maunsell evidence.
+• A newer cue-free luo2015_* environment existed, but before this audit it still omitted the active second test,
+  randomized the orientation pair between trials, used incomplete reward schedules, treated premature declarations
+  as false alarms, and rewarded passive waiting as a correct rejection.
+• The environment and analysis have now been corrected to implement a close, scaled analogue of the published trial
+  and reward mechanics. Focused veriﬁcation passes (41 tests plus live outcome exercise); the complete repository
+  suite reached 312 passes and three unrelated Python-3.9 compatibility failures.
+• No production corrected luo2015_* matrix has yet been trained. Five one-iteration MPS canary check-
+  points verify plumbing only. Therefore the environment is ready for a behavioral replication run, but the predicted
+  criterion/sensitivity dissociation has not yet been demonstrated locally.
+
+
+2     What the papers actually did
+
+2.1       Primary 2015 V4 study
+Two full-contrast Gabor samples were shown simultaneously at opposite locations. In a session, each location used
+only two possible orientations, randomized independently across trials. After a delay, one location was tested. The
+monkey reported an orientation change by making a saccade to the test. If the ﬁrst test was unchanged, a subsequent
+guaranteed changed test required a response; trials without that response were excluded. This made a correct rejection
+an veriﬁed withholding at the ﬁrst test rather than passive non-response.
+The experiment counterphased reward contingencies across locations and across task conditions. A location carrying
+one contingency in condition A carried the opposite contingency in condition B. No visual value cue identiﬁed the
+condition; the animal learned it from reward history. Sessions began with a small number of priming trials, and
+behavioral SDT measures were computed by test location.
+
+
+Table 1: Published 2015 reward design represented by the corrected defaults. “Mean” is the mean of hit and correct-
+rejection reward magnitudes; units in code are dimensionless.
+Session       Location role             Mean    H:CR      Hit reward    CR reward
+                                 ′
+Sensitivity   high-value / high-d       5.00        0.7      4.12          5.88
+Sensitivity   low-value / low-d′        1.00        1.1      1.05          0.95
+Criterion     low-c (liberal)           0.90        1.5      1.08          0.72
+Criterion     high-c (conservative)     1.00        0.5      0.67          1.33
+
+
+The signal-detection quantities are
+
+                                     d′ = z(HR) − z(FAR),           c = − 21 [z(HR) + z(FAR)] .
+
+
+                                                                    1
+Luo–Maunsell environment audit                                                                               18 July 2026
+
+
+Increasing both hit and false-alarm rates shifts c in the liberal direction; increasing hit rate while lowering false-alarm
+rate increases d′ . Reward ratio primarily changes the optimal response bias, while higher average reward at one
+location incentivizes allocation of limited perceptual resources there.
+
+
+2.2    Related 2018 LPFC study
+The 2018 experiment used the same conceptual dissociation to examine lateral prefrontal cortex. It reinforced the key
+interpretation that conventional attention manipulations can combine sensitivity and criterion eﬀects, then separated
+those components through reward design. It is relevant context for neural interpretation, but luo2015.py should
+remain keyed to the 2015 V4 protocol.
+
+
+3     Repository state before correction
+
+Artifact                         What existed                                  Scientiﬁc status
+envs/tasks.py                /   Generic battery task: a visible per-trial     Preliminary analogue; not the cue-free
+luo_maunsell_*                   cue selected the high-value location;         published method.
+                                 criterion H:CR rewards were global
+                                 rather than spatially counterphased.
+battery_sweep_results            Historical metrics.csv logs remain; all       Trained on the preliminary task. The
+                                 four ﬁnal and four rolling                    retained scalar logs have no corrected
+                                 luo_maunsell_* weight ﬁles were               task lineage or trial-level SDT outcomes
+                                 deleted.                                      and are non-evidential.
+envs/luo2015.py                  Cue-free two-location sample/test task,       Better identity, but protocol gaps made
+                                 registered as luo2015_sensitivity and         its CR and reward logic scientiﬁcally
+                                 luo2015_criterion.                            incorrect.
+luo2015_analysis                 Oﬄine hit/FA and d′ /c readout.               Counted any no-change declaration as
+                                                                               an FA and did not enforce second-test
+                                                                               engagement exclusions.
+Corrected checkpoints            Five one-iteration canary checkpoints;        Plumbing-only artifacts; the corrected
+                                 no production matrix.                         experiment has not yet produced
+                                                                               behavioral evidence.
+
+
+3.1    Why the deleted checkpoints could not answer the scientiﬁc question
+Before deletion, inspection showed that each ﬁnal checkpoint contained an iteration value of 20,000, the preliminary
+task name, model constructor arguments, and the learned state dictionary. It did not contain the environment
+conﬁguration, the spatial reward table, condition-switch history, trial-level outcomes, an SDT summary, or producer-
+source hashes. A weight ﬁle by itself therefore could not establish whether sensitivity or criterion moved in the
+intended direction.
+More importantly, the embedded task identity was luo_maunsell_sensitivity or luo_maunsell_criterion, not the
+corrected luo2015_* identity. In the old sensitivity environment, the high-value location was set to the visible cue
+location on each trial. In the old criterion environment, the H:CR ratio was global rather than assigned oppositely
+across the two locations. Those are substantive experimental diﬀerences, not naming diﬀerences. Any plots or
+aggregate logs derived from those deleted checkpoints remain preliminary historical artifacts and must not be relabeled
+as corrected Luo–Maunsell results.
+Deletion was restricted to the two .pt ﬁles in each of four preliminary directories: luo_maunsell_sensitivity_
+affine_ew, luo_maunsell_sensitivity_crossattn1, luo_maunsell_criterion_affine_ew, and luo_maunsell_
+criterion_crossattn1. In each directory, both its named *_final.pt ﬁle and rvit_plus_rl_latest.pt were
+removed. The four metrics.csv ﬁles and the derived aggregate-metrics inventories that reference them were retained
+for audit history. Twelve unrelated checkpoint ﬁles in the same pod were left untouched, and a post-deletion search
+found no remaining luo_maunsell*.pt ﬁle there.
+
+
+
+
+                                                            2
+Luo–Maunsell environment audit                                                                               18 July 2026
+
+
+4     Paper-to-code correction map
+
+Protocol element      Before audit                      Corrected implementation                         Fidelity
+Value information     New environment had no cue,       No cue; condition_loc / set_condition()          Close
+                      but reward schedules were in-     swaps a hidden reward table across locations.
+                      complete.
+Two orientations      Base angle re-randomized each     Two ﬁxed orientation values per location         Close
+                      trial.                            within a session; sampled member randomized
+                                                        per trial.
+First test            One test persisted from frame     First-test response window is frames 3–4.        Scaled
+                      3 onward.
+Correct rejection     Passive waiting until trial end   Withhold to an unchanged ﬁrst test, then         Method-matched
+                      earned CR reward.                 declare to a changed second test at frame 6.
+Exclusions            Premature no-change declara-      Fixation breaks and second-test misses are       Method-matched
+                      tions became FAs; no second-      marked invalid for SDT and excluded oﬄine.
+                      test failure class.
+Sensitivity rewards   Same H/CR reward at each lo-      Mean 5:1 reward contrast with published 0.7      Method-matched
+                      cation.                           and 1.1 H:CR ratios; counterphased.
+Criterion rewards     One global H:CR pair.             Spatial 1.5 versus 0.5 H:CR ratios; low-c mean   Method-matched
+                                                        is 90% of high-c mean; counterphased.
+Fixation              No explicit central ﬁxation.      Central white ﬁxation is present throughout      Close
+                                                        the rendered trial.
+Diﬃculty              Curriculum default could          Protocol defaults to ﬁxed θ; curriculum          Method-matched
+                      change the orientation pair.      remains optional only when explicitly
+                                                        requested.
+Checkpoint safety     Subclass     reward/condition     Environment state binds session, condition,      Stronger
+                      state absent; source hash         reward table, and orientation bases; trainer
+                      omitted Luo ﬁle.                  hashes envs/luo2015.py.
+Timing/apparatus      Seven abstract frames, 50-        Explicit scaled timeline retained; action 1      Analogue
+                      pixel image, binary action.       stands in for a test-directed saccade.
+
+
+
+
+                                                           3
+Luo–Maunsell environment audit                                                                             18 July 2026
+
+
+5     Current local task: exact interaction contract
+
+5.1    Biological anchor and scope of the local analogue
+The governing experiment is Luo and Maunsell’s 2015 V4 dissociation task, not the earlier generic battery task and
+not the 2018 LPFC extension. In the biological experiment, the monkey ﬁrst ﬁxated for 400–600 ms. Two full-contrast
+sample Gabors then appeared on opposite sides of ﬁxation for 200 ms, followed by a 200–300 ms delay. A single ﬁrst
+test appeared for 200 ms at a randomly selected sample location. Its probability of diﬀering from the sample at
+that location was 0.5. A changed ﬁrst test required a saccade within 100–500 ms. An unchanged ﬁrst test required
+withholding that saccade and then responding to a guaranteed changed second test at the same location. Failure to
+answer the second test was rare in the paper and excluded from analysis.
+The local environment preserves that decision structure while compressing physical time into seven logical frames. It
+is therefore a scaled computational analogue, not a millisecond-exact reproduction of the monkey apparatus. The local
+agent has recurrent state within one trial, but that state is reinitialized at every environment reset. Consequently, the
+present paired optimization experiment tests ﬁxed reward-conditioned policy optima. It does not model the monkey’s
+adaptation across the paper’s alternating 240–360-trial blocks, online reward titration, or priming trials.
+
+
+5.2    Registration, geometry, and trial randomization
+The task registry exposes two names, luo2015_sensitivity and luo2015_criterion. Both instantiate the same
+LuoMaunsell2015Env transition system. The names select diﬀerent reward tables; they do not change the images,
+action space, trial probabilities, or outcome deﬁnitions.
+At every reset, the environment constructs one trial as follows.
+
+1. The observation is a 50×50 RGB array on a 2 × 2 spatial grid. Only grid locations 0 (top-left) and 3 (bottom-right)
+   contain Gabors. Locations 1 and 2 remain black except for any central ﬁxation pixels at the shared grid boundary.
+   A white 2 × 2 central ﬁxation point is drawn on every logical frame.
+2. Each active location i ∈ {0, 3} has a session-ﬁxed orientation pair {bi , bi + θ}. The base bi is sampled once when
+   the environment is constructed. On each trial, the sample orientation at each location is chosen independently
+   and uniformly from that pair.
+3. The tested location is sampled uniformly from locations 0 and 3. Independently, the trial is sampled as changed
+   or unchanged with probability 0.5.
+4. On a changed trial, the ﬁrst test uses the other member of the tested location’s orientation pair. On an unchanged
+   trial, it repeats the sampled member. The second test on an unchanged trial always uses the other member and
+   is therefore guaranteed to diﬀer by exactly θ in nominal orientation.
+5. Stimulus position identiﬁes which location is being tested, but there is no separate cue identifying the high-value
+   location, reward condition, or child identity. The reward condition is hidden from the pixels and ﬁxed for the
+   lifetime of one trained child agent.
+
+The image geometry is not apparatus-matched. The paper placed stimuli on opposite sides of ﬁxation at calibrated
+visual eccentricities, whereas the local renderer places them diagonally in the top-left and bottom-right cells of a
+50-pixel image. The local claim therefore concerns the sample/test decision and reward contingencies, not retinotopic
+equivalence to the monkey display.
+The default renderer adds two forms of sensory variability. Before drawing a Gabor, it adds zero-mean Gaussian
+orientation noise with a default standard-deviation multiplier of 5 degrees. It also adds independent uniform pixel
+noise from −0.11 to 0.11 inside the Gabor aperture. Frames 0 and 1 therefore show the same nominal sample
+orientations with newly rendered noise, and frames 3 and 4 likewise show the same nominal ﬁrst test with newly
+rendered noise. The declared Gym observation box is [−1, 1], although the post-noise Gabor array is not clipped after
+adding pixel noise; the executable renderer, rather than the nominal box bound, is the exact source of the values
+consumed by the model.
+
+
+
+
+                                                           4
+Luo–Maunsell environment audit                                                                                    18 July 2026
+
+
+5.3     What is shown at every timestep
+The production matrix uses T=7 and frame_repeat=1, so one logical frame equals one policy decision. The observation
+in the table is the frame visible before the action is selected. Internally, step(action) classiﬁes the action against
+that current frame, increments the timestep, and returns the next observation. A terminal outcome stops the episode
+immediately.
+
+Frame      Pixels shown before action          Action 0: wait/withhold                   Action 1: declare/respond
+0          Both sample Gabors at loca-         Continue to frame 1 with zero reward      Terminal ﬁxation break, zero reward,
+           tions 0 and 3; central ﬁxation;     on either trial type.                     invalid for SDT.
+           no cue.
+1          Both samples again at the same      Continue to blank delay frame 2 with      Terminal ﬁxation break, zero reward,
+           nominal orientations, with fresh    zero reward.                              invalid for SDT.
+           renderer noise; ﬁxation.
+2          Black ﬁeld plus central ﬁxation     Continue to ﬁrst-test frame 3 with        Terminal ﬁxation break, zero reward,
+           only; this is the scaled delay.     zero reward.                              invalid for SDT.
+3          First test at the randomly se-      Continue to frame 4 on both changed       Changed trial: terminal hit, valid for
+           lected location; the other three    and unchanged trials.                     SDT, location-speciﬁc hit reward.
+           cells are black; ﬁxation remains.                                             Unchanged trial: terminal false alarm,
+                                                                                         valid for SDT, zero reward.
+4          The same nominal ﬁrst test ap-      Changed trial: terminal miss, valid for   Changed trial: terminal hit with hit
+           pears again with fresh renderer     SDT, zero reward. Unchanged trial:        reward. Unchanged trial: terminal
+           noise; ﬁxation remains.             continue to gap frame 5.                  false alarm with zero reward. Both
+                                                                                         are valid for SDT.
+5          Black inter-test gap plus ﬁxa-      Continue to second-test frame 6 with      Terminal ﬁxation break, zero reward,
+           tion. This frame is reachable       zero reward.                              invalid for SDT. A changed trial
+           only after withholding on an un-                                              cannot normally reach this frame
+           changed ﬁrst test.                                                            because it ended as a hit or miss by
+                                                                                         frame 4.
+6          On an unchanged trial, a guar-      Terminal second-test miss, zero           Terminal correct rejection, valid for
+           anteed changed second test at       reward, invalid for SDT and excluded.     SDT, location-speciﬁc
+           the same tested location; ﬁxa-                                                correct-rejection reward. A changed
+           tion remains.                                                                 trial cannot normally reach this frame.
+
+The binary action does not encode a spatial choice. Action 1 means “respond to the currently presented test,”
+analogous to a test-directed saccade; the test’s location is supplied by the image. Before the ﬁrst test and during the
+inter-test gap, the same action is treated as a ﬁxation break. There is no negative punishment: misses, false alarms,
+ﬁxation breaks, and second-test misses all receive zero. Only hits and veriﬁed correct rejections receive positive
+reward.
+
+
+
+
+                                                               5
+Luo–Maunsell environment audit                                                                             18 July 2026
+
+
+5.4    Complete outcome partition and SDT denominators
+
+Outcome                 Exact action history at the decisive    SDT status        Reward and analysis role
+                        frame
+In progress             Action 0 before a terminal rule is      Not yet classi-   Zero reward; the trial continues and
+                        reached.                                ﬁed               recurrent state is carried to the next
+                                                                                  frame.
+Hit                     Changed ﬁrst test; action 1 at frame    Valid             Hit reward for the tested location;
+                        3 or 4.                                                   contributes to the hit-rate numerator
+                                                                                  and change-trial denominator.
+Miss                    Changed ﬁrst test; no action 1 by the   Valid             Zero reward; contributes only to the
+                        end of frame 4.                                           change-trial denominator.
+False alarm             Unchanged ﬁrst test; action 1 at        Valid             Zero reward; contributes to the
+                        frame 3 or 4.                                             false-alarm numerator and no-change
+                                                                                  denominator.
+Correct rejection       Unchanged ﬁrst test; action 0 at        Valid             CR reward for the tested location;
+                        frames 3–5, then action 1 to the                          contributes to the no-change
+                        changed second test at frame 6.                           denominator. This active veriﬁcation
+                                                                                  is the local counterpart of the
+                                                                                  paper’s engagement check.
+Fixation break          Action 1 at frame 0, 1, 2, or reach-    Excluded          Zero reward; reported separately and
+                        able frame 5.                                             omitted from ordinary
+                                                                                  hit/false-alarm denominators.
+Second-test miss        Unchanged ﬁrst test;       action 0     Excluded          Zero reward; reported separately and
+                        through frame 6.                                          omitted from ordinary SDT
+                                                                                  denominators, matching the paper’s
+                                                                                  exclusion of failures to answer the
+                                                                                  changed second test.
+
+After exclusions, the local analysis computes HR = H/(H + M ) and FAR = F A/(F A + CR) separately by tested
+location. It then computes d′ = z(HR)−z(FAR) and c = − 21 [z(HR)+z(FAR)], using the ﬁnite-sample bounds 1/(2N )
+and 1 − 1/(2N ) before applying z. During deterministic evaluation, the model emits two action logits at every frame;
+the evaluator takes their argmax, records the ﬁrst frame assigned action 1, and applies the same outcome partition.
+The executable step interface returns (next_obs, reward, done, info). The info dictionary exposes the current
+orientation magnitude theta, binary correct ﬂag, tested grid location test_loc, ground-truth change ﬂag change,
+condition location high_value_index, categorical outcome, and Boolean valid_sdt. Thus exclusions do not have to
+be reconstructed from reward zero: ﬁxation breaks and second-test misses are explicitly labeled and marked invalid.
+
+
+5.5    Reward tables actually optimized
+The raw environment rewards reproduce the Luo–Maunsell session averages and hit-to-CR ratios. The paired matrix
+then applies one positive session-wide scale to keep average correct-outcome reward near one. That scaling preserves
+every within-session reward ratio. All runs use γ = 1, so a CR delivered at frame 6 is not discounted relative to a hit
+delivered at frame 3 or 4.
+
+
+
+
+                                                          6
+Luo–Maunsell environment audit                                                                               18 July 2026
+
+
+
+Session/location role     Raw        mean;   Raw H    Raw CR    Child scale   Eﬀective H / CR    Intended pressure
+                          H:CR
+Sensitivity favored lo-   5.0; 0.7           4.1176    5.8824          1/3     1.3725 / 1.9608   Increase overall value and
+cation                                                                                           predicted d′ at this
+                                                                                                 location while
+                                                                                                 approximately balancing
+                                                                                                 criterion.
+Sensitivity other loca-   1.0; 1.1           1.0476    0.9524          1/3     0.3492 / 0.3175   Lower overall value;
+tion                                                                                             opposite spatial member
+                                                                                                 of the sensitivity
+                                                                                                 contrast.
+Criterion low-c loca-     0.9; 1.5           1.0800    0.7200       1/0.95     1.1368 / 0.7579   Favor hits relative to CRs
+tion                                                                                             and thereby predict a
+                                                                                                 more liberal criterion.
+Criterion high-c loca-    1.0; 0.5           0.6667    1.3333       1/0.95     0.7018 / 1.4035   Favor CRs relative to hits
+tion                                                                                             and thereby predict a
+                                                                                                 more conservative
+                                                                                                 criterion.
+
+The condition location is counterphased. In a condition_loc=0 child, location 0 receives the favored sensitivity
+schedule or the low-c criterion schedule and location 3 receives its counterpart. In a condition_loc=3 child, those
+assignments swap. The neutral parent instead uses equal raw rewards, H = CR = 1, at both locations.
+
+
+5.6    Structure of the local paired experiment from our previous work
+Our prior implementation work deliberately separated the biological task mechanics from the causal optimization
+comparison. The resulting local experiment has the following hierarchy.
+
+1. One neutral parent per seed. The parent is trained from a fresh initialization with the corrected seven-frame
+   environment, equal H = CR = 1 rewards at both locations, and a curriculum from θ = 65◦ down to the target
+   18◦ .
+2. One hard competence gate. At exactly 18◦ , the parent must achieve at least 75% accuracy and 90% valid
+   engagement separately for changed and unchanged trials at each location. The deterministic held-out bank contains
+   100 trials for each of the four location-by-change-status cells. If any cell fails, no child launches.
+3. Four checkpoint-identical children per seed. The exact parent weights are strictly loaded into sensitivity-
+   location-0, sensitivity-location-3, criterion-location-0, and criterion-location-3 children. The current matrix gives
+   every cell the same existing VDA/RViT affine_ew architecture. Each child uses ﬁxed θ = 18◦ , no curriculum, no
+   value cue, the same optimization budget, and one ﬁxed hidden reward table for its entire run.
+
+4. Episodic recurrent learning. PPO samples actions from the two-logit categorical policy during training. Re-
+   current state propagates across the seven frames of one trial and is reset before the next trial. Thus, hidden
+   cross-trial block inference is neither required nor available.
+5. Matched deterministic evaluation. All four children for a seed are evaluated with argmax actions on the
+   same balanced, reward-free stimulus bank. Fixation breaks and second-test misses are counted but excluded from
+   ordinary SDT denominators.
+6. Paired seed-level inference. Counterphasing removes ﬁxed location preference: the location-0 minus location-3
+   contrast under condition_loc=0 is diﬀerenced against the same contrast under condition_loc=3, then halved.
+   The preregistered signs are positive for sensitivity-session ∆DID (d′ ) and negative for criterion-session ∆DID (c).
+   Seeds, not trials, are the independent optimization replicates.
+
+This structure answers a narrower question than the monkey block-switching experiment: whether ﬁxed Luo–Maunsell
+reward objectives drive separately optimized recurrent visual policies toward the predicted sensitivity and criterion
+optima. A continuously learning agent would be required for a diﬀerent claim about adaptation speed or inference of
+an unobserved reward block.
+
+
+
+                                                            7
+Luo–Maunsell environment audit                                                                           18 July 2026
+
+
+6    Corrected environment visualization
+Figure 1 shows that all four reward conditions receive identical sample images. Only the reward table diﬀers. Figure 2
+shows the guaranteed changed second test used to validate a correct rejection.
+
+
+
+
+Figure 1: Sample frame. Reward annotations are outside the agent observation; there is no condition cue in the 50×50
+input.
+
+
+
+
+                                                          8
+Luo–Maunsell environment audit                                                                        18 July 2026
+
+
+
+
+Figure 2: Changed second test on a no-change trial. A declaration here completes the correct-rejection sequence and
+releases the location- and outcome-speciﬁc CR reward.
+
+
+
+
+                                                        9
+Luo–Maunsell environment audit                                                                                    18 July 2026
+
+
+7     Veriﬁcation evidence
+• Focused tests: all 21 environment-protocol cases and 20 paired-experiment cases passed (41 total). They cover re-
+  ward means/ratios and counterphasing, event semantics, SDT exclusions, rendering, checkpoint compatibility, ﬁxed-
+  condition matrix construction, immutable embedded parent lineage, strict warm starts and resume roots, restart
+  manifests, held-out competence-gate cells, protocol drift rejection, matched evaluation banks, canary-analysis re-
+  jection, and diﬀerence-in-diﬀerences signs.
+• Live outcome exercise: both registered tasks produced every terminal outcome under deterministic binary action
+  schedules. Using 0 for wait and 1 for declare, the decisive traces were hit [0, 0, 0, 1], miss [0, 0, 0, 0, 0], false alarm
+  [0, 0, 0, 1], correct rejection [0, 0, 0, 0, 0, 0, 1], immediate ﬁxation break [1], and second-test miss [0, 0, 0, 0, 0, 0, 0].
+  Additional declarations at frames 1, 2, and 5 conﬁrmed the remaining reachable ﬁxation-break transitions. The
+  emitted rewards matched the explicit tables above.
+• Syntax: envs/luo2015.py, the analysis module, trainer, rendering script, and tests compiled with the active
+  Python interpreter.
+• Broader suite: 312 passed, 3 failed, 88 warnings in 80.54 seconds. The failures are outside the modiﬁed Luo paths
+  and arise because the active Python 3.9 lacks Path.hardlink_to and zip(..., strict=True) used by unrelated
+  matched-width and VDA ﬁgure tests.
+• GIF QA: the generated GIF is 1280×940, seven frames, 475,625 bytes. Sample, delay, ﬁrst test, gap, and second
+  test were veriﬁed. Full-frame inspection found no clipping, overlap, or condition-dependent visual cue.
+• Training canary: one neutral parent and four condition-speciﬁc children completed on MPS, strictly restored
+  all parent weights (87 loaded, 0 skipped), embedded the same veriﬁed parent SHA-256 in every child, used γ =
+  1, and passed independent task/reward/theta/curriculum/iteration/producer-hash contracts. A second launcher
+  invocation skipped all ﬁve completed cells. The explicit canary bypass is plumbing evidence only, and the analyzer
+  rejects it as behavioral input.
+
+
+8     What is now valid—and what is not
+Valid now: in addition to the method-matched environment, the repository has a paired episodic optimiza-
+tion path that uses the existing VDA architecture and trainer. Each seed creates one neutral parent and four
+ﬁxed-condition children with identical inherited weights, no reward cue, matched budgets, immutable embedded
+lineage, source/protocol validation, a balanced held-out parent gate, common evaluation trials, and counterphased
+statistical contrasts.
+Still required for a local behavioral claim: run the full paired-seed matrix, pass the neutral-parent com-
+petence gate, obtain valid nonsaturated SDT denominators, and estimate the preregistered contrasts. Canary
+checkpoints are deliberately too short for this claim.
+
+
+8.1    Why continuous learning is not required
+The core computational question can be posed as an optimization problem: does a ﬁxed reward objective produce
+the predicted ﬁxed-condition policy? A recurrent state spanning trials is unnecessary for that estimand. For each
+seed, the launcher ﬁrst trains one neutral perceptual parent, then forks its exact weights into sensitivity/criterion
+× location-0/location-3 children. The condition and reward table remain ﬁxed during each child’s ordinary episodic
+updates. Thus reward feedback changes network parameters across episodes; the policy never needs to infer an
+unobserved block switch within its recurrent state.
+This design is more controlled than unrelated agents trained from separate random initializations. Children are
+paired by parent, architecture, seed, diﬃculty, and budget. Global positive reward scaling normalizes mean correct-
+outcome reward across session types while retaining every within-session reward ratio. All runs use γ = 1 because
+hit/false-alarm rewards can arrive at the ﬁrst test while correct-rejection rewards arrive at the second; discounting
+would otherwise alter the intended H:CR objective. A full run has one hard gate before any child is launched: the
+neutral parent must reach target θ, then achieve at least 75% accuracy and 90% valid engagement separately for
+change/no-change trials at both locations on a deterministic balanced held-out bank generated at that exact θ.
+
+
+
+                                                              10
+Luo–Maunsell environment audit                                                                            18 July 2026
+
+
+For any metric m, the counterphased estimand is
+
+                             ∆DID (m) = 21 {(m0 − m3 )condition 0 − (m0 − m3 )condition 3 }.
+
+The primary predictions are ∆DID (d′ ) > 0 in sensitivity sessions and ∆DID (c) < 0 in criterion sessions. Cross-metric
+contrasts are speciﬁcity checks; claiming “no eﬀect” requires a declared equivalence bound rather than a nonsigniﬁcant
+test.
+A continuously stateful agent is needed only for a diﬀerent claim about learning a hidden block switch, adaptation
+speed, or trial-history eﬀects. The episodic experiment therefore tests the reward-optimization methodology accurately
+without pretending to reproduce that separate temporal-learning question. No visible condition cue is introduced.
+No claim about V4 or LPFC neural modulation follows from the environment alone. The eight obsolete preliminary
+battery weight ﬁles have been deleted. Their retained aggregate logs are historical records only and must not be
+relabeled as corrected Luo–Maunsell results.
+
+
+9    Artifacts and integrity
+
+Artifact                            SHA-256
+2015 full paper PDF                 fe840430b5e63fa8b043a327b2960a1d2981ae2a792109bf3feeb48fc56608d8
+2015 supplement PDF                 4cb6fc4fd7b36452f7540cbde66691aa33d50278aa0b1e12d9d52038d9f9e391
+2018 full paper PDF                 9d9b9e341adc4bfc65811b653f4ce051fa8c215f12233b52b4ebdc19df9e2b14
+2018 supplement PDF                 7a245fcd73475bd142029cc06f762559f89199225ba7adef57bf5e3829d88386
+Protocol GIF                        9143ecb69697ab72313978bd6ac973f830c58121a33de2d08fbb0e30bb4f6ccd
+Corrected environment source        9128d7d54ea8c33b8e037d244ece9e0163a1d73c5b5dc6ebea944602162c7f4c
+RL trainer with lineage contract    761f9632c8be6413b93574a3f36ab51eb8101d6c9abeb8ec214826816272255b
+Episodic matrix launcher            fb9eaff5607673116f837002c6a5acd8d61748bb0d1a0b9a04cf862837a8911e
+Paired SDT analyzer                 62292524a5d6e8dfb4ac64fba97e23493bc56f58c728843ce5d9753909132739
+Experiment contract README          9f49d628d8d6bed61c0cc71d0aaf4aa82942ad355a6f2f5ae8054015815b873f
+Canary manifest                     6f5d83a1a2559dcad60184cd81d0755a643ac9fb634c6d1185e6d1f4d0c2e74b
+Primary artifact directory: /Users/jonathanmorgan/AttentionManuscript/reports/luo_maunsell_environment/.
+
+
+Primary sources
+1. Luo, T. Z., & Maunsell, J. H. R. (2015). Neuronal modulations in visual cortex are associated with only one of multi-
+   ple components of attention. Neuron, 86(5), 1182–1188. doi:10.1016/j.neuron.2015.05.007. PMCID: PMC4458699.
+2. Luo, T. Z., & Maunsell, J. H. R. (2018). Attentional changes in either criterion or sensitivity are associated
+   with robust modulations in lateral prefrontal cortex. Neuron, 97, 1382–1393.e7. doi:10.1016/j.neuron.2018.02.007.
+   PMCID: PMC5866245.
+
+
+
+
+                                                           11
+

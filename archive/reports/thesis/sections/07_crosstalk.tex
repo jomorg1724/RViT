@@ -1,0 +1,80 @@
+\chapter{Finding III --- coupling is a precondition for learning}
+\label{ch:crosstalk}
+
+A second structural result, established on the long task with the \code{v11} family of
+split-pathway networks, is that the coupling between the policy and value streams is not an
+optimisation detail --- it is a precondition for the task to be learned at all.
+
+\section{The split-pathway design}
+The \code{v11\_part2} network splits the recurrent encoder into two single-head cross-
+attention streams that share a deep memory. The \emph{priority} ($\mu$) stream queries the
+image and attends over $[\Hone\!\parallel\!\Htwo]$ with an image residual, and its output
+$\Zmu$ drives the actor. The \emph{value} ($q$) stream queries the image and attends over
+$\Htwo$ with a memory residual, and its output $\Zq$ drives the critic. The cross-talk
+lives in the shared deep memory $\Htwo$: the priority stream \emph{writes} it (through
+$\Zmu$) and \emph{reads} it back, while the value stream reads the same $\Htwo$. The two
+heads are separated but sit on a jointly maintained recurrent register.
+
+\section{The three-way comparison}
+Holding the front-end, heads, parameter count, and entire training recipe fixed, three
+wirings were trained and evaluated (Table~\ref{tab:crosstalk}):
+\begin{enumerate}
+\item \textbf{Shared memory (cross-talk).} As above: the two streams coupled through
+$\Htwo$, priority driving the actor.
+\item \textbf{Independent (no cross-talk).} The same two stream \emph{types}, but each with
+its own private memory updated only by its own output --- the minimal edit that removes the
+coupling while preserving the split.
+\item \textbf{Swapped routing.} Architecturally identical to the coupled model, but the
+value stream drives the actor and the priority stream drives the critic.
+\end{enumerate}
+
+\begin{table}[t]
+\centering
+\caption{Coupling between the policy and value pathways is necessary for learning. Same
+front-end, heads, parameter count and training recipe; only the inter-pathway wiring
+differs. Numbers from the trained checkpoints on the long task.}
+\label{tab:crosstalk}
+\small
+\begin{tabular}{lcccl}
+\toprule
+Configuration & Accuracy & Hit rate & FA rate & Phenotype \\
+\midrule
+Shared memory (cross-talk) & \textbf{0.868} & \textbf{0.794} & 0.067 & active, calibrated detector \\
+Independent (no cross-talk) & 0.504 & 0.000 & 0.000 & always-wait collapse \\
+Swapped routing & 0.420 & 0.000 & 0.000 & always-wait collapse \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The result}
+The coupled model is a genuine psychophysical detector. Both uncoupled controls collapse
+completely: across hundreds of episodes they never once declare a change. The independent
+model's failure shows that \textbf{a shared substrate is necessary} --- decoupling the
+critic's state from the actor's state breaks credit assignment, because the value estimate
+that should teach the policy is computed on memory the policy cannot influence. The
+swapped-routing failure shows that \textbf{which stream drives the policy also matters} ---
+the grounded, image-reading priority stream must command the actor; routing the memory-
+grounded value stream to the policy fails even with the coupling intact. The two conditions
+are jointly necessary, and the margin --- a fifty-point accuracy gap from a single wiring
+edit --- is among the largest the program has produced.
+
+\section{Interpretation and its limits}
+The result echoes a deep feature of the biology: in a cortico-basal-ganglia actor--critic,
+the actor is updated only through a dopaminergic teaching signal gated by the critic's
+reward-prediction error, so severing value from action breaks learning. We are careful,
+however, about the mapping. The brain's coupling is a largely scalar, diffusely broadcast
+critic-to-actor signal, whereas the model's coupling is a shared recurrent working-memory
+register that the actor writes and both read. The model therefore \emph{formalises one
+concrete way} to satisfy a constraint the brain satisfies by other means, rather than
+replicating the mechanism. The asymmetry result --- that the grounded stream must drive the
+policy --- is better motivated by the evidence-accumulation literature (the sensory stage is
+the causally necessary one) than by the actor--critic literature, and is the sharpest,
+most specific claim the split-pathway work makes.
+
+\section{Standing caveat}
+The cross-talk results were obtained on the long task, before the perception finding of
+Chapter~\ref{ch:perception}. The split-pathway models read $\mathbf Z$ (the attention
+output), not $\mathbf H$ (memory), which on the short task interacts with the perception
+and attention findings in ways Chapter~\ref{ch:attention} takes up directly. The coupling
+result itself is robust; its expression on the short task with a frozen VAE is one of the
+open items in the research plan.

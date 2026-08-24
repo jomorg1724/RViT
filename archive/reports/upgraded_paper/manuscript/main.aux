@@ -1,0 +1,325 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{morgan_albanna_herman2025_rvit}
+\citation{morgan_albanna_herman2026_vda}
+\citation{carrasco2011_visual_attention_25y}
+\citation{posner1980_orienting}
+\citation{carrasco2011_visual_attention_25y}
+\citation{reynolds_heeger2009_normalization}
+\citation{mcadams_maunsell1999_v4_tuning}
+\citation{treue_martinez_trujillo1999_feature_attention}
+\citation{sani2017_temporal_v4_gain}
+\citation{CohenMaunsell2009}
+\citation{MullerFindlay1987}
+\citation{posner1980_orienting}
+\citation{carrasco2011_visual_attention_25y}
+\citation{MullerFindlay1987}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\citation{baruni2015}
+\citation{awh_jonides2001_overlapping_attention_wm}
+\citation{awh1998_rehearsal}
+\citation{kane2001_controlled_attention}
+\citation{bisley_goldberg2010}
+\citation{morgan_albanna_herman2025_rvit}
+\citation{morgan_albanna_herman2026_vda}
+\citation{morgan_albanna_herman2025_rvit}
+\citation{morgan_albanna_herman2026_vda}
+\citation{posner1980_orienting}
+\citation{MullerFindlay1987}
+\citation{carrasco2011_visual_attention_25y}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {The model.} A recurrent vision transformer trained by reinforcement learning on the cued change-detection task plus a temporal JEPA auxiliary loss (weight $0.5$). Each frame is split into four patches, encoded by a shared squeeze-and-excitation convolutional front-end, and passed to a recurrent self-attention encoder whose visual tokens are affinely modulated by the recurrent memory before attending to one another. A per-location spatial working memory integrates the attended tokens across the trial and is read out to a distributional actor--critic and to an auxiliary self-distillation head.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:model-schematic}{{1}{4}{\textbf {The model.} A recurrent vision transformer trained by reinforcement learning on the cued change-detection task plus a temporal JEPA auxiliary loss (weight $0.5$). Each frame is split into four patches, encoded by a shared squeeze-and-excitation convolutional front-end, and passed to a recurrent self-attention encoder whose visual tokens are affinely modulated by the recurrent memory before attending to one another. A per-location spatial working memory integrates the attended tokens across the trial and is read out to a distributional actor--critic and to an auxiliary self-distillation head}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Model}{4}{section.2}\protected@file@percent }
+\newlabel{sec:model}{{2}{4}{Model}{section.2}{}}
+\citation{carrasco2011_visual_attention_25y}
+\citation{failing_theeuwes2018_selection_history}
+\citation{hickey2010_reward_salience_acc}
+\citation{posner1980_orienting}
+\citation{MullerFindlay1987}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Task structure}{5}{subsection.2.1}\protected@file@percent }
+\newlabel{sec:model-task}{{2.1}{5}{Task structure}{subsection.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Convolutional front-end: pixels to patch tokens}{5}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:model-frontend}{{2.2}{5}{Convolutional front-end: pixels to patch tokens}{subsection.2.2}{}}
+\citation{reynolds_heeger2009_normalization}
+\citation{mcadams_maunsell1999_v4_tuning}
+\citation{treue_martinez_trujillo1999_feature_attention}
+\citation{carrasco2011_visual_attention_25y}
+\citation{reynolds_heeger2009_normalization}
+\citation{ghose_maunsell2002_task_timing}
+\citation{sani2017_temporal_v4_gain}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Recurrent self-attention with element-wise affine feedback}{6}{subsection.2.3}\protected@file@percent }
+\newlabel{sec:model-encoder}{{2.3}{6}{Recurrent self-attention with element-wise affine feedback}{subsection.2.3}{}}
+\newlabel{eq:affine-feedback}{{1}{6}{Recurrent self-attention with element-wise affine feedback}{equation.1}{}}
+\newlabel{eq:self-attention}{{2}{6}{Recurrent self-attention with element-wise affine feedback}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Spatial working memory}{6}{subsection.2.4}\protected@file@percent }
+\newlabel{sec:model-memory}{{2.4}{6}{Spatial working memory}{subsection.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Decision: distributional actor--critic}{7}{subsection.2.5}\protected@file@percent }
+\newlabel{sec:model-heads}{{2.5}{7}{Decision: distributional actor--critic}{subsection.2.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Auxiliary temporal self-distillation}{7}{subsection.2.6}\protected@file@percent }
+\newlabel{sec:model-jepa}{{2.6}{7}{Auxiliary temporal self-distillation}{subsection.2.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Training}{7}{subsection.2.7}\protected@file@percent }
+\newlabel{sec:model-training}{{2.7}{7}{Training}{subsection.2.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8}What the trained model does, in brief}{7}{subsection.2.8}\protected@file@percent }
+\newlabel{sec:model-summary}{{2.8}{7}{What the trained model does, in brief}{subsection.2.8}{}}
+\citation{MullerFindlay1987}
+\citation{carrasco2011_visual_attention_25y}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Criterion and sensitivity are dissociable components of the attentional benefit}{8}{section.3}\protected@file@percent }
+\newlabel{sec:luomaunsell}{{3}{8}{Criterion and sensitivity are dissociable components of the attentional benefit}{section.3}{}}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textbf  {(Preliminary; cued variant.)} \textbf  {The reward-structure manipulation reproduces the Luo--Maunsell sensitivity/criterion double dissociation.} Across all three change magnitudes, the \emph  {sensitivity} session (value concentrated at one location) yields a larger sensitivity gap ($\Delta d'$, left) at a \emph  {low} false-alarm rate (right), whereas the \emph  {criterion} session (global hit/correct-rejection reward) yields a smaller sensitivity gap but a \emph  {high} false-alarm rate. At the near-threshold magnitude $\Delta = 18^\circ $: $\Delta d'= 1.09$ at $\mathrm  {FA} = 0.02$ (sensitivity) versus $\Delta d'= 0.59$ at $\mathrm  {FA} = 0.18$ (criterion).}}{9}{figure.2}\protected@file@percent }
+\newlabel{fig:luo_repro}{{2}{9}{\textbf {(Preliminary; cued variant.)} \textbf {The reward-structure manipulation reproduces the Luo--Maunsell sensitivity/criterion double dissociation.} Across all three change magnitudes, the \emph {sensitivity} session (value concentrated at one location) yields a larger sensitivity gap ($\Delta \dprime $, left) at a \emph {low} false-alarm rate (right), whereas the \emph {criterion} session (global hit/correct-rejection reward) yields a smaller sensitivity gap but a \emph {high} false-alarm rate. At the near-threshold magnitude $\Delta = 18^\circ $: $\Delta \dprime = 1.09$ at $\mathrm {FA} = 0.02$ (sensitivity) versus $\Delta \dprime = 0.59$ at $\mathrm {FA} = 0.18$ (criterion)}{figure.2}{}}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\citation{mcadams_maunsell1999_v4_tuning}
+\citation{reynolds_heeger2009_normalization}
+\citation{sani2017_temporal_v4_gain}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\citation{CohenMaunsell2009}
+\citation{ghose_maunsell2002_task_timing}
+\citation{treue_martinez_trujillo1999_feature_attention}
+\@writefile{toc}{\contentsline {paragraph}{The criterion effect is decision-stage.}{10}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The sensitivity localization is carried by cue-anchored attention.}{10}{section*.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textbf  {(Preliminary; cued variant.) Localizing the two components (mechanism).} Left: attention to the cued location is high in \emph  {both} sessions ($\alpha _c= 0.46$ sensitivity, $0.55$ criterion; uniform $= 0.25$) --- the model's spatial attention is cue-anchored, not steered by the reward map. Right: the criterion session shifts the read-out's declare bias toward reporting (from $-15.4$ to $-3.6$), the decision-stage change that produces the high false-alarm rate. The criterion effect is thus a decision-stage bias shift with attention if anything slightly higher, not lower; the sensitivity dissociation rides on cue-anchored attention.}}{11}{figure.3}\protected@file@percent }
+\newlabel{fig:luo_mechanism}{{3}{11}{\textbf {(Preliminary; cued variant.) Localizing the two components (mechanism).} Left: attention to the cued location is high in \emph {both} sessions ($\alphacued = 0.46$ sensitivity, $0.55$ criterion; uniform $= 0.25$) --- the model's spatial attention is cue-anchored, not steered by the reward map. Right: the criterion session shifts the read-out's declare bias toward reporting (from $-15.4$ to $-3.6$), the decision-stage change that produces the high false-alarm rate. The criterion effect is thus a decision-stage bias shift with attention if anything slightly higher, not lower; the sensitivity dissociation rides on cue-anchored attention}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}The model reproduces the core signatures of spatial attention in a cued change-detection task}{11}{section.4}\protected@file@percent }
+\newlabel{sec:detection}{{4}{11}{The model reproduces the core signatures of spatial attention in a cued change-detection task}{section.4}{}}
+\citation{carrasco2011_visual_attention_25y}
+\citation{posner1980_orienting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Psychometrics and reaction time across task checkpoints}{12}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:det-psych}{{4.1}{12}{Psychometrics and reaction time across task checkpoints}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Detection is a graded psychometric function, and reaction time falls with change magnitude.}{12}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The cueing contrast differs across separately trained tasks.}{12}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{A genuine spatial benefit, at threshold magnitudes.}{12}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The benefit is flat across cue validity.}{12}{section*.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Psychometrics and reaction time on the cued change-detection task (\texttt  {vda4}, the model). \textbf  {(a)} Detection probability is a graded monotone function of change magnitude $|\Delta \theta |$ in every cue condition; the cued curve is shifted left of the uncued curve (a spatial cueing benefit; no $2.207^\circ $ claim is made here). \textbf  {(b)} Reaction time falls with $|\Delta \theta |$. \textbf  {(c)} The valid$-$invalid detection gap at threshold magnitudes is flat across displayed cue validity $p$ ($0.21, 0.23, 0.19, 0.25$ at $p = 0.25, 0.5, 0.75, 1.0$): the benefit is spatial, not validity-graded.}}{13}{figure.4}\protected@file@percent }
+\newlabel{fig:det-psych}{{4}{13}{Psychometrics and reaction time on the cued change-detection task (\texttt {vda4}, the model). \textbf {(a)} Detection probability is a graded monotone function of change magnitude $|\Delta \theta |$ in every cue condition; the cued curve is shifted left of the uncued curve (a spatial cueing benefit; no $2.207^\circ $ claim is made here). \textbf {(b)} Reaction time falls with $|\Delta \theta |$. \textbf {(c)} The valid$-$invalid detection gap at threshold magnitudes is flat across displayed cue validity $p$ ($0.21, 0.23, 0.19, 0.25$ at $p = 0.25, 0.5, 0.75, 1.0$): the benefit is spatial, not validity-graded}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Attention deployment: orient, release, re-acquire, and lock --- diluted by load, blind to validity, and not shaped by value}{13}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:det-attn}{{4.2}{13}{Attention deployment: orient, release, re-acquire, and lock --- diluted by load, blind to validity, and not shaped by value}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{A legible attentional schedule: transient orient, release, re-acquire, bottom-up lock.}{13}{section*.11}\protected@file@percent }
+\citation{reynolds_heeger2009_normalization}
+\citation{carrasco2011_visual_attention_25y}
+\citation{carrasco2011_visual_attention_25y}
+\@writefile{toc}{\contentsline {paragraph}{The change-lock is bottom-up: it captures valid and invalid changes alike.}{14}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sustained monitoring differs between the VDA1 and VDA4 checkpoints.}{14}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The attention map is blind to cue validity.}{14}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Value is not written into the attention map.}{14}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Signal-detection read-out: attention lowers the criterion \emph  {and} raises sensitivity}{14}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:det-sdt}{{4.3}{14}{Signal-detection read-out: attention lowers the criterion \emph {and} raises sensitivity}{subsection.4.3}{}}
+\citation{reynolds_heeger2009_normalization}
+\citation{mcadams_maunsell1999_v4_tuning}
+\citation{treue_martinez_trujillo1999_feature_attention}
+\citation{carrasco2011_visual_attention_25y}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Attention deployment (the model). \textbf  {(a)} The $\alpha _1$ time-course: orient at the cue ($0.73$ at $t=1$), release at the blank ($0.22$ at $t=2$), re-acquire over the Gabor frames ($0.44 \to 0.80$), lock at the change. \textbf  {(b)} The change-lock is bottom-up: attention to the changed patch at $t=5$ is $1.00$ (valid) and $0.92$ (invalid). \textbf  {(c)} The map is flat across displayed cue validity. \textbf  {(d)} Sustained monitoring dilutes from \texttt  {vda1} to \texttt  {vda4}. Uniform baseline $\alpha _1 = 0.25$ throughout.}}{15}{figure.5}\protected@file@percent }
+\newlabel{fig:det-attn}{{5}{15}{Attention deployment (the model). \textbf {(a)} The $\alpha _1$ time-course: orient at the cue ($0.73$ at $t=1$), release at the blank ($0.22$ at $t=2$), re-acquire over the Gabor frames ($0.44 \to 0.80$), lock at the change. \textbf {(b)} The change-lock is bottom-up: attention to the changed patch at $t=5$ is $1.00$ (valid) and $0.92$ (invalid). \textbf {(c)} The map is flat across displayed cue validity. \textbf {(d)} Sustained monitoring dilutes from \texttt {vda1} to \texttt {vda4}. Uniform baseline $\alpha _1 = 0.25$ throughout}{figure.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Attention lowers the decision criterion.}{15}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Attention is also load-bearing for sensitivity.}{15}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The model realizes both accounts in one system.}{16}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Decision uncertainty: misdirected attention manufactures a confident miss}{16}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:det-uncertainty}{{4.4}{16}{Decision uncertainty: misdirected attention manufactures a confident miss}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Misdirection produces a miss --- and, diagnostically, a confident one.}{16}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The value system registers the problem the policy commits to.}{16}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Temporal decoding from working memory: value is latched, validity becomes weakly recoverable after the cue, and the change is built online}{16}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:det-decoding}{{4.5}{16}{Temporal decoding from working memory: value is latched, validity becomes weakly recoverable after the cue, and the change is built online}{subsection.4.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Value (cue colour) is latched at the cue and held.}{16}{section*.21}\protected@file@percent }
+\citation{RuffCohen2016}
+\citation{Srinath2021}
+\citation{RuffCohen2016}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\@writefile{toc}{\contentsline {paragraph}{Validity is cue-locked and weakly recoverable after the cue.}{17}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Change presence and location are constructed online.}{17}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Attentional microstimulation: injecting priority evokes a false detection, gated to the monitored location}{17}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:det-microstim}{{4.6}{17}{Attentional microstimulation: injecting priority evokes a false detection, gated to the monitored location}{subsection.4.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Injecting priority at the monitored location evokes false detections.}{17}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The evoked percept is spatially gated.}{17}{section*.25}\protected@file@percent }
+\citation{posner1980_orienting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Summary: one model, the core signatures of spatial attention}{18}{subsection.4.7}\protected@file@percent }
+\newlabel{sec:det-summary}{{4.7}{18}{Summary: one model, the core signatures of spatial attention}{subsection.4.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Value-directed attention: the model uses spatial validity, but in an absolute-value regime}{18}{section.5}\protected@file@percent }
+\newlabel{sec:value}{{5}{18}{Value-directed attention: the model uses spatial validity, but in an absolute-value regime}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Validity4: spatial validity, used gradedly}{18}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:value-validity4}{{5.1}{18}{Validity4: spatial validity, used gradedly}{subsection.5.1}{}}
+\citation{posner1980_orienting}
+\citation{posner1980_orienting}
+\citation{MullerFindlay1987}
+\citation{reynolds_heeger2009_normalization}
+\citation{mcadams_maunsell1999_v4_tuning}
+\citation{reynolds_heeger2009_normalization}
+\citation{carrasco2011_visual_attention_25y}
+\citation{posner1980_orienting}
+\@writefile{toc}{\contentsline {paragraph}{The cueing benefit grows monotonically with validity.}{19}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Uncued detection falls as validity rises --- a pattern compatible with a resource trade-off.}{19}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cued-patch attention rises with validity.}{19}{section*.28}\protected@file@percent }
+\citation{failing_theeuwes2018_selection_history}
+\citation{hickey2010_reward_salience_acc}
+\citation{wang_theeuwes2018_statistical_learning_distractor_suppression}
+\citation{failing_theeuwes2018_selection_history}
+\citation{morgan_albanna_herman2026_vda}
+\citation{posner1980_orienting}
+\citation{MullerFindlay1987}
+\citation{failing_theeuwes2018_selection_history}
+\citation{hickey2010_reward_salience_acc}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}The contrast with the value-VDA: a cue-competition hypothesis}{20}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:value-crowdout}{{5.2}{20}{The contrast with the value-VDA: a cue-competition hypothesis}{subsection.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Baruni relative-value: a principled null in the absolute-value regime}{20}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:value-baruni}{{5.3}{20}{Baruni relative-value: a principled null in the absolute-value regime}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Summary}{20}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:value-summary}{{5.4}{20}{Summary}{subsection.5.4}{}}
+\citation{carrasco2011_visual_attention_25y}
+\@writefile{toc}{\contentsline {section}{\numberline {6}The value-directed attention battery: attentional signatures across set size}{21}{section.6}\protected@file@percent }
+\newlabel{sec:vda-battery}{{6}{21}{The value-directed attention battery: attentional signatures across set size}{section.6}{}}
+\citation{carrasco2011_visual_attention_25y}
+\citation{reynolds_heeger2009_normalization}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Per-environment deep dives}{22}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:vda-perenv}{{6.1}{22}{Per-environment deep dives}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}The priority map: checkpoint-specific orienting with no consistent value steering}{22}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:vda-map}{{6.2}{22}{The priority map: checkpoint-specific orienting with no consistent value steering}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Orient at the cue, then release --- largest at cue time in VDA9.}{22}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Value does not consistently steer the map in these summaries.}{22}{section*.30}\protected@file@percent }
+\citation{carrasco2011_visual_attention_25y}
+\@writefile{toc}{\contentsline {paragraph}{The VDA9 checkpoint shows the strongest validity steering.}{23}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Validity-threshold changes differ across checkpoints}{23}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:vda-validity}{{6.3}{23}{Validity-threshold changes differ across checkpoints}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Clamp-induced criterion and sensitivity ranges differ across checkpoints}{23}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:vda-sdt}{{6.4}{23}{Clamp-induced criterion and sensitivity ranges differ across checkpoints}{subsection.6.4}{}}
+\citation{awh_vogel_oh2006}
+\citation{awh_jonides2001_overlapping_attention_wm}
+\citation{kane2001_controlled_attention}
+\citation{awh_jonides_reuterlorenz1998_rehearsal}
+\citation{awh_jonides2001_overlapping_attention_wm}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Validity decoding from working memory differs across checkpoints}{24}{subsection.6.5}\protected@file@percent }
+\newlabel{sec:vda-decode}{{6.5}{24}{Validity decoding from working memory differs across checkpoints}{subsection.6.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Working-memory width and controlled detection}{24}{section.7}\protected@file@percent }
+\newlabel{sec:capacity}{{7}{24}{Working-memory width and controlled detection}{section.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{Status and planned comparison.}{24}{section*.32}\protected@file@percent }
+\citation{carrasco2011_visual_attention_25y}
+\citation{carrasco2011_visual_attention_25y}
+\citation{carrasco2011_visual_attention_25y}
+\citation{MullerFindlay1987}
+\citation{MullerFindlay1987}
+\citation{posner1980_orienting}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Attention-based rehearsal remains a hypothesis}{25}{section.8}\protected@file@percent }
+\newlabel{sec:rehearsal}{{8}{25}{Attention-based rehearsal remains a hypothesis}{section.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Discussion}{25}{section.9}\protected@file@percent }
+\newlabel{sec:discussion}{{9}{25}{Discussion}{section.9}{}}
+\citation{reynolds_heeger2009_normalization}
+\citation{mcadams_maunsell1999_v4_tuning}
+\citation{treue_martinez_trujillo1999_feature_attention}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\citation{awh_vogel_oh2006}
+\citation{baddeley1992working}
+\citation{posner1980_orienting}
+\citation{bisley_goldberg2010}
+\citation{baruni2015}
+\citation{posner1980_orienting}
+\citation{MullerFindlay1987}
+\citation{carrasco2011_visual_attention_25y}
+\newlabel{fig:discussion-synthesis}{{9}{28}{Scope and limitations}{section*.37}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Methods}{28}{section.10}\protected@file@percent }
+\newlabel{sec:methods}{{10}{28}{Methods}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}The change-detection environment}{28}{subsection.10.1}\protected@file@percent }
+\newlabel{sec:methods-env}{{10.1}{28}{The change-detection environment}{subsection.10.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Trial timeline.}{29}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Gabor stimuli and orientation noise.}{29}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cue: location, value, and validity.}{29}{section*.40}\protected@file@percent }
+\citation{luo_maunsell2018_criterion_sensitivity}
+\citation{awh_jonides_reuterlorenz1998_rehearsal}
+\@writefile{toc}{\contentsline {paragraph}{Actions and reward.}{30}{section*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Variants.}{30}{section*.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Network}{31}{subsection.10.2}\protected@file@percent }
+\newlabel{sec:methods-network}{{10.2}{31}{Network}{subsection.10.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Convolutional front-end.}{31}{section*.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recurrent self-attention with element-wise affine feedback.}{31}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Spatial working memory.}{31}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Distributional actor--critic.}{32}{section*.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Auxiliary temporal self-distillation.}{32}{section*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Reinforcement-learning objective}{32}{subsection.10.3}\protected@file@percent }
+\newlabel{sec:methods-training}{{10.3}{32}{Reinforcement-learning objective}{subsection.10.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Actor.}{32}{section*.48}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Critic.}{32}{section*.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Replay and target.}{32}{section*.50}\protected@file@percent }
+\citation{MullerFindlay1987}
+\@writefile{toc}{\contentsline {paragraph}{JEPA teacher.}{33}{section*.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Optimisation.}{33}{section*.52}\protected@file@percent }
+\newlabel{sec:methods-curriculum}{{10.3}{33}{Difficulty curriculum}{section*.53}{}}
+\@writefile{toc}{\contentsline {paragraph}{Difficulty curriculum.}{33}{section*.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Analysis harnesses}{33}{subsection.10.4}\protected@file@percent }
+\newlabel{sec:methods-analysis}{{10.4}{33}{Analysis harnesses}{subsection.10.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.1}Attention clamp: microstimulation and graded biasing}{33}{subsubsection.10.4.1}\protected@file@percent }
+\newlabel{sec:methods-clamp}{{10.4.1}{33}{Attention clamp: microstimulation and graded biasing}{subsubsection.10.4.1}{}}
+\citation{luo_maunsell2018_criterion_sensitivity}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.2}Signal-detection read-out}{34}{subsubsection.10.4.2}\protected@file@percent }
+\newlabel{sec:methods-sdt}{{10.4.2}{34}{Signal-detection read-out}{subsubsection.10.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.3}Temporal decoding from working memory}{34}{subsubsection.10.4.3}\protected@file@percent }
+\newlabel{sec:methods-decoding}{{10.4.3}{34}{Temporal decoding from working memory}{subsubsection.10.4.3}{}}
+\bibstyle{unsrt}
+\bibdata{refs}
+\bibcite{morgan_albanna_herman2025_rvit}{1}
+\bibcite{morgan_albanna_herman2026_vda}{2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Reproducibility and implementation}{35}{subsection.10.5}\protected@file@percent }
+\newlabel{sec:methods-repro}{{10.5}{35}{Reproducibility and implementation}{subsection.10.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Supplementary material}{35}{appendix.A}\protected@file@percent }
+\newlabel{sec:appendix}{{A}{35}{Supplementary material}{appendix.A}{}}
+\@writefile{toc}{\contentsline {paragraph}{Figure inventory.}{35}{section*.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Current battery status.}{35}{section*.55}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Invalid legacy artifacts.}{35}{section*.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Failed filtering-task trace.}{35}{section*.57}\protected@file@percent }
+\bibcite{carrasco2011_visual_attention_25y}{3}
+\bibcite{posner1980_orienting}{4}
+\bibcite{reynolds_heeger2009_normalization}{5}
+\bibcite{mcadams_maunsell1999_v4_tuning}{6}
+\bibcite{treue_martinez_trujillo1999_feature_attention}{7}
+\bibcite{sani2017_temporal_v4_gain}{8}
+\bibcite{CohenMaunsell2009}{9}
+\bibcite{MullerFindlay1987}{10}
+\bibcite{luo_maunsell2018_criterion_sensitivity}{11}
+\bibcite{baruni2015}{12}
+\bibcite{awh_jonides2001_overlapping_attention_wm}{13}
+\bibcite{awh1998_rehearsal}{14}
+\bibcite{kane2001_controlled_attention}{15}
+\bibcite{bisley_goldberg2010}{16}
+\bibcite{failing_theeuwes2018_selection_history}{17}
+\bibcite{hickey2010_reward_salience_acc}{18}
+\bibcite{ghose_maunsell2002_task_timing}{19}
+\bibcite{RuffCohen2016}{20}
+\bibcite{Srinath2021}{21}
+\bibcite{wang_theeuwes2018_statistical_learning_distractor_suppression}{22}
+\bibcite{awh_vogel_oh2006}{23}
+\bibcite{awh_jonides_reuterlorenz1998_rehearsal}{24}
+\bibcite{baddeley1992working}{25}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \textbf  {Attention maps of the model, conditioned on cue validity and value.} \emph  {Top:} the per-patch attention map across the trial on validly cued (left) and invalidly cued (right) trials, resolved by displayed cue proportion --- attention orients to the cue and then locks onto the changed patch. \emph  {Bottom left:} the attention maps split by cue colour (value) are essentially indistinguishable --- value is \emph  {not} written into the priority map. \emph  {Bottom right:} the $\alpha _c$ time-course underlying the maps (orient; release at the blank; re-acquire; lock). All panels are the model (affine feedback) on \texttt  {vda4}.}}{38}{figure.6}\protected@file@percent }
+\newlabel{fig:det-attn-maps}{{6}{38}{\textbf {Attention maps of the model, conditioned on cue validity and value.} \emph {Top:} the per-patch attention map across the trial on validly cued (left) and invalidly cued (right) trials, resolved by displayed cue proportion --- attention orients to the cue and then locks onto the changed patch. \emph {Bottom left:} the attention maps split by cue colour (value) are essentially indistinguishable --- value is \emph {not} written into the priority map. \emph {Bottom right:} the $\alpha _c$ time-course underlying the maps (orient; release at the blank; re-acquire; lock). All panels are the model (affine feedback) on \texttt {vda4}}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Signal-detection read-out under the graded cued-patch attention clamp (\texttt  {vda4}, the model). \textbf  {Left:} at these sampled VDA4 settings, the criterion $c$ falls monotonically with attention, from $1.42$ (suppress) to $-0.60$ (enhance) --- attention makes the detector more liberal. \textbf  {Right:} sensitivity $d'$ is attention-mediated, collapsing to $0.63$--$1.45$ under suppression and recovering to $\sim \!2.0$--$2.7$ under natural/enhanced attention. Both the criterion and the sensitivity account are realized by one manipulation.}}{39}{figure.7}\protected@file@percent }
+\newlabel{fig:det-sdt}{{7}{39}{Signal-detection read-out under the graded cued-patch attention clamp (\texttt {vda4}, the model). \textbf {Left:} at these sampled VDA4 settings, the criterion $c$ falls monotonically with attention, from $1.42$ (suppress) to $-0.60$ (enhance) --- attention makes the detector more liberal. \textbf {Right:} sensitivity $d'$ is attention-mediated, collapsing to $0.63$--$1.45$ under suppression and recovering to $\sim \!2.0$--$2.7$ under natural/enhanced attention. Both the criterion and the sensitivity account are realized by one manipulation}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Decision uncertainty under attention misdirection (real change at the uncued patch, the model). Misdirecting attention onto the empty cued patch drops the declare rate from $0.68$ to $0.24$ (a miss) while lowering policy entropy from $0.053$ to $0.035$ (increased confidence) --- a confident miss. The critic's quantile spread widens under misdirection, so the value system registers the problem the policy commits to.}}{39}{figure.8}\protected@file@percent }
+\newlabel{fig:det-uncertainty}{{8}{39}{Decision uncertainty under attention misdirection (real change at the uncued patch, the model). Misdirecting attention onto the empty cued patch drops the declare rate from $0.68$ to $0.24$ (a miss) while lowering policy entropy from $0.053$ to $0.035$ (increased confidence) --- a confident miss. The critic's quantile spread widens under misdirection, so the value system registers the problem the policy commits to}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Temporal decoding of task variables from the recurrent working-memory state (the model). Value (cue colour) is latched at the cue and held at balanced accuracy $1.00$. Validity (ring proportion) peaks at the cue ($0.773$ at $t=1$), falls near chance at the blank ($0.296$ at $t=2$), and remains weak thereafter (mean $t=2$--$6$: $0.309$). Change presence ($0.81$ at $t=5$) and change location ($0.50$ at $t=5$) are flat at chance until the change frame, then jump: the change is built online. The position-specific post-change code is compatible with a parietal-like event-location signal; no cue-location decoder was fitted across the delay.}}{40}{figure.9}\protected@file@percent }
+\newlabel{fig:det-decoding}{{9}{40}{Temporal decoding of task variables from the recurrent working-memory state (the model). Value (cue colour) is latched at the cue and held at balanced accuracy $1.00$. Validity (ring proportion) peaks at the cue ($0.773$ at $t=1$), falls near chance at the blank ($0.296$ at $t=2$), and remains weak thereafter (mean $t=2$--$6$: $0.309$). Change presence ($0.81$ at $t=5$) and change location ($0.50$ at $t=5$) are flat at chance until the change frame, then jump: the change is built online. The position-specific post-change code is compatible with a parietal-like event-location signal; no cue-location decoder was fitted across the delay}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Attentional microstimulation on no-change trials (the model). Injecting attention at the cued (monitored) patch drives the false-detection rate from $\approx \!0.03$ to $\approx \!0.12$ (a $\sim \!4\times $ increase); injecting the same attention at an uncued patch leaves it flat ($\approx \!0.05$--$0.10$). The evoked false percept is spatially gated to the location the model is already monitoring.}}{41}{figure.10}\protected@file@percent }
+\newlabel{fig:det-microstim}{{10}{41}{Attentional microstimulation on no-change trials (the model). Injecting attention at the cued (monitored) patch drives the false-detection rate from $\approx \!0.03$ to $\approx \!0.12$ (a $\sim \!4\times $ increase); injecting the same attention at an uncued patch leaves it flat ($\approx \!0.05$--$0.10$). The evoked false percept is spatially gated to the location the model is already monitoring}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces \textbf  {A separately trained Validity4 checkpoint uses spatial validity.} With no competing value cue, the cueing benefit (cued $-$ uncued detection at $\Delta =26^\circ $; left) grows monotonically with cue validity, and cued-patch attention $\alpha _c$ (right) rises from near the uniform baseline ($0.25$) toward $0.48$ as the ring signals higher reliability. Curves are the model (affine feedback).}}{41}{figure.11}\protected@file@percent }
+\newlabel{fig:validity4}{{11}{41}{\textbf {A separately trained Validity4 checkpoint uses spatial validity.} With no competing value cue, the cueing benefit (cued $-$ uncued detection at $\Delta =26^\circ $; left) grows monotonically with cue validity, and cued-patch attention $\alpha _c$ (right) rises from near the uniform baseline ($0.25$) toward $0.48$ as the ring signals higher reliability. Curves are the model (affine feedback)}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces \textbf  {Set size 1 (\texttt  {vda1}): a single monitored stimulus.} With no spatial competition there is no cued/uncued distinction, so the psychometric and chronometric functions are cued-only. The mean cued detection threshold is $\approx 9.8^\circ $, the lowest of the battery --- detection is easiest when the target is alone. The attention clamp produces the \emph  {largest} sensitivity modulation of any set size ($d'$ swept from $0.72$ to $2.71$), i.e.\ at set size 1 attention is almost entirely a sensitivity (gain) effect; the criterion also moves ($c: 0.52 \to -0.33$).}}{42}{figure.12}\protected@file@percent }
+\newlabel{fig:env-vda1}{{12}{42}{\textbf {Set size 1 (\texttt {vda1}): a single monitored stimulus.} With no spatial competition there is no cued/uncued distinction, so the psychometric and chronometric functions are cued-only. The mean cued detection threshold is $\approx 9.8^\circ $, the lowest of the battery --- detection is easiest when the target is alone. The attention clamp produces the \emph {largest} sensitivity modulation of any set size ($d'$ swept from $0.72$ to $2.71$), i.e.\ at set size 1 attention is almost entirely a sensitivity (gain) effect; the criterion also moves ($c: 0.52 \to -0.33$)}{figure.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces \textbf  {Set size 2 (canonical \texttt  {vda2\_2x2} checkpoint).} In this separately trained task, the cued threshold is $\approx 12.2^\circ $ and panel (a) shows a cued-over-uncued benefit. This cross-task contrast does not isolate set size. The criterion sweep is the widest of the battery ($c: 1.36 \to 0.02$), while the sensitivity modulation begins to compress ($d': 1.11$--$2.76$).}}{42}{figure.13}\protected@file@percent }
+\newlabel{fig:env-vda2}{{13}{42}{\textbf {Set size 2 (canonical \texttt {vda2\_2x2} checkpoint).} In this separately trained task, the cued threshold is $\approx 12.2^\circ $ and panel (a) shows a cued-over-uncued benefit. This cross-task contrast does not isolate set size. The criterion sweep is the widest of the battery ($c: 1.36 \to 0.02$), while the sensitivity modulation begins to compress ($d': 1.11$--$2.76$)}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \textbf  {Set size 4 (\texttt  {vda4}): the canonical published condition.} The cued threshold is $\approx 12.1^\circ $; attention lowers the criterion strongly ($c: 1.19 \to -0.43$) and still moves sensitivity ($d': 1.44$--$2.57$). The attention time-course (panel c) shows the model orienting to the cue and locking onto the changed patch, and the map is validity- and value-invariant (Section~\ref {sec:detection}).}}{43}{figure.14}\protected@file@percent }
+\newlabel{fig:env-vda4}{{14}{43}{\textbf {Set size 4 (\texttt {vda4}): the canonical published condition.} The cued threshold is $\approx 12.1^\circ $; attention lowers the criterion strongly ($c: 1.19 \to -0.43$) and still moves sensitivity ($d': 1.44$--$2.57$). The attention time-course (panel c) shows the model orienting to the cue and locking onto the changed patch, and the map is validity- and value-invariant (Section~\ref {sec:detection})}{figure.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \textbf  {Set size 9 (\texttt  {vda9}): a $3\times 3$ array.} The validity effect is now pronounced (panel f: the cued threshold falls steeply as the cue becomes more reliable). The nominal attention clamp has the smallest observed sensitivity range in the battery ($d': 2.38$--$2.74$). This endpoint range alone does not establish saturation or show that sensitivity has ceased to contribute; the criterion range is also narrower than at set size 4 ($c: 0.96 \to 0.22$), with a high-clamp reversal visible in the full curve.}}{43}{figure.15}\protected@file@percent }
+\newlabel{fig:env-vda9}{{15}{43}{\textbf {Set size 9 (\texttt {vda9}): a $3\times 3$ array.} The validity effect is now pronounced (panel f: the cued threshold falls steeply as the cue becomes more reliable). The nominal attention clamp has the smallest observed sensitivity range in the battery ($d': 2.38$--$2.74$). This endpoint range alone does not establish saturation or show that sensitivity has ceased to contribute; the criterion range is also narrower than at set size 4 ($c: 0.96 \to 0.22$), with a high-clamp reversal visible in the full curve}{figure.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \textbf  {The spatial attention map across the trial, per set size.} Each row is one environment; each column is one of the seven trial frames; each panel is the attention map in that environment's \emph  {native} grid --- $2\times 2$ for set sizes 1--4 and $3\times 3$ for set size 9 --- with the cued cell (top-left) outlined in cyan (value- and validity-averaged; common colour scale; per-row uniform baseline noted at left). Attention concentrates on the cued cell at the cue frame $t_1$ and relaxes thereafter; cue-time concentration is largest at set size 9, whereas sustained elevation is not strictly monotone across all four checkpoints. At VDA9, $t_1 \approx 0.82$ against a uniform baseline of $0.11$ for the nine-cell array, with $\approx 0.02$ on each other cell. Separate affine-feedback checkpoints; VDA9 also differs in grid and token/readout dimensions.}}{44}{figure.16}\protected@file@percent }
+\newlabel{fig:attn-maps}{{16}{44}{\textbf {The spatial attention map across the trial, per set size.} Each row is one environment; each column is one of the seven trial frames; each panel is the attention map in that environment's \emph {native} grid --- $2\times 2$ for set sizes 1--4 and $3\times 3$ for set size 9 --- with the cued cell (top-left) outlined in cyan (value- and validity-averaged; common colour scale; per-row uniform baseline noted at left). Attention concentrates on the cued cell at the cue frame $t_1$ and relaxes thereafter; cue-time concentration is largest at set size 9, whereas sustained elevation is not strictly monotone across all four checkpoints. At VDA9, $t_1 \approx 0.82$ against a uniform baseline of $0.11$ for the nine-cell array, with $\approx 0.02$ on each other cell. Separate affine-feedback checkpoints; VDA9 also differs in grid and token/readout dimensions}{figure.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces \textbf  {Priority-map associations with value and validity differ across checkpoints.} \emph  {Left:} cued-location attention $\alpha _c$ as a function of cue value (reward level $5/3/1$), one curve per set size --- small and non-monotone at every set size (no value steering). \emph  {Right:} $\alpha _c$ as a function of displayed cue validity --- nearly flat in VDA1/2/4 and increasing in VDA9. Uniform baselines are task-specific: $0.25$ for the $2\times 2$ VDA1/2/4 tasks and $1/9\approx 0.11$ for VDA9. Separate affine-feedback checkpoints; the VDA9 contrast is associated with, but does not isolate, load.}}{44}{figure.17}\protected@file@percent }
+\newlabel{fig:attn-value-validity}{{17}{44}{\textbf {Priority-map associations with value and validity differ across checkpoints.} \emph {Left:} cued-location attention $\alpha _c$ as a function of cue value (reward level $5/3/1$), one curve per set size --- small and non-monotone at every set size (no value steering). \emph {Right:} $\alpha _c$ as a function of displayed cue validity --- nearly flat in VDA1/2/4 and increasing in VDA9. Uniform baselines are task-specific: $0.25$ for the $2\times 2$ VDA1/2/4 tasks and $1/9\approx 0.11$ for VDA9. Separate affine-feedback checkpoints; the VDA9 contrast is associated with, but does not isolate, load}{figure.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces \textbf  {Low-to-high-validity cued-threshold changes across checkpoints.} \emph  {Left:} cued detection threshold vs.\ displayed cue validity, one curve per set size --- flat at VDA1, steeply decreasing in VDA9. \emph  {Right:} the displayed-validity effect is defined as low-validity minus high-validity \emph  {cued} threshold and is $0.148^\circ $, $0.193^\circ $, $0.979^\circ $, and $2.207^\circ $; it is not a cued-versus-uncued benefit. Separate affine-feedback checkpoints.}}{45}{figure.18}\protected@file@percent }
+\newlabel{fig:validity-setsize}{{18}{45}{\textbf {Low-to-high-validity cued-threshold changes across checkpoints.} \emph {Left:} cued detection threshold vs.\ displayed cue validity, one curve per set size --- flat at VDA1, steeply decreasing in VDA9. \emph {Right:} the displayed-validity effect is defined as low-validity minus high-validity \emph {cued} threshold and is $0.148^\circ $, $0.193^\circ $, $0.979^\circ $, and $2.207^\circ $; it is not a cued-versus-uncued benefit. Separate affine-feedback checkpoints}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces \textbf  {Criterion and sensitivity across set size.} \emph  {Left:} criterion $c$ vs.\ the attention clamp, one curve per set size. \emph  {Middle:} sensitivity $d'$ vs.\ the clamp. \emph  {Right:} the magnitude of each effect (clamp range) against set size. Sensitivity ranges are $1.982$, $1.647$, $1.131$, and $0.367$; criterion ranges are $1.020$, $1.381$, $1.622$, and $1.048$. These are clamp ranges, not the displayed-validity threshold improvements. VDA9 criterion is not uniformly monotone.}}{45}{figure.19}\protected@file@percent }
+\newlabel{fig:sdt-setsize}{{19}{45}{\textbf {Criterion and sensitivity across set size.} \emph {Left:} criterion $c$ vs.\ the attention clamp, one curve per set size. \emph {Middle:} sensitivity $d'$ vs.\ the clamp. \emph {Right:} the magnitude of each effect (clamp range) against set size. Sensitivity ranges are $1.982$, $1.647$, $1.131$, and $0.367$; criterion ranges are $1.020$, $1.381$, $1.622$, and $1.048$. These are clamp ranges, not the displayed-validity threshold improvements. VDA9 criterion is not uniformly monotone}{figure.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces \textbf  {Validity-decoding profiles differ across checkpoints, while value remains recoverable at ceiling.} \emph  {Left:} balanced accuracy of decoding displayed cue validity from the recurrent memory state, per frame, one solid curve per set size (chance $0.25$); the dashed black line is the value (cue-colour) decode, pinned at $\approx 1.0$ across all set sizes. Validity decays after the cue except at set size 9; the value decode remains near ceiling. \emph  {Right:} the peak (at-cue) and maintained (mean over post-cue frames) validity decoding is highest at VDA9 but not monotone at the intermediate checkpoints, whereas value (dashed) is at ceiling for peak and maintained at every set size. Separate affine-feedback checkpoints.}}{46}{figure.20}\protected@file@percent }
+\newlabel{fig:decode-setsize}{{20}{46}{\textbf {Validity-decoding profiles differ across checkpoints, while value remains recoverable at ceiling.} \emph {Left:} balanced accuracy of decoding displayed cue validity from the recurrent memory state, per frame, one solid curve per set size (chance $0.25$); the dashed black line is the value (cue-colour) decode, pinned at $\approx 1.0$ across all set sizes. Validity decays after the cue except at set size 9; the value decode remains near ceiling. \emph {Right:} the peak (at-cue) and maintained (mean over post-cue frames) validity decoding is highest at VDA9 but not monotone at the intermediate checkpoints, whereas value (dashed) is at ceiling for peak and maintained at every set size. Separate affine-feedback checkpoints}{figure.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces \textbf  {Trial timeline of the change-detection environment.} Each trial is seven frames: a blank, the cue (whose ring completeness signals validity and whose colour signals value), a blank delay, and four held Gabor patches, one of which steps in orientation by $\Delta $ at the fixed change frame $t = 5$ on half of trials. The model chooses \emph  {wait} or \emph  {declare-change} at every frame.}}{46}{figure.21}\protected@file@percent }
+\newlabel{fig:methods-timeline}{{21}{46}{\textbf {Trial timeline of the change-detection environment.} Each trial is seven frames: a blank, the cue (whose ring completeness signals validity and whose colour signals value), a blank delay, and four held Gabor patches, one of which steps in orientation by $\Delta $ at the fixed change frame $t = 5$ on half of trials. The model chooses \emph {wait} or \emph {declare-change} at every frame}{figure.21}{}}
+\gdef \@abspage@last{46}

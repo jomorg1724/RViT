@@ -1,0 +1,65 @@
+\chapter{The reinforcement-learning harness}
+\label{ch:harness}
+
+The agent learns purely from the sparse task reward; there is no reconstruction or
+auxiliary loss on the recurrent network (the VAE, when used, is pretrained separately and
+frozen). The harness has been held essentially constant across architectures so that
+comparisons are clean, and it is itself one of the program's hard-won results: a stable
+recipe for training a bootstrapped recurrent actor--critic on a task with a deceptive
+$0.5$ accuracy floor.
+
+\section{Actor: PAC (maximum-a-posteriori policy optimisation $+$ behaviour cloning)}
+The actor loss replaces the clipped PPO surrogate with the PAC objective. For the discrete
+action set the maximum-a-posteriori-policy-optimisation E-step is closed form,
+\begin{equation}
+q(a\mid s)=\mathrm{softmax}_a\!\big[\log\pi_{\theta'}(a\mid s)+\bar Q_{\theta'}(s,a)/\eta\big],
+\end{equation}
+where $\theta'$ is a time-lagged target network, $\bar Q$ is the critic's mean over the
+value distribution, and $\eta$ is a temperature. The M-step plus a behaviour-cloning term
+gives
+\[
+\mathcal L_{\text{actor}}=(1-\alpha)\Big(-\textstyle\sum_a q(a\mid s)\log\pi_\theta(a\mid s)\Big)
++\alpha\big(-\log\pi_\theta(a_t\mid s)\big),
+\]
+with $\eta=0.1$, $\alpha=0.1$. The critic's value drives the actor \emph{directly}; there
+is no generalised-advantage estimation.
+
+\section{Critic: distributional quantile regression}
+The critic is a distributional QR-DQN critic: it predicts a set of value quantiles and is
+trained with the quantile-Huber loss against the one-step distributional temporal-
+difference target $r_t+\gamma\,\mathbf V_{\text{dist}}(s_{t+1})(1-d_t)$. The published
+network used a $15$-bin categorical critic; in the reproduction we use $5$--$15$ quantiles.
+The number of ``particles'' is a deliberate knob (Chapter~\ref{ch:harnessvar}).
+
+\section{Prioritised episode replay}
+Fresh on-policy episodes are augmented with replay episodes drawn at episode granularity
+$\propto$ priority$^{\alpha}$, priority being the mean per-step quantile-Huber error,
+with importance-sampling weights annealed over training. Episode-level replay is essential
+on this task: the discriminating ``correct press'' events are rare, and replay keeps them
+in the gradient long enough to be learned.
+
+\section{Target network: hard-copy versus EMA}
+The target network $\theta'$ supplies both the critic's bootstrap target and the actor's
+E-step reference policy. Two update rules are available: a periodic hard copy ($\theta'\!
+\leftarrow\!\theta$ every $N$ optimiser steps, the form that produced the original working
+checkpoints) and an exponential moving average ($\theta'\!\leftarrow\!d\,\theta'+(1-d)
+\theta$ each iteration). The EMA form was added during the reproduction; whether it is
+load-bearing is one of the open A/B questions of Chapter~\ref{ch:harnessvar}.
+
+\section{Burn-in}
+For the first $\sim\!20$ iterations the agent is forced to wait, training only the critic
+on full-length episodes so the value function and recurrent representation warm up on clean
+trajectories before the policy acts. This is the descendant of the program's earlier
+reconstruction-pretrain phase and materially reduces the early collapse to premature
+pressing.
+
+\section{What the harness taught us}
+Three lessons recur in the history. First, \textbf{always-wait is a stable harbor}: a
+bootstrapped actor on this task will retreat to the safe action that never incurs a
+false-alarm penalty unless exploration is actively maintained. Second, \textbf{the target
+network is the main stabiliser}: a time-lagged reference for both the critic target and
+the E-step reference policy is what keeps the bootstrap from chasing its own tail. Third,
+\textbf{a degenerate $0.5$ optimum has two faces} (always-wait and always-press-at-deadline)
+and which one a run falls into is seed-dependent --- both are collapses, and escaping them
+is a perception/exploration problem, not a critic problem (the critic learns the $0.5$
+value perfectly well in both).

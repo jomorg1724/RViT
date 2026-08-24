@@ -1,0 +1,32 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Only the closed, grounded loop learns}
+We trained each of the three configurations on the cued change-detection task with identical task, algorithm, hyperparameters and number of updates, and evaluated each on $500$ fresh episodes under a stochastic (sampled) policy. Outcomes were scored by signal-detection category---hit, miss, false alarm, correct rejection---and summarised by overall accuracy, hit rate on change trials, false-alarm (FA) rate on no-change trials, and reaction time (RT) on hits (Table~\ref{tab:loopresults}).
+
+\begin{table}[t]
+\centering
+\caption{Behavioural outcomes of the three loop architectures on the $T=29$ cued change-detection task ($500$ fresh episodes each, sampled policy). The shared-memory closed loop (V1) is a calibrated, change-locked detector; the independent (V2) and swapped-routing (V3) configurations both collapse to never declaring a change. Each configuration differs from V1 in exactly one structural property.}
+\label{tab:loopresults}
+\small
+\begin{tabular}{llcccl}
+\toprule
+Configuration & Loop & Accuracy & Hit rate & FA rate & RT (frames) \\
+\midrule
+V1 shared memory & closed, $\mu\!\to$\,actor & \textbf{0.868} & \textbf{0.794} & 0.067 & 1.95 \\
+V2 independent & open & 0.504 & 0.000 & 0.000 & --- \\
+V3 swapped routing & closed, $q\!\to$\,actor & 0.420 & 0.000 & 0.000 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The shared-memory closed loop (V1) is a genuine psychophysical detector. It catches roughly four of every five real changes (hit rate $0.794$), rarely fires on no-change trials ($\mathrm{FA}=0.067$), and responds quickly---a mean reaction time of $1.95$ frames after change onset---for an overall accuracy of $0.868$. The other two configurations do not partially learn the task; across $500$ episodes each \emph{never once} declares a change. Their hit and FA rates are both exactly $0.000$. The independent configuration's accuracy, $0.504$, is precisely the rate obtained by waiting out every trial and being correct only on the half that contain no change; the swapped-routing configuration reaches $0.420$ by the same always-wait strategy. The policy has retreated, in both cases, to the single safe action---always wait---that can never incur a false-alarm penalty, and it never discovers that declaring a change is worthwhile.
+
+The effect is categorical, not a matter of degree. A single structural edit---removing the shared memory (V1$\to$V2) or reversing which stream commands the actor (V1$\to$V3)---turns a $0.794$ hit rate into $0.000$, a $79.4$-percentage-point gap, and turns a $0.868$ accuracy into chance-level always-wait. Two conditions are jointly necessary for the task to be learned at all: the loop must be \emph{closed} through a shared recurrent memory (V2 fails without it), and the \emph{grounded priority stream must command the policy} (V3 fails when the value stream does). Only V1 satisfies both.
+
+\subsection{The working loop reproduces the reliability-scaled cueing signature}
+A non-collapsed accuracy number is necessary but not sufficient evidence that the right computation has emerged. The discriminating test is whether the agent shows the behavioural fingerprint of covert spatial attention: a benefit for changes at the cued location that scales with how reliable the cue is. Detailed characterisation of V1 confirms this signature.
+
+Splitting hit rate by cue reliability reveals a graded cueing effect that rises monotonically with reliability: $0.680$ at validity $0.25$, $0.697$ at $0.50$, $0.750$ at $0.75$, and $0.753$ at $1.00$ (each cell $n=300$; sampled policy). Decisions remain change-locked at every level, with a median reaction time of $3.0$ frames at all four reliabilities and a premature-press rate at or below $0.0033$. The advantage of a change at the cued (valid) location over an equivalent change at an uncued (invalid) location is largest where the psychometric function is steepest---near a change magnitude of $14^{\circ}$---and it grows with reliability: the valid$-$invalid hit-rate gap is $+0.092$ at validity $0.25$ ($0.748$ vs.\ $0.656$), $+0.132$ at $0.50$ ($0.756$ vs.\ $0.624$), $+0.136$ at $0.75$ ($0.736$ vs.\ $0.600$), and $+0.208$ at $1.00$ ($0.776$ vs.\ $0.568$). At ceiling and floor magnitudes the gap closes, as expected for an effect expressed as a shift of perceptual threshold rather than a uniform additive benefit. The underlying psychometric function is a clean orientation-discrimination sigmoid: at validity $1.00$ the valid-location hit rate runs from $0.016$ at $2^{\circ}$ through $0.308$ ($9^{\circ}$), $0.776$ ($14^{\circ}$), $0.976$ ($20^{\circ}$) to $1.000$ at $30^{\circ}$ and above (each cell $n=250$). Reaction time on valid trials likewise tracks difficulty: at the lowest reliability (validity $0.25$) the median falls from $10.0$ frames at $2^{\circ}$ to $4.0$ ($9^{\circ}$), $3.0$ ($14^{\circ}$), $2.0$ ($20$--$30^{\circ}$) and $1.0$ frame at $44^{\circ}$, with the same monotone speed-up at every reliability. The model thus reproduces the canonical covert-attention pattern---a graded, reliability-scaled validity benefit expressed as a lowered threshold for the attended location---in an agent trained only to detect changes for reward.
+
+The two collapsed configurations, by contrast, have no behavioural signature to characterise. An agent that never presses produces a flat zero hit rate at every reliability and validity condition; there is no cueing benefit, no psychometric function, and no reaction-time structure to fit. The capacity to express spatial attention is downstream of the capacity to act at all, and only the closed, grounded loop clears that first bar.

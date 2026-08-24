@@ -1,0 +1,34 @@
+# APPROVE_WITH_LIMITS
+
+## Critical / integration-blocking findings
+
+- **None.** The immutable artifacts are fit for manuscript integration under the stated exclusions and claim boundaries.
+
+## Important — mandatory manuscript limits
+
+- **Timestep 0:** Label every matched PCA-128 timestep-0 point as **structurally uninformative/chance**, not evidence of decodable representation. All 104 defined native/matched timestep-0 scores exactly equaled their class-count chance levels; the 208 PCA warnings equal 52 defined variable-series × 4 folds. PCA is fitted foldwise inside the timestep/fold loop at `RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_matched_width/provenance/execution/vda_sweep/matched_width_compute.py:82-95` and `:115-134`.
+- **Convergence exclusions:** Exclude the complete **native `cued_change` trajectories** for:
+  - `vda9_affine_ew_d256`
+  - `vda9_crossattn1_d128`
+  
+  The supplied process-log evidence localizes all 13 `max_iter=600` warnings to those cells. The classifier limit and fit site are source-bound at `.../matched_width_compute.py:95` and `:127-133`. No matched PCA-128 decoder was warning-affected; its finite post-t0 values remain usable, including for these two cells.
+- **Competence gate:** Treat `vda9_crossattn1_d256` mechanism results only as possible floor-policy diagnostics, not controlled-attention evidence: `RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_matched_width/MANIFEST.json:295-308`; its bound evidence row is `.../provenance/evidence/battery_metrics_inventory.csv:41`.
+- **Blocked cell:** Make no matched-width claim for `vda2`; its d128/d256 token geometry is unmatched: `.../MANIFEST.json:3-18`.
+- **Claim ceiling:** Results are checkpoint-specific width associations—not replicated causal width effects or human-capacity estimates: `.../MANIFEST.json:294`. Also preserve the forced-invalid-at-validity-1 stress-test and additive-key-logit-bias—not-attention-mass—qualifiers recorded in the protocols, e.g. `.../MANIFEST.json:341-395`.
+
+## Verification
+
+- **Exact closure:** 34/34 regular files manifested: 12 shards, 20 source/evidence snapshots, `RUN_SPEC.json`, and `MANIFEST.json`; no symlinks, special files, or hard-link aliases. Manifest shard inventory is at `.../MANIFEST.json:311-323` and byte/hash records at `:1245-1329`.
+- **Audit:** `scripts/run_matched_width.py --audit` exited **0**. Tree digest remained  
+  `8856dbe6926e834b5d07afcfd06d81666b4de622588ae5f252308642c9600f60`.
+- **Binding:** All 12 checkpoint bytes/hashes, iteration 19999, geometry, source snapshots, and runtime matched. Runtime is recorded at `.../MANIFEST.json:1236-1242`; source hashes and records at `:1331-1512`.
+- **Schema/count conservation:** All shards had the identical exact 48-key schema. Independent checks passed for psychometric `N=300` per point, decoder `N=900`, clamp `N=250`, histogram totals, count/rate derivations, undefined sentinels, and SDT fields. Validator contracts are at `.../matched_width.py:233-397`.
+- **Common random numbers:** All 15 persisted replay fields—conditions, labels, folds, and protocol arrays—were identical within each task across both widths and routings. Cross-shard enforcement is at `.../provenance/run_matched_width.py:436-454`; deterministic video replay is at `.../vda_core.py:82-109` and `:116-130`.
+- **Decoder support:** Four-fold support was complete; the smallest class had 28 observations for the conditional nine-location decoder. Conditional location/cued-change masking is explicit at `.../matched_width_compute.py:51-73`.
+
+## Review integrity
+
+- **Files created or modified:** None.
+- Git metadata was unavailable, so byte-level tree hashing—not Git diff attribution—was used.
+- The process log was not part of the 34-file immutable tree and had no supplied path; warning localization therefore rests on the supplied process-log evidence plus the source/artifact corroboration above.
+- One initial audit wrapper incorrectly resolved the virtual-environment symlink and produced a false missing-`sklearn` error; invoking the recorded venv path directly passed without modifying the tree.

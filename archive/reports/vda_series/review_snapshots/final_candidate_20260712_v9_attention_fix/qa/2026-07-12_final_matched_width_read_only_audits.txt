@@ -1,0 +1,18 @@
+Fresh read-only audit bracket — candidate v3
+before_upstream_sha=f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11
+before_upstream_mtime=1783840225
+before_v15_sha=3ded3023a0cd81a344487807e11d8a06fa46b7c29cf7f5f499ef5ac659ff5e24
+before_v15_mtime=1783847484
+
+$ /Users/jonathanmorgan/AttentionManuscript/.venv/bin/python scripts/run_matched_width.py --audit
+/Users/jonathanmorgan/AttentionManuscript/RViT_plus_paper_jepa_grid9/vda_sweep/derived/2026-07-11_matched_width/MANIFEST.json
+return_code=0
+
+$ /Users/jonathanmorgan/AttentionManuscript/.venv/bin/python scripts/build_matched_width_summary.py --audit --output-root ../reports/vda_series/matched_width_20260712_production_v15
+/Users/jonathanmorgan/AttentionManuscript/reports/vda_series/matched_width_20260712_production_v15/MANIFEST.json
+return_code=0
+
+after_upstream_sha=f80ee096ed0d51aa6339b7819f5cfbb8c5de6b94b0f87fece2819529db159a11
+after_upstream_mtime=1783840225
+after_v15_sha=3ded3023a0cd81a344487807e11d8a06fa46b7c29cf7f5f499ef5ac659ff5e24
+after_v15_mtime=1783847484

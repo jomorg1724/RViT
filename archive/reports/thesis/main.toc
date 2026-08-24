@@ -1,0 +1,147 @@
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}The program and its goal}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}The model in one paragraph}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Scope of the evidence}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Contributions and structure}{5}{section.1.4}%
+\contentsline {section}{\numberline {1.5}A note on terminology}{5}{section.1.5}%
+\contentsline {chapter}{\numberline {2}The task and its environments}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The canonical cued change-detection task}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Difficulty control}{6}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Why the seven-step task is hard for reinforcement learning}{7}{section.2.3}%
+\contentsline {section}{\numberline {2.4}The task battery}{7}{section.2.4}%
+\contentsline {section}{\numberline {2.5}The long-horizon variant}{7}{section.2.5}%
+\contentsline {chapter}{\numberline {3}The model architecture}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Patch front-end}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Recurrent multiplicative self-attention}{8}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Spatial recurrent memory}{8}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Actor--critic readout}{9}{section.3.4}%
+\contentsline {chapter}{\numberline {4}The reinforcement-learning harness}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Actor: PAC (maximum-a-posteriori policy optimisation $+$ behaviour cloning)}{10}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Critic: distributional quantile regression}{10}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Prioritised episode replay}{10}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Target network: hard-copy versus EMA}{11}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Burn-in}{11}{section.4.5}%
+\contentsline {section}{\numberline {4.6}What the harness taught us}{11}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Finding I --- perception is the bottleneck}{12}{chapter.5}%
+\contentsline {section}{\numberline {5.1}The collapse}{12}{section.5.1}%
+\contentsline {section}{\numberline {5.2}The diagnosis}{12}{section.5.2}%
+\contentsline {section}{\numberline {5.3}The rescue}{12}{section.5.3}%
+\contentsline {section}{\numberline {5.4}The VAE is a static, task-parameter-invariant front-end}{13}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Why this matters for the architecture choice}{13}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Finding II --- the horizon decides the strategy}{14}{chapter.6}%
+\contentsline {section}{\numberline {6.1}The puzzle}{14}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Two ways to detect a change}{14}{section.6.2}%
+\contentsline {section}{\numberline {6.3}The horizon selects between them}{14}{section.6.3}%
+\contentsline {section}{\numberline {6.4}The behavioural fingerprint}{15}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Consequences for the program}{15}{section.6.5}%
+\contentsline {chapter}{\numberline {7}Finding III --- coupling is a precondition for learning}{16}{chapter.7}%
+\contentsline {section}{\numberline {7.1}The split-pathway design}{16}{section.7.1}%
+\contentsline {section}{\numberline {7.2}The three-way comparison}{16}{section.7.2}%
+\contentsline {section}{\numberline {7.3}The result}{16}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Interpretation and its limits}{17}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Standing caveat}{17}{section.7.5}%
+\contentsline {chapter}{\numberline {8}The architecture zoo}{18}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Family A --- memory-as-tokens self-attention (\texttt {v4}, \texttt {v5}, \texttt {v5\_part2})}{18}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Family B --- bottleneck residuals (\texttt {v8}, \texttt {v8\_part2}, \texttt {v9})}{18}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Family C --- split priority/value pathways (\texttt {v11}, \texttt {v11\_part2--5})}{18}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Family D --- codebook / vector-quantised attention (\texttt {v12}, \texttt {v12\_part2/3})}{19}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Family E --- predictive-coding and energy modulation (\texttt {v13}, \texttt {v14}, \texttt {v15})}{19}{section.8.5}%
+\contentsline {section}{\numberline {8.6}What the zoo says in aggregate}{19}{section.8.6}%
+\contentsline {chapter}{\numberline {9}Finding IV --- the working model reproduces the paper}{21}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Baseline behaviour}{21}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Psychometrics: the reliability-scaled cueing benefit}{21}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Chronometrics: the reaction-time story}{21}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Causal attention manipulation}{22}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Scorecard}{22}{section.9.5}%
+\contentsline {chapter}{\numberline {10}Finding V --- attention versus memory, and the cue-attention question}{24}{chapter.10}%
+\contentsline {section}{\numberline {10.1}The cue modulates behaviour}{24}{section.10.1}%
+\contentsline {section}{\numberline {10.2}The attention is change-locked, not cue-locked}{24}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Where the cue actually lives}{24}{section.10.3}%
+\contentsline {section}{\numberline {10.4}The mechanism}{25}{section.10.4}%
+\contentsline {section}{\numberline {10.5}The open question}{25}{section.10.5}%
+\contentsline {section}{\numberline {10.6}The matched family under test}{26}{section.10.6}%
+\contentsline {section}{\numberline {10.7}Results: the family resolves the question}{26}{section.10.7}%
+\contentsline {paragraph}{A correction.}{27}{section*.15}%
+\contentsline {section}{\numberline {10.8}Why this matters}{27}{section.10.8}%
+\contentsline {chapter}{\numberline {11}Finding VI --- perception can be learned without a pretrained VAE: V-JEPA self-distillation}{29}{chapter.11}%
+\contentsline {section}{\numberline {11.1}The question Chapter 5 left open}{29}{section.11.1}%
+\contentsline {section}{\numberline {11.2}The auxiliary: V-JEPA temporal self-distillation}{30}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Result A: learning from raw pixels via frame-repeat}{30}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Result B: the convolutional front-end and its sharp covert-cueing algorithm}{31}{section.11.4}%
+\contentsline {section}{\numberline {11.5}Informative negatives: what fences the recipe}{33}{section.11.5}%
+\contentsline {section}{\numberline {11.6}Set-size-9 generalization (in progress)}{34}{section.11.6}%
+\contentsline {section}{\numberline {11.7}Cross-cutting lesson: architecture sets the attention strategy}{35}{section.11.7}%
+\contentsline {chapter}{\numberline {12}Reinforcement-learning harness variations}{37}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Discount and horizon}{37}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Critic particles}{37}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Target network: EMA versus hard copy}{37}{section.12.3}%
+\contentsline {section}{\numberline {12.4}Exploration and the two collapses}{37}{section.12.4}%
+\contentsline {section}{\numberline {12.5}A resume footgun, fixed}{38}{section.12.5}%
+\contentsline {chapter}{\numberline {13}Where this leaves us: an architecture recommendation}{39}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Decision criteria}{39}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Two non-negotiables}{39}{section.13.2}%
+\contentsline {section}{\numberline {13.3}The attention-mechanism choice (now decided)}{40}{section.13.3}%
+\contentsline {section}{\numberline {13.4}Recommendation}{40}{section.13.4}%
+\contentsline {section}{\numberline {13.5}What must be resolved before this is final}{41}{section.13.5}%
+\contentsline {chapter}{\numberline {14}Proposed experiments}{42}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Track 1 --- the task battery (empirical manuscript)}{42}{section.14.1}%
+\contentsline {paragraph}{Visual-discrimination / value-cue (\texttt {vda4}).}{42}{section*.23}%
+\contentsline {paragraph}{Set-size (\texttt {setsize\{2,4,9\}}).}{42}{section*.24}%
+\contentsline {paragraph}{Reward structure (Luo \& Maunsell).}{42}{section*.25}%
+\contentsline {paragraph}{Attend / ignore (Krauzlis).}{42}{section*.26}%
+\contentsline {paragraph}{Discrimination (Baruni, optional).}{42}{section*.27}%
+\contentsline {section}{\numberline {14.2}Track 2 --- the architecture / mechanism experiments}{42}{section.14.2}%
+\contentsline {paragraph}{The cue-attention question (\emph {done}).}{42}{section*.28}%
+\contentsline {paragraph}{The optic-flow reaction-time test.}{43}{section*.29}%
+\contentsline {paragraph}{Coupling on the short task.}{43}{section*.30}%
+\contentsline {paragraph}{EMA-versus-hard-copy A/B.}{43}{section*.31}%
+\contentsline {paragraph}{The representational and causal dissociations.}{43}{section*.32}%
+\contentsline {section}{\numberline {14.3}Sequencing and cost}{43}{section.14.3}%
+\contentsline {chapter}{\numberline {15}Research plan}{44}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Stage 0 --- settle the network (\emph {largely done})}{44}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Stage 1 --- generalisation across the battery ($\sim $2--3 weeks)}{44}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Stage 2 --- the causal-prediction differentiators ($\sim $2 weeks)}{44}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Stage 3 --- the architecture / dissociation paper (parallel track)}{45}{section.15.4}%
+\contentsline {section}{\numberline {15.5}Stage 4 --- the normative theory preprint (James first author, parallel)}{45}{section.15.5}%
+\contentsline {section}{\numberline {15.6}Risks and contingencies}{45}{section.15.6}%
+\contentsline {chapter}{\numberline {16}Summary of findings}{46}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Established findings}{46}{section.16.1}%
+\contentsline {paragraph}{F1. Perception is the bottleneck on the short task.}{46}{section*.33}%
+\contentsline {paragraph}{F2. One VAE serves all task variants.}{46}{section*.34}%
+\contentsline {paragraph}{F3. The horizon decides the strategy.}{46}{section*.35}%
+\contentsline {paragraph}{F4. Coupling is a precondition for learning.}{46}{section*.36}%
+\contentsline {paragraph}{F5. Routing decides the phenotype, not representation.}{46}{section*.37}%
+\contentsline {paragraph}{F6. A grounded image pathway is required.}{46}{section*.38}%
+\contentsline {paragraph}{F7. The working model reproduces the paper's behaviour.}{47}{section*.39}%
+\contentsline {paragraph}{F8. The cueing effect is memory-driven, across the whole family.}{47}{section*.40}%
+\contentsline {paragraph}{F9. The harness is a stable recipe with two failure harbors.}{47}{section*.41}%
+\contentsline {paragraph}{F10. Two stacked memories is the best detector, and the recommended network.}{47}{section*.42}%
+\contentsline {paragraph}{F11. Perception is learnable without a pretrained VAE.}{47}{section*.43}%
+\contentsline {section}{\numberline {16.2}Open questions}{47}{section.16.2}%
+\contentsline {paragraph}{O1. \emph {(Resolved.)} Which wiring restores cue-orienting attention?}{47}{section*.44}%
+\contentsline {paragraph}{O2. Does the coupling result survive the perception fix?}{47}{section*.45}%
+\contentsline {paragraph}{O3. Is the EMA target load-bearing?}{48}{section*.46}%
+\contentsline {paragraph}{O4. Does the chosen network generalise across the battery?}{48}{section*.47}%
+\contentsline {paragraph}{O5. Does a longer delay restore cue-orienting attention?}{48}{section*.48}%
+\contentsline {section}{\numberline {16.3}Reusable infrastructure}{48}{section.16.3}%
+\contentsline {chapter}{\numberline {17}Conclusion}{49}{chapter.17}%
+\contentsline {chapter}{\numberline {A}Per-model atlas: architecture, attention, and behaviour}{62}{appendix.A}%
+\contentsline {paragraph}{How to read the attention maps.}{62}{section*.50}%
+\contentsline {paragraph}{How to read the behaviour.}{62}{section*.51}%
+\contentsline {section}{\numberline {A.1}Two stacked xLSTMs (recommended network)}{62}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Multiplicative (paper-faithful reference)}{64}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Cross-attention (image $+$ memory keys)}{66}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Dual-memory (the memories query)}{68}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Dual-head (sensory $+$ feedback)}{71}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Affine (matrix scale $+$ shift) modulation --- failed}{73}{section.A.6}%
+\contentsline {section}{\numberline {A.7}Fast-weight (hypernetwork) attention --- degenerate}{75}{section.A.7}%
+\contentsline {section}{\numberline {A.8}Fast-weight $+$ codebook --- essentially untrained}{77}{section.A.8}%
+\contentsline {chapter}{\numberline {B}Per-model atlas: the successful $T=29$ long-task models}{79}{appendix.B}%
+\contentsline {paragraph}{Two architectural families.}{79}{section*.76}%
+\contentsline {paragraph}{The headline, before the details.}{79}{section*.77}%
+\contentsline {section}{\numberline {B.1}v11\_part2 — split-readout cross-talk}{80}{section.B.1}%
+\contentsline {section}{\numberline {B.2}v11 — parallel dual-stream}{82}{section.B.2}%
+\contentsline {section}{\numberline {B.3}v11\_part5 — split-readout cross-talk (distractor-trained)}{84}{section.B.3}%
+\contentsline {section}{\numberline {B.4}v5 — memory-as-tokens self-attention}{86}{section.B.4}%
+\contentsline {section}{\numberline {B.5}v5\_part2 — cross-attention over memory}{88}{section.B.5}%
+\contentsline {section}{\numberline {B.6}v8 — cross-attention with an $H_1$ residual}{90}{section.B.6}%

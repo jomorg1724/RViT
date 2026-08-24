@@ -1,0 +1,84 @@
+\chapter{Per-model atlas: architecture, attention, and behaviour}
+\label{app:atlas}
+
+This appendix gives, for \emph{every} trained variant, three things on one or two pages: a
+diagram of its architecture, its attention maps at every time point, and its psychometric and
+chronometric functions. All models share the frozen pretrained VAE front-end, the
+PAC$+$QR-DQN$+$PER harness, and the $4096$-d flattened-memory readout; they differ only in the
+attention/memory wiring drawn in each diagram.
+
+\paragraph{How to read the attention maps.} Each attention figure forces the agent to wait so
+the full seven-frame timecourse is visible, under a $100\%$-reliable cue at $S_1$. The top row
+is the input movie (the cue appears at $t_1$, blue border; the change, when present, at $t_5$,
+red border). Below it, each $2\times2$ heat-map is the attention received by the four spatial
+patches (top-left $=S_1$, the cued/changed location, outlined in cyan), with the numeric
+attention score printed in each cell, shown separately for the \emph{no-change} and
+\emph{change-at-}$S_1$ conditions. For the cross-attention variants the attention over the
+\emph{image} key tokens and over the \emph{memory} key tokens is plotted on separate rows, as
+requested; the dual-memory model additionally separates its two memory streams $H_1,H_2$.
+
+\paragraph{How to read the behaviour.} Panel~A is the cued psychometric function by cue
+validity; panel~B contrasts cued vs.\ uncued at $100\%$ validity (a leftward cued curve is the
+cueing benefit); panel~C is the chronometric reaction time against change magnitude. Fitted
+$4$-parameter-logistic thresholds and false-alarm rates are printed beneath each panel.
+
+\begin{center}\archlegend\end{center}
+
+% \atlasmodel{file-stem}{Title}{descriptive note paragraph}
+\newcommand{\atlasmodel}[3]{%
+  \section{#2}%
+  #3\par\medskip
+  \begin{figure}[h]\centering\resizebox{\textwidth}{!}{\input{figures/arch_#1}}%
+    \caption{\textbf{#2} --- architecture. Solid arrows: forward dataflow; dashed red:
+    recurrent feedback from the previous frame.}\end{figure}
+  \begin{figure}[h]\centering\includegraphics[width=\textwidth]{atlas_#1_attention.pdf}%
+    \caption{\textbf{#2} --- attention maps at every frame, $100\%$ cue at $S_1$, for the
+    no-change and change-at-$S_1$ conditions (mean of $150$ trials).}\end{figure}
+  \begin{figure}[h]\centering\includegraphics[width=\textwidth]{atlas_#1_behavior.pdf}%
+    \caption{\textbf{#2} --- psychometric (A, B) and chronometric (C) functions on the
+    seven-step \code{validity4} task.}\end{figure}
+  \clearpage}
+
+\atlasmodel{two_lstm}{Two stacked xLSTMs (recommended network)}{%
+  The recommended network: the paper-faithful multiplicative attention with a second stacked
+  xLSTM feeding the heads. It is the \emph{best detector} in the family (mean cued-hit
+  $0.74$); the cued psychometric sits left of the uncued (a cueing benefit of $\sim$$4$--$6^\circ$
+  in threshold) and, unusually for this family, a small chronometric reaction-time effect is
+  visible. The attention is change-locked and the cue is carried in memory.}
+
+\atlasmodel{standard}{Multiplicative (paper-faithful reference)}{%
+  The exact published equation: $\mathbf Q=(\X W_{XQ})\odot(\Hone W_{HQ})$. It reproduces the
+  reliability-scaled cueing benefit (Chapter~\ref{ch:deepdive}); the attention map is uniform
+  through the cue and delay and snaps onto $S_1$ only at the change --- the cue is held in
+  working memory, not in the attention.}
+
+\atlasmodel{crossattn}{Cross-attention (image $+$ memory keys)}{%
+  Works (mean cued-hit $0.70$). The image queries keys/values drawn from both the image and the
+  memory $H_1$. Its attention to the cued \emph{image} patch sits \emph{below} uniform
+  ($\sim$$0.06$--$0.09$) while the memory keys carry the bulk of the weight --- the model routes
+  the cued location through memory rather than orienting image attention to it.}
+
+\atlasmodel{dualmem}{Dual-memory (the memories query)}{%
+  Works (mean cued-hit $0.64$). Both memories form the queries; keys/values come from the image
+  and both memories. The attention spreads near-uniformly across all twelve keys, and the image
+  keys at the cued patch again sit below uniform.}
+
+\atlasmodel{dualhead}{Dual-head (sensory $+$ feedback)}{%
+  Works (mean cued-hit $0.63$). The memory-free sensory head carries the family's only
+  \emph{positive} cue-orienting bias ($+0.04$ above uniform) --- real but far too weak to
+  feature as an attention-allocation result.}
+
+\atlasmodel{affine}{Affine (matrix scale $+$ shift) modulation --- failed}{%
+  \textbf{Failed to learn the task:} an always-wait collapse (never presses; $P(\text{press})\le
+  0.004$ even on a clear $60^\circ$ change). The architecture is shown for completeness; the
+  behaviour panel is flat at zero by construction.}
+
+\atlasmodel{hyper}{Fast-weight (hypernetwork) attention --- degenerate}{%
+  Memory generates the $Q/K/V$ projection weights. This checkpoint is in the \emph{other} $0.5$
+  collapse --- always-press (hit $1.0$, false-alarm $1.0$) --- and its training is incomplete
+  (iter $8{,}999$ of $18{,}750$). Shown for completeness.}
+
+\atlasmodel{hypercb}{Fast-weight $+$ codebook --- essentially untrained}{%
+  Generated $Q/K$ weights with a learnable codebook as the values and no image residual. This
+  checkpoint is essentially untrained (iter $999$) and sits in an always-wait collapse; included
+  only so the catalogue is complete.}

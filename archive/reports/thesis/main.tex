@@ -1,0 +1,106 @@
+% =====================================================================
+% Comprehensive architecture study — Recurrent Vision Transformers as
+% models of primate visual attention. Internal progress thesis.
+% Build:  pdflatex main ; bibtex main ; pdflatex main ; pdflatex main
+% (PATH=$PATH:/Library/TeX/texbin). Minimal-TeX safe: no siunitx/authblk. TikZ (core
+% libraries only — no shadows.blend) is used for the architecture atlas (App.~A).
+% =====================================================================
+\documentclass[11pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{caption}
+\captionsetup{labelfont=bf,textfont=small,labelsep=period}
+\usepackage[round]{natbib}
+\bibliographystyle{plainnat}
+\usepackage[colorlinks=true,allcolors=blue!45!black]{hyperref}
+\graphicspath{{figures/}{figures/atlas/}{figures/atlas_t29/}{figures/jepa/}}
+\input{figures/arch_preamble}   % shared TikZ styles for the architecture atlas (App.~A)
+
+% notation shorthands
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Hone}{\mathbf{H}_1}
+\newcommand{\Htwo}{\mathbf{H}_2}
+\newcommand{\Zmu}{\mathbf{Z}_\mu}
+\newcommand{\Zq}{\mathbf{Z}_q}
+\newcommand{\Rsq}{R^{2}}
+\newcommand{\dmem}{d_{\text{mem}}}
+\newcommand{\oflat}{\mathbf{o}_{\text{flat,2}}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\title{\bfseries Recurrent Vision Transformers as Models of Primate Visual
+Attention:\\[4pt] A Comprehensive Architecture Study\\[10pt]
+\large Internal progress report}
+\author{RViT architecture program\\\small Morgan, Albanna \& Herman}
+\date{Compiled \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This report consolidates everything the architecture program has learned about
+building a recurrent vision transformer (RViT) that reproduces the behavioural and
+neural signatures of primate covert spatial attention while learning end-to-end from
+sparse reward. Across roughly thirty network variants and two task horizons we isolate
+a small number of load-bearing findings. \textbf{(1) Perception is the bottleneck on the
+short (seven-step) task.} Sparse reward cannot teach the front-end to represent
+orientation: a reconstruction-pretrained VAE encoder lifts the linear decodability of
+Gabor orientation from $\Rsq=0.24$ to $\Rsq=0.97$, and with that single change the exact
+paper network learns the task on the first attempt. \textbf{(2) The horizon governs which
+strategy is viable.} On the long task a weak front-end suffices because the change
+persists long enough to be detected by slow temporal integration (``optic flow''); the
+short task removes that escape hatch and forces accurate single-frame perception.
+\textbf{(3) Coupling between the policy and value pathways is a precondition for
+learning,} not an optimisation: cutting the shared recurrent memory collapses an
+otherwise identical split-pathway model to chance. \textbf{(4) The working model reproduces
+the paper's core behavioural figures} --- a reliability-scaled psychometric cueing benefit
+($+1.5^\circ\!\to\!+7.5^\circ$ across $25\%\!\to\!100\%$ validity) and a causal
+attention-to-sensitivity link ($+8.5\%/-8.0\%$ from biasing attention toward/away from a
+change). \textbf{(5) The cueing effect is memory-driven rather than attention-driven, across an
+entire matched family:} in the multiplicative-gated model the cue and its validity are held
+in recurrent memory ($100\%$ decodable) while the attention map stays change-locked, and a
+matched family of six attention/memory wirings (multiplicative, dual-head, two-LSTM,
+cross-attention, dual-memory, and a failed affine modulation) confirms that \emph{no} working
+variant orients attention to the cue on the short task --- two of them attend markedly
+\emph{away} from the cued image location. The same sweep names the network to carry forward:
+the two-LSTM multiplicative form is the best detector. We close with that recommendation for
+the empirical manuscript, a proposed task battery (VDA, set-size, Luo \& Maunsell, Krauzlis),
+and a staged research plan.
+\end{abstract}
+
+\tableofcontents
+
+\input{sections/01_intro}
+\input{sections/02_task}
+\input{sections/03_model}
+\input{sections/04_harness}
+\input{sections/05_perception}
+\input{sections/06_horizon}
+\input{sections/07_crosstalk}
+\input{sections/08_zoo}
+\input{sections/09_deepdive}
+\input{sections/10_attention}
+\input{sections/19_jepa}
+\input{sections/11_harness_variations}
+\input{sections/12_recommendation}
+\input{sections/13_experiments}
+\input{sections/14_plan}
+\input{sections/15_findings}
+\input{sections/16_conclusion}
+
+\nocite{*}
+\bibliography{refs}
+
+\appendix
+\input{sections/17_atlas}
+\input{sections/18_atlas_t29}
+\end{document}

@@ -1,0 +1,36 @@
+% MULTIPLICATIVE (paper-faithful) — the reference layout for the atlas.
+% Convention: front-end at left, attention in the middle (the variable part), xLSTM + heads
+% at right; solid black = forward dataflow, dashed red = recurrent feedback from frame t-1.
+\begin{tikzpicture}[node distance=7mm and 10mm]
+  % ---- front-end (identical across all diagrams) --------------------------------------
+  \node[vae,minimum size=9mm,inner sep=0] (patch){};
+  \draw[RoyalBlue!45,line width=.5pt] (patch.north)--(patch.south) (patch.west)--(patch.east);
+  \node[below=.4mm of patch,font=\tiny,align=center] {frame $x_t$\\[-1pt]{\tiny $2{\times}2$ patches}};
+  \node[vae,right=of patch] (vae) {VAE enc.\\(frozen)};
+  \node[tok,right=8mm of vae] (X) {$X$\\[-1pt]{\tiny $4{\times}140$}};
+  \node[below=.3mm of X,lbl,font=\tiny] {+pos+temporal};
+  % ---- attention block (THE distinguishing part) -------------------------------------
+  \node[attn,right=11mm of X,minimum width=24mm,minimum height=12mm] (sa)
+        {Multiplicative\\self-attention};
+  \node[op,above=3.5mm of sa] (gate) {$\odot$};
+  \node[lbl,below=1.2mm of sa,align=center,font=\tiny]
+        {$Q{=}(XW_{XQ})\!\odot\!(H W_{HQ})$ \ (same $K,V$)\\[1pt]
+         $Z{=}X+\mathrm{softmax}(QK^{\!\top})V$};
+  % ---- memory + readout --------------------------------------------------------------
+  \node[mem,right=12mm of sa] (lstm) {spatial\\xLSTM};
+  \node[tok,right=8mm of lstm,minimum width=12mm] (H) {$H'$\\[-1pt]{\tiny $4{\cdot}1024{=}4096$}};
+  % ---- heads -------------------------------------------------------------------------
+  \node[head,above right=1mm and 9mm of H] (actor) {Actor\\{\tiny softmax(2)}};
+  \node[head,below right=1mm and 9mm of H] (critic){Critic\\{\tiny QR, 5 quant.}};
+  % ---- forward dataflow --------------------------------------------------------------
+  \draw[flow] (patch)--(vae); \draw[flow] (vae)--(X); \draw[flow] (X)--(sa);
+  \draw[flow] (sa)--(lstm); \draw[flow] (lstm)--(H);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (actor.west);
+  \draw[flow] (H.east)-- ++(4mm,0) |- (critic.west);
+  \draw[qkv] (X.north) |- (gate.west);                         % image into the gate
+  % ---- recurrence + feedback ---------------------------------------------------------
+  \draw[fb] (lstm.north) .. controls +(0,9mm) and +(0,9mm) .. (lstm.north west)
+        node[midway,above,font=\tiny,text=Red!70] {carry $H^{t}\!\to\!H^{t+1}$};
+  \draw[fb] (lstm.south) .. controls +(0,-8mm) and +(0,-8mm) .. (gate.south east)
+        node[pos=.15,below,font=\tiny,text=Red!70] {$H^{t-1}$};
+\end{tikzpicture}

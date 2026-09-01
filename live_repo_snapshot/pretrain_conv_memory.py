@@ -54,6 +54,17 @@ def build_parser() -> argparse.ArgumentParser:
                         "motion_zk T=20 c128) to fit GPU memory")
     p.add_argument("--T", type=int, default=7)
     p.add_argument("--frame-repeat", type=int, default=1)
+    p.add_argument("--frame-window", type=int, default=1,
+                   help="frames per agent step, stacked as input channels (default 1 = original)")
+    p.add_argument("--frame-stride", type=int, default=1,
+                   help="frames advanced per agent step (default 1 = original)")
+    p.add_argument("--mem-every", type=int, default=1,
+                   help="run the memory block (H1/H2 update) every N agent steps (default 1)")
+    p.add_argument("--visual-accum", action="store_true",
+                   help="concatenate a learnable-decay EMA of the stem output (visual "
+                        "accumulator H_VA) with X_t as the vision block input")
+    p.add_argument("--accum-decay", type=float, default=0.5,
+                   help="initial per-channel EMA decay for the visual accumulator")
     p.add_argument("--min-change-time", type=int, default=5)
     p.add_argument("--max-change-time", type=int, default=5)
     p.add_argument("--noise", type=float, default=5.0)
@@ -98,6 +109,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--checkpoint-dir", default=None)
     p.add_argument("--log-every", type=int, default=1,
                    help="log every this many collections")
+    p.add_argument("--resume", action="store_true",
+                   help="resume from <checkpoint-dir>/convmem_latest.pt (model + EMA teacher + "
+                        "curriculum theta); appends to metrics.csv instead of overwriting")
     return p
 
 
@@ -117,7 +131,12 @@ def main() -> None:
 
     model = ConvMemoryModel(n_channels=args.n_channels, proto_dim=args.proto_dim,
                             map_size=args.map_size,
-                            memory_noise_std=args.memory_noise_std).to(device)
+                            memory_noise_std=args.memory_noise_std,
+                            frame_window=args.frame_window,
+                            frame_stride=args.frame_stride,
+                            mem_every=args.mem_every,
+                            visual_accum=args.visual_accum,
+                            accum_decay=args.accum_decay).to(device)
     jepa_teacher = copy.deepcopy(model)
     for p in jepa_teacher.parameters():
         p.requires_grad_(False)
@@ -131,7 +150,9 @@ def main() -> None:
     n_collections = (args.n_trials + args.collection_size - 1) // args.collection_size
     n_mb = args.collection_size // args.batch_size
     print(f"[convmem] n_channels={args.n_channels} map={args.map_size} proto={args.proto_dim} "
-          f"params={n_params:,} device={device}")
+          f"params={n_params:,} device={device} "
+          f"| frame_window={args.frame_window} stride={args.frame_stride} mem_every={args.mem_every} "
+          f"visual_accum={args.visual_accum}(d0={args.accum_decay})")
     print(f"[convmem] collections={n_collections} x {args.collection_size} trials x "
           f"{args.epochs} epochs x {n_mb} minibatches({args.batch_size}) = "
           f"{n_collections * args.collection_size} trials, "
@@ -147,16 +168,38 @@ def main() -> None:
 
     ckpt_dir = args.checkpoint_dir or os.path.join(_HERE, "convmem_checkpoints")
     os.makedirs(ckpt_dir, exist_ok=True)
+
+    # ---- optional resume: model + EMA teacher + curriculum state ----
+    start_col = 0
+    prev_elapsed = 0.0
+    if args.resume:
+        ckpt_path = os.path.join(ckpt_dir, "convmem_latest.pt")
+        ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt["model_state_dict"])
+        jepa_teacher.load_state_dict(ckpt["jepa_teacher_state_dict"])
+        start_col = int(ckpt["collection"]) + 1
+        env.theta = float(ckpt.get("theta", env.theta))
+        mp = os.path.join(ckpt_dir, "metrics.csv")
+        if os.path.exists(mp):
+            with open(mp) as f:
+                rows = [r for r in csv.reader(f) if r]
+            if len(rows) > 1:
+                prev_elapsed = float(rows[-1][10])   # last row's elapsed_s
+        print(f"[convmem] RESUMING from {ckpt_path}: collection {start_col}, "
+              f"theta={env.theta}, prior elapsed={prev_elapsed:.0f}s "
+              f"(optimizer state resets — brief Adam transient expected)")
+
     metrics_path = os.path.join(ckpt_dir, "metrics.csv")
     fieldnames = ["collection", "n_trials", "loss_total", "loss_jepa_ce", "loss_jepa_var",
                   "loss_jepa_cov", "loss_change", "change_acc", "grad_norm", "theta", "elapsed_s"]
-    with open(metrics_path, "w", newline="") as f:
-        csv.writer(f).writerow(fieldnames)
+    if not (args.resume and os.path.exists(metrics_path)):
+        with open(metrics_path, "w", newline="") as f:
+            csv.writer(f).writerow(fieldnames)
 
     ce_loss = nn.CrossEntropyLoss()
-    t_start = time.time()
-    total_updates = 0
-    for col in range(n_collections):
+    t_start = time.time() - prev_elapsed
+    total_updates = start_col * args.epochs * n_mb
+    for col in range(start_col, n_collections):
         # ---- collect a FRESH training set ----
         obs_list, change_list = [], []
         for _ in range(args.collection_size):
@@ -164,8 +207,10 @@ def main() -> None:
             change_list.append(int(env.valid) if args.label == "valid" else int(env.change_true))
             frames = [env.step(0)[0] for _ in range(T)]
             obs_list.append(np.stack(frames))
-        obs = torch.from_numpy(np.stack(obs_list)).to(device, torch.float32)  # (N,T,50,50,3)
-        change = torch.tensor(change_list, dtype=torch.long, device=device)
+        obs = torch.from_numpy(np.stack(obs_list))  # (N,T,50,50,3) — stays on CPU;
+        # minibatches are transferred per update to avoid a 614 MB device-resident block
+        # (the full-resident tensor pushed VRAM to the fragmentation cliff on 8 GB cards)
+        change = torch.tensor(change_list, dtype=torch.long)
 
         acc = {k: 0.0 for k in ("loss_total", "loss_jepa_ce", "loss_jepa_var",
                                 "loss_jepa_cov", "loss_change", "change_acc", "grad_norm")}
@@ -174,8 +219,8 @@ def main() -> None:
             order = torch.randperm(args.collection_size)
             for mb in range(n_mb):
                 bidx = order[mb * args.batch_size:(mb + 1) * args.batch_size]
-                obs_mb = obs[bidx]
-                change_mb = change[bidx]
+                obs_mb = obs[bidx].to(device, torch.float32, non_blocking=True)
+                change_mb = change[bidx].to(device, non_blocking=True)
 
                 # Teacher (clean, EMA).
                 jepa_teacher.eval()
@@ -191,7 +236,7 @@ def main() -> None:
                 R_s = R_s.float()
                 z_s = model.jepa_logits(R_s)
 
-                m = torch.ones(obs_mb.shape[0], T, device=device)
+                m = torch.ones(obs_mb.shape[0], R_s.shape[1], device=device)
                 ce, _ = structured_jepa_loss(
                     z_t[:, 1:], z_s[:, :-1], model.jepa_center, m[:, 1:] * m[:, :-1],
                     tau_teacher=tau_t, tau_student=args.jepa_tau_student,
@@ -260,9 +305,15 @@ def main() -> None:
                 "jepa_teacher_state_dict": jepa_teacher.state_dict(),
                 "collection": col,
                 "n_trials": (col + 1) * args.collection_size,
+                "theta": float(env.theta),
                 "n_channels": args.n_channels,
                 "map_size": args.map_size,
                 "proto_dim": args.proto_dim,
+                "frame_window": args.frame_window,
+                "frame_stride": args.frame_stride,
+                "mem_every": args.mem_every,
+                "visual_accum": bool(args.visual_accum),
+                "accum_decay": float(args.accum_decay),
             }, ckpt_path)
             print(f"[convmem] checkpoint saved: {ckpt_path}")
 

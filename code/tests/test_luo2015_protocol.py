@@ -83,6 +83,79 @@ def test_published_reward_schedules_are_spatially_counterphased():
     assert high_c_ratio == pytest.approx(0.5)
 
 
+def test_sensitivity_hit_cr_ratios_are_titratable_and_default_to_published_values():
+    default = LuoMaunsell2015Env(session="sensitivity", condition_loc=0)
+    assert default.high_hit_cr_ratio == pytest.approx(0.7)
+    assert default.low_hit_cr_ratio == pytest.approx(1.1)
+
+    # Ratio 1 at both locations: hit == CR == the location's mean, so beta* = 1 and the
+    # reward-optimal criterion is zero at both locations for any pair of d' values.
+    unbiased = LuoMaunsell2015Env(
+        session="sensitivity", condition_loc=0,
+        high_hit_cr_ratio=1.0, low_hit_cr_ratio=1.0,
+    )
+    assert unbiased.reward_table[0] == pytest.approx((5.0, 5.0))
+    assert unbiased.reward_table[3] == pytest.approx((1.0, 1.0))
+
+    # The 5:1 value manipulation survives intact, carried by the overall scale.
+    for location, expected_mean in ((0, 5.0), (3, 1.0)):
+        mean, ratio = _mean_and_ratio(unbiased.reward_table[location])
+        assert mean == pytest.approx(expected_mean)
+        assert ratio == pytest.approx(1.0)
+
+    # Counterphasing still follows condition_loc, not a fixed location.
+    unbiased.set_condition(3)
+    assert unbiased.reward_table[3] == pytest.approx((5.0, 5.0))
+    assert unbiased.reward_table[0] == pytest.approx((1.0, 1.0))
+
+
+def test_hit_cr_ratios_may_be_titrated_asymmetrically_after_construction():
+    """Step-4 titration adjusts one location's ratio at a time, mid-run."""
+    env = LuoMaunsell2015Env(session="sensitivity", condition_loc=0,
+                             high_hit_cr_ratio=1.0, low_hit_cr_ratio=1.0)
+    env.high_hit_cr_ratio = 0.85
+    env.set_condition(env.high_loc)
+
+    high_mean, high_ratio = _mean_and_ratio(env.reward_table[0])
+    low_mean, low_ratio = _mean_and_ratio(env.reward_table[3])
+    assert high_ratio == pytest.approx(0.85)
+    assert low_ratio == pytest.approx(1.0)
+    assert high_mean == pytest.approx(5.0)   # mean is invariant to the ratio
+    assert low_mean == pytest.approx(1.0)
+
+
+@pytest.mark.parametrize("ratio", [0.0, -1.0, -0.5])
+def test_non_positive_hit_cr_ratio_is_refused(ratio):
+    with pytest.raises(ValueError, match="must be positive"):
+        LuoMaunsell2015Env(session="sensitivity", high_hit_cr_ratio=ratio)
+    with pytest.raises(ValueError, match="must be positive"):
+        LuoMaunsell2015Env(session="sensitivity", low_hit_cr_ratio=ratio)
+
+
+def test_training_state_records_the_hit_cr_ratios_in_force():
+    env = LuoMaunsell2015Env(session="sensitivity", condition_loc=0,
+                             high_hit_cr_ratio=1.0, low_hit_cr_ratio=1.0)
+    config = env.training_state_dict()["environment_config"]
+    assert config["high_hit_cr_ratio"] == pytest.approx(1.0)
+    assert config["low_hit_cr_ratio"] == pytest.approx(1.0)
+    assert config["reward_table"] == env.reward_table
+
+
+def test_hit_cr_ratio_cli_flags_default_to_unset():
+    parser = build_arg_parser()
+    default_args = parser.parse_args(["--task", "luo2015_sensitivity"])
+    assert default_args.high_hit_cr_ratio is None
+    assert default_args.low_hit_cr_ratio is None
+
+    args = parser.parse_args([
+        "--task", "luo2015_sensitivity",
+        "--high-hit-cr-ratio", "1.0",
+        "--low-hit-cr-ratio", "1.0",
+    ])
+    assert args.high_hit_cr_ratio == pytest.approx(1.0)
+    assert args.low_hit_cr_ratio == pytest.approx(1.0)
+
+
 def test_no_change_trial_requires_response_to_changed_second_test_for_cr():
     env = LuoMaunsell2015Env(session="sensitivity", condition_loc=0, T=7)
     env.change_true = 0

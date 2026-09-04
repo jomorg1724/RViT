@@ -14,6 +14,15 @@ The published reward structure is spatially counterphased between conditions:
   * criterion: low-c H:CR ratio 1.5 at 90% of the high-c mean reward, versus
     high-c H:CR ratio 0.5.
 
+The published sensitivity ratios are the *averaged outputs* of a per-location titration
+L&M ran until each animal's criterion was unbiased, not settings they started from. They
+are therefore the defaults of `high_hit_cr_ratio` / `low_hit_cr_ratio` rather than
+constants: holding them fixed forces a nonzero reward-optimal criterion difference
+(beta* = R_CR/R_hit, c* = ln beta* / d'), while ratio 1 at both locations makes
+ln beta* = 0 and the reward-optimal criterion zero at both locations for any pair of d'
+values. Overriding them leaves the mean reward, and hence the 5:1 value manipulation,
+untouched.
+
 This is a scaled seven-frame computational analogue, not a millisecond-exact monkey
 apparatus: sample frames 0--1, delay 2, first-test response window 3--4, inter-test gap
 5, and second test 6. Locations are top-left (0) and bottom-right (3) in the existing
@@ -41,6 +50,7 @@ class LuoMaunsell2015Env(BaseChangeDetectionEnv):
 
     def __init__(self, session: str = "sensitivity",
                  high_reward: float = 5.0, low_reward: float = 1.0,
+                 high_hit_cr_ratio: float = 0.7, low_hit_cr_ratio: float = 1.1,
                  r_hit: float | None = None, r_cr: float | None = None,
                  high_loc: int = 0, condition_loc: int | None = None,
                  spatial_grid_size: int = 2, **kw):
@@ -82,6 +92,15 @@ class LuoMaunsell2015Env(BaseChangeDetectionEnv):
         kw.setdefault("min_change_time", 5); kw.setdefault("max_change_time", 5)  # unused; keeps base happy
         self.session = session
         self.high_reward, self.low_reward = float(high_reward), float(low_reward)
+        # Titratable per-location H:CR ratios; defaults reproduce the published averages.
+        # _hit_cr_pair divides by (1 + ratio) and scales the hit by it, so a ratio at or
+        # below zero is degenerate (unrewarded hits) or singular.
+        for _name, _value in (("high_hit_cr_ratio", high_hit_cr_ratio),
+                              ("low_hit_cr_ratio", low_hit_cr_ratio)):
+            if not float(_value) > 0.0:
+                raise ValueError(f"{_name} must be positive, got {_value!r}")
+        self.high_hit_cr_ratio = float(high_hit_cr_ratio)
+        self.low_hit_cr_ratio = float(low_hit_cr_ratio)
         if (r_hit is None) != (r_cr is None):
             raise ValueError("r_hit and r_cr must be provided together")
         self.r_hit = None if r_hit is None else float(r_hit)
@@ -114,8 +133,8 @@ class LuoMaunsell2015Env(BaseChangeDetectionEnv):
         self.high_value_index = condition_loc
         if self.session == "sensitivity":
             self.reward_table = {
-                condition_loc: self._hit_cr_pair(self.high_reward, 0.7),
-                other_loc: self._hit_cr_pair(self.low_reward, 1.1),
+                condition_loc: self._hit_cr_pair(self.high_reward, self.high_hit_cr_ratio),
+                other_loc: self._hit_cr_pair(self.low_reward, self.low_hit_cr_ratio),
             }
         elif self.r_hit is not None and self.r_cr is not None:
             self.reward_table = {
@@ -198,6 +217,8 @@ class LuoMaunsell2015Env(BaseChangeDetectionEnv):
             "session": self.session,
             "condition_loc": self.high_loc,
             "reward_table": dict(self.reward_table),
+            "high_hit_cr_ratio": self.high_hit_cr_ratio,
+            "low_hit_cr_ratio": self.low_hit_cr_ratio,
             "orientation_sampling": "independent_uniform_axial_0_180",
             "orientation_period_degrees": 180.0,
             "spatial_grid_size": self.spatial_grid_size,

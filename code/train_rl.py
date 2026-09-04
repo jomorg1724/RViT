@@ -442,6 +442,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
                    help="Luo sensitivity session: mean correct-response reward at high-value location (default 5).")
     p.add_argument("--low-reward", type=float, default=None,
                    help="Luo sensitivity session: mean correct-response reward at low-value location (default 1).")
+    p.add_argument("--high-hit-cr-ratio", type=float, default=None,
+                   help="Luo sensitivity session: hit:correct-rejection reward ratio at the high-value "
+                        "location (default 0.7, the published titration average). 1.0 puts the "
+                        "reward-optimal criterion at zero there; the mean reward is unchanged.")
+    p.add_argument("--low-hit-cr-ratio", type=float, default=None,
+                   help="Luo sensitivity session: hit:correct-rejection reward ratio at the low-value "
+                        "location (default 1.1, the published titration average).")
     p.add_argument("--high-loc", type=int, default=None,
                    help="Luo condition location: sensitivity high-value or criterion low-c location (0 or 3; default 0).")
     p.add_argument("--reward-scale", type=float, default=None,
@@ -608,6 +615,8 @@ def main() -> None:
     # (which do not accept them) are unaffected.
     _luo_kw = {k: v for k, v in (("r_hit", args.r_hit), ("r_cr", args.r_cr),
                                   ("high_reward", args.high_reward), ("low_reward", args.low_reward),
+                                  ("high_hit_cr_ratio", args.high_hit_cr_ratio),
+                                  ("low_hit_cr_ratio", args.low_hit_cr_ratio),
                                   ("high_loc", args.high_loc)) if v is not None}
     if is_luo2015:
         _luo_kw["spatial_grid_size"] = args.luo_spatial_grid_size

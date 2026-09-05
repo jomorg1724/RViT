@@ -179,12 +179,13 @@ def main() -> None:
                     raw["Ah"][ci, t] += Ah[0].cpu().numpy()
 
                     # --- memory block: raw A over [Z | H1] key streams ---
-                    mem = model.memory
-                    Az, Ah1 = raw_A(mem.W_q(H1), mem.W_kz(Z), mem.W_kh(H1), mem.scale)
-                    maps["Az"][ci, t] += colsum_map(Az)
-                    maps["Ah1"][ci, t] += colsum_map(Ah1)
-                    raw["Az"][ci, t] += Az[0].cpu().numpy()
-                    raw["Ah1"][ci, t] += Ah1[0].cpu().numpy()
+                    if model.memory is not None:
+                        mem = model.memory
+                        Az, Ah1 = raw_A(mem.W_q(H1), mem.W_kz(Z), mem.W_kh(H1), mem.scale)
+                        maps["Az"][ci, t] += colsum_map(Az)
+                        maps["Ah1"][ci, t] += colsum_map(Ah1)
+                        raw["Az"][ci, t] += Az[0].cpu().numpy()
+                        raw["Ah1"][ci, t] += Ah1[0].cpu().numpy()
 
                     # --- mirror step() exactly: cadence + v_mode branch ---
                     update_memory = ((t + 1) % mem_every == 0)
@@ -192,6 +193,11 @@ def main() -> None:
                         H2 = att
                         if update_memory:
                             H1, _ = model.memory(Z, H1)
+                    elif v_mode == "learned_z":
+                        H2 = att
+                        H1 = Z
+                        if model.memory_noise_std > 0.0:
+                            H1 = H1 + model.memory_noise_std * torch.randn_like(H1)
                     elif v_mode == "learned_mem":
                         # vision already used H1 as value source in the model's
                         # step(); here Z/att came from model.vision(Xin, H1, H2)

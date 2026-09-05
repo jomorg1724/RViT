@@ -365,8 +365,8 @@ class KDAConvMemoryModel(nn.Module):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         if readout not in ("full", "h1h2"):
             raise ValueError(f"readout must be full|h1h2, got {readout!r}")
-        if cls_head not in ("pool", "ffn"):
-            raise ValueError(f"cls_head must be pool|ffn, got {cls_head!r}")
+        if cls_head not in ("pool", "ffn", "conv"):
+            raise ValueError(f"cls_head must be pool|ffn|conv, got {cls_head!r}")
         self.n_channels = n_channels
         self.map_size = map_size
         self.proto_dim = proto_dim
@@ -407,10 +407,19 @@ class KDAConvMemoryModel(nn.Module):
         # Belief decoder.
         #   "pool": legacy mean-pool + Linear(r_dim, 2)
         #   "ffn":  per-pixel channel FFN (r_dim -> 16), flatten, FFN -> 2.
-        #           No convs, no pooling — spatial layout is preserved.
+        #   "conv": two strided convs (r_dim -> r_dim/4 -> r_dim/8), flatten,
+        #           Linear -> 2. Spatial, no pooling.
         if cls_head == "ffn":
             self.cls_chan = nn.Linear(self.r_dim, 16)
             self.cls_out = nn.Linear(16 * map_size * map_size, 2)
+        elif cls_head == "conv":
+            hid = max(self.r_dim // 4, 32)
+            mid = max(hid // 2, 16)
+            self.cls_conv = nn.Sequential(
+                nn.Conv2d(self.r_dim, hid, 3, stride=2, padding=1), nn.GELU(),
+                nn.Conv2d(hid, mid, 3, stride=2, padding=1), nn.GELU(),
+            )
+            self.cls_out = nn.Linear(mid * (map_size // 4) * (map_size // 4), 2)
         else:
             self.classifier = nn.Linear(self.r_dim, 2)
         self.register_buffer("jepa_center", torch.zeros(map_size, map_size, proto_dim))
@@ -506,4 +515,6 @@ class KDAConvMemoryModel(nn.Module):
             x = R_last.permute(0, 2, 3, 1).contiguous()     # (B,H,W,r_dim)
             x = F.gelu(self.cls_chan(x))                    # (B,H,W,16)
             return self.cls_out(x.flatten(1))               # (B,2)
+        if self.cls_head == "conv":
+            return self.cls_out(self.cls_conv(R_last).flatten(1))
         return self.classifier(R_last.mean(dim=(2, 3)))

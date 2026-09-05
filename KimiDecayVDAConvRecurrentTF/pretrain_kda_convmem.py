@@ -88,9 +88,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--readout", choices=["full", "h1h2"], default="h1h2",
                    help="R construction: full = [H1|H2|Z|att_vis] (4C); "
                         "h1h2 = [H1|H2] (2C) — decode only from the two state streams.")
-    p.add_argument("--cls-head", choices=["pool", "ffn"], default="ffn",
+    p.add_argument("--cls-head", choices=["pool", "ffn", "conv"], default="conv",
                    help="belief decoder: pool = mean-pool + Linear; ffn = per-pixel "
-                        "channel FFN (r_dim->16), flatten, Linear -> 2 logits")
+                        "channel FFN (r_dim->16), flatten, Linear; conv = two strided "
+                        "convs, flatten, Linear -> 2 logits")
     p.add_argument("--min-change-time", type=int, default=5)
     p.add_argument("--max-change-time", type=int, default=5)
     p.add_argument("--noise", type=float, default=5.0)
@@ -263,29 +264,34 @@ def main() -> None:
                 obs_mb = obs[bidx].to(device, torch.float32, non_blocking=True)
                 change_mb = change[bidx].to(device, non_blocking=True)
 
-                # Teacher (clean, EMA).
-                jepa_teacher.eval()
-                with torch.no_grad(), amp_ctx():
-                    R_t = jepa_teacher.forward_seq(obs_mb)
-                z_t = jepa_teacher.jepa_logits(R_t.float())         # (B,T,map,map,P)
-                frac = min(float(total_updates) / max(1, args.jepa_tau_warmup), 1.0)
-                tau_t = args.jepa_tau_teacher_start + frac * (args.jepa_tau_teacher_end - args.jepa_tau_teacher_start)
+                # Teacher (clean, EMA). Skipped entirely when JEPA is off.
+                if args.jepa_coef > 0:
+                    jepa_teacher.eval()
+                    with torch.no_grad(), amp_ctx():
+                        R_t = jepa_teacher.forward_seq(obs_mb)
+                    z_t = jepa_teacher.jepa_logits(R_t.float())     # (B,T,map,map,P)
+                    frac = min(float(total_updates) / max(1, args.jepa_tau_warmup), 1.0)
+                    tau_t = args.jepa_tau_teacher_start + frac * (args.jepa_tau_teacher_end - args.jepa_tau_teacher_start)
 
                 # Student. Recurrent forward under autocast (fp16); heads/losses in fp32.
                 with amp_ctx():
-                    R_s = model.forward_seq(obs_mb)                 # (B,T,4C,map,map)
+                    R_s = model.forward_seq(obs_mb)                 # (B,T,r_dim,map,map)
                 R_s = R_s.float()
-                z_s = model.jepa_logits(R_s)
 
-                m = torch.ones(obs_mb.shape[0], R_s.shape[1], device=device)
-                ce, _ = structured_jepa_loss(
-                    z_t[:, 1:], z_s[:, :-1], model.jepa_center, m[:, 1:] * m[:, :-1],
-                    tau_teacher=tau_t, tau_student=args.jepa_tau_student,
-                    sinkhorn_iters=args.jepa_sinkhorn_iters,
-                )
-                feats = model.jepa_features(R_s)[:, :-1]
-                var, cov = jepa_variance_covariance_loss(feats, m[:, 1:] * m[:, :-1])
-                jepa_loss = ce + args.jepa_var_coef * var + args.jepa_cov_coef * cov
+                if args.jepa_coef > 0:
+                    z_s = model.jepa_logits(R_s)
+                    m = torch.ones(obs_mb.shape[0], R_s.shape[1], device=device)
+                    ce, _ = structured_jepa_loss(
+                        z_t[:, 1:], z_s[:, :-1], model.jepa_center, m[:, 1:] * m[:, :-1],
+                        tau_teacher=tau_t, tau_student=args.jepa_tau_student,
+                        sinkhorn_iters=args.jepa_sinkhorn_iters,
+                    )
+                    feats = model.jepa_features(R_s)[:, :-1]
+                    var, cov = jepa_variance_covariance_loss(feats, m[:, 1:] * m[:, :-1])
+                    jepa_loss = ce + args.jepa_var_coef * var + args.jepa_cov_coef * cov
+                else:
+                    ce = var = cov = torch.zeros((), device=device)
+                    jepa_loss = torch.zeros((), device=device)
 
                 if args.change_per_step and args.label == "change":
                     # Belief model: classify change-vs-no-change at EVERY step.
@@ -336,12 +342,13 @@ def main() -> None:
 
                 # Teacher EMA + DINO centre update (per optimizer step).
                 with torch.no_grad():
-                    dj = args.jepa_ema_decay
-                    for tp, p_ in zip(jepa_teacher.parameters(), model.parameters()):
-                        tp.data.mul_(dj).add_(p_.data, alpha=1.0 - dj)
-                    batch_center = masked_jepa_center(z_t, m)
-                    model.jepa_center.mul_(args.jepa_center_momentum).add_(
-                        batch_center, alpha=1.0 - args.jepa_center_momentum)
+                    if args.jepa_coef > 0:
+                        dj = args.jepa_ema_decay
+                        for tp, p_ in zip(jepa_teacher.parameters(), model.parameters()):
+                            tp.data.mul_(dj).add_(p_.data, alpha=1.0 - dj)
+                        batch_center = masked_jepa_center(z_t, m)
+                        model.jepa_center.mul_(args.jepa_center_momentum).add_(
+                            batch_center, alpha=1.0 - args.jepa_center_momentum)
 
                 acc["loss_total"] += float(loss.detach().item())
                 acc["loss_jepa_ce"] += float(ce.detach().item())

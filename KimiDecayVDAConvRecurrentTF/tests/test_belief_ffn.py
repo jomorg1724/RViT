@@ -68,6 +68,43 @@ def test_ffn_gradient_flows_to_trunk():
     assert g is not None and g.abs().sum().item() > 0
 
 
+def test_conv_head_structure():
+    m = _model("conv")
+    r_dim, S = m.r_dim, m.map_size
+    assert isinstance(m.cls_conv[0], torch.nn.Conv2d)
+    assert m.cls_conv[0].in_channels == r_dim
+    assert isinstance(m.cls_out, torch.nn.Linear)
+    assert m.cls_out.out_features == 2
+    assert not hasattr(m, "classifier") and not hasattr(m, "cls_chan")
+
+
+def test_conv_classify_runs_end_to_end():
+    m = _model("conv")
+    R = m.forward_seq(torch.randn(2, 7, 16, 16, 3))
+    logits = m.classify(R[:, -1])
+    assert logits.shape == (2, 2)
+    all_logits = torch.stack([m.classify(R[:, t]) for t in range(R.shape[1])], dim=1)
+    assert all_logits.shape == (2, 7, 2)
+
+
+def test_conv_head_is_spatially_sensitive():
+    m = _model("conv").eval()
+    R = torch.randn(1, m.r_dim, m.map_size, m.map_size)
+    perm = torch.randperm(m.map_size * m.map_size)
+    Rp = R.flatten(2)[:, :, perm].view_as(R)
+    with torch.no_grad():
+        d = (m.classify(R) - m.classify(Rp)).abs().max().item()
+    assert d > 1e-4
+
+
+def test_conv_gradient_flows_to_trunk():
+    m = _model("conv")
+    R = m.forward_seq(torch.randn(1, 7, 16, 16, 3))
+    m.classify(R[:, -1]).sum().backward()
+    g = m.stem.net[0].weight.grad
+    assert g is not None and g.abs().sum().item() > 0
+
+
 def test_bad_cls_head_rejected():
     try:
         _model("bogus")

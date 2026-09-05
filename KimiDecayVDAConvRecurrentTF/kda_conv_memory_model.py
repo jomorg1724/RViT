@@ -212,17 +212,25 @@ class ConvMemoryBlock(nn.Module):
     H2' = att                                                          — the raw ephemeral read
     """
 
-    def __init__(self, c: int = 128, memory_noise_std: float = 0.0, attn_mode: str = "pixel_gate"):
+    def __init__(self, c: int = 128, memory_noise_std: float = 0.0, attn_mode: str = "pixel_gate",
+                 learned_v: bool = False, map_size: int = 16):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         self.attn_mode = attn_mode
+        self.learned_v = learned_v
         self.memory_noise_std = float(memory_noise_std)
         self.W_q = nn.Conv2d(c, c, 1, bias=False)
         self.W_kz = nn.Conv2d(c, c, 1, bias=False)
         self.W_kh = nn.Conv2d(c, c, 1, bias=False)
-        self.W_vz = nn.Conv2d(c, c, 1, bias=False)
-        self.W_vh = nn.Conv2d(c, c, 1, bias=False)
+        if learned_v:
+            # Values are LEARNED per-position embeddings (V_Z, V_H1), not derived
+            # from Z/H1. H2 = A_Z@V_Z + A_H1@V_H1 carries only the attention pattern.
+            self.V_X = nn.Parameter(torch.randn(1, c, map_size, map_size) * 0.02)
+            self.V_H = nn.Parameter(torch.randn(1, c, map_size, map_size) * 0.02)
+        else:
+            self.W_vz = nn.Conv2d(c, c, 1, bias=False)
+            self.W_vh = nn.Conv2d(c, c, 1, bias=False)
         self.ffn = nn.Sequential(nn.Conv2d(c, 2 * c, 1), nn.GELU(), nn.Conv2d(2 * c, c, 1))
         self.se = SEBlock(2 * c)
         self.proj = nn.Conv2d(2 * c, c, 1)
@@ -231,7 +239,11 @@ class ConvMemoryBlock(nn.Module):
     def forward(self, Z: torch.Tensor, H1: torch.Tensor):
         Q = self.W_q(H1)
         Kz, Kh = self.W_kz(Z), self.W_kh(H1)
-        Vz, Vh = self.W_vz(Z), self.W_vh(H1)
+        if self.learned_v:
+            Vz = self.V_X.expand(Z.shape[0], -1, -1, -1)
+            Vh = self.V_H.expand(Z.shape[0], -1, -1, -1)
+        else:
+            Vz, Vh = self.W_vz(Z), self.W_vh(H1)
         if self.attn_mode == "token":
             att, _ = _two_stream_token_attn(Q, Kz, Kh, Vz, Vh, self.scale)
         else:
@@ -379,8 +391,8 @@ class KDAConvMemoryModel(nn.Module):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         if readout not in ("full", "h1h2", "h2"):
             raise ValueError(f"readout must be full|h1h2|h2, got {readout!r}")
-        if v_mode not in ("state", "learned"):
-            raise ValueError(f"v_mode must be state|learned, got {v_mode!r}")
+        if v_mode not in ("state", "learned", "learned_mem"):
+            raise ValueError(f"v_mode must be state|learned|learned_mem, got {v_mode!r}")
         if cls_head not in ("pool", "ffn", "conv"):
             raise ValueError(f"cls_head must be pool|ffn|conv, got {cls_head!r}")
         self.n_channels = n_channels
@@ -415,8 +427,10 @@ class KDAConvMemoryModel(nn.Module):
         # The accumulator readout is always concatenated with X_t (X-side widens to 2C).
         self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode,
                                          learned_v=(v_mode == "learned"), map_size=map_size)
+        self._learned_mem = (v_mode == "learned_mem")
         self.memory = ConvMemoryBlock(n_channels, memory_noise_std=memory_noise_std,
-                                     attn_mode=attn_mode)
+                                      attn_mode=attn_mode,
+                                      learned_v=(v_mode == "learned_mem"), map_size=map_size)
         # JEPA head: ONE per-pixel head on R.
         #   readout="full": R = [H1‖H2‖Z‖att_vis] (4C)
         #   readout="h1h2": R = [H1‖H2] (2C) — decode only from the two state streams
@@ -464,14 +478,25 @@ class KDAConvMemoryModel(nn.Module):
         H1, H2, ACC = state
         ACC, acc_read, stats = self._accumulate(X_t, H1, ACC)
         Xin = torch.cat([X_t, acc_read], dim=1)                 # (B,2C,map,map)
-        Z, att_vis = self.vision(Xin, H1, H2)
         if self.v_mode == "learned":
             # H2 is NOT state: it is rebuilt every step as A_X@V_X + A_H@V_H
             # over learned value embeddings. Only H1 (and ACC) cross timesteps.
+            Z, att_vis = self.vision(Xin, H1, H2)
             H2 = att_vis
             if update_memory:
                 H1, _ = self.memory(Z, H1)
+        elif self.v_mode == "learned_mem":
+            # H2 comes from the MEMORY block: A_Z@V_Z + A_H1@V_H1 over learned
+            # embeddings, computed EVERY step (fast belief). H1 is written only
+            # on memory ticks (slow tick preserved). Vision values are derived
+            # again, reading H1 as the memory-value source (H2 is not fed back).
+            Z, att_vis = self.vision(Xin, H1, H1)
+            H1_new, att_mem = self.memory(Z, H1)
+            H2 = att_mem
+            if update_memory:
+                H1 = H1_new
         else:
+            Z, att_vis = self.vision(Xin, H1, H2)
             if update_memory:
                 H1, H2 = self.memory(Z, H1)
         if self.readout == "h2":

@@ -92,10 +92,13 @@ def build_parser() -> argparse.ArgumentParser:
                    help="belief decoder: pool = mean-pool + Linear; ffn = per-pixel "
                         "channel FFN (r_dim->16), flatten, Linear; conv = two strided "
                         "convs, flatten, Linear -> 2 logits")
-    p.add_argument("--v-mode", choices=["state", "learned"], default="state",
+    p.add_argument("--v-mode", choices=["state", "learned", "learned_mem"], default="state",
                    help="learned: vision-block values V_X/V_H are learned embeddings "
                         "(not derived from X/H2); H2 = A_X@V_X + A_H@V_H each step, "
-                        "only H1 crosses timesteps. Pair with --readout h2.")
+                        "only H1 crosses timesteps. learned_mem: same but H2 and the "
+                        "learned values live in the MEMORY block (A_Z@V_Z + A_H1@V_H1), "
+                        "computed every step; H1 still written on ticks. "
+                        "Pair with --readout h2.")
     p.add_argument("--min-change-time", type=int, default=5)
     p.add_argument("--max-change-time", type=int, default=5)
     p.add_argument("--noise", type=float, default=5.0)

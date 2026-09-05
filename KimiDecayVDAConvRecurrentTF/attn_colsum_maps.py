@@ -107,10 +107,42 @@ def main() -> None:
                    noise_multiplier=5.0, curriculum=False, theta=args.theta)
 
     keys = ("Ax", "Ah", "Az", "Ah1")
+    akeys = ("acc_decay", "acc_write", "acc_gate", "acc_surprise")
     NC = len(CHANGE_CONDS)
     N = MAP * MAP
     maps = {k: np.zeros((NC, T, MAP, MAP), dtype=np.float64) for k in keys}
     raw = {k: np.zeros((NC, T, N, N), dtype=np.float64) for k in keys}
+    amaps = {k: np.zeros((NC, T, MAP, MAP), dtype=np.float64) for k in akeys}
+    mem_every = ckpt.get("mem_every", 1)
+    v_mode = ckpt.get("v_mode", "state")
+    accum = model.accumulator
+
+    def accum_gate_maps(X_t, H1, ACC_pre):
+        """Accumulator 'attention': per-pixel gate fields + surprise, each (MAP,MAP).
+
+        a = decay (h*dk -> mean), b = write (h -> mean), g = readout gate
+        (h*dv -> mean), surprise = ||v - (a*S)^T k|| per pixel (mean over h).
+        Mirrors KDAVisualAccumulator.forward against the PRE-update state.
+        """
+        B, _, H, W = X_t.shape
+        h, dk, dv, P = accum.h, accum.dk, accum.dv, H * W
+        inp = torch.cat([X_t, H1], dim=1)
+        def shp(t):
+            return t.view(B, h, -1, P)
+        k = torch.nn.functional.normalize(shp(accum.W_k(inp)).float(), dim=2)
+        v = shp(accum.W_v(inp)).float()
+        a = torch.sigmoid(accum.W_a(inp)).view(B, h, dk, 1, P).float()
+        b = torch.sigmoid(accum.W_b(inp)).view(B, h, 1, 1, P).float()
+        g = torch.sigmoid(accum.W_g(inp)).view(B, h, dv, P).float()
+        S_dec = a * ACC_pre.float()
+        v_hat = torch.einsum("bhikp,bhip->bhkp", S_dec, k)
+        err = (v - v_hat).norm(dim=2)                 # (B,h,P)
+        am = a.mean(dim=(1, 2)).view(B, H, W)         # (B,H,W)
+        bm = b.mean(dim=1).view(B, H, W)
+        gm = g.mean(dim=(1, 2)).view(B, H, W)
+        em = err.mean(dim=1).view(B, H, W)
+        return (am[0].cpu().numpy(), bm[0].cpu().numpy(),
+                gm[0].cpu().numpy(), em[0].cpu().numpy())
 
     print(f"[colsum] cue S1 @100%, theta={args.theta}, {args.trials} trials x {NC} conditions")
     with torch.no_grad():
@@ -129,6 +161,11 @@ def main() -> None:
                 for t in range(T):
                     frame = obs[:, t].permute(0, 3, 1, 2).contiguous()
                     X_t = model.stem(frame)
+                    ga, gb, gg, ge = accum_gate_maps(X_t, H1, ACC)
+                    amaps["acc_decay"][ci, t] += ga
+                    amaps["acc_write"][ci, t] += gb
+                    amaps["acc_gate"][ci, t] += gg
+                    amaps["acc_surprise"][ci, t] += ge
                     ACC, acc_read, _ = model._accumulate(X_t, H1, ACC)
                     Xin = torch.cat([X_t, acc_read], dim=1)
 
@@ -149,17 +186,38 @@ def main() -> None:
                     raw["Az"][ci, t] += Az[0].cpu().numpy()
                     raw["Ah1"][ci, t] += Ah1[0].cpu().numpy()
 
-                    H1, H2 = model.memory(Z, H1)
+                    # --- mirror step() exactly: cadence + v_mode branch ---
+                    update_memory = ((t + 1) % mem_every == 0)
+                    if v_mode == "learned":
+                        H2 = att
+                        if update_memory:
+                            H1, _ = model.memory(Z, H1)
+                    elif v_mode == "learned_mem":
+                        # vision already used H1 as value source in the model's
+                        # step(); here Z/att came from model.vision(Xin, H1, H2)
+                        # with H2 ignored only when learned_v. For learned_mem the
+                        # vision block uses H1 for V_h, so recompute faithfully:
+                        Z, att = model.vision(Xin, H1, H1)
+                        H1_new, att_mem = model.memory(Z, H1)
+                        H2 = att_mem
+                        if update_memory:
+                            H1 = H1_new
+                    else:
+                        if update_memory:
+                            H1, H2 = model.memory(Z, H1)
             print(f"[colsum]   {name}: done", flush=True)
 
     for k in keys:
         maps[k] /= args.trials
         raw[k] /= args.trials
+    for k in akeys:
+        amaps[k] /= args.trials
     np.savez(os.path.join(args.out_dir, "attn_colsum_maps.npz"),
              conditions=np.array([c[0] for c in CHANGE_CONDS]),
              theta=np.array([args.theta]),
              **{k: maps[k] for k in keys},
-             **{f"raw_{k}": raw[k] for k in keys})
+             **{f"raw_{k}": raw[k] for k in keys},
+             **{k: amaps[k] for k in akeys})
 
     row_labels = {"Ax": r"$A_X$ received (vision: input keys)",
                   "Ah": r"$A_H$ received (vision: memory keys)",
@@ -168,10 +226,7 @@ def main() -> None:
     cue_r0, cue_c0 = cell_origin(S_TL)
 
     def fmt_cbar(fig, im, cax):
-        from matplotlib.ticker import MaxNLocator
-        cb = fig.colorbar(im, cax=cax, format="%.4f")
-        cb.locator = MaxNLocator(5)
-        cb.update_ticks()
+        cb = fig.colorbar(im, cax=cax, format="%.2f", ticks=[0.0, 0.25, 0.5, 0.75, 1.0])
         cb.ax.tick_params(labelsize=11)
         return cb
 
@@ -184,11 +239,11 @@ def main() -> None:
         gs = fig.add_gridspec(len(keys), T + 1, width_ratios=[1.0] * T + [0.09],
                               wspace=0.05, hspace=0.15)
         for ri, k in enumerate(keys):
-            vmax = max(float(maps[k][ci].max()), 1e-9)
+            norm = maps[k][ci] / max(float(maps[k][ci].max()), 1e-9)   # [0,1] per row
             im = None
             for t in range(T):
                 ax = fig.add_subplot(gs[ri, t])
-                im = ax.imshow(maps[k][ci, t], vmin=0.0, vmax=vmax, cmap="viridis")
+                im = ax.imshow(norm[t], vmin=0.0, vmax=1.0, cmap="viridis")
                 ax.set_xticks([]); ax.set_yticks([])
                 ax.add_patch(Rectangle((cue_c0 - 0.5, cue_r0 - 0.5), CELL, CELL,
                                        fill=False, edgecolor="red", lw=1.5))
@@ -199,13 +254,13 @@ def main() -> None:
                 if ri == 0:
                     ax.set_title(f"t={t}", fontsize=11)
                 if t == 0:
-                    ax.set_ylabel(f"{row_labels[k]}\n[0, {vmax:.4f}]", fontsize=9)
+                    ax.set_ylabel(f"{row_labels[k]}\n[0, 1]", fontsize=9)
             fmt_cbar(fig, im, fig.add_subplot(gs[ri, T]))
         fig.suptitle(f"Column-sum attention received (16x16 scene) — cue top-left 100%, {ch_names[name]}",
                      fontsize=12)
-        fig.subplots_adjust(left=0.14, right=0.965, top=0.93, bottom=0.02)
+        fig.subplots_adjust(left=0.14, right=0.94, top=0.93, bottom=0.02)
         out = os.path.join(args.out_dir, f"attn_colsum_cueTL_100p_{name}.png")
-        fig.savefig(out, dpi=130)
+        fig.savefig(out, dpi=130, bbox_inches="tight")
         plt.close(fig)
         print(f"[colsum]   wrote {out}", flush=True)
 
@@ -215,11 +270,11 @@ def main() -> None:
         gs = fig.add_gridspec(len(keys), T + 1, width_ratios=[1.0] * T + [0.09],
                               wspace=0.05, hspace=0.15)
         for ri, k in enumerate(keys):
-            vmax = max(float(raw[k][ci].max()), 1e-9)
+            rnorm = raw[k][ci] / max(float(raw[k][ci].max()), 1e-9)   # [0,1] per row
             im = None
             for t in range(T):
                 ax = fig.add_subplot(gs[ri, t])
-                im = ax.imshow(raw[k][ci, t], vmin=0.0, vmax=vmax, cmap="viridis",
+                im = ax.imshow(rnorm[t], vmin=0.0, vmax=1.0, cmap="viridis",
                                interpolation="nearest")
                 ax.set_xticks([]); ax.set_yticks([])
                 # cue-cell band on both axes (keys = cols, queries = rows)
@@ -230,13 +285,48 @@ def main() -> None:
                 if ri == 0:
                     ax.set_title(f"t={t}", fontsize=11)
                 if t == 0:
-                    ax.set_ylabel(f"{row_labels[k].replace('received', 'raw')}\n[0, {vmax:.4f}]", fontsize=9)
+                    ax.set_ylabel(f"{row_labels[k].replace('received', 'raw')}\n[0, 1]", fontsize=9)
             fmt_cbar(fig, im, fig.add_subplot(gs[ri, T]))
         fig.suptitle(f"Raw attention (256 queries x 256 keys) — cue top-left 100%, {ch_names[name]}",
                      fontsize=12)
-        fig.subplots_adjust(left=0.14, right=0.965, top=0.93, bottom=0.02)
+        fig.subplots_adjust(left=0.14, right=0.94, top=0.93, bottom=0.02)
         out = os.path.join(args.out_dir, f"attn_raw_cueTL_100p_{name}.png")
-        fig.savefig(out, dpi=130)
+        fig.savefig(out, dpi=130, bbox_inches="tight")
+        plt.close(fig)
+        print(f"[colsum]   wrote {out}", flush=True)
+
+    # ---- figure set 3: accumulator gate fields (16x16, per step) ----
+    arow_labels = {"acc_decay": "accum decay a",
+                   "acc_write": "accum write b",
+                   "acc_gate": "accum readout gate g",
+                   "acc_surprise": "accum surprise ||v-v̂||"}
+    for ci, (name, change, cidx) in enumerate(CHANGE_CONDS):
+        fig = plt.figure(figsize=(2.0 * T + 1.2, 2.4 * len(akeys)))
+        gs = fig.add_gridspec(len(akeys), T + 1, width_ratios=[1.0] * T + [0.09],
+                              wspace=0.05, hspace=0.15)
+        for ri, k in enumerate(akeys):
+            anorm = amaps[k][ci] / max(float(amaps[k][ci].max()), 1e-9)   # [0,1] per row
+            im = None
+            for t in range(T):
+                ax = fig.add_subplot(gs[ri, t])
+                im = ax.imshow(anorm[t], vmin=0.0, vmax=1.0, cmap="viridis")
+                ax.set_xticks([]); ax.set_yticks([])
+                ax.add_patch(Rectangle((cue_c0 - 0.5, cue_r0 - 0.5), CELL, CELL,
+                                       fill=False, edgecolor="red", lw=1.5))
+                if change and cidx >= 0:
+                    r0, c0 = cell_origin(cidx)
+                    ax.add_patch(Rectangle((c0 - 0.5, r0 - 0.5), CELL, CELL,
+                                           fill=False, edgecolor="cyan", lw=1.5, linestyle="--"))
+                if ri == 0:
+                    ax.set_title(f"t={t}", fontsize=11)
+                if t == 0:
+                    ax.set_ylabel(f"{arow_labels[k]}\n[0, 1]", fontsize=9)
+            fmt_cbar(fig, im, fig.add_subplot(gs[ri, T]))
+        fig.suptitle(f"KDA accumulator gate fields (16x16) — cue top-left 100%, {ch_names[name]}",
+                     fontsize=12)
+        fig.subplots_adjust(left=0.14, right=0.94, top=0.93, bottom=0.02)
+        out = os.path.join(args.out_dir, f"attn_accum_cueTL_100p_{name}.png")
+        fig.savefig(out, dpi=130, bbox_inches="tight")
         plt.close(fig)
         print(f"[colsum]   wrote {out}", flush=True)
 

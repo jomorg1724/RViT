@@ -42,7 +42,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from kda_conv_memory_model import KDAConvMemoryModel
+from kda_conv_memory_model import KDAConvMemoryModel, _nchw_to_tokens, _tokens_to_nchw
 from envs import make_env
 from train_rl import pick_device, seed_training_rngs
 
@@ -107,6 +107,27 @@ def render_grid(arr, rows, suptitle, out_png):
     plt.close(fig)
 
 
+def _token_contribs(Q, Kx, Kh, Vx, Vh, scale):
+    """Token-mode attention: per-query stream mass (B,2,H,W) + each stream's
+    actual contribution to att (B,C,H,W). Pixel-gate A*B products are wrong
+    here — contributions are spatially mixed (A @ V)."""
+    q, H, W = _nchw_to_tokens(Q)
+    kx, _, _ = _nchw_to_tokens(Kx)
+    kh, _, _ = _nchw_to_tokens(Kh)
+    vx, _, _ = _nchw_to_tokens(Vx)
+    vh, _, _ = _nchw_to_tokens(Vh)
+    q, kx, kh, vx, vh = q.float(), kx.float(), kh.float(), vx.float(), vh.float()
+    B, N, _ = q.shape
+    S = torch.softmax(torch.cat([q @ kx.transpose(-2, -1) * scale,
+                                 q @ kh.transpose(-2, -1) * scale], dim=-1), dim=-1)
+    Ax, Ah = S[..., :N], S[..., N:]
+    mass = torch.stack([Ax.sum(-1).reshape(B, H, W),
+                        Ah.sum(-1).reshape(B, H, W)], dim=1)
+    cx = _tokens_to_nchw(Ax @ vx, H, W)
+    ch = _tokens_to_nchw(Ah @ vh, H, W)
+    return mass, cx, ch
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="KDA conv-memory post-training analysis (vda16)")
     ap.add_argument("--checkpoint", required=True)
@@ -114,6 +135,8 @@ def main() -> None:
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--probe-trials", type=int, default=6000)
     ap.add_argument("--heatmap-trials", type=int, default=100)
+    ap.add_argument("--skip-probes", action="store_true",
+                    help="skip Part 1 (probes); regenerate maps only")
     ap.add_argument("--n-props", type=int, default=16)
     args = ap.parse_args()
     os.makedirs(args.out_dir, exist_ok=True)
@@ -131,6 +154,8 @@ def main() -> None:
         mem_every=ckpt.get("mem_every", 1),
         accum_mode=ckpt["accum_mode"], accum_decay=ckpt["accum_decay"],
         kda_heads=ckpt["kda_heads"], kda_head_dim=ckpt["kda_head_dim"],
+        attn_mode=ckpt.get("attn_mode", "pixel_gate"),
+        readout=ckpt.get("readout", "full"),
     ).to(device)
     model.load_state_dict(ckpt["model_state_dict"])
     model.eval()
@@ -141,32 +166,36 @@ def main() -> None:
                    noise_multiplier=5.0, curriculum=False, theta=65.0)
 
     # ---------------- Part 1: fresh probes on frozen R@last ----------------
-    print("[analysis-kda] Part 1: fresh probes on frozen R@last ...")
+    if args.skip_probes:
+        print("[analysis-kda] Part 1: skipped (--skip-probes)")
+    else:
+        print("[analysis-kda] Part 1: fresh probes on frozen R@last ...")
     X_feat, y_chg, y_cue = [], [], []
-    with torch.no_grad():
-        for _ in range(args.probe_trials):
-            env.reset()
-            frames = [env.step(0)[0] for _ in range(T)]
-            obs = torch.from_numpy(np.stack(frames)).unsqueeze(0).float().to(device)
-            R = model.forward_seq(obs)
-            r = R[:, -1].mean(dim=(2, 3)).cpu().numpy()[0]      # (4C,)
-            X_feat.append(r)
-            y_chg.append(int(env.change_true))
-            y_cue.append(int(env.cue_index))
-    Xf = np.stack(X_feat)
-    y_chg, y_cue = np.array(y_chg), np.array(y_cue)
-    results = {
-        "change_linear": probe(Xf, y_chg, 2, device, mlp=False),
-        "change_mlp": probe(Xf, y_chg, 2, device, mlp=True),
-        "cue_linear": probe(Xf, y_cue, 16, device, mlp=False),
-        "cue_mlp": probe(Xf, y_cue, 16, device, mlp=True),
-    }
-    print(f"[analysis-kda]   change: linear={results['change_linear']:.3f}  "
-          f"mlp={results['change_mlp']:.3f}  (chance 0.50)")
-    print(f"[analysis-kda]   cue:    linear={results['cue_linear']:.3f}  "
-          f"mlp={results['cue_mlp']:.3f}  (chance 0.0625)")
-    with open(os.path.join(args.out_dir, "probe_results_kda.json"), "w") as f:
-        json.dump(results, f, indent=2)
+    if not args.skip_probes:
+        with torch.no_grad():
+            for _ in range(args.probe_trials):
+                env.reset()
+                frames = [env.step(0)[0] for _ in range(T)]
+                obs = torch.from_numpy(np.stack(frames)).unsqueeze(0).float().to(device)
+                R = model.forward_seq(obs)
+                r = R[:, -1].mean(dim=(2, 3)).cpu().numpy()[0]      # (4C,)
+                X_feat.append(r)
+                y_chg.append(int(env.change_true))
+                y_cue.append(int(env.cue_index))
+        Xf = np.stack(X_feat)
+        y_chg, y_cue = np.array(y_chg), np.array(y_cue)
+        results = {
+            "change_linear": probe(Xf, y_chg, 2, device, mlp=False),
+            "change_mlp": probe(Xf, y_chg, 2, device, mlp=True),
+            "cue_linear": probe(Xf, y_cue, 16, device, mlp=False),
+            "cue_mlp": probe(Xf, y_cue, 16, device, mlp=True),
+        }
+        print(f"[analysis-kda]   change: linear={results['change_linear']:.3f}  "
+              f"mlp={results['change_mlp']:.3f}  (chance 0.50)")
+        print(f"[analysis-kda]   cue:    linear={results['cue_linear']:.3f}  "
+              f"mlp={results['cue_mlp']:.3f}  (chance 0.0625)")
+        with open(os.path.join(args.out_dir, "probe_results_kda.json"), "w") as f:
+            json.dump(results, f, indent=2)
 
     # ---------------- Part 2: full map battery ----------------
     props = PROPS_FULL[: args.n_props]
@@ -217,23 +246,41 @@ def main() -> None:
                     Z, att, A = model.vision(Xin, H1, H2, return_attn=True)
                     Vx = model.vision.W_vx(Xin)
                     Vh = model.vision.W_vh(H2)
-                    maps["Ax"][ci, t] += A[0, 0].cpu().numpy()
-                    maps["Ah"][ci, t] += A[0, 1].cpu().numpy()
-                    maps["eX"][ci, t] += (A[:, 0:1] * Vx).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
-                    maps["eH"][ci, t] += (A[:, 1:2] * Vh).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                    if model.vision.attn_mode == "token":
+                        _, cx, ch = _token_contribs(model.vision.W_q(Xin),
+                                                    model.vision.W_kx(Xin),
+                                                    model.vision.W_kh(H1),
+                                                    Vx, Vh, model.vision.scale)
+                        maps["Ax"][ci, t] += A[0, 0].cpu().numpy()      # stream mass (B,2,H,W)
+                        maps["Ah"][ci, t] += A[0, 1].cpu().numpy()
+                        maps["eX"][ci, t] += cx.pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                        maps["eH"][ci, t] += ch.pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                    else:
+                        maps["Ax"][ci, t] += A[0, 0].cpu().numpy()
+                        maps["Ah"][ci, t] += A[0, 1].cpu().numpy()
+                        maps["eX"][ci, t] += (A[:, 0:1] * Vx).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                        maps["eH"][ci, t] += (A[:, 1:2] * Vh).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
 
                     # --- memory gates/energies recomputed exactly ---
                     mem = model.memory
                     Qm = mem.W_q(H1)
-                    Sz = (Qm * mem.W_kz(Z)).sum(dim=1, keepdim=True) * mem.scale
-                    Sh = (Qm * mem.W_kh(H1)).sum(dim=1, keepdim=True) * mem.scale
-                    Am = torch.softmax(torch.cat([Sz, Sh], dim=1), dim=1)
                     Vz = mem.W_vz(Z)
                     Vh1 = mem.W_vh(H1)
-                    maps["Az"][ci, t] += Am[0, 0].cpu().numpy()
-                    maps["Ah1"][ci, t] += Am[0, 1].cpu().numpy()
-                    maps["eZ"][ci, t] += (Am[:, 0:1] * Vz).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
-                    maps["eH1"][ci, t] += (Am[:, 0:1] * Vh1).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                    if mem.attn_mode == "token":
+                        mass, cz, ch1 = _token_contribs(Qm, mem.W_kz(Z), mem.W_kh(H1),
+                                                        Vz, Vh1, mem.scale)
+                        maps["Az"][ci, t] += mass[0, 0].cpu().numpy()
+                        maps["Ah1"][ci, t] += mass[0, 1].cpu().numpy()
+                        maps["eZ"][ci, t] += cz.pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                        maps["eH1"][ci, t] += ch1.pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                    else:
+                        Sz = (Qm * mem.W_kz(Z)).sum(dim=1, keepdim=True) * mem.scale
+                        Sh = (Qm * mem.W_kh(H1)).sum(dim=1, keepdim=True) * mem.scale
+                        Am = torch.softmax(torch.cat([Sz, Sh], dim=1), dim=1)
+                        maps["Az"][ci, t] += Am[0, 0].cpu().numpy()
+                        maps["Ah1"][ci, t] += Am[0, 1].cpu().numpy()
+                        maps["eZ"][ci, t] += (Am[:, 0:1] * Vz).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
+                        maps["eH1"][ci, t] += (Am[:, 0:1] * Vh1).pow(2).sum(dim=1).sqrt()[0].cpu().numpy()
 
                     H1, H2 = model.memory(Z, H1)
             print(f"[analysis-kda]   {name}: done", flush=True)

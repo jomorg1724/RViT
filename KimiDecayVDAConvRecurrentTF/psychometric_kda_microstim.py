@@ -31,12 +31,8 @@ import sys
 import numpy as np
 import torch
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from kda_conv_memory_model import KDAConvMemoryModel
+from kda_conv_memory_model import KDAConvMemoryModel, _nchw_to_tokens
 from envs import make_env
 from train_rl import pick_device, seed_training_rngs
 
@@ -61,6 +57,8 @@ def build_model(ckpt: dict, device) -> KDAConvMemoryModel:
         mem_every=ckpt.get("mem_every", 1),
         accum_mode=ckpt["accum_mode"], accum_decay=ckpt["accum_decay"],
         kda_heads=ckpt["kda_heads"], kda_head_dim=ckpt["kda_head_dim"],
+        attn_mode=ckpt.get("attn_mode", "pixel_gate"),
+        readout=ckpt.get("readout", "full"),
     ).to(device)
     model.load_state_dict(ckpt["model_state_dict"])
     model.eval()
@@ -68,7 +66,7 @@ def build_model(ckpt: dict, device) -> KDAConvMemoryModel:
 
 
 def forward_seq_stim(model, obs, stim_cell=None, target="att_vis",
-                     t_start=None, t_end=None):
+                     t_start=None, t_end=None, stim_value=1.0):
     """forward_seq with a per-step clamp at stim_cell.
 
     t_start/t_end: inclusive step indices to apply the clamp (None = whole trial).
@@ -95,7 +93,7 @@ def forward_seq_stim(model, obs, stim_cell=None, target="att_vis",
         X_t = model.stem(x)
         ACC, acc_read, _ = model._accumulate(X_t, H1, ACC)
         Xin = torch.cat([X_t, acc_read], dim=1)
-        if target == "ah" and stim_now:
+        if target in ("ah", "ax") and stim_now:
             vis = model.vision
             Q = vis.W_q(Xin)
             Sx = (Q * vis.W_kx(Xin)).sum(dim=1, keepdim=True) * vis.scale
@@ -103,8 +101,12 @@ def forward_seq_stim(model, obs, stim_cell=None, target="att_vis",
             A = torch.softmax(torch.cat([Sx, Sh], dim=1), dim=1)
             rs, cs = cell_slice(stim_cell)
             A = A.clone()
-            A[:, 1:2, rs, cs] = 1.0
-            A[:, 0:1, rs, cs] = 0.0
+            if target == "ah":
+                A[:, 1:2, rs, cs] = stim_value
+                A[:, 0:1, rs, cs] = 1.0 - stim_value
+            else:  # ax
+                A[:, 0:1, rs, cs] = stim_value
+                A[:, 1:2, rs, cs] = 1.0 - stim_value
             att_vis = A[:, 0:1] * vis.W_vx(Xin) + A[:, 1:2] * vis.W_vh(H2)
             att_vis = vis.ffn(att_vis)
             Z = vis.proj(vis.se(torch.cat([Xin, att_vis], dim=1)))
@@ -120,11 +122,11 @@ def forward_seq_stim(model, obs, stim_cell=None, target="att_vis",
                 rs, cs = cell_slice(stim_cell)
                 A = A.clone()
                 if target == "ah1":
-                    A[:, 1:2, rs, cs] = 1.0
-                    A[:, 0:1, rs, cs] = 0.0
+                    A[:, 1:2, rs, cs] = stim_value
+                    A[:, 0:1, rs, cs] = 1.0 - stim_value
                 else:  # az
-                    A[:, 0:1, rs, cs] = 1.0
-                    A[:, 1:2, rs, cs] = 0.0
+                    A[:, 0:1, rs, cs] = stim_value
+                    A[:, 1:2, rs, cs] = 1.0 - stim_value
                 att = A[:, 0:1] * mem.W_vz(Z) + A[:, 1:2] * mem.W_vh(H1)
                 att = mem.ffn(att)
                 H1_new = mem.proj(mem.se(torch.cat([H1, att], dim=1)))
@@ -137,7 +139,7 @@ def forward_seq_stim(model, obs, stim_cell=None, target="att_vis",
         if target == "att_vis" and stim_now:
             rs, cs = cell_slice(stim_cell)
             R = R.clone()
-            R[:, 3 * C: 4 * C, rs, cs] = STIM_VALUE
+            R[:, 3 * C: 4 * C, rs, cs] = stim_value
         Rs.append(R)
     return torch.stack(Rs, dim=1)
 

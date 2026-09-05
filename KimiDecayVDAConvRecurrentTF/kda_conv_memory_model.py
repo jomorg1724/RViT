@@ -356,12 +356,14 @@ class KDAConvMemoryModel(nn.Module):
                  frame_window: int = 1, frame_stride: int = 1, mem_every: int = 1,
                  accum_mode: str = "kda", accum_decay: float = 0.5,
                  kda_heads: int = 4, kda_head_dim: int = 32,
-                 attn_mode: str = "pixel_gate"):
+                 attn_mode: str = "pixel_gate", readout: str = "full"):
         super().__init__()
         if accum_mode not in ("ema", "gated", "kda"):
             raise ValueError(f"accum_mode must be ema|gated|kda, got {accum_mode!r}")
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
+        if readout not in ("full", "h1h2"):
+            raise ValueError(f"readout must be full|h1h2, got {readout!r}")
         self.n_channels = n_channels
         self.map_size = map_size
         self.proto_dim = proto_dim
@@ -373,6 +375,8 @@ class KDAConvMemoryModel(nn.Module):
         self.kda_heads = int(kda_heads)
         self.kda_head_dim = int(kda_head_dim)
         self.attn_mode = attn_mode
+        self.readout = readout
+        self.r_dim = (2 * n_channels) if readout == "h1h2" else (4 * n_channels)
 
         if accum_mode == "ema":
             init = _logit(accum_decay)
@@ -390,11 +394,13 @@ class KDAConvMemoryModel(nn.Module):
         self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode)
         self.memory = ConvMemoryBlock(n_channels, memory_noise_std=memory_noise_std,
                                      attn_mode=attn_mode)
-        # JEPA head: ONE per-pixel head. R = 4 x n_channels (H1' || H2' || Z || att_vis).
-        self.jepa_norm = nn.LayerNorm(4 * n_channels)
-        self.jepa_feat = nn.Sequential(nn.Conv2d(4 * n_channels, 2 * n_channels, 1), nn.GELU())
+        # JEPA head: ONE per-pixel head on R.
+        #   readout="full": R = [H1‖H2‖Z‖att_vis] (4C)
+        #   readout="h1h2": R = [H1‖H2] (2C) — decode only from the two state streams
+        self.jepa_norm = nn.LayerNorm(self.r_dim)
+        self.jepa_feat = nn.Sequential(nn.Conv2d(self.r_dim, 2 * n_channels, 1), nn.GELU())
         self.jepa_out = nn.Conv2d(2 * n_channels, proto_dim, 1)
-        self.classifier = nn.Linear(4 * n_channels, 2)
+        self.classifier = nn.Linear(self.r_dim, 2)
         self.register_buffer("jepa_center", torch.zeros(map_size, map_size, proto_dim))
 
     def init_state(self, B: int, device, dtype):
@@ -421,7 +427,10 @@ class KDAConvMemoryModel(nn.Module):
         Z, att_vis = self.vision(Xin, H1, H2)
         if update_memory:
             H1, H2 = self.memory(Z, H1)
-        R = torch.cat([H1, H2, Z, att_vis], dim=1)              # (B,4C,map,map)
+        if self.readout == "h1h2":
+            R = torch.cat([H1, H2], dim=1)                      # (B,2C,map,map)
+        else:
+            R = torch.cat([H1, H2, Z, att_vis], dim=1)          # (B,4C,map,map)
         if return_stats:
             return R, (H1, H2, ACC), stats
         return R, (H1, H2, ACC)

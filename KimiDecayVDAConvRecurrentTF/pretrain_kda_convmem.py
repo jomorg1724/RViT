@@ -36,6 +36,7 @@ import time
 import numpy as np
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 if _HERE not in __import__("sys").path:
@@ -84,6 +85,9 @@ def build_parser() -> argparse.ArgumentParser:
                    help="pixel_gate: per-pixel channel inner-product 2-way softmax. "
                         "token: flatten to (HW,C), QK^T over space, softmax over both "
                         "streams' keys, reshape back for conv residual.")
+    p.add_argument("--readout", choices=["full", "h1h2"], default="h1h2",
+                   help="R construction: full = [H1|H2|Z|att_vis] (4C); "
+                        "h1h2 = [H1|H2] (2C) — decode only from the two state streams.")
     p.add_argument("--min-change-time", type=int, default=5)
     p.add_argument("--max-change-time", type=int, default=5)
     p.add_argument("--noise", type=float, default=5.0)
@@ -129,6 +133,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--checkpoint-dir", default=None)
     p.add_argument("--log-every", type=int, default=1,
                    help="log every this many collections")
+    p.add_argument("--change-per-step", action="store_true",
+                   help="belief model: decode change-vs-no-change at EVERY step "
+                        "(label 1 from change_time onward on change trials, 0 otherwise)")
     p.add_argument("--resume", action="store_true",
                    help="resume from <checkpoint-dir>/kda_convmem_latest.pt (model + EMA "
                         "teacher + curriculum theta); appends to metrics.csv")
@@ -159,7 +166,8 @@ def main() -> None:
                                accum_decay=args.accum_decay,
                                kda_heads=args.kda_heads,
                                kda_head_dim=args.kda_head_dim,
-                               attn_mode=args.attn_mode).to(device)
+                               attn_mode=args.attn_mode,
+                               readout=args.readout).to(device)
     jepa_teacher = copy.deepcopy(model)
     for p_ in jepa_teacher.parameters():
         p_.requires_grad_(False)
@@ -215,7 +223,8 @@ def main() -> None:
 
     metrics_path = os.path.join(ckpt_dir, "metrics.csv")
     fieldnames = ["collection", "n_trials", "loss_total", "loss_jepa_ce", "loss_jepa_var",
-                  "loss_jepa_cov", "loss_change", "change_acc", "grad_norm", "theta", "elapsed_s"]
+                  "loss_jepa_cov", "loss_change", "change_acc", "change_acc_all",
+                  "grad_norm", "theta", "elapsed_s"]
     if not (args.resume and os.path.exists(metrics_path)):
         with open(metrics_path, "w", newline="") as f:
             csv.writer(f).writerow(fieldnames)
@@ -225,19 +234,22 @@ def main() -> None:
     total_updates = start_col * args.epochs * n_mb
     for col in range(start_col, n_collections):
         # ---- collect a FRESH training set ----
-        obs_list, change_list = [], []
+        obs_list, change_list, ctime_list = [], [], []
         for _ in range(args.collection_size):
             env.reset()
             change_list.append(int(env.valid) if args.label == "valid" else int(env.change_true))
+            ctime_list.append(int(getattr(env, "change_time", T)))
             frames = [env.step(0)[0] for _ in range(T)]
             obs_list.append(np.stack(frames))
         obs = torch.from_numpy(np.stack(obs_list))  # (N,T,S,S,3) — stays on CPU;
         # minibatches are transferred per update to avoid a device-resident block
         # (VDA16 100x100 frames: a full collection is ~2.4 GB fp32)
         change = torch.tensor(change_list, dtype=torch.long)
+        ctime = torch.tensor(ctime_list, dtype=torch.long)
 
         acc = {k: 0.0 for k in ("loss_total", "loss_jepa_ce", "loss_jepa_var",
-                                "loss_jepa_cov", "loss_change", "change_acc", "grad_norm")}
+                                "loss_jepa_cov", "loss_change", "change_acc",
+                                "change_acc_all", "grad_norm")}
         n_upd = 0
         n_skipped = 0
         for epoch in range(args.epochs):
@@ -271,10 +283,29 @@ def main() -> None:
                 var, cov = jepa_variance_covariance_loss(feats, m[:, 1:] * m[:, :-1])
                 jepa_loss = ce + args.jepa_var_coef * var + args.jepa_cov_coef * cov
 
-                logits = model.classify(R_s[:, -1])
-                change_loss = ce_loss(logits, change_mb)
-                with torch.no_grad():
-                    ch_acc = float((logits.argmax(-1) == change_mb).float().mean().item())
+                if args.change_per_step and args.label == "change":
+                    # Belief model: classify change-vs-no-change at EVERY step.
+                    # Label is 1 from the change frame onward on change trials.
+                    ct_mb = ctime[bidx].to(device, non_blocking=True)
+                    B_, T_ = R_s.shape[0], R_s.shape[1]
+                    step_logits = model.classify(
+                        R_s.reshape(B_ * T_, *R_s.shape[2:])).reshape(B_, T_, 2)
+                    t_idx = torch.arange(T_, device=device).unsqueeze(0)
+                    step_labels = ((change_mb.unsqueeze(1) == 1)
+                                   & (t_idx >= ct_mb.unsqueeze(1))).long()
+                    change_loss = F.cross_entropy(
+                        step_logits.reshape(-1, 2), step_labels.reshape(-1))
+                    with torch.no_grad():
+                        ch_acc = float((step_logits[:, -1].argmax(-1) == change_mb)
+                                       .float().mean().item())
+                        ch_acc_all = float((step_logits.argmax(-1) == step_labels)
+                                           .float().mean().item())
+                else:
+                    logits = model.classify(R_s[:, -1])
+                    change_loss = ce_loss(logits, change_mb)
+                    with torch.no_grad():
+                        ch_acc = float((logits.argmax(-1) == change_mb).float().mean().item())
+                        ch_acc_all = ch_acc
 
                 loss = args.jepa_coef * jepa_loss + args.change_coef * change_loss
 
@@ -314,6 +345,7 @@ def main() -> None:
                 acc["loss_jepa_cov"] += float(cov.detach().item())
                 acc["loss_change"] += float(change_loss.detach().item())
                 acc["change_acc"] += ch_acc
+                acc["change_acc_all"] += ch_acc_all
                 acc["grad_norm"] += float(grad_norm)
                 n_upd += 1
                 total_updates += 1
@@ -338,7 +370,8 @@ def main() -> None:
             print(f"[kda-convmem c{col}/{n_collections}] trials={(col + 1) * args.collection_size} "
                   f"jepa={row['loss_jepa_ce']:.3f} var={row['loss_jepa_var']:.3f} "
                   f"cov={row['loss_jepa_cov']:.2f} change={row['loss_change']:.3f} "
-                  f"acc={row['change_acc']:.3f} theta={row['theta']:.1f} "
+                  f"acc={row['change_acc']:.3f} acc_all={row['change_acc_all']:.3f} "
+                  f"theta={row['theta']:.1f} "
                   f"gnorm={row['grad_norm']:.2f} ({row['elapsed_s']:.0f}s){skip_note}")
 
         if (col + 1) % args.save_every == 0 or col == n_collections - 1:
@@ -360,6 +393,7 @@ def main() -> None:
                 "kda_heads": args.kda_heads,
                 "kda_head_dim": args.kda_head_dim,
                 "attn_mode": args.attn_mode,
+                "readout": args.readout,
             }, ckpt_path)
             print(f"[kda-convmem] checkpoint saved: {ckpt_path}")
 

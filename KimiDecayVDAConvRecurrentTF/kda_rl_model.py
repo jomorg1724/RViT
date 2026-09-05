@@ -72,6 +72,7 @@ class KDARLModel(nn.Module):
         frame_window: int = 1,
         frame_stride: int = 1,
         attn_mode: str = "pixel_gate",
+        readout: str = "full",
     ) -> None:
         super().__init__()
         if init_action_bias is None:
@@ -98,10 +99,11 @@ class KDARLModel(nn.Module):
             kda_heads=kda_heads,
             kda_head_dim=kda_head_dim,
             attn_mode=attn_mode,
+            readout=readout,
         )
         self.encoder = self.backbone
 
-        readout_dim = 4 * n_channels
+        readout_dim = self.backbone.r_dim
         self.readout = SpatialConvReadout(readout_dim, map_size)
         self.actor_head = TinyHead(
             self.readout.out_dim, n_actions, hidden=64, out_bias=init_action_bias,
@@ -113,6 +115,10 @@ class KDARLModel(nn.Module):
             "taus",
             (torch.arange(n_quantiles, dtype=torch.float32) + 0.5) / n_quantiles,
         )
+        # Per-step change classifier — IDENTICAL decode to the supervised
+        # variant: a single Linear(r_dim, 2) on the spatially mean-pooled R.
+        # Decoded at every timestep (not just the last) for a dense task signal.
+        self.change_head = nn.Linear(readout_dim, 2)
         self.critic_head = self.critic_ff
         self.register_buffer(
             "jepa_center",
@@ -200,6 +206,10 @@ class KDARLModel(nn.Module):
         if return_cell:
             out["cell_seq"] = torch.stack(cell_seq, dim=1)
         return out
+
+    def change_logits_seq(self, cell_seq: torch.Tensor) -> torch.Tensor:
+        """Per-step change logits: (B,T,4C,H,W) -> mean-pool -> Linear -> (B,T,2)."""
+        return self.change_head(cell_seq.mean(dim=(3, 4)))
 
     def jepa_logits(self, cell_seq: torch.Tensor) -> torch.Tensor:
         pix = self.backbone.jepa_logits(cell_seq)

@@ -85,13 +85,17 @@ def build_parser() -> argparse.ArgumentParser:
                    help="pixel_gate: per-pixel channel inner-product 2-way softmax. "
                         "token: flatten to (HW,C), QK^T over space, softmax over both "
                         "streams' keys, reshape back for conv residual.")
-    p.add_argument("--readout", choices=["full", "h1h2"], default="h1h2",
+    p.add_argument("--readout", choices=["full", "h1h2", "h2"], default="h1h2",
                    help="R construction: full = [H1|H2|Z|att_vis] (4C); "
                         "h1h2 = [H1|H2] (2C) — decode only from the two state streams.")
     p.add_argument("--cls-head", choices=["pool", "ffn", "conv"], default="conv",
                    help="belief decoder: pool = mean-pool + Linear; ffn = per-pixel "
                         "channel FFN (r_dim->16), flatten, Linear; conv = two strided "
                         "convs, flatten, Linear -> 2 logits")
+    p.add_argument("--v-mode", choices=["state", "learned"], default="state",
+                   help="learned: vision-block values V_X/V_H are learned embeddings "
+                        "(not derived from X/H2); H2 = A_X@V_X + A_H@V_H each step, "
+                        "only H1 crosses timesteps. Pair with --readout h2.")
     p.add_argument("--min-change-time", type=int, default=5)
     p.add_argument("--max-change-time", type=int, default=5)
     p.add_argument("--noise", type=float, default=5.0)
@@ -172,7 +176,8 @@ def main() -> None:
                                kda_head_dim=args.kda_head_dim,
                                attn_mode=args.attn_mode,
                                readout=args.readout,
-                               cls_head=args.cls_head).to(device)
+                               cls_head=args.cls_head,
+                               v_mode=args.v_mode).to(device)
     jepa_teacher = copy.deepcopy(model)
     for p_ in jepa_teacher.parameters():
         p_.requires_grad_(False)
@@ -406,6 +411,7 @@ def main() -> None:
                 "attn_mode": args.attn_mode,
                 "readout": args.readout,
                 "cls_head": args.cls_head,
+                "v_mode": args.v_mode,
             }, ckpt_path)
             print(f"[kda-convmem] checkpoint saved: {ckpt_path}")
 

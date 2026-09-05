@@ -155,27 +155,41 @@ class ConvAttentionBlock(nn.Module):
     readout); H-sides and the output stay at width c.
     """
 
-    def __init__(self, c: int = 128, in_c: int | None = None, attn_mode: str = "pixel_gate"):
+    def __init__(self, c: int = 128, in_c: int | None = None, attn_mode: str = "pixel_gate",
+                 learned_v: bool = False, map_size: int = 16):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         cin = int(in_c) if in_c else c
         self.attn_mode = attn_mode
+        self.learned_v = learned_v
         self.W_q = nn.Conv2d(cin, c, 1, bias=False)
         self.W_kx = nn.Conv2d(cin, c, 1, bias=False)
         self.W_kh = nn.Conv2d(c, c, 1, bias=False)
-        self.W_vx = nn.Conv2d(cin, c, 1, bias=False)
-        self.W_vh = nn.Conv2d(c, c, 1, bias=False)
+        if learned_v:
+            # Values are LEARNED per-position embeddings, not derived from X or H2.
+            # att = A_X @ V_X + A_H @ V_H is then a pure attention-pattern readout:
+            # the content is fixed, only the routing is computed.
+            self.V_X = nn.Parameter(torch.randn(1, c, map_size, map_size) * 0.02)
+            self.V_H = nn.Parameter(torch.randn(1, c, map_size, map_size) * 0.02)
+        else:
+            self.W_vx = nn.Conv2d(cin, c, 1, bias=False)
+            self.W_vh = nn.Conv2d(c, c, 1, bias=False)
         self.ffn = nn.Sequential(nn.Conv2d(c, 2 * c, 1), nn.GELU(), nn.Conv2d(2 * c, c, 1))
         self.se = SEBlock(cin + c)
         self.proj = nn.Conv2d(cin + c, c, 1)
         self.scale = c ** -0.5
 
-    def forward(self, X: torch.Tensor, H1: torch.Tensor, H2: torch.Tensor,
+    def forward(self, X: torch.Tensor, H1: torch.Tensor, H2: torch.Tensor | None = None,
                 return_attn: bool = False):
         Q = self.W_q(X)
         Kx, Kh = self.W_kx(X), self.W_kh(H1)
-        Vx, Vh = self.W_vx(X), self.W_vh(H2)
+        if self.learned_v:
+            B = X.shape[0]
+            Vx = self.V_X.expand(B, -1, -1, -1)
+            Vh = self.V_H.expand(B, -1, -1, -1)
+        else:
+            Vx, Vh = self.W_vx(X), self.W_vh(H2)
         if self.attn_mode == "token":
             att, A = _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, self.scale)
         else:
@@ -357,14 +371,16 @@ class KDAConvMemoryModel(nn.Module):
                  accum_mode: str = "kda", accum_decay: float = 0.5,
                  kda_heads: int = 4, kda_head_dim: int = 32,
                  attn_mode: str = "pixel_gate", readout: str = "full",
-                 cls_head: str = "pool"):
+                 cls_head: str = "pool", v_mode: str = "state"):
         super().__init__()
         if accum_mode not in ("ema", "gated", "kda"):
             raise ValueError(f"accum_mode must be ema|gated|kda, got {accum_mode!r}")
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
-        if readout not in ("full", "h1h2"):
-            raise ValueError(f"readout must be full|h1h2, got {readout!r}")
+        if readout not in ("full", "h1h2", "h2"):
+            raise ValueError(f"readout must be full|h1h2|h2, got {readout!r}")
+        if v_mode not in ("state", "learned"):
+            raise ValueError(f"v_mode must be state|learned, got {v_mode!r}")
         if cls_head not in ("pool", "ffn", "conv"):
             raise ValueError(f"cls_head must be pool|ffn|conv, got {cls_head!r}")
         self.n_channels = n_channels
@@ -380,7 +396,9 @@ class KDAConvMemoryModel(nn.Module):
         self.attn_mode = attn_mode
         self.readout = readout
         self.cls_head = cls_head
-        self.r_dim = (2 * n_channels) if readout == "h1h2" else (4 * n_channels)
+        self.v_mode = v_mode
+        self.r_dim = {"full": 4 * n_channels, "h1h2": 2 * n_channels,
+                      "h2": n_channels}[readout]
 
         if accum_mode == "ema":
             init = _logit(accum_decay)
@@ -395,7 +413,8 @@ class KDAConvMemoryModel(nn.Module):
         self.stem = ConvStem(channels=n_channels, map_size=map_size,
                              in_channels=3 * self.frame_window)
         # The accumulator readout is always concatenated with X_t (X-side widens to 2C).
-        self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode)
+        self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode,
+                                         learned_v=(v_mode == "learned"), map_size=map_size)
         self.memory = ConvMemoryBlock(n_channels, memory_noise_std=memory_noise_std,
                                      attn_mode=attn_mode)
         # JEPA head: ONE per-pixel head on R.
@@ -446,9 +465,18 @@ class KDAConvMemoryModel(nn.Module):
         ACC, acc_read, stats = self._accumulate(X_t, H1, ACC)
         Xin = torch.cat([X_t, acc_read], dim=1)                 # (B,2C,map,map)
         Z, att_vis = self.vision(Xin, H1, H2)
-        if update_memory:
-            H1, H2 = self.memory(Z, H1)
-        if self.readout == "h1h2":
+        if self.v_mode == "learned":
+            # H2 is NOT state: it is rebuilt every step as A_X@V_X + A_H@V_H
+            # over learned value embeddings. Only H1 (and ACC) cross timesteps.
+            H2 = att_vis
+            if update_memory:
+                H1, _ = self.memory(Z, H1)
+        else:
+            if update_memory:
+                H1, H2 = self.memory(Z, H1)
+        if self.readout == "h2":
+            R = H2                                              # (B,C,map,map)
+        elif self.readout == "h1h2":
             R = torch.cat([H1, H2], dim=1)                      # (B,2C,map,map)
         else:
             R = torch.cat([H1, H2, Z, att_vis], dim=1)          # (B,4C,map,map)

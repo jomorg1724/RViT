@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KDA Conv-Memory Trunk — Attention & Recurrence Explainer</title>
+<style>
+  :root{
+    --bg:#0c0f14; --panel:#12161d; --panel2:#171c25; --ink:#e6edf3; --muted:#9aa7b4;
+    --faint:#5c6a78; --line:#232b36;
+    --acc:#f0a35e;           /* amber — observation / X stream */
+    --teal:#45c4b0;          /* teal — memory / H stream */
+    --violet:#c39bd3;        /* state */
+    --red:#e5534b;
+    --mono:"Cascadia Code","JetBrains Mono",Consolas,"SF Mono",monospace;
+    --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+       font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:56px 28px 120px}
+  header.hero{border-bottom:1px solid var(--line);padding-bottom:36px;margin-bottom:8px}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--acc);
+          text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:40px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+  h1 .dim{color:var(--faint)}
+  .sub{color:var(--muted);margin-top:14px;max-width:720px}
+  section{margin-top:72px}
+  .secno{font-family:var(--mono);font-size:13px;color:var(--acc);letter-spacing:.15em}
+  h2{font-size:27px;margin:6px 0 6px;letter-spacing:-.01em}
+  h2 .q{color:var(--faint);font-weight:400;font-style:italic;font-size:20px}
+  p.lede{color:var(--muted);max-width:760px}
+  p{margin:12px 0;max-width:760px}
+  strong{color:var(--ink)}
+  code,.m{font-family:var(--mono);font-size:.92em}
+  code{color:var(--acc)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+         padding:22px 24px;margin:22px 0}
+  .panel h3{font-size:14px;font-family:var(--mono);letter-spacing:.12em;color:var(--faint);
+            text-transform:uppercase;margin-bottom:14px}
+  .math{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+        padding:18px 22px;font-family:var(--mono);font-size:14.5px;line-height:2.05;
+        overflow-x:auto;margin:16px 0;color:var(--ink)}
+  .math .xs{color:var(--acc)} .math .hs{color:var(--teal)} .math .st{color:var(--violet)}
+  .math .cm{color:var(--faint)}
+  .math .frac{display:inline-block;vertical-align:middle;text-align:center;line-height:1.3;margin:0 2px}
+  .math .frac>span{display:block}
+  .math .frac>span.bot{border-top:1px solid var(--faint);padding:0 6px}
+  sub,sup{font-size:.72em}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  @media(max-width:880px){.grid2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:8px 0}
+  th{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--faint);
+     text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);text-transform:uppercase}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top}
+  td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;
+       border-radius:20px;border:1px solid var(--line);color:var(--muted);margin-left:8px;
+       vertical-align:middle}
+  .tag.acc{color:var(--acc);border-color:var(--acc)}
+  .tag.teal{color:var(--teal);border-color:var(--teal)}
+  .note{border-left:2px solid var(--acc);padding:4px 0 4px 16px;color:var(--muted);
+        font-size:14.5px;margin:18px 0;max-width:760px}
+  .findings{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px}
+  @media(max-width:880px){.findings{grid-template-columns:repeat(2,1fr)}}
+  .find{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .find h4{font-family:var(--mono);font-size:13px;margin-bottom:4px}
+  .find p{font-size:12.5px;color:var(--muted);line-height:1.5;margin:8px 0 0}
+  .find canvas{width:100%;image-rendering:pixelated;border-radius:6px;background:#000}
+  svg{display:block;width:100%;height:auto}
+  .svglabel{font-family:var(--mono);fill:var(--ink)}
+  footer{margin-top:90px;padding-top:24px;border-top:1px solid var(--line);
+         color:var(--faint);font-size:13px;font-family:var(--mono)}
+  .toc{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:26px;
+       display:flex;flex-wrap:wrap;gap:8px 22px}
+  .toc a{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--faint)}
+  .toc a:hover{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">RViT · KDA visual-accumulator · token-attention trunk</div>
+  <h1>Attention &amp; Recurrence<br><span class="dim">in the conv-memory belief model</span></h1>
+  <p class="sub">Four mechanisms, four questions. Two attention blocks decide <em>where to read and from
+  which stream</em>; two recurrent mechanisms decide <em>what persists, and at what timescale</em>.
+  This is the math as implemented in <code>kda_conv_memory_model.py</code>.</p>
+  <nav class="toc">
+    <a href="#s0">0 · pipeline</a>
+    <a href="#s1">1 · the three recurrent states</a>
+    <a href="#s2">2 · token attention</a>
+    <a href="#s3">3 · KDA accumulator</a>
+    <a href="#s4">4 · H1/H2 memory</a>
+    <a href="#s5">5 · readout &amp; belief</a>
+    <a href="#s6">6 · what the maps showed</a>
+  </nav>
+</header>
+
+<!-- ═══════════════ 0 · PIPELINE ═══════════════ -->
+<section id="s0">
+  <div class="secno">SECTION 0</div>
+  <h2>The pipeline <span class="q">— one frame's journey</span></h2>
+  <p class="lede">Every timestep, one 100×100 frame flows through four stages. The accumulator ticks
+  <strong>every step</strong>; the memory block ticks every <strong>3rd</strong> step (<code>mem_every=3</code>);
+  the belief is decoded at every step.</p>
+
+  <div class="panel">
+  <h3>Data flow, one timestep</h3>
+  <svg viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#5c6a78"/>
+      </marker>
+    </defs>
+    <!-- frame -->
+    <rect x="10" y="92" width="96" height="76" rx="8" fill="#171c25" stroke="#232b36"/>
+    <text x="58" y="122" text-anchor="middle" class="svglabel" font-size="13">frame</text>
+    <text x="58" y="142" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">100×100×3</text>
+    <!-- stem -->
+    <rect x="136" y="92" width="110" height="76" rx="8" fill="#171c25" stroke="#232b36"/>
+    <text x="191" y="122" text-anchor="middle" class="svglabel" font-size="13">ConvStem</text>
+    <text x="191" y="142" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">X_t · 128×16×16</text>
+    <line x1="106" y1="130" x2="132" y2="130" stroke="#5c6a78" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- accumulator -->
+    <rect x="278" y="80" width="150" height="100" rx="8" fill="#171c25" stroke="#f0a35e" stroke-width="1.4"/>
+    <text x="353" y="108" text-anchor="middle" class="svglabel" font-size="13" fill="#f0a35e">KDA accumulator</text>
+    <text x="353" y="128" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">delta rule · matrix S</text>
+    <text x="353" y="146" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">every step</text>
+    <!-- self loop -->
+    <path d="M 300 80 C 300 40, 406 40, 406 80" fill="none" stroke="#f0a35e" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+    <text x="353" y="34" text-anchor="middle" class="svglabel" font-size="10" fill="#f0a35e">S persists</text>
+    <line x1="246" y1="130" x2="274" y2="130" stroke="#5c6a78" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- vision attn -->
+    <rect x="462" y="80" width="170" height="100" rx="8" fill="#171c25" stroke="#232b36"/>
+    <text x="547" y="106" text-anchor="middle" class="svglabel" font-size="13">Vision attention</text>
+    <text x="547" y="126" text-anchor="middle" class="svglabel" font-size="10.5" fill="#f0a35e">obs stream [X_t‖acc]</text>
+    <text x="547" y="142" text-anchor="middle" class="svglabel" font-size="10.5" fill="#45c4b0">vs memory H1/H2</text>
+    <text x="547" y="162" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">→ Z</text>
+    <line x1="428" y1="130" x2="458" y2="130" stroke="#5c6a78" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- memory attn -->
+    <rect x="666" y="80" width="170" height="100" rx="8" fill="#171c25" stroke="#45c4b0" stroke-width="1.4"/>
+    <text x="751" y="106" text-anchor="middle" class="svglabel" font-size="13" fill="#45c4b0">Memory attention</text>
+    <text x="751" y="126" text-anchor="middle" class="svglabel" font-size="10.5" fill="#f0a35e">obs stream Z</text>
+    <text x="751" y="142" text-anchor="middle" class="svglabel" font-size="10.5" fill="#45c4b0">vs persistent H1</text>
+    <text x="751" y="162" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">every 3rd step → H1′, H2′</text>
+    <path d="M 690 80 C 690 40, 812 40, 812 80" fill="none" stroke="#45c4b0" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+    <text x="751" y="34" text-anchor="middle" class="svglabel" font-size="10" fill="#45c4b0">H1 persists (+noise σ=0.05)</text>
+    <line x1="632" y1="130" x2="662" y2="130" stroke="#5c6a78" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- readout -->
+    <rect x="870" y="80" width="120" height="100" rx="8" fill="#171c25" stroke="#c39bd3" stroke-width="1.4"/>
+    <text x="930" y="110" text-anchor="middle" class="svglabel" font-size="13" fill="#c39bd3">R = [H1‖H2]</text>
+    <text x="930" y="130" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">256 ch</text>
+    <text x="930" y="150" text-anchor="middle" class="svglabel" font-size="11" fill="#5c6a78">belief @ every t</text>
+    <line x1="836" y1="130" x2="866" y2="130" stroke="#5c6a78" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- feedback: H1/H2 feed vision block -->
+    <path d="M 751 180 L 751 224 L 547 224 L 547 184" fill="none" stroke="#45c4b0" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+    <text x="649" y="242" text-anchor="middle" class="svglabel" font-size="10" fill="#45c4b0">H1, H2 → next step's vision keys/values</text>
+    <path d="M 353 180 L 353 208 L 462 208" fill="none" stroke="#f0a35e" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+    <text x="407" y="222" text-anchor="middle" class="svglabel" font-size="10" fill="#f0a35e">acc readout → vision input</text>
+  </svg>
+  </div>
+  <p>Two clocks, two memories: the <strong>accumulator</strong> integrates sensory evidence frame-by-frame;
+  <strong>H1</strong> holds trial-scale state and is only rewritten on the slow tick. Attention at both blocks
+  is the same operation — a two-stream competition between <span style="color:var(--acc)">what's happening now</span>
+  and <span style="color:var(--teal)">what's remembered</span>.</p>
+</section>
+
+<!-- ═══════════════ 1 · STATE INVENTORY ═══════════════ -->
+<section id="s1">
+  <div class="secno">SECTION 1</div>
+  <h2>The complete state inventory <span class="q">— everything that survives from one step to the next</span></h2>
+  <p class="lede">Within a trial, the model carries <strong>exactly three</strong> recurrent states —
+  the tuple <code>(H1, H2, ACC)</code> threaded through <code>step()</code>. All three are zero-initialized
+  at the start of every trial. Everything else (X_t, Z, att, R, the accumulator's readout) is computed
+  fresh each step and thrown away.</p>
+
+  <div class="panel">
+  <h3>State timeline across one trial (T=7, memory tick at k=2 and k=5)</h3>
+  <svg viewBox="0 0 1000 240" xmlns="http://www.w3.org/2000/svg">
+    <!-- time axis -->
+    <g font-family="monospace">
+    <!-- header ticks -->
+    <text x="150" y="24" class="svglabel" font-size="12" fill="#5c6a78" text-anchor="middle">t=0</text>
+    <text x="270" y="24" class="svglabel" font-size="12" fill="#5c6a78" text-anchor="middle">t=1</text>
+    <text x="390" y="24" class="svglabel" font-size="12" fill="#5c6a78" text-anchor="middle">t=2</text>
+    <text x="510" y="24" class="svglabel" font-size="12" fill="#5c6a78" text-anchor="middle">t=3</text>
+    <text x="630" y="24" class="svglabel" font-size="12" fill="#5c6a78" text-anchor="middle">t=4</text>
+    <text x="750" y="24" class="svglabel" font-size="12" fill="#e5534b" text-anchor="middle">t=5 ⚡change</text>
+    <text x="870" y="24" class="svglabel" font-size="12" fill="#5c6a78" text-anchor="middle">t=6</text>
+    </g>
+    <!-- ACC row -->
+    <text x="20" y="66" class="svglabel" font-size="13" fill="#f0a35e">ACC (S)</text>
+    <line x1="150" y1="60" x2="870" y2="60" stroke="#f0a35e" stroke-width="2"/>
+    <g fill="#f0a35e">
+      <circle cx="150" cy="60" r="6"/><circle cx="270" cy="60" r="6"/><circle cx="390" cy="60" r="6"/>
+      <circle cx="510" cy="60" r="6"/><circle cx="630" cy="60" r="6"/><circle cx="750" cy="60" r="6"/>
+      <circle cx="870" cy="60" r="6"/>
+    </g>
+    <text x="895" y="65" class="svglabel" font-size="11" fill="#f0a35e">written EVERY step (delta rule)</text>
+    <!-- H1 row -->
+    <text x="20" y="126" class="svglabel" font-size="13" fill="#45c4b0">H1</text>
+    <line x1="150" y1="120" x2="870" y2="120" stroke="#45c4b0" stroke-width="2"/>
+    <circle cx="390" cy="120" r="7" fill="#45c4b0"/><circle cx="750" cy="120" r="7" fill="#45c4b0"/>
+    <circle cx="150" cy="120" r="4" fill="#232b36"/><circle cx="270" cy="120" r="4" fill="#232b36"/>
+    <circle cx="510" cy="120" r="4" fill="#232b36"/><circle cx="630" cy="120" r="4" fill="#232b36"/>
+    <circle cx="870" cy="120" r="4" fill="#232b36"/>
+    <text x="895" y="125" class="svglabel" font-size="11" fill="#45c4b0">written on memory ticks (+noise)</text>
+    <!-- H2 row -->
+    <text x="20" y="186" class="svglabel" font-size="13" fill="#45c4b0">H2</text>
+    <line x1="150" y1="180" x2="870" y2="180" stroke="#45c4b0" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="390" cy="180" r="7" fill="#45c4b0"/><circle cx="750" cy="180" r="7" fill="#45c4b0"/>
+    <circle cx="150" cy="180" r="4" fill="#232b36"/><circle cx="270" cy="180" r="4" fill="#232b36"/>
+    <circle cx="510" cy="180" r="4" fill="#232b36"/><circle cx="630" cy="180" r="4" fill="#232b36"/>
+    <circle cx="870" cy="180" r="4" fill="#232b36"/>
+    <text x="895" y="185" class="svglabel" font-size="11" fill="#45c4b0">= last raw read (att)</text>
+    <text x="150" y="222" class="svglabel" font-size="11" fill="#5c6a78">● write event&nbsp;&nbsp;&nbsp;● held unchanged&nbsp;&nbsp;&nbsp;⚡ change frame coincides with a memory tick</text>
+  </svg>
+  </div>
+
+  <table>
+    <tr><th>state</th><th>shape (per trial)</th><th>written</th><th>read by</th><th>role</th></tr>
+    <tr>
+      <td style="color:var(--acc)">ACC — KDA matrix state S</td>
+      <td><code>(4, 32, 32, 256)</code> ≈ <strong>1.05M floats</strong></td>
+      <td>every step — delta rule, surprise-gated</td>
+      <td>its own readout <code>o=Sᵀq</code> each step; future steps via S</td>
+      <td>fast sensory integration — <strong>the actual persistence store</strong> (maps: A_H1≈0, so H1 is not re-read)</td>
+    </tr>
+    <tr>
+      <td style="color:var(--teal)">H1 — persistent conv state</td>
+      <td><code>(128, 16, 16)</code> = 32.8k floats</td>
+      <td>memory ticks only (k=2, 5): <code>proj(SE([H1‖att])) + N(0,σ²)</code></td>
+      <td>vision block keys <code>K_h</code> · memory block <code>K_h,V_h</code> · accumulator input <code>[X_t‖H1]</code> · readout R</td>
+      <td>trial-scale content; noise-hardened</td>
+    </tr>
+    <tr>
+      <td style="color:var(--teal)">H2 — raw read register</td>
+      <td><code>(128, 16, 16)</code> = 32.8k floats</td>
+      <td>memory ticks only: <code>H2′ = att</code></td>
+      <td>vision block values <code>V_h</code> · readout R</td>
+      <td>the last thing memory attention read, unprocessed</td>
+    </tr>
+  </table>
+
+  <div class="note"><strong>Not states:</strong> X_t, Z, att_vis, att, the accumulator readout, and R are
+  recomputed every step from (frame, current states) and discarded. With JEPA off (current run), the
+  DINO center buffer and EMA teacher are inert training apparatus, not model state. Note the asymmetry:
+  <strong>ACC holds 32× more numbers than H1 and H2 combined</strong> — and the attention maps agree it is
+  where persistence actually lives.</div>
+</section>
+
+<!-- ═══════════════ 2 · TOKEN ATTENTION ═══════════════ -->
+<section id="s2">
+  <div class="secno">SECTION 2</div>
+  <h2>Token attention <span class="q">— where do I read from, and from which stream?</span></h2>
+  <p class="lede">Each of the 16×16 = 256 spatial positions is a token. Every position emits a query;
+  the keys come from <strong>two competing sources</strong> — the observation stream and the memory stream —
+  joined under a <strong>single softmax</strong>, so mass spent on the past is mass not spent on the present.</p>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>The attention matrix A — 256 queries × 512 keys</h3>
+      <svg viewBox="0 0 460 290" xmlns="http://www.w3.org/2000/svg">
+        <!-- A matrix -->
+        <rect x="60" y="30" width="150" height="220" fill="#171c25" stroke="#f0a35e" stroke-width="1.5"/>
+        <rect x="210" y="30" width="150" height="220" fill="#171c25" stroke="#45c4b0" stroke-width="1.5"/>
+        <text x="135" y="20" text-anchor="middle" class="svglabel" font-size="12" fill="#f0a35e">X-stream keys (256)</text>
+        <text x="285" y="20" text-anchor="middle" class="svglabel" font-size="12" fill="#45c4b0">H-stream keys (256)</text>
+        <text x="135" y="145" text-anchor="middle" class="svglabel" font-size="15">S_x = q·k_xᵀ/√C</text>
+        <text x="285" y="145" text-anchor="middle" class="svglabel" font-size="15">S_h = q·k_hᵀ/√C</text>
+        <!-- softmax bracket -->
+        <path d="M 56 262 L 60 254 L 360 254 L 364 262" fill="none" stroke="#9aa7b4" stroke-width="1.2"/>
+        <text x="210" y="280" text-anchor="middle" class="svglabel" font-size="12" fill="#9aa7b4">one softmax over all 512 → A</text>
+        <!-- queries label -->
+        <text x="42" y="145" class="svglabel" font-size="12" fill="#9aa7b4" transform="rotate(-90 42 145)" text-anchor="middle">256 queries</text>
+      </svg>
+    </div>
+    <div>
+      <div class="math">
+<span class="cm"># tokens: q, k_x, k_h ∈ R^256×C  (16×16 map flattened)</span>
+S_x = <span class="frac"><span>q k_x<sup>⊤</sup></span><span class="bot">√C</span></span>      S_h = <span class="frac"><span>q k_h<sup>⊤</sup></span><span class="bot">√C</span></span>
+
+A = softmax( [ S_x ‖ S_h ] )  <span class="cm">∈ R^256×512</span>
+
+att = <span class="xs">A_x V_x</span> + <span class="hs">A_h V_h</span>
+
+<span class="cm"># joint softmax ⇒ per-query stream mass sums to 1:
+#   Σ A_x + Σ A_h = 1   (this is the "gate" we plot)</span>
+      </div>
+      <p style="font-size:14.5px">After attention: per-token FFN, <strong>concat residual</strong>
+      <code>[input ‖ att]</code>, SE channel reweighting, 1×1 projection back to C channels.
+      Scores are computed in fp32 — 256-token logits overflow fp16.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+  <h3>Same operation, two wirings</h3>
+  <table>
+    <tr><th></th><th>queries Q</th><th>observation keys/values</th><th>memory keys/values</th></tr>
+    <tr><td>Vision block</td><td><code>W_q[X_t‖acc]</code></td>
+        <td><code>K_x, V_x</code> from <code>[X_t‖acc]</code></td>
+        <td><code>K_h</code> from <code>H1</code> · <code>V_h</code> from <code>H2</code></td></tr>
+    <tr><td>Memory block</td><td><code>W_q H1</code></td>
+        <td><code>K_z, V_z</code> from <code>Z</code></td>
+        <td><code>K_h, V_h</code> from <code>H1</code></td></tr>
+  </table>
+  <p style="font-size:14px;color:var(--faint)">The retired pixel-gate variant replaced QKᵀ with a per-pixel
+  scalar inner product + 2-way softmax — a local mixing dial with no spatial routing. Token attention is what
+  actually moves information across positions, which is why the raw 256×256 A (column-summed back onto the
+  scene) is the right object to inspect.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 2 · KDA ACCUMULATOR ═══════════════ -->
+<section id="s3">
+  <div class="secno">SECTION 3</div>
+  <h2>KDA visual accumulator <span class="q">— what do I remember, and how surprised am I?</span></h2>
+  <p class="lede">The fast integrator. Each pixel carries a small <strong>matrix state S</strong>
+  (per head, d_k×d_v) that learns key→value associations online by a <strong>delta rule</strong>:
+  it writes only the prediction error, gated by learned decay and write strength.</p>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>Delta-rule write cycle</h3>
+      <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#5c6a78"/>
+          </marker>
+        </defs>
+        <rect x="20" y="20" width="150" height="46" rx="7" fill="#171c25" stroke="#232b36"/>
+        <text x="95" y="40" text-anchor="middle" class="svglabel" font-size="12">input [X_t ‖ H1]</text>
+        <text x="95" y="56" text-anchor="middle" class="svglabel" font-size="10.5" fill="#5c6a78">→ k, q, v, a, b, g</text>
+        <!-- state box -->
+        <rect x="180" y="120" width="130" height="110" rx="8" fill="#171c25" stroke="#f0a35e" stroke-width="1.6"/>
+        <text x="245" y="150" text-anchor="middle" class="svglabel" font-size="15" fill="#f0a35e">S</text>
+        <text x="245" y="170" text-anchor="middle" class="svglabel" font-size="10.5" fill="#5c6a78">h heads · d_k×d_v</text>
+        <text x="245" y="186" text-anchor="middle" class="svglabel" font-size="10.5" fill="#5c6a78">per pixel (×256)</text>
+        <text x="245" y="212" text-anchor="middle" class="svglabel" font-size="10.5" fill="#9aa7b4">S ← a⊙S + b·k·errᵀ</text>
+        <!-- prediction -->
+        <rect x="30" y="130" width="110" height="40" rx="7" fill="#171c25" stroke="#232b36"/>
+        <text x="85" y="147" text-anchor="middle" class="svglabel" font-size="11.5">prediction</text>
+        <text x="85" y="162" text-anchor="middle" class="svglabel" font-size="10.5" fill="#9aa7b4">v̂ = (a⊙S)ᵀk</text>
+        <!-- surprise -->
+        <rect x="30" y="196" width="110" height="40" rx="7" fill="#171c25" stroke="#e5534b" stroke-width="1.3"/>
+        <text x="85" y="213" text-anchor="middle" class="svglabel" font-size="11.5" fill="#e5534b">surprise</text>
+        <text x="85" y="228" text-anchor="middle" class="svglabel" font-size="10.5" fill="#9aa7b4">err = v − v̂</text>
+        <!-- readout -->
+        <rect x="340" y="140" width="105" height="52" rx="7" fill="#171c25" stroke="#232b36"/>
+        <text x="392" y="160" text-anchor="middle" class="svglabel" font-size="11.5">readout</text>
+        <text x="392" y="176" text-anchor="middle" class="svglabel" font-size="10" fill="#9aa7b4">o = RMS(Sᵀq)⊙g</text>
+        <line x1="95" y1="66" x2="85" y2="126" stroke="#5c6a78" stroke-width="1.3" marker-end="url(#arr2)"/>
+        <line x1="140" y1="150" x2="176" y2="150" stroke="#5c6a78" stroke-width="1.3" marker-end="url(#arr2)"/>
+        <line x1="140" y1="216" x2="176" y2="200" stroke="#e5534b" stroke-width="1.3" marker-end="url(#arr2)"/>
+        <line x1="310" y1="166" x2="336" y2="166" stroke="#5c6a78" stroke-width="1.3" marker-end="url(#arr2)"/>
+        <path d="M 245 120 C 245 88, 160 92, 108 66" fill="none" stroke="#5c6a78" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#arr2)"/>
+        <text x="235" y="262" text-anchor="middle" class="svglabel" font-size="10.5" fill="#5c6a78">k, q are L2-normalized ⇒ update is contractive (eig ≤ 1)</text>
+      </svg>
+    </div>
+    <div class="math" style="margin-top:22px">
+<span class="cm"># from [X_t ‖ H1], per head (h=4, d_k=d_v=32):</span>
+k = l2norm(W_k·)   q = l2norm(W_q·)   v = W_v·
+<span class="st">a_t</span> = σ(W_a·)   <span class="cm"># per-head-channel decay</span>
+<span class="st">b_t</span> = σ(W_b·)   <span class="cm"># write strength</span>
+
+<span class="cm"># delta rule — write only the prediction error:</span>
+v̂  = (<span class="st">a_t</span>⊙S)<sup>⊤</sup> k          <span class="cm"># state's current guess</span>
+err = v − v̂               <span class="cm"># surprise</span>
+S  ← <span class="st">a_t</span>⊙S + <span class="st">b_t</span>·k·err<sup>⊤</sup>
+
+o = RMSNorm(S<sup>⊤</sup>q) ⊙ σ(W_g·)   <span class="cm"># gated readout</span>
+    </div>
+  </div>
+  <p>The readout <code>o</code> is concatenated with <code>X_t</code> to form the vision block's input —
+  attention sees <em>raw now</em> and <em>integrated recent past</em> side by side. The accumulator runs in
+  fp32 regardless of autocast; it is the precision-sensitive recurrence. The
+  <span style="color:var(--red)">surprise map</span> ‖v − v̂‖ is one of our diagnostics — it lights up at the
+  change frame.</p>
+</section>
+
+<!-- ═══════════════ 3 · H1/H2 MEMORY ═══════════════ -->
+<section id="s4">
+  <div class="secno">SECTION 4</div>
+  <h2>Conv-recurrent memory <span class="q">— what persists across the whole trial?</span></h2>
+  <p class="lede"><strong>H1</strong> is the slow, persistent state — the thing that should carry task-relevant
+  content across all 7 steps. <strong>H2</strong> is the raw ephemeral read of whatever the memory block just
+  attended to. Updates land only on the slow tick (<code>mem_every=3</code>).</p>
+
+  <div class="grid2">
+    <div class="math">
+<span class="cm"># memory block: Q from H1, keys/values from [Z ‖ H1]</span>
+att = <span class="xs">A_z V_z</span> + <span class="hs">A_h1 V_h1</span>   <span class="cm">(token attention, §1)</span>
+
+<span class="st">H1′</span> = proj( SE( [H1 ‖ att] ) ) + <span class="st">N(0, σ²)</span>   <span class="cm">σ=0.05</span>
+<span class="st">H2′</span> = att                    <span class="cm"># raw read, no norm</span>
+
+<span class="cm"># noise lands ONLY on H1's output, after SE-proj.
+# H2 and the accumulator stay clean.</span>
+    </div>
+    <div>
+      <p>The injected noise is a robustness contract: whatever H1 stores must survive perturbation, because the
+      same state is queried by both attention blocks on later steps.</p>
+      <p>Note what H1 is <em>not</em>: it is not rewritten every step, and (as the maps showed) it is barely
+      re-read — the heavy lifting of persistence is done by the KDA accumulator's matrix state, while H1
+      behaves more like a slow scratchpad written from the cued observation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 4 · READOUT & BELIEF ═══════════════ -->
+<section id="s5">
+  <div class="secno">SECTION 5</div>
+  <h2>Readout &amp; belief decoding <span class="q">— what is the model allowed to report from?</span></h2>
+  <p class="lede">The readout defines what the belief can possibly know. Current configuration decodes
+  <strong>only from the two state streams</strong>, at <strong>every step</strong>.</p>
+
+  <div class="math">
+<span class="st">R</span> = [ H1 ‖ H2 ]  ∈ R^256×16×16     <span class="cm"># "h1h2" (was: [H1‖H2‖Z‖att_vis] = 4C)</span>
+
+<span class="cm"># conv belief decoder (spatial, no pooling):</span>
+belief_logits = Linear( flatten( GELU(Conv₃ₓ₃,s₂( GELU(Conv₃ₓ₃,s₂(R)) )) ) )  ∈ R²
+
+<span class="cm"># per-step change CE: label = 1 from the change frame onward
+# → pressures a belief TRAJECTORY, not just a final answer</span>
+  </div>
+
+  <table>
+    <tr><th>variant</th><th>R</th><th>belief decoder</th><th>result @ c29</th></tr>
+    <tr><td>4C reference</td><td><code>[H1‖H2‖Z‖att_vis]</code></td><td>mean-pool Linear</td><td style="color:var(--teal)">78.7% ✓ took off</td></tr>
+    <tr><td>h1h2 + pool</td><td><code>[H1‖H2]</code></td><td>mean-pool Linear</td><td style="color:var(--red)">50% — flat to c43</td></tr>
+    <tr><td>h1h2 + FFN</td><td><code>[H1‖H2]</code></td><td>channel-FFN→flatten→FFN</td><td style="color:var(--red)">50% — flat</td></tr>
+    <tr><td>h1h2 + FFN, τ=0.9</td><td><code>[H1‖H2]</code></td><td>same, soft JEPA student</td><td style="color:var(--red)">50% — flat</td></tr>
+    <tr><td>h1h2 + conv, no JEPA</td><td><code>[H1‖H2]</code></td><td>conv decoder</td><td style="color:var(--acc)">running…</td></tr>
+  </table>
+  <div class="note">The open question this run answers: with JEPA off and a conv decoder, can change-CE alone
+  drive decodable change information into the state streams? All three previous h1h2 variants sat at exact
+  chance past the reference run's takeoff point.</div>
+</section>
+
+<!-- ═══════════════ 5 · FINDINGS ═══════════════ -->
+<section id="s6">
+  <div class="secno">SECTION 6</div>
+  <h2>What the attention maps showed <span class="q">— column-sums of raw A, back on the scene</span></h2>
+  <p class="lede">Each raw A is 256×256 per stream. Column-summing over queries and dividing by 256 projects
+  attention back onto the 16×16 stimulus grid — "how much attention does each scene position receive."
+  Stylized from the measured maps (cue top-left, 100% valid):</p>
+
+  <div class="findings">
+    <div class="find">
+      <h4 style="color:var(--acc)">A_X · vision, input keys</h4>
+      <canvas data-pat="focal" width="64" height="64"></canvas>
+      <p>Sharp focal hotspot at the cue cell, peaking t=3 (~30× uniform). Silent after the change frame —
+      the model stops reading raw input late.</p>
+    </div>
+    <div class="find">
+      <h4 style="color:var(--teal)">A_H · vision, memory keys</h4>
+      <canvas data-pat="sheet" width="64" height="64"></canvas>
+      <p>No spatial structure; a broad sheet that saturates at t=5–6. Which <em>queries</em> read memory is
+      selective — what they read is uniform.</p>
+    </div>
+    <div class="find">
+      <h4 style="color:var(--acc)">A_Z · memory, obs keys</h4>
+      <canvas data-pat="stripes" width="64" height="64"></canvas>
+      <p>Cue-locked vertical stripes in raw A → focal hotspot in projection. In the invalid condition the
+      hotspot stays at the cue — the 55° change draws nothing.</p>
+    </div>
+    <div class="find">
+      <h4 style="color:var(--teal)">A_H1 · memory, persistent keys</h4>
+      <canvas data-pat="empty" width="64" height="64"></canvas>
+      <p>Bright uniform sheet at t=0, then exactly zero. The persistent state is written but never re-read —
+      persistence lives in the KDA accumulator.</p>
+    </div>
+  </div>
+  <p style="margin-top:18px;font-size:14.5px;color:var(--faint)">No attention map, in either block, localizes
+  the change — change is carried in state <em>content</em> (88% linear probe on R), not in attention routing.</p>
+</section>
+
+<footer>
+  kda_conv_memory_model.py · token QKᵀ two-stream attention · KDA delta-rule accumulator (4×32) ·
+  C=128 · map 16×16 · T=7 · mem_every=3 · σ_noise=0.05 · generated 2026-09-04
+</footer>
+
+</div>
+
+<script>
+// stylized 16x16 heatmaps echoing the measured patterns
+function viridis(t){ // cheap viridis-ish
+  const c=[[68,1,84],[59,82,139],[33,145,140],[94,201,98],[253,231,37]];
+  t=Math.max(0,Math.min(1,t)); const i=Math.min(3,Math.floor(t*4)), f=t*4-i;
+  const a=c[i],b=c[i+1];
+  return `rgb(${a.map((v,j)=>Math.round(v+(b[j]-v)*f)).join(",")})`;
+}
+document.querySelectorAll("canvas[data-pat]").forEach(cv=>{
+  const g=cv.getContext("2d"), N=16, s=cv.width/N, pat=cv.dataset.pat;
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){
+    let v=0.03;
+    if(pat==="focal"){ // hotspot in cue cell (rows 0-3, cols 0-3), center ~ (1.5,1.5)
+      const d=Math.hypot(r-1.5,c-1.5); v=Math.max(0.03, Math.exp(-d*d/2.2)*0.95);
+    }else if(pat==="sheet"){ // uniform mid sheet with slight query-noise
+      v=0.55+0.08*Math.sin(r*2.1)*Math.cos(c*1.7);
+    }else if(pat==="stripes"){ // focal hotspot at cue + faint secondary
+      const d=Math.hypot(r-1.5,c-1.5); v=Math.max(0.03, Math.exp(-d*d/1.8)*0.9 + 0.06*Math.exp(-Math.hypot(r-13,c-13)/3));
+    }else if(pat==="empty"){ v=0.02+0.01*Math.random(); }
+    g.fillStyle=viridis(v); g.fillRect(c*s,r*s,s,s);
+  }
+  // cue cell outline
+  g.strokeStyle="#e5534b"; g.lineWidth=2; g.strokeRect(1,1,4*s-2,4*s-2);
+});
+</script>
+</body>
+</html>

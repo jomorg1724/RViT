@@ -57,6 +57,7 @@ def build_model(ckpt: dict, device) -> KDAConvMemoryModel:
         kda_heads=ckpt["kda_heads"], kda_head_dim=ckpt["kda_head_dim"],
         attn_mode=ckpt.get("attn_mode", "pixel_gate"),
         readout=ckpt.get("readout", "full"),
+        cls_head=ckpt.get("cls_head", "pool"),
     ).to(device)
     model.load_state_dict(ckpt["model_state_dict"])
     model.eval()

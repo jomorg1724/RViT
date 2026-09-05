@@ -356,7 +356,8 @@ class KDAConvMemoryModel(nn.Module):
                  frame_window: int = 1, frame_stride: int = 1, mem_every: int = 1,
                  accum_mode: str = "kda", accum_decay: float = 0.5,
                  kda_heads: int = 4, kda_head_dim: int = 32,
-                 attn_mode: str = "pixel_gate", readout: str = "full"):
+                 attn_mode: str = "pixel_gate", readout: str = "full",
+                 cls_head: str = "pool"):
         super().__init__()
         if accum_mode not in ("ema", "gated", "kda"):
             raise ValueError(f"accum_mode must be ema|gated|kda, got {accum_mode!r}")
@@ -364,6 +365,8 @@ class KDAConvMemoryModel(nn.Module):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         if readout not in ("full", "h1h2"):
             raise ValueError(f"readout must be full|h1h2, got {readout!r}")
+        if cls_head not in ("pool", "ffn"):
+            raise ValueError(f"cls_head must be pool|ffn, got {cls_head!r}")
         self.n_channels = n_channels
         self.map_size = map_size
         self.proto_dim = proto_dim
@@ -376,6 +379,7 @@ class KDAConvMemoryModel(nn.Module):
         self.kda_head_dim = int(kda_head_dim)
         self.attn_mode = attn_mode
         self.readout = readout
+        self.cls_head = cls_head
         self.r_dim = (2 * n_channels) if readout == "h1h2" else (4 * n_channels)
 
         if accum_mode == "ema":
@@ -400,7 +404,15 @@ class KDAConvMemoryModel(nn.Module):
         self.jepa_norm = nn.LayerNorm(self.r_dim)
         self.jepa_feat = nn.Sequential(nn.Conv2d(self.r_dim, 2 * n_channels, 1), nn.GELU())
         self.jepa_out = nn.Conv2d(2 * n_channels, proto_dim, 1)
-        self.classifier = nn.Linear(self.r_dim, 2)
+        # Belief decoder.
+        #   "pool": legacy mean-pool + Linear(r_dim, 2)
+        #   "ffn":  per-pixel channel FFN (r_dim -> 16), flatten, FFN -> 2.
+        #           No convs, no pooling — spatial layout is preserved.
+        if cls_head == "ffn":
+            self.cls_chan = nn.Linear(self.r_dim, 16)
+            self.cls_out = nn.Linear(16 * map_size * map_size, 2)
+        else:
+            self.classifier = nn.Linear(self.r_dim, 2)
         self.register_buffer("jepa_center", torch.zeros(map_size, map_size, proto_dim))
 
     def init_state(self, B: int, device, dtype):
@@ -489,5 +501,9 @@ class KDAConvMemoryModel(nn.Module):
         return feat.flatten(2, 3)                               # (B,T,map*map,2C)
 
     def classify(self, R_last: torch.Tensor) -> torch.Tensor:
-        """R_last: (B, 4C, map, map) -> (B, 2)."""
+        """R_last: (B, r_dim, map, map) -> (B, 2)."""
+        if self.cls_head == "ffn":
+            x = R_last.permute(0, 2, 3, 1).contiguous()     # (B,H,W,r_dim)
+            x = F.gelu(self.cls_chan(x))                    # (B,H,W,16)
+            return self.cls_out(x.flatten(1))               # (B,2)
         return self.classifier(R_last.mean(dim=(2, 3)))

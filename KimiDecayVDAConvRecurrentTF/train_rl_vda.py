@@ -49,12 +49,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--kda-heads", type=int, default=4)
     p.add_argument("--kda-head-dim", type=int, default=32)
     p.add_argument("--attn-mode", choices=["pixel_gate", "token"], default="pixel_gate")
+    p.add_argument("--change-ce-coef", type=float, default=0.0)
     p.add_argument("--n-actions", type=int, default=2)
     p.add_argument("--n-quantiles", type=int, default=5)
     p.add_argument("--init-action-bias", type=float, nargs=2, default=[0.0, -1.5])
     p.add_argument("--iters", type=int, default=31250)
     p.add_argument("--episodes-per-iter", type=int, default=8)
     p.add_argument("--lr", type=float, default=3e-4)
+    p.add_argument("--actor-lr-scale", type=float, default=1.0,
+                   help="actor head LR = lr * this (0.01 = actor learns 100x slower than trunk)")
+    p.add_argument("--critic-lr-scale", type=float, default=1.0,
+                   help="critic head LR = lr * this (0.1 = critic learns 10x slower than trunk)")
     p.add_argument("--actor-coef", type=float, default=0.5)
     p.add_argument("--value-coef", type=float, default=1.0)
     p.add_argument("--jepa-coef", type=float, default=0.01)
@@ -94,7 +99,10 @@ def main() -> None:
           f"C={args.n_channels}  map={args.map_size}  mem_every={args.mem_every}  "
           f"σ_mem={args.memory_noise_std}  attn={args.attn_mode}")
     print(f"  objectives: critic={args.value_coef}  actor={args.actor_coef}  "
-          f"JEPA={args.jepa_coef}  BC={args.bc_alpha}  teacher EMA={args.jepa_ema_decay}")
+          f"JEPA={args.jepa_coef}  BC={args.bc_alpha}  changeCE={args.change_ce_coef}  "
+          f"teacher EMA={args.jepa_ema_decay}")
+    print(f"  LR separation: trunk={args.lr:.2e}  critic={args.lr * args.critic_lr_scale:.2e}  "
+          f"actor={args.lr * args.actor_lr_scale:.2e}")
     print(f"  grid={task_grid(args.task)}  sensory noise={args.noise}  "
           f"iters={args.iters} × {args.episodes_per_iter} eps")
     if args.dry_run:
@@ -139,6 +147,8 @@ def main() -> None:
 
     cfg = PPOConfig(
         lr=args.lr,
+        actor_lr_scale=args.actor_lr_scale,
+        critic_lr_scale=args.critic_lr_scale,
         actor_coef=args.actor_coef,
         value_coef=args.value_coef,
         entropy_coef=args.entropy_coef,
@@ -153,6 +163,7 @@ def main() -> None:
         jepa_var_coef=args.jepa_var_coef,
         jepa_cov_coef=args.jepa_cov_coef,
         jepa_sinkhorn_iters=args.jepa_sinkhorn_iters,
+        change_ce_coef=args.change_ce_coef,
         burn_in_iters=args.burn_in_iters,
     )
     ckpt_dir = args.checkpoint_dir or os.path.join(

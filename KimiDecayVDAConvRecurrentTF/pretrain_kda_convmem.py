@@ -88,6 +88,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--readout", choices=["full", "h1h2"], default="h1h2",
                    help="R construction: full = [H1|H2|Z|att_vis] (4C); "
                         "h1h2 = [H1|H2] (2C) — decode only from the two state streams.")
+    p.add_argument("--cls-head", choices=["pool", "ffn"], default="ffn",
+                   help="belief decoder: pool = mean-pool + Linear; ffn = per-pixel "
+                        "channel FFN (r_dim->16), flatten, Linear -> 2 logits")
     p.add_argument("--min-change-time", type=int, default=5)
     p.add_argument("--max-change-time", type=int, default=5)
     p.add_argument("--noise", type=float, default=5.0)
@@ -167,7 +170,8 @@ def main() -> None:
                                kda_heads=args.kda_heads,
                                kda_head_dim=args.kda_head_dim,
                                attn_mode=args.attn_mode,
-                               readout=args.readout).to(device)
+                               readout=args.readout,
+                               cls_head=args.cls_head).to(device)
     jepa_teacher = copy.deepcopy(model)
     for p_ in jepa_teacher.parameters():
         p_.requires_grad_(False)
@@ -394,6 +398,7 @@ def main() -> None:
                 "kda_head_dim": args.kda_head_dim,
                 "attn_mode": args.attn_mode,
                 "readout": args.readout,
+                "cls_head": args.cls_head,
             }, ckpt_path)
             print(f"[kda-convmem] checkpoint saved: {ckpt_path}")
 

@@ -74,7 +74,17 @@ class RolloutBatch:
     old_V_dist: torch.Tensor        # (B, T, N)         float32
     last_V_dist: torch.Tensor       # (B, N)            float32 (bootstrap; 0 if done)
     lengths: torch.Tensor           # (B,)              long
+    change_labels: torch.Tensor     # (B, T)            float32 — 1 from the change
+                                    # frame onward on change trials, else 0
     sample_weights: Optional[torch.Tensor] = None   # (B,) float32 or None → ones
+
+
+def per_step_change_labels(change_true: int, change_time: int, T: int,
+                           frame_repeat: int = 1) -> list[int]:
+    """Per-step 'has the change happened yet' labels: 1 from the change frame
+    onward on change trials, all 0 on no-change trials."""
+    return [1 if (int(change_true) == 1 and (t // frame_repeat) >= change_time)
+            else 0 for t in range(T)]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -123,6 +133,7 @@ class EpisodeReplayBuffer:
                 "old_V_dist":    batch.old_V_dist[b].detach().cpu(),
                 "last_V_dist":   batch.last_V_dist[b].detach().cpu(),
                 "length":        int(batch.lengths[b].detach().cpu().item()),
+                "change_labels": batch.change_labels[b].detach().cpu(),
             }
             pri = max(float(pri_np[b]), 1e-6)
             if len(self._buffer) < self.capacity:
@@ -165,6 +176,7 @@ class EpisodeReplayBuffer:
             old_V_scalar  = torch.stack([e["old_V_scalar"]  for e in eps]).to(device),
             old_V_dist    = torch.stack([e["old_V_dist"]    for e in eps]).to(device),
             last_V_dist   = torch.stack([e["last_V_dist"]   for e in eps]).to(device),
+            change_labels = torch.stack([e["change_labels"] for e in eps]).to(device),
             lengths       = torch.tensor([e["length"] for e in eps], dtype=torch.long, device=device),
             sample_weights= torch.tensor(w, dtype=torch.float32, device=device),
         )
@@ -192,7 +204,8 @@ def concat_batches(batches: list[RolloutBatch]) -> RolloutBatch:
         return b
 
     fields = ["observations", "actions", "rewards", "dones", "valid_mask",
-              "old_log_probs", "old_V_scalar", "old_V_dist", "last_V_dist", "lengths"]
+              "old_log_probs", "old_V_scalar", "old_V_dist", "last_V_dist",
+              "change_labels", "lengths"]
     out = {f: torch.cat([getattr(b, f) for b in batches], dim=0) for f in fields}
     weights = []
     for b in batches:
@@ -241,10 +254,14 @@ def collect_episodes(
     ep_returns: list[float] = []
     ep_lengths: list[int] = []
     ep_correct: list[float] = []
+    lab_list: list[list[int]] = []
 
     with torch.no_grad():
         for _ in range(n_episodes):
             obs = env.reset()
+            ep_change_true = int(getattr(env, "change_true", 0))
+            ep_change_time = int(getattr(env, "change_time", 10 ** 9))
+            ep_frame_repeat = int(getattr(env, "frame_repeat", 1))
             states = model.init_states(batch_size=1, device=device)
             teacher_states = (
                 representation_teacher.init_states(batch_size=1, device=device)
@@ -302,6 +319,10 @@ def collect_episodes(
             ep_returns.append(ep_return)
             ep_lengths.append(len(obs_e))
             ep_correct.append(1.0 if any(r > 0 for r in rew_e) else 0.0)
+            lab_list.append(
+                per_step_change_labels(ep_change_true, ep_change_time,
+                                       len(obs_e), ep_frame_repeat)
+            )
 
     # Pad to model.seq_len. valid_mask is 1 only for collected steps, so padded
     # steps contribute zero to every masked-mean loss. Pad obs with the LAST
@@ -346,6 +367,7 @@ def collect_episodes(
     logps = np.stack([_pad_scalar(l, T_max, np.float32) for l in logp_list])
     Vs = np.stack([_pad_scalar(v, T_max, np.float32) for v in Vs_list])
     Vd = np.stack([_pad_dist(v, T_max, N) for v in Vd_list])
+    labs = np.stack([_pad_scalar(l, T_max, np.float32) for l in lab_list])
     lengths = np.array([len(seq) for seq in obs_list], dtype=np.int64)
 
     valid = np.zeros((B, T_max), dtype=np.float32)
@@ -363,6 +385,7 @@ def collect_episodes(
         old_V_dist=torch.from_numpy(Vd).to(device),
         last_V_dist=torch.from_numpy(np.stack(last_Vd_list)).to(device),
         lengths=torch.from_numpy(lengths).to(device),
+        change_labels=torch.from_numpy(labs).to(device),
     )
 
     stats = {
@@ -484,10 +507,15 @@ class PPOConfig:
     n_epochs: int = 4
     grad_clip: float = 0.5            # L2-norm clip threshold
     grad_value_clip: float = 1.0e6    # per-element clip BEFORE norm clip (fp32 overflow guard)
-    # Per-group learning rate: RL heads (actor/critic) train at `lr`; the trunk
-    # (front + encoder + representation heads) trains at `lr * trunk_lr_ratio`.
-    # Set to e.g. 0.001 for the "pretrained trunk, lightweight RL heads" phase.
+    # Per-group learning rates. The trunk (front + encoder + representation
+    # heads) trains at `lr * trunk_lr_ratio`; the RL heads train at
+    # `lr * actor_lr_scale` (actor) and `lr * critic_lr_scale` (critic).
+    # Set trunk_lr_ratio to e.g. 0.001 for the "pretrained trunk, lightweight
+    # RL heads" phase; set actor/critic scales < 1 to make the policy learn
+    # slower than the representation (LR-only objective separation).
     trunk_lr_ratio: float = 1.0
+    actor_lr_scale: float = 1.0
+    critic_lr_scale: float = 1.0
 
     # PAC actor loss (MPO E-step) — replaces PPO surrogate. Historical
     # self-behavior-cloning remains reproducible only when explicitly enabled.
@@ -525,6 +553,9 @@ class PPOConfig:
     actor_coef: float = 1.0           # weight on the MPO actor objective
     value_coef: float = 0.5           # quantile-Huber on distributional Q
     entropy_coef: float = 0.1         # entropy bonus
+    change_ce_coef: float = 0.0       # per-step change-classification aux on R
+                                      # (identical head to the supervised variant,
+                                      # decoded at EVERY step; dense task signal)
 
     qr_kappa: float = 1.0             # Huber threshold
     gamma: float = 0.95               # discount for the 1-step TD target
@@ -766,6 +797,7 @@ def ppo_update(
         "loss_contrastive": 0.0, "loss_jepa": 0.0, "loss_jepa_ce": 0.0,
         "loss_jepa_var": 0.0, "loss_jepa_cov": 0.0,
         "loss_jepa_h1": 0.0, "loss_jepa_h2": 0.0, "loss_total": 0.0,
+        "loss_change": 0.0,
         "loss_jepa_actor": 0.0, "loss_jepa_critic": 0.0,
         "teacher_student_h2_mse": 0.0, "teacher_student_h2_cosine": 0.0,
         "approx_kl": 0.0,
@@ -975,6 +1007,22 @@ def ppo_update(
                 if layer_jepa_losses.numel() > 1:
                     accumulated["loss_jepa_h2"] += float(layer_jepa_losses[1].detach().item())
 
+        # ── Per-step change-classification aux (dense task signal on R) ─────
+        # Decoded at EVERY step from the same cell_seq JEPA reads; label is 1
+        # from the change frame onward on change trials. Runs during burn-in
+        # too — it is representation training, like JEPA.
+        loss_change = logits_t.new_zeros(())
+        if cfg.change_ce_coef > 0.0 and hasattr(model, "change_logits_seq"):
+            ch_logits = model.change_logits_seq(out["cell_seq"])            # (B,T,2)
+            ch_logits = torch.where(mask_bta.bool(), ch_logits, torch.zeros_like(ch_logits))
+            ce_step = F.cross_entropy(
+                ch_logits.reshape(-1, 2),
+                batch.change_labels.reshape(-1).long(),
+                reduction="none",
+            ).reshape(batch.change_labels.shape)                            # (B,T)
+            loss_change = (ce_step * mw).sum() / denom_mw
+            accumulated["loss_change"] += float(loss_change.detach().item())
+
         jepa_multiplier = getattr(model, "jepa_loss_multiplier", 1.0)
         loss = compose_total_loss(
             loss_policy=loss_policy,
@@ -985,6 +1033,7 @@ def ppo_update(
             cfg=cfg,
             jepa_multiplier=jepa_multiplier,
         )
+        loss = loss + cfg.change_ce_coef * loss_change
 
         with torch.no_grad():
             if train_actor:
@@ -1061,7 +1110,7 @@ def ppo_update(
     LOSS_KEYS = {"loss_policy", "loss_value", "loss_entropy", "loss_contrastive",
                  "loss_policy_weighted", "loss_value_weighted", "loss_jepa_weighted",
                  "loss_jepa", "loss_jepa_ce", "loss_jepa_var", "loss_jepa_cov",
-                 "loss_jepa_h1", "loss_jepa_h2",
+                 "loss_jepa_h1", "loss_jepa_h2", "loss_change",
                  "loss_jepa_actor", "loss_jepa_critic", "loss_total", "approx_kl",
                  "teacher_student_h2_mse", "teacher_student_h2_cosine"}
     result = {}
@@ -1307,20 +1356,31 @@ def train(
         allow_schedule_overrun=allow_schedule_overrun,
     )
 
-    # Per-group learning rates: RL heads (actor/critic) at `lr`; the trunk
-    # (front + encoder + representation heads) at `lr * trunk_lr_ratio`.
-    head_params, trunk_params = [], []
+    # Per-group learning rates: actor head at `lr * actor_lr_scale`, critic head
+    # at `lr * critic_lr_scale`; the trunk (front + encoder + representation
+    # heads) at `lr * trunk_lr_ratio`. Note the critic module is registered as
+    # `critic_ff` (critic_head is an alias), so both prefixes are matched.
+    actor_params, critic_params, trunk_params = [], [], []
     for name, param in model.named_parameters():
         if not param.requires_grad:
             continue
-        if name.startswith("actor_head.") or name.startswith("critic_head."):
-            head_params.append(param)
+        if name.startswith("actor_head."):
+            actor_params.append(param)
+        elif name.startswith("critic_head.") or name.startswith("critic_ff."):
+            critic_params.append(param)
         else:
             trunk_params.append(param)
-    param_groups = [{"params": head_params, "lr": cfg.lr}]
+    param_groups = [
+        {"params": actor_params, "lr": cfg.lr * cfg.actor_lr_scale},
+        {"params": critic_params, "lr": cfg.lr * cfg.critic_lr_scale},
+    ]
     if trunk_params:
         param_groups.append({"params": trunk_params, "lr": cfg.lr * cfg.trunk_lr_ratio})
     optimizer = torch.optim.Adam(param_groups, lr=cfg.lr, eps=1e-5)
+    print(f"[setup] param groups: actor {len(actor_params)} tensors @ "
+          f"{cfg.lr * cfg.actor_lr_scale:.2e}, critic {len(critic_params)} tensors @ "
+          f"{cfg.lr * cfg.critic_lr_scale:.2e}, trunk {len(trunk_params)} tensors @ "
+          f"{cfg.lr * cfg.trunk_lr_ratio:.2e}")
     history: list[dict] = []
 
     # ── per-iteration metrics recording (for the paper's learning curves) ──────

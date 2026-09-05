@@ -92,6 +92,9 @@ def build_parser() -> argparse.ArgumentParser:
                    help="belief decoder: pool = mean-pool + Linear; ffn = per-pixel "
                         "channel FFN (r_dim->16), flatten, Linear; conv = two strided "
                         "convs, flatten, Linear -> 2 logits")
+    p.add_argument("--softmax-mode", choices=["joint", "split"], default="joint",
+                   help="joint: one softmax over both key streams (streams compete); "
+                        "split: standard self-attention per stream, then sum the mixes")
     p.add_argument("--v-mode", choices=["state", "learned", "learned_mem", "learned_z"], default="state",
                    help="learned: vision-block values V_X/V_H are learned embeddings "
                         "(not derived from X/H2); H2 = A_X@V_X + A_H@V_H each step, "
@@ -180,7 +183,8 @@ def main() -> None:
                                attn_mode=args.attn_mode,
                                readout=args.readout,
                                cls_head=args.cls_head,
-                               v_mode=args.v_mode).to(device)
+                               v_mode=args.v_mode,
+                               softmax_mode=args.softmax_mode).to(device)
     jepa_teacher = copy.deepcopy(model)
     for p_ in jepa_teacher.parameters():
         p_.requires_grad_(False)
@@ -415,6 +419,7 @@ def main() -> None:
                 "readout": args.readout,
                 "cls_head": args.cls_head,
                 "v_mode": args.v_mode,
+                "softmax_mode": args.softmax_mode,
             }, ckpt_path)
             print(f"[kda-convmem] checkpoint saved: {ckpt_path}")
 

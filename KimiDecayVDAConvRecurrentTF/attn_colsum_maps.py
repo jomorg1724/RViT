@@ -50,16 +50,19 @@ def cell_origin(idx: int) -> tuple[int, int]:
     return (idx // 4) * CELL, (idx % 4) * CELL
 
 
-def raw_A(Q, Kx, Kh, scale):
-    """Token-mode raw attention: (B, N, 2N) joint softmax over both key streams."""
+def raw_A(Q, Kx, Kh, scale, split=False):
+    """Token-mode raw attention per stream. joint: one softmax over [Sx|Sh]
+    (streams compete). split: softmax each stream separately (each sums to 1)."""
     q, H, W = _nchw_to_tokens(Q)
     kx, _, _ = _nchw_to_tokens(Kx)
     kh, _, _ = _nchw_to_tokens(Kh)
     q, kx, kh = q.float(), kx.float(), kh.float()
-    N = H * W
     Sx = torch.matmul(q, kx.transpose(-2, -1)) * scale
     Sh = torch.matmul(q, kh.transpose(-2, -1)) * scale
+    if split:
+        return torch.softmax(Sx, dim=-1), torch.softmax(Sh, dim=-1)
     A = torch.softmax(torch.cat([Sx, Sh], dim=-1), dim=-1)  # (B,N,2N)
+    N = H * W
     return A[..., :N], A[..., N:]
 
 
@@ -99,6 +102,7 @@ def main() -> None:
         readout=ckpt.get("readout", "full"),
         cls_head=ckpt.get("cls_head", "pool"),
         v_mode=ckpt.get("v_mode", "state"),
+        softmax_mode=ckpt.get("softmax_mode", "joint"),
     ).to(device)
     model.load_state_dict(ckpt["model_state_dict"])
     model.eval()
@@ -115,6 +119,7 @@ def main() -> None:
     amaps = {k: np.zeros((NC, T, MAP, MAP), dtype=np.float64) for k in akeys}
     mem_every = ckpt.get("mem_every", 1)
     v_mode = ckpt.get("v_mode", "state")
+    split = ckpt.get("softmax_mode", "joint") == "split"
     accum = model.accumulator
 
     def accum_gate_maps(X_t, H1, ACC_pre):
@@ -172,7 +177,7 @@ def main() -> None:
                     # --- vision block: raw A over [X | H] key streams ---
                     Z, att = model.vision(Xin, H1, H2)
                     Ax, Ah = raw_A(model.vision.W_q(Xin), model.vision.W_kx(Xin),
-                                   model.vision.W_kh(H1), model.vision.scale)
+                                   model.vision.W_kh(H1), model.vision.scale, split=split)
                     maps["Ax"][ci, t] += colsum_map(Ax)
                     maps["Ah"][ci, t] += colsum_map(Ah)
                     raw["Ax"][ci, t] += Ax[0].cpu().numpy()
@@ -181,7 +186,8 @@ def main() -> None:
                     # --- memory block: raw A over [Z | H1] key streams ---
                     if model.memory is not None:
                         mem = model.memory
-                        Az, Ah1 = raw_A(mem.W_q(H1), mem.W_kz(Z), mem.W_kh(H1), mem.scale)
+                        Az, Ah1 = raw_A(mem.W_q(H1), mem.W_kz(Z), mem.W_kh(H1), mem.scale,
+                                        split=split)
                         maps["Az"][ci, t] += colsum_map(Az)
                         maps["Ah1"][ci, t] += colsum_map(Ah1)
                         raw["Az"][ci, t] += Az[0].cpu().numpy()

@@ -158,6 +158,7 @@ def main() -> None:
         readout=ckpt.get("readout", "full"),
         cls_head=ckpt.get("cls_head", "pool"),
         v_mode=ckpt.get("v_mode", "state"),
+        softmax_mode=ckpt.get("softmax_mode", "joint"),
     ).to(device)
     model.load_state_dict(ckpt["model_state_dict"])
     model.eval()

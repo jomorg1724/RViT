@@ -115,7 +115,7 @@ def _tokens_to_nchw(t: torch.Tensor, H: int, W: int) -> torch.Tensor:
     return t.reshape(B, H, W, C).permute(0, 3, 1, 2).contiguous()
 
 
-def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float):
+def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float, split: bool = False):
     """Standard QK^T over space; softmax over both streams' keys.
 
     Scores Sx, Sh are each (B,N,N). Concatenate on the key axis and softmax so
@@ -135,8 +135,14 @@ def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float):
     N = H * W
     Sx = torch.matmul(q, kx.transpose(-2, -1)) * scale
     Sh = torch.matmul(q, kh.transpose(-2, -1)) * scale
-    A = torch.softmax(torch.cat([Sx, Sh], dim=-1), dim=-1)   # (B,N,2N)
-    Ax, Ah = A[..., :N], A[..., N:]
+    if split:
+        # standard self-attention per stream: softmax EACH stream separately,
+        # then sum the two mixes (streams no longer compete for mass)
+        Ax = torch.softmax(Sx, dim=-1)
+        Ah = torch.softmax(Sh, dim=-1)
+    else:
+        A = torch.softmax(torch.cat([Sx, Sh], dim=-1), dim=-1)   # (B,N,2N)
+        Ax, Ah = A[..., :N], A[..., N:]
     att = torch.matmul(Ax, vx) + torch.matmul(Ah, vh)
     att = _tokens_to_nchw(att, H, W).to(dtype=Q.dtype)
     B = q.shape[0]
@@ -156,12 +162,13 @@ class ConvAttentionBlock(nn.Module):
     """
 
     def __init__(self, c: int = 128, in_c: int | None = None, attn_mode: str = "pixel_gate",
-                 learned_v: bool = False, map_size: int = 16):
+                 learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint"):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         cin = int(in_c) if in_c else c
         self.attn_mode = attn_mode
+        self.softmax_mode = softmax_mode
         self.learned_v = learned_v
         self.W_q = nn.Conv2d(cin, c, 1, bias=False)
         self.W_kx = nn.Conv2d(cin, c, 1, bias=False)
@@ -191,7 +198,8 @@ class ConvAttentionBlock(nn.Module):
         else:
             Vx, Vh = self.W_vx(X), self.W_vh(H2)
         if self.attn_mode == "token":
-            att, A = _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, self.scale)
+            att, A = _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, self.scale,
+                                            split=(self.softmax_mode == "split"))
         else:
             Sx = (Q * Kx).sum(dim=1, keepdim=True) * self.scale   # (B,1,map,map)
             Sh = (Q * Kh).sum(dim=1, keepdim=True) * self.scale
@@ -213,11 +221,12 @@ class ConvMemoryBlock(nn.Module):
     """
 
     def __init__(self, c: int = 128, memory_noise_std: float = 0.0, attn_mode: str = "pixel_gate",
-                 learned_v: bool = False, map_size: int = 16):
+                 learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint"):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         self.attn_mode = attn_mode
+        self.softmax_mode = softmax_mode
         self.learned_v = learned_v
         self.memory_noise_std = float(memory_noise_std)
         self.W_q = nn.Conv2d(c, c, 1, bias=False)
@@ -245,7 +254,8 @@ class ConvMemoryBlock(nn.Module):
         else:
             Vz, Vh = self.W_vz(Z), self.W_vh(H1)
         if self.attn_mode == "token":
-            att, _ = _two_stream_token_attn(Q, Kz, Kh, Vz, Vh, self.scale)
+            att, _ = _two_stream_token_attn(Q, Kz, Kh, Vz, Vh, self.scale,
+                                            split=(self.softmax_mode == "split"))
         else:
             Sz = (Q * Kz).sum(dim=1, keepdim=True) * self.scale
             Sh = (Q * Kh).sum(dim=1, keepdim=True) * self.scale
@@ -383,7 +393,8 @@ class KDAConvMemoryModel(nn.Module):
                  accum_mode: str = "kda", accum_decay: float = 0.5,
                  kda_heads: int = 4, kda_head_dim: int = 32,
                  attn_mode: str = "pixel_gate", readout: str = "full",
-                 cls_head: str = "pool", v_mode: str = "state"):
+                 cls_head: str = "pool", v_mode: str = "state",
+                 softmax_mode: str = "joint"):
         super().__init__()
         if accum_mode not in ("ema", "gated", "kda"):
             raise ValueError(f"accum_mode must be ema|gated|kda, got {accum_mode!r}")
@@ -409,6 +420,9 @@ class KDAConvMemoryModel(nn.Module):
         self.readout = readout
         self.cls_head = cls_head
         self.v_mode = v_mode
+        if softmax_mode not in ("joint", "split"):
+            raise ValueError(f"softmax_mode must be joint|split, got {softmax_mode!r}")
+        self.softmax_mode = softmax_mode
         self.r_dim = {"full": 4 * n_channels, "h1h2": 2 * n_channels,
                       "h2": n_channels}[readout]
 
@@ -427,7 +441,7 @@ class KDAConvMemoryModel(nn.Module):
         # The accumulator readout is always concatenated with X_t (X-side widens to 2C).
         self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode,
                                          learned_v=(v_mode in ("learned", "learned_z")),
-                                         map_size=map_size)
+                                         map_size=map_size, softmax_mode=softmax_mode)
         self.memory_noise_std = float(memory_noise_std)
         self._learned_mem = (v_mode == "learned_mem")
         if v_mode == "learned_z":
@@ -436,7 +450,8 @@ class KDAConvMemoryModel(nn.Module):
         else:
             self.memory = ConvMemoryBlock(n_channels, memory_noise_std=memory_noise_std,
                                           attn_mode=attn_mode,
-                                          learned_v=(v_mode == "learned_mem"), map_size=map_size)
+                                          learned_v=(v_mode == "learned_mem"), map_size=map_size,
+                                          softmax_mode=softmax_mode)
         # JEPA head: ONE per-pixel head on R.
         #   readout="full": R = [H1‖H2‖Z‖att_vis] (4C)
         #   readout="h1h2": R = [H1‖H2] (2C) — decode only from the two state streams

@@ -115,7 +115,8 @@ def _tokens_to_nchw(t: torch.Tensor, H: int, W: int) -> torch.Tensor:
     return t.reshape(B, H, W, C).permute(0, 3, 1, 2).contiguous()
 
 
-def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float, split: bool = False):
+def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float, split: bool = False,
+                           mode: str | None = None):
     """Standard QK^T over space; softmax over both streams' keys.
 
     Scores Sx, Sh are each (B,N,N). Concatenate on the key axis and softmax so
@@ -135,11 +136,20 @@ def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float, split: bool = False)
     N = H * W
     Sx = torch.matmul(q, kx.transpose(-2, -1)) * scale
     Sh = torch.matmul(q, kh.transpose(-2, -1)) * scale
-    if split:
+    if split or mode == "colgate":
         # standard self-attention per stream: softmax EACH stream separately,
         # then sum the two mixes (streams no longer compete for mass)
         Ax = torch.softmax(Sx, dim=-1)
         Ah = torch.softmax(Sh, dim=-1)
+        if mode == "colgate":
+            # per-position stream gate: column-sum each stream's attention
+            # (over queries), softmax the two column sums with temperature 0.5,
+            # then scale that key position's contribution from each stream.
+            cx = Ax.sum(dim=1)                                  # (B,N)
+            ch = Ah.sum(dim=1)                                  # (B,N)
+            g = torch.softmax(torch.stack([cx, ch], dim=-1) / 0.5, dim=-1)  # (B,N,2)
+            Ax = Ax * g[..., 0:1]
+            Ah = Ah * g[..., 1:2]
     else:
         A = torch.softmax(torch.cat([Sx, Sh], dim=-1), dim=-1)   # (B,N,2N)
         Ax, Ah = A[..., :N], A[..., N:]
@@ -199,7 +209,8 @@ class ConvAttentionBlock(nn.Module):
             Vx, Vh = self.W_vx(X), self.W_vh(H2)
         if self.attn_mode == "token":
             att, A = _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, self.scale,
-                                            split=(self.softmax_mode == "split"))
+                                            split=(self.softmax_mode == "split"),
+                                            mode=("colgate" if self.softmax_mode == "colgate" else None))
         else:
             Sx = (Q * Kx).sum(dim=1, keepdim=True) * self.scale   # (B,1,map,map)
             Sh = (Q * Kh).sum(dim=1, keepdim=True) * self.scale
@@ -255,7 +266,8 @@ class ConvMemoryBlock(nn.Module):
             Vz, Vh = self.W_vz(Z), self.W_vh(H1)
         if self.attn_mode == "token":
             att, _ = _two_stream_token_attn(Q, Kz, Kh, Vz, Vh, self.scale,
-                                            split=(self.softmax_mode == "split"))
+                                            split=(self.softmax_mode == "split"),
+                                            mode=("colgate" if self.softmax_mode == "colgate" else None))
         else:
             Sz = (Q * Kz).sum(dim=1, keepdim=True) * self.scale
             Sh = (Q * Kh).sum(dim=1, keepdim=True) * self.scale
@@ -420,8 +432,8 @@ class KDAConvMemoryModel(nn.Module):
         self.readout = readout
         self.cls_head = cls_head
         self.v_mode = v_mode
-        if softmax_mode not in ("joint", "split"):
-            raise ValueError(f"softmax_mode must be joint|split, got {softmax_mode!r}")
+        if softmax_mode not in ("joint", "split", "colgate"):
+            raise ValueError(f"softmax_mode must be joint|split|colgate, got {softmax_mode!r}")
         self.softmax_mode = softmax_mode
         self.r_dim = {"full": 4 * n_channels, "h1h2": 2 * n_channels,
                       "h2": n_channels}[readout]

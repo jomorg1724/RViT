@@ -92,7 +92,7 @@ def build_parser() -> argparse.ArgumentParser:
                    help="belief decoder: pool = mean-pool + Linear; ffn = per-pixel "
                         "channel FFN (r_dim->16), flatten, Linear; conv = two strided "
                         "convs, flatten, Linear -> 2 logits")
-    p.add_argument("--softmax-mode", choices=["joint", "split"], default="joint",
+    p.add_argument("--softmax-mode", choices=["joint", "split", "colgate"], default="joint",
                    help="joint: one softmax over both key streams (streams compete); "
                         "split: standard self-attention per stream, then sum the mixes")
     p.add_argument("--v-mode", choices=["state", "learned", "learned_mem", "learned_z"], default="state",

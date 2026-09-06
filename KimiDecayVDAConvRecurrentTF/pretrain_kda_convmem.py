@@ -336,7 +336,9 @@ def main() -> None:
                 loss = args.jepa_coef * jepa_loss + args.change_coef * change_loss
                 h1_ent = 0.0
                 if model.aux_entropy is not None:
-                    loss = loss + args.entropy_coef * model.aux_entropy
+                    # entropy BONUS: penalize LOW entropy (code collapse),
+                    # standard RL-style regularization
+                    loss = loss - args.entropy_coef * model.aux_entropy
                     h1_ent = float(model.aux_entropy)
 
                 # Hygiene only: one non-finite minibatch must not poison the

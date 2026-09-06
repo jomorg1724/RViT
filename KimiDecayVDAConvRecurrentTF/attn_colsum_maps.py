@@ -201,7 +201,7 @@ def main() -> None:
 
                     # --- mirror step() exactly: cadence + v_mode branch ---
                     update_memory = ((t + 1) % mem_every == 0)
-                    if v_mode == "learned":
+                    if v_mode in ("learned", "learned_all"):
                         H2 = att
                         if update_memory:
                             H1, _ = model.memory(Z, H1)

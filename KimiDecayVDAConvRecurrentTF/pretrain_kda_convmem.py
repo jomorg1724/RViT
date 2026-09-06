@@ -95,7 +95,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--softmax-mode", choices=["joint", "split", "colgate"], default="joint",
                    help="joint: one softmax over both key streams (streams compete); "
                         "split: standard self-attention per stream, then sum the mixes")
-    p.add_argument("--v-mode", choices=["state", "learned", "learned_mem", "learned_z"], default="state",
+    p.add_argument("--v-mode", choices=["state", "learned", "learned_mem", "learned_z", "learned_all"], default="state",
                    help="learned: vision-block values V_X/V_H are learned embeddings "
                         "(not derived from X/H2); H2 = A_X@V_X + A_H@V_H each step, "
                         "only H1 crosses timesteps. learned_mem: same but H2 and the "

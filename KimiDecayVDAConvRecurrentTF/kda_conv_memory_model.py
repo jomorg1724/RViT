@@ -414,8 +414,8 @@ class KDAConvMemoryModel(nn.Module):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         if readout not in ("full", "h1h2", "h2"):
             raise ValueError(f"readout must be full|h1h2|h2, got {readout!r}")
-        if v_mode not in ("state", "learned", "learned_mem", "learned_z"):
-            raise ValueError(f"v_mode must be state|learned|learned_mem|learned_z, got {v_mode!r}")
+        if v_mode not in ("state", "learned", "learned_mem", "learned_z", "learned_all"):
+            raise ValueError(f"v_mode must be state|learned|learned_mem|learned_z|learned_all, got {v_mode!r}")
         if cls_head not in ("pool", "ffn", "conv"):
             raise ValueError(f"cls_head must be pool|ffn|conv, got {cls_head!r}")
         self.n_channels = n_channels
@@ -452,7 +452,7 @@ class KDAConvMemoryModel(nn.Module):
                              in_channels=3 * self.frame_window)
         # The accumulator readout is always concatenated with X_t (X-side widens to 2C).
         self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode,
-                                         learned_v=(v_mode in ("learned", "learned_z")),
+                                         learned_v=(v_mode in ("learned", "learned_z", "learned_all")),
                                          map_size=map_size, softmax_mode=softmax_mode)
         self.memory_noise_std = float(memory_noise_std)
         self._learned_mem = (v_mode == "learned_mem")
@@ -462,8 +462,8 @@ class KDAConvMemoryModel(nn.Module):
         else:
             self.memory = ConvMemoryBlock(n_channels, memory_noise_std=memory_noise_std,
                                           attn_mode=attn_mode,
-                                          learned_v=(v_mode == "learned_mem"), map_size=map_size,
-                                          softmax_mode=softmax_mode)
+                                          learned_v=(v_mode in ("learned_mem", "learned_all")),
+                                          map_size=map_size, softmax_mode=softmax_mode)
         # JEPA head: ONE per-pixel head on R.
         #   readout="full": R = [H1‖H2‖Z‖att_vis] (4C)
         #   readout="h1h2": R = [H1‖H2] (2C) — decode only from the two state streams
@@ -511,7 +511,7 @@ class KDAConvMemoryModel(nn.Module):
         H1, H2, ACC = state
         ACC, acc_read, stats = self._accumulate(X_t, H1, ACC)
         Xin = torch.cat([X_t, acc_read], dim=1)                 # (B,2C,map,map)
-        if self.v_mode in ("learned", "learned_z"):
+        if self.v_mode in ("learned", "learned_z", "learned_all"):
             # H2 is NOT state: it is rebuilt every step as A_X@V_X + A_H@V_H
             # over learned value embeddings. Only H1 (and ACC) cross timesteps.
             Z, att_vis = self.vision(Xin, H1, H2)

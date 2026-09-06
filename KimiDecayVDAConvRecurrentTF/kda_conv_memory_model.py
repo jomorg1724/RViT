@@ -38,6 +38,8 @@ gives a 4x4-pixel patch per stimulus cell; n_channels=128; heads x d_v = C.
 """
 from __future__ import annotations
 
+import math
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -539,7 +541,7 @@ class KDAConvMemoryModel(nn.Module):
             idx = torch.multinomial(flat, 1)                   # sample channel
             onehot = F.one_hot(idx.squeeze(1), C).view(B, H, W, C).permute(0, 3, 1, 2)
             H1 = (onehot - p.detach() + p).contiguous()        # STE
-            self.aux_entropy = -(p * p.clamp_min(1e-9).log()).sum(dim=1).mean()
+            self.aux_entropy = -(p * p.clamp_min(1e-9).log()).sum(dim=1).mean() / math.log(C)  # normalized [0,1]
             R = H2 if self.readout == "h2" else torch.cat([H1, H2], dim=1)
             if return_stats:
                 return R, (H1, H2, ACC), stats

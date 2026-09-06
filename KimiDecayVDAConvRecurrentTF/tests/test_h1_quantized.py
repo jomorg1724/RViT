@@ -52,7 +52,7 @@ def test_entropy_aux_tracked():
            m.init_state(1, torch.device("cpu"), torch.float32))
     e = m.aux_entropy
     assert e is not None and torch.isfinite(e)
-    assert 0.0 <= float(e) <= math.log(8) + 1e-5  # entropy of 8-way dist
+    assert 0.0 <= float(e) <= 1.0 + 1e-5  # normalized by ln(C)
 
 
 def test_h1_quantized_every_step():

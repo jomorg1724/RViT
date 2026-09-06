@@ -124,7 +124,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--jepa-cov-coef", type=float, default=0.01)
     p.add_argument("--jepa-coef", type=float, default=1.0)
     p.add_argument("--change-coef", type=float, default=1.0)
-    p.add_argument("--entropy-coef", type=float, default=1e-3,
+    p.add_argument("--entropy-coef", type=float, default=1e-5,
                    help="weight on the H1 quantization entropy penalty "
                         "(mean over 256 positions of -sum_c p log p); only active "
                         "for v-mode=learned_zq")

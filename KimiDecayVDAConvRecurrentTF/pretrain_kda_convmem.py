@@ -95,7 +95,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--softmax-mode", choices=["joint", "split", "colgate"], default="joint",
                    help="joint: one softmax over both key streams (streams compete); "
                         "split: standard self-attention per stream, then sum the mixes")
-    p.add_argument("--v-mode", choices=["state", "learned", "learned_mem", "learned_z", "learned_all"], default="state",
+    p.add_argument("--v-mode", choices=["state", "learned", "learned_mem", "learned_z", "learned_all", "learned_zq"], default="state",
                    help="learned: vision-block values V_X/V_H are learned embeddings "
                         "(not derived from X/H2); H2 = A_X@V_X + A_H@V_H each step, "
                         "only H1 crosses timesteps. learned_mem: same but H2 and the "
@@ -124,6 +124,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--jepa-cov-coef", type=float, default=0.01)
     p.add_argument("--jepa-coef", type=float, default=1.0)
     p.add_argument("--change-coef", type=float, default=1.0)
+    p.add_argument("--entropy-coef", type=float, default=1e-3,
+                   help="weight on the H1 quantization entropy penalty "
+                        "(mean over 256 positions of -sum_c p log p); only active "
+                        "for v-mode=learned_zq")
     p.add_argument("--theta-start", type=float, default=65.0,
                    help="starting max |orientation change| (degrees)")
     p.add_argument("--curr-threshold", type=float, default=0.85,
@@ -330,6 +334,10 @@ def main() -> None:
                         ch_acc_all = ch_acc
 
                 loss = args.jepa_coef * jepa_loss + args.change_coef * change_loss
+                h1_ent = 0.0
+                if model.aux_entropy is not None:
+                    loss = loss + args.entropy_coef * model.aux_entropy
+                    h1_ent = float(model.aux_entropy)
 
                 # Hygiene only: one non-finite minibatch must not poison the
                 # collection mean, GradScaler, teacher EMA, or DINO centre.
@@ -395,7 +403,8 @@ def main() -> None:
                   f"cov={row['loss_jepa_cov']:.2f} change={row['loss_change']:.3f} "
                   f"acc={row['change_acc']:.3f} acc_all={row['change_acc_all']:.3f} "
                   f"theta={row['theta']:.1f} "
-                  f"gnorm={row['grad_norm']:.2f} ({row['elapsed_s']:.0f}s){skip_note}")
+                  f"gnorm={row['grad_norm']:.2f} ({row['elapsed_s']:.0f}s){skip_note}"
+                  + (f" h1ent={h1_ent:.2f}" if model.aux_entropy is not None or args.v_mode == "learned_zq" else ""))
 
         if (col + 1) % args.save_every == 0 or col == n_collections - 1:
             ckpt_path = os.path.join(ckpt_dir, "kda_convmem_latest.pt")

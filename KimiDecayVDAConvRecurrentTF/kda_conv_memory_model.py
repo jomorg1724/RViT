@@ -172,7 +172,8 @@ class ConvAttentionBlock(nn.Module):
     """
 
     def __init__(self, c: int = 128, in_c: int | None = None, attn_mode: str = "pixel_gate",
-                 learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint"):
+                 learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint",
+                 h_key_embed: bool = False):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
@@ -180,9 +181,15 @@ class ConvAttentionBlock(nn.Module):
         self.attn_mode = attn_mode
         self.softmax_mode = softmax_mode
         self.learned_v = learned_v
+        self.h_key_embed = h_key_embed
         self.W_q = nn.Conv2d(cin, c, 1, bias=False)
         self.W_kx = nn.Conv2d(cin, c, 1, bias=False)
-        self.W_kh = nn.Conv2d(c, c, 1, bias=False)
+        if h_key_embed:
+            # one-hot H stream: keys are a learned per-channel embedding lookup
+            # (linear projection over channels), not a conv
+            self.W_kh_emb = nn.Parameter(torch.randn(c, c) * 0.02)
+        else:
+            self.W_kh = nn.Conv2d(c, c, 1, bias=False)
         if learned_v:
             # Values are LEARNED per-position embeddings, not derived from X or H2.
             # att = A_X @ V_X + A_H @ V_H is then a pure attention-pattern readout:
@@ -197,10 +204,17 @@ class ConvAttentionBlock(nn.Module):
         self.proj = nn.Conv2d(cin + c, c, 1)
         self.scale = c ** -0.5
 
+    def _keys_h(self, H):
+        if self.h_key_embed:
+            # linear projection over channels = learned embedding lookup when H
+            # is one-hot; gradient flows through H via the straight-through estimator
+            return torch.einsum("bchw,dc->bdhw", H, self.W_kh_emb)
+        return self.W_kh(H)
+
     def forward(self, X: torch.Tensor, H1: torch.Tensor, H2: torch.Tensor | None = None,
                 return_attn: bool = False):
         Q = self.W_q(X)
-        Kx, Kh = self.W_kx(X), self.W_kh(H1)
+        Kx, Kh = self.W_kx(X), self._keys_h(H1)
         if self.learned_v:
             B = X.shape[0]
             Vx = self.V_X.expand(B, -1, -1, -1)
@@ -414,8 +428,8 @@ class KDAConvMemoryModel(nn.Module):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         if readout not in ("full", "h1h2", "h2"):
             raise ValueError(f"readout must be full|h1h2|h2, got {readout!r}")
-        if v_mode not in ("state", "learned", "learned_mem", "learned_z", "learned_all"):
-            raise ValueError(f"v_mode must be state|learned|learned_mem|learned_z|learned_all, got {v_mode!r}")
+        if v_mode not in ("state", "learned", "learned_mem", "learned_z", "learned_all", "learned_zq"):
+            raise ValueError(f"v_mode must be state|learned|learned_mem|learned_z|learned_all|learned_zq, got {v_mode!r}")
         if cls_head not in ("pool", "ffn", "conv"):
             raise ValueError(f"cls_head must be pool|ffn|conv, got {cls_head!r}")
         self.n_channels = n_channels
@@ -452,11 +466,13 @@ class KDAConvMemoryModel(nn.Module):
                              in_channels=3 * self.frame_window)
         # The accumulator readout is always concatenated with X_t (X-side widens to 2C).
         self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode,
-                                         learned_v=(v_mode in ("learned", "learned_z", "learned_all")),
-                                         map_size=map_size, softmax_mode=softmax_mode)
+                                         learned_v=(v_mode in ("learned", "learned_z", "learned_all", "learned_zq")),
+                                         map_size=map_size, softmax_mode=softmax_mode,
+                                         h_key_embed=(v_mode == "learned_zq"))
         self.memory_noise_std = float(memory_noise_std)
         self._learned_mem = (v_mode == "learned_mem")
-        if v_mode == "learned_z":
+        self.aux_entropy = None
+        if v_mode in ("learned_z", "learned_zq"):
             # No memory block at all: H1 IS the vision block's Z output.
             self.memory = None
         else:
@@ -511,6 +527,23 @@ class KDAConvMemoryModel(nn.Module):
         H1, H2, ACC = state
         ACC, acc_read, stats = self._accumulate(X_t, H1, ACC)
         Xin = torch.cat([X_t, acc_read], dim=1)                 # (B,2C,map,map)
+        self.aux_entropy = None
+        if self.v_mode == "learned_zq":
+            # H1 = Z discretized: per-position channel softmax -> sample one-hot
+            # -> straight-through estimator. Keys read H1 via learned embedding.
+            Z, att_vis = self.vision(Xin, H1, H2)
+            H2 = att_vis
+            B, C, H, W = Z.shape
+            p = torch.softmax(Z, dim=1)                        # (B,C,H,W)
+            flat = p.permute(0, 2, 3, 1).reshape(B * H * W, C)
+            idx = torch.multinomial(flat, 1)                   # sample channel
+            onehot = F.one_hot(idx.squeeze(1), C).view(B, H, W, C).permute(0, 3, 1, 2)
+            H1 = (onehot - p.detach() + p).contiguous()        # STE
+            self.aux_entropy = -(p * p.clamp_min(1e-9).log()).sum(dim=1).mean()
+            R = H2 if self.readout == "h2" else torch.cat([H1, H2], dim=1)
+            if return_stats:
+                return R, (H1, H2, ACC), stats
+            return R, (H1, H2, ACC)
         if self.v_mode in ("learned", "learned_z", "learned_all"):
             # H2 is NOT state: it is rebuilt every step as A_X@V_X + A_H@V_H
             # over learned value embeddings. Only H1 (and ACC) cross timesteps.
@@ -577,7 +610,13 @@ class KDAConvMemoryModel(nn.Module):
                 R, state = self.step(X_t, state,
                                      update_memory=((k + 1) % self.mem_every == 0))
             Rs.append(R)
+            if self.aux_entropy is not None:
+                stats_seq.append(self.aux_entropy)
         R_seq = torch.stack(Rs, dim=1)
+        if self.v_mode == "learned_zq" and not return_stats:
+            self.aux_entropy = torch.stack(stats_seq).mean() if stats_seq else None
+        elif not return_stats:
+            self.aux_entropy = None
         if return_stats:
             return R_seq, stats_seq
         return R_seq

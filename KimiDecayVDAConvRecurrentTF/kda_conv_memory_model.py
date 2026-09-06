@@ -164,6 +164,31 @@ def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float, split: bool = False,
     return att, A_maps
 
 
+def _three_stream_token_attn(Q, Kx, Kh, Ka, Vx, Vh, Va, scale: float):
+    """Q,K,V: (B,C,H,W) -> ONE softmax over three key sets (X | H | A).
+    att = A_X@V_X + A_H@V_H + A_A@V_A; A_maps = per-stream mass (B,3,H,W)."""
+    q, H, W = _nchw_to_tokens(Q)
+    kx, _, _ = _nchw_to_tokens(Kx)
+    kh, _, _ = _nchw_to_tokens(Kh)
+    ka, _, _ = _nchw_to_tokens(Ka)
+    vx, _, _ = _nchw_to_tokens(Vx)
+    vh, _, _ = _nchw_to_tokens(Vh)
+    va, _, _ = _nchw_to_tokens(Va)
+    S = torch.cat([q @ kx.transpose(-2, -1),
+                   q @ kh.transpose(-2, -1),
+                   q @ ka.transpose(-2, -1)], dim=-1) * scale
+    A = torch.softmax(S.float(), dim=-1).to(S.dtype)
+    n = kx.shape[-2]
+    Ax, Ah, Aa = A[..., :n], A[..., n:2 * n], A[..., 2 * n:]
+    att = Ax @ vx + Ah @ vh + Aa @ va
+    att = _tokens_to_nchw(att, H, W).to(dtype=Q.dtype)
+    B = q.shape[0]
+    A_maps = torch.stack([Ax.sum(-1).reshape(B, H, W),
+                          Ah.sum(-1).reshape(B, H, W),
+                          Aa.sum(-1).reshape(B, H, W)], dim=1)
+    return att, A_maps
+
+
 class ConvAttentionBlock(nn.Module):
     """Recurrent conv-transformer vision block: Q<-X, K<-[X,H1], V<-[X,H2].
 
@@ -175,11 +200,16 @@ class ConvAttentionBlock(nn.Module):
 
     def __init__(self, c: int = 128, in_c: int | None = None, attn_mode: str = "pixel_gate",
                  learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint",
-                 h_key_embed: bool = False):
+                 h_key_embed: bool = False, acc_stream: bool = False):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
+        if acc_stream and attn_mode != "token":
+            raise ValueError("acc_stream requires attn_mode='token'")
+        if acc_stream and softmax_mode != "joint":
+            raise ValueError("acc_stream requires softmax_mode='joint'")
         cin = int(in_c) if in_c else c
+        self.acc_stream = acc_stream
         self.attn_mode = attn_mode
         self.softmax_mode = softmax_mode
         self.learned_v = learned_v
@@ -192,6 +222,10 @@ class ConvAttentionBlock(nn.Module):
             self.W_kh_emb = nn.Parameter(torch.randn(c, c) * 0.02)
         else:
             self.W_kh = nn.Conv2d(c, c, 1, bias=False)
+        if acc_stream:
+            # accumulator readout as a THIRD stream: derived keys + learned values
+            self.W_ka = nn.Conv2d(c, c, 1, bias=False)
+            self.V_A = nn.Parameter(torch.randn(1, c, map_size, map_size) * 0.02)
         if learned_v:
             # Values are LEARNED per-position embeddings, not derived from X or H2.
             # att = A_X @ V_X + A_H @ V_H is then a pure attention-pattern readout:
@@ -214,7 +248,7 @@ class ConvAttentionBlock(nn.Module):
         return self.W_kh(H)
 
     def forward(self, X: torch.Tensor, H1: torch.Tensor, H2: torch.Tensor | None = None,
-                return_attn: bool = False):
+                return_attn: bool = False, acc: torch.Tensor | None = None):
         Q = self.W_q(X)
         Kx, Kh = self.W_kx(X), self._keys_h(H1)
         if self.learned_v:
@@ -223,7 +257,11 @@ class ConvAttentionBlock(nn.Module):
             Vh = self.V_H.expand(B, -1, -1, -1)
         else:
             Vx, Vh = self.W_vx(X), self.W_vh(H2)
-        if self.attn_mode == "token":
+        if self.acc_stream:
+            Ka = self.W_ka(acc)
+            Va = self.V_A.expand(X.shape[0], -1, -1, -1)
+            att, A = _three_stream_token_attn(Q, Kx, Kh, Ka, Vx, Vh, Va, self.scale)
+        elif self.attn_mode == "token":
             att, A = _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, self.scale,
                                             split=(self.softmax_mode == "split"),
                                             mode=("colgate" if self.softmax_mode == "colgate" else None))
@@ -422,8 +460,9 @@ class KDAConvMemoryModel(nn.Module):
                  kda_heads: int = 4, kda_head_dim: int = 32,
                  attn_mode: str = "pixel_gate", readout: str = "full",
                  cls_head: str = "pool", v_mode: str = "state",
-                 softmax_mode: str = "joint"):
+                 softmax_mode: str = "joint", acc_stream: bool = False):
         super().__init__()
+        self.acc_stream = acc_stream
         if accum_mode not in ("ema", "gated", "kda"):
             raise ValueError(f"accum_mode must be ema|gated|kda, got {accum_mode!r}")
         if attn_mode not in ("pixel_gate", "token"):
@@ -466,11 +505,16 @@ class KDAConvMemoryModel(nn.Module):
 
         self.stem = ConvStem(channels=n_channels, map_size=map_size,
                              in_channels=3 * self.frame_window)
-        # The accumulator readout is always concatenated with X_t (X-side widens to 2C).
-        self.vision = ConvAttentionBlock(n_channels, in_c=2 * n_channels, attn_mode=attn_mode,
+        # The accumulator readout is concatenated with X_t (X-side widens to 2C),
+        # unless acc_stream: then X stays pure and the accumulator gets its own
+        # derived keys + learned values as a third attention stream.
+        self.vision = ConvAttentionBlock(n_channels,
+                                         in_c=(n_channels if acc_stream else 2 * n_channels),
+                                         attn_mode=attn_mode,
                                          learned_v=(v_mode in ("learned", "learned_z", "learned_all", "learned_zq")),
                                          map_size=map_size, softmax_mode=softmax_mode,
-                                         h_key_embed=(v_mode == "learned_zq"))
+                                         h_key_embed=(v_mode == "learned_zq"),
+                                         acc_stream=acc_stream)
         self.memory_noise_std = float(memory_noise_std)
         self._learned_mem = (v_mode == "learned_mem")
         self.aux_entropy = None
@@ -528,12 +572,16 @@ class KDAConvMemoryModel(nn.Module):
              return_stats: bool = False):
         H1, H2, ACC = state
         ACC, acc_read, stats = self._accumulate(X_t, H1, ACC)
-        Xin = torch.cat([X_t, acc_read], dim=1)                 # (B,2C,map,map)
+        Xin = X_t if self.acc_stream else torch.cat([X_t, acc_read], dim=1)
         self.aux_entropy = None
         if self.v_mode == "learned_zq":
             # H1 = Z discretized: per-position channel softmax -> sample one-hot
             # -> straight-through estimator. Keys read H1 via learned embedding.
-            Z, att_vis = self.vision(Xin, H1, H2)
+            if return_stats:
+                Z, att_vis, A_vis = self.vision(Xin, H1, H2, acc=acc_read, return_attn=True)
+                stats["A_vis"] = A_vis
+            else:
+                Z, att_vis = self.vision(Xin, H1, H2, acc=acc_read)
             H2 = att_vis
             B, C, H, W = Z.shape
             p = torch.softmax(Z, dim=1)                        # (B,C,H,W)
@@ -549,7 +597,11 @@ class KDAConvMemoryModel(nn.Module):
         if self.v_mode in ("learned", "learned_z", "learned_all"):
             # H2 is NOT state: it is rebuilt every step as A_X@V_X + A_H@V_H
             # over learned value embeddings. Only H1 (and ACC) cross timesteps.
-            Z, att_vis = self.vision(Xin, H1, H2)
+            if return_stats:
+                Z, att_vis, A_vis = self.vision(Xin, H1, H2, acc=acc_read, return_attn=True)
+                stats["A_vis"] = A_vis
+            else:
+                Z, att_vis = self.vision(Xin, H1, H2, acc=acc_read)
             H2 = att_vis
             if self.v_mode == "learned_z":
                 # No memory block: H1 IS Z (the integrated vision output),
@@ -565,13 +617,21 @@ class KDAConvMemoryModel(nn.Module):
             # embeddings, computed EVERY step (fast belief). H1 is written only
             # on memory ticks (slow tick preserved). Vision values are derived
             # again, reading H1 as the memory-value source (H2 is not fed back).
-            Z, att_vis = self.vision(Xin, H1, H1)
+            if return_stats:
+                Z, att_vis, A_vis = self.vision(Xin, H1, H1, acc=acc_read, return_attn=True)
+                stats["A_vis"] = A_vis
+            else:
+                Z, att_vis = self.vision(Xin, H1, H1, acc=acc_read)
             H1_new, att_mem = self.memory(Z, H1)
             H2 = att_mem
             if update_memory:
                 H1 = H1_new
         else:
-            Z, att_vis = self.vision(Xin, H1, H2)
+            if return_stats:
+                Z, att_vis, A_vis = self.vision(Xin, H1, H2, acc=acc_read, return_attn=True)
+                stats["A_vis"] = A_vis
+            else:
+                Z, att_vis = self.vision(Xin, H1, H2, acc=acc_read)
             if update_memory:
                 H1, H2 = self.memory(Z, H1)
         if self.readout == "h2":

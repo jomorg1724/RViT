@@ -124,6 +124,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--jepa-cov-coef", type=float, default=0.01)
     p.add_argument("--jepa-coef", type=float, default=1.0)
     p.add_argument("--change-coef", type=float, default=1.0)
+    p.add_argument("--acc-stream", action="store_true",
+                   help="accumulator readout becomes a THIRD attention stream "
+                        "(derived keys W_ka, learned values V_A) in a joint triplet "
+                        "softmax instead of being concatenated with X")
     p.add_argument("--entropy-coef", type=float, default=1e-5,
                    help="weight on the H1 quantization entropy penalty "
                         "(mean over 256 positions of -sum_c p log p); only active "
@@ -188,7 +192,8 @@ def main() -> None:
                                readout=args.readout,
                                cls_head=args.cls_head,
                                v_mode=args.v_mode,
-                               softmax_mode=args.softmax_mode).to(device)
+                               softmax_mode=args.softmax_mode,
+                               acc_stream=args.acc_stream).to(device)
     jepa_teacher = copy.deepcopy(model)
     for p_ in jepa_teacher.parameters():
         p_.requires_grad_(False)

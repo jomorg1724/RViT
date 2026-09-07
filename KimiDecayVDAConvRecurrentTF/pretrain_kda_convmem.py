@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import copy
 import csv
+import math
 import os
 import time
 
@@ -44,12 +45,36 @@ if _HERE not in __import__("sys").path:
 
 from kda_conv_memory_model import KDAConvMemoryModel  # noqa: E402
 from envs import make_env  # noqa: E402
+from envs.sequences import (  # noqa: E402
+    collect_supervised_sequence, supervised_frame_indices, SUPERVISED_SEQUENCE_VERSION,
+)
 from ppo import (  # noqa: E402
     masked_jepa_center,
     structured_jepa_loss,
     jepa_variance_covariance_loss,
 )
 from train_rl import pick_device, seed_training_rngs  # noqa: E402
+
+
+VISION_QK_METRICS = ("score_std", "score_min", "score_max", "attn_entropy",
+                     "mass_x", "mass_h", "temperature", "q_norm", "kx_norm", "kh_norm")
+# Joint attn_entropy remains joint nats; split uses mean per-stream nats.
+# Split mass_x/h are each 1 by construction, NOT fractions of a total.
+VISION_QK_SPLIT_METRICS = ("attn_entropy_x", "attn_entropy_h")
+
+
+def _positive_finite(value: str) -> float:
+    number = float(value)
+    if not math.isfinite(number) or number <= 0:
+        raise argparse.ArgumentTypeError("temperature must be positive and finite")
+    return number
+
+
+def _nonnegative_finite(value: str) -> float:
+    number = float(value)
+    if not math.isfinite(number) or number < 0:
+        raise argparse.ArgumentTypeError("attention entropy coefficient must be nonnegative and finite")
+    return number
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -85,6 +110,12 @@ def build_parser() -> argparse.ArgumentParser:
                    help="pixel_gate: per-pixel channel inner-product 2-way softmax. "
                         "token: flatten to (HW,C), QK^T over space, softmax over both "
                         "streams' keys, reshape back for conv residual.")
+    p.add_argument("--vision-qk-norm", action="store_true",
+                   help="vision-only full-channel Q/K L2 normalization with one learned "
+                        "positive temperature; requires token, joint or split, two-stream attention")
+    p.add_argument("--vision-qk-temperature", type=_positive_finite, default=None,
+                   help="initial shared cosine-score multiplier (default sqrt(n_channels)); "
+                        "used only with --vision-qk-norm")
     p.add_argument("--readout", choices=["full", "h1h2", "h2"], default="h1h2",
                    help="R construction: full = [H1|H2|Z|att_vis] (4C); "
                         "h1h2 = [H1|H2] (2C) — decode only from the two state streams.")
@@ -128,6 +159,15 @@ def build_parser() -> argparse.ArgumentParser:
                    help="accumulator readout becomes a THIRD attention stream "
                         "(derived keys W_ka, learned values V_A) in a joint triplet "
                         "softmax instead of being concatenated with X")
+    p.add_argument("--raw-attention-readout", action="store_true",
+                   help="literal no-memory H2 attention sum; requires learned_z, h2 readout, "
+                        "and zero memory write noise")
+    p.add_argument("--sample-attention", action="store_true",
+                   help="categorical one-hot attention per query and stream with softmax STE; "
+                        "also samples in eval; requires token split two-stream attention")
+    p.add_argument("--attention-entropy-coef", type=_nonnegative_finite, default=0.0,
+                   help="subtract coef * mean raw soft-attention entropy (nats), averaged "
+                        "over batch/query/streams and actual vision+memory calls; separate from H1 entropy")
     p.add_argument("--entropy-coef", type=float, default=1e-5,
                    help="weight on the H1 quantization entropy penalty "
                         "(mean over 256 positions of -sum_c p log p); only active "
@@ -193,7 +233,12 @@ def main() -> None:
                                cls_head=args.cls_head,
                                v_mode=args.v_mode,
                                softmax_mode=args.softmax_mode,
-                               acc_stream=args.acc_stream).to(device)
+                               acc_stream=args.acc_stream,
+                               vision_qk_norm=args.vision_qk_norm,
+                               vision_qk_temperature=args.vision_qk_temperature,
+                               raw_attention_readout=args.raw_attention_readout,
+                               sample_attention=args.sample_attention,
+                               attention_entropy_coef=args.attention_entropy_coef).to(device)
     jepa_teacher = copy.deepcopy(model)
     for p_ in jepa_teacher.parameters():
         p_.requires_grad_(False)
@@ -233,6 +278,20 @@ def main() -> None:
     if args.resume:
         ckpt_path = os.path.join(ckpt_dir, "kda_convmem_latest.pt")
         ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
+        expected_protocol = {
+            "supervised_sequence_version": SUPERVISED_SEQUENCE_VERSION,
+            "environment_time_indices": list(range(T)),
+            "model_time_indices": supervised_frame_indices(T, args.frame_window, args.frame_stride),
+            "frame_repeat": args.frame_repeat,
+            "frame_window": args.frame_window,
+            "frame_stride": args.frame_stride,
+            "raw_attention_readout": args.raw_attention_readout,
+            "memory_noise_std": args.memory_noise_std,
+        }
+        mismatches = [key for key, value in expected_protocol.items() if ckpt.get(key) != value]
+        if mismatches:
+            raise ValueError(f"incompatible supervised sequence protocol: {mismatches}; "
+                             "old step-first or unversioned weights cannot be resumed")
         model.load_state_dict(ckpt["model_state_dict"])
         jepa_teacher.load_state_dict(ckpt["jepa_teacher_state_dict"])
         start_col = int(ckpt["collection"]) + 1
@@ -251,6 +310,12 @@ def main() -> None:
     fieldnames = ["collection", "n_trials", "loss_total", "loss_jepa_ce", "loss_jepa_var",
                   "loss_jepa_cov", "loss_change", "change_acc", "change_acc_all",
                   "grad_norm", "theta", "elapsed_s"]
+    if args.vision_qk_norm:
+        fieldnames.extend("vision_" + k for k in VISION_QK_METRICS)
+        if args.softmax_mode == "split":
+            fieldnames.extend("vision_" + k for k in VISION_QK_SPLIT_METRICS)
+    if args.sample_attention or args.attention_entropy_coef > 0:
+        fieldnames.extend(["attention_entropy", "loss_attention_entropy"])
     if not (args.resume and os.path.exists(metrics_path)):
         with open(metrics_path, "w", newline="") as f:
             csv.writer(f).writerow(fieldnames)
@@ -262,10 +327,9 @@ def main() -> None:
         # ---- collect a FRESH training set ----
         obs_list, change_list, ctime_list = [], [], []
         for _ in range(args.collection_size):
-            env.reset()
+            frames = collect_supervised_sequence(env)
             change_list.append(int(env.valid) if args.label == "valid" else int(env.change_true))
             ctime_list.append(int(getattr(env, "change_time", T)))
-            frames = [env.step(0)[0] for _ in range(T)]
             obs_list.append(np.stack(frames))
         obs = torch.from_numpy(np.stack(obs_list))  # (N,T,S,S,3) — stays on CPU;
         # minibatches are transferred per update to avoid a device-resident block
@@ -276,6 +340,12 @@ def main() -> None:
         acc = {k: 0.0 for k in ("loss_total", "loss_jepa_ce", "loss_jepa_var",
                                 "loss_jepa_cov", "loss_change", "change_acc",
                                 "change_acc_all", "grad_norm")}
+        if args.vision_qk_norm:
+            acc.update({"vision_" + k: 0.0 for k in VISION_QK_METRICS})
+            if args.softmax_mode == "split":
+                acc.update({"vision_" + k: 0.0 for k in VISION_QK_SPLIT_METRICS})
+        if args.sample_attention or args.attention_entropy_coef > 0:
+            acc.update(attention_entropy=0.0, loss_attention_entropy=0.0)
         n_upd = 0
         n_skipped = 0
         for epoch in range(args.epochs):
@@ -321,9 +391,12 @@ def main() -> None:
                     B_, T_ = R_s.shape[0], R_s.shape[1]
                     step_logits = model.classify(
                         R_s.reshape(B_ * T_, *R_s.shape[2:])).reshape(B_, T_, 2)
-                    t_idx = torch.arange(T_, device=device).unsqueeze(0)
+                    # Model outputs correspond to physical window endpoints; change_time
+                    # is logical environment time (frame_repeat physical frames per tick).
+                    t_idx = torch.tensor(supervised_frame_indices(
+                        T, args.frame_window, args.frame_stride), device=device).unsqueeze(0)
                     step_labels = ((change_mb.unsqueeze(1) == 1)
-                                   & (t_idx >= ct_mb.unsqueeze(1))).long()
+                                   & (t_idx >= ct_mb.unsqueeze(1) * env.frame_repeat)).long()
                     change_loss = F.cross_entropy(
                         step_logits.reshape(-1, 2), step_labels.reshape(-1))
                     with torch.no_grad():
@@ -345,6 +418,12 @@ def main() -> None:
                     # standard RL-style regularization
                     loss = loss - args.entropy_coef * model.aux_entropy
                     h1_ent = float(model.aux_entropy)
+
+                loss_attention_entropy = 0.0
+                if args.attention_entropy_coef > 0:
+                    # Differentiable SOFT probabilities, not sampled one-hots or detached diagnostics.
+                    loss_attention_entropy = -args.attention_entropy_coef * model.attention_entropy
+                    loss = loss + loss_attention_entropy
 
                 # Hygiene only: one non-finite minibatch must not poison the
                 # collection mean, GradScaler, teacher EMA, or DINO centre.
@@ -385,6 +464,15 @@ def main() -> None:
                 acc["change_acc"] += ch_acc
                 acc["change_acc_all"] += ch_acc_all
                 acc["grad_norm"] += float(grad_norm)
+                if args.vision_qk_norm:
+                    # Last student timestep per accepted minibatch; collection mean.
+                    # Diagnostic scalars describe its pre-update forward, not the teacher.
+                    for key, value in model.vision.qk_stats.items():
+                        acc["vision_" + key] += float(value)
+                if args.sample_attention or args.attention_entropy_coef > 0:
+                    # Sequence-mean raw nats, then mean over accepted minibatches below.
+                    acc["attention_entropy"] += float(model.attention_entropy.detach())
+                    acc["loss_attention_entropy"] += float(loss_attention_entropy)
                 n_upd += 1
                 total_updates += 1
 
@@ -416,6 +504,11 @@ def main() -> None:
         if (col + 1) % args.save_every == 0 or col == n_collections - 1:
             ckpt_path = os.path.join(ckpt_dir, "kda_convmem_latest.pt")
             torch.save({
+                "supervised_sequence_version": SUPERVISED_SEQUENCE_VERSION,
+                "environment_time_indices": list(range(args.T * args.frame_repeat)),
+                "model_time_indices": supervised_frame_indices(
+                    args.T * args.frame_repeat, args.frame_window, args.frame_stride),
+                "frame_repeat": args.frame_repeat,
                 "model_state_dict": model.state_dict(),
                 "jepa_teacher_state_dict": jepa_teacher.state_dict(),
                 "collection": col,
@@ -436,6 +529,16 @@ def main() -> None:
                 "cls_head": args.cls_head,
                 "v_mode": args.v_mode,
                 "softmax_mode": args.softmax_mode,
+                "raw_attention_readout": args.raw_attention_readout,
+                "memory_noise_std": args.memory_noise_std,
+                "sample_attention": args.sample_attention,
+                "attention_entropy_coef": args.attention_entropy_coef,
+                "attention_entropy_semantics": "mean_soft_row_nats_over_batch_queries_streams_actual_block_calls",
+                "vision_qk_norm": args.vision_qk_norm,
+                "vision_qk_temperature": args.vision_qk_temperature,
+                "vision_attn_entropy_semantics": (
+                    ("mean_per_stream_nats" if args.softmax_mode == "split" else "joint_nats")
+                    if args.vision_qk_norm else None),
             }, ckpt_path)
             print(f"[kda-convmem] checkpoint saved: {ckpt_path}")
 

@@ -1,9 +1,9 @@
-# Invalidated supervised runs
+# Invalidated supervised experiments
 
-The retired supervised collectors discarded the observation returned by reset() and collected only subsequent step() observations. This shifted the input sequence; their supervised runs, checkpoints, metrics, figures, and downstream analyses are invalid and must not be reused or cited as valid results.
+The reset-discarding supervised collector is retired. Its old weights, metrics, analyses, takeoff claims, and baselines are invalid and must not be reused or restored.
 
-This cleanup removes the explicitly identified affected artifacts and retired collectors from the current main tree. No weights or results from the removed scope are retained in this tree, and no replacement backups are created by this cleanup. Unrelated work, including reset-correct RL, is preserved.
+The corrected implementation is `KimiDecayVDAConvRecurrentTF/pretrain_kda_convmem.py`, with `envs/sequences.py` and a fresh-only `launch.py`. Its protocol `blank_first_v1` processes exactly seven observations: reset blank t0, cue t1, blank t2, samples t3/t4, and tests t5/t6. Changed-trial labels are 0000011. Old or mismatched sequence metadata is rejected before loading model weights. Focused tests exercise the actual model input and label path.
 
-Corrected training requires a fresh run with reset observation t0 included, seven inputs t0..t6, and labels 0000011 (blank_first_v1). Corrected trainer/model changes are a separate follow-up; KimiDecayVDAConvRecurrentTF/pretrain_kda_convmem.py remains pending that replacement and must not be used as validation of a repaired pipeline at this commit.
+The replacement no-memory experiment starts from random initialization, not an old checkpoint. Unrelated reset-correct RL experiments remain separate.
 
-This is not a history purge: older Git commits, other refs, clones, caches, or external run storage may still contain invalid material. Do not recover or reuse it. No shared-history rewrite was performed.
+Known affected artifacts and obsolete entrypoints were deleted from the current working trees and GitHub main. This notice contains no old results or weights. Historical Git commits, other clones, and cloud version/recycle-bin history have NOT been erased; do not recover invalid artifacts from those sources.

@@ -117,16 +117,35 @@ def _tokens_to_nchw(t: torch.Tensor, H: int, W: int) -> torch.Tensor:
     return t.reshape(B, H, W, C).permute(0, 3, 1, 2).contiguous()
 
 
+def _sample_attention_st(p: torch.Tensor) -> torch.Tensor:
+    """One independent categorical draw per row, even in eval/no_grad.
+
+    Parentheses preserve EXACT one-hot forward values; backward is identity to p.
+    """
+    idx = torch.multinomial(p.detach().reshape(-1, p.shape[-1]), 1)
+    hard = F.one_hot(idx.squeeze(-1), p.shape[-1]).reshape_as(p).to(p.dtype)
+    return hard + (p - p.detach())
+
+
 def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float, split: bool = False,
-                           mode: str | None = None):
+                           mode: str | None = None, diagnostics: dict | None = None,
+                           sample_attention: bool = False,
+                           entropy_terms: list | None = None, entropy_grad: bool = False):
     """Standard QK^T over space; softmax over both streams' keys.
 
     Scores Sx, Sh are each (B,N,N). Concatenate on the key axis and softmax so
     X-keys and H-keys compete for each query. Weighted values:
         att = A_X @ V_X + A_H @ V_H
     then reshape back to (B,C,H,W). Also returns per-query stream mass
-    (B,2,H,W) for analysis (sums to 1 over the stream axis).
+    (B,2,H,W) for analysis. Joint mass sums to 1 over streams; split
+    independently softmaxes each stream and SUMS the mixes (not their average),
+    so each stream has mass 1 and total mass 2, not percentages of a total.
+    Diagnostics: attn_entropy is joint entropy in nats for joint mode; split
+    reports MEAN per-stream entropy in nats, plus attn_entropy_x/h separately.
+    Concatenated split weights are not a joint probability distribution.
     """
+    if (sample_attention or entropy_terms is not None) and (not split or mode == "colgate"):
+        raise ValueError("sample_attention/attention_entropy_coef requires token split two-stream attention")
     q, H, W = _nchw_to_tokens(Q)
     kx, _, _ = _nchw_to_tokens(Kx)
     kh, _, _ = _nchw_to_tokens(Kh)
@@ -155,12 +174,36 @@ def _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, scale: float, split: bool = False,
     else:
         A = torch.softmax(torch.cat([Sx, Sh], dim=-1), dim=-1)   # (B,N,2N)
         Ax, Ah = A[..., :N], A[..., N:]
+    Px, Ph = Ax, Ah  # Preserve original SOFT probabilities for entropy diagnostics.
+    if entropy_terms is not None:
+        with torch.set_grad_enabled(torch.is_grad_enabled() and entropy_grad):
+            # Raw nats: mean over batch, query rows, and the two streams.
+            entropy_terms.append(sum(-(p * p.clamp_min(1e-12).log()).sum(-1).mean()
+                                     for p in (Px, Ph)) / 2)
+    if sample_attention:
+        Ax, Ah = _sample_attention_st(Px), _sample_attention_st(Ph)
     att = torch.matmul(Ax, vx) + torch.matmul(Ah, vh)
     att = _tokens_to_nchw(att, H, W).to(dtype=Q.dtype)
     B = q.shape[0]
     mass_x = Ax.sum(dim=-1).reshape(B, H, W)
     mass_h = Ah.sum(dim=-1).reshape(B, H, W)
     A_maps = torch.stack([mass_x, mass_h], dim=1)
+    if diagnostics is not None:
+        # Only the opt-in vision path requests these; retain scalars, not graphs.
+        with torch.no_grad():
+            scores = torch.cat([Sx.detach(), Sh.detach()], dim=-1)
+            weights = torch.cat([Px.detach(), Ph.detach()], dim=-1)
+            diagnostics.update(
+                score_std=scores.std(unbiased=False), score_min=scores.min(),
+                score_max=scores.max(),
+                attn_entropy=-(weights * weights.clamp_min(1e-12).log()).sum(-1).mean(),
+                mass_x=mass_x.detach().mean(), mass_h=mass_h.detach().mean(),
+                temperature=torch.as_tensor(scale).detach())
+            if split:
+                entropy_x = -(Px.detach() * Px.detach().clamp_min(1e-12).log()).sum(-1).mean()
+                entropy_h = -(Ph.detach() * Ph.detach().clamp_min(1e-12).log()).sum(-1).mean()
+                diagnostics.update(attn_entropy=(entropy_x + entropy_h) / 2,
+                                   attn_entropy_x=entropy_x, attn_entropy_h=entropy_h)
     return att, A_maps
 
 
@@ -200,20 +243,43 @@ class ConvAttentionBlock(nn.Module):
 
     def __init__(self, c: int = 128, in_c: int | None = None, attn_mode: str = "pixel_gate",
                  learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint",
-                 h_key_embed: bool = False, acc_stream: bool = False):
+                 h_key_embed: bool = False, acc_stream: bool = False,
+                 raw_attention_readout: bool = False,
+                 vision_qk_norm: bool = False, vision_qk_temperature: float | None = None,
+                 sample_attention: bool = False, attention_entropy_coef: float = 0.0):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
+        if (sample_attention or attention_entropy_coef > 0) and (attn_mode != "token" or softmax_mode != "split" or acc_stream):
+            raise ValueError("sample_attention/attention_entropy_coef requires token split two-stream attention (acc_stream=False)")
         if acc_stream and attn_mode != "token":
             raise ValueError("acc_stream requires attn_mode='token'")
         if acc_stream and softmax_mode != "joint":
             raise ValueError("acc_stream requires softmax_mode='joint'")
         cin = int(in_c) if in_c else c
+        self.attention_entropy_coef = float(attention_entropy_coef)
+        if not math.isfinite(self.attention_entropy_coef) or self.attention_entropy_coef < 0:
+            raise ValueError("attention_entropy_coef must be nonnegative and finite")
+        self.track_attention_entropy = bool(sample_attention) or self.attention_entropy_coef > 0
+        self.attention_entropy = None
+        self.sample_attention = bool(sample_attention)
+        self.vision_qk_norm = bool(vision_qk_norm)
+        self.qk_stats = {}  # Latest vision call; norms below are PRE-normalization.
+        if self.vision_qk_norm and (attn_mode != "token" or softmax_mode not in ("joint", "split") or acc_stream):
+            raise ValueError("vision_qk_norm requires token attention, joint or split softmax, and two-stream mode (acc_stream=False)")
+        if vision_qk_temperature is not None and (
+                not math.isfinite(float(vision_qk_temperature)) or float(vision_qk_temperature) <= 0):
+            raise ValueError("vision_qk_temperature must be positive and finite")
+        if self.vision_qk_norm:
+            temperature = math.sqrt(c) if vision_qk_temperature is None else float(vision_qk_temperature)
+            # Constant initialization consumes no RNG; no extra parameter when off.
+            self.log_temperature = nn.Parameter(torch.tensor(math.log(temperature)))
         self.acc_stream = acc_stream
         self.attn_mode = attn_mode
         self.softmax_mode = softmax_mode
         self.learned_v = learned_v
         self.h_key_embed = h_key_embed
+        self.raw_attention_readout = bool(raw_attention_readout)
         self.W_q = nn.Conv2d(cin, c, 1, bias=False)
         self.W_kx = nn.Conv2d(cin, c, 1, bias=False)
         if h_key_embed:
@@ -249,8 +315,18 @@ class ConvAttentionBlock(nn.Module):
 
     def forward(self, X: torch.Tensor, H1: torch.Tensor, H2: torch.Tensor | None = None,
                 return_attn: bool = False, acc: torch.Tensor | None = None):
-        Q = self.W_q(X)
-        Kx, Kh = self.W_kx(X), self._keys_h(H1)
+        entropy_terms = [] if self.track_attention_entropy else None
+        self.attention_entropy = None
+        if self.vision_qk_norm:
+            # At zero H1, normalize's 1/eps derivative overflows an fp16 Kh
+            # gradient before the zero input can cancel it (inf * 0 -> NaN).
+            # Keep the opt-in Q/K projections as well as cosine scores in fp32.
+            with torch.autocast(device_type=X.device.type, enabled=False):
+                Q = self.W_q(X.float())
+                Kx, Kh = self.W_kx(X.float()), self._keys_h(H1.float())
+        else:
+            Q = self.W_q(X)
+            Kx, Kh = self.W_kx(X), self._keys_h(H1)
         if self.learned_v:
             B = X.shape[0]
             Vx = self.V_X.expand(B, -1, -1, -1)
@@ -261,18 +337,41 @@ class ConvAttentionBlock(nn.Module):
             Ka = self.W_ka(acc)
             Va = self.V_A.expand(X.shape[0], -1, -1, -1)
             att, A = _three_stream_token_attn(Q, Kx, Kh, Ka, Vx, Vh, Va, self.scale)
+        elif self.vision_qk_norm:
+            # One full-C head, L2-normalized independently at each spatial token.
+            # Disable AMP here too: .float() alone does not prevent autocast matmul.
+            with torch.autocast(device_type=Q.device.type, enabled=False):
+                with torch.no_grad():
+                    self.qk_stats = {name: t.detach().float().norm(dim=1).mean()
+                                     for name, t in (("q_norm", Q), ("kx_norm", Kx), ("kh_norm", Kh))}
+                att, A = _two_stream_token_attn(
+                    F.normalize(Q.float(), dim=1), F.normalize(Kx.float(), dim=1),
+                    F.normalize(Kh.float(), dim=1), Vx, Vh, self.log_temperature.exp(),
+                    split=(self.softmax_mode == "split"),
+                    diagnostics=self.qk_stats, sample_attention=self.sample_attention,
+                    entropy_terms=entropy_terms,
+                    entropy_grad=self.attention_entropy_coef > 0)
+            att = att.to(Q.dtype)
         elif self.attn_mode == "token":
             att, A = _two_stream_token_attn(Q, Kx, Kh, Vx, Vh, self.scale,
                                             split=(self.softmax_mode == "split"),
-                                            mode=("colgate" if self.softmax_mode == "colgate" else None))
+                                            mode=("colgate" if self.softmax_mode == "colgate" else None),
+                                            sample_attention=self.sample_attention,
+                                            entropy_terms=entropy_terms,
+                                            entropy_grad=self.attention_entropy_coef > 0)
         else:
             Sx = (Q * Kx).sum(dim=1, keepdim=True) * self.scale   # (B,1,map,map)
             Sh = (Q * Kh).sum(dim=1, keepdim=True) * self.scale
             A = torch.softmax(torch.cat([Sx, Sh], dim=1), dim=1)   # (B,2,map,map) per-pixel gate
             att = A[:, 0:1] * Vx + A[:, 1:2] * Vh                  # (B,C,map,map)
+        if entropy_terms:
+            self.attention_entropy = entropy_terms[0]
+        raw_att = att
         att = self.ffn(att)
         res = torch.cat([X, att], dim=1)                       # CONCAT residual
         Z = self.proj(self.se(res))                            # (B,C,map,map)
+        if self.raw_attention_readout:
+            att = raw_att
         if return_attn:
             return Z, att, A
         return Z, att
@@ -286,13 +385,22 @@ class ConvMemoryBlock(nn.Module):
     """
 
     def __init__(self, c: int = 128, memory_noise_std: float = 0.0, attn_mode: str = "pixel_gate",
-                 learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint"):
+                 learned_v: bool = False, map_size: int = 16, softmax_mode: str = "joint",
+                 sample_attention: bool = False, attention_entropy_coef: float = 0.0):
         super().__init__()
         if attn_mode not in ("pixel_gate", "token"):
             raise ValueError(f"attn_mode must be pixel_gate|token, got {attn_mode!r}")
         self.attn_mode = attn_mode
         self.softmax_mode = softmax_mode
         self.learned_v = learned_v
+        self.attention_entropy_coef = float(attention_entropy_coef)
+        if not math.isfinite(self.attention_entropy_coef) or self.attention_entropy_coef < 0:
+            raise ValueError("attention_entropy_coef must be nonnegative and finite")
+        self.track_attention_entropy = bool(sample_attention) or self.attention_entropy_coef > 0
+        self.attention_entropy = None
+        self.sample_attention = bool(sample_attention)
+        if self.track_attention_entropy and (attn_mode != "token" or softmax_mode != "split"):
+            raise ValueError("sample_attention/attention_entropy_coef requires token split two-stream attention")
         self.memory_noise_std = float(memory_noise_std)
         self.W_q = nn.Conv2d(c, c, 1, bias=False)
         self.W_kz = nn.Conv2d(c, c, 1, bias=False)
@@ -311,6 +419,8 @@ class ConvMemoryBlock(nn.Module):
         self.scale = c ** -0.5
 
     def forward(self, Z: torch.Tensor, H1: torch.Tensor):
+        entropy_terms = [] if self.track_attention_entropy else None
+        self.attention_entropy = None
         Q = self.W_q(H1)
         Kz, Kh = self.W_kz(Z), self.W_kh(H1)
         if self.learned_v:
@@ -321,12 +431,17 @@ class ConvMemoryBlock(nn.Module):
         if self.attn_mode == "token":
             att, _ = _two_stream_token_attn(Q, Kz, Kh, Vz, Vh, self.scale,
                                             split=(self.softmax_mode == "split"),
-                                            mode=("colgate" if self.softmax_mode == "colgate" else None))
+                                            mode=("colgate" if self.softmax_mode == "colgate" else None),
+                                            sample_attention=self.sample_attention,
+                                            entropy_terms=entropy_terms,
+                                            entropy_grad=self.attention_entropy_coef > 0)
         else:
             Sz = (Q * Kz).sum(dim=1, keepdim=True) * self.scale
             Sh = (Q * Kh).sum(dim=1, keepdim=True) * self.scale
             A = torch.softmax(torch.cat([Sz, Sh], dim=1), dim=1)
             att = A[:, 0:1] * Vz + A[:, 1:2] * Vh
+        if entropy_terms:
+            self.attention_entropy = entropy_terms[0]
         att = self.ffn(att)
         res = torch.cat([H1, att], dim=1)
         H1_new = self.proj(self.se(res))                        # (B,C,map,map)
@@ -460,8 +575,20 @@ class KDAConvMemoryModel(nn.Module):
                  kda_heads: int = 4, kda_head_dim: int = 32,
                  attn_mode: str = "pixel_gate", readout: str = "full",
                  cls_head: str = "pool", v_mode: str = "state",
-                 softmax_mode: str = "joint", acc_stream: bool = False):
+                 raw_attention_readout: bool = False,
+                 softmax_mode: str = "joint", acc_stream: bool = False,
+                 vision_qk_norm: bool = False, vision_qk_temperature: float | None = None,
+                 sample_attention: bool = False, attention_entropy_coef: float = 0.0):
         super().__init__()
+        self.attention_entropy_coef = float(attention_entropy_coef)
+        if not math.isfinite(self.attention_entropy_coef) or self.attention_entropy_coef < 0:
+            raise ValueError("attention_entropy_coef must be nonnegative and finite")
+        self.track_attention_entropy = bool(sample_attention) or self.attention_entropy_coef > 0
+        self.attention_entropy = None
+        self.sample_attention = bool(sample_attention)
+        if self.track_attention_entropy and (attn_mode != "token" or softmax_mode != "split" or acc_stream):
+            raise ValueError("sample_attention/attention_entropy_coef requires token split two-stream attention (acc_stream=False)")
+        self.vision_qk_norm = bool(vision_qk_norm)
         self.acc_stream = acc_stream
         if accum_mode not in ("ema", "gated", "kda"):
             raise ValueError(f"accum_mode must be ema|gated|kda, got {accum_mode!r}")
@@ -487,6 +614,9 @@ class KDAConvMemoryModel(nn.Module):
         self.readout = readout
         self.cls_head = cls_head
         self.v_mode = v_mode
+        self.raw_attention_readout = bool(raw_attention_readout)
+        if raw_attention_readout and (v_mode != "learned_z" or memory_noise_std != 0 or readout != "h2"):
+            raise ValueError("raw_attention_readout requires learned_z, zero write noise, h2 readout")
         if softmax_mode not in ("joint", "split", "colgate"):
             raise ValueError(f"softmax_mode must be joint|split|colgate, got {softmax_mode!r}")
         self.softmax_mode = softmax_mode
@@ -514,10 +644,17 @@ class KDAConvMemoryModel(nn.Module):
                                          learned_v=(v_mode in ("learned", "learned_z", "learned_all", "learned_zq")),
                                          map_size=map_size, softmax_mode=softmax_mode,
                                          h_key_embed=(v_mode == "learned_zq"),
-                                         acc_stream=acc_stream)
+                                         raw_attention_readout=raw_attention_readout,
+                                         acc_stream=acc_stream,
+                                         vision_qk_norm=vision_qk_norm,
+                                         vision_qk_temperature=vision_qk_temperature,
+                                         sample_attention=sample_attention,
+                                         attention_entropy_coef=attention_entropy_coef)
         self.memory_noise_std = float(memory_noise_std)
         self._learned_mem = (v_mode == "learned_mem")
         self.aux_entropy = None
+        self.attention_entropy_stats = {}
+        self.attention_entropy_count = 0
         if v_mode in ("learned_z", "learned_zq"):
             # No memory block at all: H1 IS the vision block's Z output.
             self.memory = None
@@ -525,7 +662,9 @@ class KDAConvMemoryModel(nn.Module):
             self.memory = ConvMemoryBlock(n_channels, memory_noise_std=memory_noise_std,
                                           attn_mode=attn_mode,
                                           learned_v=(v_mode in ("learned_mem", "learned_all")),
-                                          map_size=map_size, softmax_mode=softmax_mode)
+                                          map_size=map_size, softmax_mode=softmax_mode,
+                                          sample_attention=sample_attention,
+                                         attention_entropy_coef=attention_entropy_coef)
         # JEPA head: ONE per-pixel head on R.
         #   readout="full": R = [H1‖H2‖Z‖att_vis] (4C)
         #   readout="h1h2": R = [H1‖H2] (2C) — decode only from the two state streams
@@ -571,6 +710,10 @@ class KDAConvMemoryModel(nn.Module):
     def step(self, X_t: torch.Tensor, state, update_memory: bool = True,
              return_stats: bool = False):
         H1, H2, ACC = state
+        # Clear off-cadence memory entropy; only actual block calls may contribute.
+        self.vision.attention_entropy = None
+        if self.memory is not None:
+            self.memory.attention_entropy = None
         ACC, acc_read, stats = self._accumulate(X_t, H1, ACC)
         Xin = X_t if self.acc_stream else torch.cat([X_t, acc_read], dim=1)
         self.aux_entropy = None
@@ -652,6 +795,10 @@ class KDAConvMemoryModel(nn.Module):
         The memory block updates only every `mem_every`-th step; the visual
         accumulator updates EVERY step (it is the fast sensory integrator).
         """
+        self.attention_entropy = None
+        self.attention_entropy_stats = {}
+        self.attention_entropy_count = 0
+        entropy_by_block = {"vision": [], "memory": []} if self.track_attention_entropy else None
         B, T = obs.shape[:2]
         W, S = self.frame_window, self.frame_stride
         ends = list(range(W - 1, T, S))
@@ -672,8 +819,20 @@ class KDAConvMemoryModel(nn.Module):
                 R, state = self.step(X_t, state,
                                      update_memory=((k + 1) % self.mem_every == 0))
             Rs.append(R)
+            if entropy_by_block is not None:
+                for name in entropy_by_block:
+                    block = getattr(self, name)
+                    if block is not None and block.attention_entropy is not None:
+                        entropy_by_block[name].append(block.attention_entropy)
             if self.aux_entropy is not None:
                 stats_seq.append(self.aux_entropy)
+        if entropy_by_block is not None:
+            terms = entropy_by_block["vision"] + entropy_by_block["memory"]
+            self.attention_entropy_count = len(terms)
+            self.attention_entropy = torch.stack(terms).mean() if terms else None
+            self.attention_entropy_stats = {
+                name: torch.stack(values).mean().detach() if values else None
+                for name, values in entropy_by_block.items()}
         R_seq = torch.stack(Rs, dim=1)
         if self.v_mode == "learned_zq" and not return_stats:
             self.aux_entropy = torch.stack(stats_seq).mean() if stats_seq else None
